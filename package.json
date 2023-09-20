@@ -23,6 +23,8 @@
     "vuetify": "^3.3.17"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.54.1",
+    "@types/googlemaps": "^3.43.3",
     "@vitejs/plugin-vue": "^4.2.3",
     "sass": "^1.67.0",
     "typescript": "^5.0.2",
