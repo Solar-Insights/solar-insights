@@ -1,10 +1,6 @@
 <template>
-  <h1>
-    Hello
-  </h1>
-  <router-view/>
+    <h1> Error 404 </h1>
 </template>
 
 <script setup lang="ts">
-
 </script>
