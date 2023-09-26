@@ -5,18 +5,39 @@
 <script setup lang="ts">
 // Vue
 import { onMounted } from "vue";
+import router from "@/router";
+import { useRoute } from "vue-router";
 
 onMounted(async () => {
-    let map: google.maps.Map = await initMap();
+    const lat: number = parseFloat(useRoute().query["lat"] as string);
+    const lng: number = parseFloat(useRoute().query["lng"] as string);
+    if (!validCoordinateChecker(lat, lng)) {
+        console.log(`the current queries (lat: ${lat}, lng: ${lng}) do not respect the template of coordinates`);
+        return router.push({ name: "home" });
+    }
+    await initMap(lat, lng)
 });
 
-async function initMap(): Promise<google.maps.Map> {
-    const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
+async function initMap(lat: number, lng: number): Promise<google.maps.Map> {
+    const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary
     const element = document.getElementById("map") as HTMLElement;
     const options = {
-        center: { lat: 46.81700897216797, lng: -71.36833190917969 },
-        zoom: 8
+        center: { lat: lat, lng: lng },
+        zoom: 21,
+        clickableIcons: false,
+        disableDoubleClickZoom: false,
+        draggable: false,
+        isFractionalZoomEnabled: false,
+        keyboardShortcuts: false,
+        streetViewControl: false,
+        mapTypeControl: false
     };
     return new Map(element, options);
+}
+
+function validCoordinateChecker(lat: number, lng: number) {
+    const respectLimits = lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
+    const notNull = lat != null && lng != null;
+    return respectLimits && notNull;
 }
 </script>

@@ -6,13 +6,13 @@ const router = createRouter({
     scrollBehavior(to, from, savedPosition) { return { top: 0 } },
     routes: [
       { path: '/', name: 'home', component: () => import('@/pages/Home.vue') },
-      { path: '/map/:lat/:lng', name: 'map', component: () => import('@/pages/RoofAnalysis.vue') },
+      { path: '/map', name: 'map', component: () => import('@/pages/RoofAnalysis.vue') },
 
       { path: '/:catchAll(.*)', name: 'catch-all', component: () => import('@/pages/CatchAll.vue') }
     ]
   })
   
-  router.beforeEach(async (to, from, next) => { 
+  router.beforeEach(async (to, from, next) => {
     next();
     return;
   });
