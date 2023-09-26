@@ -32,7 +32,16 @@ async function initMap(lat: number, lng: number): Promise<google.maps.Map> {
         streetViewControl: false,
         mapTypeControl: false
     };
-    return new Map(element, options);
+
+    const map = new Map(element, options);
+    /*
+    const marker = new google.maps.Marker({
+        position: { lat: lat, lng: lng},
+        map,
+        title: "Hello World",
+    });
+    */
+    return map;
 }
 
 function validCoordinateChecker(lat: number, lng: number) {
