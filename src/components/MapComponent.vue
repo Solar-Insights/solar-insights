@@ -7,22 +7,28 @@
 import { onMounted } from "vue";
 import router from "@/router";
 import { useRoute } from "vue-router";
+// Functions
+import { getSolarData } from "@/plugins/solarAPI";
+import { coordinates, validCoordinates } from "@/models/models";
 
 onMounted(async () => {
-    const lat: number = parseFloat(useRoute().query["lat"] as string);
-    const lng: number = parseFloat(useRoute().query["lng"] as string);
-    if (!validCoordinateChecker(lat, lng)) {
-        console.log(`the current queries (lat: ${lat}, lng: ${lng}) do not respect the template of coordinates`);
+    const coord: coordinates = {
+        lat: parseFloat(useRoute().query["lat"] as string),
+        lng: parseFloat(useRoute().query["lng"] as string)
+    }
+    if (!validCoordinates(coord)) {
         return router.push({ name: "home" });
     }
-    await initMap(lat, lng)
+    
+    await initMap(coord);3
+    const solarData = await getSolarData(coord);
 });
 
-async function initMap(lat: number, lng: number): Promise<google.maps.Map> {
+async function initMap(coord: coordinates): Promise<google.maps.Map> {
     const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary
     const element = document.getElementById("map") as HTMLElement;
     const options = {
-        center: { lat: lat, lng: lng },
+        center: { lat: coord.lat, lng: coord.lng },
         zoom: 21,
         clickableIcons: false,
         disableDoubleClickZoom: false,
@@ -42,11 +48,5 @@ async function initMap(lat: number, lng: number): Promise<google.maps.Map> {
     });
     */
     return map;
-}
-
-function validCoordinateChecker(lat: number, lng: number) {
-    const respectLimits = lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
-    const notNull = lat != null && lng != null;
-    return respectLimits && notNull;
 }
 </script>

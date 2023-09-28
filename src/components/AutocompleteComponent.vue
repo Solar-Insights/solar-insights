@@ -12,7 +12,7 @@
 // Vue
 import { onMounted } from "vue";
 // Objects
-import { coordinates } from "@/objects/models";
+import { coordinates, validCoordinates } from "@/models/models";
 import router from "@/router";
 
 onMounted(async () => {
@@ -38,35 +38,31 @@ async function getGeocoding(): Promise<coordinates> {
         address: input.value,
         language: "fr-CA"
     };
-    let coordinates: coordinates = {
+    const coord: coordinates = {
         lat: 0,
         lng: 0
     };
 
     await geocoder.geocode(options)
         .then((geocodingRequest: google.maps.GeocoderResponse) => {
-            coordinates = {
-                lat: geocodingRequest.results[0].geometry.location.lat(),
-                lng: geocodingRequest.results[0].geometry.location.lng()
-            };
+            coord.lat = geocodingRequest.results[0].geometry.location.lat();
+            coord.lng = geocodingRequest.results[0].geometry.location.lng();
         })
         .catch((error) => {
             console.log(error);
         })
 
-    return coordinates;
+    return coord;
 }
 
 async function redirectToMap() {
     console.log("redirect the user to the right location on the map");
-    const coordinates: coordinates = await getGeocoding();
-
-    console.log(coordinates);
-    if ( !coordinates.lat || !coordinates.lng ) {
-        console.log("some coordinates were invalid: try again");
-        return;
+    const coord: coordinates = await getGeocoding();
+    if ( coord.lat == 0 && coord.lng == 0) {
+        console.log("enter an address");
     }
-    
-    router.push( { name: "map", query: { lat: coordinates.lat.toString(), lng: coordinates.lng.toString() } } ) ;
+    else if ( validCoordinates(coord) ) {
+        router.push( { name: "map", query: { lat: coord.lat.toString(), lng: coord.lng.toString() } } ) ;
+    }
 }
 </script>
