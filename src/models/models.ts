@@ -7,22 +7,35 @@ export function validCoordinates(coord: coordinates) {
     const { lat, lng } = coord;
     const respectLimits = lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
     const notNull = lat != null && lng != null;
-    const notNaN = isNaN(lat) || isNaN(lng);
+    const notNaN = !isNaN(lat) && !isNaN(lng);
     
     if ( !(respectLimits && notNull && notNaN) ) {
         console.log(`the coordinates (lat: ${coord.lat}, lng: ${coord.lng}) do not respect the template of coordinates`);
     }
-    return respectLimits && notNull;
+    return respectLimits && notNull && notNaN;
 };
 
-
+/*
+    Models for dataLayers response
+*/
+export type solarLayers = {
+    imageryDate: date,
+    imageryProcessedDate: date,
+    dsmUrl: string,
+    rgbUrl: string,
+    maskUrl: string,
+    annualFluxUrl: string,
+    monthlyFluxUrl: string,
+    hourlyShadeUrls: string[],
+    imageryQuality: string
+};
 
 /*
-    Models for solarAPI response
+    Models for buildingInsight response
 */
 export type solarData = {
     name: string,
-    center: coordinates,
+    center: solarDataCoords,
     imageryData: date,
     regionCode: string,
     solarPotential: {
@@ -53,6 +66,11 @@ export type solarData = {
     imageryProcessedDate: date
 };
 
+export type solarDataCoords = {
+    latitude: number,
+    longitude: number
+};
+
 type date = {
     year: number,
     month: number,
@@ -60,8 +78,8 @@ type date = {
 };
 
 type boundingBox = {
-    sw: coordinates,
-    ne: coordinates
+    sw: solarDataCoords,
+    ne: solarDataCoords
 };
 
 type roofSegment = {
@@ -72,7 +90,7 @@ type roofSegment = {
         sunshineQuantiles: number[],
         groundAreaMeters2: number
     },
-    center: coordinates,
+    center: solarDataCoords,
     boundingBox: boundingBox
     planeHeightAtCenterMeters: number
 };
@@ -92,7 +110,7 @@ type roofSegmentSummary = {
 };
 
 type solarPanel = {
-    center: coordinates,
+    center: solarDataCoords,
     orientation: string,
     yearlyEnergyDcKwh: number,
     segmentIndex: number

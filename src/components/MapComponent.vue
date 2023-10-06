@@ -8,8 +8,8 @@ import { onMounted } from "vue";
 import router from "@/router";
 import { useRoute } from "vue-router";
 // Functions
-import { getSolarData } from "@/plugins/solarAPI";
-import { coordinates, validCoordinates, solarData } from "@/models/models";
+import { getSolarData, getSolarLayers, getSingleSolarLayer } from "@/plugins/solarAPI";
+import { coordinates, validCoordinates, solarData, solarLayers } from "@/models/models";
 
 onMounted(async () => {
     const coord: coordinates = {
@@ -20,9 +20,9 @@ onMounted(async () => {
         return router.push({ name: "home" });
     }
     
-    await initMap(coord);
+    const map = await initMap(coord);
     const solarData: solarData = await getSolarData(coord);
-    console.log(solarData)
+    const solarLayers: solarLayers = await getSolarLayers(coord);
 });
 
 async function initMap(coord: coordinates): Promise<google.maps.Map> {
@@ -37,7 +37,7 @@ async function initMap(coord: coordinates): Promise<google.maps.Map> {
         isFractionalZoomEnabled: false,
         keyboardShortcuts: false,
         streetViewControl: false,
-        mapTypeControl: false
+        mapTypeControl: false,
     };
 
     const map = new Map(element, options);
