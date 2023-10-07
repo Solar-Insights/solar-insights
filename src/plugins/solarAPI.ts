@@ -25,3 +25,7 @@ export function getSingleSolarLayer(url: string) {
             return response.body!;
         })
 }
+
+export function getSingleSolarLayerUrl(url: string) {
+    return `${url}&key=${import.meta.env.VITE_GOOGLE_API}`;
+}

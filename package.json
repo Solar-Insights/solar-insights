@@ -14,7 +14,6 @@
     "@vue/test-utils": "^2.4.1",
     "@vueuse/head": "^2.0.0",
     "geotiff": "^2.0.7",
-    "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
     "pinia": "^2.1.6",
     "pinia-plugin-persistedstate": "^3.2.0",

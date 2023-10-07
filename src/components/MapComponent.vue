@@ -8,8 +8,11 @@ import { onMounted } from "vue";
 import router from "@/router";
 import { useRoute } from "vue-router";
 // Functions
-import { getSolarData, getSolarLayers, getSingleSolarLayer } from "@/plugins/solarAPI";
+import { getSolarData, getSolarLayers, getSingleSolarLayer, getSingleSolarLayerUrl } from "@/plugins/solarAPI";
 import { coordinates, validCoordinates, solarData, solarLayers } from "@/models/models";
+// Map
+import 'leaflet/dist/leaflet.css';
+import "leaflet-geotiff";
 
 onMounted(async () => {
     const coord: coordinates = {
@@ -19,10 +22,11 @@ onMounted(async () => {
     if (!validCoordinates(coord)) {
         return router.push({ name: "home" });
     }
-    
+
     const map = await initMap(coord);
     const solarData: solarData = await getSolarData(coord);
     const solarLayers: solarLayers = await getSolarLayers(coord);
+    const annualFluxUrl = getSingleSolarLayerUrl(solarLayers.annualFluxUrl);
 });
 
 async function initMap(coord: coordinates): Promise<google.maps.Map> {
@@ -30,7 +34,7 @@ async function initMap(coord: coordinates): Promise<google.maps.Map> {
     const element = document.getElementById("map") as HTMLElement;
     const options = {
         center: { lat: coord.lat, lng: coord.lng },
-        zoom: 21,
+        zoom: 18,
         clickableIcons: false,
         disableDoubleClickZoom: false,
         draggable: false,
@@ -41,13 +45,6 @@ async function initMap(coord: coordinates): Promise<google.maps.Map> {
     };
 
     const map = new Map(element, options);
-    /*
-    const marker = new google.maps.Marker({
-        position: { lat: lat, lng: lng},
-        map,
-        title: "Hello World",
-    });
-    */
     return map;
 }
 </script>
