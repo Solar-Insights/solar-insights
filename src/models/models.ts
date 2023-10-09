@@ -115,3 +115,20 @@ type solarPanel = {
     yearlyEnergyDcKwh: number,
     segmentIndex: number
 };
+
+
+/*
+    Model for Air Layer Response
+*/
+
+export type airLayerData = {
+    type: string,
+    url: string,
+    statusText: string,
+    status: number,
+    redirected: boolean,
+    ok: boolean,
+    bodyUsed: boolean,
+    body: ReadableStream,
+    headers: Headers
+};

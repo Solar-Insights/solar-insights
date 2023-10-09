@@ -1,5 +1,4 @@
-import { coordinates, solarData, solarLayers } from "@/models/models";
-import { fromArrayBuffer } from "geotiff";
+import { coordinates, solarData, solarLayers, airLayerData } from "@/models/models";
 
 export function getSolarData(coord: coordinates) {
     const requestUrl = `https://solar.googleapis.com/v1/buildingInsights:findClosest?location.latitude=${coord.lat}&location.longitude=${coord.lng}&key=${import.meta.env.VITE_GOOGLE_API}`;
@@ -19,7 +18,6 @@ export function getSolarLayers(coord: coordinates) {
 
 export function getSingleSolarLayer(url: string) {
     const requestURL = `${url}&key=${import.meta.env.VITE_GOOGLE_API}`;
-    console.log(requestURL);
     return fetch(requestURL)
         .then((response) => { 
             return response.body!;
