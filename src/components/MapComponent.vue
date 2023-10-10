@@ -29,7 +29,7 @@ async function initMap(coord: coordinates): Promise<google.maps.Map> {
             mapId: import.meta.env.VITE_AIR_QUALITY_MAP_ID,
             center: { lat: coord.lat, lng: coord.lng },
             zoom: 4,
-            minZoom: 1,
+            minZoom: 0,
             maxZoom: 6,
             clickableIcons: false,
             disableDoubleClickZoom: false,
@@ -38,7 +38,7 @@ async function initMap(coord: coordinates): Promise<google.maps.Map> {
             streetViewControl: false,
             mapTypeControl: false,
             restriction: {
-                latLngBounds: {north: 82, south: -82, west: -180, east: 180},
+                latLngBounds: {north: 85, south: -85, west: -180, east: 180},
                 strictBounds: true
             },
         }
