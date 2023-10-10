@@ -71,9 +71,8 @@ function initLabelOnlyMap() {
             {
                 elementType: 'labels',
                 stylers: [
-                    { color: '#303b45' },
                     { visibility: 'on' },
-                    { saturation: -100 }
+                    { color: '#303b45' }
                 ]
             },
             {
@@ -81,7 +80,14 @@ function initLabelOnlyMap() {
                 stylers: [
                     { color: "#FFFFFF"}
                 ]
-            }
+            },
+            {
+                featureType: 'water',
+                elementType: 'water.labels.text',
+                stylers: [
+                    { color: "#FFFFFF"}
+                ]
+            },
         ],
     );
 }
