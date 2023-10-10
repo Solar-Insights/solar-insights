@@ -85,6 +85,7 @@ function initLabelOnlyMap() {
                 featureType: 'water',
                 elementType: 'water.labels.text',
                 stylers: [
+                    { visibility: 'off' }, // To remove if want to be seen
                     { color: "#FFFFFF"}
                 ]
             },
