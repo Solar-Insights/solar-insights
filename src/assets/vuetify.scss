@@ -1,3 +1,14 @@
+/*
+    Google Map
+*/
+#map{
+
+}
+
+
+/*
+    Search bar and its parent
+*/
 #search {
     font-family: Roboto;
     font-size: 15px;
@@ -5,17 +16,13 @@
     border: none !important;
     height: 30px !important;
 }
-
 #parent-search {
 
 }
 
-#map{
-
-}
 
 /*
-    Let us custom the padding of search bar
+   Allows search bar height
 */
 .v-field {
     --v-field-input-padding-top: 0 !important;
