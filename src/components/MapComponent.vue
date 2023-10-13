@@ -1,30 +1,61 @@
 <template>
     <div id="map" style="width: 100%; height: 100%;"></div>
+    <div id="parent-search" class="w-100"> 
+        <v-text-field
+            id="search"
+            class="bg-white ml-6 my-6 rounded-t-lg w-50"
+            placeholder="Find a location"
+            prepend-inner-icon="mdi-magnify"
+            hide-details
+            single-line
+            solo
+        />
+    </div>
 </template>
 
 <script setup lang="ts">
 // Vue
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import router from "@/router";
 import { useRoute } from "vue-router";
 // Models
 import { coordinates, validCoordinates } from "@/models/models";
 
 var airQualityType = "UAQI_RED_GREEN";
+const reff = ref(false);
 
 onMounted(async () => {
     const coord: coordinates = getCoordinates();
-    const map = await initMap(coord);
+
+    const mapElement = document.getElementById("map") as HTMLElement;
+    const searchElement = document.getElementById("search") as HTMLInputElement;
+
+    const autocomplete = await initAutocomplete(searchElement);
+    const map = await initMap(coord, mapElement);
+
+    const parent = document.getElementById("parent-search") as HTMLInputElement;
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
+    
     const labelOnlyMap = initLabelOnlyMap();
     const layer = initAirQualityLayer();
     map.overlayMapTypes.push(layer as google.maps.MapType);
     map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
 });
 
-async function initMap(coord: coordinates): Promise<google.maps.Map> {
+async function initAutocomplete(searchElement: HTMLInputElement): Promise<google.maps.places.Autocomplete> {
+    const { Autocomplete } = await google.maps.importLibrary("places") as google.maps.PlacesLibrary;
+    const options = {
+        componentRestrictions: { country: "ca" },
+        fields: ["formatted_address"],
+        types: ["address"]
+    };
+    return new Autocomplete(searchElement, options);
+}
+
+async function initMap(coord: coordinates, mapElement: HTMLElement): Promise<google.maps.Map> {
     const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
     return new Map(
-        document.getElementById("map") as HTMLElement, 
+        mapElement,
         {
             mapId: import.meta.env.VITE_AIR_QUALITY_MAP_ID,
             center: { lat: coord.lat, lng: coord.lng },
@@ -41,6 +72,7 @@ async function initMap(coord: coordinates): Promise<google.maps.Map> {
                 latLngBounds: {north: 85, south: -85, west: -180, east: 180},
                 strictBounds: true
             },
+            
         }
     );
 }
@@ -52,7 +84,6 @@ function initAirQualityLayer() {
                 if ( coord.x < 0 || coord.y < 0 || zoom < 0 || coord.x >= Math.pow(2, zoom) || coord.y >= Math.pow(2, zoom) ) {
                     return null;
                 }
-                console.log(1)
                 return `https://airquality.googleapis.com/v1/mapTypes/${airQualityType}/heatmapTiles/${zoom}/${coord.x}/${coord.y}?key=${import.meta.env.VITE_GOOGLE_API}`;
             },
             minZoom: 1,

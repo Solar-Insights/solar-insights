@@ -1,0 +1,23 @@
+#search {
+    font-family: Roboto;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    border: none !important;
+    height: 30px !important;
+}
+
+#parent-search {
+
+}
+
+#map{
+
+}
+
+/*
+    Let us custom the padding of search bar
+*/
+.v-field {
+    --v-field-input-padding-top: 0 !important;
+    --v-field-input-padding-bottom: 0 !important;
+}
