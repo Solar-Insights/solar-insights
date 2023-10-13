@@ -10,12 +10,12 @@ import { useRoute } from "vue-router";
 // Models
 import { coordinates, validCoordinates } from "@/models/models";
 
-var airQualityType = "UAQI_INDIGO_PERSIAN";
+var airQualityType = "UAQI_RED_GREEN";
 
 onMounted(async () => {
     const coord: coordinates = getCoordinates();
     const map = await initMap(coord);
-    const labelOnlyMap = await initLabelOnlyMap();
+    const labelOnlyMap = initLabelOnlyMap();
     const layer = initAirQualityLayer();
     map.overlayMapTypes.push(layer as google.maps.MapType);
     map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
@@ -29,8 +29,8 @@ async function initMap(coord: coordinates): Promise<google.maps.Map> {
             mapId: import.meta.env.VITE_AIR_QUALITY_MAP_ID,
             center: { lat: coord.lat, lng: coord.lng },
             zoom: 4,
-            minZoom: 0,
-            maxZoom: 6,
+            minZoom: 1,
+            maxZoom: 15,
             clickableIcons: false,
             disableDoubleClickZoom: false,
             isFractionalZoomEnabled: false,
@@ -49,11 +49,14 @@ function initAirQualityLayer() {
     return new google.maps.ImageMapType(
         {
             getTileUrl: function(coord, zoom) {
-                console.log("fetching")
+                if ( coord.x < 0 || coord.y < 0 || zoom < 0 || coord.x >= Math.pow(2, zoom) || coord.y >= Math.pow(2, zoom) ) {
+                    return null;
+                }
+                console.log(1)
                 return `https://airquality.googleapis.com/v1/mapTypes/${airQualityType}/heatmapTiles/${zoom}/${coord.x}/${coord.y}?key=${import.meta.env.VITE_GOOGLE_API}`;
             },
             minZoom: 1,
-            maxZoom: 6,
+            maxZoom: 15,
             tileSize: new google.maps.Size(256, 256),
             opacity: 0.75
         }
@@ -72,7 +75,7 @@ function initLabelOnlyMap() {
                 elementType: 'labels',
                 stylers: [
                     { visibility: 'on' },
-                    { color: '#303b45' }
+                    { color: '#55595C' }
                 ]
             },
             {
@@ -82,13 +85,12 @@ function initLabelOnlyMap() {
                 ]
             },
             {
-                featureType: 'water',
-                elementType: 'water.labels.text',
+                featureType: 'road',
+                elementType: 'labels',
                 stylers: [
-                    { visibility: 'off' }, // To remove if want to be seen
-                    { color: "#FFFFFF"}
+                    { visibility: 'off' }
                 ]
-            },
+            }
         ],
     );
 }
