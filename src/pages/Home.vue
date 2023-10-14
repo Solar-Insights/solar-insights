@@ -1,9 +1,9 @@
 <template>
     <h1> Home </h1>
-    <AutocompleteComponent/>
+    <v-btn :to="{name: 'map' }">
+        Carte
+    </v-btn>
 </template>
 
 <script setup lang="ts">
-// Components
-import AutocompleteComponent from '@/components/AutocompleteComponent.vue';
 </script>

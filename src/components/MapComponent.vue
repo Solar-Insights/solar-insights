@@ -1,7 +1,16 @@
 <template>
     <div id="map" style="width: 100%; height: 100%;"></div>
     <div id="parent-search" class="w-100"> 
-        <AutocompleteComponent/>
+        <v-text-field
+            v-model="autocompleteValue"
+            id="autocomplete-search"
+            class="bg-white ml-6 my-6 rounded-xl w-50"
+            placeholder="Find a location"
+            prepend-inner-icon="mdi-magnify"
+            hide-details
+            single-line
+            solo
+        />
     </div>
     
 </template>
@@ -9,105 +18,52 @@
 <script setup lang="ts">
 // Vue
 import { onMounted, ref } from "vue";
-import router from "@/router";
-import { useRoute } from "vue-router";
 // Models
 import { coordinates, validCoordinates } from "@/models/models";
-// Components
-import AutocompleteComponent from "@/components/AutocompleteComponent.vue";
+// Functions
+import { initMap, initLabelOnlyMap, initAutocomplete, addMarker, getGeocoding } from "@/plugins/googleMapsAPI";
+
+const autocompleteValue = ref("");
 
 onMounted(async () => {
-    const coord: coordinates = getCoordinates();
+    const coord: coordinates = { lat: 46.811943, lng: -71.205002 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
-    const map: google.maps.Map = await initMap(coord, mapElement);
-
     const parent: HTMLInputElement = document.getElementById("parent-search") as HTMLInputElement;
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
-    
-    const labelOnlyMap: google.maps.StyledMapType = initLabelOnlyMap();
-    map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
 
+    const map: google.maps.Map = await initMap(coord, mapElement);
+    const labelOnlyMap: google.maps.StyledMapType = initLabelOnlyMap();
+    const autocomplete: google.maps.places.Autocomplete = await initAutocomplete();
+
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
+    map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
     addMarker(coord, map);
+
+    autocomplete.addListener("place_changed", async () => {
+        const newPlace = autocomplete.getPlace();
+        if ( !newPlace || !newPlace.formatted_address ) {
+            console.log("User entered the name of a Place that was not suggested and pressed the Enter key, or the Place Details request failed. Display error message");
+            return;
+        }
+
+        const newCoord = await getNewCoordinates(newPlace.formatted_address);
+        if ( !newCoord ) {
+            console.log("An error occured when getting the coordinate of the formatted address");
+            return;
+        }
+        map.setCenter( { lat: newCoord.lat, lng: newCoord.lng } );
+        addMarker(newCoord, map);
+        autocompleteValue.value = newPlace.formatted_address;
+    });
 });
 
-function getCoordinates() {
-    const coord: coordinates = {
-        lat: parseFloat(useRoute().query["lat"] as string),
-        lng: parseFloat(useRoute().query["lng"] as string)
-    };
-
-    if (!validCoordinates(coord)) {
-        router.push({ name: "home" });
-        coord.lat = 0, coord.lng = 0;
+async function getNewCoordinates(formattedAddress: string) {
+    console.log("redirect the user to the right location on the map");
+    const coord: coordinates = await getGeocoding(formattedAddress);
+    if ( coord.lat == 0 && coord.lng == 0) {
+        console.log("enter an address");
     }
-    return coord;
-}
-
-async function initMap(coord: coordinates, mapElement: HTMLElement): Promise<google.maps.Map> {
-    const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
-    return new Map(
-        mapElement,
-        {
-            mapTypeId: google.maps.MapTypeId.SATELLITE,
-            center: { lat: coord.lat, lng: coord.lng },
-            zoom: 15,
-            minZoom: 15,
-            maxZoom: 15,
-            clickableIcons: false,
-            disableDoubleClickZoom: false,
-            isFractionalZoomEnabled: false,
-            keyboardShortcuts: false,
-            streetViewControl: false,
-            mapTypeControl: false,
-            fullscreenControl: false,
-            zoomControl: false,
-            scrollwheel: false,
-            rotateControl: false,
-            restriction: {
-                latLngBounds:{
-                    north: 85.0, 
-                    south: -60.0, 
-                    west: -179.0, 
-                    east: 179.0
-                },
-                strictBounds : true
-            }
-        }
-    );
-}
-
-function addMarker(coord: coordinates, map: google.maps.Map) {
-    const marker = new google.maps.Marker({
-        position: { lat: coord.lat, lng: coord.lng },
-        title:"Hello World!"
-    });
-    marker.setMap(map);
-}
-
-function initLabelOnlyMap() {
-    return new google.maps.StyledMapType(
-        [
-            {
-                stylers: [{
-                    visibility: 'off'
-                }]
-            }, 
-            {
-                featureType: 'administrative',
-                elementType: 'labels',
-                stylers: [
-                    { visibility: 'on' },
-                    { color: '#55595C' }
-                ]
-            },
-            {
-                featureType: 'administrative',
-                elementType: 'labels.text.stroke',
-                stylers: [
-                    { color: "#FFFFFF"}
-                ]
-            }
-        ],
-    );
+    else if ( validCoordinates(coord) ) {
+        return coord;
+    }
 }
 </script>
