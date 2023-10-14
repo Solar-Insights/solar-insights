@@ -9,8 +9,8 @@ export async function initMap(coord: coordinates, mapElement: HTMLElement): Prom
             mapTypeId: google.maps.MapTypeId.SATELLITE,
             center: { lat: coord.lat, lng: coord.lng },
             zoom: 15,
-            minZoom: 15,
-            maxZoom: 15,
+            minZoom: 14,
+            maxZoom: 16,
             clickableIcons: false,
             disableDoubleClickZoom: false,
             isFractionalZoomEnabled: false,
@@ -19,7 +19,6 @@ export async function initMap(coord: coordinates, mapElement: HTMLElement): Prom
             mapTypeControl: false,
             fullscreenControl: false,
             zoomControl: false,
-            scrollwheel: false,
             rotateControl: false,
             restriction: {
                 latLngBounds:{
