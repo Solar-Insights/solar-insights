@@ -9,7 +9,7 @@
 /*
     Search bar and its parent
 */
-#search {
+#autocomplete-search {
     font-family: Roboto;
     font-size: 15px;
     text-overflow: ellipsis;
@@ -22,9 +22,16 @@
 
 
 /*
-   Allows search bar height
+   Allows search bar height and remove bottom line
 */
 .v-field {
     --v-field-input-padding-top: 0 !important;
     --v-field-input-padding-bottom: 0 !important;
 }
+.v-field--variant-filled .v-field__outline::before, .v-field--variant-underlined .v-field__outline::before {
+    opacity: 0 ! important;
+}
+.v-field--variant-filled .v-field__outline::after, .v-field--variant-underlined .v-field__outline::after {
+    opacity: 0 ! important;
+}
+

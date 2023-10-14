@@ -1,16 +1,9 @@
 <template>
     <div id="map" style="width: 100%; height: 100%;"></div>
     <div id="parent-search" class="w-100"> 
-        <v-text-field
-            id="search"
-            class="bg-white ml-6 my-6 rounded-t-lg w-50"
-            placeholder="Find a location"
-            prepend-inner-icon="mdi-magnify"
-            hide-details
-            single-line
-            solo
-        />
+        <AutocompleteComponent/>
     </div>
+    
 </template>
 
 <script setup lang="ts">
@@ -20,36 +13,32 @@ import router from "@/router";
 import { useRoute } from "vue-router";
 // Models
 import { coordinates, validCoordinates } from "@/models/models";
-
-var airQualityType = "UAQI_RED_GREEN";
-const reff = ref(false);
+// Components
+import AutocompleteComponent from "@/components/AutocompleteComponent.vue";
 
 onMounted(async () => {
     const coord: coordinates = getCoordinates();
-
     const mapElement = document.getElementById("map") as HTMLElement;
-    const searchElement = document.getElementById("search") as HTMLInputElement;
-
-    const autocomplete = await initAutocomplete(searchElement);
     const map = await initMap(coord, mapElement);
 
     const parent = document.getElementById("parent-search") as HTMLInputElement;
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     
     const labelOnlyMap = initLabelOnlyMap();
-    const layer = initAirQualityLayer();
-    map.overlayMapTypes.push(layer as google.maps.MapType);
     map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
 });
 
-async function initAutocomplete(searchElement: HTMLInputElement): Promise<google.maps.places.Autocomplete> {
-    const { Autocomplete } = await google.maps.importLibrary("places") as google.maps.PlacesLibrary;
-    const options = {
-        componentRestrictions: { country: "ca" },
-        fields: ["formatted_address"],
-        types: ["address"]
+function getCoordinates() {
+    const coord: coordinates = {
+        lat: parseFloat(useRoute().query["lat"] as string),
+        lng: parseFloat(useRoute().query["lng"] as string)
     };
-    return new Autocomplete(searchElement, options);
+
+    if (!validCoordinates(coord)) {
+        router.push({ name: "home" });
+        coord.lat = 0, coord.lng = 0;
+    }
+    return coord;
 }
 
 async function initMap(coord: coordinates, mapElement: HTMLElement): Promise<google.maps.Map> {
@@ -57,10 +46,10 @@ async function initMap(coord: coordinates, mapElement: HTMLElement): Promise<goo
     return new Map(
         mapElement,
         {
-            mapId: import.meta.env.VITE_AIR_QUALITY_MAP_ID,
+            mapTypeId: google.maps.MapTypeId.SATELLITE,
             center: { lat: coord.lat, lng: coord.lng },
-            zoom: 4,
-            minZoom: 1,
+            zoom: 15,
+            minZoom: 15,
             maxZoom: 15,
             clickableIcons: false,
             disableDoubleClickZoom: false,
@@ -68,28 +57,19 @@ async function initMap(coord: coordinates, mapElement: HTMLElement): Promise<goo
             keyboardShortcuts: false,
             streetViewControl: false,
             mapTypeControl: false,
+            fullscreenControl: false,
+            zoomControl: false,
+            scrollwheel: false,
+            rotateControl: false,
             restriction: {
-                latLngBounds: {north: 85, south: -85, west: -180, east: 180},
-                strictBounds: true
-            },
-            
-        }
-    );
-}
-
-function initAirQualityLayer() {
-    return new google.maps.ImageMapType(
-        {
-            getTileUrl: function(coord, zoom) {
-                if ( coord.x < 0 || coord.y < 0 || zoom < 0 || coord.x >= Math.pow(2, zoom) || coord.y >= Math.pow(2, zoom) ) {
-                    return null;
-                }
-                return `https://airquality.googleapis.com/v1/mapTypes/${airQualityType}/heatmapTiles/${zoom}/${coord.x}/${coord.y}?key=${import.meta.env.VITE_GOOGLE_API}`;
-            },
-            minZoom: 1,
-            maxZoom: 15,
-            tileSize: new google.maps.Size(256, 256),
-            opacity: 0.75
+                latLngBounds:{
+                    north: 85.0, 
+                    south: -60.0, 
+                    west: -179.0, 
+                    east: 179.0
+                },
+                strictBounds : true
+            }
         }
     );
 }
@@ -103,6 +83,7 @@ function initLabelOnlyMap() {
                 }]
             }, 
             {
+                featureType: 'administrative',
                 elementType: 'labels',
                 stylers: [
                     { visibility: 'on' },
@@ -110,32 +91,13 @@ function initLabelOnlyMap() {
                 ]
             },
             {
+                featureType: 'administrative',
                 elementType: 'labels.text.stroke',
                 stylers: [
                     { color: "#FFFFFF"}
                 ]
-            },
-            {
-                featureType: 'road',
-                elementType: 'labels',
-                stylers: [
-                    { visibility: 'off' }
-                ]
             }
         ],
     );
-}
-
-function getCoordinates() {
-    const coord: coordinates = {
-        lat: parseFloat(useRoute().query["lat"] as string),
-        lng: parseFloat(useRoute().query["lng"] as string)
-    };
-
-    if (!validCoordinates(coord)) {
-        router.push({ name: "home" });
-        coord.lat = 0, coord.lng = 0;
-    }
-    return coord;
 }
 </script>
