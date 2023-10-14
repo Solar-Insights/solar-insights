@@ -18,14 +18,16 @@ import AutocompleteComponent from "@/components/AutocompleteComponent.vue";
 
 onMounted(async () => {
     const coord: coordinates = getCoordinates();
-    const mapElement = document.getElementById("map") as HTMLElement;
-    const map = await initMap(coord, mapElement);
+    const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
+    const map: google.maps.Map = await initMap(coord, mapElement);
 
-    const parent = document.getElementById("parent-search") as HTMLInputElement;
+    const parent: HTMLInputElement = document.getElementById("parent-search") as HTMLInputElement;
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     
-    const labelOnlyMap = initLabelOnlyMap();
+    const labelOnlyMap: google.maps.StyledMapType = initLabelOnlyMap();
     map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
+
+    addMarker(coord, map);
 });
 
 function getCoordinates() {
@@ -72,6 +74,14 @@ async function initMap(coord: coordinates, mapElement: HTMLElement): Promise<goo
             }
         }
     );
+}
+
+function addMarker(coord: coordinates, map: google.maps.Map) {
+    const marker = new google.maps.Marker({
+        position: { lat: coord.lat, lng: coord.lng },
+        title:"Hello World!"
+    });
+    marker.setMap(map);
 }
 
 function initLabelOnlyMap() {
