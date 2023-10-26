@@ -12,7 +12,6 @@
             solo
         />
     </div>
-    
 </template>
 
 <script setup lang="ts">
@@ -21,25 +20,35 @@ import { onMounted, ref } from "vue";
 // Models
 import { coordinates } from "@/models/models";
 // Functions
-import { initMap, initLabelOnlyMap, initAutocomplete, addMarker, getCoordinatesFromAddress } from "@/plugins/googleMapsAPI";
+import { initMap, initLabelOnlyMap, initAutocomplete, addMarker, getCoordinatesFromAddress, getAirQualityData } from "@/plugins/googleMapsAPI";
 
+// Refs
 const autocompleteValue = ref("");
 
+// Google components
+let map: google.maps.Map;
+let marker: google.maps.Marker;
+let labelOnlyMap: google.maps.StyledMapType 
+let autocomplete: google.maps.places.Autocomplete;;
+
 onMounted(async () => {
+    // Setup values
     const coord: coordinates = { lat: 46.811943, lng: -71.205002 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
     const parent: HTMLInputElement = document.getElementById("parent-search") as HTMLInputElement;
 
-    const map: google.maps.Map = await initMap(coord, mapElement);
-    const labelOnlyMap: google.maps.StyledMapType = initLabelOnlyMap();
-    const autocomplete: google.maps.places.Autocomplete = await initAutocomplete();
+    // Init values of google components
+    map = await initMap(coord, mapElement);
+    marker = addMarker(coord, map);
+    labelOnlyMap = initLabelOnlyMap();
+    autocomplete = await initAutocomplete("autocomplete-search");
 
+    // Add map overlay and autocomplete on map
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
-    let marker = addMarker(coord, map);
     
+    // Listener for the autocomplete component
     autocomplete.addListener("place_changed", async () => {
-        console.log(1)
         const newPlace = autocomplete.getPlace();
         if ( !newPlace || !newPlace.formatted_address ) {
             console.log("User entered the name of a Place that was not suggested and pressed the Enter key, or the Place Details request failed. Display error message");
