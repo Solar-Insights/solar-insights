@@ -116,19 +116,10 @@ type solarPanel = {
     segmentIndex: number
 };
 
-
 /*
-    Model for Air Layer Response
+    Model for Air Quality Data
 */
 
-export type airLayerData = {
-    type: string,
-    url: string,
-    statusText: string,
-    status: number,
-    redirected: boolean,
-    ok: boolean,
-    bodyUsed: boolean,
-    body: ReadableStream,
-    headers: Headers
+export type airQualityData = {
+
 };

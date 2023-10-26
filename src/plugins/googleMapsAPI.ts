@@ -1,5 +1,5 @@
 // Models
-import { coordinates, validCoordinates } from "@/models/models";
+import { coordinates, validCoordinates, airQualityData } from "@/models/models";
 
 export async function initMap(coord: coordinates, mapElement: HTMLElement): Promise<google.maps.Map> {
     const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
@@ -112,6 +112,7 @@ async function getGeocoding(formattedAddress: string): Promise<coordinates> {
 }
 
 export async function getAirQualityData(coord: coordinates) {
+    let airQualityData: airQualityData = {};
     const url = `https://airquality.googleapis.com/v1/currentConditions:lookup?key=${import.meta.env.VITE_GOOGLE_API}`;
     const body = {
         "universalAqi": true,
@@ -125,11 +126,17 @@ export async function getAirQualityData(coord: coordinates) {
             "POLLUTANT_ADDITIONAL_INFO"
         ]
     };
-    const response = await fetch(url, {
+
+    await fetch(url, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {"Content-Type": "application/json"}
-    });
-    
-    console.log(await response.json());
+    })
+    .then(async (response) => {
+        airQualityData = await response.json();
+    })
+    .catch((error) => {
+        console.log("an error has occured when fetching the air quality data");
+    })
+    return airQualityData;
 }

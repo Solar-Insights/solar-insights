@@ -12,29 +12,28 @@
             solo
         />
     </div>
-    <div id="test" class="bg-white text-google h-50 ml-3" style="position: fixed; top: 80px;"> Test info Window </div>
+    <v-card id="test" class="bg-white text-google h-50 w-25 ml-3" style="position: fixed; top: 80px;">
+        Test info Window {{  airQualityDataDisplayed }}
+    </v-card>
 </template>
 
 <script setup lang="ts">
 // Vue
 import { onMounted, ref } from "vue";
 // Models
-import { coordinates } from "@/models/models";
+import { coordinates, airQualityData } from "@/models/models";
 // Functions
 import { initMap, initLabelOnlyMap, initAutocomplete, addMarker, getCoordinatesFromAddress, getAirQualityData } from "@/plugins/googleMapsAPI";
 
 // Refs
 const autocompleteValue = ref("");
+const airQualityDataDisplayed = ref<airQualityData>({});
 
 // Google components
 let map: google.maps.Map;
 let marker: google.maps.Marker;
 let labelOnlyMap: google.maps.StyledMapType;
 let autocomplete: google.maps.places.Autocomplete;;
-
-async function initMapComponent() {
-    
-}
 
 onMounted(async () => {
     // Setup values
@@ -49,10 +48,10 @@ onMounted(async () => {
     labelOnlyMap = initLabelOnlyMap();
     autocomplete = await initAutocomplete("autocomplete-search");
 
-    // Add map overlay, autocomplete and infowindow on map + Perform first air quality fetch
+    // Add map overlay and autocomplete on map + Perform first air quality fetch
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
-    await getAirQualityData(coord);
+    airQualityDataDisplayed.value = await getAirQualityData(coord);
 
     // Listener for the autocomplete component - Get new place -> Display new position -> Replace marker -> Get air quality data
     autocomplete.addListener("place_changed", async () => {
@@ -70,7 +69,7 @@ onMounted(async () => {
         map.setCenter( { lat: newCoord.lat, lng: newCoord.lng } );
         marker.setMap(null);
         marker = addMarker(newCoord, map);
-        await getAirQualityData(newCoord);
+        airQualityDataDisplayed.value = await getAirQualityData(newCoord);
     });
 });
 </script>
