@@ -69,9 +69,9 @@ export function initLabelOnlyMap() {
     );
 }
 
-export async function initAutocomplete(): Promise<google.maps.places.Autocomplete> {
+export async function initAutocomplete(autocompleteElementId: string): Promise<google.maps.places.Autocomplete> {
     const { Autocomplete } = await google.maps.importLibrary("places") as google.maps.PlacesLibrary;
-    const input = document.getElementById("autocomplete-search") as HTMLInputElement;
+    const input = document.getElementById(autocompleteElementId) as HTMLInputElement;
     const options = {
         fields: ["formatted_address"],
         types: ["address"]
@@ -110,4 +110,27 @@ async function getGeocoding(formattedAddress: string): Promise<coordinates> {
         })
 
     return coord;
+}
+
+export async function getAirQualityData(coord: coordinates) {
+    const url = `https://airquality.googleapis.com/v1/currentConditions:lookup?key=${import.meta.env.VITE_GOOGLE_API}`;
+    const body = {
+        "universalAqi": true,
+        "location": {
+            "latitude": coord.lat,
+            "longitude": coord.lng
+        },
+        "extraComputations": [
+            "DOMINANT_POLLUTANT_CONCENTRATION",
+            "POLLUTANT_CONCENTRATION",
+            "POLLUTANT_ADDITIONAL_INFO"
+        ]
+    };
+    const response = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {"Content-Type": "application/json"}
+    });
+    
+    console.log(await response.json());
 }

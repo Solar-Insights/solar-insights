@@ -28,7 +28,8 @@ const autocompleteValue = ref("");
 // Google components
 let map: google.maps.Map;
 let marker: google.maps.Marker;
-let labelOnlyMap: google.maps.StyledMapType 
+let infoWindow: google.maps.InfoWindow;
+let labelOnlyMap: google.maps.StyledMapType;
 let autocomplete: google.maps.places.Autocomplete;;
 
 onMounted(async () => {
@@ -43,11 +44,12 @@ onMounted(async () => {
     labelOnlyMap = initLabelOnlyMap();
     autocomplete = await initAutocomplete("autocomplete-search");
 
-    // Add map overlay and autocomplete on map
+    // Add map overlay and autocomplete on map + Perform first air quality fetch
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
-    
-    // Listener for the autocomplete component
+    await getAirQualityData(coord);
+
+    // Listener for the autocomplete component - Get new place -> Display new position -> Replace marker -> Get air quality data
     autocomplete.addListener("place_changed", async () => {
         const newPlace = autocomplete.getPlace();
         if ( !newPlace || !newPlace.formatted_address ) {
@@ -63,6 +65,7 @@ onMounted(async () => {
         map.setCenter( { lat: newCoord.lat, lng: newCoord.lng } );
         marker.setMap(null);
         marker = addMarker(newCoord, map);
+        await getAirQualityData(newCoord);
     });
 });
 </script>
