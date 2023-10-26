@@ -19,9 +19,9 @@
 // Vue
 import { onMounted, ref } from "vue";
 // Models
-import { coordinates, validCoordinates } from "@/models/models";
+import { coordinates } from "@/models/models";
 // Functions
-import { initMap, initLabelOnlyMap, initAutocomplete, addMarker, getGeocoding } from "@/plugins/googleMapsAPI";
+import { initMap, initLabelOnlyMap, initAutocomplete, addMarker, getCoordinatesFromAddress } from "@/plugins/googleMapsAPI";
 
 const autocompleteValue = ref("");
 
@@ -36,34 +36,24 @@ onMounted(async () => {
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
-    addMarker(coord, map);
-
+    let marker = addMarker(coord, map);
+    
     autocomplete.addListener("place_changed", async () => {
+        console.log(1)
         const newPlace = autocomplete.getPlace();
         if ( !newPlace || !newPlace.formatted_address ) {
             console.log("User entered the name of a Place that was not suggested and pressed the Enter key, or the Place Details request failed. Display error message");
             return;
         }
 
-        const newCoord = await getNewCoordinates(newPlace.formatted_address);
+        const newCoord = await getCoordinatesFromAddress(newPlace.formatted_address);
         if ( !newCoord ) {
             console.log("An error occured when getting the coordinate of the formatted address");
             return;
         }
         map.setCenter( { lat: newCoord.lat, lng: newCoord.lng } );
-        addMarker(newCoord, map);
-        autocompleteValue.value = newPlace.formatted_address;
+        marker.setMap(null);
+        marker = addMarker(newCoord, map);
     });
 });
-
-async function getNewCoordinates(formattedAddress: string) {
-    console.log("redirect the user to the right location on the map");
-    const coord: coordinates = await getGeocoding(formattedAddress);
-    if ( coord.lat == 0 && coord.lng == 0) {
-        console.log("enter an address");
-    }
-    else if ( validCoordinates(coord) ) {
-        return coord;
-    }
-}
 </script>

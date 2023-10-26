@@ -1,5 +1,5 @@
 // Models
-import { coordinates } from "@/models/models";
+import { coordinates, validCoordinates } from "@/models/models";
 
 export async function initMap(coord: coordinates, mapElement: HTMLElement): Promise<google.maps.Map> {
     const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
@@ -39,6 +39,7 @@ export function addMarker(coord: coordinates, map: google.maps.Map) {
         title:"Hello World!"
     });
     marker.setMap(map);
+    return marker;
 }
 
 export function initLabelOnlyMap() {
@@ -78,7 +79,18 @@ export async function initAutocomplete(): Promise<google.maps.places.Autocomplet
     return new Autocomplete(input, options);
 }
 
-export async function getGeocoding(formattedAddress: string): Promise<coordinates> {
+export async function getCoordinatesFromAddress(formattedAddress: string) {
+    console.log("get coordinates of formatted address");
+    const coord: coordinates = await getGeocoding(formattedAddress);
+    if ( coord.lat == 0 && coord.lng == 0) {
+        console.log("enter an address");
+    }
+    else if ( validCoordinates(coord) ) {
+        return coord;
+    }
+}
+
+async function getGeocoding(formattedAddress: string): Promise<coordinates> {
     console.log("get lat and lng from address");
     const geocoder = new google.maps.Geocoder()
     const options = {
