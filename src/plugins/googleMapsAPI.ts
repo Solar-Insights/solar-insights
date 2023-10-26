@@ -35,8 +35,7 @@ export async function initMap(coord: coordinates, mapElement: HTMLElement): Prom
 
 export function addMarker(coord: coordinates, map: google.maps.Map) {
     const marker = new google.maps.Marker({
-        position: { lat: coord.lat, lng: coord.lng },
-        title:"Hello World!"
+        position: { lat: coord.lat, lng: coord.lng }
     });
     marker.setMap(map);
     return marker;

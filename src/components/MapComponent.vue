@@ -4,7 +4,7 @@
         <v-text-field
             v-model="autocompleteValue"
             id="autocomplete-search"
-            class="bg-white ml-6 my-6 rounded-xl w-50"
+            class="bg-white ml-3 my-6 rounded-xl w-50"
             placeholder="Find a location"
             prepend-inner-icon="mdi-magnify"
             hide-details
@@ -12,6 +12,7 @@
             solo
         />
     </div>
+    <div id="test" class="bg-white text-google h-50 ml-3" style="position: fixed; top: 80px;"> Test info Window </div>
 </template>
 
 <script setup lang="ts">
@@ -28,14 +29,18 @@ const autocompleteValue = ref("");
 // Google components
 let map: google.maps.Map;
 let marker: google.maps.Marker;
-let infoWindow: google.maps.InfoWindow;
 let labelOnlyMap: google.maps.StyledMapType;
 let autocomplete: google.maps.places.Autocomplete;;
+
+async function initMapComponent() {
+    
+}
 
 onMounted(async () => {
     // Setup values
     const coord: coordinates = { lat: 46.811943, lng: -71.205002 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
+    const infoWindowAnchor: HTMLElement = document.getElementById("test") as HTMLElement;
     const parent: HTMLInputElement = document.getElementById("parent-search") as HTMLInputElement;
 
     // Init values of google components
@@ -44,7 +49,7 @@ onMounted(async () => {
     labelOnlyMap = initLabelOnlyMap();
     autocomplete = await initAutocomplete("autocomplete-search");
 
-    // Add map overlay and autocomplete on map + Perform first air quality fetch
+    // Add map overlay, autocomplete and infowindow on map + Perform first air quality fetch
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
     await getAirQualityData(coord);
