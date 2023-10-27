@@ -1,6 +1,6 @@
 <template>
     <div id="map" style="width: 100%; height: 100%;"></div>
-    <div id="parent-search" class="w-100"> 
+    <!-- <div id="parent-search" class="w-100"> 
         <v-text-field
             v-model="autocompleteValue"
             id="autocomplete-search"
@@ -12,14 +12,66 @@
             solo
         />
     </div>
-    <v-card id="test" class="bg-white text-google h-50 w-25 ml-3" style="position: fixed; top: 80px;">
-        Test info Window {{  airQualityDataDisplayed }}
+    <v-expansion-panels id="test" class="bg-white w-25 h-50 ml-3" style="position: fixed; top: 80px;" v-model="pollutantsPanel">
+        <v-expansion-panel expand-icon="mdi-plus" collapse-icon="mdi-minus" v-model="pollutantsPanel">
+            <v-expansion-panel-title color="red" style="font-size: 18px; font-weight: 400;">
+                Pollutants
+            </v-expansion-panel-title>
+            <v-expansion-panel-text class="h-50" style="overflow-y: scroll;">
+                {{  airQualityDataDisplayed }}
+            </v-expansion-panel-text>
+        </v-expansion-panel>
+    </v-expansion-panels> -->
+
+    <v-card id="test" class="bg-white w-25 h-50 ml-3 rounded-lg" style="position: fixed; top: 80px;">
+        <v-card-title class="text-center" style="font-weight: lighter;">
+            Air quality details
+        </v-card-title>
+
+        <v-divider class="mx-4"/>
+
+        <v-card-text class="px-0 text-center">
+            <div class="mb-2" style="font-size: 1.15rem;">
+                Universal AQI
+            </div>
+
+            <div class="mb-4">
+                <v-progress-circular
+                    class="mb-4"
+                    :model-value="50"
+                    :size="50"
+                    :width="7"
+                    color="red"
+                >
+                    50
+                </v-progress-circular>
+                <div style="font-weight: 500">
+                    Moderate air quality
+                </div>
+                <div style="font-weight: lighter;">
+                    Dominant polluant: CO
+                </div>
+            </div>
+
+            <v-btn-toggle class="w-100" variant="outlined" mandatory v-model="airQualityPanel">
+                <v-btn class="w-50" prepend-icon="mdi-alert" style="text-transform: none !important;"> Pollutants </v-btn>
+                <v-btn class="w-50" prepend-icon="mdi-heart" style="text-transform: none !important;"> Health </v-btn>
+            </v-btn-toggle>
+
+            <div v-if="airQualityPanel == 0">
+                Pollutants
+            </div>
+
+            <div v-if="airQualityPanel == 1">
+                Health
+            </div>
+        </v-card-text>
     </v-card>
 </template>
 
 <script setup lang="ts">
-// Vue
-import { onMounted, ref } from "vue";
+// Vue  'text' | 'flat' | 'elevated' | 'tonal' | 'outlined' | 'plain'
+import { onMounted,  ref } from "vue";
 // Models
 import { coordinates, airQualityData } from "@/models/models";
 // Functions
@@ -28,6 +80,7 @@ import { initMap, initLabelOnlyMap, initAutocomplete, addMarker, getCoordinatesF
 // Refs
 const autocompleteValue = ref("");
 const airQualityDataDisplayed = ref<airQualityData>({});
+const airQualityPanel = ref(0);
 
 // Google components
 let map: google.maps.Map;
