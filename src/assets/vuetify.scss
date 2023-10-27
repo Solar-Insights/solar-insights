@@ -10,7 +10,6 @@
     Search bar and its parent
 */
 #autocomplete-search {
-    @extend .text-google;
     font-size: 15px;
     text-overflow: ellipsis;
     border: none !important;
