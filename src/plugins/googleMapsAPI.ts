@@ -112,6 +112,7 @@ async function getGeocoding(formattedAddress: string): Promise<coordinates> {
 }
 
 export async function getAirQualityData(coord: coordinates) {
+    // https://developers.google.com/maps/documentation/air-quality/reference/rest/v1/currentConditions/lookup#request-body
     let airQualityData: airQualityData = {};
     const url = `https://airquality.googleapis.com/v1/currentConditions:lookup?key=${import.meta.env.VITE_GOOGLE_API}`;
     const body = {
@@ -123,7 +124,8 @@ export async function getAirQualityData(coord: coordinates) {
         "extraComputations": [
             "DOMINANT_POLLUTANT_CONCENTRATION",
             "POLLUTANT_CONCENTRATION",
-            "POLLUTANT_ADDITIONAL_INFO"
+            "POLLUTANT_ADDITIONAL_INFO",
+            "HEALTH_RECOMMENDATIONS"
         ]
     };
 
