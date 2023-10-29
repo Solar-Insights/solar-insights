@@ -99,7 +99,22 @@
             </div>
 
             <div v-if="airQualityPanel == 1">
-                Health
+                <v-item-group v-model="healthButtonSelection" mandatory>
+                    <v-item v-for="group in healthRecommendations" v-slot="{ selectedClass, toggle, isSelected }">
+                        <v-btn @click="toggle" class="mx-2 my-1" icon :style="isSelected ? 'background-color: #4C8BF5;' : ''">
+                            <v-icon :color="isSelected ? 'white' : '#949494'">{{ group.icon }}</v-icon>
+                        </v-btn>
+                    </v-item>
+                </v-item-group>
+
+                <v-divider class="my-2"/>
+                
+                <v-card class="ma-3 pa-2 rounded-lg text-left" variant="text">
+                    <v-card-subtitle class="pl-0 pb-3" style="font-weight: 500">
+                        Effects
+                    </v-card-subtitle>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque saepe sint laboriosam maxime, animi magni ab veniam, nisi natus quam eius beatae tempore quisquam qui molestias architecto nihil pariatur maiores?
+                </v-card>
             </div>
         </v-card-text>
     </v-card>
@@ -117,7 +132,8 @@ import { initMap, initLabelOnlyMap, initAutocomplete, addMarker, getCoordinatesF
 const autocompleteValue = ref("");
 const airQualityDataDisplayed = ref<airQualityData>({});
 
-const airQualityPanel = ref(0);
+const healthButtonSelection = ref(0);
+const airQualityPanel = ref(1);
 const pollutantsInformations = reactive({
     co: {
         index: 0,
@@ -151,13 +167,55 @@ const pollutantsInformations = reactive({
     },
 });
 const healthRecommendations = reactive({
-    athletes: "healthrecom",
-    children: "healthrecom",
-    elderly: "healthrecom",
-    generalPopulation: "healthrecom",
-    heartDiseasePopulation: "healthrecom",
-    lungDiseasePopulation: "healthrecom",
-    pregnantWomen: "healthrecom"
+    athletes: {
+        index: 0,
+        group: "athletes",
+        displayName: "Athletes",
+        recommendation: "health recommandation",
+        icon: "mdi-weight-lifter"
+    },
+    children: {
+        index: 1,
+        group: "children",
+        displayName: "Children",
+        recommendation: "health recommandation",
+        icon: "mdi-baby-carriage"
+    },
+    elderly: {
+        index: 2,
+        group: "elderly",
+        displayName: "Senior citizens",
+        recommendation: "health recommandation",
+        icon: "mdi-human-cane"
+    },
+    generalPopulation: {
+        index: 3,
+        group: "generalPopulation",
+        displayName: "General Population",
+        recommendation: "health recommandation",
+        icon: "mdi-account-group"
+    },
+    heartDiseasePopulation: {
+        index: 4,
+        group: "heartDiseasePopulation",
+        displayName: "Individuals with heart-related issues",
+        recommendation: "health recommandation",
+        icon: "mdi-heart"
+    },
+    lungDiseasePopulation: {
+        index: 5,
+        group: "lungDiseasePopulation",
+        displayName: "Individuals with lung-related issues",
+        recommendation: "health recommandation",
+        icon: "mdi-lungs"
+    },
+    pregnantWomen: {
+        index: 6,
+        group: "pregnantWomen",
+        displayName: "Pregnant women",
+        recommendation: "health recommandation",
+        icon: "mdi-human-pregnant"
+    }
 });
 
 // Google components
