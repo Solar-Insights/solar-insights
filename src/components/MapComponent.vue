@@ -100,7 +100,7 @@
 
             <div v-if="airQualityPanel == 1">
                 <v-item-group v-model="healthButtonSelection" mandatory>
-                    <v-item v-for="group in healthRecommendations" v-slot="{ selectedClass, toggle, isSelected }">
+                    <v-item v-for="group in healthRecommendations.recommendations" v-slot="{ toggle, isSelected }">
                         <v-btn @click="toggle" class="mx-2 my-1" icon :style="isSelected ? 'background-color: #4C8BF5;' : ''">
                             <v-icon :color="isSelected ? 'white' : '#949494'">{{ group.icon }}</v-icon>
                         </v-btn>
@@ -111,9 +111,9 @@
                 
                 <v-card class="ma-3 pa-2 rounded-lg text-left" variant="text">
                     <v-card-subtitle class="pl-0 pb-3" style="font-weight: 500">
-                        Effects
+                        {{ healthRecommendations.recommendations[healthButtonSelection].displayName }}
                     </v-card-subtitle>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque saepe sint laboriosam maxime, animi magni ab veniam, nisi natus quam eius beatae tempore quisquam qui molestias architecto nihil pariatur maiores?
+                    {{ healthRecommendations.recommendations[healthButtonSelection].recommendation }}
                 </v-card>
             </div>
         </v-card-text>
@@ -133,6 +133,7 @@ const autocompleteValue = ref("");
 const airQualityDataDisplayed = ref<airQualityData>({});
 
 const healthButtonSelection = ref(0);
+
 const airQualityPanel = ref(1);
 const pollutantsInformations = reactive({
     co: {
@@ -167,55 +168,57 @@ const pollutantsInformations = reactive({
     },
 });
 const healthRecommendations = reactive({
-    athletes: {
-        index: 0,
-        group: "athletes",
-        displayName: "Athletes",
-        recommendation: "health recommandation",
-        icon: "mdi-weight-lifter"
-    },
-    children: {
-        index: 1,
-        group: "children",
-        displayName: "Children",
-        recommendation: "health recommandation",
-        icon: "mdi-baby-carriage"
-    },
-    elderly: {
-        index: 2,
-        group: "elderly",
-        displayName: "Senior citizens",
-        recommendation: "health recommandation",
-        icon: "mdi-human-cane"
-    },
-    generalPopulation: {
-        index: 3,
-        group: "generalPopulation",
-        displayName: "General Population",
-        recommendation: "health recommandation",
-        icon: "mdi-account-group"
-    },
-    heartDiseasePopulation: {
-        index: 4,
-        group: "heartDiseasePopulation",
-        displayName: "Individuals with heart-related issues",
-        recommendation: "health recommandation",
-        icon: "mdi-heart"
-    },
-    lungDiseasePopulation: {
-        index: 5,
-        group: "lungDiseasePopulation",
-        displayName: "Individuals with lung-related issues",
-        recommendation: "health recommandation",
-        icon: "mdi-lungs"
-    },
-    pregnantWomen: {
-        index: 6,
-        group: "pregnantWomen",
-        displayName: "Pregnant women",
-        recommendation: "health recommandation",
-        icon: "mdi-human-pregnant"
-    }
+    recommendations: [
+        {
+            index: 0,
+            group: "athletes",
+            displayName: "Athletes",
+            recommendation: "health recommandation",
+            icon: "mdi-weight-lifter"
+        },
+        {
+            index: 1,
+            group: "children",
+            displayName: "Children",
+            recommendation: "health recommandation",
+            icon: "mdi-baby-carriage"
+        },
+        {
+            index: 2,
+            group: "elderly",
+            displayName: "Senior citizens",
+            recommendation: "health recommandation",
+            icon: "mdi-human-cane"
+        },
+        {
+            index: 3,
+            group: "generalPopulation",
+            displayName: "General Population",
+            recommendation: "health recommandation",
+            icon: "mdi-account-group"
+        },
+        {
+            index: 4,
+            group: "heartDiseasePopulation",
+            displayName: "Individuals with heart-related issues",
+            recommendation: "health recommandation",
+            icon: "mdi-heart"
+        },
+        {
+            index: 5,
+            group: "lungDiseasePopulation",
+            displayName: "Individuals with lung-related issues",
+            recommendation: "health recommandation",
+            icon: "mdi-lungs"
+        },
+        {
+            index: 6,
+            group: "pregnantWomen",
+            displayName: "Pregnant women",
+            recommendation: "health recommandation",
+            icon: "mdi-human-pregnant"
+        }
+    ]
 });
 
 // Google components
@@ -228,7 +231,6 @@ onMounted(async () => {
     // Setup values
     const coord: coordinates = { lat: 46.811943, lng: -71.205002 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
-    const infoWindowAnchor: HTMLElement = document.getElementById("test") as HTMLElement;
     const parent: HTMLInputElement = document.getElementById("parent-search") as HTMLInputElement;
 
     // Init values of google components
