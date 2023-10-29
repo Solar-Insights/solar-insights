@@ -61,7 +61,7 @@
             <div v-if="airQualityPanel == 0">
                 <template v-for="(pollutant, i) in pollutantsInformations" :key="i">
                     <v-hover v-slot="{ isHovering, props }">
-                        <v-card v-bind="props" class="ma-3 pa-2 rounded-lg" variant="plain" :elevation="isHovering ? 6 : 0" :style="isHovering ? 'border: 2px solid #4C8BF5' : ''">
+                        <v-card v-bind="props" class="ma-3 pa-2 rounded-lg" variant="text" :style="isHovering ? 'color: black; border: 2px solid #4C8BF5;' : 'color: #949494; border: 2px solid #d6d4d4'">
                             <v-row>
                                 <v-col cols="auto" class="me-auto pb-1">
                                     {{ pollutant.displayName }}
@@ -76,17 +76,17 @@
                                     {{ pollutant.fullName }}
                                 </v-col>
                                 <v-col cols="auto" class="pt-1">
-                                    <v-btn variant="text" density="compact" icon="mdi-information-outline" :color="isHovering ? '#4C8BF5' : 'black'"/>
+                                    <v-btn variant="text" density="compact" icon="mdi-information-outline" :color="isHovering ? 'black' : '#949494'"/>
 
-                                    <v-tooltip max-width="300" activator="parent" open-delay="200" :open-on-hover="false" open-on-click close-on-content-click>
-                                        <v-card-subtitle>
+                                    <v-tooltip max-width="300" activator="parent" open-delay="200" :open-on-hover="false" open-on-click close-on-content-click :persistent="false">
+                                        <v-card-subtitle class="pl-0">
                                             Effects
                                         </v-card-subtitle>
                                         {{ pollutant.effects }} Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque saepe sint laboriosam maxime, animi magni ab veniam, nisi natus quam eius beatae tempore quisquam qui molestias architecto nihil pariatur maiores?
 
                                         <v-divider class="my-2"/>
 
-                                        <v-card-subtitle> 
+                                        <v-card-subtitle class="pl-0"> 
                                             Sources
                                         </v-card-subtitle>
                                         {{ pollutant.sources }}
