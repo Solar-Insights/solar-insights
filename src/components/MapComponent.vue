@@ -59,11 +59,11 @@
             </v-btn-toggle>
 
             <div v-if="airQualityPanel == 0">
-                <PollutantTab/>
+                <PollutantTab :pollutants="airQualityDataDisplayed.pollutants"/>
             </div>
 
             <div v-if="airQualityPanel == 1">
-                <HealthTab/>
+                <HealthTab :healthRecommendations="airQualityDataDisplayed.healthRecommendations"/>
             </div>
         </v-card-text>
     </v-card>
@@ -82,7 +82,7 @@ import HealthTab from "@/components/HealthTab.vue";
 
 // Component data
 const autocompleteValue = ref("");
-const airQualityPanel = ref(0);
+const airQualityPanel = ref(1);
 const airQualityDataDisplayed = ref<airQualityData>({} as airQualityData);
 
 // Google components

@@ -1,6 +1,6 @@
 <template>
     <v-item-group v-model="healthButtonSelection" mandatory>
-        <v-item v-for="group in healthRecommendations.healthRecommendations" v-slot="{ toggle, isSelected }">
+        <v-item v-for="group in healthRecommendationsList" v-slot="{ toggle, isSelected }">
             <v-btn @click="toggle" class="mx-2 my-1" icon :style="isSelected ? 'background-color: #4C8BF5;' : ''">
                 <v-icon :color="isSelected ? 'white' : '#949494'">{{ group.icon }}</v-icon>
             </v-btn>
@@ -11,19 +11,33 @@
     
     <v-card class="ma-3 pa-2 rounded-lg text-left" variant="text">
         <v-card-subtitle class="pl-0 pb-3" style="font-weight: 500">
-            {{ healthRecommendations.healthRecommendations[healthButtonSelection].displayName }}
+            {{ healthRecommendationsList[healthButtonSelection].displayName }}
         </v-card-subtitle>
-        {{ healthRecommendations.healthRecommendations[healthButtonSelection].recommendation }}
+        {{ healthRecommendationsList[healthButtonSelection].recommendation }}
     </v-card>
 </template>
 
 <script setup lang="ts">
 // Vue 
-import { ref, reactive } from 'vue';
+import { ref, PropType, watch } from 'vue';
+// Models
+import { healthRecommendations } from "@/models/models";
+
+const props = defineProps({
+    healthRecommendations: {
+        type: Object as PropType<healthRecommendations>,
+        required: true,
+        default: {}
+    }
+});
+watch( () => props.healthRecommendations, () => {
+    for(let i = 0; i < healthRecommendationsList.value.length; i++) {
+        healthRecommendationsList.value[i].recommendation = props.healthRecommendations[healthRecommendationsList.value[i].group as keyof typeof props.healthRecommendations];
+    }
+}) 
 
 const healthButtonSelection = ref(0);
-const healthRecommendations = reactive({
-    healthRecommendations: [
+const healthRecommendationsList = ref([
         {
             index: 0,
             group: "generalPopulation",
@@ -73,6 +87,5 @@ const healthRecommendations = reactive({
             recommendation: "",
             icon: "mdi-lungs"
         },
-    ]
-});
+]);
 </script>

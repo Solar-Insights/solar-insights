@@ -121,18 +121,23 @@ type solarPanel = {
 */
 export type airQualityData = {
     dateTime: Date,
-    healthRecommendations: {
-        generalPopulation: string,
-        children: string,
-        elderly: string,
-        athletes: string,
-        pregnantWomen: string,
-        heartDiseasePopulation: string,
-        lungDiseasePopulation: string
-    },
+    healthRecommendations: healthRecommendations,
     indexes: aqi[],
     pollutants: airPollutant[],
     regionCode: string
+};
+
+export type aqi = {
+    aqi: number,
+    aqiDisplay: string,
+    code: string,
+    displayName: string,
+    category: string,
+    dominantPollutant: string,
+    color: {
+        // See example request on site. Seems like : { red: number, green: number, blue: number }.
+        // These colours seem to depend on the AQI used
+    },
 };
 
 export type airPollutant = {
@@ -149,15 +154,12 @@ export type airPollutant = {
     }
 };
 
-export type aqi = {
-    aqi: number,
-    aqiDisplay: string,
-    code: string,
-    displayName: string,
-    category: string,
-    dominantPollutant: string,
-    color: {
-        // See example request on site. Seems like : { red: number, green: number, blue: number }.
-        // These colours seem to depend on the AQI used
-    },
+export type healthRecommendations = {
+    generalPopulation: string,
+    children: string,
+    elderly: string,
+    athletes: string,
+    pregnantWomen: string,
+    heartDiseasePopulation: string,
+    lungDiseasePopulation: string
 };
