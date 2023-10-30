@@ -119,7 +119,45 @@ type solarPanel = {
 /*
     Model for Air Quality Data
 */
-
 export type airQualityData = {
+    dateTime: Date,
+    healthRecommendations: {
+        generalPopulation: string,
+        children: string,
+        elderly: string,
+        athletes: string,
+        pregnantWomen: string,
+        heartDiseasePopulation: string,
+        lungDiseasePopulation: string
+    },
+    indexes: aqi[],
+    pollutants: pollutant[],
+    regionCode: string
+};
 
+type pollutant = {
+    code: string,
+    displayName: string,
+    fullName: string,
+    additionalInfo: {
+        effects: string,
+        sources: string
+    },
+    concentration: {
+        units: string,
+        value: number
+    }
+};
+
+type aqi = {
+    aqi: number,
+    aqiDisplay: string,
+    code: string,
+    displayName: string,
+    category: string,
+    dominantPollutant: string,
+    color: {
+        // See example request on site. Seems like : { red: number, green: number, blue: number }.
+        // These colours seem to depend on the AQI used
+    },
 };

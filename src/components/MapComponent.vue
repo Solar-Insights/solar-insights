@@ -83,7 +83,7 @@ import HealthTab from "@/components/HealthTab.vue";
 // Component data
 const autocompleteValue = ref("");
 const airQualityPanel = ref(0);
-// const airQualityDataDisplayed: airQualityData = reactive({});
+const airQualityDataDisplayed = ref<airQualityData>({} as airQualityData);
 
 // Google components
 let map: google.maps.Map;
@@ -106,8 +106,9 @@ onMounted(async () => {
     // Add map overlay and autocomplete on map + Perform first air quality fetch
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
-    console.log(await getAirQualityData(coord));
-
+    airQualityDataDisplayed.value = await getAirQualityData(coord);
+    console.log(airQualityDataDisplayed.value
+    )
     // Listener for the autocomplete component - Get new place -> Display new position -> Replace marker -> Get air quality data
     autocomplete.addListener("place_changed", async () => {
         const newPlace = autocomplete.getPlace();
@@ -124,7 +125,7 @@ onMounted(async () => {
         map.setCenter( { lat: newCoord.lat, lng: newCoord.lng } );
         marker.setMap(null);
         marker = addMarker(newCoord, map);
-        //airQualityDataDisplayed.value = await getAirQualityData(newCoord);
+        airQualityDataDisplayed.value = await getAirQualityData(newCoord);
     });
 });
 </script>
