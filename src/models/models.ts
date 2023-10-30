@@ -131,11 +131,11 @@ export type airQualityData = {
         lungDiseasePopulation: string
     },
     indexes: aqi[],
-    pollutants: pollutant[],
+    pollutants: airPollutant[],
     regionCode: string
 };
 
-type pollutant = {
+export type airPollutant = {
     code: string,
     displayName: string,
     fullName: string,
@@ -144,12 +144,12 @@ type pollutant = {
         sources: string
     },
     concentration: {
-        units: string,
+        units: "PARTS_PER_BILLION" | "MICROGRAMS_PER_CUBIC_METER",
         value: number
     }
 };
 
-type aqi = {
+export type aqi = {
     aqi: number,
     aqiDisplay: string,
     code: string,
