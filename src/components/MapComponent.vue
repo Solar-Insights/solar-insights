@@ -30,15 +30,15 @@
 
         <v-divider class="mx-4"/>
 
-        <v-card-text class="px-0 text-center">
+        <v-card-text v-if="Object.keys(airQualityDataDisplayed).length" class="px-0 text-center">
             <div class="mb-2" style="font-size: 1.15rem;">
-                Universal AQI
+                {{ airQualityDataDisplayed.indexes[0].displayName }}
             </div>
 
             <div class="mb-4">
                 <v-progress-circular
                     class="mb-4"
-                    :model-value="50"
+                    :model-value="airQualityDataDisplayed.indexes[0].aqiDisplay"
                     :size="50"
                     :width="7"
                     color="red"
@@ -46,10 +46,10 @@
                     50
                 </v-progress-circular>
                 <div style="font-weight: 500">
-                    Moderate air quality
+                    {{ airQualityDataDisplayed.indexes[0].category }}
                 </div>
                 <div style="font-weight: lighter;">
-                    Dominant polluant: CO
+                    Dominant polluant: {{ pollutants[airQualityDataDisplayed.indexes[0].dominantPollutant as keyof typeof pollutants].displayName }}
                 </div>
             </div>
 
@@ -59,11 +59,11 @@
             </v-btn-toggle>
 
             <div v-if="airQualityPanel == 0">
-                <PollutantTab/>
+                <PollutantTab :pollutants="airQualityDataDisplayed.pollutants"/>
             </div>
 
             <div v-if="airQualityPanel == 1">
-                <HealthRecom/>
+                <HealthTab :healthRecommendations="airQualityDataDisplayed.healthRecommendations"/>
             </div>
         </v-card-text>
     </v-card>
@@ -71,19 +71,20 @@
 
 <script setup lang="ts">
 // Vue
-import { onMounted, ref, reactive } from "vue";
+import { onMounted, ref } from "vue";
 // Models
 import { coordinates, airQualityData } from "@/models/models";
+import { pollutants } from "@/models/constants";
 // Functions
 import { initMap, initLabelOnlyMap, initAutocomplete, addMarker, getCoordinatesFromAddress, getAirQualityData } from "@/plugins/googleMapsAPI";
 // Components
-import HealthRecom from "@/components/HealthRecom.vue";
 import PollutantTab from "@/components/PollutantTab.vue";
+import HealthTab from "@/components/HealthTab.vue";
 
-// Refs
+// Component data
 const autocompleteValue = ref("");
-const airQualityDataDisplayed = ref<airQualityData>({});
-const airQualityPanel = ref(1);
+const airQualityPanel = ref(0);
+const airQualityDataDisplayed = ref<airQualityData>({} as airQualityData);
 
 // Google components
 let map: google.maps.Map;
@@ -107,7 +108,7 @@ onMounted(async () => {
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
     airQualityDataDisplayed.value = await getAirQualityData(coord);
-    console.log(airQualityDataDisplayed.value)
+    console.log(airQualityDataDisplayed.value);
 
     // Listener for the autocomplete component - Get new place -> Display new position -> Replace marker -> Get air quality data
     autocomplete.addListener("place_changed", async () => {

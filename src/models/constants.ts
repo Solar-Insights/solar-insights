@@ -3,80 +3,54 @@
 export const pollutants = {
     co: {
         code: "co",
-        displayName: "CO",
-        fullName: "Carbon monoxide",
-        unitsMeasured: "ppb",
+        displayName: "CO"
     },
     c6h6 : {
         code: "c6h6",
-        displayName: "C6H6",
-        fullName: "Benzene",
-        unitsMeasured: "μg/m³",
+        displayName: "C6H6"
     },
     ox : {
         code: "ox",
-        displayName: "OX",
-        fullName: "Photochemical oxidants",
-        unitsMeasured: "ppb",
+        displayName: "OX"
     },
     o3 : {
         code: "o3",
-        displayName: "O3",
-        fullName: "Ozone",
-        unitsMeasured: "ppb",
+        displayName: "O3"
     },
     nh3 : {
         code: "nh3",
-        displayName: "NH3",
-        fullName: "	Ammonia",
-        unitsMeasured: "ppb",
+        displayName: "NH3"
     },
     nhmc : {
         code: "nhmc",
-        displayName: "NHMC",
-        fullName: "Non-methane hydrocarbons",
-        unitsMeasured: "ppb",
+        displayName: "NHMC"
     },
     no : {
         code: "no",
-        displayName: "NO",
-        fullName: "Nitrogen monoxide",
-        unitsMeasured: "ppb",
+        displayName: "NO"
     },
     nox : {
         code: "nox",
-        displayName: "NOX",
-        fullName: "Nitrogen oxides",
-        unitsMeasured: "ppb",
+        displayName: "NOX"
     },
     no2 : {
         code: "no2",
-        displayName: "NO2",
-        fullName: "Nitrogen dioxide",
-        unitsMeasured: "ppb",
+        displayName: "NO2"
     },
-    p25 : {
-        code: "p25",
-        displayName: "P25",
-        fullName: "Fine particulate matter (<2.5µm)",
-        unitsMeasured: "μg/m³",
+    pm25 : {
+        code: "pm25",
+        displayName: "PM25"
     },
     pm10 : {
         code: "pm10",
-        displayName: "PM10",
-        fullName: "Inhalable particulate matter (<10µm)",
-        unitsMeasured: "μg/m³",
+        displayName: "PM10"
     },
     so2 : {
         code: "so2",
-        displayName: "SO2",
-        fullName: "Sulfur dioxide",
-        unitsMeasured: "ppb",
+        displayName: "SO2"
     },
     trs : {
         code: "trs",
-        displayName: "TRS",
-        fullName: "Total reduced sulfur",
-        unitsMeasured: "μg/m³",
+        displayName: "TRS"
     },
 };

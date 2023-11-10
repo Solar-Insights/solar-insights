@@ -1,5 +1,5 @@
 // Models
-import { coordinates, validCoordinates, airQualityData } from "@/models/models";
+import { coordinates, validCoordinates, airQualityData, airPollutant } from "@/models/models";
 
 export async function initMap(coord: coordinates, mapElement: HTMLElement): Promise<google.maps.Map> {
     const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
@@ -113,7 +113,7 @@ async function getGeocoding(formattedAddress: string): Promise<coordinates> {
 
 export async function getAirQualityData(coord: coordinates) {
     // https://developers.google.com/maps/documentation/air-quality/reference/rest/v1/currentConditions/lookup#request-body
-    let airQualityData: airQualityData = {};
+    let airQualityData: airQualityData = {} as airQualityData;
     const url = `https://airquality.googleapis.com/v1/currentConditions:lookup?key=${import.meta.env.VITE_GOOGLE_API}`;
     const body = {
         "universalAqi": true,
@@ -136,9 +136,21 @@ export async function getAirQualityData(coord: coordinates) {
     })
     .then(async (response) => {
         airQualityData = await response.json();
+        makeDominantPollutantFirst(airQualityData.indexes[0].dominantPollutant, airQualityData.pollutants);
     })
     .catch((error) => {
         console.log("an error has occured when fetching the air quality data");
     })
     return airQualityData;
+}
+
+function makeDominantPollutantFirst(dominantPollutant: string, listOfPollutants: airPollutant[]) {
+    const index = listOfPollutants.findIndex(pollutant => pollutant.code == dominantPollutant);
+    if (index != -1) {
+        listOfPollutants.sort((a, b) => {
+            if (a.code == dominantPollutant) return -1;
+            if (b.code == dominantPollutant) return -1;
+            return a.code.localeCompare(b.code);
+        });
+    }
 }
