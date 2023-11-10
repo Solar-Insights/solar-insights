@@ -59,62 +59,11 @@
             </v-btn-toggle>
 
             <div v-if="airQualityPanel == 0">
-                <template v-for="(pollutant, i) in pollutantsInformations" :key="i">
-                    <v-hover v-slot="{ isHovering, props }">
-                        <v-card v-bind="props" class="ma-3 pa-2 rounded-lg" variant="text" :style="isHovering ? 'color: black; border: 2px solid #4C8BF5;' : 'color: #949494; border: 2px solid #d6d4d4'">
-                            <v-row>
-                                <v-col cols="auto" class="me-auto pb-1">
-                                    {{ pollutant.displayName }}
-                                </v-col>
-                                <v-col cols="auto" class="pb-1">
-                                    {{ pollutant.concentration }} {{ pollutant.unitsMeasured }}
-                                </v-col>
-                            </v-row>
-
-                            <v-row>
-                                <v-col cols="auto" class="me-auto pt-1">
-                                    {{ pollutant.fullName }}
-                                </v-col>
-                                <v-col cols="auto" class="pt-1">
-                                    <v-btn variant="text" density="compact" icon="mdi-information-outline" :color="isHovering ? 'black' : '#949494'"/>
-
-                                    <v-tooltip max-width="300" activator="parent" open-delay="200" :open-on-hover="false" open-on-click close-on-content-click :persistent="false">
-                                        <v-card-subtitle class="pl-0">
-                                            Effects
-                                        </v-card-subtitle>
-                                        {{ pollutant.effects }} Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque saepe sint laboriosam maxime, animi magni ab veniam, nisi natus quam eius beatae tempore quisquam qui molestias architecto nihil pariatur maiores?
-
-                                        <v-divider class="my-2"/>
-
-                                        <v-card-subtitle class="pl-0"> 
-                                            Sources
-                                        </v-card-subtitle>
-                                        {{ pollutant.sources }}
-                                    </v-tooltip>
-                                </v-col>
-                            </v-row>
-                        </v-card>
-                    </v-hover>
-                </template>
+                <PollutantTab/>
             </div>
 
             <div v-if="airQualityPanel == 1">
-                <v-item-group v-model="healthButtonSelection" mandatory>
-                    <v-item v-for="group in healthRecommendations.recommendations" v-slot="{ toggle, isSelected }">
-                        <v-btn @click="toggle" class="mx-2 my-1" icon :style="isSelected ? 'background-color: #4C8BF5;' : ''">
-                            <v-icon :color="isSelected ? 'white' : '#949494'">{{ group.icon }}</v-icon>
-                        </v-btn>
-                    </v-item>
-                </v-item-group>
-
-                <v-divider class="my-2"/>
-                
-                <v-card class="ma-3 pa-2 rounded-lg text-left" variant="text">
-                    <v-card-subtitle class="pl-0 pb-3" style="font-weight: 500">
-                        {{ healthRecommendations.recommendations[healthButtonSelection].displayName }}
-                    </v-card-subtitle>
-                    {{ healthRecommendations.recommendations[healthButtonSelection].recommendation }}
-                </v-card>
+                <HealthRecom/>
             </div>
         </v-card-text>
     </v-card>
@@ -127,99 +76,14 @@ import { onMounted, ref, reactive } from "vue";
 import { coordinates, airQualityData } from "@/models/models";
 // Functions
 import { initMap, initLabelOnlyMap, initAutocomplete, addMarker, getCoordinatesFromAddress, getAirQualityData } from "@/plugins/googleMapsAPI";
+// Components
+import HealthRecom from "@/components/HealthRecom.vue";
+import PollutantTab from "@/components/PollutantTab.vue";
 
 // Refs
 const autocompleteValue = ref("");
 const airQualityDataDisplayed = ref<airQualityData>({});
-
-const healthButtonSelection = ref(0);
-
 const airQualityPanel = ref(1);
-const pollutantsInformations = reactive({
-    co: {
-        index: 0,
-        code: "co",
-        displayName: "CO",
-        fullName: "Carbon monoxide",
-        unitsMeasured: "ppb",
-        concentration: 101.10,
-        effects: "effects blabla",
-        sources: "sources blabla"
-    },
-    c6h6 : {
-        index: 1,
-        code: "c6h6",
-        displayName: "C6H6",
-        fullName: "Benzene",
-        unitsMeasured: "μg/m³",
-        concentration: 11.977,
-        effects: "effects blabla",
-        sources: "sources blabla"
-    },
-    ox : {
-        index: 2,
-        code: "ox",
-        displayName: "OX",
-        fullName: "Photochemical oxidants",
-        unitsMeasured: "ppb",
-        concentration: 20.10,
-        effects: "effects blabla",
-        sources: "sources blabla"
-    },
-});
-const healthRecommendations = reactive({
-    recommendations: [
-        {
-            index: 0,
-            group: "athletes",
-            displayName: "Athletes",
-            recommendation: "health recommandation",
-            icon: "mdi-weight-lifter"
-        },
-        {
-            index: 1,
-            group: "children",
-            displayName: "Children",
-            recommendation: "health recommandation",
-            icon: "mdi-baby-carriage"
-        },
-        {
-            index: 2,
-            group: "elderly",
-            displayName: "Senior citizens",
-            recommendation: "health recommandation",
-            icon: "mdi-human-cane"
-        },
-        {
-            index: 3,
-            group: "generalPopulation",
-            displayName: "General Population",
-            recommendation: "health recommandation",
-            icon: "mdi-account-group"
-        },
-        {
-            index: 4,
-            group: "heartDiseasePopulation",
-            displayName: "Individuals with heart-related issues",
-            recommendation: "health recommandation",
-            icon: "mdi-heart"
-        },
-        {
-            index: 5,
-            group: "lungDiseasePopulation",
-            displayName: "Individuals with lung-related issues",
-            recommendation: "health recommandation",
-            icon: "mdi-lungs"
-        },
-        {
-            index: 6,
-            group: "pregnantWomen",
-            displayName: "Pregnant women",
-            recommendation: "health recommandation",
-            icon: "mdi-human-pregnant"
-        }
-    ]
-});
 
 // Google components
 let map: google.maps.Map;
