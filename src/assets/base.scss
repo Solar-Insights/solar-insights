@@ -1,0 +1,22 @@
+/*
+    Variable definitions
+*/
+$light-blue: #4C8BF5;
+
+
+/*
+    Class conditionals: apply some caracteristics based on some values
+*/
+.button-selection-light-blue-border {
+    border-bottom: 2px solid $light-blue;
+}
+
+.hovering-over-card-style {
+    color: black; 
+    border: 2px solid $light-blue;
+}
+
+.not-hovering-over-card-style {
+    color: #949494; 
+    border: 2px solid #d6d4d4;
+}

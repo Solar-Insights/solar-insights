@@ -53,10 +53,10 @@
                 </div>
             </div>
 
-            <v-btn-toggle class="w-100 mb-2" variant="outlined" mandatory v-model="airQualityPanel">
-                <v-btn class="w-50" prepend-icon="mdi-alert" style="text-transform: none !important;"> Pollutants </v-btn>
-                <v-btn class="w-50" prepend-icon="mdi-heart" style="text-transform: none !important;"> Health </v-btn>
-            </v-btn-toggle>
+            <div class="w-100 mb-2">
+                <v-btn @click="airQualityPanel = 0;" class="w-50 h-100 py-4" :class="airQualityPanel == 0 ? 'button-selection-light-blue-border' : ''" prepend-icon="mdi-alert" variant="flat"> Pollutants </v-btn>
+                <v-btn @click="airQualityPanel = 1;" class="w-50 h-100 py-4" :class="airQualityPanel == 1 ? 'button-selection-light-blue-border' : ''" prepend-icon="mdi-heart" variant="flat"> Health </v-btn>
+            </div>
 
             <div v-if="airQualityPanel == 0">
                 <PollutantTab :pollutants="airQualityDataDisplayed.pollutants"/>
