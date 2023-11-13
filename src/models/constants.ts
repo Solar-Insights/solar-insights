@@ -1,5 +1,12 @@
-// For an updated list of pollutants, visit https://developers.google.com/maps/documentation/air-quality/pollutants
+export function circularBarColorSelector(value: string) {
+    const num_value: number = Number(value);
+    if ( isNaN(num_value)) return "green";
+    else if ( num_value < 50 ) return "red";
+    else if ( num_value < 80 ) return "orange";
+    else return "green";
+}
 
+// For an updated list of pollutants, visit https://developers.google.com/maps/documentation/air-quality/pollutants
 export const pollutants = {
     co: {
         code: "co",
@@ -39,7 +46,7 @@ export const pollutants = {
     },
     pm25 : {
         code: "pm25",
-        displayName: "PM25"
+        displayName: "PM2.5"
     },
     pm10 : {
         code: "pm10",

@@ -41,7 +41,7 @@
                     :model-value="airQualityDataDisplayed.indexes[0].aqiDisplay"
                     :size="50"
                     :width="7"
-                    color="red"
+                    :color="circularBarColorSelector(airQualityDataDisplayed.indexes[0].aqiDisplay)"
                 >
                     {{ airQualityDataDisplayed.indexes[0].aqi }}
                 </v-progress-circular>
@@ -74,7 +74,7 @@
 import { onMounted, ref } from "vue";
 // Models
 import { coordinates, airQualityData } from "@/models/models";
-import { pollutants } from "@/models/constants";
+import { pollutants, circularBarColorSelector } from "@/models/constants";
 // Functions
 import { initMap, initLabelOnlyMap, initAutocomplete, addMarker, getCoordinatesFromAddress, getAirQualityData } from "@/plugins/googleMapsAPI";
 // Components
