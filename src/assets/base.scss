@@ -2,13 +2,34 @@
     Variable definitions
 */
 $light-blue: #4C8BF5;
-
+$light-grey: #949494;
 
 /*
-    Class conditionals: apply some caracteristics based on some values
+    Class conditionals: apply some caracteristics based on some values. Should always come in pair
 */
-.button-selection-light-blue-border {
+.button-selection-border {
     border-bottom: 2px solid $light-blue;
+    font-weight: bold !important;
+}
+
+.button-non-selection-border {
+
+}
+
+.button-selection-background {
+    background-color: $light-blue;
+}
+
+.button-non-selection-background {
+
+}
+
+.icon-selection-color {
+    color: white;
+}
+
+.icon-non-selection-color {
+    color: $light-grey; 
 }
 
 .hovering-over-card-style {
@@ -17,6 +38,6 @@ $light-blue: #4C8BF5;
 }
 
 .not-hovering-over-card-style {
-    color: #949494; 
+    color: $light-grey; 
     border: 2px solid #d6d4d4;
 }

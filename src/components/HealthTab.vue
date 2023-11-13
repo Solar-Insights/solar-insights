@@ -1,8 +1,8 @@
 <template>
     <v-item-group v-model="healthButtonSelection" mandatory>
         <v-item v-for="group in healthRecommendationsList" v-slot="{ toggle, isSelected }">
-            <v-btn @click="toggle" class="mx-2 my-1" icon :style="isSelected ? 'background-color: #4C8BF5;' : ''">
-                <v-icon :color="isSelected ? 'white' : '#949494'">{{ group.icon }}</v-icon>
+            <v-btn @click="toggle" class="mx-2 my-1" :class="isSelected ? 'button-selection-background' : 'button-non-selection-background'" icon>
+                <v-icon :class="isSelected ? 'icon-selection-color' : 'icon-non-selection-color'">{{ group.icon }}</v-icon>
             </v-btn>
         </v-item>
     </v-item-group>

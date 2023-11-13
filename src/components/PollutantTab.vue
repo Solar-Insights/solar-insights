@@ -16,7 +16,7 @@
                         {{ pollutant.fullName }}
                     </v-col>
                     <v-col cols="auto" class="pt-1">
-                        <v-btn variant="text" density="compact" icon="mdi-information-outline" :color="isHovering ? 'black' : '#949494'"/>
+                        <v-btn variant="text" density="compact" icon="mdi-information-outline"/>
 
                         <v-tooltip max-width="300" activator="parent" open-delay="200" :open-on-hover="false" open-on-click close-on-content-click :persistent="false">
                             <v-card-subtitle class="pl-0">

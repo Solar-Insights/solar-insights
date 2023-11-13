@@ -42,20 +42,21 @@
                     :size="50"
                     :width="7"
                     :color="circularBarColorSelector(airQualityDataDisplayed.indexes[0].aqiDisplay)"
+                    style="font-weight: bold;"
                 >
                     {{ airQualityDataDisplayed.indexes[0].aqi }}
                 </v-progress-circular>
-                <div style="font-weight: 500">
+                <div>
                     {{ airQualityDataDisplayed.indexes[0].category }}
                 </div>
-                <div style="font-weight: lighter;">
+                <div>
                     Dominant polluant: {{ pollutants[airQualityDataDisplayed.indexes[0].dominantPollutant as keyof typeof pollutants].displayName }}
                 </div>
             </div>
 
             <div class="w-100 mb-2">
-                <v-btn @click="airQualityPanel = 0;" class="w-50 h-100 py-4" :class="airQualityPanel == 0 ? 'button-selection-light-blue-border' : ''" prepend-icon="mdi-alert" variant="flat"> Pollutants </v-btn>
-                <v-btn @click="airQualityPanel = 1;" class="w-50 h-100 py-4" :class="airQualityPanel == 1 ? 'button-selection-light-blue-border' : ''" prepend-icon="mdi-heart" variant="flat"> Health </v-btn>
+                <v-btn @click="airQualityPanel = 0;" class="w-50 h-100 py-4" :class="airQualityPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" prepend-icon="mdi-alert" variant="flat"> Pollutants </v-btn>
+                <v-btn @click="airQualityPanel = 1;" class="w-50 h-100 py-4" :class="airQualityPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" prepend-icon="mdi-heart" variant="flat"> Health </v-btn>
             </div>
 
             <div v-if="airQualityPanel == 0">
@@ -83,7 +84,7 @@ import HealthTab from "@/components/HealthTab.vue";
 
 // Component data
 const autocompleteValue = ref("");
-const airQualityPanel = ref(0);
+const airQualityPanel = ref(1);
 const airQualityDataDisplayed = ref<airQualityData>({} as airQualityData);
 
 // Google components
