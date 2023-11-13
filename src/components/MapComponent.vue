@@ -43,7 +43,7 @@
                     :width="7"
                     color="red"
                 >
-                    50
+                    {{ airQualityDataDisplayed.indexes[0].aqi }}
                 </v-progress-circular>
                 <div style="font-weight: 500">
                     {{ airQualityDataDisplayed.indexes[0].category }}

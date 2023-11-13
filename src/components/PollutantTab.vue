@@ -1,7 +1,7 @@
 <template>
     <template v-for="(pollutant, i) in pollutants" :key="i">
-        <v-hover v-slot="{ isHovering, props }">
-            <v-card v-bind="props" class="ma-3 pa-2 rounded-lg" variant="text" :style="isHovering ? 'color: black; border: 2px solid #4C8BF5;' : 'color: #949494; border: 2px solid #d6d4d4'">
+        <v-hover v-slot="{ isHovering, props }" open-delay="100">
+            <v-card v-bind="props" class="ma-3 pa-2 rounded-lg" variant="text" :style="isHovering ? 'color: black; border: 2px solid #4C8BF5;' : 'color: #949494; border: 2px solid #d6d4d4'" :elevation="isHovering ? 4 : 0">
                 <v-row> 
                     <v-col cols="auto" class="me-auto pb-1">
                         {{ pollutant.displayName }}
