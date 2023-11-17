@@ -55,8 +55,8 @@
             </div>
 
             <div class="w-100 mb-2">
-                <v-btn @click="airQualityPanel = 0;" class="w-50 h-100 py-4" :class="airQualityPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" prepend-icon="mdi-alert-outline" variant="flat"> Pollutants </v-btn>
-                <v-btn @click="airQualityPanel = 1;" class="w-50 h-100 py-4" :class="airQualityPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" prepend-icon="mdi-heart-outline" variant="flat"> Health </v-btn>
+                <v-btn @click="airQualityPanel = 0;" class="w-50 h-100 py-4" :class="airQualityPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" :prepend-icon="airQualityPanel == 0 ? 'mdi-alert' : 'mdi-alert-outline'" variant="flat"> Pollutants </v-btn>
+                <v-btn @click="airQualityPanel = 1;" class="w-50 h-100 py-4" :class="airQualityPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" :prepend-icon="airQualityPanel == 1 ? 'mdi-heart' : 'mdi-heart-outline'" variant="flat"> Health </v-btn>
             </div>
 
             <div v-if="airQualityPanel == 0">

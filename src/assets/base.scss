@@ -8,12 +8,11 @@ $light-grey: #949494;
     Class conditionals: apply some caracteristics based on some values. Should always come in pair
 */
 .button-selection-border {
-    border-bottom: 2px solid $light-blue;
     font-weight: bold !important;
+    background-color: rgba(0, 0, 0, 0.10);
 }
 
 .button-non-selection-border {
-
 }
 
 .button-selection-background {
@@ -23,20 +22,20 @@ $light-grey: #949494;
 .button-selection-background::before {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -10px;
     width: 100%;
     height: 2px;
     background: $light-blue;
 }
 
 .button-non-selection-background {
-
+    border: 1px solid $light-blue;
 }
 
 .button-non-selection-background::before {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -10px;
     width: 100%;
     height: 2px;
     background: $light-grey;
@@ -48,7 +47,7 @@ $light-grey: #949494;
 }
 
 .icon-non-selection-color {
-    color: $light-grey; 
+    color: $light-blue; 
 }
 
 .hovering-over-card-style {

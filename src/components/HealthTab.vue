@@ -1,7 +1,7 @@
 <template>
     <v-item-group v-model="healthButtonSelection" mandatory>
         <v-item v-for="group in healthRecommendationsList" v-slot="{ toggle, isSelected }">
-            <v-btn @click="toggle" class="mx-2 my-1" :class="isSelected ? 'button-selection-background' : 'button-non-selection-background'" icon>
+            <v-btn @click="toggle" class="mx-2 my-2" :class="isSelected ? 'button-selection-background' : 'button-non-selection-background'" icon>
                 <v-icon :class="isSelected ? 'icon-selection-color' : 'icon-non-selection-color'" >{{ group.icon }}</v-icon>
             </v-btn>
         </v-item>
@@ -13,7 +13,9 @@
         <v-card-subtitle class="pl-0 pb-3" style="font-weight: 500">
             {{ healthRecommendationsList[healthButtonSelection].displayName }}
         </v-card-subtitle>
-        {{ healthRecommendationsList[healthButtonSelection].recommendation }}
+        <div>
+            {{ healthRecommendationsList[healthButtonSelection].recommendation }}
+        </div>
     </v-card>
 </template>
 
@@ -30,10 +32,12 @@ const props = defineProps({
         default: {}
     }
 });
+
 watch( () => props.healthRecommendations, () => {
     for(let i = 0; i < healthRecommendationsList.value.length; i++) {
         healthRecommendationsList.value[i].recommendation = props.healthRecommendations[healthRecommendationsList.value[i].group as keyof typeof props.healthRecommendations];
     }
+    console.log(healthRecommendationsList.value[healthButtonSelection.value].recommendation);
 }) 
 
 const healthButtonSelection = ref(0);
