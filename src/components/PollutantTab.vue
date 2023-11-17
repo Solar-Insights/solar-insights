@@ -3,10 +3,10 @@
         <v-hover v-slot="{ isHovering, props }" open-delay="100">
             <v-card v-bind="props" class="ma-3 pa-2 rounded-lg" variant="text" :class="isHovering ? 'hovering-over-card-style' : 'not-hovering-over-card-style'" :elevation="isHovering ? 4 : 0">
                 <v-row> 
-                    <v-col cols="auto" class="me-auto pb-1">
+                    <v-col cols="auto" class="me-auto pb-1" style="color: black; font-size: 1rem;">
                         {{ pollutant.displayName }}
                     </v-col>
-                    <v-col cols="auto" class="pb-1">
+                    <v-col cols="auto" class="pb-1" style="font-size: 1rem;">
                         {{ pollutant.concentration.value }} {{ concentrationMap[pollutant.concentration.units] }}
                     </v-col>
                 </v-row>
