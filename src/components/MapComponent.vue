@@ -3,7 +3,10 @@
     <!-- 
         Search bar goes over air quality details so that it can stay even on scroll
     -->
-    <div :class="$vuetify.display.xs ? 'air-quality-details-mobile' : 'air-quality-details-computer'" style="z-index: 200">
+    <v-card 
+        id="air-quality-details" 
+        :class="$vuetify.display.xs ? 'air-quality-details-mobile' : 'air-quality-details-computer'"
+    >
         <v-text-field
             v-model="autocompleteValue"
             id="autocomplete-search"
@@ -15,13 +18,9 @@
             variant="solo"
             rounded
         />
-    </div>
 
+        <v-divider/>
 
-    <v-card 
-        id="air-quality-details" 
-        :class="$vuetify.display.xs ? 'air-quality-details-mobile' : 'air-quality-details-computer'"
-    >
         <v-card-title class="text-center" style="font-weight: lighter;">
             Air quality details
         </v-card-title>
