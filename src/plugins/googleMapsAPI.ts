@@ -71,9 +71,9 @@ export function initLabelOnlyMap() {
 export async function initAutocomplete(autocompleteElementId: string): Promise<google.maps.places.Autocomplete> {
     const { Autocomplete } = await google.maps.importLibrary("places") as google.maps.PlacesLibrary;
     const input = document.getElementById(autocompleteElementId) as HTMLInputElement;
-    const options = {
-        fields: ["formatted_address"],
-        types: ["address"]
+    const options = { // Pour uniquement accepter des inputs d'adresse valide
+        // fields: ["formatted_address"],
+        // types: ["address"]
     };
     return new Autocomplete(input, options);
 }
