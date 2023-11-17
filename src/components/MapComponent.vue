@@ -84,7 +84,7 @@ import HealthTab from "@/components/HealthTab.vue";
 
 // Component data
 const autocompleteValue = ref("");
-const airQualityPanel = ref(1);
+const airQualityPanel = ref(0);
 const airQualityDataDisplayed = ref<airQualityData>({} as airQualityData);
 
 // Google components

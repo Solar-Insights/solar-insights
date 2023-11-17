@@ -1,13 +1,11 @@
 <template>
-    <v-item-group v-model="healthButtonSelection" mandatory>
+    <v-item-group class="my-4" v-model="healthButtonSelection" mandatory>
         <v-item v-for="group in healthRecommendationsList" v-slot="{ toggle, isSelected }">
             <v-btn @click="toggle" class="mx-2 my-2" :class="isSelected ? 'button-selection-background' : 'button-non-selection-background'" icon>
                 <v-icon :class="isSelected ? 'icon-selection-color' : 'icon-non-selection-color'" >{{ group.icon }}</v-icon>
             </v-btn>
         </v-item>
     </v-item-group>
-
-    <v-divider class="my-2"/>
     
     <v-card class="ma-3 pa-2 rounded-lg text-left" variant="text">
         <v-card-subtitle class="pl-0 pb-3" style="font-weight: 500">
@@ -21,9 +19,10 @@
 
 <script setup lang="ts">
 // Vue 
-import { ref, PropType, watch } from 'vue';
+import { ref, PropType } from 'vue';
 // Models
 import { healthRecommendations } from "@/models/models";
+import { onMounted } from 'vue';
 
 const props = defineProps({
     healthRecommendations: {
@@ -33,19 +32,18 @@ const props = defineProps({
     }
 });
 
-watch( () => props.healthRecommendations, () => {
+onMounted(() => {
     for(let i = 0; i < healthRecommendationsList.value.length; i++) {
         healthRecommendationsList.value[i].recommendation = props.healthRecommendations[healthRecommendationsList.value[i].group as keyof typeof props.healthRecommendations];
     }
-    console.log(healthRecommendationsList.value[healthButtonSelection.value].recommendation);
-}) 
+})
 
 const healthButtonSelection = ref(0);
 const healthRecommendationsList = ref([
         {
             index: 0,
             group: "generalPopulation",
-            displayName: "General Population",
+            displayName: "General population",
             recommendation: "",
             icon: "mdi-account-group"
         },
