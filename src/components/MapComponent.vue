@@ -1,24 +1,32 @@
 <template>
-    <div id="map" style="width: 100%; height: 100%;"></div>
-    <div id="parent-search" class="parent-search"> 
+    <div id="map" class="w-100 h-100"></div>
+    <!-- 
+        Search bar goes over air quality details so that it can stay even on scroll
+    -->
+    <div :class="$vuetify.display.xs ? 'air-quality-details-mobile' : 'air-quality-details-computer'" style="z-index: 200">
         <v-text-field
             v-model="autocompleteValue"
             id="autocomplete-search"
-            class="autocomplete-search"
+            :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
             placeholder="Find a location"
-            prepend-inner-icon="mdi-magnify"
+            prepend-inner-icon="mdi-google-maps"
             hide-details
             single-line
-            solo
+            variant="solo"
+            rounded
         />
     </div>
 
-    <v-card id="air-quality-details" class="air-quality-details w-25 h-75 ml-3 rounded-lg" style="position: fixed; top: 80px;">
+
+    <v-card 
+        id="air-quality-details" 
+        :class="$vuetify.display.xs ? 'air-quality-details-mobile' : 'air-quality-details-computer'"
+    >
         <v-card-title class="text-center" style="font-weight: lighter;">
             Air quality details
         </v-card-title>
 
-        <v-divider class="mx-4"/>
+        <v-divider/>
 
         <v-card-text v-if="Object.keys(airQualityDataDisplayed).length" class="px-0 text-center">
             <div class="mb-2" style="font-size: 1.15rem;">
@@ -45,17 +53,29 @@
             </div>
 
             <div class="w-100 mb-2">
-                <v-btn @click="airQualityPanel = 0;" class="w-50 h-100 py-4" :class="airQualityPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" :prepend-icon="airQualityPanel == 0 ? 'mdi-alert' : 'mdi-alert-outline'" variant="flat"> Pollutants </v-btn>
-                <v-btn @click="airQualityPanel = 1;" class="w-50 h-100 py-4" :class="airQualityPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" :prepend-icon="airQualityPanel == 1 ? 'mdi-heart' : 'mdi-heart-outline'" variant="flat"> Health </v-btn>
+                <v-btn 
+                    @click="airQualityPanel = 0;" 
+                    class="w-50 h-100 py-4" 
+                    :class="airQualityPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" 
+                    :prepend-icon="airQualityPanel == 0 ? 'mdi-alert' : 'mdi-alert-outline'" 
+                    variant="flat"
+                > 
+                    Pollutants 
+                </v-btn>
+                <v-btn 
+                    @click="airQualityPanel = 1;" 
+                    class="w-50 h-100 py-4" 
+                    :class="airQualityPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" 
+                    :prepend-icon="airQualityPanel == 1 ? 'mdi-heart' : 'mdi-heart-outline'" 
+                    variant="flat"
+                > 
+                    Health 
+                </v-btn>
             </div>
 
-            <div v-if="airQualityPanel == 0">
-                <PollutantTab :pollutants="airQualityDataDisplayed.pollutants"/>
-            </div>
+            <PollutantTab v-if="airQualityPanel == 0" :pollutants="airQualityDataDisplayed.pollutants"/>
 
-            <div v-if="airQualityPanel == 1">
-                <HealthTab :healthRecommendations="airQualityDataDisplayed.healthRecommendations"/>
-            </div>
+            <HealthTab v-if="airQualityPanel == 1" :healthRecommendations="airQualityDataDisplayed.healthRecommendations"/>
         </v-card-text>
     </v-card>
 </template>

@@ -11,50 +11,60 @@ $light-grey: #949494;
     Phones
 */
 @media screen and (max-width: 599px) {
-    .air-quality-details {
-
-    }
-    .parent-search {
-
-    }
-    .autocomplete-search {
-
-    }
 }
   
+
 /*
   Tablets and computers
 */
 @media screen and (min-width: 600px) {
-    .air-quality-details {
-
-    }
-    .parent-search {
-
-    }
-    .autocomplete-search {
-        
-    }
 }
 
+
 /*
-    Classes
+    Search component
+*/
+.autocomplete-search {
+    @extend .px-3;
+    @extend .my-6;
+    .v-field.v-field--prepended {
+        @extend .py-2;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+    }
+}
+.autocomplete-search-mobile {
+    @extend .autocomplete-search;
+    @extend .w-100;
+}
+.autocomplete-search-computer {
+    @extend .autocomplete-search;
+    width: 385px;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+
+
+/*
+    Air quality component
 */
 .air-quality-details {
     @extend .bg-white;
-    @extend .rounded-lg;
-    @extend .ml-3;
+    position: fixed;
+    top: 0;
+    overflow-y: scroll;
+}
+.air-quality-details-mobile {
+    @extend .ml-0;
+    @extend .air-quality-details;
+}
+.air-quality-details-computer {
+    @extend .air-quality-details;
+    width: 400px;
+    @extend .h-100;
+    z-index: 10
 }
 
-.parent-search {
-}
-
-.autocomplete-search {
-    @extend .bg-white;
-    @extend .rounded-xl;
-    @extend .ml-3;
-    @extend .my-6;
-}
 
 /*
     Class conditionals: apply some caracteristics based on some values. Should always come in pair
@@ -111,4 +121,3 @@ $light-grey: #949494;
     color: $light-grey; 
     border: 2px solid #d6d4d4;
 }
-
