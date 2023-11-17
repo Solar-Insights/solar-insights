@@ -1,10 +1,10 @@
 <template>
     <div id="map" style="width: 100%; height: 100%;"></div>
-    <!-- <div id="parent-search" class="w-100"> 
+    <div id="parent-search" class="parent-search"> 
         <v-text-field
             v-model="autocompleteValue"
             id="autocomplete-search"
-            class="bg-white ml-3 my-6 rounded-xl w-50"
+            class="autocomplete-search"
             placeholder="Find a location"
             prepend-inner-icon="mdi-magnify"
             hide-details
@@ -12,18 +12,8 @@
             solo
         />
     </div>
-    <v-expansion-panels id="test" class="bg-white w-25 h-50 ml-3" style="position: fixed; top: 80px;" v-model="pollutantsPanel">
-        <v-expansion-panel expand-icon="mdi-plus" collapse-icon="mdi-minus" v-model="pollutantsPanel">
-            <v-expansion-panel-title color="red" style="font-size: 18px; font-weight: 400;">
-                Pollutants
-            </v-expansion-panel-title>
-            <v-expansion-panel-text class="h-50" style="overflow-y: scroll;">
-                {{  airQualityDataDisplayed }}
-            </v-expansion-panel-text>
-        </v-expansion-panel>
-    </v-expansion-panels> -->
 
-    <v-card id="test" class="bg-white w-25 h-75 ml-3 rounded-lg" style="position: fixed; top: 80px;">
+    <v-card id="air-quality-details" class="air-quality-details w-25 h-75 ml-3 rounded-lg" style="position: fixed; top: 80px;">
         <v-card-title class="text-center" style="font-weight: lighter;">
             Air quality details
         </v-card-title>

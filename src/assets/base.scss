@@ -1,8 +1,60 @@
+@import '../node_modules/vuetify/_styles.scss';
+
 /*
     Variable definitions
 */
 $light-blue: #4C8BF5;
 $light-grey: #949494;
+
+
+/*
+    Phones
+*/
+@media screen and (max-width: 599px) {
+    .air-quality-details {
+
+    }
+    .parent-search {
+
+    }
+    .autocomplete-search {
+
+    }
+}
+  
+/*
+  Tablets and computers
+*/
+@media screen and (min-width: 600px) {
+    .air-quality-details {
+
+    }
+    .parent-search {
+
+    }
+    .autocomplete-search {
+        
+    }
+}
+
+/*
+    Classes
+*/
+.air-quality-details {
+    @extend .bg-white;
+    @extend .rounded-lg;
+    @extend .ml-3;
+}
+
+.parent-search {
+}
+
+.autocomplete-search {
+    @extend .bg-white;
+    @extend .rounded-xl;
+    @extend .ml-3;
+    @extend .my-6;
+}
 
 /*
     Class conditionals: apply some caracteristics based on some values. Should always come in pair
