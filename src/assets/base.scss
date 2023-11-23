@@ -56,7 +56,7 @@ $light-grey: #949494;
     @extend .air-quality-details;
     @extend .bg-white;
     overflow-y: scroll;
-    position: fixed;
+    position: absolute;
     top: 0px;
     width: 400px;
     height: 100%;

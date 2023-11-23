@@ -1,8 +1,10 @@
 <template>
   <v-app>
     <v-main>
-      <ErrorComponent v-if="displayError"/>
-      <router-view :key="$route.fullPath"></router-view>
+      <AlertComponent type="" title="" message="" v-if="!displayAlert"/>
+      <v-container class="h-100 pa-0" fluid style="position: relative">
+        <router-view :key="$route.fullPath"></router-view>
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -11,7 +13,7 @@
 // Vue
 import { ref } from 'vue';
 // Components
-import ErrorComponent from '@/components/util/ErrorComponent.vue';
+import AlertComponent from '@/components/misc/AlertComponent.vue';
 
-const displayError = ref(false);
+const displayAlert = ref(false);
 </script>

@@ -1,8 +1,6 @@
 <template>
     <div id="map" class="w-100 h-100"></div>
-    <!-- 
-        Search bar goes over air quality details so that it can stay even on scroll
-    -->
+
     <v-card 
         id="air-quality-details" 
         :class="$vuetify.display.xs ? 'air-quality-details-mobile' : 'air-quality-details-computer'"
@@ -157,8 +155,6 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
             return;
         }
 
-
-        map.setCenter({ lat: newCoord.lat, lng: newCoord.lng});
         marker.setMap(null);
         marker = initMarker(newCoord, map);
         airQualityDataDisplayed.value = await getAirQualityData(newCoord);
