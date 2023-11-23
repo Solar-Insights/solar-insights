@@ -1,25 +1,13 @@
 // Models
 import { coordinates, validCoordinates, airQualityData, airPollutant } from "@/models/models";
 
-export async function getCoordinatesFromAddress(formattedAddress: string) {
-    console.log("get coordinates of formatted address");
-    const coord: coordinates = await getGeocoding(formattedAddress);
-    if ( validCoordinates(coord) && coord.lat != 0 && coord.lng != 0 ) {
-        return coord;
-    }
-}
-
-async function getGeocoding(formattedAddress: string): Promise<coordinates> {
-    console.log("get lat and lng from address");
+export async function geocoding(formattedAddress: string) {
     const geocoder = new google.maps.Geocoder()
-    const options = {
-        address: formattedAddress
-    };
     const coord: coordinates = {
         lat: 0,
         lng: 0
     };
-    await geocoder.geocode(options)
+    await geocoder.geocode({ address: formattedAddress})
         .then((geocodingRequest: google.maps.GeocoderResponse) => {
             coord.lat = geocodingRequest.results[0].geometry.location.lat();
             coord.lng = geocodingRequest.results[0].geometry.location.lng();
@@ -27,9 +15,26 @@ async function getGeocoding(formattedAddress: string): Promise<coordinates> {
         .catch((error) => {
             console.log(error);
         })
-
-    return coord;
+    
+    if ( validCoordinates(coord) && coord.lat != 0 && coord.lng != 0 ) {
+        return coord;
+    }
 }
+
+
+export async function reverseGeocoding(coord: coordinates) {
+    const geocoder = new google.maps.Geocoder();
+    let formattedAddress = "";
+    await geocoder.geocode({ location: coord})
+    .then((geocodingRequest: google.maps.GeocoderResponse) => {
+        formattedAddress = geocodingRequest.results[0].formatted_address;
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+    return formattedAddress;
+}
+
 
 export async function getAirQualityData(coord: coordinates) {
     // https://developers.google.com/maps/documentation/air-quality/reference/rest/v1/currentConditions/lookup#request-body

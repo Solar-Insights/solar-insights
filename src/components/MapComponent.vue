@@ -87,7 +87,7 @@ import { coordinates, airQualityData } from "@/models/models";
 import { pollutants, circularBarColorSelector } from "@/models/constants";
 // Functions
 import { initMap, initMarker, initAutocomplete } from "@/plugins/initMapComponents";
-import {  getCoordinatesFromAddress, getAirQualityData } from "@/plugins/googleMapsAPI";
+import {  geocoding, reverseGeocoding, getAirQualityData } from "@/plugins/googleMapsAPI";
 // Components
 import PollutantTab from "@/components/PollutantTab.vue";
 import HealthTab from "@/components/HealthTab.vue";
@@ -119,12 +119,11 @@ onMounted(async () => {
     console.log(airQualityDataDisplayed.value);
 
     // Listeners
-    await mapListeners(map, marker);
-    await autocompleteListeners(autocomplete, map, marker);
-    
+    await initListeners(autocomplete, map, marker);
 });
 
-async function autocompleteListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map, marker: google.maps.Marker) {
+
+async function initListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map, marker: google.maps.Marker) {
     autocomplete.addListener("place_changed", async () => {
         const newPlace = autocomplete.getPlace();
         if ( !newPlace || !newPlace.formatted_address ) {
@@ -132,9 +131,10 @@ async function autocompleteListeners(autocomplete: google.maps.places.Autocomple
             return;
         }
 
-        const newCoord = await getCoordinatesFromAddress(newPlace.formatted_address);
+        const newCoord = await geocoding(newPlace.formatted_address);
         if ( !newCoord ) {
             console.log("An error occured when getting the coordinate of the formatted address");
+            autocompleteValue.value = "";
             return;
         }
         
@@ -143,19 +143,26 @@ async function autocompleteListeners(autocomplete: google.maps.places.Autocomple
         marker = initMarker(newCoord, map);
         airQualityDataDisplayed.value = await getAirQualityData(newCoord);
     });
-}
 
-async function mapListeners(map: google.maps.Map, marker: google.maps.Marker) {
     map.addListener("dblclick", async (mouseEvent: any) => {
         const newCoord: coordinates = {
             lat: mouseEvent.latLng.lat(),
             lng: mouseEvent.latLng.lng()
         };
 
+        const formattedAddress = await reverseGeocoding(newCoord);
+        if ( !formattedAddress ) {
+            console.log("An error occured when reverse geocoding the coordinate");
+            autocompleteValue.value = "";
+            return;
+        }
+
+
         map.setCenter({ lat: newCoord.lat, lng: newCoord.lng});
         marker.setMap(null);
         marker = initMarker(newCoord, map);
         airQualityDataDisplayed.value = await getAirQualityData(newCoord);
+        autocompleteValue.value = formattedAddress;
     });
 }
 </script>
