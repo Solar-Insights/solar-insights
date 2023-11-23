@@ -90,6 +90,16 @@ import { getGeocoding, getReverseGeocoding, getAirQualityData } from "@/google/g
 import PollutantTab from "@/components/map/PollutantTab.vue";
 import HealthTab from "@/components/map/HealthTab.vue";
 
+// Emit
+const emit = defineEmits(['alert']);
+function emitAlert(type: string, title: string, message: string) {
+    emit('alert', {
+        type: type, 
+        title: title, 
+        message: message
+    });
+}
+
 // Component data
 const autocompleteValue = ref("");
 const airQualityPanel = ref(0);

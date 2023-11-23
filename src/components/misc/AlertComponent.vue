@@ -1,5 +1,6 @@
 <template>
     <v-alert
+        style="z-index: 9999;"
         :type="matchType()"
         :title="matchTitle()"
         :text="matchMessage()"
