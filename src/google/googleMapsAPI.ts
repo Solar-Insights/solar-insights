@@ -1,7 +1,7 @@
 // Models
 import { coordinates, validCoordinates, airQualityData, airPollutant } from "@/models/models";
 
-export async function geocoding(formattedAddress: string) {
+export async function getGeocoding(formattedAddress: string) {
     const geocoder = new google.maps.Geocoder()
     const coord: coordinates = {
         lat: 0,
@@ -22,7 +22,7 @@ export async function geocoding(formattedAddress: string) {
 }
 
 
-export async function reverseGeocoding(coord: coordinates) {
+export async function getReverseGeocoding(coord: coordinates) {
     const geocoder = new google.maps.Geocoder();
     let formattedAddress = "";
     await geocoder.geocode({ location: coord})

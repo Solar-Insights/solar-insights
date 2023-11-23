@@ -86,8 +86,8 @@ import { onMounted, ref } from "vue";
 import { coordinates, airQualityData } from "@/models/models";
 import { pollutants, circularBarColorSelector } from "@/models/constants";
 // Functions
-import { initMap, initMarker, initAutocomplete } from "@/plugins/initMapComponents";
-import {  geocoding, reverseGeocoding, getAirQualityData } from "@/plugins/googleMapsAPI";
+import { initMap, initMarker, initAutocomplete } from "@/components/util/initMapComponents";
+import { getGeocoding, getReverseGeocoding, getAirQualityData } from "@/google/googleMapsAPI";
 // Components
 import PollutantTab from "@/components/PollutantTab.vue";
 import HealthTab from "@/components/HealthTab.vue";
@@ -116,7 +116,6 @@ onMounted(async () => {
     // Add map overlay and autocomplete on map + Perform first air quality fetch
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     airQualityDataDisplayed.value = await getAirQualityData(coord);
-    console.log(airQualityDataDisplayed.value);
 
     // Listeners
     await initListeners(autocomplete, map, marker);
@@ -131,7 +130,7 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
             return;
         }
 
-        const newCoord = await geocoding(newPlace.formatted_address);
+        const newCoord = await getGeocoding(newPlace.formatted_address);
         if ( !newCoord ) {
             console.log("An error occured when getting the coordinate of the formatted address");
             autocompleteValue.value = "";
@@ -150,7 +149,7 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
             lng: mouseEvent.latLng.lng()
         };
 
-        const formattedAddress = await reverseGeocoding(newCoord);
+        const formattedAddress = await getReverseGeocoding(newCoord);
         if ( !formattedAddress ) {
             console.log("An error occured when reverse geocoding the coordinate");
             autocompleteValue.value = "";
