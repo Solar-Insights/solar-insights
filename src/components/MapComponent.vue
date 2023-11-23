@@ -86,7 +86,8 @@ import { onMounted, ref } from "vue";
 import { coordinates, airQualityData } from "@/models/models";
 import { pollutants, circularBarColorSelector } from "@/models/constants";
 // Functions
-import { initMap, initMarker, initAutocomplete, getCoordinatesFromAddress, getAirQualityData } from "@/plugins/googleMapsAPI";
+import { initMap, initMarker, initAutocomplete } from "@/plugins/initMapComponents";
+import {  getCoordinatesFromAddress, getAirQualityData } from "@/plugins/googleMapsAPI";
 // Components
 import PollutantTab from "@/components/PollutantTab.vue";
 import HealthTab from "@/components/HealthTab.vue";
