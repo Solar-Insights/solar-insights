@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-main>
-            <v-container class="h-100 pa-0" fluid style="position: relative">
+            <v-container class="app-container" fluid>
                 <AlertComponent :type="alertValue.type" :title="alertValue.title" :message="alertValue.message" v-if="displayAlert"/>
                 <router-view :key="$route.fullPath" @alert="handleAlert"></router-view>
             </v-container>

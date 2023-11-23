@@ -22,6 +22,28 @@ $light-grey: #949494;
 
 
 /*
+    App skeleton
+*/
+.app-container {
+    @extend .h-100;
+    @extend .pa-0;
+    position: relative;
+}
+
+
+
+/*
+    Alert component
+*/
+.alert-component {
+    @extend .w-100;
+    z-index: 9999;
+    position: absolute;
+    top: 0px;
+}
+
+
+/*
     Search component
 */
 .autocomplete-search {

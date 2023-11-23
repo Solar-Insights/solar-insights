@@ -1,13 +1,20 @@
 <template>
     <v-alert
-        style="z-index: 9999;"
+        class="alert-component"
         :type="matchType()"
         :title="matchTitle()"
         :text="matchMessage()"
+        closable
+        close-label="Close"
+        border="start"
     />
 </template>
 
 <script setup lang="ts">
+// Vue 
+import { ref } from "vue";
+const defaultIcon = ref("");
+
 const props = defineProps({
     type: {
         type: String,
