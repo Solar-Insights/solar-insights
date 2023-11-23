@@ -4,5 +4,5 @@
 
 <script setup lang="ts">
 // Components
-import MapComponent from '@/components/MapComponent.vue';
+import MapComponent from '@/components/map/MapComponent.vue';
 </script>

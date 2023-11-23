@@ -86,11 +86,11 @@ import { onMounted, ref } from "vue";
 import { coordinates, airQualityData } from "@/models/models";
 import { pollutants, circularBarColorSelector } from "@/models/constants";
 // Functions
-import { initMap, initMarker, initAutocomplete } from "@/components/util/initMapComponents";
+import { initMap, initMarker, initAutocomplete } from "@/components/util_functions/initMapComponents";
 import { getGeocoding, getReverseGeocoding, getAirQualityData } from "@/google/googleMapsAPI";
 // Components
-import PollutantTab from "@/components/PollutantTab.vue";
-import HealthTab from "@/components/HealthTab.vue";
+import PollutantTab from "@/components/map/PollutantTab.vue";
+import HealthTab from "@/components/map/HealthTab.vue";
 
 // Component data
 const autocompleteValue = ref("");
@@ -112,6 +112,7 @@ onMounted(async () => {
     map = await initMap(coord, mapElement);
     marker = initMarker(coord, map);
     autocomplete = await initAutocomplete("autocomplete-search");
+    autocompleteValue.value = await getReverseGeocoding(coord);
 
     // Add map overlay and autocomplete on map + Perform first air quality fetch
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
