@@ -86,7 +86,7 @@ import { onMounted, ref } from "vue";
 import { coordinates, airQualityData } from "@/models/models";
 import { pollutants, circularBarColorSelector } from "@/models/constants";
 // Functions
-import { initMap, initLabelOnlyMap, initAutocomplete, addMarker, getCoordinatesFromAddress, getAirQualityData } from "@/plugins/googleMapsAPI";
+import { initMap, initMarker, initAutocomplete, getCoordinatesFromAddress, getAirQualityData } from "@/plugins/googleMapsAPI";
 // Components
 import PollutantTab from "@/components/PollutantTab.vue";
 import HealthTab from "@/components/HealthTab.vue";
@@ -99,7 +99,6 @@ const airQualityDataDisplayed = ref<airQualityData>({} as airQualityData);
 // Google components
 let map: google.maps.Map;
 let marker: google.maps.Marker;
-let labelOnlyMap: google.maps.StyledMapType;
 let autocomplete: google.maps.places.Autocomplete;;
 
 onMounted(async () => {
@@ -110,17 +109,21 @@ onMounted(async () => {
 
     // Init values of google components
     map = await initMap(coord, mapElement);
-    marker = addMarker(coord, map);
-    labelOnlyMap = initLabelOnlyMap();
+    marker = initMarker(coord, map);
     autocomplete = await initAutocomplete("autocomplete-search");
 
     // Add map overlay and autocomplete on map + Perform first air quality fetch
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
-    map.overlayMapTypes.push(labelOnlyMap as google.maps.MapType);
     airQualityDataDisplayed.value = await getAirQualityData(coord);
     console.log(airQualityDataDisplayed.value);
 
-    // Listener for the autocomplete component - Get new place -> Display new position -> Replace marker -> Get air quality data
+    // Listeners
+    await mapListeners(map, marker);
+    await autocompleteListeners(autocomplete, map, marker);
+    
+});
+
+async function autocompleteListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map, marker: google.maps.Marker) {
     autocomplete.addListener("place_changed", async () => {
         const newPlace = autocomplete.getPlace();
         if ( !newPlace || !newPlace.formatted_address ) {
@@ -133,10 +136,25 @@ onMounted(async () => {
             console.log("An error occured when getting the coordinate of the formatted address");
             return;
         }
-        map.setCenter( { lat: newCoord.lat, lng: newCoord.lng } );
+        
+        map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
         marker.setMap(null);
-        marker = addMarker(newCoord, map);
+        marker = initMarker(newCoord, map);
         airQualityDataDisplayed.value = await getAirQualityData(newCoord);
     });
-});
+}
+
+async function mapListeners(map: google.maps.Map, marker: google.maps.Marker) {
+    map.addListener("dblclick", async (mouseEvent: any) => {
+        const newCoord: coordinates = {
+            lat: mouseEvent.latLng.lat(),
+            lng: mouseEvent.latLng.lng()
+        };
+
+        map.setCenter({ lat: newCoord.lat, lng: newCoord.lng});
+        marker.setMap(null);
+        marker = initMarker(newCoord, map);
+        airQualityDataDisplayed.value = await getAirQualityData(newCoord);
+    });
+}
 </script>
