@@ -165,6 +165,7 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
             return;
         }
 
+        map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
         marker.setMap(null);
         marker = initMarker(newCoord, map);
         airQualityDataDisplayed.value = await getAirQualityData(newCoord);
