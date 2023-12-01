@@ -2,7 +2,7 @@
     <v-app>
         <v-main>
             <v-container class="app-container" fluid>
-                <AlertComponent v-if="displayAlert" :type="alertValue.type" :title="alertValue.title" :message="alertValue.message" />
+                <AlertComponent v-if="displayAlert" :type="alertValue.type" :title="alertValue.title" :message="alertValue.message"/>
                 <router-view :key="$route.fullPath" @alert="handleAlert"></router-view>
             </v-container>
         </v-main>
@@ -21,7 +21,7 @@ type alertData = {
     message: string
 };
 
-const displayAlert = ref();
+const displayAlert = ref(true);
 const alertValue: alertData = reactive({
     type: "",
     title: "",
@@ -33,5 +33,7 @@ const handleAlert = (data: alertData) => {
     alertValue.type = data.type;
     alertValue.title = data.title;
     alertValue.message = data.message;
+    console.log("setting a timeout")
+    const timeout = setTimeout(() => { displayAlert.value = false }, 5000);
 }
 </script>

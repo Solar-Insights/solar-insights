@@ -1,19 +1,19 @@
 <template>
-    <v-alert
-        class="alert-component"
-        :type="matchType()"
-        :title="matchTitle()"
-        :text="matchMessage()"
-        closable
-        close-label="Close"
-        border="start"
-    />
+    <div class="alert-component">
+        <v-alert
+            class="alert-component"
+            :type="matchType()"
+            :title="matchTitle()"
+            :text="matchMessage()"
+            closable
+            close-label="Close"
+        >
+        
+        </v-alert>
+    </div>
 </template>
 
 <script setup lang="ts">
-// Vue 
-import { ref } from "vue";
-const defaultIcon = ref("");
 
 const props = defineProps({
     type: {
