@@ -90,10 +90,11 @@ $light-grey: #949494;
 */
 .button-selection-border {
     font-weight: bold !important;
-    background-color: rgba(0, 0, 0, 0.10);
+    border: 2px solid $light-blue;
 }
 
 .button-non-selection-border {
+    border: 2px solid rgba(0, 0, 0, 0.15);
 }
 
 .button-selection-background {

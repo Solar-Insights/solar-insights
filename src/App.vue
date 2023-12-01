@@ -2,7 +2,7 @@
     <v-app>
         <v-main>
             <v-container class="app-container" fluid>
-                <AlertComponent :type="alertValue.type" :title="alertValue.title" :message="alertValue.message" v-if="displayAlert"/>
+                <AlertComponent v-if="displayAlert" :type="alertValue.type" :title="alertValue.title" :message="alertValue.message" />
                 <router-view :key="$route.fullPath" @alert="handleAlert"></router-view>
             </v-container>
         </v-main>
@@ -16,12 +16,12 @@ import { ref, reactive } from 'vue';
 import AlertComponent from '@/components/misc/AlertComponent.vue';
 
 type alertData = {
-    type: String,
-    title: String,
-    message: String
+    type: string,
+    title: string,
+    message: string
 };
 
-const displayAlert = ref(true);
+const displayAlert = ref();
 const alertValue: alertData = reactive({
     type: "",
     title: "",

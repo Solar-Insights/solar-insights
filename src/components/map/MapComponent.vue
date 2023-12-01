@@ -56,6 +56,7 @@
                     :class="airQualityPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" 
                     :prepend-icon="airQualityPanel == 0 ? 'mdi-alert' : 'mdi-alert-outline'" 
                     variant="flat"
+                    :ripple="false"
                 > 
                     Pollutants 
                 </v-btn>
@@ -65,6 +66,7 @@
                     :class="airQualityPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" 
                     :prepend-icon="airQualityPanel == 1 ? 'mdi-heart' : 'mdi-heart-outline'" 
                     variant="flat"
+                    :ripple="false"
                 > 
                     Health 
                 </v-btn>
