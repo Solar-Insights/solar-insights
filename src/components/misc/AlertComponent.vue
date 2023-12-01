@@ -7,9 +7,8 @@
             :text="matchMessage()"
             closable
             close-label="Close"
-        >
-        
-        </v-alert>
+        />
+        <hr :color="matchColorToType()" :width="`${timerProgress}%`" style="height: 5px;">
     </div>
 </template>
 
@@ -30,6 +29,11 @@ const props = defineProps({
         type: String,
         required: true,
         default: ""
+    },
+    timerProgress: {
+        type: Number,
+        required: true,
+        default: 100
     }
 });
 
@@ -68,6 +72,25 @@ function matchMessage() {
         }
         default: {
             return props.message;
+        }
+    }
+}
+
+// Pour choix des couleurs
+// https://vuetifyjs.com/en/styles/colors/#material-colors
+function matchColorToType() {
+    switch(props.type) {
+        case "success": {
+            return "#A5D6A7";
+        }
+        case "warning": {
+            return "#FFCC80";
+        }
+        case "error": {
+            return "#EF9A9A";
+        }
+        default: {
+            return "#FFCC80";
         }
     }
 }

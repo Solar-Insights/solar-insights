@@ -2,7 +2,7 @@
     <v-app>
         <v-main>
             <v-container class="app-container" fluid>
-                <AlertComponent v-if="displayAlert" :type="alertValue.type" :title="alertValue.title" :message="alertValue.message"/>
+                <AlertComponent v-if="displayAlert" :type="alertValue.type" :title="alertValue.title" :message="alertValue.message" :timer-progress="iteLeft"/>
                 <router-view :key="$route.fullPath" @alert="handleAlert"></router-view>
             </v-container>
         </v-main>
@@ -20,20 +20,36 @@ type alertData = {
     title: string,
     message: string
 };
-
-const displayAlert = ref(true);
+const displayAlert = ref(false);
 const alertValue: alertData = reactive({
     type: "",
     title: "",
     message: ""
 });
 
+const iteLeft = ref(100.0);
+let currentInterval: NodeJS.Timeout | undefined = undefined;
+
 const handleAlert = (data: alertData) => {
     displayAlert.value = true;
     alertValue.type = data.type;
     alertValue.title = data.title;
     alertValue.message = data.message;
-    console.log("setting a timeout")
-    const timeout = setTimeout(() => { displayAlert.value = false }, 5000);
+
+    // Resets number of ite, deletes interval if exists, runs interval. 
+    // Removes display and interval when over.
+    iteLeft.value = 100;
+    if ( currentInterval != undefined ) {
+        clearInterval(currentInterval);
+        currentInterval = undefined;
+    }
+    currentInterval = setInterval(() => { 
+        if ( iteLeft.value == 0 ) {
+            clearInterval(currentInterval);
+            displayAlert.value = false;
+            return;
+        }
+        iteLeft.value -= 0.25;
+    }, 10);
 }
 </script>
