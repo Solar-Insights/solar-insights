@@ -131,6 +131,13 @@ onMounted(async () => {
     marker = initMarker(coord, map);
     autocomplete = await initAutocomplete("autocomplete-search");
     autocompleteValue.value = await getReverseGeocoding(coord);
+    if (map == undefined || marker == undefined || autocomplete == undefined) {
+        emitAlert(
+            "error", 
+            "Could not properly load the map",
+            "An error occured when trying to load the map and its components."
+        );
+    }
 
     // Add map overlay and autocomplete on map + Perform first air quality fetch
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
@@ -143,16 +150,24 @@ onMounted(async () => {
 
 async function initListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map, marker: google.maps.Marker) {
     autocomplete.addListener("place_changed", async () => {
-        const newPlace = autocomplete.getPlace();
+        const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
         if ( !newPlace || !newPlace.formatted_address ) {
-            console.log("User entered the name of a Place that was not suggested and pressed the Enter key, or the Place Details request failed. Display error message");
+            emitAlert(
+                "warning", 
+                "Could not process the prompted address",
+                "Choose a valid address from the dropdown menu."
+            );
             return;
         }
 
-        const newCoord = await getGeocoding(newPlace.formatted_address);
+        const newCoord: coordinates | undefined = await getGeocoding(newPlace.formatted_address);
         if ( !newCoord ) {
-            console.log("An error occured when getting the coordinate of the formatted address");
             autocompleteValue.value = "";
+            emitAlert(
+                "error", 
+                "Could not geocode the prompted address",
+                "An error occured when trying to convert the address to geographic coordinates."
+            );
             return;
         }
         
@@ -170,8 +185,12 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
 
         const formattedAddress = await getReverseGeocoding(newCoord);
         if ( !formattedAddress ) {
-            console.log("An error occured when reverse geocoding the coordinate");
             autocompleteValue.value = "";
+            emitAlert(
+                "error", 
+                "Could not reverse geocode the double click on the map",
+                "An error occured when trying to convert geographic coordinates to an address."
+            );
             return;
         }
 
