@@ -1,9 +1,9 @@
-export type coordinates = {
+export type Coordinates = {
     lat: number,
     lng: number
 };
 
-export function validCoordinates(coord: coordinates) {
+export function validCoordinates(coord: Coordinates) {
     const { lat, lng } = coord;
     const respectLimits = lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
     const notNull = lat != null && lng != null;
@@ -18,9 +18,9 @@ export function validCoordinates(coord: coordinates) {
 /*
     Models for dataLayers response
 */
-export type solarLayers = {
-    imageryDate: date,
-    imageryProcessedDate: date,
+export type SolarLayers = {
+    imageryDate: Date,
+    imageryProcessedDate: Date,
     dsmUrl: string,
     rgbUrl: string,
     maskUrl: string,
@@ -33,10 +33,10 @@ export type solarLayers = {
 /*
     Models for buildingInsight response
 */
-export type solarData = {
+export type BuildingInsights = {
     name: string,
-    center: solarDataCoords,
-    imageryData: date,
+    center: SolarDataCoords,
+    imageryData: Date,
     regionCode: string,
     solarPotential: {
         maxArrayPanelsCount: number,
@@ -48,8 +48,8 @@ export type solarData = {
             sunshineQuantiles: number[],
             groundAreaMeters2: number
         },
-        roofSegmentStats: roofSegment[]
-        solarPanelConfigs: solarPanelConfig[],
+        RoofSegmentStats: RoofSegment[]
+        SolarPanelConfigs: SolarPanelConfig[],
         panelCapacityWatts: number,
         panelHeightMeters: number,
         panelWidthMeters: number,
@@ -59,30 +59,30 @@ export type solarData = {
             sunshineQuantiles: number[],
             groundAreaMeters2: number
         },
-        solarPanels: solarPanel[]
+        SolarPanels: SolarPanel[]
     },
-    boundingBox: boundingBox,
+    BoundingBox: BoundingBox,
     imageryQuality: string,
-    imageryProcessedDate: date
+    imageryProcessedDate: Date
 };
 
-export type solarDataCoords = {
+export type SolarDataCoords = {
     latitude: number,
     longitude: number
 };
 
-type date = {
+type Date = {
     year: number,
     month: number,
     day: number
 };
 
-type boundingBox = {
-    sw: solarDataCoords,
-    ne: solarDataCoords
+type BoundingBox = {
+    sw: SolarDataCoords,
+    ne: SolarDataCoords
 };
 
-type roofSegment = {
+type RoofSegment = {
     pitchDegrees: number,
     azimuthDegrees: number,
     stats: {
@@ -90,18 +90,18 @@ type roofSegment = {
         sunshineQuantiles: number[],
         groundAreaMeters2: number
     },
-    center: solarDataCoords,
-    boundingBox: boundingBox
+    center: SolarDataCoords,
+    BoundingBox: BoundingBox
     planeHeightAtCenterMeters: number
 };
 
-type solarPanelConfig = {
+type SolarPanelConfig = {
     panelsCount: number,
     yearlyEnergyDcKwh: number,
-    roofSegmentSummaries: roofSegmentSummary[]
+    RoofSegmentSummaries: RoofSegmentSummary[]
 };
 
-type roofSegmentSummary = {
+type RoofSegmentSummary = {
     pitchDegrees: number,
     azimuthDegrees: number,
     panelsCount: number,
@@ -109,8 +109,8 @@ type roofSegmentSummary = {
     segmentIndex: number
 };
 
-type solarPanel = {
-    center: solarDataCoords,
+type SolarPanel = {
+    center: SolarDataCoords,
     orientation: string,
     yearlyEnergyDcKwh: number,
     segmentIndex: number
@@ -119,15 +119,15 @@ type solarPanel = {
 /*
     Model for Air Quality Data
 */
-export type airQualityData = {
-    dateTime: Date,
-    healthRecommendations: healthRecommendations,
-    indexes: aqi[],
-    pollutants: airPollutant[],
+export type AirQualityData = {
+    DateTime: Date,
+    healthRecommendations: HealthRecommendations,
+    indexes: Aqi[],
+    pollutants: AirPollutant[],
     regionCode: string
 }; 
 
-export type aqi = {
+export type Aqi = {
     aqi: number,
     aqiDisplay: string,
     code: string,
@@ -140,7 +140,7 @@ export type aqi = {
     },
 };
 
-export type airPollutant = {
+export type AirPollutant = {
     code: string,
     displayName: string,
     fullName: string,
@@ -154,7 +154,7 @@ export type airPollutant = {
     }
 };
 
-export type healthRecommendations = {
+export type HealthRecommendations = {
     generalPopulation: string,
     children: string,
     elderly: string,

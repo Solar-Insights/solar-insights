@@ -92,7 +92,7 @@
 import { onMounted, ref } from "vue";
 import _ from 'lodash';
 // Models
-import { coordinates, airQualityData } from "@/models/models";
+import { Coordinates, AirQualityData } from "@/models/models";
 import { pollutants, circularBarColorSelector } from "@/models/constants";
 // Functions
 import { initMap, initMarker, initAutocomplete } from "@/util/initMapComponents";
@@ -114,7 +114,7 @@ function emitAlert(type: string, title: string, message: string) {
 // Component data
 const autocompleteValue = ref("");
 const airQualityPanel = ref(0);
-const airQualityDataDisplayed = ref<airQualityData>({} as airQualityData);
+const airQualityDataDisplayed = ref<AirQualityData>({} as AirQualityData);
 
 // Google components
 let map: google.maps.Map;
@@ -123,7 +123,7 @@ let autocomplete: google.maps.places.Autocomplete;;
 
 onMounted(async () => {
     // Setup values
-    const coord: coordinates = { lat: 46.811943, lng: -71.205002 };
+    const coord: Coordinates = { lat: 46.811943, lng: -71.205002 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
     const parent: HTMLInputElement = document.getElementById("parent-search") as HTMLInputElement;
 
@@ -162,13 +162,13 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
             return;
         }
 
-        const newCoord: coordinates | undefined = await getGeocoding(newPlace.formatted_address);
+        const newCoord: Coordinates | undefined = await getGeocoding(newPlace.formatted_address);
         if ( !newCoord ) {
             autocompleteValue.value = "";
             emitAlert(
                 "error", 
                 "Could not geocode the prompted address",
-                "An error occured when trying to convert the address to geographic coordinates."
+                "An error occured when trying to convert the address to geographic Coordinates."
             );
             return;
         }
@@ -180,7 +180,7 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
     });
 
     map.addListener("dblclick", async (mouseEvent: any) => {
-        const newCoord: coordinates = {
+        const newCoord: Coordinates = {
             lat: mouseEvent.latLng.lat(),
             lng: mouseEvent.latLng.lng()
         };
@@ -191,7 +191,7 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
             emitAlert(
                 "error", 
                 "Could not reverse geocode the double click on the map",
-                "An error occured when trying to convert geographic coordinates to an address."
+                "An error occured when trying to convert geographic Coordinates to an address."
             );
             return;
         }

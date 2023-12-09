@@ -1,9 +1,9 @@
 // Models
-import { coordinates, validCoordinates, airQualityData, airPollutant, solarData } from "@/models/models";
+import { Coordinates, validCoordinates, AirQualityData, AirPollutant, BuildingInsights } from "@/models/models";
 
 export async function getGeocoding(formattedAddress: string) {
     const geocoder = new google.maps.Geocoder()
-    const coord: coordinates = {
+    const coord: Coordinates = {
         lat: 0,
         lng: 0
     };
@@ -22,7 +22,7 @@ export async function getGeocoding(formattedAddress: string) {
 }
 
 
-export async function getReverseGeocoding(coord: coordinates) {
+export async function getReverseGeocoding(coord: Coordinates) {
     const geocoder = new google.maps.Geocoder();
     let formattedAddress = "";
     await geocoder.geocode({ location: coord})
@@ -36,9 +36,9 @@ export async function getReverseGeocoding(coord: coordinates) {
 }
 
 
-export async function getAirQualityData(coord: coordinates) {
+export async function getAirQualityData(coord: Coordinates) {
     // https://developers.google.com/maps/documentation/air-quality/reference/rest/v1/currentConditions/lookup#request-body
-    let airQualityData: airQualityData | undefined = {} as airQualityData;
+    let airQualityData: AirQualityData | undefined = {} as AirQualityData;
     const url = `https://airquality.googleapis.com/v1/currentConditions:lookup?key=${import.meta.env.VITE_GOOGLE_API}`;
     const body = {
         "universalAqi": true,
@@ -60,7 +60,7 @@ export async function getAirQualityData(coord: coordinates) {
         headers: {"Content-Type": "application/json"}
     })
     .then(async (response) => {
-        airQualityData = await response.json() as airQualityData;
+        airQualityData = await response.json() as AirQualityData;
         if (airQualityData == undefined) {
             return {};
         }
@@ -72,7 +72,7 @@ export async function getAirQualityData(coord: coordinates) {
     return airQualityData;
 }
 
-function makeDominantPollutantFirst(dominantPollutant: string, listOfPollutants: airPollutant[]) {
+function makeDominantPollutantFirst(dominantPollutant: string, listOfPollutants: AirPollutant[]) {
     const index = listOfPollutants.findIndex(pollutant => pollutant.code == dominantPollutant);
     if (index != -1) {
         listOfPollutants.sort((a, b) => {
@@ -83,10 +83,10 @@ function makeDominantPollutantFirst(dominantPollutant: string, listOfPollutants:
     }
 }
 
-export function getSolarData(coord: coordinates) {
+export function getSolarData(coord: Coordinates) {
     const requestUrl = `https://solar.googleapis.com/v1/buildingInsights:findClosest?location.latitude=${coord.lat}&location.longitude=${coord.lng}&key=${import.meta.env.VITE_GOOGLE_API}`
     return fetch(requestUrl)
         .then((response) => {
-            return response.json() as Promise<solarData>;
+            return response.json() as Promise<BuildingInsights>;
         })
 };
