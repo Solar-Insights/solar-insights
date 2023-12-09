@@ -90,6 +90,7 @@
 <script setup lang="ts">
 // Vue
 import { onMounted, ref } from "vue";
+import _ from 'lodash';
 // Models
 import { coordinates, airQualityData } from "@/models/models";
 import { pollutants, circularBarColorSelector } from "@/models/constants";
@@ -142,6 +143,7 @@ onMounted(async () => {
     // Add map overlay and autocomplete on map + Perform first air quality fetch
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     airQualityDataDisplayed.value = await getAirQualityData(coord);
+    airQualityDataHandler();
 
     // Listeners
     await initListeners(autocomplete, map, marker);
@@ -198,7 +200,19 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
         marker.setMap(null);
         marker = initMarker(newCoord, map);
         airQualityDataDisplayed.value = await getAirQualityData(newCoord);
+        airQualityDataHandler();
+
         autocompleteValue.value = formattedAddress;
     });
+}
+
+function airQualityDataHandler() {
+    if ( _.isEqual(airQualityDataDisplayed.value, {}) ) {
+        emitAlert(
+            "error", 
+            "Could not fetch the air quality data associated to this address",
+            "An error occured when trying to fetch the air quality data. Try again with another address if the problem persists."
+        );
+    }
 }
 </script>

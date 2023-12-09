@@ -38,7 +38,7 @@ export async function getReverseGeocoding(coord: coordinates) {
 
 export async function getAirQualityData(coord: coordinates) {
     // https://developers.google.com/maps/documentation/air-quality/reference/rest/v1/currentConditions/lookup#request-body
-    let airQualityData: airQualityData = {} as airQualityData;
+    let airQualityData: airQualityData | undefined = {} as airQualityData;
     const url = `https://airquality.googleapis.com/v1/currentConditions:lookup?key=${import.meta.env.VITE_GOOGLE_API}`;
     const body = {
         "universalAqi": true,
@@ -60,7 +60,10 @@ export async function getAirQualityData(coord: coordinates) {
         headers: {"Content-Type": "application/json"}
     })
     .then(async (response) => {
-        airQualityData = await response.json();
+        airQualityData = await response.json() as airQualityData;
+        if (airQualityData == undefined) {
+            return {};
+        }
         makeDominantPollutantFirst(airQualityData.indexes[0].dominantPollutant, airQualityData.pollutants);
     })
     .catch((error) => {
