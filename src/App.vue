@@ -13,7 +13,7 @@
 // Vue
 import { ref, reactive } from 'vue';
 // Components
-import AlertComponent from '@/components/misc/AlertComponent.vue';
+import AlertComponent from '@/components/util/AlertComponent.vue';
 
 type alertData = {
     type: string,

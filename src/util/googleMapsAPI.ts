@@ -1,5 +1,5 @@
 // Models
-import { coordinates, validCoordinates, airQualityData, airPollutant } from "@/models/models";
+import { coordinates, validCoordinates, airQualityData, airPollutant, solarData } from "@/models/models";
 
 export async function getGeocoding(formattedAddress: string) {
     const geocoder = new google.maps.Geocoder()
@@ -82,3 +82,11 @@ function makeDominantPollutantFirst(dominantPollutant: string, listOfPollutants:
         });
     }
 }
+
+export function getSolarData(coord: coordinates) {
+    const requestUrl = `https://solar.googleapis.com/v1/buildingInsights:findClosest?location.latitude=${coord.lat}&location.longitude=${coord.lng}&key=${import.meta.env.VITE_GOOGLE_API}`
+    return fetch(requestUrl)
+        .then((response) => {
+            return response.json() as Promise<solarData>;
+        })
+};
