@@ -119,7 +119,7 @@ const airQualityDataDisplayed = ref<AirQualityData>({} as AirQualityData);
 // Google components
 let map: google.maps.Map;
 let marker: google.maps.Marker;
-let autocomplete: google.maps.places.Autocomplete;;
+let autocomplete: google.maps.places.Autocomplete;
 
 onMounted(async () => {
     // Setup values

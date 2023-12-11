@@ -1,5 +1,8 @@
 // Models
-import { Coordinates, validCoordinates, AirQualityData, AirPollutant, BuildingInsights } from "@/models/models";
+import { Coordinates, validCoordinates, AirQualityData, AirPollutant, BuildingInsights, SolarDataCoords, SolarLayers, LayerId, Layer, Bounds, binaryPalette, GeoTiff, rainbowPalette, ironPalette, sunlightPalette } from "@/models/models";
+import * as geotiff from 'geotiff';
+import * as geokeysToProj4 from 'geotiff-geokeys-to-proj4';
+import proj4 from 'proj4';
 
 export async function getGeocoding(formattedAddress: string) {
     const geocoder = new google.maps.Geocoder()
@@ -83,10 +86,324 @@ function makeDominantPollutantFirst(dominantPollutant: string, listOfPollutants:
     }
 }
 
-export function getSolarData(coord: Coordinates) {
-    const requestUrl = `https://solar.googleapis.com/v1/buildingInsights:findClosest?location.latitude=${coord.lat}&location.longitude=${coord.lng}&key=${import.meta.env.VITE_GOOGLE_API}`
-    return fetch(requestUrl)
-        .then((response) => {
-            return response.json() as Promise<BuildingInsights>;
+export function getSolarDataLayers(coord: SolarDataCoords, radius: number) {
+    const args = {
+		'location.latitude': coord.latitude.toFixed(5),
+		'location.longitude': coord.longitude.toFixed(5),
+		'radius_meters': radius.toString(),
+	};
+    const params = new URLSearchParams({ ...args, key: import.meta.env.VITE_GOOGLE_API})
+    console.log('GET dataLayers\n', args);
+    return fetch(`https://solar.googleapis.com/v1/dataLayers:get?${params}`)
+        .then(async (response) => {
+            const content = response.json();
+            if ( response.status == 200 ) {
+                return content as Promise<SolarLayers>;
+            }
         })
 };
+
+export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
+	const get: Record<LayerId, () => Promise<Layer>> = {
+		mask: async () => {
+			const mask = await downloadGeoTIFF(urls.maskUrl, import.meta.env.VITE_GOOGLE_API);
+			const colors = binaryPalette;
+			return {
+				id: layerId,
+				bounds: mask.bounds,
+				palette: {
+					colors: colors,
+					min: 'No roof',
+					max: 'Roof',
+				},
+				render: (showRoofOnly) => [
+					renderPalette({
+						data: mask,
+						mask: showRoofOnly ? mask : undefined,
+						colors: colors,
+					}),
+				],
+			};
+		},
+		dsm: async () => {
+			const [mask, data] = await Promise.all([
+				downloadGeoTIFF(urls.maskUrl, import.meta.env.VITE_GOOGLE_API),
+				downloadGeoTIFF(urls.dsmUrl, import.meta.env.VITE_GOOGLE_API),
+			]);
+			const sortedValues = Array.from(data.rasters[0]).sort((x, y) => x - y);
+			const minValue = sortedValues[0];
+			const maxValue = sortedValues.slice(-1)[0];
+			const colors = rainbowPalette;
+			return {
+				id: layerId,
+				bounds: mask.bounds,
+				palette: {
+					colors: colors,
+					min: `${minValue.toFixed(1)} m`,
+					max: `${maxValue.toFixed(1)} m`,
+				},
+				render: (showRoofOnly) => [
+					renderPalette({
+						data: data,
+						mask: showRoofOnly ? mask : undefined,
+						colors: colors,
+						min: sortedValues[0],
+						max: sortedValues.slice(-1)[0],
+					}),
+				],
+			};
+		},
+		rgb: async () => {
+			const [mask, data] = await Promise.all([
+				downloadGeoTIFF(urls.maskUrl, import.meta.env.VITE_GOOGLE_API),
+				downloadGeoTIFF(urls.rgbUrl, import.meta.env.VITE_GOOGLE_API),
+			]);
+			return {
+				id: layerId,
+				bounds: mask.bounds,
+				render: (showRoofOnly) => [renderRGB(data, showRoofOnly ? mask : undefined)],
+			};
+		},
+		annualFlux: async () => {
+			const [mask, data] = await Promise.all([
+				downloadGeoTIFF(urls.maskUrl, import.meta.env.VITE_GOOGLE_API),
+				downloadGeoTIFF(urls.annualFluxUrl, import.meta.env.VITE_GOOGLE_API),
+			]);
+			const colors = ironPalette;
+			return {
+				id: layerId,
+				bounds: mask.bounds,
+				palette: {
+					colors: colors,
+					min: 'Shady',
+					max: 'Sunny',
+				},
+				render: (showRoofOnly) => [
+					renderPalette({
+						data: data,
+						mask: showRoofOnly ? mask : undefined,
+						colors: colors,
+						min: 0,
+						max: 1800,
+					}),
+				],
+			};
+		},
+		monthlyFlux: async () => {
+			const [mask, data] = await Promise.all([
+				downloadGeoTIFF(urls.maskUrl, import.meta.env.VITE_GOOGLE_API),
+				downloadGeoTIFF(urls.monthlyFluxUrl, import.meta.env.VITE_GOOGLE_API),
+			]);
+			const colors = ironPalette;
+			return {
+				id: layerId,
+				bounds: mask.bounds,
+				palette: {
+					colors: colors,
+					min: 'Shady',
+					max: 'Sunny',
+				},
+				render: (showRoofOnly) =>
+					[...Array(12).keys()].map((month) =>
+						renderPalette({
+							data: data,
+							mask: showRoofOnly ? mask : undefined,
+							colors: colors,
+							min: 0,
+							max: 200,
+							index: month,
+						}),
+					),
+			};
+		},
+		hourlyShade: async () => {
+			const [mask, ...months] = await Promise.all([
+				downloadGeoTIFF(urls.maskUrl, import.meta.env.VITE_GOOGLE_API   ),
+				...urls.hourlyShadeUrls.map((url) => downloadGeoTIFF(url, import.meta.env.VITE_GOOGLE_API)),
+			]);
+			const colors = sunlightPalette;
+			return {
+				id: layerId,
+				bounds: mask.bounds,
+				palette: {
+					colors: colors,
+					min: 'Shade',
+					max: 'Sun',
+				},
+				render: (showRoofOnly, month, day) =>
+					[...Array(24).keys()].map((hour) =>
+						renderPalette({
+							data: {
+								...months[month],
+								rasters: months[month].rasters.map((values) =>
+									values.map((x) => x & (1 << (day - 1))),
+								),
+							},
+							mask: showRoofOnly ? mask : undefined,
+							colors: colors,
+							min: 0,
+							max: 1,
+							index: hour,
+						}),
+					),
+			};
+		},
+	};
+	try {
+		return get[layerId]();
+	} catch (e) {
+		console.error(`Error getting layer: ${layerId}\n`, e);
+		throw e;
+	}
+}
+
+export async function downloadGeoTIFF(url: string, apiKey: string): Promise<GeoTiff> {
+	console.log(`Downloading data layer: ${url}`);
+	const solarUrl = url.includes('solar.googleapis.com') ? url + `&key=${apiKey}` : url;
+	const response = await fetch(solarUrl);
+	if (response.status != 200) {
+		const error = await response.json();
+		console.error(`downloadGeoTIFF failed: ${url}\n`, error);
+		throw error;
+	}
+	const arrayBuffer = await response.arrayBuffer();
+	const tiff = await geotiff.fromArrayBuffer(arrayBuffer);
+	const image = await tiff.getImage();
+	const rasters = await image.readRasters();
+
+	// Reproject the bounding box into coordinates.
+	const geoKeys = image.getGeoKeys();
+	const projObj = geokeysToProj4.toProj4(geoKeys);
+	const projection = proj4(projObj.proj4, 'WGS84');
+	const box = image.getBoundingBox();
+	const sw = projection.forward({
+		x: box[0] * projObj.coordinatesConversionParameters.x,
+		y: box[1] * projObj.coordinatesConversionParameters.y,
+	});
+	const ne = projection.forward({
+		x: box[2] * projObj.coordinatesConversionParameters.x,
+		y: box[3] * projObj.coordinatesConversionParameters.y,
+	});
+
+	return {
+		width: rasters.width,
+		height: rasters.height,
+		rasters: [...Array(rasters.length).keys()].map((i) =>
+			Array.from(rasters[i] as geotiff.TypedArray),
+		),
+		bounds: {
+			north: ne.y,
+			south: sw.y,
+			east: ne.x,
+			west: sw.x,
+		},
+	};
+}
+
+export function renderRGB(rgb: GeoTiff, mask?: GeoTiff) {
+	// https://www.w3schools.com/tags/canvas_createimagedata.asp
+	const canvas = document.createElement('canvas');
+	canvas.width = mask ? mask.width : rgb.width;
+	canvas.height = mask ? mask.height : rgb.height;
+
+	const dw = rgb.width / canvas.width;
+	const dh = rgb.height / canvas.height;
+
+	const ctx = canvas.getContext('2d')!;
+	const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+	for (let y = 0; y < canvas.height; y++) {
+		for (let x = 0; x < canvas.width; x++) {
+			const imgIdx = y * canvas.width * 4 + x * 4;
+			const rgbIdx = Math.floor(y * dh) * rgb.width + Math.floor(x * dw);
+			const maskIdx = y * canvas.width + x;
+			img.data[imgIdx + 0] = rgb.rasters[0][rgbIdx]; // Red
+			img.data[imgIdx + 1] = rgb.rasters[1][rgbIdx]; // Green
+			img.data[imgIdx + 2] = rgb.rasters[2][rgbIdx]; // Blue
+			img.data[imgIdx + 3] = mask // Alpha
+				? mask.rasters[0][maskIdx] * 255
+				: 255;
+		}
+	}
+	ctx.putImageData(img, 0, 0);
+	return canvas;
+}
+
+export function renderPalette({
+	data,
+	mask,
+	colors,
+	min,
+	max,
+	index,
+}: {
+	data: GeoTiff;
+	mask?: GeoTiff;
+	colors?: string[];
+	min?: number;
+	max?: number;
+	index?: number;
+}) {
+	const n = 256;
+	const palette = createPalette(colors ?? ['000000', 'ffffff'], n);
+	const indices = data.rasters[index ?? 0]
+		.map((x) => normalize(x, max ?? 1, min ?? 0))
+		.map((x) => Math.round(x * (n - 1)));
+	return renderRGB(
+		{
+			...data,
+			rasters: [
+				indices.map((i: number) => palette[i].r),
+				indices.map((i: number) => palette[i].g),
+				indices.map((i: number) => palette[i].b),
+			],
+		},
+		mask,
+	);
+}
+
+export function createPalette(hexColors: string[], size = 256) {
+	const rgb = hexColors.map(colorToRGB);
+	const step = (rgb.length - 1) / (size - 1);
+	return Array(size)
+		.fill(0)
+		.map((_, i) => {
+			const index = i * step;
+			const j = Math.floor(index);
+			const k = Math.ceil(index);
+			return {
+				r: lerp(rgb[j].r, rgb[k].r, index - j),
+				g: lerp(rgb[j].g, rgb[k].g, index - j),
+				b: lerp(rgb[j].b, rgb[k].b, index - j),
+			};
+		});
+}
+
+export function colorToRGB(color: string): { r: number; g: number; b: number } {
+	const hex = color.startsWith('#') ? color.slice(1) : color;
+	return {
+		r: parseInt(hex.substring(0, 2), 16),
+		g: parseInt(hex.substring(2, 4), 16),
+		b: parseInt(hex.substring(4, 6), 16),
+	};
+}
+
+export function rgbToColor({ r, g, b }: { r: number; g: number; b: number }): string {
+	const f = (x: number) => {
+		const hex = Math.round(x).toString(16);
+		return hex.length == 1 ? `0${hex}` : hex;
+	};
+	return `#${f(r)}${f(g)}${f(b)}`;
+}
+
+export function normalize(x: number, max: number = 1, min: number = 0) {
+	const y = (x - min) / (max - min);
+	return clamp(y, 0, 1);
+}
+
+export function lerp(x: number, y: number, t: number) {
+	return x + t * (y - x);
+}
+
+export function clamp(x: number, min: number, max: number) {
+	return Math.min(Math.max(x, min), max);
+}

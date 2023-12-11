@@ -15,8 +15,16 @@ export function validCoordinates(coord: Coordinates) {
     return respectLimits && notNull && notNaN;
 };
 
+export interface RequestError {
+	error: {
+		code: number;
+		message: string;
+		status: string;
+	};
+}
+
 /*
-    Models for dataLayers response
+    Models for buildingInsight response
 */
 export type SolarLayers = {
     imageryDate: Date,
@@ -27,12 +35,11 @@ export type SolarLayers = {
     annualFluxUrl: string,
     monthlyFluxUrl: string,
     hourlyShadeUrls: string[],
-    imageryQuality: string
+    imageryQuality: 'HIGH' | 'MEDIUM' | 'LOW';
 };
 
-/*
-    Models for buildingInsight response
-*/
+export type LayerId = 'mask' | 'dsm' | 'rgb' | 'annualFlux' | 'monthlyFlux' | 'hourlyShade';
+
 export type BuildingInsights = {
     name: string,
     center: SolarDataCoords,
@@ -61,7 +68,7 @@ export type BuildingInsights = {
         },
         SolarPanels: SolarPanel[]
     },
-    BoundingBox: BoundingBox,
+    boundingBox: BoundingBox,
     imageryQuality: string,
     imageryProcessedDate: Date
 };
@@ -115,6 +122,46 @@ type SolarPanel = {
     yearlyEnergyDcKwh: number,
     segmentIndex: number
 };
+
+export type Layer = {
+	id: LayerId;
+	render: (showRoofOnly: boolean, month: number, day: number) => HTMLCanvasElement[];
+	bounds: Bounds;
+	palette?: Palette;
+}
+
+export type Palette = {
+	colors: string[];
+	min: string;
+	max: string;
+}
+
+export type Bounds = {
+	north: number;
+	south: number;
+	east: number;
+	west: number;
+}
+
+export type GeoTiff = {
+	width: number;
+	height: number;
+	rasters: Array<number>[];
+	bounds: Bounds;
+}
+
+export const binaryPalette = ['212121', 'B3E5FC'];
+
+export const rainbowPalette = ['3949AB', '81D4FA', '66BB6A', 'FFE082', 'E53935'];
+
+export const ironPalette = ['00000A', '91009C', 'E64616', 'FEB400', 'FFFFF6'];
+
+export const sunlightPalette = ['212121', 'FFCA28'];
+
+export const panelsPalette = ['E8EAF6', '1A237E'];
+
+
+
 
 /*
     Model for Air Quality Data
