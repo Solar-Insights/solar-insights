@@ -9,8 +9,8 @@ export async function initMap(coord: Coordinates, mapElement: HTMLElement): Prom
             mapTypeId: google.maps.MapTypeId.HYBRID,
             center: { lat: coord.lat, lng: coord.lng },
             zoom: 15,
-            minZoom: 14,
-            maxZoom: 16,
+            minZoom: 18, // 14 pour airQuality
+            maxZoom: 18, // 16 pour airQuality
             clickableIcons: false,
             disableDoubleClickZoom: true,
             isFractionalZoomEnabled: false,

@@ -26,6 +26,10 @@ function emitAlert(type: string, title: string, message: string) {
 "Requests to this API solar.googleapis.com method google.maps.solar.v1.Solar.FindClosestBuildingInsights are blocked."
 // Google components
 let map: google.maps.Map;
+let expandedSection: string;
+let showPanels = true;
+let buildingInsights: BuildingInsights;
+let geometryLibrary: google.maps.GeometryLibrary;
 
 onMounted(async () => {
     const coord: Coordinates = { lat: 46.811943, lng: -71.205002 };
@@ -35,22 +39,19 @@ onMounted(async () => {
     // Init values of google components
     map = await initMap(coord, mapElement);
     buildingInsights = await findClosestBuilding(coord);
+    const loader = new Loader({ apiKey: import.meta.env.VITE_GOOGLE_API });
+    const libraries = {
+        geometry: loader.importLibrary('geometry'),
+        maps: loader.importLibrary('maps'),
+        places: loader.importLibrary('places'),
+    };
+    geometryLibrary = await libraries.geometry;
 
     showDataLayer(true);
 })
 
 
-let expandedSection: string;
-let showPanels = true;
-let buildingInsights: BuildingInsights;
 
-const loader = new Loader({ apiKey: import.meta.env.VITE_GOOGLE_API });
-const libraries = {
-    geometry: loader.importLibrary('geometry'),
-    maps: loader.importLibrary('maps'),
-    places: loader.importLibrary('places'),
-};
-let geometryLibrary: google.maps.GeometryLibrary = await libraries.geometry;
 
 const icon = 'layers';
 const title = 'Data Layers endpoint';
