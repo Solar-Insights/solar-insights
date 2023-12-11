@@ -10,6 +10,7 @@ import { BuildingInsights, LayerId, SolarLayers, RequestError, Layer, Coordinate
 // API
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding } from "@/util/googleMapsAPI";
 import { onMounted } from 'vue';
+import { Loader } from '@googlemaps/js-api-loader';
 // Functions
 import { initMap } from "@/util/initMapComponents";
 
@@ -42,7 +43,14 @@ onMounted(async () => {
 let expandedSection: string;
 let showPanels = true;
 let buildingInsights: BuildingInsights;
-let geometryLibrary: google.maps.GeometryLibrary;
+
+const loader = new Loader({ apiKey: import.meta.env.VITE_GOOGLE_API });
+const libraries = {
+    geometry: loader.importLibrary('geometry'),
+    maps: loader.importLibrary('maps'),
+    places: loader.importLibrary('places'),
+};
+let geometryLibrary: google.maps.GeometryLibrary = await libraries.geometry;
 
 const icon = 'layers';
 const title = 'Data Layers endpoint';

@@ -10,6 +10,7 @@
     "test:unit": "vitest"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.2",
     "@mdi/font": "^7.2.96",
     "@vue/test-utils": "^2.4.1",
     "@vueuse/head": "^2.0.0",
@@ -26,7 +27,7 @@
     "vuetify": "^3.3.17"
   },
   "devDependencies": {
-    "@types/google.maps": "^3.54.1",
+    "@types/google.maps": "^3.54.10",
     "@types/googlemaps": "^3.43.3",
     "@types/proj4": "^2.5.5",
     "@vitejs/plugin-vue": "^4.2.3",
