@@ -40,11 +40,11 @@
 
 <script setup lang="ts">
 // Models
-import { airPollutant } from "@/models/models";
+import { AirPollutant } from "@/models/models";
 
 const props = defineProps({
     pollutants: {
-        type: Array<airPollutant>,
+        type: Array<AirPollutant>,
         required: true,
         default: []
     }

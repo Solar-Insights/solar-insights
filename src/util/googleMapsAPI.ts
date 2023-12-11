@@ -407,3 +407,23 @@ export function lerp(x: number, y: number, t: number) {
 export function clamp(x: number, min: number, max: number) {
 	return Math.min(Math.max(x, min), max);
 }
+
+export async function findClosestBuilding(coord: Coordinates){
+	const args = {
+		'location.latitude': coord.lat.toFixed(5),
+		'location.longitude': coord.lng.toFixed(5),
+	};
+	console.log('GET buildingInsights\n', args);
+	const params = new URLSearchParams({ ...args, key: import.meta.env.VITE_GOOGLE_API });
+	return fetch(`https://solar.googleapis.com/v1/buildingInsights:findClosest?${params}`).then(
+		async (response) => {
+			const content = await response.json();
+			if (response.status != 200) {
+				console.error('findClosestBuilding\n', content);
+				throw content;
+			}
+			console.log('buildingInsightsResponse', content);
+			return content;
+		},
+	);
+}

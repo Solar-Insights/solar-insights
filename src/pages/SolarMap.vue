@@ -1,12 +1,17 @@
 <template>
+    <div class="d-flex" style="height: 100vh;">
+        <div id="map" class="w-100"></div>
+    </div>
 </template>
 
 <script setup lang="ts">
 // Models
-import { BuildingInsights, LayerId, SolarLayers, RequestError, Layer } from '@/models/models';
+import { BuildingInsights, LayerId, SolarLayers, RequestError, Layer, Coordinates } from '@/models/models';
 // API
-import { getSolarDataLayers, getSingleLayer } from "@/util/googleMapsAPI";
+import { getSolarDataLayers, getSingleLayer, findClosestBuilding } from "@/util/googleMapsAPI";
 import { onMounted } from 'vue';
+// Functions
+import { initMap } from "@/util/initMapComponents";
 
 // Emit
 const emit = defineEmits(['alert']);
@@ -17,9 +22,19 @@ function emitAlert(type: string, title: string, message: string) {
         message: message
     });
 }
+"Requests to this API solar.googleapis.com method google.maps.solar.v1.Solar.FindClosestBuildingInsights are blocked."
+// Google components
+let map: google.maps.Map;
 
+onMounted(async () => {
+    const coord: Coordinates = { lat: 46.811943, lng: -71.205002 };
+    const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
+    const parent: HTMLInputElement = document.getElementById("parent-search") as HTMLInputElement;
+    
+    // Init values of google components
+    map = await initMap(coord, mapElement);
+    buildingInsights = await findClosestBuilding(coord);
 
-onMounted(() => {
     showDataLayer(true);
 })
 
@@ -28,7 +43,6 @@ let expandedSection: string;
 let showPanels = true;
 let buildingInsights: BuildingInsights;
 let geometryLibrary: google.maps.GeometryLibrary;
-let map: google.maps.Map;
 
 const icon = 'layers';
 const title = 'Data Layers endpoint';
@@ -86,6 +100,7 @@ async function showDataLayer(reset = false) {
         hour = 5;
         playAnimation = ['monthlyFlux', 'hourlyShade'].includes(layerId);
     }
+
     if (layerId == 'none') {
         return;
     }

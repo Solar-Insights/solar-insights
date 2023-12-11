@@ -1,7 +1,7 @@
 // Models
-import { coordinates } from "@/models/models";
+import { Coordinates } from "@/models/models";
 
-export async function initMap(coord: coordinates, mapElement: HTMLElement): Promise<google.maps.Map> {
+export async function initMap(coord: Coordinates, mapElement: HTMLElement): Promise<google.maps.Map> {
     const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
     return new Map(
         mapElement,
@@ -55,7 +55,7 @@ export async function initMap(coord: coordinates, mapElement: HTMLElement): Prom
     );
 }
 
-export function initMarker(coord: coordinates, map: google.maps.Map) {
+export function initMarker(coord: Coordinates, map: google.maps.Map) {
     const marker = new google.maps.Marker({
         position: { lat: coord.lat, lng: coord.lng }
     });
