@@ -90,10 +90,13 @@ export function getSolarDataLayers(coord: SolarDataCoords, radius: number) {
     const args = {
 		'location.latitude': coord.latitude.toFixed(5),
 		'location.longitude': coord.longitude.toFixed(5),
-		'radius_meters': radius.toString(),
+		'radiusMeters': radius.toString(),
+		'view': "FULL_LAYERS",
+		'requiredQuality': "HIGH",
+		'pixelSizeMeters': "0.5"
 	};
-    const params = new URLSearchParams({ ...args, key: import.meta.env.VITE_GOOGLE_API})
     console.log('GET dataLayers\n', args);
+	const params = new URLSearchParams({ ...args, key: import.meta.env.VITE_GOOGLE_API})
     return fetch(`https://solar.googleapis.com/v1/dataLayers:get?${params}`)
         .then(async (response) => {
             const content = response.json();
@@ -106,7 +109,7 @@ export function getSolarDataLayers(coord: SolarDataCoords, radius: number) {
 export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
 	const get: Record<LayerId, () => Promise<Layer>> = {
 		mask: async () => {
-			const mask = await downloadGeoTIFF(urls.maskUrl, import.meta.env.VITE_GOOGLE_API);
+			const mask = await downloadGeoTIFF(urls.maskUrl);
 			const colors = binaryPalette;
 			return {
 				id: layerId,
@@ -127,8 +130,8 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
 		},
 		dsm: async () => {
 			const [mask, data] = await Promise.all([
-				downloadGeoTIFF(urls.maskUrl, import.meta.env.VITE_GOOGLE_API),
-				downloadGeoTIFF(urls.dsmUrl, import.meta.env.VITE_GOOGLE_API),
+				downloadGeoTIFF(urls.maskUrl),
+				downloadGeoTIFF(urls.dsmUrl),
 			]);
 			const sortedValues = Array.from(data.rasters[0]).sort((x, y) => x - y);
 			const minValue = sortedValues[0];
@@ -155,8 +158,8 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
 		},
 		rgb: async () => {
 			const [mask, data] = await Promise.all([
-				downloadGeoTIFF(urls.maskUrl, import.meta.env.VITE_GOOGLE_API),
-				downloadGeoTIFF(urls.rgbUrl, import.meta.env.VITE_GOOGLE_API),
+				downloadGeoTIFF(urls.maskUrl),
+				downloadGeoTIFF(urls.rgbUrl),
 			]);
 			return {
 				id: layerId,
@@ -166,8 +169,8 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
 		},
 		annualFlux: async () => {
 			const [mask, data] = await Promise.all([
-				downloadGeoTIFF(urls.maskUrl, import.meta.env.VITE_GOOGLE_API),
-				downloadGeoTIFF(urls.annualFluxUrl, import.meta.env.VITE_GOOGLE_API),
+				downloadGeoTIFF(urls.maskUrl),
+				downloadGeoTIFF(urls.annualFluxUrl),
 			]);
 			const colors = ironPalette;
 			return {
@@ -191,8 +194,8 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
 		},
 		monthlyFlux: async () => {
 			const [mask, data] = await Promise.all([
-				downloadGeoTIFF(urls.maskUrl, import.meta.env.VITE_GOOGLE_API),
-				downloadGeoTIFF(urls.monthlyFluxUrl, import.meta.env.VITE_GOOGLE_API),
+				downloadGeoTIFF(urls.maskUrl),
+				downloadGeoTIFF(urls.monthlyFluxUrl),
 			]);
 			const colors = ironPalette;
 			return {
@@ -218,8 +221,8 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
 		},
 		hourlyShade: async () => {
 			const [mask, ...months] = await Promise.all([
-				downloadGeoTIFF(urls.maskUrl, import.meta.env.VITE_GOOGLE_API   ),
-				...urls.hourlyShadeUrls.map((url) => downloadGeoTIFF(url, import.meta.env.VITE_GOOGLE_API)),
+				downloadGeoTIFF(urls.maskUrl),
+				...urls.hourlyShadeUrls.map((url) => downloadGeoTIFF(url)),
 			]);
 			const colors = sunlightPalette;
 			return {
@@ -257,9 +260,9 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
 	}
 }
 
-export async function downloadGeoTIFF(url: string, apiKey: string): Promise<GeoTiff> {
+export async function downloadGeoTIFF(url: string): Promise<GeoTiff> {
 	console.log(`Downloading data layer: ${url}`);
-	const solarUrl = url.includes('solar.googleapis.com') ? url + `&key=${apiKey}` : url;
+	const solarUrl = url + `&key=${import.meta.env.VITE_GOOGLE_API}`;
 	const response = await fetch(solarUrl);
 	if (response.status != 200) {
 		const error = await response.json();

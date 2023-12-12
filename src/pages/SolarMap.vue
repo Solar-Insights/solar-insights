@@ -10,7 +10,6 @@ import { BuildingInsights, LayerId, SolarLayers, RequestError, Layer, Coordinate
 // API
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding } from "@/util/googleMapsAPI";
 import { onMounted } from 'vue';
-import { Loader } from '@googlemaps/js-api-loader';
 // Functions
 import { initMap } from "@/util/initMapComponents";
 
@@ -23,7 +22,7 @@ function emitAlert(type: string, title: string, message: string) {
         message: message
     });
 }
-"Requests to this API solar.googleapis.com method google.maps.solar.v1.Solar.FindClosestBuildingInsights are blocked."
+
 // Google components
 let map: google.maps.Map;
 let expandedSection: string;
@@ -31,22 +30,16 @@ let showPanels = true;
 let buildingInsights: BuildingInsights;
 let geometryLibrary: google.maps.GeometryLibrary;
 
+
 onMounted(async () => {
     const coord: Coordinates = { lat: 46.811943, lng: -71.205002 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
     const parent: HTMLInputElement = document.getElementById("parent-search") as HTMLInputElement;
     
     // Init values of google components
-    map = await initMap(coord, mapElement);
+    map = await initMap(coord, mapElement, "SOLAR");
     buildingInsights = await findClosestBuilding(coord);
-    const loader = new Loader({ apiKey: import.meta.env.VITE_GOOGLE_API });
-    const libraries = {
-        geometry: loader.importLibrary('geometry'),
-        maps: loader.importLibrary('maps'),
-        places: loader.importLibrary('places'),
-    };
-    geometryLibrary = await libraries.geometry;
-
+    geometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary
     showDataLayer(true);
 })
 
@@ -150,8 +143,6 @@ async function showDataLayer(reset = false) {
         .render(showRoofOnly, month, day)
         .map((canvas) => new google.maps.GroundOverlay(canvas.toDataURL(), bounds));
 
-    if (!['monthlyFlux', 'hourlyShade'].includes(layer.id)) {
-        overlays[0].setMap(map);
-    }
+    overlays[0].setMap(map);
 }
 </script>

@@ -128,7 +128,7 @@ onMounted(async () => {
     const parent: HTMLInputElement = document.getElementById("parent-search") as HTMLInputElement;
 
     // Init values of google components
-    map = await initMap(coord, mapElement);
+    map = await initMap(coord, mapElement, "AIR_QUALITY");
     marker = initMarker(coord, map);
     autocomplete = await initAutocomplete("autocomplete-search");
     autocompleteValue.value = await getReverseGeocoding(coord);

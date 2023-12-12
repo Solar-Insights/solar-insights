@@ -1,16 +1,50 @@
 // Models
-import { Coordinates } from "@/models/models";
+import { Coordinates, MapType } from "@/models/models";
 
-export async function initMap(coord: Coordinates, mapElement: HTMLElement): Promise<google.maps.Map> {
+function zoom(mapType: MapType) {
+    switch (mapType) {
+        case "SOLAR":
+            return 18;
+        case "AIR_QUALITY":
+            return 14;
+        default:
+            return 0;
+    }
+}
+
+function minZoom(mapType: MapType) {
+    switch (mapType) {
+        case "SOLAR":
+            return 18;
+        case "AIR_QUALITY":
+            return 14;
+        default:
+            return 0;
+    }
+}
+
+function maxZoom(mapType: MapType) {
+    switch (mapType) {
+        case "SOLAR":
+            return 18;
+        case "AIR_QUALITY":
+            return 16; 
+        default:
+            return 0;
+    }
+}
+
+export async function initMap(coord: Coordinates, mapElement: HTMLElement, mapType: MapType): Promise<google.maps.Map> {
     const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
     return new Map(
         mapElement,
         {
             mapTypeId: google.maps.MapTypeId.HYBRID,
             center: { lat: coord.lat, lng: coord.lng },
-            zoom: 15,
-            minZoom: 18, // 14 pour airQuality
-            maxZoom: 18, // 16 pour airQuality
+            zoom: zoom(mapType),
+            minZoom: minZoom(mapType),
+            maxZoom: maxZoom(mapType), 
+            tilt: 0,
             clickableIcons: false,
             disableDoubleClickZoom: true,
             isFractionalZoomEnabled: false,
