@@ -4,9 +4,9 @@ import { Coordinates, MapType } from "@/models/models";
 function zoom(mapType: MapType) {
     switch (mapType) {
         case "SOLAR":
-            return 18;
+            return 20;
         case "AIR_QUALITY":
-            return 14;
+            return 16;
         default:
             return 0;
     }
@@ -26,7 +26,7 @@ function minZoom(mapType: MapType) {
 function maxZoom(mapType: MapType) {
     switch (mapType) {
         case "SOLAR":
-            return 18;
+            return 22;
         case "AIR_QUALITY":
             return 16; 
         default:

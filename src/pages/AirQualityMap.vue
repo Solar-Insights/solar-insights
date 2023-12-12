@@ -144,8 +144,7 @@ onMounted(async () => {
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     airQualityDataDisplayed.value = await getAirQualityData(coord);
     airQualityDataHandler();
-
-    // Listeners
+    
     await initListeners(autocomplete, map, marker);
 });
 

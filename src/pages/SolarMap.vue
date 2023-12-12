@@ -1,5 +1,33 @@
 <template>
-    <div class="d-flex" style="height: 100vh;">
+    <div class="d-flex flex-row-reverse" style="height: 100vh;">
+        <v-card 
+            id="air-quality-details" 
+            :class="$vuetify.display.xs ? 'air-quality-details-mobile' : 'air-quality-details-computer'"
+        >
+            <!-- Header of air quality details -->
+            <div>
+                <v-text-field
+                    v-model="autocompleteValue"
+                    id="autocomplete-search"
+                    :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
+                    placeholder="Find a location"
+                    prepend-inner-icon="mdi-google-maps"
+                    hide-details
+                    single-line
+                    variant="solo"
+                    rounded
+                />
+
+                <v-divider/>
+
+                <v-card-title class="text-center" style="font-weight: lighter;">
+                    Solar data
+                </v-card-title>
+
+                <v-divider/>
+            </div>
+        </v-card>
+
         <div id="map" class="w-100"></div>
     </div>
 </template>
@@ -8,10 +36,10 @@
 // Models
 import { BuildingInsights, LayerId, SolarLayers, RequestError, Layer, Coordinates } from '@/models/models';
 // API
-import { getSolarDataLayers, getSingleLayer, findClosestBuilding } from "@/util/googleMapsAPI";
-import { onMounted } from 'vue';
+import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/util/googleMapsAPI";
+import { onMounted, ref } from 'vue';
 // Functions
-import { initMap } from "@/util/initMapComponents";
+import { initMap, initAutocomplete } from "@/util/initMapComponents";
 
 // Emit
 const emit = defineEmits(['alert']);
@@ -23,8 +51,12 @@ function emitAlert(type: string, title: string, message: string) {
     });
 }
 
+// Components data
+const autocompleteValue = ref("");
+
 // Google components
 let map: google.maps.Map;
+let autocomplete: google.maps.places.Autocomplete;
 let expandedSection: string;
 let showPanels = true;
 let buildingInsights: BuildingInsights;
@@ -38,11 +70,51 @@ onMounted(async () => {
     
     // Init values of google components
     map = await initMap(coord, mapElement, "SOLAR");
+    autocomplete = await initAutocomplete("autocomplete-search");
+    autocompleteValue.value = await getReverseGeocoding(coord);
+    if (map == undefined || autocomplete == undefined) {
+        emitAlert(
+            "error", 
+            "Could not properly load the map",
+            "An error occured when trying to load the map and its components."
+        );
+    }
+
+    await initListeners(autocomplete, map);
+
     buildingInsights = await findClosestBuilding(coord);
     geometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary
     showDataLayer(true);
 })
 
+async function initListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map) {
+    autocomplete.addListener("place_changed", async () => {
+        const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
+        if ( !newPlace || !newPlace.formatted_address ) {
+            emitAlert(
+                "warning", 
+                "Could not process the prompted address",
+                "Choose a valid address from the dropdown menu."
+            );
+            return;
+        }
+
+        const newCoord: Coordinates | undefined = await getGeocoding(newPlace.formatted_address);
+        if ( !newCoord ) {
+            autocompleteValue.value = "";
+            emitAlert(
+                "error", 
+                "Could not geocode the prompted address",
+                "An error occured when trying to convert the address to geographic Coordinates."
+            );
+            return;
+        }
+        
+        map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
+        buildingInsights = await findClosestBuilding(newCoord);
+        showDataLayer(true);
+    });
+}
 
 
 
@@ -75,7 +147,7 @@ const monthNames = [
 
 let dataLayersResponse: SolarLayers | undefined;
 let requestError: RequestError | undefined;
-let layerId: LayerId | 'none' = 'monthlyFlux';
+let layerId: LayerId | 'none' = 'annualFlux';
 let layer: Layer | undefined;
 
 let playAnimation = true;
