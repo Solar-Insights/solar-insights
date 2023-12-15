@@ -1,4 +1,42 @@
-.text-google {
+$text-theme: #50a490;
+
+.universal-font-theme {
+    @extend .font-weight-light;
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-size: 0.9rem;
+}
+
+/*
+    To create other classes with and to use in combination
+*/
+.colored {
+    color: $text-theme;
+}
+
+.emphasis {
+    @extend .font-weight-medium;
+}
+
+.no-emphasis {
+    @extend .font-weight-light;
+}
+
+/*
+    To use in .vue files
+*/
+.map-title {
+    @extend .text-center;
+    @extend .font-weight-regular;
+}
+
+.section-title {
+    @extend .colored;
+    @extend .emphasis;
+    @extend .mb-2;
+}
+
+.detail-text {
+    @extend .pb-1;
+    @extend .font-weight-thin;
+    font-size: 0.75rem;
 }

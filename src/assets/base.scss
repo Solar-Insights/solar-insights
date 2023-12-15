@@ -3,7 +3,7 @@
 /*
     Variable definitions
 */
-$light-blue: #4C8BF5;
+$theme: #50a490;
 $light-grey: #949494;
 $scrollbars: #555;
 
@@ -115,8 +115,9 @@ $scrollbars: #555;
     Class conditionals: apply some caracteristics based on some values. Should always come in pair
 */
 .button-selection-border {
-    font-weight: bold !important;
-    border: 2px solid $light-blue;
+    @extend .emphasis;
+    color: $theme;
+    border: 2px solid $theme;
 }
 
 .button-non-selection-border {
@@ -124,7 +125,7 @@ $scrollbars: #555;
 }
 
 .button-selection-background {
-    background-color: $light-blue;
+    background-color: $theme;
 }
 
 .button-selection-background::before {
@@ -133,11 +134,11 @@ $scrollbars: #555;
     bottom: -10px;
     width: 100%;
     height: 2px;
-    background: $light-blue;
+    background: $theme;
 }
 
 .button-non-selection-background {
-    border: 1px solid $light-blue;
+    border: 1px solid $theme;
 }
 
 .button-non-selection-background::before {
@@ -155,15 +156,13 @@ $scrollbars: #555;
 }
 
 .icon-non-selection-color {
-    color: $light-blue; 
+    color: $theme; 
 }
 
 .hovering-over-card-style {
-    color: black; 
-    border: 2px solid $light-blue;
+    border: 2px solid $theme;
 }
 
 .not-hovering-over-card-style {
-    color: $light-grey; 
     border: 2px solid #d6d4d4;
 }

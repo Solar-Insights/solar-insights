@@ -1,38 +1,44 @@
 <template>
     <template v-for="(pollutant, i) in pollutants" :key="i">
         <v-hover v-slot="{ isHovering, props }" open-delay="100">
-            <v-card v-bind="props" class="my-5 mx-2 pa-2 rounded-lg" variant="text" :class="isHovering ? 'hovering-over-card-style' : 'not-hovering-over-card-style'" :elevation="isHovering ? 4 : 0">
-                <v-row> 
-                    <v-col cols="auto" class="me-auto pb-1" style="color: black; font-size: 1rem;">
+            <v-card v-bind="props" class="my-5 mx-2 pa-2 pb-0 rounded-lg" :class="isHovering ? 'hovering-over-card-style' : 'not-hovering-over-card-style'" :elevation="isHovering ? 4 : 0">
+                <div class="d-flex">
+                    <div class="me-auto emphasis">
                         {{ pollutant.displayName }}
-                    </v-col>
-                    <v-col cols="auto" class="pb-1" style="font-size: 1rem;">
+                    </div>
+                    <div>
                         {{ pollutant.concentration.value }} {{ concentrationMap[pollutant.concentration.units] }}
-                    </v-col>
-                </v-row>
+                    </div>
+                </div>
 
-                <v-row>
-                    <v-col cols="auto" class="me-auto pt-1">
+                <div class="d-flex detail-text">
+                    <div class="me-auto my-auto">
                         {{ pollutant.fullName }}
-                    </v-col>
-                    <v-col cols="auto" class="pt-1">
-                        <v-btn variant="text" density="compact" icon="mdi-information-outline"/>
+                    </div>
+                    <div>
+                        <v-btn variant="text" density="compact" icon>
+                            <v-icon size="small">mdi-information-outline</v-icon>
+                        </v-btn>
 
                         <v-tooltip max-width="300" activator="parent" open-delay="200" :open-on-hover="false" open-on-click close-on-content-click :persistent="false">
-                            <v-card-subtitle class="pl-0">
+                            <div class="section-title">
                                 Effects
-                            </v-card-subtitle>
-                            {{ pollutant.additionalInfo.effects }}
+                            </div>
+                            <p>
+                                {{ pollutant.additionalInfo.effects }}
+                            </p>
+                            
+                            <v-divider class="my-3"/>
 
-                            <v-divider class="my-2"/>
-
-                            <v-card-subtitle class="pl-0"> 
+                            <div class="section-title">
                                 Sources
-                            </v-card-subtitle>
-                            {{ pollutant.additionalInfo.sources }}
+                            </div>
+                            <p>
+                                {{ pollutant.additionalInfo.sources }}
+                            </p>
                         </v-tooltip>
-                    </v-col>
-                </v-row>
+                    </div>
+                </div>
             </v-card>
         </v-hover>
     </template>

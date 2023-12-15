@@ -10,12 +10,12 @@
     <v-divider/>
 
     <v-card class="ma-3 pa-2 rounded-lg text-left" variant="text">
-        <v-card-subtitle class="pl-0 pb-3" style="font-weight: 500">
+        <div class="pl-0 section-title">
             {{ healthRecommendationsList[healthButtonSelection].displayName }}
-        </v-card-subtitle>
-        <div>
-            {{ healthRecommendationsList[healthButtonSelection].recommendation }}
         </div>
+        <p>
+            {{ healthRecommendationsList[healthButtonSelection].recommendation }}
+        </p>
     </v-card>
 </template>
 
@@ -23,12 +23,12 @@
 // Vue 
 import { ref, PropType } from 'vue';
 // Models
-import { healthRecommendations } from "@/models/models";
+import { HealthRecommendations } from "@/models/models";
 import { onMounted } from 'vue';
 
 const props = defineProps({
     healthRecommendations: {
-        type: Object as PropType<healthRecommendations>,
+        type: Object as PropType<HealthRecommendations>,
         required: true,
         default: {}
     }

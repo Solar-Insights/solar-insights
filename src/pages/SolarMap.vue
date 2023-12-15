@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-row-reverse" style="height: 100vh;">
+    <div class="d-flex" style="height: 100vh;">
         <v-card 
             id="air-quality-details" 
             :class="$vuetify.display.xs ? 'air-quality-details-mobile' : 'air-quality-details-computer'"
@@ -20,8 +20,8 @@
 
                 <v-divider/>
 
-                <v-card-title class="text-center" style="font-weight: lighter;">
-                    Solar data
+                <v-card-title class="map-title">
+                    Building insights
                 </v-card-title>
 
                 <v-divider/>

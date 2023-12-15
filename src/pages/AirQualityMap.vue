@@ -20,16 +20,16 @@
 
                 <v-divider/>
 
-                <v-card-title class="text-center" style="font-weight: lighter;">
-                    Air quality details
+                <v-card-title class="map-title">
+                    <v-icon class="mr-2">mdi-weather-windy</v-icon> Air quality
                 </v-card-title>
 
                 <v-divider/>
 
                 <div v-if="Object.keys(airQualityDataDisplayed).length" class="text-center">
                     <div class="my-4">
-                        <div class="mb-2" style="font-size: 1.15rem;">
-                            {{ airQualityDataDisplayed.indexes[0].displayName }}
+                        <div class="mb-2">
+                            {{ airQualityDataDisplayed.indexes[0].displayName }} 
                         </div>
 
                         <v-progress-circular
@@ -42,18 +42,18 @@
                         >
                             {{ airQualityDataDisplayed.indexes[0].aqi }}
                         </v-progress-circular>
-                        <div>
-                            {{ airQualityDataDisplayed.indexes[0].category }}
+                        <div class="mb-2">
+                            <v-icon class="mr-2" size="medium">mdi-medal-outline</v-icon> {{ airQualityDataDisplayed.indexes[0].category }}
                         </div>
                         <div>
-                            Dominant pollutant: {{ pollutants[airQualityDataDisplayed.indexes[0].dominantPollutant as keyof typeof pollutants].displayName }}
+                            <v-icon class="mr-2" size="medium">mdi-exclamation-thick</v-icon> Dominant pollutant - {{ pollutants[airQualityDataDisplayed.indexes[0].dominantPollutant as keyof typeof pollutants].displayName }}
                         </div>
                     </div>
                     
                     <div class="px-3 mb-4">
                         <v-btn 
                             @click="airQualityPanel = 0;" 
-                            class="w-50 h-100 py-4" 
+                            class="w-50 h-100 py-4 universal-font-theme" 
                             :class="airQualityPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" 
                             :prepend-icon="airQualityPanel == 0 ? 'mdi-alert' : 'mdi-alert-outline'" 
                             variant="flat"
@@ -63,7 +63,7 @@
                         </v-btn>
                         <v-btn 
                             @click="airQualityPanel = 1;" 
-                            class="w-50 h-100 py-4" 
+                            class="w-50 h-100 py-4 universal-font-theme" 
                             :class="airQualityPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" 
                             :prepend-icon="airQualityPanel == 1 ? 'mdi-heart' : 'mdi-heart-outline'" 
                             variant="flat"
@@ -77,10 +77,10 @@
                 </div>
             </div>
             
-            <v-card-text v-if="Object.keys(airQualityDataDisplayed).length" class="air-quality-data">
+            <div v-if="Object.keys(airQualityDataDisplayed).length" class="air-quality-data">
                 <PollutantTab v-if="airQualityPanel == 0" :pollutants="airQualityDataDisplayed.pollutants"/>
                 <HealthTab v-if="airQualityPanel == 1" :healthRecommendations="airQualityDataDisplayed.healthRecommendations"/>
-            </v-card-text>
+            </div>
         </v-card>
 
         <div id="map" class="w-100"></div>
