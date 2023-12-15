@@ -93,7 +93,6 @@ export function getSolarDataLayers(coord: SolarDataCoords, radius: number) {
 		'radiusMeters': radius.toString(),
 		'view': "FULL_LAYERS",
 		'requiredQuality': "HIGH",
-		'pixelSizeMeters': "0.5"
 	};
     console.log('GET dataLayers\n', args);
 	const params = new URLSearchParams({ ...args, key: import.meta.env.VITE_GOOGLE_API})

@@ -55,8 +55,8 @@ export type BuildingInsights = {
             sunshineQuantiles: number[],
             groundAreaMeters2: number
         },
-        RoofSegmentStats: RoofSegment[]
-        SolarPanelConfigs: SolarPanelConfig[],
+        roofSegmentStats: RoofSegment[]
+        solarPanelConfigs: SolarPanelConfig[],
         panelCapacityWatts: number,
         panelHeightMeters: number,
         panelWidthMeters: number,
@@ -66,7 +66,7 @@ export type BuildingInsights = {
             sunshineQuantiles: number[],
             groundAreaMeters2: number
         },
-        SolarPanels: SolarPanel[]
+        solarPanels: SolarPanel[]
     },
     boundingBox: BoundingBox,
     imageryQuality: string,
@@ -102,7 +102,7 @@ type RoofSegment = {
     planeHeightAtCenterMeters: number
 };
 
-type SolarPanelConfig = {
+export type SolarPanelConfig = {
     panelsCount: number,
     yearlyEnergyDcKwh: number,
     RoofSegmentSummaries: RoofSegmentSummary[]
