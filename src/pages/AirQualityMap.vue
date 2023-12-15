@@ -1,31 +1,33 @@
 <template>
     <div class="d-flex" style="height: 100vh;">
         <v-card 
-            id="air-quality-details" 
-            :class="$vuetify.display.xs ? 'air-quality-details-mobile' : 'air-quality-details-computer'"
+            id="map-details" 
+            :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'"
         >
             <!-- Header of air quality details -->
-            <div>
-                <v-text-field
-                    v-model="autocompleteValue"
-                    id="autocomplete-search"
-                    :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
-                    placeholder="Find a location"
-                    prepend-inner-icon="mdi-google-maps"
-                    hide-details
-                    single-line
-                    variant="solo"
-                    rounded
-                />
+            <v-text-field
+                v-model="autocompleteValue"
+                id="autocomplete-search"
+                :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
+                placeholder="Find a location"
+                hide-details
+                single-line
+                variant="solo"
+                rounded
+            >
+                <v-icon slot="prepend-inner-icon" color="theme" class="my-auto mr-3">mdi-google-maps</v-icon>
+            </v-text-field>
 
-                <v-divider/>
+            <v-divider/>
 
-                <v-card-title class="map-title">
-                    <v-icon class="mr-2">mdi-weather-windy</v-icon> Air quality
-                </v-card-title>
+            <v-card-title class="map-title">
+                <v-icon class="mr-2">mdi-weather-windy</v-icon> Air quality
+            </v-card-title>
 
-                <v-divider/>
+            <v-divider/>
 
+
+            <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
                 <div v-if="Object.keys(airQualityDataDisplayed).length" class="text-center">
                     <div class="my-4">
                         <div class="mb-2">
@@ -50,7 +52,7 @@
                         </div>
                     </div>
                     
-                    <div class="px-3 mb-4">
+                    <div class="mb-4">
                         <v-btn 
                             @click="airQualityPanel = 0;" 
                             class="w-50 h-100 py-4 universal-font-theme" 
@@ -74,12 +76,12 @@
                     </div>
 
                     <v-divider/>
+                
+                    <div v-if="Object.keys(airQualityDataDisplayed).length">
+                        <PollutantTab v-if="airQualityPanel == 0" :pollutants="airQualityDataDisplayed.pollutants"/>
+                        <HealthTab v-if="airQualityPanel == 1" :healthRecommendations="airQualityDataDisplayed.healthRecommendations"/>
+                    </div>
                 </div>
-            </div>
-            
-            <div v-if="Object.keys(airQualityDataDisplayed).length" class="air-quality-data">
-                <PollutantTab v-if="airQualityPanel == 0" :pollutants="airQualityDataDisplayed.pollutants"/>
-                <HealthTab v-if="airQualityPanel == 1" :healthRecommendations="airQualityDataDisplayed.healthRecommendations"/>
             </div>
         </v-card>
 

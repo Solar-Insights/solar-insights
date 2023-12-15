@@ -51,7 +51,8 @@ $scrollbars: #555;
     .v-field.v-field--prepended {
         @extend .py-1;
         border: 1px solid rgba(0, 0, 0, 0.4);
-    }
+    };
+    max-height: 2rem !important;
 }
 .autocomplete-search-mobile {
     @extend .autocomplete-search;
@@ -67,15 +68,15 @@ $scrollbars: #555;
 /*
     Air quality component
 */
-.air-quality-details {
+.map-details {
     @extend .bg-white;
 }
-.air-quality-details-mobile {
-    @extend .air-quality-details;
+.map-details-mobile {
+    @extend .map-details;
     @extend .ml-0;
 }
-.air-quality-details-computer {
-    @extend .air-quality-details;
+.map-details-computer {
+    @extend .map-details;
     @extend .bg-white;
     height: 100vh;
     width: 500px;
@@ -83,26 +84,36 @@ $scrollbars: #555;
     flex-direction: column;
 }
 
-.air-quality-data {
-    @extend .px-0;
-    @extend .py-0;
-    @extend .text-center;
+.map-data {
     flex-grow: 1;
     overflow: auto;
     scrollbar-color: $scrollbars;
-}  
-.air-quality-data::-webkit-scrollbar
+}
+.map-data-mobile {
+    @extend .map-data;
+}
+.map-data-computer {
+    @extend .map-data;
+    @extend .mb-5;
+    @extend .mx-2;
+    @extend .pa-2;
+    @extend .pb-0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.map-data::-webkit-scrollbar
 {
 	width: 8px;
 }
-.air-quality-data::-webkit-scrollbar-thumb
+.map-data::-webkit-scrollbar-thumb
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 	border-radius: 10px;
 	background-color: $scrollbars;
     border-right: 3px solid white;
 } 
-.air-quality-data::-webkit-scrollbar-track
+.map-data::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 	border-radius: 10px;

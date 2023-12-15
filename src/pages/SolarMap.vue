@@ -1,8 +1,8 @@
 <template>
     <div class="d-flex" style="height: 100vh;">
         <v-card 
-            id="air-quality-details" 
-            :class="$vuetify.display.xs ? 'air-quality-details-mobile' : 'air-quality-details-computer'"
+            id="map-details" 
+            :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'"
         >
             <!-- Header of air quality details -->
             <div>
@@ -11,20 +11,37 @@
                     id="autocomplete-search"
                     :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
                     placeholder="Find a location"
-                    prepend-inner-icon="mdi-google-maps"
                     hide-details
                     single-line
                     variant="solo"
                     rounded
-                />
+                >
+                    <v-icon slot="prepend-inner-icon" color="theme" class="my-auto mr-3">mdi-google-maps</v-icon>
+                </v-text-field>
 
                 <v-divider/>
 
                 <v-card-title class="map-title">
-                    Building insights
+                    <v-icon class="mr-2 mb-1">mdi-weather-sunny</v-icon> Solar insights
                 </v-card-title>
 
                 <v-divider/>
+                    
+                <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
+                    <div class="section-title">
+                        <v-icon>mdi-home</v-icon>
+                    </div>
+                    {{ panelCount }}
+                    <v-slider 
+                        v-model="panelCount" 
+                        :min="minNbOfPanels" 
+                        :max="maxNbOfPanels"
+                        step="1"
+                        class="mx-4"
+                        color="theme"
+                    />
+                </div>
+                
             </div>
         </v-card>
 
@@ -33,11 +50,12 @@
 </template>
 
 <script setup lang="ts">
+// Vue
+import { onMounted, ref } from 'vue';
 // Models
 import { BuildingInsights, LayerId, SolarLayers, RequestError, Layer, Coordinates, panelsPalette, SolarPanelConfig } from '@/models/models';
 // API
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/util/googleMapsAPI";
-import { onMounted, ref } from 'vue';
 // Functions
 import { initMap, initAutocomplete } from "@/util/initMapComponents";
 
@@ -224,9 +242,12 @@ let panelConfig: SolarPanelConfig | undefined;
 
 let solarPanels: google.maps.Polygon[] = [];
 
+const panelCount = ref(0);
+const minNbOfPanels = ref(0);
+const maxNbOfPanels = ref(1);
+
 let configId: number | undefined; // linked to buildingInsights.solarPotential.solarPanelConfigs: 1st is min nb of panels, last is max nb of panels
-let minNbOfPanels: number | undefined;
-let maxNbOfPannels: number | undefined;
+
 
 async function showSolarPotential() {
    
@@ -235,8 +256,8 @@ async function showSolarPotential() {
     solarPanels = [];
 
     configId = 0;
-    minNbOfPanels = buildingInsights.solarPotential.solarPanelConfigs[0].panelsCount;
-    maxNbOfPannels = buildingInsights.solarPotential.solarPanelConfigs[buildingInsights.solarPotential.solarPanelConfigs.length - 1].panelsCount;
+    minNbOfPanels.value = buildingInsights.solarPotential.solarPanelConfigs[0].panelsCount;
+    maxNbOfPanels.value = buildingInsights.solarPotential.solarPanelConfigs[buildingInsights.solarPotential.solarPanelConfigs.length - 1].panelsCount;
     panelConfig = buildingInsights.solarPotential.solarPanelConfigs[configId];
 
     // Create the solar panels on the map.
