@@ -22,7 +22,8 @@ const customTheme: ThemeDefinition = {
       info: '#2196F3',
       success: '#4CAF50',
       warning: '#FB8C00',
-      'theme': '#50a490'
+      'theme': '#50a490',
+      'text-emphasis': '#535353',
     }
   }
 

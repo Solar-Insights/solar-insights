@@ -52,6 +52,16 @@ $scrollbars: #555;
         @extend .py-1;
         border: 1px solid rgba(0, 0, 0, 0.4);
     };
+    .v-field {
+        --v-field-input-padding-top: 0 !important;
+        --v-field-input-padding-bottom: 0 !important;
+    }
+    .v-field--variant-filled .v-field__outline::before, .v-field--variant-underlined .v-field__outline::before {
+        opacity: 0 ! important;
+    }
+    .v-field--variant-filled .v-field__outline::after, .v-field--variant-underlined .v-field__outline::after {
+        opacity: 0 ! important;
+    }
     max-height: 2rem !important;
 }
 .autocomplete-search-mobile {

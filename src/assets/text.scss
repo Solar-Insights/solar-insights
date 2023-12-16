@@ -1,4 +1,5 @@
 $text-theme: #50a490;
+$text-emphasis: #535353; 
 
 .universal-font-theme {
     @extend .font-weight-light;
@@ -9,9 +10,6 @@ $text-theme: #50a490;
 /*
     To create other classes with and to use in combination
 */
-.colored {
-    color: $text-theme;
-}
 
 .emphasis {
     @extend .font-weight-medium;
@@ -30,9 +28,17 @@ $text-theme: #50a490;
 }
 
 .section-title {
-    @extend .colored;
     @extend .emphasis;
     @extend .mb-2;
+    font-size: 1.1rem;
+    color: $text-theme;
+}
+
+.subsection-title {
+    @extend .emphasis;
+    @extend .mb-2;
+    font-size: 1rem;
+    color: $text-emphasis;
 }
 
 .detail-text {

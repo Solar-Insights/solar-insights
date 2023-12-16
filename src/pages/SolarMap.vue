@@ -22,26 +22,65 @@
                 <v-divider/>
 
                 <v-card-title class="map-title">
-                    <v-icon class="mr-2 mb-1">mdi-weather-sunny</v-icon> Solar insights
+                    <v-icon class="mr-2 mb-1">mdi-weather-sunny</v-icon> Solar Insights
                 </v-card-title>
 
                 <v-divider/>
                     
                 <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
-                    <div class="section-title">
-                        <v-icon>mdi-home</v-icon>
+                    <div>
+                        <div class="section-title d-flex">
+                            <v-icon class="mr-3">mdi-home-outline</v-icon> 
+                            <div class="my-auto"> 
+                                Parameters 
+                            </div>
+                        </div>
+
+                        <div class="ml-3">
+                            <div class="px-3">
+                                <div class="d-flex">
+                                    <v-icon class="mr-3" color="theme">mdi-solar-panel-large</v-icon>
+                                    <div class="my-auto me-auto subsection-title">
+                                        Panels count
+                                    </div>
+                                    <div class="text-right">
+                                        {{ panelCount }} panels
+                                    </div>
+                                </div>
+                                <v-slider 
+                                    v-model="panelCount" 
+                                    :min="minNbOfPanels" 
+                                    :max="maxNbOfPanels"
+                                    step="1"
+                                    color="theme"
+                                />
+                            </div>
+                            
+                            <div class="px-3">
+                                <div class="d-flex">
+                                    <v-icon class="mr-3" color="theme">mdi-lightning-bolt</v-icon>
+                                    <div class="my-auto me-auto subsection-title">
+                                        Power rating (capacity)
+                                    </div>
+                                </div>
+                                <v-text-field
+                                    v-model="panelPowerRating"
+                                    label="Power rating"
+                                    placeholder="Power rating"
+                                    density="compact"
+                                    prepend-inner-icon="mdi-solar-power-variant-outline"
+                                    variant="outlined"
+                                    color="theme"
+                                >
+                                    <template v-slot:append-inner>
+                                        Watts
+                                    </template>
+                                </v-text-field>
+                            </div>
+                            
+                        </div>
                     </div>
-                    {{ panelCount }}
-                    <v-slider 
-                        v-model="panelCount" 
-                        :min="minNbOfPanels" 
-                        :max="maxNbOfPanels"
-                        step="1"
-                        class="mx-4"
-                        color="theme"
-                    />
                 </div>
-                
             </div>
         </v-card>
 
@@ -245,6 +284,7 @@ let solarPanels: google.maps.Polygon[] = [];
 const panelCount = ref(0);
 const minNbOfPanels = ref(0);
 const maxNbOfPanels = ref(1);
+const panelPowerRating = ref(350); 
 
 let configId: number | undefined; // linked to buildingInsights.solarPotential.solarPanelConfigs: 1st is min nb of panels, last is max nb of panels
 

@@ -21,7 +21,7 @@
             <v-divider/>
 
             <v-card-title class="map-title">
-                <v-icon class="mr-2">mdi-weather-windy</v-icon> Air quality
+                <v-icon class="mr-2">mdi-weather-windy</v-icon> Air Quality
             </v-card-title>
 
             <v-divider/>
