@@ -29,19 +29,19 @@
                     
                 <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
                     <div>
-                        <div class="section-title d-flex">
-                            <v-icon class="mr-3">mdi-home-outline</v-icon> 
+                        <div class="section-title d-flex mb-6">
+                            <v-icon class="mr-3">mdi-solar-panel-large</v-icon> 
                             <div class="my-auto"> 
-                                Parameters 
+                                Solar Panels
                             </div>
                         </div>
 
                         <div class="ml-3">
                             <div class="px-3">
                                 <div class="d-flex">
-                                    <v-icon class="mr-3" color="theme">mdi-solar-panel-large</v-icon>
-                                    <div class="my-auto me-auto subsection-title">
-                                        Panels count
+                                    <v-icon class="mr-3" color="theme">mdi-scale-balance</v-icon>
+                                    <div class="me-auto subsection-title">
+                                        Count
                                     </div>
                                     <div class="text-right">
                                         {{ panelCount }} panels
@@ -65,19 +65,21 @@
                                 </div>
                                 <v-text-field
                                     v-model="panelPowerRating"
-                                    label="Power rating"
                                     placeholder="Power rating"
                                     density="compact"
-                                    prepend-inner-icon="mdi-solar-power-variant-outline"
                                     variant="outlined"
                                     color="theme"
+                                    type="number"
                                 >
                                     <template v-slot:append-inner>
                                         Watts
                                     </template>
                                 </v-text-field>
                             </div>
-                            
+
+                            <div class="px-3">
+                                <v-switch v-model="showPanels" label="Show pannels" inset color="theme" density="compact"/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -115,7 +117,6 @@ const autocompleteValue = ref("");
 let map: google.maps.Map;
 let autocomplete: google.maps.places.Autocomplete;
 let expandedSection: string;
-let showPanels = true;
 let buildingInsights: BuildingInsights;
 let geometryLibrary: google.maps.GeometryLibrary;
 
@@ -284,6 +285,7 @@ let solarPanels: google.maps.Polygon[] = [];
 const panelCount = ref(0);
 const minNbOfPanels = ref(0);
 const maxNbOfPanels = ref(1);
+const showPanels = ref(true);
 const panelPowerRating = ref(350); 
 
 let configId: number | undefined; // linked to buildingInsights.solarPotential.solarPanelConfigs: 1st is min nb of panels, last is max nb of panels
@@ -333,7 +335,7 @@ async function showSolarPotential() {
         });
     });
     solarPanels.map((panel, i) =>
-        panel.setMap(showPanels && panelConfig && i < panelConfig.panelsCount ? map : null)
+        panel.setMap(showPanels.value && panelConfig && i < panelConfig.panelsCount ? map : null)
     );
 }
 
