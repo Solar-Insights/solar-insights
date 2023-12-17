@@ -76,7 +76,7 @@ $scrollbars: #555;
 
 
 /*
-    Air quality component
+    Map components
 */
 .map-details {
     @extend .bg-white;
@@ -87,11 +87,26 @@ $scrollbars: #555;
 }
 .map-details-computer {
     @extend .map-details;
-    @extend .bg-white;
     height: 100vh;
     width: 500px;
     display: flex !important;
     flex-direction: column;
+}
+
+.map-readonly-data {
+    @extend .bg-white;
+}
+.map-readonly-data-mobile {
+    @extend .map-readonly-data;
+}
+.map-readonly-data-computer {
+    @extend .map-readonly-data;
+    @extend .ma-3;
+    @extend .pa-3;
+    width: 275px;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .map-data {
@@ -104,6 +119,7 @@ $scrollbars: #555;
 }
 .map-data-computer {
     @extend .map-data;
+    @extend .mt-3;
     @extend .mb-5;
     @extend .mx-2;
     @extend .pa-2;

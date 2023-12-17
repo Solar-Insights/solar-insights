@@ -29,22 +29,26 @@
                     
                 <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
                     <div>
-                        <div class="section-title d-flex mb-6">
-                            <v-icon class="mr-3">mdi-solar-panel-large</v-icon> 
+                        <div class="section-title d-flex mb-3">
+                            <v-icon class="mr-3">mdi-solar-power-variant-outline</v-icon> 
                             <div class="my-auto"> 
                                 Solar Panels
                             </div>
                         </div>
 
-                        <div class="ml-3">
-                            <div class="px-3">
+                        <div class="ml-3 px-3">
+                            <div class="detail-text mb-3">
+                                Solar pannels are ordered from most to least efficient based on the amount of sunlight received over the course of a year.
+                            </div>
+
+                            <div>
                                 <div class="d-flex">
                                     <v-icon class="mr-3" color="theme">mdi-scale-balance</v-icon>
                                     <div class="me-auto subsection-title">
                                         Count
                                     </div>
                                     <div class="text-right">
-                                        {{ panelCount }} panels
+                                        {{ panelCount }} / {{ maxNbOfPanels }} panels
                                     </div>
                                 </div>
                                 <v-slider 
@@ -56,7 +60,7 @@
                                 />
                             </div>
                             
-                            <div class="px-3">
+                            <div>
                                 <div class="d-flex">
                                     <v-icon class="mr-3" color="theme">mdi-lightning-bolt</v-icon>
                                     <div class="my-auto me-auto subsection-title">
@@ -77,7 +81,7 @@
                                 </v-text-field>
                             </div>
 
-                            <div class="px-3">
+                            <div>
                                 <v-switch v-model="showPanels" label="Show pannels" inset color="theme" density="compact"/>
                             </div>
                         </div>
@@ -88,6 +92,60 @@
 
         <div id="map" class="w-100"></div>
     </div>
+
+    <v-card class="rounded-lg" :class="$vuetify.display.xs ? 'map-readonly-data-mobile' : 'map-readonly-data-computer'" elevation="8"> 
+        <v-card-title class="section-title d-flex justify-center">
+            <v-icon class="mr-3" color="theme">mdi-home-outline</v-icon> 
+            <div class="my-auto">
+                Analytics
+            </div>
+        </v-card-title>
+        
+        <div class="mb-5">
+            <div class="d-flex">
+                <v-icon class="mr-3" color="theme">mdi-math-compass</v-icon>
+                <div class="me-auto emphasis">
+                    Roof area
+                </div>
+                <div>
+                    {{ buildingInsights?.solarPotential.wholeRoofStats.areaMeters2.toFixed(0) }} m²
+                </div>
+            </div>
+            <div class="detail-text mt-1" style="margin-left: 33.6px;">
+                Based on 3D analysis of the roof
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <div class="d-flex">
+                <v-icon class="mr-3" color="theme">mdi-white-balance-sunny</v-icon>
+                <div class="me-auto emphasis flex-shrink-1">
+                    Annual sunlight
+                </div>
+                <div>
+                    {{ buildingInsights?.solarPotential.maxSunshineHoursPerYear.toFixed(0) }} hrs
+                </div>
+            </div>
+            <div class="detail-text mt-1" style="margin-left: 33.6px;">
+                Derived from daily examination of weather patterns
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <div class="d-flex">
+                <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon>
+                <div class="me-auto emphasis">
+                    Panels
+                </div>
+                <div>
+                    {{ panelCount }} / {{ maxNbOfPanels }} panels
+                </div>
+            </div>
+            <div class="detail-text mt-1" style="margin-left: 33.6px;">
+                Number of panels considered for the analysis
+            </div>
+        </div>
+    </v-card>
 </template>
 
 <script setup lang="ts">
@@ -117,7 +175,7 @@ const autocompleteValue = ref("");
 let map: google.maps.Map;
 let autocomplete: google.maps.places.Autocomplete;
 let expandedSection: string;
-let buildingInsights: BuildingInsights;
+const buildingInsights = ref<BuildingInsights>();
 let geometryLibrary: google.maps.GeometryLibrary;
 
 
@@ -140,7 +198,7 @@ onMounted(async () => {
 
     await initListeners(autocomplete, map);
 
-    buildingInsights = await findClosestBuilding(coord);
+    buildingInsights.value = await findClosestBuilding(coord);
     geometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary
     showDataLayer(true);
     showSolarPotential();
@@ -170,7 +228,7 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
         }
         
         map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
-        buildingInsights = await findClosestBuilding(newCoord);
+        buildingInsights.value = await findClosestBuilding(newCoord);
         showDataLayer(true);
     });
 }
@@ -234,14 +292,14 @@ async function showDataLayer(reset = false) {
         playAnimation = ['monthlyFlux', 'hourlyShade'].includes(layerId);
     }
 
-    if (layerId == 'none') {
+    if (layerId == 'none' || buildingInsights.value == null) {
         return;
     }
 
     if (!layer) {
-        const center = buildingInsights.center;
-        const ne = buildingInsights.boundingBox.ne;
-        const sw = buildingInsights.boundingBox.sw;
+        const center = buildingInsights.value.center;
+        const ne = buildingInsights.value.boundingBox.ne;
+        const sw = buildingInsights.value.boundingBox.sw;
         const diameter = geometryLibrary.spherical.computeDistanceBetween(
             new google.maps.LatLng(ne.latitude, ne.longitude),
             new google.maps.LatLng(sw.latitude, sw.longitude),
@@ -292,18 +350,20 @@ let configId: number | undefined; // linked to buildingInsights.solarPotential.s
 
 
 async function showSolarPotential() {
-   
+    if (buildingInsights.value == null) {
+        return;
+    }
     console.log('showSolarPotential');
     solarPanels.map((panel) => panel.setMap(null));
     solarPanels = [];
 
     configId = 0;
-    minNbOfPanels.value = buildingInsights.solarPotential.solarPanelConfigs[0].panelsCount;
-    maxNbOfPanels.value = buildingInsights.solarPotential.solarPanelConfigs[buildingInsights.solarPotential.solarPanelConfigs.length - 1].panelsCount;
-    panelConfig = buildingInsights.solarPotential.solarPanelConfigs[configId];
+    minNbOfPanels.value = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
+    maxNbOfPanels.value = buildingInsights.value.solarPotential.solarPanelConfigs[buildingInsights.value.solarPotential.solarPanelConfigs.length - 1].panelsCount;
+    panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[configId];
 
     // Create the solar panels on the map.
-    const solarPotential = buildingInsights.solarPotential;
+    const solarPotential = buildingInsights.value.solarPotential;
     const palette = createPalette(panelsPalette, 256).map(rgbToColor);
     const minEnergy = solarPotential.solarPanels.slice(-1)[0].yearlyEnergyDcKwh;
     const maxEnergy = solarPotential.solarPanels[0].yearlyEnergyDcKwh;

@@ -27,7 +27,7 @@ $text-emphasis: #535353;
     @extend .font-weight-regular;
 }
 
-.section-title {
+.section-title   {
     @extend .emphasis;
     @extend .mb-2;
     font-size: 1.1rem;
