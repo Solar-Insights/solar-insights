@@ -1,9 +1,6 @@
 <template>
     <div class="d-flex" style="height: 100vh;">
-        <v-card 
-            id="map-details" 
-            :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'"
-        >
+        <v-card id="map-details" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
             <!-- Header of air quality details -->
             <v-text-field
                 v-model="autocompleteValue"

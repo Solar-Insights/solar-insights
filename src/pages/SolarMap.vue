@@ -1,69 +1,67 @@
 <template>
     <div class="d-flex" style="height: 100vh;">
-        <v-card 
-            id="map-details" 
-            :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'"
-        >
-            <!-- Header of air quality details -->
-            <div>
-                <v-text-field
-                    v-model="autocompleteValue"
-                    id="autocomplete-search"
-                    :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
-                    placeholder="Find a location"
-                    hide-details
-                    single-line
-                    variant="solo"
-                    rounded
-                >
-                    <v-icon slot="prepend-inner-icon" color="theme" class="my-auto mr-3">mdi-google-maps</v-icon>
-                </v-text-field>
+        <v-card id="map-details" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
+            <v-text-field
+                v-model="autocompleteValue"
+                id="autocomplete-search"
+                :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
+                placeholder="Find a location"
+                hide-details
+                single-line
+                variant="solo"
+                rounded
+            >
+                <v-icon slot="prepend-inner-icon" color="theme" class="my-auto mr-3">mdi-google-maps</v-icon>
+            </v-text-field>
+
+            <v-divider/>
+
+            <v-card-title class="map-title">
+                <v-icon class="mr-2 mb-1">mdi-weather-sunny</v-icon> Solar Analysis
+            </v-card-title>
+
+            <v-divider/>
+                
+            <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
+                <div class="mb-4">
+                    <v-btn 
+                        @click="solarReadonlyPanel = 0;" 
+                        class="w-50 h-100 py-4 universal-font-theme" 
+                        :class="solarReadonlyPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" 
+                        :prepend-icon="solarReadonlyPanel == 0 ? 'mdi-home' : 'mdi-home-outline'" 
+                        variant="flat"
+                        :ripple="false"
+                    > 
+                        Building
+                    </v-btn>
+                    <v-btn 
+                        @click="solarReadonlyPanel = 1;" 
+                        class="w-50 h-100 py-4 universal-font-theme" 
+                        :class="solarReadonlyPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" 
+                        :prepend-icon="solarReadonlyPanel == 1 ? 'mdi-transmission-tower' : 'mdi-transmission-tower'" 
+                        variant="flat"
+                        :ripple="false"
+                    > 
+                        Energy
+                    </v-btn>
+                </div>
 
                 <v-divider/>
 
-                <v-card-title class="map-title">
-                    <v-icon class="mr-2 mb-1">mdi-weather-sunny</v-icon> Solar Insights
-                </v-card-title>
-
-                <v-divider/>
-                    
-                <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
-                    <div class="mb-4">
-                        <v-btn 
-                            @click="solarPanel = 0;" 
-                            class="w-50 h-100 py-4 universal-font-theme" 
-                            :class="solarPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" 
-                            :prepend-icon="solarPanel == 0 ? 'mdi-home' : 'mdi-home-outline'" 
-                            variant="flat"
-                            :ripple="false"
-                        > 
-                            Building Data
-                        </v-btn>
-                        <v-btn 
-                            @click="solarPanel = 1;" 
-                            class="w-50 h-100 py-4 universal-font-theme" 
-                            :class="solarPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" 
-                            :prepend-icon="solarPanel == 1 ? 'mdi-sun-angle' : 'mdi-sun-angle-outline'" 
-                            variant="flat"
-                            :ripple="false"
-                        > 
-                            Solar Data
-                        </v-btn>
-                    </div>
-
-                    <v-divider/>
-
-                    <div>
-                        <div class="section-title d-flex mb-3 mt-4">
-                            <v-icon class="mr-3">mdi-solar-power-variant-outline</v-icon> 
+                <v-expansion-panels multiple>
+                    <v-expansion-panel class="mb-2" elevation="5">
+                        <v-expansion-panel-title>
+                            <div class="section-title d-flex">
+                            <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon> 
                             <div class="my-auto"> 
                                 Solar Panels
                             </div>
                         </div>
-
-                        <div class="ml-3 px-3">
+                        </v-expansion-panel-title>
+                        
+                        <v-expansion-panel-text>
                             <div class="detail-text mb-3">
-                                Solar pannels are ordered from most to least efficient based annual sunlight of the roof.
+                                Solar panels are ordered from most to least efficient based annual sunlight of the roof.
                             </div>
 
                             <div>
@@ -109,68 +107,84 @@
                             <div>
                                 <v-switch v-model="showPanels" label="Show pannels" inset color="theme" density="compact"/>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </v-expansion-panel-text>
+                    </v-expansion-panel>
+
+                    <v-expansion-panel elevation="5">
+                        <v-expansion-panel-title>
+                            <div class="section-title d-flex">
+                                <v-icon class="mr-3">mdi-battery-charging-70</v-icon> 
+                                <div class="my-auto"> 
+                                    Solar Potential
+                                </div>
+                            </div>
+                        </v-expansion-panel-title>
+                        
+                        <v-expansion-panel-text>
+                            <div class="detail-text mb-3">
+                                Solar potential is measured using various variables like the power rating of pannels and the annual usable sunlight of the building.
+                            </div>
+
+                            <div>
+                                <div class="d-flex">
+                                    <v-icon class="mr-3" color="theme">mdi-scale-balance</v-icon>
+                                    <div class="me-auto subsection-title">
+                                        Count
+                                    </div>
+                                    <div class="text-right">
+                                        {{ panelCount }} / {{ maxNbOfPanels }} panels
+                                    </div>
+                                </div>
+                                <v-slider 
+                                    v-model="panelCount" 
+                                    :min="minNbOfPanels" 
+                                    :max="maxNbOfPanels"
+                                    step="1"
+                                    color="theme"
+                                />
+                            </div>
+                            
+                            <div>
+                                <div class="d-flex">
+                                    <v-icon class="mr-3" color="theme">mdi-lightning-bolt</v-icon>
+                                    <div class="my-auto me-auto subsection-title">
+                                        Power rating (capacity)
+                                    </div>
+                                </div>
+                                <v-text-field
+                                    v-model="panelPowerRating"
+                                    placeholder="Power rating"
+                                    density="compact"
+                                    variant="outlined"
+                                    color="theme"
+                                    type="number"
+                                >
+                                    <template v-slot:append-inner>
+                                        Watts
+                                    </template>
+                                </v-text-field>
+                            </div>
+
+                            <div>
+                                <v-switch v-model="showPanels" label="Show pannels" inset color="theme" density="compact"/>
+                            </div>
+
+                            <div>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis voluptates eum, modi nemo odit beatae explicabo expedita deserunt et nobis, repellat aut? Voluptatibus eum dignissimos sequi. Architecto magnam odit voluptatem.
+                            </div>
+                        </v-expansion-panel-text>
+                    </v-expansion-panel>
+                </v-expansion-panels>
             </div>
         </v-card>
 
         <div id="map" class="w-100"></div>
     </div>
 
-    <v-card class="rounded-lg" :class="$vuetify.display.xs ? 'map-readonly-data-mobile' : 'map-readonly-data-computer'" elevation="8"> 
-        <v-card-title class="section-title pl-0 mb-4 d-flex">
-            <v-icon class="mr-3" color="theme">mdi-home-outline</v-icon> 
-            <div class="my-auto">
-                Building Data
-            </div>
-        </v-card-title>
-        
-        <div class="mb-5">
-            <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-math-compass</v-icon>
-                <div class="me-auto emphasis">
-                    Roof area
-                </div>
-                <div>
-                    {{ buildingInsights?.solarPotential.wholeRoofStats.areaMeters2.toFixed(0) }} m²
-                </div>
-            </div>
-            <div class="detail-text mt-1" style="margin-left: 33.6px;">
-                Based on 3D analysis of the roof
-            </div>
-        </div>
-
-        <div class="mb-5">
-            <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-white-balance-sunny</v-icon>
-                <div class="me-auto emphasis flex-shrink-1">
-                    Annual sunlight
-                </div>
-                <div>
-                    {{ buildingInsights?.solarPotential.maxSunshineHoursPerYear.toFixed(0) }} hrs
-                </div>
-            </div>
-            <div class="detail-text mt-1" style="margin-left: 33.6px;">
-                Derived from daily examination of weather patterns
-            </div>
-        </div>
-
-        <div class="mb-5">
-            <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon>
-                <div class="me-auto emphasis">
-                    Panels
-                </div>
-                <div>
-                    {{ panelCount }} / {{ maxNbOfPanels }} panels
-                </div>
-            </div>
-            <div class="detail-text mt-1" style="margin-left: 33.6px;">
-                Number of panels considered for the analysis
-            </div>
-        </div>
-    </v-card>
+    <div v-if="Object.keys(buildingInsights).length">
+        <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" :buildingInsights="buildingInsights" :panelCount="panelCount" :maxNbOfPanels="maxNbOfPanels"/>
+        <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :panelCount="panelCount" :maxNbOfPanels="maxNbOfPanels"/>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -182,6 +196,9 @@ import { BuildingInsights, LayerId, SolarLayers, RequestError, Layer, Coordinate
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/util/googleMapsAPI";
 // Functions
 import { initMap, initAutocomplete } from "@/util/initMapComponents";
+// Components
+import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
+import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
 
 // Emit
 const emit = defineEmits(['alert']);
@@ -194,14 +211,14 @@ function emitAlert(type: string, title: string, message: string) {
 }
 
 // Components data
+const solarReadonlyPanel = ref(0);
 const autocompleteValue = ref("");
-const solarPanel = ref(0);
 
 // Google components
 let map: google.maps.Map;
 let autocomplete: google.maps.places.Autocomplete;
 let expandedSection: string;
-const buildingInsights = ref<BuildingInsights>();
+const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
 let geometryLibrary: google.maps.GeometryLibrary;
 
 
