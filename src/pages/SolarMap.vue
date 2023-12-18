@@ -28,8 +28,33 @@
                 <v-divider/>
                     
                 <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
+                    <div class="mb-4">
+                        <v-btn 
+                            @click="solarPanel = 0;" 
+                            class="w-50 h-100 py-4 universal-font-theme" 
+                            :class="solarPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" 
+                            :prepend-icon="solarPanel == 0 ? 'mdi-home' : 'mdi-home-outline'" 
+                            variant="flat"
+                            :ripple="false"
+                        > 
+                            Building Data
+                        </v-btn>
+                        <v-btn 
+                            @click="solarPanel = 1;" 
+                            class="w-50 h-100 py-4 universal-font-theme" 
+                            :class="solarPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" 
+                            :prepend-icon="solarPanel == 1 ? 'mdi-sun-angle' : 'mdi-sun-angle-outline'" 
+                            variant="flat"
+                            :ripple="false"
+                        > 
+                            Solar Data
+                        </v-btn>
+                    </div>
+
+                    <v-divider/>
+
                     <div>
-                        <div class="section-title d-flex mb-3">
+                        <div class="section-title d-flex mb-3 mt-4">
                             <v-icon class="mr-3">mdi-solar-power-variant-outline</v-icon> 
                             <div class="my-auto"> 
                                 Solar Panels
@@ -38,7 +63,7 @@
 
                         <div class="ml-3 px-3">
                             <div class="detail-text mb-3">
-                                Solar pannels are ordered from most to least efficient based on the amount of sunlight received over the course of a year.
+                                Solar pannels are ordered from most to least efficient based annual sunlight of the roof.
                             </div>
 
                             <div>
@@ -94,10 +119,10 @@
     </div>
 
     <v-card class="rounded-lg" :class="$vuetify.display.xs ? 'map-readonly-data-mobile' : 'map-readonly-data-computer'" elevation="8"> 
-        <v-card-title class="section-title d-flex justify-center">
+        <v-card-title class="section-title pl-0 mb-4 d-flex">
             <v-icon class="mr-3" color="theme">mdi-home-outline</v-icon> 
             <div class="my-auto">
-                Analytics
+                Building Data
             </div>
         </v-card-title>
         
@@ -170,6 +195,7 @@ function emitAlert(type: string, title: string, message: string) {
 
 // Components data
 const autocompleteValue = ref("");
+const solarPanel = ref(0);
 
 // Google components
 let map: google.maps.Map;
