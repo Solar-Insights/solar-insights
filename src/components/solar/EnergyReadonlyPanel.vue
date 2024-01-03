@@ -3,18 +3,18 @@
         <v-card-title class="section-title pl-0 mb-4 d-flex">
             <v-icon class="mr-3" color="theme">mdi-transmission-tower</v-icon> 
             <div class="my-auto">
-                Energy insights
+                Energy Insights
             </div>
         </v-card-title>
         
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-math-compass</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-home-lightning-bolt</v-icon>
                 <div class="me-auto emphasis">
-                    Roof area
+                    Yearly Energy
                 </div>
                 <div>
-                    {{ buildingInsights?.solarPotential.wholeRoofStats.areaMeters2.toFixed(0) }} m²
+                    {{ yearlyEnergy.toFixed(0) }} kWh
                 </div>
             </div>
             <div class="detail-text mt-1" style="margin-left: 33.6px;">
@@ -72,6 +72,11 @@ const props = defineProps({
         default: 0
     },
     maxNbOfPanels: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    yearlyEnergy: {
         type: Number,
         required: true,
         default: 0

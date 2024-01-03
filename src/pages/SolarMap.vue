@@ -54,14 +54,14 @@
                             <div class="section-title d-flex">
                             <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon> 
                             <div class="my-auto"> 
-                                Solar Panels
+                                Panels
                             </div>
                         </div>
                         </v-expansion-panel-title>
                         
                         <v-expansion-panel-text>
                             <div class="detail-text mb-3">
-                                Solar panels are ordered from most to least efficient based annual sunlight of the roof.
+                                Solar panels are ordered from most to least efficient based annual sunlight of the roof (e.g. using 10 pannels will give you the 10 most efficient)
                             </div>
 
                             <div>
@@ -87,7 +87,7 @@
                                 <div class="d-flex">
                                     <v-icon class="mr-3" color="theme">mdi-lightning-bolt</v-icon>
                                     <div class="my-auto me-auto subsection-title">
-                                        Power rating (capacity)
+                                        Power Rating (capacity)
                                     </div>
                                 </div>
                                 <v-text-field
@@ -122,55 +122,52 @@
                         
                         <v-expansion-panel-text>
                             <div class="detail-text mb-3">
-                                Solar potential is measured using various variables like the power rating of pannels and the annual usable sunlight of the building.
+                                Solar potential is used to evaluate the financial benefits of solar panels for a specific building
                             </div>
 
                             <div>
-                                <div class="d-flex">
-                                    <v-icon class="mr-3" color="theme">mdi-scale-balance</v-icon>
-                                    <div class="me-auto subsection-title">
-                                        Count
-                                    </div>
-                                    <div class="text-right">
-                                        {{ panelCount }} / {{ maxNbOfPanels }} panels
-                                    </div>
-                                </div>
-                                <v-slider 
-                                    v-model="panelCount" 
-                                    :min="minNbOfPanels" 
-                                    :max="maxNbOfPanels"
-                                    step="1"
-                                    color="theme"
-                                />
-                            </div>
-                            
-                            <div>
-                                <div class="d-flex">
-                                    <v-icon class="mr-3" color="theme">mdi-lightning-bolt</v-icon>
+                                <div class="d-flex mb-2">
+                                    <v-icon class="mr-3" color="theme">mdi-cash</v-icon>
                                     <div class="my-auto me-auto subsection-title">
-                                        Power rating (capacity)
+                                        Building costs
                                     </div>
                                 </div>
                                 <v-text-field
-                                    v-model="panelPowerRating"
-                                    placeholder="Power rating"
+                                    v-model="monthlyEnergyCost"
+                                    label="Average monthly energy cost"
                                     density="compact"
                                     variant="outlined"
                                     color="theme"
                                     type="number"
                                 >
                                     <template v-slot:append-inner>
-                                        Watts
+                                        $
                                     </template>
                                 </v-text-field>
-                            </div>
-
-                            <div>
-                                <v-switch v-model="showPanels" label="Show pannels" inset color="theme" density="compact"/>
-                            </div>
-
-                            <div>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis voluptates eum, modi nemo odit beatae explicabo expedita deserunt et nobis, repellat aut? Voluptatibus eum dignissimos sequi. Architecto magnam odit voluptatem.
+                                <v-text-field
+                                    v-model="costPerKwh"
+                                    label="Cost per kWh"
+                                    density="compact"
+                                    variant="outlined"
+                                    color="theme"
+                                    type="number"
+                                >
+                                    <template v-slot:append-inner>
+                                        $
+                                    </template>
+                                </v-text-field>
+                                <v-text-field
+                                    v-model="installationPerKwh"
+                                    label="Installation cost per kWh"
+                                    density="compact"
+                                    variant="outlined"
+                                    color="theme"
+                                    type="number"
+                                >
+                                    <template v-slot:append-inner>
+                                        $
+                                    </template>
+                                </v-text-field> 
                             </div>
                         </v-expansion-panel-text>
                     </v-expansion-panel>
@@ -183,7 +180,7 @@
 
     <div v-if="Object.keys(buildingInsights).length">
         <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" :buildingInsights="buildingInsights" :panelCount="panelCount" :maxNbOfPanels="maxNbOfPanels"/>
-        <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :panelCount="panelCount" :maxNbOfPanels="maxNbOfPanels"/>
+        <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :panelCount="panelCount" :maxNbOfPanels="maxNbOfPanels" :yearlyEnergy="yearlyEnergy"/>
     </div>
 </template>
 
@@ -245,6 +242,7 @@ onMounted(async () => {
     geometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary
     showDataLayer(true);
     showSolarPotential();
+    console.log(buildingInsights);
 })
 
 async function initListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map) {
@@ -275,8 +273,6 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
         showDataLayer(true);
     });
 }
-
-
 
 const icon = 'layers';
 const title = 'Data Layers endpoint';
@@ -387,7 +383,12 @@ const panelCount = ref(0);
 const minNbOfPanels = ref(0);
 const maxNbOfPanels = ref(1);
 const showPanels = ref(true);
-const panelPowerRating = ref(350); 
+const panelPowerRating = ref(350);
+
+const yearlyEnergy = ref(0);
+const monthlyEnergyCost = ref(0);
+const costPerKwh = ref(0);
+const installationPerKwh = ref(0);
 
 let configId: number | undefined; // linked to buildingInsights.solarPotential.solarPanelConfigs: 1st is min nb of panels, last is max nb of panels
 
@@ -404,6 +405,7 @@ async function showSolarPotential() {
     minNbOfPanels.value = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
     maxNbOfPanels.value = buildingInsights.value.solarPotential.solarPanelConfigs[buildingInsights.value.solarPotential.solarPanelConfigs.length - 1].panelsCount;
     panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[configId];
+    yearlyEnergy.value = panelConfig.yearlyEnergyDcKwh;
 
     // Create the solar panels on the map.
     const solarPotential = buildingInsights.value.solarPotential;
