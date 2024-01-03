@@ -47,9 +47,6 @@
                     {{ panelCount }} / {{ maxNbOfPanels }} panels
                 </div>
             </div>
-            <div class="detail-text mt-1" style="margin-left: 33.6px;">
-                Number of panels considered for the analysis
-            </div>
         </div>
     </v-card>
 </template>

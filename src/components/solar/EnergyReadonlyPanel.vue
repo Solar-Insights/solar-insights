@@ -17,38 +17,29 @@
                     {{ yearlyEnergy.toFixed(0) }} kWh
                 </div>
             </div>
-            <div class="detail-text mt-1" style="margin-left: 33.6px;">
-                Based on 3D analysis of the roof
-            </div>
         </div>
-
+        
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-white-balance-sunny</v-icon>
-                <div class="me-auto emphasis flex-shrink-1">
-                    Annual sunlight
-                </div>
-                <div>
-                    {{ buildingInsights?.solarPotential.maxSunshineHoursPerYear.toFixed(0) }} hrs
-                </div>
-            </div>
-            <div class="detail-text mt-1" style="margin-left: 33.6px;">
-                Derived from daily examination of weather patterns
-            </div>
-        </div>
-
-        <div class="mb-5">
-            <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-hammer</v-icon>
                 <div class="me-auto emphasis">
-                    Panels
-                </div>
+                    Installation Size
+                </div>  
                 <div>
-                    {{ panelCount }} / {{ maxNbOfPanels }} panels
+                    {{ (panelCount * panelPowerRating / 1000).toFixed(0) }} kW
                 </div>
             </div>
-            <div class="detail-text mt-1" style="margin-left: 33.6px;">
-                Number of panels considered for the analysis
+        </div>
+
+        <div class="mb-5">
+            <div class="d-flex">
+                <v-icon class="mr-3" color="theme">mdi-hammer</v-icon>
+                <div class="me-auto emphasis">
+                    Installation Cost
+                </div>
+                <div>
+                    {{ (installationPerKwh * panelCount * panelPowerRating).toFixed(0) }} $
+                </div>
             </div>
         </div>
     </v-card>
@@ -77,6 +68,21 @@ const props = defineProps({
         default: 0
     },
     yearlyEnergy: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    monthlyEnergyCost: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    installationPerKwh: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    panelPowerRating: {
         type: Number,
         required: true,
         default: 0
