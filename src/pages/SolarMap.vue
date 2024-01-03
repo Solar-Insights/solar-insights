@@ -84,25 +84,43 @@
                             </div>
                             
                             <div>
-                                <div class="d-flex">
-                                    <v-icon class="mr-3" color="theme">mdi-lightning-bolt</v-icon>
-                                    <div class="my-auto me-auto subsection-title">
-                                        Power Rating (capacity)
-                                    </div>
-                                </div>
                                 <v-text-field
                                     v-model="panelPowerRating"
-                                    placeholder="Power rating"
+                                    label="Power rating (capacity)"
                                     density="compact"
                                     variant="outlined"
                                     color="theme"
                                     type="number"
+                                    prepend-inner-icon="mdi-lightning-bolt"
                                 >
                                     <template v-slot:append-inner>
                                         Watts
                                     </template>
                                 </v-text-field>
                             </div>
+                            <div class="w-100 text-center mb-2">
+                                <v-chip @click="advancedSettings.length == 0 ? advancedSettings=['advanced-settings'] : advancedSettings=[]" color="theme" variant="text" :append-icon="advancedSettings.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"> Advanced Settings </v-chip>
+                            </div>
+
+                            <v-expansion-panels v-model="advancedSettings">
+                                <v-expansion-panel value="advanced-settings" class="mb-2" elevation="0">
+                                    <v-expansion-panel-text class="px-0" id="expansion-panel-second-layer">
+                                        <v-text-field
+                                            v-model="dcToAcRate"
+                                            label="DC to AC conversion"
+                                            density="compact"
+                                            variant="outlined"
+                                            color="theme"
+                                            type="number"
+                                            prepend-inner-icon="mdi-handshake"
+                                        >
+                                            <template v-slot:append-inner>
+                                                %
+                                            </template>
+                                        </v-text-field> 
+                                    </v-expansion-panel-text>
+                                </v-expansion-panel>
+                            </v-expansion-panels>   
 
                             <div>
                                 <v-switch v-model="showPanels" label="Show panels" inset color="theme" density="compact"/>
@@ -196,7 +214,7 @@
 
     <div v-if="Object.keys(buildingInsights).length">
         <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" :buildingInsights="buildingInsights" :panelCount="panelCount" :maxNbOfPanels="maxNbOfPanels"/>
-        <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :panelCount="Number(panelCount)" :maxNbOfPanels="Number(maxNbOfPanels)" :yearlyEnergy="Number(yearlyEnergy)" :monthlyEnergyCost="Number(monthlyEnergyCost)" :installationPerKwh="Number(installationPerKwh)" :panelPowerRating="Number(panelPowerRating)"/>
+        <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :panelCount="Number(panelCount)" :maxNbOfPanels="Number(maxNbOfPanels)" :yearlyEnergy="Number(yearlyEnergy)" :monthlyEnergyCost="Number(monthlyEnergyCost)" :installationPerKwh="Number(installationPerKwh)" :panelPowerRating="Number(panelPowerRating)" :costPerKwh="Number(costPerKwh)" :defaultPanelPowerRating="defaultPanelPowerRating" :dcToAcRate="dcToAcRate"/>
     </div>
 </template>
 
@@ -226,6 +244,7 @@ function emitAlert(type: string, title: string, message: string) {
 // Components data
 const solarReadonlyPanel = ref(0);
 const autocompleteValue = ref("");
+const advancedSettings = ref([] as string[]);
 
 // Google components
 let map: google.maps.Map;
@@ -399,6 +418,7 @@ const panelCount = ref(0);
 const minNbOfPanels = ref(0);
 const maxNbOfPanels = ref(1);
 const showPanels = ref(true);
+const defaultPanelPowerRating = ref(0);
 const panelPowerRating = ref(350);
 
 const yearlyEnergy = ref(0);
@@ -406,6 +426,7 @@ const monthlyEnergyCost = ref(0);
 const costPerKwh = ref(0);
 const installationPerKwh = ref(0);
 const solarIncentives = ref(0);
+const dcToAcRate = ref(0);
 
 let configId: number | undefined; // linked to buildingInsights.solarPotential.solarPanelConfigs: 1st is min nb of panels, last is max nb of panels
 
@@ -421,6 +442,7 @@ async function showSolarPotential() {
     configId = 0;
     minNbOfPanels.value = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
     maxNbOfPanels.value = buildingInsights.value.solarPotential.solarPanelConfigs[buildingInsights.value.solarPotential.solarPanelConfigs.length - 1].panelsCount;
+    defaultPanelPowerRating.value = buildingInsights.value.solarPotential.panelCapacityWatts;
     panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[configId];
     yearlyEnergy.value = panelConfig.yearlyEnergyDcKwh;
 

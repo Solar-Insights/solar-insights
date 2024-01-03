@@ -9,36 +9,48 @@
         
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-home-lightning-bolt</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-home-lightning-bolt-outline</v-icon>
                 <div class="me-auto emphasis">
                     Yearly Energy
                 </div>
                 <div>
-                    {{ yearlyEnergy.toFixed(0) }} kWh
+                    {{ (yearlyEnergy * (panelPowerRating / defaultPanelPowerRating)).toFixed(0) }} kWh
                 </div>
             </div>
         </div>
         
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-hammer</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-hammer-wrench</v-icon>
                 <div class="me-auto emphasis">
                     Installation Size
                 </div>  
                 <div>
-                    {{ (panelCount * panelPowerRating / 1000).toFixed(0) }} kW
+                    {{ (panelCount * panelPowerRating / 1000).toFixed(1) }} kW
                 </div>
             </div>
         </div>
 
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-hammer</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-account-cash-outline</v-icon>
                 <div class="me-auto emphasis">
                     Installation Cost
                 </div>
                 <div>
                     {{ (installationPerKwh * panelCount * panelPowerRating).toFixed(0) }} $
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <div class="d-flex">
+                <v-icon class="mr-3" color="theme">mdi-battery-60</v-icon>
+                <div class="me-auto emphasis">
+                    Energy Covered
+                </div>
+                <div>
+                    {{ ((yearlyEnergy * (panelPowerRating / defaultPanelPowerRating) * dcToAcRate) / (monthlyEnergyCost / costPerKwh * 12)).toFixed(0) }} %
                 </div>
             </div>
         </div>
@@ -77,12 +89,27 @@ const props = defineProps({
         required: true,
         default: 0
     },
+    costPerKwh: {
+        type: Number,
+        required: true,
+        default: 0  
+    },
     installationPerKwh: {
         type: Number,
         required: true,
         default: 0
     },
     panelPowerRating: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    defaultPanelPowerRating: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    dcToAcRate : {
         type: Number,
         required: true,
         default: 0
