@@ -61,7 +61,7 @@
                         
                         <v-expansion-panel-text>
                             <div class="detail-text mb-3">
-                                Solar panels are ordered from most to least efficient based annual sunlight of the roof (e.g. using 10 pannels will give you the 10 most efficient)
+                                Solar panels are ordered from most to least efficient based annual sunlight of the roof (e.g. an input of 10 panels will use the 10 most efficient)
                             </div>
 
                             <div>
@@ -105,7 +105,7 @@
                             </div>
 
                             <div>
-                                <v-switch v-model="showPanels" label="Show pannels" inset color="theme" density="compact"/>
+                                <v-switch v-model="showPanels" label="Show panels" inset color="theme" density="compact"/>
                             </div>
                         </v-expansion-panel-text>
                     </v-expansion-panel>
@@ -129,7 +129,7 @@
                                 <div class="d-flex mb-2">
                                     <v-icon class="mr-3" color="theme">mdi-cash</v-icon>
                                     <div class="my-auto me-auto subsection-title">
-                                        Building costs
+                                        Costs and Incentives
                                     </div>
                                 </div>
                                 <v-text-field
@@ -139,6 +139,7 @@
                                     variant="outlined"
                                     color="theme"
                                     type="number"
+                                    prepend-inner-icon="mdi-calendar-month-outline"
                                 >
                                     <template v-slot:append-inner>
                                         $
@@ -146,11 +147,12 @@
                                 </v-text-field>
                                 <v-text-field
                                     v-model="costPerKwh"
-                                    label="Cost per kWh"
+                                    label="Energy cost per kWh"
                                     density="compact"
                                     variant="outlined"
                                     color="theme"
                                     type="number"
+                                    prepend-inner-icon="mdi-currency-usd"
                                 >
                                     <template v-slot:append-inner>
                                         $
@@ -163,6 +165,20 @@
                                     variant="outlined"
                                     color="theme"
                                     type="number"
+                                    prepend-inner-icon="mdi-hammer"
+                                >
+                                    <template v-slot:append-inner>
+                                        $
+                                    </template>
+                                </v-text-field> 
+                                <v-text-field
+                                    v-model="solarIncentives"
+                                    label="Solar incentives"
+                                    density="compact"
+                                    variant="outlined"
+                                    color="theme"
+                                    type="number"
+                                    prepend-inner-icon="mdi-handshake"
                                 >
                                     <template v-slot:append-inner>
                                         $
@@ -180,7 +196,7 @@
 
     <div v-if="Object.keys(buildingInsights).length">
         <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" :buildingInsights="buildingInsights" :panelCount="panelCount" :maxNbOfPanels="maxNbOfPanels"/>
-        <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :panelCount="panelCount" :maxNbOfPanels="maxNbOfPanels" :yearlyEnergy="yearlyEnergy"/>
+        <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :panelCount="Number(panelCount)" :maxNbOfPanels="Number(maxNbOfPanels)" :yearlyEnergy="Number(yearlyEnergy)" :monthlyEnergyCost="Number(monthlyEnergyCost)" :installationPerKwh="Number(installationPerKwh)" :panelPowerRating="Number(panelPowerRating)"/>
     </div>
 </template>
 
@@ -389,6 +405,7 @@ const yearlyEnergy = ref(0);
 const monthlyEnergyCost = ref(0);
 const costPerKwh = ref(0);
 const installationPerKwh = ref(0);
+const solarIncentives = ref(0);
 
 let configId: number | undefined; // linked to buildingInsights.solarPotential.solarPanelConfigs: 1st is min nb of panels, last is max nb of panels
 
