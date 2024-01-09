@@ -210,10 +210,11 @@
         </v-card>
 
         <div id="map" class="w-100">
-            <div v-if="Object.keys(buildingInsights).length">
-                <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
-                <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
-            </div>
+        </div>
+        
+        <div v-if="Object.keys(buildingInsights).length">
+            <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
+            <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
         </div>
     </div>
 </template>
@@ -442,6 +443,7 @@ async function showSolarPotential() {
 
     userSolarData.value.minPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
     userSolarData.value.maxPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[buildingInsights.value.solarPotential.solarPanelConfigs.length - 1].panelsCount;
+    userSolarData.value.panelCount = userSolarData.value.minPanelCount;
     userSolarData.value.defaultPanelCapacityWatts = buildingInsights.value.solarPotential.panelCapacityWatts;
     userSolarData.value.yearlyEnergyDcKwh = panelConfig.yearlyEnergyDcKwh;
 
