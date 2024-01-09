@@ -21,33 +21,33 @@
             </v-card-title>
 
             <v-divider/>
-                
+            
+            <div class="mb-3 mx-2 pa-2 mt-3">
+                <v-btn 
+                    @click="solarReadonlyPanel = 0;" 
+                    class="w-50 h-100 py-4 universal-font-theme" 
+                    :class="solarReadonlyPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" 
+                    :prepend-icon="solarReadonlyPanel == 0 ? 'mdi-home' : 'mdi-home-outline'" 
+                    variant="flat"
+                    :ripple="false"
+                > 
+                    Building
+                </v-btn>
+                <v-btn 
+                    @click="solarReadonlyPanel = 1;" 
+                    class="w-50 h-100 py-4 universal-font-theme" 
+                    :class="solarReadonlyPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" 
+                    :prepend-icon="solarReadonlyPanel == 1 ? 'mdi-transmission-tower' : 'mdi-transmission-tower'" 
+                    variant="flat"
+                    :ripple="false"
+                > 
+                    Energy
+                </v-btn>
+            </div>
+
+            <v-divider/>
+
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
-                <div class="mb-4">
-                    <v-btn 
-                        @click="solarReadonlyPanel = 0;" 
-                        class="w-50 h-100 py-4 universal-font-theme" 
-                        :class="solarReadonlyPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" 
-                        :prepend-icon="solarReadonlyPanel == 0 ? 'mdi-home' : 'mdi-home-outline'" 
-                        variant="flat"
-                        :ripple="false"
-                    > 
-                        Building
-                    </v-btn>
-                    <v-btn 
-                        @click="solarReadonlyPanel = 1;" 
-                        class="w-50 h-100 py-4 universal-font-theme" 
-                        :class="solarReadonlyPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" 
-                        :prepend-icon="solarReadonlyPanel == 1 ? 'mdi-transmission-tower' : 'mdi-transmission-tower'" 
-                        variant="flat"
-                        :ripple="false"
-                    > 
-                        Energy
-                    </v-btn>
-                </div>
-
-                <v-divider/>
-
                 <v-expansion-panels multiple>
                     <v-expansion-panel class="mb-2" elevation="5">
                         <v-expansion-panel-title>
@@ -209,12 +209,12 @@
             </div>
         </v-card>
 
-        <div id="map" class="w-100"></div>
-    </div>
-
-    <div v-if="Object.keys(buildingInsights).length">
-        <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
-        <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
+        <div id="map" class="w-100">
+            <div v-if="Object.keys(buildingInsights).length">
+                <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
+                <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -252,7 +252,7 @@ const userSolarData = ref<UserSolarData>({
     maxPanelCount: 1,
     panelCapacityWatts: 350,
     defaultPanelCapacityWatts: 350,
-    installationCostPerWatt: 3,
+    installationCostPerWatt: 4.00,
     yearlyEnergyDcKwh: 0,
     dcToAcDerate: 0.85,
     averageMonthlyEnergyBill: 300,
