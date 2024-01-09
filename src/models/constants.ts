@@ -47,7 +47,7 @@ export function yearlyEnergyConsumptionKwh(userSolarData: UserSolarData) {
     Units: %
 */
 export function energyCoveredCalc(userSolarData: UserSolarData) {
-    return yearlyEnergyAcProductionKwh(userSolarData) / yearlyEnergyConsumptionKwh(userSolarData);
+    return yearlyEnergyAcProductionKwh(userSolarData) / yearlyEnergyConsumptionKwh(userSolarData) * 100;
 }
 
 export function circularBarColorSelector(value: string) {

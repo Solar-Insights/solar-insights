@@ -14,7 +14,7 @@
                     Yearly Energy
                 </div>
                 <div>
-                    {{ yearlyEnergyCalc(userSolarData) }} kWh
+                    {{ yearlyEnergyCalc(userSolarData).toFixed(0) }} kWh
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
                     Installation Size
                 </div>  
                 <div>
-                    {{ installationSizeCalc(userSolarData) }} kW
+                    {{ installationSizeCalc(userSolarData).toFixed(2) }} kW
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                     Installation Cost
                 </div>
                 <div>
-                    {{ installationCostCalc(userSolarData) }} $
+                    {{ installationCostCalc(userSolarData).toFixed(0) }} $
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     Energy Covered
                 </div>
                 <div>
-                    {{ energyCoveredCalc(userSolarData) }} %
+                    {{ energyCoveredCalc(userSolarData).toFixed(1) }} %
                 </div>
             </div>
         </div>
