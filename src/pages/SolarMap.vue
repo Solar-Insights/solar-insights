@@ -71,13 +71,13 @@
                                         Count
                                     </div>
                                     <div class="text-right">
-                                        {{ panelCount }} / {{ maxNbOfPanels }} panels
+                                        {{ userSolarData.panelCount }} / {{ userSolarData.maxPanelCount }} panels
                                     </div>
                                 </div>
                                 <v-slider 
-                                    v-model="panelCount" 
-                                    :min="minNbOfPanels" 
-                                    :max="maxNbOfPanels"
+                                    v-model="userSolarData.panelCount" 
+                                    :min="userSolarData.minPanelCount" 
+                                    :max="userSolarData.maxPanelCount"
                                     step="1"
                                     color="theme"
                                 />
@@ -85,7 +85,7 @@
                             
                             <div>
                                 <v-text-field
-                                    v-model="panelPowerRating"
+                                    v-model="userSolarData.panelCapacityWatts"
                                     label="Power rating (capacity)"
                                     density="compact"
                                     variant="outlined"
@@ -106,7 +106,7 @@
                                 <v-expansion-panel value="advanced-settings" class="mb-2" elevation="0">
                                     <v-expansion-panel-text class="px-0" id="expansion-panel-second-layer">
                                         <v-text-field
-                                            v-model="dcToAcRate"
+                                            v-model="userSolarData.dcToAcDerate"
                                             label="DC to AC conversion"
                                             density="compact"
                                             variant="outlined"
@@ -151,7 +151,7 @@
                                     </div>
                                 </div>
                                 <v-text-field
-                                    v-model="monthlyEnergyCost"
+                                    v-model="userSolarData.averageMonthlyEnergyBill"
                                     label="Average monthly energy cost"
                                     density="compact"
                                     variant="outlined"
@@ -164,7 +164,7 @@
                                     </template>
                                 </v-text-field>
                                 <v-text-field
-                                    v-model="costPerKwh"
+                                    v-model="userSolarData.energyCostPerKwh"
                                     label="Energy cost per kWh"
                                     density="compact"
                                     variant="outlined"
@@ -177,8 +177,8 @@
                                     </template>
                                 </v-text-field>
                                 <v-text-field
-                                    v-model="installationPerKwh"
-                                    label="Installation cost per kWh"
+                                    v-model="userSolarData.installationCostPerWatt"
+                                    label="Installation cost per Watt"
                                     density="compact"
                                     variant="outlined"
                                     color="theme"
@@ -190,7 +190,7 @@
                                     </template>
                                 </v-text-field> 
                                 <v-text-field
-                                    v-model="solarIncentives"
+                                    v-model="userSolarData.solarIncentives"
                                     label="Solar incentives"
                                     density="compact"
                                     variant="outlined"
@@ -213,8 +213,8 @@
     </div>
 
     <div v-if="Object.keys(buildingInsights).length">
-        <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" :buildingInsights="buildingInsights" :panelCount="panelCount" :maxNbOfPanels="maxNbOfPanels"/>
-        <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :panelCount="Number(panelCount)" :maxNbOfPanels="Number(maxNbOfPanels)" :yearlyEnergy="Number(yearlyEnergy)" :monthlyEnergyCost="Number(monthlyEnergyCost)" :installationPerKwh="Number(installationPerKwh)" :panelPowerRating="Number(panelPowerRating)" :costPerKwh="Number(costPerKwh)" :defaultPanelPowerRating="defaultPanelPowerRating" :dcToAcRate="dcToAcRate"/>
+        <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
+        <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
     </div>
 </template>
 
@@ -222,7 +222,7 @@
 // Vue
 import { onMounted, ref } from 'vue';
 // Models
-import { BuildingInsights, LayerId, SolarLayers, RequestError, Layer, Coordinates, panelsPalette, SolarPanelConfig } from '@/models/models';
+import { BuildingInsights, LayerId, SolarLayers, RequestError, Layer, Coordinates, panelsPalette, SolarPanelConfig, UserSolarData } from '@/models/models';
 // API
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/util/googleMapsAPI";
 // Functions
@@ -245,6 +245,21 @@ function emitAlert(type: string, title: string, message: string) {
 const solarReadonlyPanel = ref(0);
 const autocompleteValue = ref("");
 const advancedSettings = ref([] as string[]);
+
+const userSolarData = ref<UserSolarData>({
+    panelCount: 0,
+    minPanelCount: 0,
+    maxPanelCount: 1,
+    panelCapacityWatts: 350,
+    defaultPanelCapacityWatts: 350,
+    installationCostPerWatt: 3,
+    yearlyEnergyDcKwh: 0,
+    dcToAcDerate: 0.85,
+    averageMonthlyEnergyBill: 300,
+    energyCostPerKwh: 0.31,
+    solarIncentives: 5000
+});
+
 
 // Google components
 let map: google.maps.Map;
@@ -411,25 +426,9 @@ async function showDataLayer(reset = false) {
 
 
 let panelConfig: SolarPanelConfig | undefined;
-
 let solarPanels: google.maps.Polygon[] = [];
-
-const panelCount = ref(0);
-const minNbOfPanels = ref(0);
-const maxNbOfPanels = ref(1);
-const showPanels = ref(true);
-const defaultPanelPowerRating = ref(0);
-const panelPowerRating = ref(350);
-
-const yearlyEnergy = ref(0);
-const monthlyEnergyCost = ref(0);
-const costPerKwh = ref(0);
-const installationPerKwh = ref(0);
-const solarIncentives = ref(0);
-const dcToAcRate = ref(0);
-
 let configId: number | undefined; // linked to buildingInsights.solarPotential.solarPanelConfigs: 1st is min nb of panels, last is max nb of panels
-
+const showPanels = ref(true);
 
 async function showSolarPotential() {
     if (buildingInsights.value == null) {
@@ -438,13 +437,13 @@ async function showSolarPotential() {
     console.log('showSolarPotential');
     solarPanels.map((panel) => panel.setMap(null));
     solarPanels = [];
-
     configId = 0;
-    minNbOfPanels.value = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
-    maxNbOfPanels.value = buildingInsights.value.solarPotential.solarPanelConfigs[buildingInsights.value.solarPotential.solarPanelConfigs.length - 1].panelsCount;
-    defaultPanelPowerRating.value = buildingInsights.value.solarPotential.panelCapacityWatts;
     panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[configId];
-    yearlyEnergy.value = panelConfig.yearlyEnergyDcKwh;
+
+    userSolarData.value.minPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
+    userSolarData.value.maxPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[buildingInsights.value.solarPotential.solarPanelConfigs.length - 1].panelsCount;
+    userSolarData.value.defaultPanelCapacityWatts = buildingInsights.value.solarPotential.panelCapacityWatts;
+    userSolarData.value.yearlyEnergyDcKwh = panelConfig.yearlyEnergyDcKwh;
 
     // Create the solar panels on the map.
     const solarPotential = buildingInsights.value.solarPotential;

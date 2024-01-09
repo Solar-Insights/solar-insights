@@ -160,6 +160,19 @@ export const sunlightPalette = ['212121', 'FFCA28'];
 
 export const panelsPalette = ['E8EAF6', '1A237E'];
 
+export type UserSolarData = {
+    minPanelCount: number,
+    maxPanelCount: number,
+    panelCapacityWatts: number,
+    defaultPanelCapacityWatts: number,
+    panelCount: number,
+    installationCostPerWatt: number,
+    yearlyEnergyDcKwh: number,
+    dcToAcDerate: number,
+    averageMonthlyEnergyBill: number,
+    energyCostPerKwh: number,
+    solarIncentives: number
+};
 
 
 

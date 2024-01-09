@@ -44,7 +44,7 @@
                     Panels
                 </div>
                 <div>
-                    {{ panelCount }} / {{ maxNbOfPanels }} panels
+                    {{ userSolarData.panelCount }} / {{ userSolarData.maxPanelCount }} panels
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
 // Vue 
 import { PropType } from 'vue';
 // Models
-import { BuildingInsights } from "@/models/models";
+import { BuildingInsights, UserSolarData } from "@/models/models";
 
 const props = defineProps({
     buildingInsights: {
@@ -63,15 +63,10 @@ const props = defineProps({
         required: true,
         default: {}
     },
-    panelCount: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    maxNbOfPanels: {
-        type: Number,
-        required: true,
-        default: 0
+    userSolarData: {
+        type: Object as PropType<UserSolarData>,
+            required: true,
+            default: {}
     }
 });
 </script>

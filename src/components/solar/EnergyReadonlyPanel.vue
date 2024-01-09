@@ -14,7 +14,7 @@
                     Yearly Energy
                 </div>
                 <div>
-                    {{ (yearlyEnergy * (panelPowerRating / defaultPanelPowerRating)).toFixed(0) }} kWh
+                    {{ yearlyEnergyCalc(userSolarData) }} kWh
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
                     Installation Size
                 </div>  
                 <div>
-                    {{ (panelCount * panelPowerRating / 1000).toFixed(1) }} kW
+                    {{ installationSizeCalc(userSolarData) }} kW
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                     Installation Cost
                 </div>
                 <div>
-                    {{ (installationPerKwh * panelCount * panelPowerRating).toFixed(0) }} $
+                    {{ installationCostCalc(userSolarData) }} $
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     Energy Covered
                 </div>
                 <div>
-                    {{ ((yearlyEnergy * (panelPowerRating / defaultPanelPowerRating) * dcToAcRate) / (monthlyEnergyCost / costPerKwh * 12)).toFixed(0) }} %
+                    {{ energyCoveredCalc(userSolarData) }} %
                 </div>
             </div>
         </div>
@@ -60,8 +60,9 @@
 <script setup lang="ts">
 // Vue 
 import { PropType } from 'vue';
-// Models
-import { BuildingInsights } from "@/models/models";
+// Models and formulas
+import { BuildingInsights, UserSolarData } from "@/models/models";
+import { yearlyEnergyCalc, installationSizeCalc, installationCostCalc, energyCoveredCalc } from "@/models/constants";
 
 const props = defineProps({
     buildingInsights: {
@@ -69,50 +70,10 @@ const props = defineProps({
         required: true,
         default: {}
     },
-    panelCount: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    maxNbOfPanels: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    yearlyEnergy: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    monthlyEnergyCost: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    costPerKwh: {
-        type: Number,
-        required: true,
-        default: 0  
-    },
-    installationPerKwh: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    panelPowerRating: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    defaultPanelPowerRating: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    dcToAcRate : {
-        type: Number,
-        required: true,
-        default: 0
+    userSolarData: {
+        type: Object as PropType<UserSolarData>,
+            required: true,
+            default: {}
     }
 });
 </script>
