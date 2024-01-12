@@ -17,7 +17,7 @@
             <v-divider/>
 
             <v-card-title class="map-title">
-                <v-icon class="mr-2 mb-1">mdi-weather-sunny</v-icon> Solar Analysis
+                <v-icon class="mr-2 mb-1">mdi-weather-sunny</v-icon> Solar Potential
             </v-card-title>
 
             <v-divider/>
@@ -134,14 +134,14 @@
                             <div class="section-title d-flex">
                                 <v-icon class="mr-3">mdi-battery-charging-70</v-icon> 
                                 <div class="my-auto"> 
-                                    Solar Potential
+                                    Solar Analysis
                                 </div>
                             </div>
                         </v-expansion-panel-title>
                         
                         <v-expansion-panel-text>
                             <div class="detail-text mb-3">
-                                Solar potential is used to evaluate the financial benefits of solar panels for a specific building
+                                Solar analysis is used to evaluate the financial benefits of solar panels for a specific building
                             </div>
 
                             <div>
@@ -279,7 +279,7 @@ import { onMounted, ref, watch } from 'vue';
 import { BuildingInsights, LayerId, SolarLayers, Layer, SolarPanelConfig, UserSolarData } from '@/util/solarTypes';
 import { panelsPalette } from "@/util/constants"
 import { RequestError, Coordinates } from '@/util/generalTypes';
-import { createPalette, rgbToColor, colorToRGB, lerp, normalize, clamp } from "@/util/generalFunctions";
+import { createPalette, rgbToColor, colorToRGB, lerp, normalize, clamp,  } from "@/util/generalFunctions";
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/api/googleMapsAPI";
 import { initMap, initAutocomplete } from "@/util/generalFunctions";
 // Components
@@ -314,7 +314,7 @@ const userSolarData = ref<UserSolarData>({
     dcToAcDerate: 85,
     averageMonthlyEnergyBill: 300,
     energyCostPerKwh: 0.31,
-    solarIncentives: 5000,
+    solarIncentives: 7000,
     yearlyPanelEfficiencyDecline: 0.5,
     yearlyEnergyCostIncrease: 2.2,
     yearlyDiscountRate: 4,

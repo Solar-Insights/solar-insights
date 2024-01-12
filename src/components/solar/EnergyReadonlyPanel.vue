@@ -4,7 +4,7 @@
             <div class="d-flex mb-3">
                 <v-icon class="mr-3" color="theme">mdi-weather-sunny</v-icon> 
                 <div class="my-auto">
-                    Solar Potential
+                    Solar Insights
                 </div>
             </div>
             <v-divider style="border: 1px solid black"/>
@@ -112,19 +112,24 @@
                     Break even
                 </div>
                 <div>
-                    {{ energyCoveredCalc(userSolarData).toFixed(1) }} years
+                    {{ breakEvenYear + new Date().getFullYear() }} in {{ breakEvenYear }} years
                 </div>
             </div>
+        </div>
+
+        <div id="breakeven-chart">
+
         </div>
     </v-card>
 </template>
 
 <script setup lang="ts">
 // Vue 
-import { PropType } from 'vue';
+import { PropType, onMounted, watch, ref } from 'vue';
 // Util
 import { BuildingInsights, UserSolarData } from '@/util/solarTypes';
-import { yearlyEnergyCalc, installationSizeCalc, installationCostCalc, energyCoveredCalc, batteryCharging, costWithSolarInstallation, costWithoutSolarInstallation } from "@/util/constants";
+import { getBreakEvenYear, drawGoogleChart, yearlyEnergyCalc, installationSizeCalc, installationCostCalc, energyCoveredCalc, costWithSolarInstallation, costWithoutSolarInstallation } from "@/util/solarFunctions";
+import { batteryCharging } from "@/util/constants";
 
 const props = defineProps({
     buildingInsights: {
@@ -137,5 +142,19 @@ const props = defineProps({
             required: true,
             default: {}
     }
+});
+
+const breakEvenYear = ref(0);
+
+onMounted(() => {
+    const costChart: HTMLElement | null = document.getElementById("breakeven-chart");
+    drawGoogleChart(props.userSolarData, costChart);
+    breakEvenYear.value = getBreakEvenYear(props.userSolarData);
+});
+
+watch(props.userSolarData, () => {
+    const costChart: HTMLElement | null = document.getElementById("breakeven-chart");
+    drawGoogleChart(props.userSolarData, costChart);
+    breakEvenYear.value = getBreakEvenYear(props.userSolarData);
 });
 </script>
