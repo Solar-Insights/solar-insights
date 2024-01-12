@@ -112,7 +112,12 @@
                     Break even
                 </div>
                 <div>
-                    {{ breakEvenYear + new Date().getFullYear() }} in {{ breakEvenYear }} years
+                    <div v-if="breakEvenYear != -1">
+                        {{ breakEvenYear + new Date().getFullYear() }} in {{ breakEvenYear }} years
+                    </div>
+                    <div v-if="breakEvenYear == -1">
+                        - years
+                    </div>
                 </div>
             </div>
         </div>

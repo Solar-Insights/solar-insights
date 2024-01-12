@@ -157,6 +157,12 @@ export function getBreakEvenYear(userSolarData: UserSolarData) {
         if (cumulativeCostWithSolar[i] < cumulativeCostWithoutSolar[i]) break;
     }
 
+    if (breakEvenYear == userSolarData.installationLifespan) {
+        if (cumulativeCostWithSolar[userSolarData.installationLifespan - 1] > cumulativeCostWithoutSolar[userSolarData.installationLifespan - 1]) {
+            return -1;
+        }
+    }
+
     return breakEvenYear;
 }
 
