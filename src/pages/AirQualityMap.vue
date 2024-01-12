@@ -93,7 +93,7 @@ import _ from 'lodash';
 // Util
 import { AirQualityData } from "@/util/airQualityTypes";
 import { Coordinates } from "@/util/generalTypes";
-import { pollutants, circularBarColorSelector } from "@/models/constants";
+import { pollutants, circularBarColorSelector } from "@/util/constants";
 import { initMap, initMarker, initAutocomplete } from "@/util/generalFunctions";
 import { getGeocoding, getReverseGeocoding, getAirQualityData } from "@/api/googleMapsAPI";
 // Components

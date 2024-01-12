@@ -24,6 +24,7 @@ const customTheme: ThemeDefinition = {
       warning: '#FB8C00',
       'theme': '#50a490',
       'text-emphasis': '#535353',
+      'bg-whitey': '#fffbfe'
     }
   }
 

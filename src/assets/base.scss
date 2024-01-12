@@ -4,6 +4,7 @@
     Variable definitions
 */
 $theme: #50a490;
+$bg-whitey: #fffbfe;
 $light-grey: #949494;
 $scrollbars: #555;
 
@@ -94,7 +95,7 @@ $scrollbars: #555;
 }
 
 .map-readonly-data {
-    @extend .bg-white;
+    background-color: $bg-whitey
 }
 .map-readonly-data-mobile {
     @extend .map-readonly-data;
@@ -189,7 +190,7 @@ $scrollbars: #555;
 }
 
 .icon-selection-color {
-    color: white;
+    color: $bg-whitey;
 }
 
 .icon-non-selection-color {
