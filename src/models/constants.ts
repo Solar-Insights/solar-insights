@@ -1,5 +1,5 @@
-// Models
-import { UserSolarData } from "@/models/models";
+// Util
+import { UserSolarData } from "@/util/solarTypes";
 
 /*
     Units: None

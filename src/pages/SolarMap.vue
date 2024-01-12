@@ -223,11 +223,10 @@
 <script setup lang="ts">
 // Vue
 import { onMounted, ref, watch } from 'vue';
-// Models
-import { BuildingInsights, LayerId, SolarLayers, RequestError, Layer, Coordinates, panelsPalette, SolarPanelConfig, UserSolarData } from '@/models/models';
-// API
-import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/util/googleMapsAPI";
-// Functions
+// Util
+import { BuildingInsights, LayerId, SolarLayers, Layer, panelsPalette, SolarPanelConfig, UserSolarData } from '@/util/solarTypes';
+import { RequestError, Coordinates } from '@/util/generalTypes';
+import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/api/googleMapsAPI";
 import { initMap, initAutocomplete } from "@/util/initMapComponents";
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
@@ -428,6 +427,8 @@ async function showDataLayer(reset: boolean = false) {
             requestError = e as RequestError;
             return;
         }
+
+        if (!layer) return;
     }
 
     const bounds = layer.bounds;

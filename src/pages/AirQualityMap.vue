@@ -90,12 +90,12 @@
 // Vue
 import { onMounted, ref } from "vue";
 import _ from 'lodash';
-// Models
-import { Coordinates, AirQualityData } from "@/models/models";
+// Util
+import { AirQualityData } from "@/util/airQualityTypes";
+import { Coordinates } from "@/util/generalTypes";
 import { pollutants, circularBarColorSelector } from "@/models/constants";
-// Functions
 import { initMap, initMarker, initAutocomplete } from "@/util/initMapComponents";
-import { getGeocoding, getReverseGeocoding, getAirQualityData } from "@/util/googleMapsAPI";
+import { getGeocoding, getReverseGeocoding, getAirQualityData } from "@/api/googleMapsAPI";
 // Components
 import PollutantTab from "@/components/air_quality/PollutantTab.vue";
 import HealthTab from "@/components/air_quality/HealthTab.vue";

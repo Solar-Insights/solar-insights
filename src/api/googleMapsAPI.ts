@@ -1,5 +1,7 @@
-// Models
-import { Coordinates, validCoordinates, AirQualityData, AirPollutant, BuildingInsights, SolarDataCoords, SolarLayers, LayerId, Layer, Bounds, binaryPalette, GeoTiff, rainbowPalette, ironPalette, sunlightPalette } from "@/models/models";
+// Util
+import { Coordinates, validCoordinates } from "@/util/generalTypes";
+import { AirQualityData, AirPollutant } from "@/util/airQualityTypes";
+import { BuildingInsights, SolarDataCoords, SolarLayers, LayerId, Layer, Bounds, binaryPalette, GeoTiff, rainbowPalette, ironPalette, sunlightPalette } from "@/util/solarTypes";
 import * as geotiff from 'geotiff';
 import * as geokeysToProj4 from 'geotiff-geokeys-to-proj4';
 import proj4 from 'proj4';

@@ -1,13 +1,6 @@
-/*
-    Models for buildingInsight response
-*/
-
-
-
-
-/*
-    Model for Air Quality Data
-*/
+/**
+ * Air quality map types
+ */
 export type AirQualityData = {
     DateTime: Date,
     healthRecommendations: HealthRecommendations,

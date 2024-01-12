@@ -54,8 +54,8 @@
 <script setup lang="ts">
 // Vue 
 import { PropType } from 'vue';
-// Models
-import { BuildingInsights, UserSolarData } from "@/models/models";
+// Util
+import { BuildingInsights, UserSolarData } from '@/util/solarTypes';
 
 const props = defineProps({
     buildingInsights: {

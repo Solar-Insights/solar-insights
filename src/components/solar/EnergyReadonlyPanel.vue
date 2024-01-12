@@ -60,8 +60,8 @@
 <script setup lang="ts">
 // Vue 
 import { PropType } from 'vue';
-// Models and formulas
-import { BuildingInsights, UserSolarData } from "@/models/models";
+// Util
+import { BuildingInsights, UserSolarData } from '@/util/solarTypes';
 import { yearlyEnergyCalc, installationSizeCalc, installationCostCalc, energyCoveredCalc } from "@/models/constants";
 
 const props = defineProps({
