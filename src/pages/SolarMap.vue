@@ -74,8 +74,9 @@
                                         {{ userSolarData.panelCount }} / {{ userSolarData.maxPanelCount }} panels
                                     </div>
                                 </div>
-                                <v-slider 
-                                    v-model="userSolarData.panelCount" 
+                                <v-slider
+                                    v-model="userSolarData.panelCount"
+                                    @end="panelCountChange"
                                     :min="userSolarData.minPanelCount" 
                                     :max="userSolarData.maxPanelCount"
                                     step="1"
@@ -221,7 +222,7 @@
 
 <script setup lang="ts">
 // Vue
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 // Models
 import { BuildingInsights, LayerId, SolarLayers, RequestError, Layer, Coordinates, panelsPalette, SolarPanelConfig, UserSolarData } from '@/models/models';
 // API
@@ -246,7 +247,6 @@ function emitAlert(type: string, title: string, message: string) {
 const solarReadonlyPanel = ref(0);
 const autocompleteValue = ref("");
 const advancedSettings = ref([] as string[]);
-
 const userSolarData = ref<UserSolarData>({
     panelCount: 0,
     minPanelCount: 0,
@@ -265,7 +265,6 @@ const userSolarData = ref<UserSolarData>({
 // Google components
 let map: google.maps.Map;
 let autocomplete: google.maps.places.Autocomplete;
-let expandedSection: string;
 const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
 let geometryLibrary: google.maps.GeometryLibrary;
 
@@ -288,8 +287,8 @@ onMounted(async () => {
     }
 
     await initListeners(autocomplete, map);
+    await updateBuildingInsights(coord);
 
-    buildingInsights.value = await findClosestBuilding(coord);
     geometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary
     showDataLayer(true);
     showSolarPotential();
@@ -324,6 +323,27 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
         showDataLayer(true);
     });
 }
+
+
+async function updateBuildingInsights(coord: Coordinates) {
+    buildingInsights.value = await findClosestBuilding(coord);
+    userSolarData.value.minPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
+    userSolarData.value.maxPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[buildingInsights.value.solarPotential.solarPanelConfigs.length - 1].panelsCount;
+    userSolarData.value.defaultPanelCapacityWatts = buildingInsights.value.solarPotential.panelCapacityWatts;
+
+    if (userSolarData.value.panelCount < userSolarData.value.minPanelCount) userSolarData.value.panelCount = userSolarData.value.minPanelCount;
+}
+
+async function panelCountChange() {
+    // Because the list of configs has the minPanelCount for its first index
+    const configId = userSolarData.value.panelCount - userSolarData.value.minPanelCount;
+    await showSolarPotential(configId);
+}
+
+
+
+
+
 
 const icon = 'layers';
 const title = 'Data Layers endpoint';
@@ -366,7 +386,7 @@ let hour = 0;
 let overlays: google.maps.GroundOverlay[] = [];
 let showRoofOnly = false;
 
-async function showDataLayer(reset = false) {
+async function showDataLayer(reset: boolean = false) {
     if (reset) {
         dataLayersResponse = undefined;
         requestError = undefined;
@@ -428,23 +448,16 @@ async function showDataLayer(reset = false) {
 
 let panelConfig: SolarPanelConfig | undefined;
 let solarPanels: google.maps.Polygon[] = [];
-let configId: number | undefined; // linked to buildingInsights.solarPotential.solarPanelConfigs: 1st is min nb of panels, last is max nb of panels
 const showPanels = ref(true);
 
-async function showSolarPotential() {
+async function showSolarPotential(configId: number = 0) {
     if (buildingInsights.value == null) {
         return;
     }
     console.log('showSolarPotential');
     solarPanels.map((panel) => panel.setMap(null));
     solarPanels = [];
-    configId = 0;
     panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[configId];
-
-    userSolarData.value.minPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
-    userSolarData.value.maxPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[buildingInsights.value.solarPotential.solarPanelConfigs.length - 1].panelsCount;
-    userSolarData.value.panelCount = userSolarData.value.minPanelCount;
-    userSolarData.value.defaultPanelCapacityWatts = buildingInsights.value.solarPotential.panelCapacityWatts;
     userSolarData.value.yearlyEnergyDcKwh = panelConfig.yearlyEnergyDcKwh;
 
     // Create the solar panels on the map.
