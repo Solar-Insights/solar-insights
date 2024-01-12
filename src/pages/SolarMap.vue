@@ -48,7 +48,7 @@
             <v-divider/>
 
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
-                <v-expansion-panels multiple>
+                <v-expansion-panels>
                     <v-expansion-panel class="mb-2" elevation="5">
                         <v-expansion-panel-title>
                             <div class="section-title d-flex">
@@ -227,7 +227,7 @@ import { onMounted, ref, watch } from 'vue';
 import { BuildingInsights, LayerId, SolarLayers, Layer, SolarPanelConfig, UserSolarData } from '@/util/solarTypes';
 import { panelsPalette } from "@/util/constants"
 import { RequestError, Coordinates } from '@/util/generalTypes';
-import { rgbToColor, colorToRGB, lerp, normalize, clamp } from "@/util/generalFunctions";
+import { createPalette, rgbToColor, colorToRGB, lerp, normalize, clamp } from "@/util/generalFunctions";
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/api/googleMapsAPI";
 import { initMap, initAutocomplete } from "@/util/generalFunctions";
 // Components
@@ -246,6 +246,7 @@ function emitAlert(type: string, title: string, message: string) {
 
 // Components data
 const solarReadonlyPanel = ref(0);
+const showPanels = ref(true);
 const configId = ref(0);
 const autocompleteValue = ref("");
 const advancedSettings = ref([] as string[]);
@@ -263,18 +264,15 @@ const userSolarData = ref<UserSolarData>({
     solarIncentives: 5000
 });
 
-
 // Google components
 let map: google.maps.Map;
 let autocomplete: google.maps.places.Autocomplete;
 const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
 let geometryLibrary: google.maps.GeometryLibrary;
 
-
 onMounted(async () => {
     const coord: Coordinates = { lat: 46.81701, lng: -71.36838 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
-    const parent: HTMLInputElement = document.getElementById("parent-search") as HTMLInputElement;
     
     // Init values of google components
     map = await initMap(coord, mapElement, "SOLAR");
@@ -290,14 +288,12 @@ onMounted(async () => {
 
     await initListeners(autocomplete, map);
     await updateBuildingInsights(coord);
-
     geometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary
     showDataLayer(true);
     showSolarPotential();
-    console.log(buildingInsights);
 })
 
-watch(configId, async () => {
+watch(showPanels, async () => {
     await showSolarPotential(configId.value);
 });
 
@@ -346,8 +342,55 @@ async function panelCountChange() {
 }
 
 
+let panelConfig: SolarPanelConfig | undefined;
+let solarPanels: google.maps.Polygon[] = [];
+async function showSolarPotential(configId: number = 0) {
+    if (buildingInsights.value == null) {
+        return;
+    }
+    // console.log('showSolarPotential');
+    solarPanels.map((panel) => panel.setMap(null));
+    solarPanels = [];
+    panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[configId];
+    userSolarData.value.yearlyEnergyDcKwh = panelConfig.yearlyEnergyDcKwh;
 
+    // Create the solar panels on the map.
+    const solarPotential = buildingInsights.value.solarPotential;
+    const palette = createPalette(panelsPalette, 256).map(rgbToColor);
+    const minEnergy = solarPotential.solarPanels.slice(-1)[0].yearlyEnergyDcKwh;
+    const maxEnergy = solarPotential.solarPanels[0].yearlyEnergyDcKwh;
+    solarPanels = solarPotential.solarPanels.map((panel) => {
+        const [w, h] = [solarPotential.panelWidthMeters / 2, solarPotential.panelHeightMeters / 2];
+        const points = [
+            { x: +w, y: +h }, // top right
+            { x: +w, y: -h }, // bottom right
+            { x: -w, y: -h }, // bottom left
+            { x: -w, y: +h }, // top left
+            { x: +w, y: +h }, //  top right
+        ];
+        const orientation = panel.orientation == 'PORTRAIT' ? 90 : 0;
+        const azimuth = solarPotential.roofSegmentStats[panel.segmentIndex].azimuthDegrees;
+        const colorIndex = Math.round(normalize(panel.yearlyEnergyDcKwh, maxEnergy, minEnergy) * 255);
+        return new google.maps.Polygon({
+            paths: points.map(({ x, y }) =>
+                geometryLibrary.spherical.computeOffset(
+                    { lat: panel.center.latitude, lng: panel.center.longitude },
+                    Math.sqrt(x * x + y * y),
+                    Math.atan2(y, x) * (180 / Math.PI) + orientation + azimuth,
+                ),
+            ),
+            strokeColor: '#B0BEC5',
+            strokeOpacity: 0.9,
+            strokeWeight: 1,
+            fillColor: palette[colorIndex],
+            fillOpacity: 0.9,
+        });
+    });
 
+    solarPanels.map((panel, i) =>
+        panel.setMap(showPanels.value && panelConfig && i < panelConfig.panelsCount ? map : null)
+    );
+}
 
 
 const icon = 'layers';
@@ -438,86 +481,17 @@ async function showDataLayer(reset: boolean = false) {
     }
 
     const bounds = layer.bounds;
-    console.log('Render layer:', {
-        layerId: layer.id,
-        showRoofOnly: showRoofOnly,
-        month: month,
-        day: day,
-    });
+    // console.log('Render layer:', {
+    //     layerId: layer.id,
+    //     showRoofOnly: showRoofOnly,
+    //     month: month,
+    //     day: day,
+    // });
     overlays.map((overlay) => overlay.setMap(null));
     overlays = layer
         .render(showRoofOnly, month, day)
         .map((canvas) => new google.maps.GroundOverlay(canvas.toDataURL(), bounds));
 
     overlays[0].setMap(map);
-}
-
-
-let panelConfig: SolarPanelConfig | undefined;
-let solarPanels: google.maps.Polygon[] = [];
-const showPanels = ref(true);
-
-async function showSolarPotential(configId: number = 0) {
-    if (buildingInsights.value == null) {
-        return;
-    }
-    console.log('showSolarPotential');
-    solarPanels.map((panel) => panel.setMap(null));
-    solarPanels = [];
-    panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[configId];
-    userSolarData.value.yearlyEnergyDcKwh = panelConfig.yearlyEnergyDcKwh;
-
-    // Create the solar panels on the map.
-    const solarPotential = buildingInsights.value.solarPotential;
-    const palette = createPalette(panelsPalette, 256).map(rgbToColor);
-    const minEnergy = solarPotential.solarPanels.slice(-1)[0].yearlyEnergyDcKwh;
-    const maxEnergy = solarPotential.solarPanels[0].yearlyEnergyDcKwh;
-    solarPanels = solarPotential.solarPanels.map((panel) => {
-        const [w, h] = [solarPotential.panelWidthMeters / 2, solarPotential.panelHeightMeters / 2];
-        const points = [
-            { x: +w, y: +h }, // top right
-            { x: +w, y: -h }, // bottom right
-            { x: -w, y: -h }, // bottom left
-            { x: -w, y: +h }, // top left
-            { x: +w, y: +h }, //  top right
-        ];
-        const orientation = panel.orientation == 'PORTRAIT' ? 90 : 0;
-        const azimuth = solarPotential.roofSegmentStats[panel.segmentIndex].azimuthDegrees;
-        const colorIndex = Math.round(normalize(panel.yearlyEnergyDcKwh, maxEnergy, minEnergy) * 255);
-        return new google.maps.Polygon({
-            paths: points.map(({ x, y }) =>
-                geometryLibrary.spherical.computeOffset(
-                    { lat: panel.center.latitude, lng: panel.center.longitude },
-                    Math.sqrt(x * x + y * y),
-                    Math.atan2(y, x) * (180 / Math.PI) + orientation + azimuth,
-                ),
-            ),
-            strokeColor: '#B0BEC5',
-            strokeOpacity: 0.9,
-            strokeWeight: 1,
-            fillColor: palette[colorIndex],
-            fillOpacity: 0.9,
-        });
-    });
-    solarPanels.map((panel, i) =>
-        panel.setMap(showPanels.value && panelConfig && i < panelConfig.panelsCount ? map : null)
-    );
-}
-
-function createPalette(hexColors: string[], size = 256) {
-	const rgb = hexColors.map(colorToRGB);
-	const step = (rgb.length - 1) / (size - 1);
-	return Array(size)
-		.fill(0)
-		.map((_, i) => {
-			const index = i * step;
-			const j = Math.floor(index);
-			const k = Math.ceil(index);
-			return {
-				r: lerp(rgb[j].r, rgb[k].r, index - j),
-				g: lerp(rgb[j].g, rgb[k].g, index - j),
-				b: lerp(rgb[j].b, rgb[k].b, index - j),
-			};
-		});
 }
 </script>

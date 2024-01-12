@@ -51,14 +51,27 @@ export function energyCoveredCalc(userSolarData: UserSolarData) {
 }
 
 /*
-    To enhance air quality interface
+    To enhance interfaces
 */
 export function circularBarColorSelector(value: string) {
-    const num_value: number = Number(value);
-    if ( isNaN(num_value)) return "green";
-    else if ( num_value < 50 ) return "red";
-    else if ( num_value < 80 ) return "orange";
+    const numValue: number = Number(value);
+    if ( isNaN(numValue)) return "green";
+    else if ( numValue < 50 ) return "red";
+    else if ( numValue < 80 ) return "orange";
     else return "green";
+}
+
+export function batteryCharging(value: number) {
+    if (value > 90) return "mdi-battery-charging-100";
+    else if (value > 80) return "mdi-battery-charging-90";
+    else if (value > 70) return "mdi-battery-charging-80";
+    else if (value > 60) return "mdi-battery-charging-70";
+    else if (value > 50) return "mdi-battery-charging-60";
+    else if (value > 40) return "mdi-battery-charging-50";
+    else if (value > 30) return "mdi-battery-charging-40";
+    else if (value > 20) return "mdi-battery-charging-30";
+    else if (value > 10) return "mdi-battery-charging-20";
+    else if (value > 0) return "mdi-battery-charging-10";
 }
 
 // For an updated list of pollutants, visit https://developers.google.com/maps/documentation/air-quality/pollutants

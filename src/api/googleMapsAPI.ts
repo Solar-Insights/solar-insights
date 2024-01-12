@@ -3,6 +3,7 @@ import { Coordinates, validCoordinates } from "@/util/generalTypes";
 import { AirQualityData, AirPollutant } from "@/util/airQualityTypes";
 import { binaryPalette, rainbowPalette, ironPalette, sunlightPalette } from "@/util/constants";
 import { BuildingInsights, SolarDataCoords, SolarLayers, LayerId, Layer, Bounds, GeoTiff } from "@/util/solarTypes";
+import { colorToRGB, rgbToColor, lerp, normalize, clamp, createPalette } from "@/util/generalFunctions";
 import * as geotiff from 'geotiff';
 import * as geokeysToProj4 from 'geotiff-geokeys-to-proj4';
 import proj4 from 'proj4';
@@ -97,7 +98,7 @@ export function getSolarDataLayers(coord: SolarDataCoords, radius: number) {
 		'view': "FULL_LAYERS",
 		'requiredQuality': "HIGH",
 	};
-    console.log('GET dataLayers\n', args);
+    // console.log('GET dataLayers\n', args);
 	const params = new URLSearchParams({ ...args, key: import.meta.env.VITE_GOOGLE_API})
     return fetch(`https://solar.googleapis.com/v1/dataLayers:get?${params}`)
         .then(async (response) => {
@@ -263,7 +264,7 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
 }
 
 export async function downloadGeoTIFF(url: string): Promise<GeoTiff> {
-	console.log(`Downloading data layer: ${url}`);
+	// console.log(`Downloading data layer: ${url}`);
 	const solarUrl = url + `&key=${import.meta.env.VITE_GOOGLE_API}`;
 	const response = await fetch(solarUrl);
 	if (response.status != 200) {
@@ -366,59 +367,12 @@ export function renderPalette({
 	);
 }
 
-export function createPalette(hexColors: string[], size = 256) {
-	const rgb = hexColors.map(colorToRGB);
-	const step = (rgb.length - 1) / (size - 1);
-	return Array(size)
-		.fill(0)
-		.map((_, i) => {
-			const index = i * step;
-			const j = Math.floor(index);
-			const k = Math.ceil(index);
-			return {
-				r: lerp(rgb[j].r, rgb[k].r, index - j),
-				g: lerp(rgb[j].g, rgb[k].g, index - j),
-				b: lerp(rgb[j].b, rgb[k].b, index - j),
-			};
-		});
-}
-
-export function colorToRGB(color: string): { r: number; g: number; b: number } {
-	const hex = color.startsWith('#') ? color.slice(1) : color;
-	return {
-		r: parseInt(hex.substring(0, 2), 16),
-		g: parseInt(hex.substring(2, 4), 16),
-		b: parseInt(hex.substring(4, 6), 16),
-	};
-}
-
-export function rgbToColor({ r, g, b }: { r: number; g: number; b: number }): string {
-	const f = (x: number) => {
-		const hex = Math.round(x).toString(16);
-		return hex.length == 1 ? `0${hex}` : hex;
-	};
-	return `#${f(r)}${f(g)}${f(b)}`;
-}
-
-export function normalize(x: number, max: number = 1, min: number = 0) {
-	const y = (x - min) / (max - min);
-	return clamp(y, 0, 1);
-}
-
-export function lerp(x: number, y: number, t: number) {
-	return x + t * (y - x);
-}
-
-export function clamp(x: number, min: number, max: number) {
-	return Math.min(Math.max(x, min), max);
-}
-
 export async function findClosestBuilding(coord: Coordinates){
 	const args = {
 		'location.latitude': coord.lat.toFixed(5),
 		'location.longitude': coord.lng.toFixed(5),
 	};
-	console.log('GET buildingInsights\n', args);
+	// console.log('GET buildingInsights\n', args);
 	const params = new URLSearchParams({ ...args, key: import.meta.env.VITE_GOOGLE_API });
 	return fetch(`https://solar.googleapis.com/v1/buildingInsights:findClosest?${params}`).then(
 		async (response) => {
@@ -427,7 +381,7 @@ export async function findClosestBuilding(coord: Coordinates){
 				console.error('findClosestBuilding\n', content);
 				throw content;
 			}
-			console.log('buildingInsightsResponse', content);
+			// console.log('buildingInsightsResponse', content);
 			return content;
 		},
 	);

@@ -3,7 +3,7 @@
         <v-card-title class="section-title pl-0 mb-4 d-flex">
             <v-icon class="mr-3" color="theme">mdi-home-outline</v-icon> 
             <div class="my-auto">
-                Building Insights
+                Building Attributes
             </div>
         </v-card-title>
         
@@ -24,7 +24,7 @@
 
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-white-balance-sunny</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-sun-clock-outline</v-icon>
                 <div class="me-auto emphasis flex-shrink-1">
                     Annual sunlight
                 </div>

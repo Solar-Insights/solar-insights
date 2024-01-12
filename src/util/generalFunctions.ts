@@ -22,6 +22,23 @@ export function rgbToColor({ r, g, b }: { r: number; g: number; b: number }): st
 }
 
 
+export function createPalette(hexColors: string[], size = 256) {
+	const rgb = hexColors.map(colorToRGB);
+	const step = (rgb.length - 1) / (size - 1);
+	return Array(size)
+		.fill(0)
+		.map((_, i) => {
+			const index = i * step;
+			const j = Math.floor(index);
+			const k = Math.ceil(index);
+			return {
+				r: lerp(rgb[j].r, rgb[k].r, index - j),
+				g: lerp(rgb[j].g, rgb[k].g, index - j),
+				b: lerp(rgb[j].b, rgb[k].b, index - j),
+			};
+		});
+}
+
 /**
  * Math
  */

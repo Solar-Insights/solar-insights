@@ -1,15 +1,15 @@
 <template>
     <v-card class="rounded-lg" :class="$vuetify.display.xs ? 'map-readonly-data-mobile' : 'map-readonly-data-computer'" elevation="8"> 
         <v-card-title class="section-title pl-0 mb-4 d-flex">
-            <v-icon class="mr-3" color="theme">mdi-transmission-tower</v-icon> 
+            <v-icon class="mr-3" color="theme">mdi-weather-sunny</v-icon> 
             <div class="my-auto">
-                Energy Insights
+                Solar Potential
             </div>
         </v-card-title>
         
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-home-lightning-bolt-outline</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-calendar-clock-outline</v-icon>
                 <div class="me-auto emphasis">
                     Yearly Energy
                 </div>
@@ -21,7 +21,7 @@
         
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-hammer-wrench</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-account-hard-hat-outline</v-icon>
                 <div class="me-auto emphasis">
                     Installation Size
                 </div>  
@@ -45,7 +45,7 @@
 
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-battery-60</v-icon>
+                <v-icon class="mr-3" color="theme">{{ batteryCharging(energyCoveredCalc(userSolarData)) }}</v-icon>
                 <div class="me-auto emphasis">
                     Energy Covered
                 </div>
@@ -62,7 +62,7 @@
 import { PropType } from 'vue';
 // Util
 import { BuildingInsights, UserSolarData } from '@/util/solarTypes';
-import { yearlyEnergyCalc, installationSizeCalc, installationCostCalc, energyCoveredCalc } from "@/util/constants";
+import { yearlyEnergyCalc, installationSizeCalc, installationCostCalc, energyCoveredCalc, batteryCharging } from "@/util/constants";
 
 const props = defineProps({
     buildingInsights: {
