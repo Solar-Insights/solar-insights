@@ -29,3 +29,7 @@ export type RequestError = {
 		status: string;
 	};
 }
+
+
+
+export type MapType = "AIR_QUALITY" | "SOLAR";

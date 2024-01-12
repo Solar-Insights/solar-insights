@@ -224,7 +224,8 @@
 // Vue
 import { onMounted, ref, watch } from 'vue';
 // Util
-import { BuildingInsights, LayerId, SolarLayers, Layer, panelsPalette, SolarPanelConfig, UserSolarData } from '@/util/solarTypes';
+import { BuildingInsights, LayerId, SolarLayers, Layer, SolarPanelConfig, UserSolarData } from '@/util/solarTypes';
+import { panelsPalette } from "@/util/constants"
 import { RequestError, Coordinates } from '@/util/generalTypes';
 import { rgbToColor, colorToRGB, lerp, normalize, clamp } from "@/util/generalFunctions";
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/api/googleMapsAPI";
@@ -245,6 +246,7 @@ function emitAlert(type: string, title: string, message: string) {
 
 // Components data
 const solarReadonlyPanel = ref(0);
+const configId = ref(0);
 const autocompleteValue = ref("");
 const advancedSettings = ref([] as string[]);
 const userSolarData = ref<UserSolarData>({
@@ -295,6 +297,10 @@ onMounted(async () => {
     console.log(buildingInsights);
 })
 
+watch(configId, async () => {
+    await showSolarPotential(configId.value);
+});
+
 async function initListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map) {
     autocomplete.addListener("place_changed", async () => {
         const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
@@ -324,7 +330,6 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
     });
 }
 
-
 async function updateBuildingInsights(coord: Coordinates) {
     buildingInsights.value = await findClosestBuilding(coord);
     userSolarData.value.minPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
@@ -336,8 +341,8 @@ async function updateBuildingInsights(coord: Coordinates) {
 
 async function panelCountChange() {
     // Because the list of configs has the minPanelCount for its first index
-    const configId = userSolarData.value.panelCount - userSolarData.value.minPanelCount;
-    await showSolarPotential(configId);
+    configId.value = userSolarData.value.panelCount - userSolarData.value.minPanelCount;
+    await showSolarPotential(configId.value);
 }
 
 

@@ -1,5 +1,5 @@
-// Models
-import { Coordinates, MapType } from "@/models/models";
+// Util
+import { Coordinates, MapType} from "@/util/generalTypes";
 
 function zoom(mapType: MapType) {
     switch (mapType) {

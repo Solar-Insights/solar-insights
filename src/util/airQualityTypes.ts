@@ -45,5 +45,3 @@ export type HealthRecommendations = {
     heartDiseasePopulation: string,
     lungDiseasePopulation: string
 };
-
-export type MapType = "AIR_QUALITY" | "SOLAR";

@@ -62,7 +62,7 @@
 import { PropType } from 'vue';
 // Util
 import { BuildingInsights, UserSolarData } from '@/util/solarTypes';
-import { yearlyEnergyCalc, installationSizeCalc, installationCostCalc, energyCoveredCalc } from "@/models/constants";
+import { yearlyEnergyCalc, installationSizeCalc, installationCostCalc, energyCoveredCalc } from "@/util/constants";
 
 const props = defineProps({
     buildingInsights: {

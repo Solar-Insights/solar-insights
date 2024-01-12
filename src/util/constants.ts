@@ -50,6 +50,9 @@ export function energyCoveredCalc(userSolarData: UserSolarData) {
     return yearlyEnergyAcProductionKwh(userSolarData) / yearlyEnergyConsumptionKwh(userSolarData) * 100;
 }
 
+/*
+    To enhance air quality interface
+*/
 export function circularBarColorSelector(value: string) {
     const num_value: number = Number(value);
     if ( isNaN(num_value)) return "green";
@@ -113,3 +116,16 @@ export const pollutants = {
         displayName: "TRS"
     },
 };
+
+/*
+    Solar colors
+*/
+export const binaryPalette = ['212121', 'B3E5FC'];
+
+export const rainbowPalette = ['3949AB', '81D4FA', '66BB6A', 'FFE082', 'E53935'];
+
+export const ironPalette = ['00000A', '91009C', 'E64616', 'FEB400', 'FFFFF6'];
+
+export const sunlightPalette = ['212121', 'FFCA28'];
+
+export const panelsPalette = ['E8EAF6', '1A237E'];
