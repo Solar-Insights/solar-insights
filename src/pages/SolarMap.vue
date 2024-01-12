@@ -71,11 +71,11 @@
                                         Count
                                     </div>
                                     <div class="text-right">
-                                        {{ userSolarData.panelCount }} / {{ userSolarData.maxPanelCount }} panels
+                                        {{ panelCountTempo }} / {{ userSolarData.maxPanelCount }} panels
                                     </div>
                                 </div>
                                 <v-slider
-                                    v-model="userSolarData.panelCount"
+                                    v-model="panelCountTempo"
                                     @end="panelCountChange"
                                     :min="userSolarData.minPanelCount" 
                                     :max="userSolarData.maxPanelCount"
@@ -298,6 +298,7 @@ function emitAlert(type: string, title: string, message: string) {
 
 // Components data
 const solarReadonlyPanel = ref(0);
+const panelCountTempo = ref(0);
 const showPanels = ref(true);
 const configId = ref(0);
 const autocompleteValue = ref("");
@@ -389,11 +390,15 @@ async function updateBuildingInsights(coord: Coordinates) {
     userSolarData.value.maxPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[buildingInsights.value.solarPotential.solarPanelConfigs.length - 1].panelsCount;
     userSolarData.value.defaultPanelCapacityWatts = buildingInsights.value.solarPotential.panelCapacityWatts;
 
-    if (userSolarData.value.panelCount < userSolarData.value.minPanelCount) userSolarData.value.panelCount = userSolarData.value.minPanelCount;
+    if (userSolarData.value.panelCount < userSolarData.value.minPanelCount) {
+        userSolarData.value.panelCount = userSolarData.value.minPanelCount;
+        panelCountTempo.value = userSolarData.value.minPanelCount;
+    }
 }
 
 async function panelCountChange() {
     // Because the list of configs has the minPanelCount for its first index
+    userSolarData.value.panelCount = panelCountTempo.value;
     configId.value = userSolarData.value.panelCount - userSolarData.value.minPanelCount;
     await showSolarPotential(configId.value);
 }

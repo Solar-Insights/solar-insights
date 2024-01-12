@@ -30,7 +30,7 @@
                     Installation Size
                 </div>  
                 <div>
-                    {{ installationSizeCalc(userSolarData).toFixed(2) }} kW
+                    {{ installationSizeCalc(userSolarData).toFixed(1) }} kW
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
                     Energy Covered
                 </div>
                 <div>
-                    {{ energyCoveredCalc(userSolarData).toFixed(1) }} %
+                    {{ energyCoveredCalc(userSolarData).toFixed(0) }} %
                 </div>
             </div>
         </div>
