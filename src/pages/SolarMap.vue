@@ -229,7 +229,7 @@ import { panelsPalette } from "@/util/constants"
 import { RequestError, Coordinates } from '@/util/generalTypes';
 import { rgbToColor, colorToRGB, lerp, normalize, clamp } from "@/util/generalFunctions";
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/api/googleMapsAPI";
-import { initMap, initAutocomplete } from "@/util/initMapComponents";
+import { initMap, initAutocomplete } from "@/util/generalFunctions";
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";

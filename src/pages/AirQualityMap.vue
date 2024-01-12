@@ -94,7 +94,7 @@ import _ from 'lodash';
 import { AirQualityData } from "@/util/airQualityTypes";
 import { Coordinates } from "@/util/generalTypes";
 import { pollutants, circularBarColorSelector } from "@/models/constants";
-import { initMap, initMarker, initAutocomplete } from "@/util/initMapComponents";
+import { initMap, initMarker, initAutocomplete } from "@/util/generalFunctions";
 import { getGeocoding, getReverseGeocoding, getAirQualityData } from "@/api/googleMapsAPI";
 // Components
 import PollutantTab from "@/components/air_quality/PollutantTab.vue";
