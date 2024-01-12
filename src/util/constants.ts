@@ -9,6 +9,34 @@ export function panelCapacityRatioCalc(userSolarData: UserSolarData) {
 }
 
 /*
+    Units: None
+*/
+export function yearlyDiscountRate(userSolarData: UserSolarData) {
+    return 1 + userSolarData.yearlyDiscountRate / 100; 
+}
+
+/*
+    Units: None
+*/
+export function yearlyPanelEfficiencyDecline(userSolarData: UserSolarData) {
+    return 1 - userSolarData.yearlyPanelEfficiencyDecline / 100;
+}
+
+/*
+    Units: None
+*/
+export function yearlyEnergyCostIncrease(userSolarData: UserSolarData) {
+    return 1 + userSolarData.yearlyEnergyCostIncrease / 100;
+}
+
+/*
+    Units: None
+*/
+export function dcToAcDerate(userSolarData: UserSolarData) {
+    return userSolarData.dcToAcDerate / 100
+}
+
+/*
     Units: kWh
 */
 export function yearlyEnergyCalc(userSolarData: UserSolarData) {
@@ -30,11 +58,18 @@ export function installationCostCalc(userSolarData: UserSolarData) {
 }
 
 /*
-    Units: kWh
+    Units: []kWh
     Division by 100 because dcToAcDerate in percent
 */
 export function yearlyEnergyAcProductionKwh(userSolarData: UserSolarData){
-    return userSolarData.yearlyEnergyDcKwh * panelCapacityRatioCalc(userSolarData) * userSolarData.dcToAcDerate / 100;
+    const energyProduction: number[] = [];
+    for(let i = 0; i < userSolarData.installationLifespan; i++) {
+        energyProduction.push(
+            userSolarData.yearlyEnergyDcKwh * panelCapacityRatioCalc(userSolarData) * dcToAcDerate(userSolarData) * yearlyPanelEfficiencyDecline(userSolarData) ** i
+        );
+    }
+
+    return energyProduction;
 }
 
 /*
@@ -48,8 +83,49 @@ export function yearlyEnergyConsumptionKwh(userSolarData: UserSolarData) {
     Units: %
 */
 export function energyCoveredCalc(userSolarData: UserSolarData) {
-    return yearlyEnergyAcProductionKwh(userSolarData) / yearlyEnergyConsumptionKwh(userSolarData) * 100;
+    return yearlyEnergyAcProductionKwh(userSolarData)[0] / yearlyEnergyConsumptionKwh(userSolarData) * 100;
 }
+
+/*
+    Units: $
+*/
+export function yearlyUtilityBillEsimates(userSolarData: UserSolarData) {
+    const utilityBillEstimates: number[] = [];
+    const energyProduction: number[] = yearlyEnergyAcProductionKwh(userSolarData);
+    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+        utilityBillEstimates.push(
+            Math.max((yearlyEnergyConsumptionKwh(userSolarData) - energyProduction[i]) * userSolarData.energyCostPerKwh * yearlyEnergyCostIncrease(userSolarData) ** i / yearlyDiscountRate(userSolarData) ** i, 0)
+        );
+    }
+
+    return utilityBillEstimates;
+}
+
+/*
+    Units: $
+*/
+export function costWithSolarInstallation(userSolarData: UserSolarData) {
+    const utilityBillEstimates: number[] = yearlyUtilityBillEsimates(userSolarData);
+    return installationCostCalc(userSolarData) + utilityBillEstimates.reduce((x, y) => x + y, 0) - userSolarData.solarIncentives;
+}
+
+/*
+    Units: $
+*/
+export function costWithoutSolarInstallation(userSolarData: UserSolarData) {
+    const costWithoutSolar: number[] = [];
+    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+        costWithoutSolar.push(
+            (userSolarData.averageMonthlyEnergyBill * 12 * yearlyEnergyCostIncrease(userSolarData) ** i) / yearlyDiscountRate(userSolarData) ** i
+        );
+    }
+
+    return costWithoutSolar.reduce((x, y) => x + y, 0);
+}
+
+
+
+
 
 /*
     To enhance interfaces

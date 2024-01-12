@@ -16,7 +16,8 @@ export type UserSolarData = {
     solarIncentives: number,
     yearlyPanelEfficiencyDecline: number,
     yearlyEnergyCostIncrease: number,
-    yearlyDiscountRate: number
+    yearlyDiscountRate: number,
+    installationLifespan: number
 };
 
 export type SolarLayers = {

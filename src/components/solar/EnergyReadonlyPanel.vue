@@ -67,48 +67,48 @@
 
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">{{ batteryCharging(energyCoveredCalc(userSolarData)) }}</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-transmission-tower</v-icon>
                 <div class="me-auto emphasis">
-                    Cost with solar installation
+                    Cost without solar panels
                 </div>
                 <div>
-                    {{ energyCoveredCalc(userSolarData).toFixed(1) }} %
+                    {{ costWithoutSolarInstallation(userSolarData).toFixed(0) }} $
                 </div>
             </div>
         </div>
 
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">{{ batteryCharging(energyCoveredCalc(userSolarData)) }}</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-solar-panel</v-icon>
                 <div class="me-auto emphasis">
-                    Cost without solar installation]
+                    Cost with solar panels
                 </div>
                 <div>
-                    {{ energyCoveredCalc(userSolarData).toFixed(1) }} %
+                    {{ costWithSolarInstallation(userSolarData).toFixed(0) }} $
                 </div>
             </div>
         </div>
 
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">{{ batteryCharging(energyCoveredCalc(userSolarData)) }}</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-bank-outline</v-icon>
                 <div class="me-auto emphasis">
                     Total saved cost
                 </div>
                 <div>
-                    {{ energyCoveredCalc(userSolarData).toFixed(1) }} %
+                    {{ (costWithoutSolarInstallation(userSolarData) - costWithSolarInstallation(userSolarData)).toFixed(0) }}  $
                 </div>
             </div>
         </div>
 
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">{{ batteryCharging(energyCoveredCalc(userSolarData)) }}</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-scale-balance</v-icon>
                 <div class="me-auto emphasis">
                     Break even
                 </div>
                 <div>
-                    {{ energyCoveredCalc(userSolarData).toFixed(1) }} %
+                    {{ energyCoveredCalc(userSolarData).toFixed(1) }} years
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@
 import { PropType } from 'vue';
 // Util
 import { BuildingInsights, UserSolarData } from '@/util/solarTypes';
-import { yearlyEnergyCalc, installationSizeCalc, installationCostCalc, energyCoveredCalc, batteryCharging } from "@/util/constants";
+import { yearlyEnergyCalc, installationSizeCalc, installationCostCalc, energyCoveredCalc, batteryCharging, costWithSolarInstallation, costWithoutSolarInstallation } from "@/util/constants";
 
 const props = defineProps({
     buildingInsights: {

@@ -48,8 +48,8 @@
             <v-divider/>
 
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
-                <v-expansion-panels>
-                    <v-expansion-panel class="mb-2" elevation="5">
+                <v-expansion-panels variant="accordion">
+                    <v-expansion-panel class="mb-2">
                         <v-expansion-panel-title>
                             <div class="section-title d-flex">
                             <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon> 
@@ -66,7 +66,7 @@
 
                             <div>
                                 <div class="d-flex">
-                                    <v-icon class="mr-3" color="theme">mdi-scale-balance</v-icon>
+                                    <v-icon class="mr-3" color="theme">mdi-numeric</v-icon>
                                     <div class="me-auto subsection-title">
                                         Count
                                     </div>
@@ -129,7 +129,7 @@
                         </v-expansion-panel-text>
                     </v-expansion-panel>
 
-                    <v-expansion-panel elevation="5">
+                    <v-expansion-panel>
                         <v-expansion-panel-title>
                             <div class="section-title d-flex">
                                 <v-icon class="mr-3">mdi-battery-charging-70</v-icon> 
@@ -317,7 +317,8 @@ const userSolarData = ref<UserSolarData>({
     solarIncentives: 5000,
     yearlyPanelEfficiencyDecline: 0.5,
     yearlyEnergyCostIncrease: 2.2,
-    yearlyDiscountRate: 4
+    yearlyDiscountRate: 4,
+    installationLifespan: 25
 });
 
 // Google components
