@@ -100,11 +100,11 @@
                                 </v-text-field>
                             </div>
                             <div class="w-100 text-center mb-2">
-                                <v-chip @click="advancedSettings.length == 0 ? advancedSettings=['advanced-settings'] : advancedSettings=[]" color="theme" variant="text" :append-icon="advancedSettings.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"> Advanced Settings </v-chip>
+                                <v-chip @click="advancedSettingsPanels.length == 0 ? advancedSettingsPanels=['advanced-settings-panels'] : advancedSettingsPanels=[]" color="theme" variant="text" :append-icon="advancedSettingsPanels.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"> Advanced Settings </v-chip>
                             </div>
 
-                            <v-expansion-panels v-model="advancedSettings">
-                                <v-expansion-panel value="advanced-settings" class="mb-2" elevation="0">
+                            <v-expansion-panels v-model="advancedSettingsPanels">
+                                <v-expansion-panel value="advanced-settings-panels" class="mb-2" elevation="0">
                                     <v-expansion-panel-text class="px-0" id="expansion-panel-second-layer">
                                         <v-text-field
                                             v-model="userSolarData.dcToAcDerate"
@@ -204,6 +204,58 @@
                                     </template>
                                 </v-text-field> 
                             </div>
+
+                            <div class="w-100 text-center mb-2">
+                                <v-chip @click="advancedSettingsSolarPotential.length == 0 ? advancedSettingsSolarPotential=['advanced-settings-solar-potential'] : advancedSettingsSolarPotential=[]" color="theme" variant="text" :append-icon="advancedSettingsSolarPotential.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"> Advanced Settings </v-chip>
+                            </div>
+
+                            <v-expansion-panels v-model="advancedSettingsSolarPotential">
+                                <v-expansion-panel value="advanced-settings-solar-potential" class="mb-2" elevation="0">
+                                    <v-expansion-panel-text class="px-0" id="expansion-panel-second-layer">
+                                        <v-text-field
+                                            v-model="userSolarData.yearlyEnergyCostIncrease"
+                                            label="Energy cost increase per year"
+                                            density="compact"
+                                            variant="outlined"
+                                            color="theme"
+                                            type="number"
+                                            prepend-inner-icon="mdi-chart-line-variant"
+                                        >
+                                            <template v-slot:append-inner>
+                                                %
+                                            </template>
+                                        </v-text-field> 
+
+                                        <v-text-field
+                                            v-model="userSolarData.yearlyPanelEfficiencyDecline"
+                                            label="Panel efficiency decline per year"
+                                            density="compact"
+                                            variant="outlined"
+                                            color="theme"
+                                            type="number"
+                                            prepend-inner-icon="mdi-elevation-decline"
+                                        >
+                                            <template v-slot:append-inner>
+                                                %
+                                            </template>
+                                        </v-text-field> 
+
+                                        <v-text-field
+                                            v-model="userSolarData.yearlyDiscountRate"
+                                            label="Discount rate per year"
+                                            density="compact"
+                                            variant="outlined"
+                                            color="theme"
+                                            type="number"
+                                            prepend-inner-icon="mdi-cart-percent"
+                                        >
+                                            <template v-slot:append-inner>
+                                                %
+                                            </template>
+                                        </v-text-field> 
+                                    </v-expansion-panel-text>
+                                </v-expansion-panel>
+                            </v-expansion-panels>   
                         </v-expansion-panel-text>
                     </v-expansion-panel>
                 </v-expansion-panels>
@@ -249,7 +301,8 @@ const solarReadonlyPanel = ref(0);
 const showPanels = ref(true);
 const configId = ref(0);
 const autocompleteValue = ref("");
-const advancedSettings = ref([] as string[]);
+const advancedSettingsPanels = ref([] as string[]);
+const advancedSettingsSolarPotential = ref([] as string[]);
 const userSolarData = ref<UserSolarData>({
     panelCount: 0,
     minPanelCount: 0,
@@ -258,10 +311,13 @@ const userSolarData = ref<UserSolarData>({
     defaultPanelCapacityWatts: 350,
     installationCostPerWatt: 4.00,
     yearlyEnergyDcKwh: 0,
-    dcToAcDerate: 0.85,
+    dcToAcDerate: 85,
     averageMonthlyEnergyBill: 300,
     energyCostPerKwh: 0.31,
-    solarIncentives: 5000
+    solarIncentives: 5000,
+    yearlyPanelEfficiencyDecline: 0.5,
+    yearlyEnergyCostIncrease: 2.2,
+    yearlyDiscountRate: 4
 });
 
 // Google components

@@ -54,6 +54,64 @@
                 </div>
             </div>
         </div>
+
+        <div class="mb-5">
+            <div> &nbsp</div>
+            <div class="d-flex">
+                
+                <div class="me-auto emphasis">
+                    Cost analysis for 25 years
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <div class="d-flex">
+                <v-icon class="mr-3" color="theme">{{ batteryCharging(energyCoveredCalc(userSolarData)) }}</v-icon>
+                <div class="me-auto emphasis">
+                    Cost with solar installation
+                </div>
+                <div>
+                    {{ energyCoveredCalc(userSolarData).toFixed(1) }} %
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <div class="d-flex">
+                <v-icon class="mr-3" color="theme">{{ batteryCharging(energyCoveredCalc(userSolarData)) }}</v-icon>
+                <div class="me-auto emphasis">
+                    Cost without solar installation]
+                </div>
+                <div>
+                    {{ energyCoveredCalc(userSolarData).toFixed(1) }} %
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <div class="d-flex">
+                <v-icon class="mr-3" color="theme">{{ batteryCharging(energyCoveredCalc(userSolarData)) }}</v-icon>
+                <div class="me-auto emphasis">
+                    Total saved cost
+                </div>
+                <div>
+                    {{ energyCoveredCalc(userSolarData).toFixed(1) }} %
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <div class="d-flex">
+                <v-icon class="mr-3" color="theme">{{ batteryCharging(energyCoveredCalc(userSolarData)) }}</v-icon>
+                <div class="me-auto emphasis">
+                    Break even
+                </div>
+                <div>
+                    {{ energyCoveredCalc(userSolarData).toFixed(1) }} %
+                </div>
+            </div>
+        </div>
     </v-card>
 </template>
 

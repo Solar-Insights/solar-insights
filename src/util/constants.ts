@@ -31,9 +31,10 @@ export function installationCostCalc(userSolarData: UserSolarData) {
 
 /*
     Units: kWh
+    Division by 100 because dcToAcDerate in percent
 */
 export function yearlyEnergyAcProductionKwh(userSolarData: UserSolarData){
-    return userSolarData.yearlyEnergyDcKwh * panelCapacityRatioCalc(userSolarData) * userSolarData.dcToAcDerate;
+    return userSolarData.yearlyEnergyDcKwh * panelCapacityRatioCalc(userSolarData) * userSolarData.dcToAcDerate / 100;
 }
 
 /*

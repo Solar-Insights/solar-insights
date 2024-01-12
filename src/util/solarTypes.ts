@@ -13,7 +13,10 @@ export type UserSolarData = {
     dcToAcDerate: number,
     averageMonthlyEnergyBill: number,
     energyCostPerKwh: number,
-    solarIncentives: number
+    solarIncentives: number,
+    yearlyPanelEfficiencyDecline: number,
+    yearlyEnergyCostIncrease: number,
+    yearlyDiscountRate: number
 };
 
 export type SolarLayers = {
