@@ -202,7 +202,7 @@ export function drawGoogleChart(userSolarData: UserSolarData, costChart: HTMLEle
         const chart = new googleCharts.Line(costChart);
         const options = googleCharts.Line.convertOptions({
             title: `Cost analysis for ${userSolarData.installationLifespan} years`,
-            width: 350,
+            width: 325,
             height: 200,
         });
         chart.draw(data, options);

@@ -118,6 +118,20 @@
                                             <template v-slot:append-inner>
                                                 %
                                             </template>
+                                        </v-text-field>
+
+                                        <v-text-field
+                                            v-model="userSolarData.yearlyPanelEfficiencyDecline"
+                                            label="Panel efficiency decline per year"
+                                            density="compact"
+                                            variant="outlined"
+                                            color="theme"
+                                            type="number"
+                                            prepend-inner-icon="mdi-elevation-decline"
+                                        >
+                                            <template v-slot:append-inner>
+                                                %
+                                            </template>
                                         </v-text-field> 
                                     </v-expansion-panel-text>
                                 </v-expansion-panel>
@@ -220,20 +234,6 @@
                                             color="theme"
                                             type="number"
                                             prepend-inner-icon="mdi-chart-line-variant"
-                                        >
-                                            <template v-slot:append-inner>
-                                                %
-                                            </template>
-                                        </v-text-field> 
-
-                                        <v-text-field
-                                            v-model="userSolarData.yearlyPanelEfficiencyDecline"
-                                            label="Panel efficiency decline per year"
-                                            density="compact"
-                                            variant="outlined"
-                                            color="theme"
-                                            type="number"
-                                            prepend-inner-icon="mdi-elevation-decline"
                                         >
                                             <template v-slot:append-inner>
                                                 %
