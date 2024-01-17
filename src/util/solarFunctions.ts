@@ -209,12 +209,3 @@ export function drawGoogleChart(userSolarData: UserSolarData, costChart: HTMLEle
     },
     { packages: ['line'] },);
 }
-
-export function getConfigIdForFullEnergyCoverage(buildingInsights: BuildingInsights, userSolarData: UserSolarData) {
-    for (let i = 0; i < buildingInsights.solarPotential.solarPanelConfigs.length; i++) {
-        if (buildingInsights.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh * panelCapacityRatioCalc(userSolarData) * dcToAcDerate(userSolarData) >= yearlyEnergyConsumptionKwh(userSolarData)) {
-            return i;
-        }
-    }
-    return 0
-}

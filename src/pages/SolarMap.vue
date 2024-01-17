@@ -71,14 +71,14 @@
                                         Count
                                     </div>
                                     <div class="text-right">
-                                        {{ panelCountTempo }} / {{ userSolarData.maxPanelCount }} panels
+                                        {{ buildingInsights.solarPotential.solarPanelConfigs[configIdIndex].panelsCount }} / {{ userSolarData.maxPanelCount }} panels
                                     </div>
                                 </div>
                                 <v-slider
-                                    v-model="panelCountTempo"
+                                    v-model="configIdIndex"
                                     @end="panelCountChange"
-                                    :min="userSolarData.minPanelCount" 
-                                    :max="userSolarData.maxPanelCount"
+                                    :min="0" 
+                                    :max="buildingInsights.solarPotential.solarPanelConfigs.length === undefined ? 1 : buildingInsights.solarPotential.solarPanelConfigs.length - 1"
                                     step="1"
                                     color="theme"
                                 />
@@ -277,15 +277,14 @@
 import { onMounted, ref, watch } from 'vue';
 // Util
 import { BuildingInsights, LayerId, SolarLayers, Layer, SolarPanelConfig, UserSolarData } from '@/util/solarTypes';
-import { getConfigIdForFullEnergyCoverage } from "@/util/solarFunctions";
 import { panelsPalette } from "@/util/constants"
 import { RequestError, Coordinates } from '@/util/generalTypes';
 import { createPalette, rgbToColor, colorToRGB, lerp, normalize, clamp, initMap, initAutocomplete } from "@/util/generalFunctions";
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/api/googleMapsAPI";
-
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
+import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh } from '@/util/solarFunctions';
 
 // Emit
 const emit = defineEmits(['alert']);
@@ -297,14 +296,14 @@ function emitAlert(type: string, title: string, message: string) {
     });
 }
 
-// Components data
+// Data
 const solarReadonlyPanel = ref(0);
-const panelCountTempo = ref(0);
+const configIdIndex = ref(0);
 const showPanels = ref(true);
-const configId = ref(0);
 const autocompleteValue = ref("");
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
+const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
 const userSolarData = ref<UserSolarData>({
     panelCount: 0,
     minPanelCount: 0,
@@ -326,14 +325,14 @@ const userSolarData = ref<UserSolarData>({
 // Google components
 let map: google.maps.Map;
 let autocomplete: google.maps.places.Autocomplete;
-const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
 let geometryLibrary: google.maps.GeometryLibrary;
 
 onMounted(async () => {
+    // Gets starting coords and map element
     const coord: Coordinates = { lat: 46.81701, lng: -71.36838 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
     
-    // Init values of google components
+    // Init values of Google components
     map = await initMap(coord, mapElement, "SOLAR");
     autocomplete = await initAutocomplete("autocomplete-search");
     autocompleteValue.value = await getReverseGeocoding(coord);
@@ -344,19 +343,23 @@ onMounted(async () => {
             "An error occured when trying to load the map and its components."
         );
     }
-
+    
+    // Adds geometry library and queries the starting coordinates' solar potential
+    geometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary
     await initListeners(autocomplete, map);
     await updateBuildingInsights(coord);
-    geometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary
+    configIdIndex.value = getConfigIdForFullEnergyCoverage();
     showDataLayer(true);
-    showSolarPotential(getConfigIdForFullEnergyCoverage(buildingInsights.value, userSolarData.value));
+    showSolarPotential();
 })
 
 watch(showPanels, async () => {
-    await showSolarPotential(configId.value);
+    // Adjusts the display of solar panels on attribute change
+    await showSolarPotential();
 });
 
 async function initListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map) {
+    // When the search bar is used, changes the location of the map, and queries the new coordinates' solar potential
     autocomplete.addListener("place_changed", async () => {
         const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
         if ( !newPlace || !newPlace.formatted_address ) {
@@ -380,44 +383,56 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
         }
         
         map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
-        buildingInsights.value = await findClosestBuilding(newCoord);
+        await updateBuildingInsights({ lat: newCoord.lat, lng: newCoord.lng });
+        configIdIndex.value = getConfigIdForFullEnergyCoverage();
         showDataLayer(true);
+        showSolarPotential();
     });
 }
 
 async function updateBuildingInsights(coord: Coordinates) {
+    // Updates the building insights value and proceeds to update all related data
     buildingInsights.value = await findClosestBuilding(coord);
     userSolarData.value.minPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
     userSolarData.value.maxPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[buildingInsights.value.solarPotential.solarPanelConfigs.length - 1].panelsCount;
     userSolarData.value.defaultPanelCapacityWatts = buildingInsights.value.solarPotential.panelCapacityWatts;
-
-    if (userSolarData.value.panelCount < userSolarData.value.minPanelCount) {
-        userSolarData.value.panelCount = userSolarData.value.minPanelCount;
-        panelCountTempo.value = userSolarData.value.minPanelCount;
-    }
 }
 
 async function panelCountChange() {
     // Because the list of configs has the minPanelCount for its first index
-    userSolarData.value.panelCount = panelCountTempo.value;
-    configId.value = userSolarData.value.panelCount - userSolarData.value.minPanelCount;
-    await showSolarPotential(configId.value);
+    userSolarData.value.panelCount = buildingInsights.value.solarPotential.solarPanelConfigs[configIdIndex.value].panelsCount;
+    await showSolarPotential(configIdIndex.value);
 }
+
+function getConfigIdForFullEnergyCoverage() {
+    for (let i = 0; i < buildingInsights.value.solarPotential.solarPanelConfigs.length; i++) {
+        if (buildingInsights.value.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh * panelCapacityRatioCalc(userSolarData.value) * dcToAcDerate(userSolarData.value) >= yearlyEnergyConsumptionKwh(userSolarData.value)) {
+            return i;
+        }
+    }
+    return 0
+}
+
 
 
 let panelConfig: SolarPanelConfig | undefined;
 let solarPanels: google.maps.Polygon[] = [];
-async function showSolarPotential(configId: number = 0) {
+
+async function setNewPanelConfig() {
+    panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[configIdIndex.value];
+    userSolarData.value.yearlyEnergyDcKwh = panelConfig.yearlyEnergyDcKwh;
+    userSolarData.value.panelCount = panelConfig.panelsCount;
+}
+
+async function showSolarPotential(configIdIndex = 0) {
+    // Needs buildingInsights to do something
     if (buildingInsights.value == null) {
         return;
     }
-    // console.log('showSolarPotential');
+
     solarPanels.map((panel) => panel.setMap(null));
     solarPanels = [];
-    panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[configId];
-    userSolarData.value.yearlyEnergyDcKwh = panelConfig.yearlyEnergyDcKwh;
-    userSolarData.value.panelCount = panelConfig.panelsCount;
-    panelCountTempo.value = panelConfig.panelsCount;
+    setNewPanelConfig();
 
     // Create the solar panels on the map.
     const solarPotential = buildingInsights.value.solarPotential;
@@ -456,6 +471,10 @@ async function showSolarPotential(configId: number = 0) {
         panel.setMap(showPanels.value && panelConfig && i < panelConfig.panelsCount ? map : null)
     );
 }
+
+
+
+
 
 
 const icon = 'layers';
