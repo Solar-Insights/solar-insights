@@ -18,7 +18,7 @@
                     Yearly Energy
                 </div>
                 <div>
-                    {{ yearlyEnergyCalc(userSolarData).toFixed(0) }} kWh
+                    {{ strToLargeNumberDisplay(yearlyEnergyCalc(userSolarData).toFixed(0)) }} kWh
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                     Installation Size
                 </div>  
                 <div>
-                    {{ installationSizeCalc(userSolarData).toFixed(1) }} kW
+                    {{ strToLargeNumberDisplay(installationSizeCalc(userSolarData).toFixed(1)) }} kW
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     Installation Cost
                 </div>
                 <div>
-                    {{ installationCostCalc(userSolarData).toFixed(0) }} $
+                    {{ strToLargeNumberDisplay(installationCostCalc(userSolarData).toFixed(0)) }} $
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
                     Cost without solar panels
                 </div>
                 <div>
-                    {{ costWithoutSolarInstallation(userSolarData).toFixed(0) }} $
+                    {{ strToLargeNumberDisplay(costWithoutSolarInstallation(userSolarData).toFixed(0)) }} $
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
                     Cost with solar panels
                 </div>
                 <div>
-                    {{ costWithSolarInstallation(userSolarData).toFixed(0) }} $
+                    {{ strToLargeNumberDisplay(costWithSolarInstallation(userSolarData).toFixed(0)) }} $
                 </div>
             </div>
         </div>
@@ -100,7 +100,7 @@
                     Total saved cost
                 </div>
                 <div>
-                    {{ (costWithoutSolarInstallation(userSolarData) - costWithSolarInstallation(userSolarData)).toFixed(0) }}  $
+                    {{ strToLargeNumberDisplay((costWithoutSolarInstallation(userSolarData) - costWithSolarInstallation(userSolarData)).toFixed(0)) }}  $
                 </div>
             </div>
         </div>
@@ -135,6 +135,7 @@ import { PropType, onMounted, watch, ref } from 'vue';
 import { BuildingInsights, UserSolarData } from '@/util/solarTypes';
 import { getBreakEvenYear, drawGoogleChart, yearlyEnergyCalc, installationSizeCalc, installationCostCalc, energyCoveredCalc, costWithSolarInstallation, costWithoutSolarInstallation } from "@/util/solarFunctions";
 import { batteryCharging } from "@/util/constants";
+import { strToLargeNumberDisplay } from '@/util/generalFunctions';
 
 const props = defineProps({
     buildingInsights: {

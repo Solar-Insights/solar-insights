@@ -18,7 +18,7 @@
                     Roof area
                 </div>
                 <div>
-                    {{ buildingInsights?.solarPotential.wholeRoofStats.areaMeters2.toFixed(0) }} m²
+                    {{ strToLargeNumberDisplay(buildingInsights?.solarPotential.wholeRoofStats.areaMeters2.toFixed(0)) }} m²
                 </div>
             </div>
             <div class="detail-text mt-1" style="margin-left: 33.6px;">
@@ -33,7 +33,7 @@
                     Annual sunlight
                 </div>
                 <div>
-                    {{ buildingInsights?.solarPotential.maxSunshineHoursPerYear.toFixed(0) }} hrs
+                    {{ strToLargeNumberDisplay(buildingInsights?.solarPotential.maxSunshineHoursPerYear.toFixed(0)) }} hrs
                 </div>
             </div>
             <div class="detail-text mt-1" style="margin-left: 33.6px;">
@@ -60,6 +60,7 @@
 import { PropType } from 'vue';
 // Util
 import { BuildingInsights, UserSolarData } from '@/util/solarTypes';
+import { strToLargeNumberDisplay } from '@/util/generalFunctions';
 
 const props = defineProps({
     buildingInsights: {
