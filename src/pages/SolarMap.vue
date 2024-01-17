@@ -277,11 +277,12 @@
 import { onMounted, ref, watch } from 'vue';
 // Util
 import { BuildingInsights, LayerId, SolarLayers, Layer, SolarPanelConfig, UserSolarData } from '@/util/solarTypes';
+import { getConfigIdForFullEnergyCoverage } from "@/util/solarFunctions";
 import { panelsPalette } from "@/util/constants"
 import { RequestError, Coordinates } from '@/util/generalTypes';
-import { createPalette, rgbToColor, colorToRGB, lerp, normalize, clamp,  } from "@/util/generalFunctions";
+import { createPalette, rgbToColor, colorToRGB, lerp, normalize, clamp, initMap, initAutocomplete } from "@/util/generalFunctions";
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/api/googleMapsAPI";
-import { initMap, initAutocomplete } from "@/util/generalFunctions";
+
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
@@ -348,7 +349,7 @@ onMounted(async () => {
     await updateBuildingInsights(coord);
     geometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary
     showDataLayer(true);
-    showSolarPotential();
+    showSolarPotential(getConfigIdForFullEnergyCoverage(buildingInsights.value, userSolarData.value));
 })
 
 watch(showPanels, async () => {
@@ -415,6 +416,8 @@ async function showSolarPotential(configId: number = 0) {
     solarPanels = [];
     panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[configId];
     userSolarData.value.yearlyEnergyDcKwh = panelConfig.yearlyEnergyDcKwh;
+    userSolarData.value.panelCount = panelConfig.panelsCount;
+    panelCountTempo.value = panelConfig.panelsCount;
 
     // Create the solar panels on the map.
     const solarPotential = buildingInsights.value.solarPotential;

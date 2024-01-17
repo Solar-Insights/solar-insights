@@ -1,5 +1,5 @@
 // Util
-import { UserSolarData } from "@/util/solarTypes";
+import { BuildingInsights, UserSolarData } from "@/util/solarTypes";
 import { GoogleCharts } from 'google-charts';
 
 /*
@@ -208,4 +208,13 @@ export function drawGoogleChart(userSolarData: UserSolarData, costChart: HTMLEle
         chart.draw(data, options);
     },
     { packages: ['line'] },);
+}
+
+export function getConfigIdForFullEnergyCoverage(buildingInsights: BuildingInsights, userSolarData: UserSolarData) {
+    for (let i = 0; i < buildingInsights.solarPotential.solarPanelConfigs.length; i++) {
+        if (buildingInsights.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh * panelCapacityRatioCalc(userSolarData) * dcToAcDerate(userSolarData) >= yearlyEnergyConsumptionKwh(userSolarData)) {
+            return i;
+        }
+    }
+    return 0
 }
