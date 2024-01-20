@@ -3,6 +3,7 @@
         <v-card id="map-details" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
             <v-text-field
                 v-model="autocompleteValue"
+                @keypress.enter="handleEnterKeyOnSearch"
                 id="autocomplete-search"
                 :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
                 placeholder="Find a location"
@@ -358,18 +359,29 @@ watch(showPanels, async () => {
     await showSolarPotential();
 });
 
+// Magic to change the value to first choice on enter key: will trigger 2 events, prevent first one
+let autocompleteChanged: boolean = false;
+
 async function initListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map) {
     // When the search bar is used, changes the location of the map, and queries the new coordinates' solar potential
     autocomplete.addListener("place_changed", async () => {
         const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
         if ( !newPlace || !newPlace.formatted_address ) {
-            emitAlert(
-                "warning", 
-                "Could not process the prompted address",
-                "Choose a valid address from the dropdown menu."
-            );
-            return;
+            if (autocompleteChanged) {
+                emitAlert(
+                    "warning", 
+                    "Could not process the prompted address",
+                    "Choose a valid address from the dropdown menu."
+                );
+                autocompleteChanged = false;
+                return;
+            } else {
+                autocompleteChanged = true;
+                return;
+            }
         }
+
+        autocompleteChanged = false;
 
         const newCoord: Coordinates | undefined = await getGeocoding(newPlace.formatted_address);
         if ( !newCoord ) {
@@ -382,12 +394,32 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
             return;
         }
         
+        autocompleteValue.value = newPlace.formatted_address;
         map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
         await updateBuildingInsights({ lat: newCoord.lat, lng: newCoord.lng });
         configIdIndex.value = getConfigIdForFullEnergyCoverage();
         showDataLayer(true);
         showSolarPotential();
     });
+}
+
+function handleEnterKeyOnSearch(event: KeyboardEvent) {
+    // Prevents default behavior, then dispatch arrowDown and enter to choose first choice
+    const autocompleteSearch: HTMLInputElement = document.getElementById("autocomplete-search") as HTMLInputElement;
+    autocompleteSearch.dispatchEvent(new KeyboardEvent('keydown', {
+        key: "ArrowDown",
+        keyCode: 40,
+        code: "ArrowDown",
+        bubbles: true,
+        cancelable: true
+    }));
+    autocompleteSearch.dispatchEvent(new KeyboardEvent('keydown', {
+        key: "Enter",
+        keyCode: 13,
+        code: "Enter",
+        bubbles: true,
+        cancelable: true
+    }));
 }
 
 async function updateBuildingInsights(coord: Coordinates) {
