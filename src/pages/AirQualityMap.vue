@@ -1,32 +1,27 @@
 <template>
     <div class="d-flex" style="height: 100vh;">
         <v-card id="map-details" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
-            <!-- Header of air quality details -->
-            <v-text-field
-                v-model="autocompleteValue"
-                id="autocomplete-search"
-                :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
-                placeholder="Find a location"
-                hide-details
-                single-line
-                variant="solo"
-                rounded
-            >
-                <v-icon slot="prepend-inner-icon" color="theme" class="my-auto mr-3">mdi-google-maps</v-icon>
-            </v-text-field>
-
-            <v-divider/>
-
             <v-card-title class="map-title">
                 <v-icon class="mr-2">mdi-weather-windy</v-icon> Air Quality
             </v-card-title>
 
-            <v-divider/>
+            <v-row class="autocomplete-container">
+                <v-text-field
+                    v-model="autocompleteValue"
+                    @keypress.enter="handleEnterKeyOnSearch"
+                    id="autocomplete-search"
+                    :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
+                    placeholder="Find a location"
+                    hide-details
+                    variant="outlined"
+                    prepend-inner-icon="mdi-google-maps"
+                >
+                </v-text-field>
+            </v-row>
 
-
-            <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
+            <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'mt-0 pt-0 map-data-computer'">
                 <div v-if="Object.keys(airQualityDataDisplayed).length" class="text-center">
-                    <div class="my-4">
+                    <div class="mt-3 mb-8">
                         <div class="mb-2">
                             {{ airQualityDataDisplayed.indexes[0].displayName }} 
                         </div>
@@ -147,18 +142,28 @@ onMounted(async () => {
     await initListeners(autocomplete, map, marker);
 });
 
+// Magic to change the value to first choice on enter key: will trigger 2 events, prevent first one
+let autocompleteChanged: boolean = false;
 
 async function initListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map, marker: google.maps.Marker) {
     autocomplete.addListener("place_changed", async () => {
         const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
         if ( !newPlace || !newPlace.formatted_address ) {
-            emitAlert(
-                "warning", 
-                "Could not process the prompted address",
-                "Choose a valid address from the dropdown menu."
-            );
-            return;
+            if (autocompleteChanged) {
+                emitAlert(
+                    "warning", 
+                    "Could not process the prompted address",
+                    "Choose a valid address from the dropdown menu."
+                );
+                autocompleteChanged = false;
+                return;
+            } else {
+                autocompleteChanged = true;
+                return;
+            }
         }
+
+        autocompleteChanged = false;
 
         const newCoord: Coordinates | undefined = await getGeocoding(newPlace.formatted_address);
         if ( !newCoord ) {
@@ -171,6 +176,7 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
             return;
         }
         
+        autocompleteValue.value = newPlace.formatted_address;
         map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
         marker.setMap(null);
         marker = initMarker(newCoord, map);
@@ -202,6 +208,25 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
 
         autocompleteValue.value = formattedAddress;
     });
+}
+
+function handleEnterKeyOnSearch(event: KeyboardEvent) {
+    // Prevents default behavior, then dispatch arrowDown and enter to choose first choice
+    const autocompleteSearch: HTMLInputElement = document.getElementById("autocomplete-search") as HTMLInputElement;
+    autocompleteSearch.dispatchEvent(new KeyboardEvent('keydown', {
+        key: "ArrowDown",
+        keyCode: 40,
+        code: "ArrowDown",
+        bubbles: true,
+        cancelable: true
+    }));
+    autocompleteSearch.dispatchEvent(new KeyboardEvent('keydown', {
+        key: "Enter",
+        keyCode: 13,
+        code: "Enter",
+        bubbles: true,
+        cancelable: true
+    }));
 }
 
 function airQualityDataHandler() {

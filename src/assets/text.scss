@@ -25,6 +25,7 @@ $text-emphasis: #535353;
 .map-title {
     @extend .text-center;
     @extend .font-weight-regular;
+    @extend .my-2;
 }
 
 .section-title   {

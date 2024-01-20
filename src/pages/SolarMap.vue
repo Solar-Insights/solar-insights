@@ -1,27 +1,23 @@
 <template>
     <div class="d-flex" style="height: 100vh;">
         <v-card id="map-details" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
-            <v-text-field
-                v-model="autocompleteValue"
-                @keypress.enter="handleEnterKeyOnSearch"
-                id="autocomplete-search"
-                :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
-                placeholder="Find a location"
-                hide-details
-                single-line
-                variant="solo"
-                rounded
-            >
-                <v-icon slot="prepend-inner-icon" color="theme" class="my-auto mr-3">mdi-google-maps</v-icon>
-            </v-text-field>
-
-            <v-divider/>
-
             <v-card-title class="map-title">
                 <v-icon class="mr-2 mb-1">mdi-weather-sunny</v-icon> Solar Potential
             </v-card-title>
-
-            <v-divider/>
+            
+            <v-row class="autocomplete-container">
+                <v-text-field
+                    v-model="autocompleteValue"
+                    @keypress.enter="handleEnterKeyOnSearch"
+                    id="autocomplete-search"
+                    :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
+                    placeholder="Find a location"
+                    hide-details
+                    variant="outlined"
+                    prepend-inner-icon="mdi-google-maps"
+                >
+                </v-text-field>
+            </v-row>  
             
             <div class="mb-3 mx-2 pa-2 mt-3">
                 <v-btn 

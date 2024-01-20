@@ -47,23 +47,12 @@ $scrollbars: #555;
 /*
     Search component
 */
+.autocomplete-container {
+    flex-shrink: 1; 
+    flex-grow: 0;
+}
 .autocomplete-search {
     @extend .px-3;
-    .v-field.v-field--prepended {
-        @extend .py-1;
-        border: 1px solid rgba(0, 0, 0, 0.4);
-    };
-    .v-field {
-        --v-field-input-padding-top: 0 !important;
-        --v-field-input-padding-bottom: 0 !important;
-    }
-    .v-field--variant-filled .v-field__outline::before, .v-field--variant-underlined .v-field__outline::before {
-        opacity: 0 ! important;
-    }
-    .v-field--variant-filled .v-field__outline::after, .v-field--variant-underlined .v-field__outline::after {
-        opacity: 0 ! important;
-    }
-    max-height: 2rem !important;
 }
 .autocomplete-search-mobile {
     @extend .autocomplete-search;
@@ -72,7 +61,8 @@ $scrollbars: #555;
 .autocomplete-search-computer {
     @extend .autocomplete-search;
     @extend .w-100;
-    @extend .my-4;
+    @extend .mx-2;
+    @extend .my-6;
 }
 
 
