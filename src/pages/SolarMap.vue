@@ -558,8 +558,6 @@ let overlays: google.maps.GroundOverlay[] = [];
 let showRoofOnly = false;
 
 async function showDataLayer(reset: boolean = false) {
-    if (!showHeatmap) return;
-    
     if (reset) {
         dataLayersResponse = undefined;
         requestError = undefined;
@@ -613,6 +611,9 @@ async function showDataLayer(reset: boolean = false) {
     //     day: day,
     // });
     overlays.map((overlay) => overlay.setMap(null));
+    if (!showHeatmap.value)
+        return;
+
     overlays = layer
         .render(showRoofOnly, month, day)
         .map((canvas) => new google.maps.GroundOverlay(canvas.toDataURL(), bounds));
