@@ -48,11 +48,11 @@ $scrollbars: #555;
     Search component
 */
 .autocomplete-container {
+    @extend .mx-4;
     flex-shrink: 1; 
     flex-grow: 0;
 }
 .autocomplete-search {
-    @extend .px-3;
 }
 .autocomplete-search-mobile {
     @extend .autocomplete-search;
@@ -61,7 +61,6 @@ $scrollbars: #555;
 .autocomplete-search-computer {
     @extend .autocomplete-search;
     @extend .w-100;
-    @extend .mx-2;
     @extend .my-6;
 }
 
