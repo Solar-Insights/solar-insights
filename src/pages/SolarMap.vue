@@ -72,14 +72,14 @@
                                         Count
                                     </div>
                                     <div class="text-right">
-                                        {{ buildingInsights.solarPotential.solarPanelConfigs[configIdIndex].panelsCount }} / {{ userSolarData.maxPanelCount }} panels
+                                        {{ buildingInsights.solarPotential === undefined ? 0 : buildingInsights.solarPotential.solarPanelConfigs[configIdIndex].panelsCount }} / {{ userSolarData.maxPanelCount }} panels
                                     </div>
                                 </div>
                                 <v-slider
                                     v-model="configIdIndex"
                                     @end="panelCountChange"
                                     :min="0" 
-                                    :max="buildingInsights.solarPotential.solarPanelConfigs.length === undefined ? 1 : buildingInsights.solarPotential.solarPanelConfigs.length - 1"
+                                    :max="buildingInsights.solarPotential === undefined ? 1 : buildingInsights.solarPotential.solarPanelConfigs.length - 1"
                                     step="1"
                                     color="theme"
                                 />
@@ -100,6 +100,12 @@
                                     </template>
                                 </v-text-field>
                             </div>
+
+                            <div>
+                                <v-switch v-model="showPanels" label="Show panels" inset color="theme" density="compact"/>
+                                <v-switch v-model="showHeatmap" label="Show heat map" inset color="theme" density="compact"/>
+                            </div>
+
                             <div class="w-100 text-center mb-2">
                                 <v-chip @click="advancedSettingsPanels.length == 0 ? advancedSettingsPanels=['advanced-settings-panels'] : advancedSettingsPanels=[]" color="theme" variant="text" :append-icon="advancedSettingsPanels.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"> Advanced Settings </v-chip>
                             </div>
@@ -136,11 +142,7 @@
                                         </v-text-field> 
                                     </v-expansion-panel-text>
                                 </v-expansion-panel>
-                            </v-expansion-panels>   
-
-                            <div>
-                                <v-switch v-model="showPanels" label="Show panels" inset color="theme" density="compact"/>
-                            </div>
+                            </v-expansion-panels>
                         </v-expansion-panel-text>
                     </v-expansion-panel>
 
@@ -301,6 +303,7 @@ function emitAlert(type: string, title: string, message: string) {
 const solarReadonlyPanel = ref(0);
 const configIdIndex = ref(0);
 const showPanels = ref(true);
+const showHeatmap = ref(true);
 const autocompleteValue = ref("");
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
@@ -357,6 +360,10 @@ onMounted(async () => {
 watch(showPanels, async () => {
     // Adjusts the display of solar panels on attribute change
     await showSolarPotential();
+});
+watch(showHeatmap, async () => {
+    // Adjusts the display of building heat map on attribute change
+    await showDataLayer(true);
 });
 
 // Magic to change the value to first choice on enter key: will trigger 2 events, prevent first one
@@ -551,6 +558,8 @@ let overlays: google.maps.GroundOverlay[] = [];
 let showRoofOnly = false;
 
 async function showDataLayer(reset: boolean = false) {
+    if (!showHeatmap) return;
+    
     if (reset) {
         dataLayersResponse = undefined;
         requestError = undefined;
