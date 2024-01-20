@@ -442,7 +442,7 @@ function getConfigIdForFullEnergyCoverage() {
             return i;
         }
     }
-    return 0
+    return buildingInsights.value.solarPotential.solarPanelConfigs.length - 1;
 }
 
 
