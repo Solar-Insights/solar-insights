@@ -295,7 +295,7 @@ function emitAlert(type: string, title: string, message: string) {
     });
 }
 
-// Data
+// Component data
 const solarReadonlyPanel = ref(0);
 const configIdIndex = ref(0);
 const showPanels = ref(true);
@@ -363,28 +363,28 @@ watch(showHeatmap, async () => {
 });
 
 // Magic to change the value to first choice on enter key: will trigger 2 events, prevent first one
-let autocompleteChanged: boolean = false;
+let autocompleteAlreadyChanged: boolean = false;
 
 async function initListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map) {
     // When the search bar is used, changes the location of the map, and queries the new coordinates' solar potential
     autocomplete.addListener("place_changed", async () => {
         const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
         if ( !newPlace || !newPlace.formatted_address ) {
-            if (autocompleteChanged) {
+            if (autocompleteAlreadyChanged) {
                 emitAlert(
                     "warning", 
                     "Could not process the prompted address",
                     "Choose a valid address from the dropdown menu."
                 );
-                autocompleteChanged = false;
+                autocompleteAlreadyChanged = false;
                 return;
             } else {
-                autocompleteChanged = true;
+                autocompleteAlreadyChanged = true;
                 return;
             }
         }
 
-        autocompleteChanged = false;
+        autocompleteAlreadyChanged = false;
 
         const newCoord: Coordinates | undefined = await getGeocoding(newPlace.formatted_address);
         if ( !newCoord ) {

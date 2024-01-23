@@ -116,16 +116,15 @@ let marker: google.maps.Marker;
 let autocomplete: google.maps.places.Autocomplete;
 
 onMounted(async () => {
-    // Setup values
     const coord: Coordinates = { lat: 46.811943, lng: -71.205002 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
     const parent: HTMLInputElement = document.getElementById("parent-search") as HTMLInputElement;
 
-    // Init values of google components
     map = await initMap(coord, mapElement, "AIR_QUALITY");
     marker = initMarker(coord, map);
     autocomplete = await initAutocomplete("autocomplete-search");
     autocompleteValue.value = await getReverseGeocoding(coord);
+
     if (map == undefined || marker == undefined || autocomplete == undefined) {
         emitAlert(
             "error", 
@@ -134,36 +133,39 @@ onMounted(async () => {
         );
     }
 
-    // Add map overlay and autocomplete on map + Perform first air quality fetch
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     airQualityDataDisplayed.value = await getAirQualityData(coord);
     handleEmptyAirQualityData();
     
-    await initListeners(autocomplete, map, marker);
+    await initListeners();
 });
 
-// Magic to change the value to first choice on enter key: will trigger 2 events, prevent first one
-let autocompleteChanged: boolean = false;
+async function initListeners() {
+    await setPlaceChangedOnAutocompleteListener();
+    await setDblClickListenerToMap();
+}
 
-async function initListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map, marker: google.maps.Marker) {
+let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events, prevent first one from sending request
+
+async function setPlaceChangedOnAutocompleteListener() {
     autocomplete.addListener("place_changed", async () => {
         const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
         if ( !newPlace || !newPlace.formatted_address ) {
-            if (autocompleteChanged) {
+            if (autocompleteAlreadyChanged) {
                 emitAlert(
                     "warning", 
                     "Could not process the prompted address",
                     "Choose a valid address from the dropdown menu."
                 );
-                autocompleteChanged = false;
+                autocompleteAlreadyChanged = false;
                 return;
             } else {
-                autocompleteChanged = true;
+                autocompleteAlreadyChanged = true;
                 return;
             }
         }
 
-        autocompleteChanged = false;
+        autocompleteAlreadyChanged = false;
 
         const newCoord: Coordinates | undefined = await getGeocoding(newPlace.formatted_address);
         if ( !newCoord ) {
@@ -176,14 +178,12 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
             return;
         }
         
-        autocompleteValue.value = newPlace.formatted_address;
-        map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
-        marker.setMap(null);
-        marker = initMarker(newCoord, map);
-        airQualityDataDisplayed.value = await getAirQualityData(newCoord);
+        await syncCurrentDataWithNewRequest(newCoord, newPlace.formatted_address)
     });
+}
 
-    map.addListener("dblclick", async (mouseEvent: any) => {
+async function setDblClickListenerToMap() {
+        map.addListener("dblclick", async (mouseEvent: any) => {
         const newCoord: Coordinates = {
             lat: mouseEvent.latLng.lat(),
             lng: mouseEvent.latLng.lng()
@@ -200,15 +200,19 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
             return;
         }
 
-        map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
-        marker.setMap(null);
-        marker = initMarker(newCoord, map);
-        airQualityDataDisplayed.value = await getAirQualityData(newCoord);
-        handleEmptyAirQualityData();
-
-        autocompleteValue.value = formattedAddress;
+        await syncCurrentDataWithNewRequest(newCoord, formattedAddress);
     });
 }
+
+async function syncCurrentDataWithNewRequest(newCoord: Coordinates, formattedAddress: string) {
+    map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
+    marker.setMap(null);
+    marker = initMarker(newCoord, map);
+    airQualityDataDisplayed.value = await getAirQualityData(newCoord);
+    autocompleteValue.value = formattedAddress;
+    handleEmptyAirQualityData();
+}
+
 
 function handleEmptyAirQualityData() {
     if ( _.isEqual(airQualityDataDisplayed.value, {}) ) {
