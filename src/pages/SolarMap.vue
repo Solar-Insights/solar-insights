@@ -8,7 +8,7 @@
             <v-row class="autocomplete-container">
                 <v-text-field
                     v-model="autocompleteValue"
-                    @keypress.enter="handleEnterKeyOnSearch"
+                    @keypress.enter="prepareHandlerEnterKeyOnSearchBar"
                     id="autocomplete-search"
                     :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
                     placeholder="Find a location"
@@ -278,7 +278,7 @@ import { onMounted, ref, watch } from 'vue';
 import { BuildingInsights, LayerId, SolarLayers, Layer, SolarPanelConfig, UserSolarData } from '@/util/solarTypes';
 import { panelsPalette } from "@/util/constants"
 import { RequestError, Coordinates } from '@/util/generalTypes';
-import { createPalette, rgbToColor, colorToRGB, lerp, normalize, clamp, initMap, initAutocomplete } from "@/util/generalFunctions";
+import { createPalette, rgbToColor, colorToRGB, lerp, normalize, clamp, initMap, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/util/generalFunctions";
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/api/googleMapsAPI";
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
@@ -404,25 +404,6 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
         showDataLayer(true);
         showSolarPotential();
     });
-}
-
-function handleEnterKeyOnSearch(event: KeyboardEvent) {
-    // Prevents default behavior, then dispatch arrowDown and enter to choose first choice
-    const autocompleteSearch: HTMLInputElement = document.getElementById("autocomplete-search") as HTMLInputElement;
-    autocompleteSearch.dispatchEvent(new KeyboardEvent('keydown', {
-        key: "ArrowDown",
-        keyCode: 40,
-        code: "ArrowDown",
-        bubbles: true,
-        cancelable: true
-    }));
-    autocompleteSearch.dispatchEvent(new KeyboardEvent('keydown', {
-        key: "Enter",
-        keyCode: 13,
-        code: "Enter",
-        bubbles: true,
-        cancelable: true
-    }));
 }
 
 async function updateBuildingInsights(coord: Coordinates) {

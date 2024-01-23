@@ -3,7 +3,7 @@
         <v-main>
             <v-container class="app-container" fluid>
                 <AlertComponent v-if="displayAlert" :type="alertValue.type" :title="alertValue.title" :message="alertValue.message" :timer-progress="iteLeft"/>
-                <router-view :key="$route.fullPath" @alert="handleAlert"></router-view>
+                <router-view :key="$route.fullPath" @alert="handleAlertLifeCycle"></router-view>
             </v-container>
         </v-main>
     </v-app>
@@ -30,7 +30,7 @@ const alertValue: alertData = reactive({
 const iteLeft = ref(100.0);
 let currentInterval: NodeJS.Timeout | undefined = undefined;
 
-const handleAlert = (data: alertData) => {
+const handleAlertLifeCycle = (data: alertData) => {
     displayAlert.value = true;
     alertValue.type = data.type;
     alertValue.title = data.title;

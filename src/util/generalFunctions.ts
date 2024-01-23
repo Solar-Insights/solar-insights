@@ -191,29 +191,23 @@ export async function initAutocomplete(autocompleteElementId: string): Promise<g
     return new Autocomplete(input, options);
 }
 
-// export function initLabelOnlyMap() {
-//     return new google.maps.StyledMapType(
-//         [
-//             {
-//                 stylers: [{
-//                     visibility: 'off'
-//                 }]
-//             }, 
-//             {
-//                 featureType: 'administrative',
-//                 elementType: 'labels',
-//                 stylers: [
-//                     { visibility: 'on' },
-//                     { color: '#55595C' }
-//                 ]
-//             },
-//             {
-//                 featureType: 'administrative',
-//                 elementType: 'labels.text.stroke',
-//                 stylers: [
-//                     { color: "#FFFFFF"}
-//                 ]
-//             }
-//         ],
-//     );
-// }
+export function prepareHandlerEnterKeyOnSearchBar() {
+    handleEnterKeyOnSearchBar(document.getElementById("autocomplete-search") as HTMLInputElement);
+}
+
+function handleEnterKeyOnSearchBar(autocompleteSearch: HTMLInputElement) {
+    autocompleteSearch.dispatchEvent(new KeyboardEvent('keydown', {
+        key: "ArrowDown",
+        keyCode: 40,
+        code: "ArrowDown",
+        bubbles: true,
+        cancelable: true
+    }));
+    autocompleteSearch.dispatchEvent(new KeyboardEvent('keydown', {
+        key: "Enter",
+        keyCode: 13,
+        code: "Enter",
+        bubbles: true,
+        cancelable: true
+    }));
+}

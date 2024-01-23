@@ -8,7 +8,7 @@
             <v-row class="autocomplete-container">
                 <v-text-field
                     v-model="autocompleteValue"
-                    @keypress.enter="handleEnterKeyOnSearch"
+                    @keypress.enter="prepareHandlerEnterKeyOnSearchBar"
                     id="autocomplete-search"
                     :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
                     placeholder="Find a location"
@@ -89,7 +89,7 @@ import _ from 'lodash';
 import { AirQualityData } from "@/util/airQualityTypes";
 import { Coordinates } from "@/util/generalTypes";
 import { pollutants, circularBarColorSelector } from "@/util/constants";
-import { initMap, initMarker, initAutocomplete } from "@/util/generalFunctions";
+import { initMap, initMarker, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/util/generalFunctions";
 import { getGeocoding, getReverseGeocoding, getAirQualityData } from "@/api/googleMapsAPI";
 // Components
 import PollutantTab from "@/components/air_quality/PollutantTab.vue";
@@ -137,7 +137,7 @@ onMounted(async () => {
     // Add map overlay and autocomplete on map + Perform first air quality fetch
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     airQualityDataDisplayed.value = await getAirQualityData(coord);
-    airQualityDataHandler();
+    handleEmptyAirQualityData();
     
     await initListeners(autocomplete, map, marker);
 });
@@ -204,32 +204,13 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
         marker.setMap(null);
         marker = initMarker(newCoord, map);
         airQualityDataDisplayed.value = await getAirQualityData(newCoord);
-        airQualityDataHandler();
+        handleEmptyAirQualityData();
 
         autocompleteValue.value = formattedAddress;
     });
 }
 
-function handleEnterKeyOnSearch(event: KeyboardEvent) {
-    // Prevents default behavior, then dispatch arrowDown and enter to choose first choice
-    const autocompleteSearch: HTMLInputElement = document.getElementById("autocomplete-search") as HTMLInputElement;
-    autocompleteSearch.dispatchEvent(new KeyboardEvent('keydown', {
-        key: "ArrowDown",
-        keyCode: 40,
-        code: "ArrowDown",
-        bubbles: true,
-        cancelable: true
-    }));
-    autocompleteSearch.dispatchEvent(new KeyboardEvent('keydown', {
-        key: "Enter",
-        keyCode: 13,
-        code: "Enter",
-        bubbles: true,
-        cancelable: true
-    }));
-}
-
-function airQualityDataHandler() {
+function handleEmptyAirQualityData() {
     if ( _.isEqual(airQualityDataDisplayed.value, {}) ) {
         emitAlert(
             "error", 
