@@ -40,7 +40,8 @@
                             <v-icon class="mr-2" size="medium">mdi-medal-outline</v-icon> {{ airQualityDataDisplayed.indexes[0].category }}
                         </div>
                         <div>
-                            <v-icon class="mr-2" size="medium">mdi-exclamation-thick</v-icon> Dominant pollutant - {{ pollutants[airQualityDataDisplayed.indexes[0].dominantPollutant as keyof typeof pollutants].displayName }}
+                            <v-icon class="mr-2" size="medium">mdi-exclamation-thick</v-icon> 
+                            Dominant pollutant - {{ pollutants[airQualityDataDisplayed.indexes[0].dominantPollutant as keyof typeof pollutants].displayName }}
                         </div>
                     </div>
                     
@@ -114,7 +115,7 @@ const airQualityDataDisplayed = ref<AirQualityData>({} as AirQualityData);
 let map: google.maps.Map;
 let marker: google.maps.Marker;
 let autocomplete: google.maps.places.Autocomplete;
-
+  
 onMounted(async () => {
     const coord: Coordinates = { lat: 46.811943, lng: -71.205002 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;

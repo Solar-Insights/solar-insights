@@ -103,7 +103,14 @@
                             </div>
 
                             <div class="w-100 text-center mb-2">
-                                <v-chip @click="advancedSettingsPanels.length == 0 ? advancedSettingsPanels=['advanced-settings-panels'] : advancedSettingsPanels=[]" color="theme" variant="text" :append-icon="advancedSettingsPanels.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"> Advanced Settings </v-chip>
+                                <v-chip 
+                                    @click="advancedSettingsPanels.length == 0 ? advancedSettingsPanels=['advanced-settings-panels'] : advancedSettingsPanels=[]" 
+                                    color="theme" 
+                                    variant="text" 
+                                    :append-icon="advancedSettingsPanels.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"
+                                > 
+                                        Advanced Settings 
+                                </v-chip>
                             </div>
 
                             <v-expansion-panels v-model="advancedSettingsPanels">
@@ -219,7 +226,14 @@
                             </div>
 
                             <div class="w-100 text-center mb-2">
-                                <v-chip @click="advancedSettingsSolarPotential.length == 0 ? advancedSettingsSolarPotential=['advanced-settings-solar-potential'] : advancedSettingsSolarPotential=[]" color="theme" variant="text" :append-icon="advancedSettingsSolarPotential.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"> Advanced Settings </v-chip>
+                                <v-chip 
+                                    @click="advancedSettingsSolarPotential.length == 0 ? advancedSettingsSolarPotential=['advanced-settings-solar-potential'] : advancedSettingsSolarPotential=[]" 
+                                    color="theme"
+                                    variant="text" 
+                                    :append-icon="advancedSettingsSolarPotential.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"
+                                > 
+                                    Advanced Settings 
+                                </v-chip>
                             </div>
 
                             <v-expansion-panels v-model="advancedSettingsSolarPotential">
@@ -328,14 +342,13 @@ let autocomplete: google.maps.places.Autocomplete;
 let geometryLibrary: google.maps.GeometryLibrary;
 
 onMounted(async () => {
-    // Gets starting coords and map element
     const coord: Coordinates = { lat: 46.81701, lng: -71.36838 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
     
-    // Init values of Google components
     map = await initMap(coord, mapElement, "SOLAR");
     autocomplete = await initAutocomplete("autocomplete-search");
     autocompleteValue.value = await getReverseGeocoding(coord);
+
     if (map == undefined || autocomplete == undefined) {
         emitAlert(
             "error", 
@@ -344,29 +357,29 @@ onMounted(async () => {
         );
     }
     
-    // Adds geometry library and queries the starting coordinates' solar potential
     geometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary
-    await initListeners(autocomplete, map);
+    await initListeners();
     await updateBuildingInsights(coord);
     configIdIndex.value = getConfigIdForFullEnergyCoverage();
     showDataLayer(true);
-    showSolarPotential();
+    syncMapWithNewBuildingInsights();
 })
 
 watch(showPanels, async () => {
-    // Adjusts the display of solar panels on attribute change
-    await showSolarPotential();
+    await syncMapWithNewBuildingInsights();
 });
+
 watch(showHeatmap, async () => {
-    // Adjusts the display of building heat map on attribute change
     await showDataLayer(true);
 });
 
-// Magic to change the value to first choice on enter key: will trigger 2 events, prevent first one
-let autocompleteAlreadyChanged: boolean = false;
+let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events, prevent first one from sending request
 
-async function initListeners(autocomplete: google.maps.places.Autocomplete, map: google.maps.Map) {
-    // When the search bar is used, changes the location of the map, and queries the new coordinates' solar potential
+async function initListeners() {
+    await setPlaceChangedOnAutocompleteListener();
+}
+
+async function setPlaceChangedOnAutocompleteListener() {
     autocomplete.addListener("place_changed", async () => {
         const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
         if ( !newPlace || !newPlace.formatted_address ) {
@@ -397,17 +410,20 @@ async function initListeners(autocomplete: google.maps.places.Autocomplete, map:
             return;
         }
         
-        autocompleteValue.value = newPlace.formatted_address;
-        map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
-        await updateBuildingInsights({ lat: newCoord.lat, lng: newCoord.lng });
-        configIdIndex.value = getConfigIdForFullEnergyCoverage();
-        showDataLayer(true);
-        showSolarPotential();
+        await syncCurrentDataWithNewRequest(newCoord, newPlace.formatted_address);
     });
 }
 
+async function syncCurrentDataWithNewRequest(newCoord: Coordinates, formattedAddress: string) {
+    autocompleteValue.value = formattedAddress;
+    map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
+    await updateBuildingInsights({ lat: newCoord.lat, lng: newCoord.lng });
+    configIdIndex.value = getConfigIdForFullEnergyCoverage();
+    showDataLayer(true);
+    syncMapWithNewBuildingInsights();
+}
+
 async function updateBuildingInsights(coord: Coordinates) {
-    // Updates the building insights value and proceeds to update all related data
     buildingInsights.value = await findClosestBuilding(coord);
     userSolarData.value.minPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
     userSolarData.value.maxPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[buildingInsights.value.solarPotential.solarPanelConfigs.length - 1].panelsCount;
@@ -415,9 +431,8 @@ async function updateBuildingInsights(coord: Coordinates) {
 }
 
 async function panelCountChange() {
-    // Because the list of configs has the minPanelCount for its first index
     userSolarData.value.panelCount = buildingInsights.value.solarPotential.solarPanelConfigs[configIdIndex.value].panelsCount;
-    await showSolarPotential(configIdIndex.value);
+    await syncMapWithNewBuildingInsights();
 }
 
 function getConfigIdForFullEnergyCoverage() {
@@ -434,23 +449,28 @@ function getConfigIdForFullEnergyCoverage() {
 let panelConfig: SolarPanelConfig | undefined;
 let solarPanels: google.maps.Polygon[] = [];
 
+async function syncMapWithNewBuildingInsights() {
+    if (buildingInsights.value == null) {
+        return;
+    }
+
+    removeSolarPanelsFromMap();
+    setNewPanelConfig();
+    addSolarPanelsToMap();
+}
+
+function removeSolarPanelsFromMap() {
+    solarPanels.map((panel) => panel.setMap(null));
+    solarPanels = [];
+}
+
 async function setNewPanelConfig() {
     panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[configIdIndex.value];
     userSolarData.value.yearlyEnergyDcKwh = panelConfig.yearlyEnergyDcKwh;
     userSolarData.value.panelCount = panelConfig.panelsCount;
 }
 
-async function showSolarPotential(configIdIndex = 0) {
-    // Needs buildingInsights to do something
-    if (buildingInsights.value == null) {
-        return;
-    }
-
-    solarPanels.map((panel) => panel.setMap(null));
-    solarPanels = [];
-    setNewPanelConfig();
-
-    // Create the solar panels on the map.
+function addSolarPanelsToMap() {
     const solarPotential = buildingInsights.value.solarPotential;
     const palette = createPalette(panelsPalette, 256).map(rgbToColor);
     const minEnergy = solarPotential.solarPanels.slice(-1)[0].yearlyEnergyDcKwh;
@@ -536,18 +556,7 @@ let showRoofOnly = false;
 
 async function showDataLayer(reset: boolean = false) {
     if (reset) {
-        dataLayersResponse = undefined;
-        requestError = undefined;
-        layer = undefined;
-
-        // Default values per layer.
-        showRoofOnly = ['annualFlux', 'monthlyFlux', 'hourlyShade'].includes(layerId);
-        map.setMapTypeId(layerId == 'rgb' ? 'roadmap' : 'satellite');
-        overlays.map((overlay) => overlay.setMap(null));
-        month = layerId == 'hourlyShade' ? 3 : 0;
-        day = 14;
-        hour = 5;
-        playAnimation = ['monthlyFlux', 'hourlyShade'].includes(layerId);
+        resetDataLayer();
     }
 
     if (layerId == 'none' || buildingInsights.value == null) {
@@ -576,17 +585,32 @@ async function showDataLayer(reset: boolean = false) {
             requestError = e as RequestError;
             return;
         }
+    }
 
-        if (!layer) return;
+    resetHeatmapLayer();
+}
+
+function resetDataLayer() {
+    dataLayersResponse = undefined;
+    requestError = undefined;
+    layer = undefined;
+
+    // Default values per layer.
+    showRoofOnly = ['annualFlux', 'monthlyFlux', 'hourlyShade'].includes(layerId);
+    map.setMapTypeId(layerId == 'rgb' ? 'roadmap' : 'satellite');
+    overlays.map((overlay) => overlay.setMap(null));
+    month = layerId == 'hourlyShade' ? 3 : 0;
+    day = 14;
+    hour = 5;
+    playAnimation = ['monthlyFlux', 'hourlyShade'].includes(layerId);
+}
+
+function resetHeatmapLayer() {
+    if (!layer) {
+        return;
     }
 
     const bounds = layer.bounds;
-    // console.log('Render layer:', {
-    //     layerId: layer.id,
-    //     showRoofOnly: showRoofOnly,
-    //     month: month,
-    //     day: day,
-    // });
     overlays.map((overlay) => overlay.setMap(null));
     if (!showHeatmap.value)
         return;
