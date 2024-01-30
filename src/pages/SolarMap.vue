@@ -46,8 +46,8 @@
 
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
                 <v-expansion-panels variant="accordion">
-                    <v-expansion-panel class="mb-2">
-                        <v-expansion-panel-title>
+                    <v-expansion-panel class="mb-2" elevation="0">
+                        <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
                             <div class="section-title d-flex">
                             <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon> 
                             <div class="my-auto"> 
@@ -149,10 +149,10 @@
                         </v-expansion-panel-text>
                     </v-expansion-panel>
 
-                    <v-expansion-panel>
-                        <v-expansion-panel-title>
+                    <v-expansion-panel elevation="0">
+                        <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
                             <div class="section-title d-flex">
-                                <v-icon class="mr-3">mdi-battery-charging-70</v-icon> 
+                                <v-icon class="mr-3">mdi-battery-charging-20</v-icon> 
                                 <div class="my-auto"> 
                                     Solar Analysis
                                 </div>
@@ -271,7 +271,49 @@
                             </v-expansion-panels>   
                         </v-expansion-panel-text>
                     </v-expansion-panel>
+
+                    <v-expansion-panel elevation="0">
+                        <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
+                            <div class="section-title d-flex">
+                                <v-icon class="mr-3">mdi-map-outline</v-icon> 
+                                <div class="my-auto"> 
+                                    Map parameters
+                                </div>
+                            </div>
+                        </v-expansion-panel-title>
+                        
+                        <v-expansion-panel-text>
+                            <div class="detail-text mb-3">
+                                Parameters to control what information is currently being displayed on the map
+                            </div>
+
+                            <div>
+                                <div class="d-flex mb-2">
+                                    <v-icon class="mr-3" color="theme">mdi-cash</v-icon>
+                                    <div class="my-auto me-auto subsection-title">
+                                        Costs and Incentives
+                                    </div>
+                                </div>
+                                <v-text-field
+                                    v-model="userSolarData.averageMonthlyEnergyBill"
+                                    label="Average monthly energy cost"
+                                    density="compact"
+                                    variant="outlined"
+                                    color="theme"
+                                    type="number"
+                                    prepend-inner-icon="mdi-calendar-month-outline"
+                                >
+                                    <template v-slot:append-inner>
+                                        $
+                                    </template>
+                                </v-text-field>
+                            </div>
+                        </v-expansion-panel-text>
+                    </v-expansion-panel>
+
                 </v-expansion-panels>
+
+                
 
 
                 <div class="mt-12">
