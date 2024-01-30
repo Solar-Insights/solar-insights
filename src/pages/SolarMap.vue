@@ -345,11 +345,12 @@ function emitAlert(type: string, title: string, message: string) {
 }
 
 // Component data
-const solarReadonlyPanel = ref(0);
-const configIdIndex = ref(0);
+const autocompleteValue = ref("");
 const showPanels = ref(true);
 const showHeatmap = ref(true);
-const autocompleteValue = ref("");
+
+const solarReadonlyPanel = ref(0);
+const configIdIndex = ref(0);
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
 const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
@@ -370,6 +371,9 @@ const userSolarData = ref<UserSolarData>({
     yearlyDiscountRate: 4,
     installationLifespan: 25
 });
+
+
+const layerId = ref<LayerId | 'none'>("monthlyFlux");
 const tick = ref(0);
 const month = ref(0);
 const day = ref(14);
@@ -432,6 +436,14 @@ watch(showPanels, async () => {
 
 watch(showHeatmap, async () => {
     await showDataLayer(true);
+});
+
+watch(tick, () => {
+    if (layerId.value === "monthlyFlux") {
+        displayMonthlyFlux();
+    } else if (layerId.value === "hourlyShade") {
+        displayHourlyShade();
+    }
 });
 
 let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events, prevent first one from sending request
@@ -584,13 +596,9 @@ const dataLayerOptions: Record<LayerId | 'none', string> = {
 
 let dataLayersResponse: SolarLayers | undefined;
 let layer: Layer | undefined;
-const layerId = ref<LayerId | 'none'>('hourlyShade');
-
-let playAnimation = true;
-
-
 let overlays: google.maps.GroundOverlay[] = [];
 let showRoofOnly = false;
+let playAnimation = true;
 
 async function showDataLayer(reset: boolean = false) {
     if (reset) {
@@ -657,11 +665,19 @@ function resetHeatmapLayer() {
         .map((canvas) => new google.maps.GroundOverlay(canvas.toDataURL(), bounds));
 
     if (layer.id === "monthlyFlux") {
-        overlays.map((overlay, i) => overlay.setMap(i == month.value ? map : null));
+        displayMonthlyFlux();
     } else if (layer.id === "hourlyShade") {
-        overlays.map((overlay, i) => overlay.setMap(i == hour.value ? map : null));
+        displayHourlyShade();
     } else {
         overlays[0].setMap(map);
     }
+}
+
+function displayMonthlyFlux() {
+    overlays.map((overlay, i) => overlay.setMap(i == month.value ? map : null));
+}
+
+function displayHourlyShade() {
+    overlays.map((overlay, i) => overlay.setMap(i == hour.value ? map : null));
 }
 </script>
