@@ -99,6 +99,26 @@ $scrollbars: #555;
     right: 0;
 }
 
+.time-slider {
+}
+.time-slider-mobile {
+    @extend .time-slider;
+}
+.time-slider-computer {
+    @extend .time-slider;
+    @extend .mb-6;
+    @extend .py-1;
+    @extend .pl-6;
+    @extend .pr-3;
+    @extend .bg-white;
+    @extend .rounded-lg;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    width: 300px;
+    bottom: 0;
+}
+
 .map-data {
     flex-grow: 1;
     overflow: auto;

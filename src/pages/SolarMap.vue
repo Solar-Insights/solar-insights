@@ -68,11 +68,11 @@
                                         Count
                                     </div>
                                     <div class="text-right">
-                                        {{ buildingInsights.solarPotential === undefined ? 0 : buildingInsights.solarPotential.solarPanelConfigs[configIdIndex].panelsCount }} / {{ userSolarData.maxPanelCount }} panels
+                                        {{ buildingInsights.solarPotential === undefined ? 0 : buildingInsights.solarPotential.solarPanelConfigs[mapSettings.configIdIndex].panelsCount }} / {{ userSolarData.maxPanelCount }} panels
                                     </div>
                                 </div>
                                 <v-slider
-                                    v-model="configIdIndex"
+                                    v-model="mapSettings.configIdIndex"
                                     @end="panelCountChange"
                                     :min="0" 
                                     :max="buildingInsights.solarPotential === undefined ? 1 : buildingInsights.solarPotential.solarPanelConfigs.length - 1"
@@ -301,7 +301,6 @@
                                     color="theme"
                                     prepend-inner-icon="mdi-magnify"
                                 >
-
                                 </v-select>
 
                                 <v-text-field
@@ -337,45 +336,48 @@
                         </v-expansion-panel-text>
                     </v-expansion-panel>
                 </v-expansion-panels>
-
-                <div class="mt-12">
-                    <v-slider
-                        v-if="mapSettings.layerId === 'monthlyFlux'"
-                        v-model="timeParams.month"
-                        @end="timeParams.tick = timeParams.month"
-                        :min="0" 
-                        :max="11"
-                        step="1"
-                        color="theme"
-                    >
-                        <template v-slot:append>
-                            <div style="width: 50px;">
-                                {{ monthCodes[timeParams.month] }}
-                            </div>
-                        </template>
-                    </v-slider>
-
-                    <v-slider
-                        v-if="mapSettings.layerId === 'dailyShade'"
-                        v-model="timeParams.hour"
-                        @end="timeParams.tick = timeParams.hour"
-                        :min="0" 
-                        :max="23"
-                        step="1"
-                        color="theme"
-                    >
-                        <template v-slot:append>
-                            <div style="width: 50px;">
-                                {{ hourCodes[timeParams.hour] }}
-                            </div>
-                        </template>
-                    </v-slider>
-                </div>
             </div>
         </v-card>
 
         <div id="map" class="w-100">
         </div>
+
+        <v-slider
+            v-if="mapSettings.layerId === 'monthlyFlux'"
+            v-model="timeParams.month"
+            @end="timeParams.tick = timeParams.month"
+            :min="0" 
+            :max="11"
+            step="1"
+            hide-details
+            color="theme"
+            :class="$vuetify.display.xs ? 'time-slider-mobile' : 'time-slider-computer'"
+            rounded
+        >
+            <template v-slot:append>
+                <div class="ml-1" style="width: 50px;">
+                    {{ monthCodes[timeParams.month] }}
+                </div>
+            </template>
+        </v-slider>
+
+        <v-slider
+            v-if="mapSettings.layerId === 'hourlyShade'"
+            v-model="timeParams.hour"
+            @end="timeParams.tick = timeParams.hour"
+            :min="0" 
+            :max="23"
+            step="1"
+            hide-details
+            color="theme"
+            :class="$vuetify.display.xs ? 'time-slider-mobile' : 'time-slider-computer'"
+        >
+            <template v-slot:append>
+                <div class="ml-1" style="width: 50px;">
+                    {{ hourCodes[timeParams.hour] }}
+                </div>
+            </template>
+        </v-slider>
         
         <div v-if="Object.keys(buildingInsights).length">
             <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
@@ -410,30 +412,28 @@ function emitAlert(type: string, title: string, message: string) {
 
 // Component data
 const autocompleteValue = ref("");
+const solarReadonlyPanel = ref(0);
+const advancedSettingsPanels = ref([] as string[]);
+const advancedSettingsSolarPotential = ref([] as string[]);
+const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
 const mapSettings = ref<MapSettings>({
     layerId: "annualFlux",
     layerIdChoices: [
         { name: "annualFlux", displayedName: "Annual" },
         { name: "monthlyFlux", displayedName: "Monthly" },
-        { name: "dailyShade", displayedName: "Daily" }
+        { name: "hourlyShade", displayedName: "Daily" }
     ],
     showPanels: true,
     showHeatmap: true,
     heatmapAnimation: true,
+    configIdIndex: 0
 });
-
 const timeParams = ref<TimeParameters>({
     tick: 0,
     month: 0,
     day: 1,
     hour: 0
 });
-
-const solarReadonlyPanel = ref(0);
-const configIdIndex = ref(0);
-const advancedSettingsPanels = ref([] as string[]);
-const advancedSettingsSolarPotential = ref([] as string[]);
-const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
 const userSolarData = ref<UserSolarData>({
     panelCount: 0,
     minPanelCount: 0,
@@ -452,7 +452,6 @@ const userSolarData = ref<UserSolarData>({
     installationLifespan: 25
 });
 
-// Google components
 let map: google.maps.Map;
 let autocomplete: google.maps.places.Autocomplete;
 let geometryLibrary: google.maps.GeometryLibrary;
@@ -476,7 +475,7 @@ onMounted(async () => {
     geometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary
     await initListeners();
     await updateBuildingInsights(coord);
-    configIdIndex.value = getConfigIdForFullEnergyCoverage();
+    mapSettings.value.configIdIndex = getConfigIdForFullEnergyCoverage();
     showDataLayer(true);
     syncMapWithNewBuildingInsights();
 
@@ -495,7 +494,7 @@ function handleTickChange() {
             timeParams.value.tick = timeParams.value.month;
         }
     }
-    else if (layer?.id === "dailyShade") {
+    else if (layer?.id === "hourlyShade") {
         if (mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
             timeParams.value.hour = timeParams.value.tick % 24;
         } else {
@@ -519,11 +518,10 @@ watch(() => mapSettings.value.showHeatmap, async () => {
 watch(() => timeParams.value.tick, () => {
     if (mapSettings.value.layerId === "monthlyFlux") {
         displayMonthlyFlux();
-    } else if (mapSettings.value.layerId === "dailyShade") {
-        displaydailyShade();
+    } else if (mapSettings.value.layerId === "hourlyShade") {
+        displayhourlyShade();
     }
 });
-
 
 
 let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events, prevent first one from sending request
@@ -571,7 +569,7 @@ async function syncCurrentDataWithNewRequest(newCoord: Coordinates, formattedAdd
     autocompleteValue.value = formattedAddress;
     map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
     await updateBuildingInsights({ lat: newCoord.lat, lng: newCoord.lng });
-    configIdIndex.value = getConfigIdForFullEnergyCoverage();
+    mapSettings.value.configIdIndex = getConfigIdForFullEnergyCoverage();
     showDataLayer(true);
     syncMapWithNewBuildingInsights();
 }
@@ -584,7 +582,7 @@ async function updateBuildingInsights(coord: Coordinates) {
 }
 
 async function panelCountChange() {
-    userSolarData.value.panelCount = buildingInsights.value.solarPotential.solarPanelConfigs[configIdIndex.value].panelsCount;
+    userSolarData.value.panelCount = buildingInsights.value.solarPotential.solarPanelConfigs[mapSettings.value.configIdIndex].panelsCount;
     await syncMapWithNewBuildingInsights();
 }
 
@@ -598,9 +596,12 @@ function getConfigIdForFullEnergyCoverage() {
 }
 
 
+
+/*
+    Solar panels
+*/
 let panelConfig: SolarPanelConfig | undefined;
 let solarPanels: google.maps.Polygon[] = [];
-
 async function syncMapWithNewBuildingInsights() {
     if (buildingInsights.value == null) {
         return;
@@ -617,7 +618,7 @@ function removeSolarPanelsFromMap() {
 }
 
 async function setNewPanelConfig() {
-    panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[configIdIndex.value];
+    panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[mapSettings.value.configIdIndex];
     userSolarData.value.yearlyEnergyDcKwh = panelConfig.yearlyEnergyDcKwh;
     userSolarData.value.panelCount = panelConfig.panelsCount;
 }
@@ -661,17 +662,19 @@ function addSolarPanelsToMap() {
 }
 
 
+/*
+    Heatmap layer
+*/
 let dataLayersResponse: SolarLayers | undefined;
 let layer: Layer | undefined;
 let overlays: google.maps.GroundOverlay[] = [];
 let showRoofOnly = false;
-
 async function showDataLayer(reset: boolean = false) {
     if (reset) {
         resetDataLayer();
     }
 
-    if (mapSettings.value.layerId == 'none' || buildingInsights.value == null) {
+    if (mapSettings.value.layerId == null || buildingInsights.value == null) {
         return;
     }
 
@@ -706,8 +709,8 @@ function resetDataLayer() {
     layer = undefined;
 
     // Default values per layer.
-    showRoofOnly = ['annualFlux', 'monthlyFlux', 'dailyShade'].includes(mapSettings.value.layerId);
-    mapSettings.value.heatmapAnimation = ['monthlyFlux', 'dailyShade'].includes(mapSettings.value.layerId);
+    showRoofOnly = ['annualFlux', 'monthlyFlux', 'hourlyShade'].includes(mapSettings.value.layerId);
+    mapSettings.value.heatmapAnimation = ['monthlyFlux', 'hourlyShade'].includes(mapSettings.value.layerId);
     map.setMapTypeId('satellite');
 }
 
@@ -728,8 +731,8 @@ function resetHeatmapLayer() {
 
     if (layer.id === "monthlyFlux") {
         displayMonthlyFlux();
-    } else if (layer.id === "dailyShade") {
-        displaydailyShade();
+    } else if (layer.id === "hourlyShade") {
+        displayhourlyShade();
     } else {
         overlays[0].setMap(map);
     }
@@ -741,7 +744,7 @@ function displayMonthlyFlux() {
     }
 }
 
-function displaydailyShade() {
+function displayhourlyShade() {
     if (mapSettings.value.showHeatmap) {
         overlays.map((overlay, i) => overlay.setMap(i == timeParams.value.hour ? map : null));
     }

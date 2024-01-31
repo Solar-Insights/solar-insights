@@ -111,65 +111,6 @@ export function getSolarDataLayers(coord: SolarDataCoords, radius: number) {
 
 export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
 	const get: Record<LayerId, () => Promise<Layer>> = {
-		mask: async () => {
-			const mask = await downloadGeoTIFF(urls.maskUrl);
-			const colors = binaryPalette;
-			return {
-				id: layerId,
-				bounds: mask.bounds,
-				palette: {
-					colors: colors,
-					min: 'No roof',
-					max: 'Roof',
-				},
-				render: (showRoofOnly) => [
-					renderPalette({
-						data: mask,
-						mask: showRoofOnly ? mask : undefined,
-						colors: colors,
-					}),
-				],
-			};
-		},
-		dsm: async () => {
-			const [mask, data] = await Promise.all([
-				downloadGeoTIFF(urls.maskUrl),
-				downloadGeoTIFF(urls.dsmUrl),
-			]);
-			const sortedValues = Array.from(data.rasters[0]).sort((x, y) => x - y);
-			const minValue = sortedValues[0];
-			const maxValue = sortedValues.slice(-1)[0];
-			const colors = rainbowPalette;
-			return {
-				id: layerId,
-				bounds: mask.bounds,
-				palette: {
-					colors: colors,
-					min: `${minValue.toFixed(1)} m`,
-					max: `${maxValue.toFixed(1)} m`,
-				},
-				render: (showRoofOnly) => [
-					renderPalette({
-						data: data,
-						mask: showRoofOnly ? mask : undefined,
-						colors: colors,
-						min: sortedValues[0],
-						max: sortedValues.slice(-1)[0],
-					}),
-				],
-			};
-		},
-		rgb: async () => {
-			const [mask, data] = await Promise.all([
-				downloadGeoTIFF(urls.maskUrl),
-				downloadGeoTIFF(urls.rgbUrl),
-			]);
-			return {
-				id: layerId,
-				bounds: mask.bounds,
-				render: (showRoofOnly) => [renderRGB(data, showRoofOnly ? mask : undefined)],
-			};
-		},
 		annualFlux: async () => {
 			const [mask, data] = await Promise.all([
 				downloadGeoTIFF(urls.maskUrl),
@@ -222,10 +163,10 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
 					),
 			};
 		},
-		dailyShade: async () => {
+		hourlyShade: async () => {
 			const [mask, ...months] = await Promise.all([
 				downloadGeoTIFF(urls.maskUrl),
-				...urls.dailyShadeUrls.map((url) => downloadGeoTIFF(url)),
+				...urls.hourlyShadeUrls.map((url) => downloadGeoTIFF(url)),
 			]);
 			const colors = sunlightPalette;
 			return {
