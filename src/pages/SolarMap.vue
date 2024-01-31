@@ -97,11 +97,6 @@
                                 </v-text-field>
                             </div>
 
-                            <div>
-                                <v-switch v-model="showPanels" label="Show panels" inset color="theme" density="compact"/>
-                                <v-switch v-model="showHeatmap" label="Show heat map" inset color="theme" density="compact"/>
-                            </div>
-
                             <div class="w-100 text-center mb-2">
                                 <v-chip 
                                     @click="advancedSettingsPanels.length == 0 ? advancedSettingsPanels=['advanced-settings-panels'] : advancedSettingsPanels=[]" 
@@ -277,44 +272,31 @@
                             <div class="section-title d-flex">
                                 <v-icon class="mr-3">mdi-map-outline</v-icon> 
                                 <div class="my-auto"> 
-                                    Map parameters
+                                    Map Settings
                                 </div>
                             </div>
                         </v-expansion-panel-title>
                         
                         <v-expansion-panel-text>
                             <div class="detail-text mb-3">
-                                Parameters to control what information is currently being displayed on the map
+                                Settings to control what information is currently being displayed on the map
                             </div>
 
                             <div>
-                                <div class="d-flex mb-2">
-                                    <v-icon class="mr-3" color="theme">mdi-cash</v-icon>
-                                    <div class="my-auto me-auto subsection-title">
-                                        Costs and Incentives
-                                    </div>
-                                </div>
-                                <v-text-field
-                                    v-model="userSolarData.averageMonthlyEnergyBill"
-                                    label="Average monthly energy cost"
-                                    density="compact"
-                                    variant="outlined"
-                                    color="theme"
-                                    type="number"
-                                    prepend-inner-icon="mdi-calendar-month-outline"
-                                >
-                                    <template v-slot:append-inner>
-                                        $
+                                <v-switch v-model="showPanels" label="Show panels" inset color="theme" density="compact">
+                                    <template v-slot:label>
+                                        <span class="ml-4"> Display panels </span>
                                     </template>
-                                </v-text-field>
+                                </v-switch>
+                                <v-switch v-model="showHeatmap" label="Show heat map" inset color="theme" density="compact">
+                                    <template v-slot:label>
+                                        <span class="ml-4"> Display heatmap </span>
+                                    </template>
+                                </v-switch>
                             </div>
                         </v-expansion-panel-text>
                     </v-expansion-panel>
-
                 </v-expansion-panels>
-
-                
-
 
                 <div class="mt-12">
                     <v-slider
@@ -455,19 +437,22 @@ onMounted(async () => {
 })
 
 function handleTickChange() {
-    tick.value++;
-    if (layer?.id == "monthlyFlux") {
-        if (playAnimation) {
-            month.value = tick.value % 12;
-        } else {
-            tick.value = month.value;
+    if (showHeatmap.value) {
+        tick.value++;
+
+        if (layer?.id == "monthlyFlux") {
+            if (playAnimation && showHeatmap.value) {
+                month.value = tick.value % 12;
+            } else {
+                tick.value = month.value;
+            }
         }
-    }
-    else if (layer?.id == "hourlyShade") {
-        if (playAnimation) {
-            hour.value = tick.value % 24;
-        } else {
-            tick.value = hour.value;
+        else if (layer?.id == "hourlyShade") {
+            if (playAnimation && showHeatmap.value) {
+                hour.value = tick.value % 24;
+            } else {
+                tick.value = hour.value;
+            }
         }
     }
 }
@@ -685,14 +670,10 @@ function resetDataLayer() {
     showRoofOnly = ['annualFlux', 'monthlyFlux', 'hourlyShade'].includes(layerId.value);
     playAnimation = ['monthlyFlux', 'hourlyShade'].includes(layerId.value);
     map.setMapTypeId('satellite');
-    overlays.map((overlay) => overlay.setMap(null));
-    month.value = layerId.value == 'hourlyShade' ? 3 : 0;
-    day.value = 14;
-    hour.value = 5;
 }
 
 function resetHeatmapLayer() {
-    if (!layer) {
+    if (!layer ) {
         return;
     }
 
@@ -716,10 +697,14 @@ function resetHeatmapLayer() {
 }
 
 function displayMonthlyFlux() {
-    overlays.map((overlay, i) => overlay.setMap(i == month.value ? map : null));
+    if (showHeatmap.value) {
+        overlays.map((overlay, i) => overlay.setMap(i == month.value ? map : null));
+    }
 }
 
 function displayHourlyShade() {
-    overlays.map((overlay, i) => overlay.setMap(i == hour.value ? map : null));
+    if (showHeatmap.value) {
+        overlays.map((overlay, i) => overlay.setMap(i == hour.value ? map : null));
+    }
 }
 </script>
