@@ -222,10 +222,10 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
 					),
 			};
 		},
-		hourlyShade: async () => {
+		dailyShade: async () => {
 			const [mask, ...months] = await Promise.all([
 				downloadGeoTIFF(urls.maskUrl),
-				...urls.hourlyShadeUrls.map((url) => downloadGeoTIFF(url)),
+				...urls.dailyShadeUrls.map((url) => downloadGeoTIFF(url)),
 			]);
 			const colors = sunlightPalette;
 			return {

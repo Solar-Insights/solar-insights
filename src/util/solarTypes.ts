@@ -28,11 +28,11 @@ export type SolarLayers = {
     maskUrl: string,
     annualFluxUrl: string,
     monthlyFluxUrl: string,
-    hourlyShadeUrls: string[],
-    imageryQuality: 'HIGH' | 'MEDIUM' | 'LOW';
+    dailyShadeUrls: string[],
+    imageryQuality: "HIGH" | "MEDIUM" | "LOW";
 };
 
-export type LayerId = 'mask' | 'dsm' | 'rgb' | 'annualFlux' | 'monthlyFlux' | 'hourlyShade';
+export type LayerId = "annualFlux" | "monthlyFlux" | "dailyShade" | "none";
 
 export type BuildingInsights = {
     name: string,
@@ -143,3 +143,23 @@ export type GeoTiff = {
 	rasters: Array<number>[];
 	bounds: Bounds;
 }
+
+export type MapSettings = {
+    layerId: LayerId,
+    layerIdChoices: SolarDataType[]
+    showPanels: boolean,
+    showHeatmap: boolean,
+    heatmapAnimation: boolean,
+};
+
+type SolarDataType = {
+    name: "annualFlux" | "monthlyFlux" | "dailyShade",
+    displayedName: string
+};
+
+export type TimeParameters = {
+    tick: number,
+    month: number,
+    day: number,
+    hour: number
+};

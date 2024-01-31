@@ -270,9 +270,9 @@
                     <v-expansion-panel elevation="0">
                         <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
                             <div class="section-title d-flex">
-                                <v-icon class="mr-3">mdi-map-outline</v-icon> 
+                                <v-icon class="mr-3">mdi-cog-outline</v-icon> 
                                 <div class="my-auto"> 
-                                    Map Settings
+                                    Settings
                                 </div>
                             </div>
                         </v-expansion-panel-title>
@@ -283,14 +283,54 @@
                             </div>
 
                             <div>
-                                <v-switch v-model="showPanels" label="Show panels" inset color="theme" density="compact">
+                                <div class="d-flex mb-2">
+                                    <v-icon class="mr-3" color="theme">mdi-weather-sunny</v-icon>
+                                    <div class="my-auto me-auto subsection-title">
+                                        Solar data
+                                    </div>
+                                </div>
+
+                                <v-select
+                                    v-model="mapSettings.layerId"
+                                    item-title="displayedName"
+                                    item-value="name"
+                                    :items="mapSettings.layerIdChoices"
+                                    label="Displayed solar data"
+                                    density="compact"
+                                    variant="outlined"
+                                    color="theme"
+                                    prepend-inner-icon="mdi-magnify"
+                                >
+
+                                </v-select>
+
+                                <v-text-field
+                                    v-model="userSolarData.averageMonthlyEnergyBill"
+                                    label="Average monthly energy cost"
+                                    density="compact"
+                                    variant="outlined"
+                                    color="theme"
+                                    type="number"
+                                    prepend-inner-icon="mdi-calendar-month-outline"
+                                >
+                                    <template v-slot:append-inner>
+                                        $
+                                    </template>
+                                </v-text-field>
+
+                                <v-switch v-model="mapSettings.showPanels" inset color="theme" density="compact">
                                     <template v-slot:label>
                                         <span class="ml-4"> Display panels </span>
                                     </template>
                                 </v-switch>
-                                <v-switch v-model="showHeatmap" label="Show heat map" inset color="theme" density="compact">
+                                <v-switch v-model="mapSettings.showHeatmap" inset color="theme" density="compact">
                                     <template v-slot:label>
                                         <span class="ml-4"> Display heatmap </span>
+                                    </template>
+                                </v-switch>
+                                <v-switch v-model="mapSettings.heatmapAnimation" inset color="theme" density="compact">
+                                    <template v-slot:label>
+                                        <span class="ml-4"> Heatmap animation </span>
                                     </template>
                                 </v-switch>
                             </div>
@@ -300,9 +340,9 @@
 
                 <div class="mt-12">
                     <v-slider
-                        v-if="layerId == 'monthlyFlux'"
-                        v-model="month"
-                        @end="tick = month"
+                        v-if="mapSettings.layerId === 'monthlyFlux'"
+                        v-model="timeParams.month"
+                        @end="timeParams.tick = timeParams.month"
                         :min="0" 
                         :max="11"
                         step="1"
@@ -310,15 +350,15 @@
                     >
                         <template v-slot:append>
                             <div style="width: 50px;">
-                                {{ monthCodes[month] }}
+                                {{ monthCodes[timeParams.month] }}
                             </div>
                         </template>
                     </v-slider>
 
                     <v-slider
-                        v-if="layerId == 'hourlyShade'"
-                        v-model="hour"
-                        @end="tick = hour"
+                        v-if="mapSettings.layerId === 'dailyShade'"
+                        v-model="timeParams.hour"
+                        @end="timeParams.tick = timeParams.hour"
                         :min="0" 
                         :max="23"
                         step="1"
@@ -326,7 +366,7 @@
                     >
                         <template v-slot:append>
                             <div style="width: 50px;">
-                                {{ hourCodes[hour] }}
+                                {{ hourCodes[timeParams.hour] }}
                             </div>
                         </template>
                     </v-slider>
@@ -348,10 +388,10 @@
 // Vue
 import { onMounted, ref, watch } from 'vue';
 // Util
-import { BuildingInsights, LayerId, SolarLayers, Layer, SolarPanelConfig, UserSolarData } from '@/util/solarTypes';
+import { BuildingInsights, LayerId, SolarLayers, Layer, SolarPanelConfig, UserSolarData, MapSettings, TimeParameters } from '@/util/solarTypes';
 import { panelsPalette, monthCodes, hourCodes } from "@/util/constants"
 import { Coordinates } from '@/util/generalTypes';
-import { createPalette, rgbToColor, colorToRGB, lerp, normalize, clamp, initMap, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/util/generalFunctions";
+import { createPalette, rgbToColor, normalize, initMap, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/util/generalFunctions";
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/api/googleMapsAPI";
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
@@ -370,8 +410,24 @@ function emitAlert(type: string, title: string, message: string) {
 
 // Component data
 const autocompleteValue = ref("");
-const showPanels = ref(true);
-const showHeatmap = ref(true);
+const mapSettings = ref<MapSettings>({
+    layerId: "annualFlux",
+    layerIdChoices: [
+        { name: "annualFlux", displayedName: "Annual" },
+        { name: "monthlyFlux", displayedName: "Monthly" },
+        { name: "dailyShade", displayedName: "Daily" }
+    ],
+    showPanels: true,
+    showHeatmap: true,
+    heatmapAnimation: true,
+});
+
+const timeParams = ref<TimeParameters>({
+    tick: 0,
+    month: 0,
+    day: 1,
+    hour: 0
+});
 
 const solarReadonlyPanel = ref(0);
 const configIdIndex = ref(0);
@@ -395,13 +451,6 @@ const userSolarData = ref<UserSolarData>({
     yearlyDiscountRate: 4,
     installationLifespan: 25
 });
-
-
-const layerId = ref<LayerId | 'none'>("monthlyFlux");
-const tick = ref(0);
-const month = ref(0);
-const day = ref(14);
-const hour = ref(0);
 
 // Google components
 let map: google.maps.Map;
@@ -437,41 +486,45 @@ onMounted(async () => {
 })
 
 function handleTickChange() {
-    if (showHeatmap.value) {
-        tick.value++;
+    timeParams.value.tick++;
 
-        if (layer?.id == "monthlyFlux") {
-            if (playAnimation && showHeatmap.value) {
-                month.value = tick.value % 12;
-            } else {
-                tick.value = month.value;
-            }
+    if (layer?.id === "monthlyFlux") {
+        if (mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
+            timeParams.value.month = timeParams.value.tick % 12;
+        } else {
+            timeParams.value.tick = timeParams.value.month;
         }
-        else if (layer?.id == "hourlyShade") {
-            if (playAnimation && showHeatmap.value) {
-                hour.value = tick.value % 24;
-            } else {
-                tick.value = hour.value;
-            }
+    }
+    else if (layer?.id === "dailyShade") {
+        if (mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
+            timeParams.value.hour = timeParams.value.tick % 24;
+        } else {
+            timeParams.value.tick = timeParams.value.hour;
         }
     }
 }
 
-watch(showPanels, async () => {
+watch(() => mapSettings.value.showPanels, async () => {
     await syncMapWithNewBuildingInsights();
 });
 
-watch(showHeatmap, async () => {
+watch(() => mapSettings.value.layerId, async () => {
     await showDataLayer(true);
 });
 
-watch(tick, () => {
-    if (layerId.value === "monthlyFlux") {
+watch(() => mapSettings.value.showHeatmap, async () => {
+    await showDataLayer(true);
+});
+
+watch(() => timeParams.value.tick, () => {
+    if (mapSettings.value.layerId === "monthlyFlux") {
         displayMonthlyFlux();
-    } else if (layerId.value === "hourlyShade") {
-        displayHourlyShade();
+    } else if (mapSettings.value.layerId === "dailyShade") {
+        displaydailyShade();
     }
 });
+
+
 
 let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events, prevent first one from sending request
 
@@ -603,36 +656,22 @@ function addSolarPanelsToMap() {
     });
 
     solarPanels.map((panel, i) =>
-        panel.setMap(showPanels.value && panelConfig && i < panelConfig.panelsCount ? map : null)
+        panel.setMap(mapSettings.value.showPanels && panelConfig && i < panelConfig.panelsCount ? map : null)
     );
 }
 
-
-
-
-
-const dataLayerOptions: Record<LayerId | 'none', string> = {
-    none: 'No layer',
-    mask: 'Roof mask',
-    dsm: 'Digital Surface Model',
-    rgb: 'Aerial image',
-    annualFlux: 'Annual sunshine',
-    monthlyFlux: 'Monthly sunshine',
-    hourlyShade: 'Hourly shade',
-};
 
 let dataLayersResponse: SolarLayers | undefined;
 let layer: Layer | undefined;
 let overlays: google.maps.GroundOverlay[] = [];
 let showRoofOnly = false;
-let playAnimation = true;
 
 async function showDataLayer(reset: boolean = false) {
     if (reset) {
         resetDataLayer();
     }
 
-    if (layerId.value == 'none' || buildingInsights.value == null) {
+    if (mapSettings.value.layerId == 'none' || buildingInsights.value == null) {
         return;
     }
 
@@ -653,7 +692,7 @@ async function showDataLayer(reset: boolean = false) {
         }
 
         try {
-            layer = await getSingleLayer(layerId.value, dataLayersResponse as SolarLayers);
+            layer = await getSingleLayer(mapSettings.value.layerId, dataLayersResponse as SolarLayers);
         } catch (error) {
             return;
         }
@@ -667,8 +706,8 @@ function resetDataLayer() {
     layer = undefined;
 
     // Default values per layer.
-    showRoofOnly = ['annualFlux', 'monthlyFlux', 'hourlyShade'].includes(layerId.value);
-    playAnimation = ['monthlyFlux', 'hourlyShade'].includes(layerId.value);
+    showRoofOnly = ['annualFlux', 'monthlyFlux', 'dailyShade'].includes(mapSettings.value.layerId);
+    mapSettings.value.heatmapAnimation = ['monthlyFlux', 'dailyShade'].includes(mapSettings.value.layerId);
     map.setMapTypeId('satellite');
 }
 
@@ -679,32 +718,32 @@ function resetHeatmapLayer() {
 
     const bounds = layer.bounds;
     overlays.map((overlay) => overlay.setMap(null));
-    if (!showHeatmap.value) {
+    if (!mapSettings.value.showHeatmap) {
         return;
     } 
 
     overlays = layer
-        .render(showRoofOnly, month.value, day.value)
+        .render(showRoofOnly, timeParams.value.month, timeParams.value.day)
         .map((canvas) => new google.maps.GroundOverlay(canvas.toDataURL(), bounds));
 
     if (layer.id === "monthlyFlux") {
         displayMonthlyFlux();
-    } else if (layer.id === "hourlyShade") {
-        displayHourlyShade();
+    } else if (layer.id === "dailyShade") {
+        displaydailyShade();
     } else {
         overlays[0].setMap(map);
     }
 }
 
 function displayMonthlyFlux() {
-    if (showHeatmap.value) {
-        overlays.map((overlay, i) => overlay.setMap(i == month.value ? map : null));
+    if (mapSettings.value.showHeatmap) {
+        overlays.map((overlay, i) => overlay.setMap(i == timeParams.value.month ? map : null));
     }
 }
 
-function displayHourlyShade() {
-    if (showHeatmap.value) {
-        overlays.map((overlay, i) => overlay.setMap(i == hour.value ? map : null));
+function displaydailyShade() {
+    if (mapSettings.value.showHeatmap) {
+        overlays.map((overlay, i) => overlay.setMap(i == timeParams.value.hour ? map : null));
     }
 }
 </script>
