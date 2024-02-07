@@ -1,5 +1,5 @@
 // Util
-import { BuildingInsights, UserSolarData } from "@/util/solarTypes";
+import { UserSolarData } from "solar-typing/src/solar"
 import { GoogleCharts } from 'google-charts';
 
 /*

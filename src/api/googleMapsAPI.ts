@@ -1,9 +1,11 @@
 // Util
-import { Coordinates, validCoordinates } from "@/util/generalTypes";
-import { AirQualityData, AirPollutant } from "@/util/airQualityTypes";
+import { Coordinates, validCoordinates } from "solar-typing/src/general";
+import { AirQualityData, AirPollutant } from "solar-typing/src/airQuality";
+import { BuildingInsights, SolarDataCoords, SolarLayers, LayerId, Layer, Bounds, GeoTiff } from "solar-typing/src/solar";
+
 import { binaryPalette, rainbowPalette, ironPalette, sunlightPalette } from "@/util/constants";
-import { BuildingInsights, SolarDataCoords, SolarLayers, LayerId, Layer, Bounds, GeoTiff } from "@/util/solarTypes";
-import { colorToRGB, rgbToColor, lerp, normalize, clamp, createPalette } from "@/util/generalFunctions";
+import { colorToRGB, rgbToColor, lerp, normalize, clamp, createPalette } from "@/util/generalHelpers";
+
 import * as geotiff from 'geotiff';
 import * as geokeysToProj4 from 'geotiff-geokeys-to-proj4';
 import proj4 from 'proj4';

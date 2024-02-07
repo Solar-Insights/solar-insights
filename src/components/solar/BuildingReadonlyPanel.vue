@@ -59,8 +59,8 @@
 // Vue 
 import { PropType } from 'vue';
 // Util
-import { BuildingInsights, UserSolarData } from '@/util/solarTypes';
-import { strToLargeNumberDisplay } from '@/util/generalFunctions';
+import { strToLargeNumberDisplay } from '@/util/generalHelpers';
+import { BuildingInsights, UserSolarData } from "solar-typing/src/solar"
 
 const props = defineProps({
     buildingInsights: {

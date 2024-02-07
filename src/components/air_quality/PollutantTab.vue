@@ -45,8 +45,8 @@
 </template>
 
 <script setup lang="ts">
-// Models
-import { AirPollutant } from "@/models/models";
+// Util
+import { AirPollutant } from "solar-typing/src/airQuality"
 
 const props = defineProps({
     pollutants: {

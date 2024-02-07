@@ -23,10 +23,9 @@
 
 <script setup lang="ts">
 // Vue 
-import { ref, PropType } from 'vue';
-// Models
-import { HealthRecommendations } from "@/models/models";
-import { onMounted } from 'vue';
+import { ref, PropType, onMounted } from 'vue';
+// Util
+import { HealthRecommendations } from "solar-typing/src/airQuality"
 
 const props = defineProps({
     healthRecommendations: {

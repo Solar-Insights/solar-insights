@@ -1,5 +1,5 @@
 // Util
-import { MapType, Coordinates } from "@/util/generalTypes";
+import { MapType, Coordinates } from "solar-typing/src/general"
 
 /* Colors */
 export function colorToRGB(color: string): { r: number; g: number; b: number } {

@@ -390,15 +390,16 @@
 // Vue
 import { onMounted, ref, watch } from 'vue';
 // Util
-import { BuildingInsights, LayerId, SolarLayers, Layer, SolarPanelConfig, UserSolarData, MapSettings, TimeParameters } from '@/util/solarTypes';
+import { Coordinates } from "solar-typing/src/general"
+import { BuildingInsights, LayerId, SolarLayers, Layer, SolarPanelConfig, UserSolarData, MapSettings } from "solar-typing/src/solar"
+import { TimeParameters } from '@/util/types';
 import { panelsPalette, monthCodes, hourCodes } from "@/util/constants"
-import { Coordinates } from '@/util/generalTypes';
-import { createPalette, rgbToColor, normalize, initMap, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/util/generalFunctions";
+import { createPalette, rgbToColor, normalize, initMap, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/util/generalHelpers";
 import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/api/googleMapsAPI";
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
-import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh } from '@/util/solarFunctions';
+import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh } from '@/util/solarHelpers';
 
 // Emit
 const emit = defineEmits(['alert']);

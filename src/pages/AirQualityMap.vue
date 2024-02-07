@@ -87,10 +87,10 @@
 import { onMounted, ref } from "vue";
 import _ from 'lodash';
 // Util
-import { AirQualityData } from "@/util/airQualityTypes";
-import { Coordinates } from "@/util/generalTypes";
+import { AirQualityData } from "solar-typing/src/airQuality";
+import { Coordinates } from "solar-typing/src/general";
 import { pollutants, circularBarColorSelector } from "@/util/constants";
-import { initMap, initMarker, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/util/generalFunctions";
+import { initMap, initMarker, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/util/generalHelpers";
 import { getGeocoding, getReverseGeocoding, getAirQualityData } from "@/api/googleMapsAPI";
 // Components
 import PollutantTab from "@/components/air_quality/PollutantTab.vue";
