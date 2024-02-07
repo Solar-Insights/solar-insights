@@ -8,37 +8,36 @@
             closable
             close-label="Close"
         />
-        <hr :color="matchColorToType()" :width="`${timerProgress}%`" style="height: 5px;">
+        <hr :color="matchColorToType()" :width="`${timerProgress}%`" style="height: 5px" />
     </div>
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps({
     type: {
         type: String,
         required: true,
-        default: ""
+        default: "",
     },
     title: {
         type: String,
         required: true,
-        default: ""
+        default: "",
     },
     message: {
         type: String,
         required: true,
-        default: ""
+        default: "",
     },
     timerProgress: {
         type: Number,
         required: true,
-        default: 100
-    }
+        default: 100,
+    },
 });
 
 function matchType() {
-    switch(props.type) {
+    switch (props.type) {
         case "success": {
             return "success";
         }
@@ -46,7 +45,7 @@ function matchType() {
             return "warning";
         }
         case "error": {
-            return "error"
+            return "error";
         }
         default: {
             return "warning";
@@ -55,7 +54,7 @@ function matchType() {
 }
 
 function matchTitle() {
-    switch(props.title) {
+    switch (props.title) {
         case "": {
             return "Error encountered";
         }
@@ -66,7 +65,7 @@ function matchTitle() {
 }
 
 function matchMessage() {
-    switch(props.message) {
+    switch (props.message) {
         case "": {
             return "Something has happened";
         }
@@ -79,7 +78,7 @@ function matchMessage() {
 // Pour choix des couleurs
 // https://vuetifyjs.com/en/styles/colors/#material-colors
 function matchColorToType() {
-    switch(props.type) {
+    switch (props.type) {
         case "success": {
             return "#A5D6A7";
         }

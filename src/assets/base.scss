@@ -1,4 +1,4 @@
-@import '../node_modules/vuetify/_styles.scss';
+@import "../node_modules/vuetify/_styles.scss";
 
 /*
     Variable definitions
@@ -8,20 +8,17 @@ $bg-whitey: #fffbfe;
 $light-grey: #949494;
 $scrollbars: #555;
 
-
 /*
     Phones
 */
 @media screen and (max-width: 599px) {
 }
-  
 
 /*
   Tablets and computers
 */
 @media screen and (min-width: 600px) {
 }
-
 
 /*
     App skeleton
@@ -31,7 +28,6 @@ $scrollbars: #555;
     @extend .pa-0;
     position: relative;
 }
-
 
 /*
     Alert component
@@ -43,13 +39,12 @@ $scrollbars: #555;
     top: 0px;
 }
 
-
 /*
     Search component
 */
 .autocomplete-container {
     @extend .mx-4;
-    flex-shrink: 1; 
+    flex-shrink: 1;
     flex-grow: 0;
 }
 .autocomplete-search {
@@ -63,7 +58,6 @@ $scrollbars: #555;
     @extend .w-100;
     @extend .my-6;
 }
-
 
 /*
     Map components
@@ -84,7 +78,7 @@ $scrollbars: #555;
 }
 
 .map-readonly-data {
-    background-color: $bg-whitey
+    background-color: $bg-whitey;
 }
 .map-readonly-data-mobile {
     @extend .map-readonly-data;
@@ -138,25 +132,21 @@ $scrollbars: #555;
     overflow-y: scroll;
 }
 
-.map-data::-webkit-scrollbar
-{
-	width: 8px;
+.map-data::-webkit-scrollbar {
+    width: 8px;
 }
-.map-data::-webkit-scrollbar-thumb
-{
+.map-data::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-	border-radius: 10px;
-	background-color: $scrollbars;
+    border-radius: 10px;
+    background-color: $scrollbars;
     border-right: 3px solid white;
-} 
-.map-data::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
+}
+.map-data::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
     @extend .my-3;
 }
-
 
 /*
     Class conditionals: apply some caracteristics based on some values. Should always come in pair
@@ -176,7 +166,7 @@ $scrollbars: #555;
 }
 
 .button-selection-background::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -10px;
     width: 100%;
@@ -189,13 +179,13 @@ $scrollbars: #555;
 }
 
 .button-non-selection-background::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -10px;
     width: 100%;
     height: 2px;
     background: $light-grey;
-    opacity: 0.20;
+    opacity: 0.2;
 }
 
 .icon-selection-color {
@@ -203,7 +193,7 @@ $scrollbars: #555;
 }
 
 .icon-non-selection-color {
-    color: $theme; 
+    color: $theme;
 }
 
 .hovering-over-card-style {

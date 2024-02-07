@@ -1,10 +1,10 @@
 <template>
-    <div class="d-flex" style="height: 100vh;">
+    <div class="d-flex" style="height: 100vh">
         <v-card id="map-details" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
             <v-card-title class="map-title">
                 <v-icon class="mr-2 mb-1">mdi-weather-sunny</v-icon> Solar Potential
             </v-card-title>
-            
+
             <v-row class="autocomplete-container">
                 <v-text-field
                     v-model="autocompleteValue"
@@ -17,70 +17,78 @@
                     prepend-inner-icon="mdi-google-maps"
                 >
                 </v-text-field>
-            </v-row>  
-            
+            </v-row>
+
             <div class="mb-3 mx-2 pa-2 mt-3">
-                <v-btn 
-                    @click="solarReadonlyPanel = 0;" 
-                    class="w-50 h-100 py-4 universal-font-theme" 
-                    :class="solarReadonlyPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'" 
-                    :prepend-icon="solarReadonlyPanel == 0 ? 'mdi-home' : 'mdi-home-outline'" 
+                <v-btn
+                    @click="solarReadonlyPanel = 0"
+                    class="w-50 h-100 py-4 universal-font-theme"
+                    :class="solarReadonlyPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'"
+                    :prepend-icon="solarReadonlyPanel == 0 ? 'mdi-home' : 'mdi-home-outline'"
                     variant="flat"
                     :ripple="false"
-                > 
+                >
                     Building
                 </v-btn>
-                <v-btn 
-                    @click="solarReadonlyPanel = 1;" 
-                    class="w-50 h-100 py-4 universal-font-theme" 
-                    :class="solarReadonlyPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'" 
-                    :prepend-icon="solarReadonlyPanel == 1 ? 'mdi-transmission-tower' : 'mdi-transmission-tower'" 
+                <v-btn
+                    @click="solarReadonlyPanel = 1"
+                    class="w-50 h-100 py-4 universal-font-theme"
+                    :class="solarReadonlyPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'"
+                    :prepend-icon="solarReadonlyPanel == 1 ? 'mdi-transmission-tower' : 'mdi-transmission-tower'"
                     variant="flat"
                     :ripple="false"
-                > 
+                >
                     Energy
                 </v-btn>
             </div>
 
-            <v-divider/>
+            <v-divider />
 
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
                 <v-expansion-panels variant="accordion">
                     <v-expansion-panel class="mb-2" elevation="0">
                         <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
                             <div class="section-title d-flex">
-                            <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon> 
-                            <div class="my-auto"> 
-                                Panels
+                                <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon>
+                                <div class="my-auto">Panels</div>
                             </div>
-                        </div>
                         </v-expansion-panel-title>
-                        
+
                         <v-expansion-panel-text>
                             <div class="detail-text mb-3">
-                                Solar panels are ordered from most to least efficient based annual sunlight of the roof (e.g. an input of 10 panels will use the 10 most efficient)
+                                Solar panels are ordered from most to least efficient based annual sunlight of the roof
+                                (e.g. an input of 10 panels will use the 10 most efficient)
                             </div>
 
                             <div>
                                 <div class="d-flex">
                                     <v-icon class="mr-3" color="theme">mdi-numeric</v-icon>
-                                    <div class="me-auto subsection-title">
-                                        Count
-                                    </div>
+                                    <div class="me-auto subsection-title">Count</div>
                                     <div class="text-right">
-                                        {{ buildingInsights.solarPotential === undefined ? 0 : buildingInsights.solarPotential.solarPanelConfigs[mapSettings.configIdIndex].panelsCount }} / {{ userSolarData.maxPanelCount }} panels
+                                        {{
+                                            buildingInsights.solarPotential === undefined
+                                                ? 0
+                                                : buildingInsights.solarPotential.solarPanelConfigs[
+                                                      mapSettings.configIdIndex
+                                                  ].panelsCount
+                                        }}
+                                        / {{ userSolarData.maxPanelCount }} panels
                                     </div>
                                 </div>
                                 <v-slider
                                     v-model="mapSettings.configIdIndex"
                                     @end="panelCountChange"
-                                    :min="0" 
-                                    :max="buildingInsights.solarPotential === undefined ? 1 : buildingInsights.solarPotential.solarPanelConfigs.length - 1"
+                                    :min="0"
+                                    :max="
+                                        buildingInsights.solarPotential === undefined
+                                            ? 1
+                                            : buildingInsights.solarPotential.solarPanelConfigs.length - 1
+                                    "
                                     step="1"
                                     color="theme"
                                 />
                             </div>
-                            
+
                             <div>
                                 <v-text-field
                                     v-model="userSolarData.panelCapacityWatts"
@@ -91,20 +99,22 @@
                                     type="number"
                                     prepend-inner-icon="mdi-lightning-bolt"
                                 >
-                                    <template v-slot:append-inner>
-                                        Watts
-                                    </template>
+                                    <template v-slot:append-inner> Watts </template>
                                 </v-text-field>
                             </div>
 
                             <div class="w-100 text-center mb-2">
-                                <v-chip 
-                                    @click="advancedSettingsPanels.length == 0 ? advancedSettingsPanels=['advanced-settings-panels'] : advancedSettingsPanels=[]" 
-                                    color="theme" 
-                                    variant="text" 
+                                <v-chip
+                                    @click="
+                                        advancedSettingsPanels.length == 0
+                                            ? (advancedSettingsPanels = ['advanced-settings-panels'])
+                                            : (advancedSettingsPanels = [])
+                                    "
+                                    color="theme"
+                                    variant="text"
                                     :append-icon="advancedSettingsPanels.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"
-                                > 
-                                        Advanced Settings 
+                                >
+                                    Advanced Settings
                                 </v-chip>
                             </div>
 
@@ -120,9 +130,7 @@
                                             type="number"
                                             prepend-inner-icon="mdi-handshake"
                                         >
-                                            <template v-slot:append-inner>
-                                                %
-                                            </template>
+                                            <template v-slot:append-inner> % </template>
                                         </v-text-field>
 
                                         <v-text-field
@@ -134,10 +142,8 @@
                                             type="number"
                                             prepend-inner-icon="mdi-elevation-decline"
                                         >
-                                            <template v-slot:append-inner>
-                                                %
-                                            </template>
-                                        </v-text-field> 
+                                            <template v-slot:append-inner> % </template>
+                                        </v-text-field>
                                     </v-expansion-panel-text>
                                 </v-expansion-panel>
                             </v-expansion-panels>
@@ -147,24 +153,21 @@
                     <v-expansion-panel elevation="0">
                         <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
                             <div class="section-title d-flex">
-                                <v-icon class="mr-3">mdi-battery-charging-20</v-icon> 
-                                <div class="my-auto"> 
-                                    Solar Analysis
-                                </div>
+                                <v-icon class="mr-3">mdi-battery-charging-20</v-icon>
+                                <div class="my-auto">Solar Analysis</div>
                             </div>
                         </v-expansion-panel-title>
-                        
+
                         <v-expansion-panel-text>
                             <div class="detail-text mb-3">
-                                Solar analysis is used to evaluate the financial benefits of solar panels for a specific building
+                                Solar analysis is used to evaluate the financial benefits of solar panels for a specific
+                                building
                             </div>
 
                             <div>
                                 <div class="d-flex mb-2">
                                     <v-icon class="mr-3" color="theme">mdi-cash</v-icon>
-                                    <div class="my-auto me-auto subsection-title">
-                                        Costs and Incentives
-                                    </div>
+                                    <div class="my-auto me-auto subsection-title">Costs and Incentives</div>
                                 </div>
                                 <v-text-field
                                     v-model="userSolarData.averageMonthlyEnergyBill"
@@ -175,9 +178,7 @@
                                     type="number"
                                     prepend-inner-icon="mdi-calendar-month-outline"
                                 >
-                                    <template v-slot:append-inner>
-                                        $
-                                    </template>
+                                    <template v-slot:append-inner> $ </template>
                                 </v-text-field>
                                 <v-text-field
                                     v-model="userSolarData.energyCostPerKwh"
@@ -188,9 +189,7 @@
                                     type="number"
                                     prepend-inner-icon="mdi-currency-usd"
                                 >
-                                    <template v-slot:append-inner>
-                                        $
-                                    </template>
+                                    <template v-slot:append-inner> $ </template>
                                 </v-text-field>
                                 <v-text-field
                                     v-model="userSolarData.installationCostPerWatt"
@@ -201,10 +200,8 @@
                                     type="number"
                                     prepend-inner-icon="mdi-hammer"
                                 >
-                                    <template v-slot:append-inner>
-                                        $
-                                    </template>
-                                </v-text-field> 
+                                    <template v-slot:append-inner> $ </template>
+                                </v-text-field>
                                 <v-text-field
                                     v-model="userSolarData.solarIncentives"
                                     label="Solar incentives"
@@ -214,20 +211,24 @@
                                     type="number"
                                     prepend-inner-icon="mdi-handshake"
                                 >
-                                    <template v-slot:append-inner>
-                                        $
-                                    </template>
-                                </v-text-field> 
+                                    <template v-slot:append-inner> $ </template>
+                                </v-text-field>
                             </div>
 
                             <div class="w-100 text-center mb-2">
-                                <v-chip 
-                                    @click="advancedSettingsSolarPotential.length == 0 ? advancedSettingsSolarPotential=['advanced-settings-solar-potential'] : advancedSettingsSolarPotential=[]" 
+                                <v-chip
+                                    @click="
+                                        advancedSettingsSolarPotential.length == 0
+                                            ? (advancedSettingsSolarPotential = ['advanced-settings-solar-potential'])
+                                            : (advancedSettingsSolarPotential = [])
+                                    "
                                     color="theme"
-                                    variant="text" 
-                                    :append-icon="advancedSettingsSolarPotential.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"
-                                > 
-                                    Advanced Settings 
+                                    variant="text"
+                                    :append-icon="
+                                        advancedSettingsSolarPotential.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'
+                                    "
+                                >
+                                    Advanced Settings
                                 </v-chip>
                             </div>
 
@@ -243,10 +244,8 @@
                                             type="number"
                                             prepend-inner-icon="mdi-chart-line-variant"
                                         >
-                                            <template v-slot:append-inner>
-                                                %
-                                            </template>
-                                        </v-text-field> 
+                                            <template v-slot:append-inner> % </template>
+                                        </v-text-field>
 
                                         <v-text-field
                                             v-model="userSolarData.yearlyDiscountRate"
@@ -257,26 +256,22 @@
                                             type="number"
                                             prepend-inner-icon="mdi-cart-percent"
                                         >
-                                            <template v-slot:append-inner>
-                                                %
-                                            </template>
-                                        </v-text-field> 
+                                            <template v-slot:append-inner> % </template>
+                                        </v-text-field>
                                     </v-expansion-panel-text>
                                 </v-expansion-panel>
-                            </v-expansion-panels>   
+                            </v-expansion-panels>
                         </v-expansion-panel-text>
                     </v-expansion-panel>
 
                     <v-expansion-panel elevation="0">
                         <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
                             <div class="section-title d-flex">
-                                <v-icon class="mr-3">mdi-cog-outline</v-icon> 
-                                <div class="my-auto"> 
-                                    Settings
-                                </div>
+                                <v-icon class="mr-3">mdi-cog-outline</v-icon>
+                                <div class="my-auto">Settings</div>
                             </div>
                         </v-expansion-panel-title>
-                        
+
                         <v-expansion-panel-text>
                             <div class="detail-text mb-3">
                                 Settings to control what information is currently being displayed on the map
@@ -285,9 +280,7 @@
                             <div>
                                 <div class="d-flex mb-2">
                                     <v-icon class="mr-3" color="theme">mdi-weather-sunny</v-icon>
-                                    <div class="my-auto me-auto subsection-title">
-                                        Solar data
-                                    </div>
+                                    <div class="my-auto me-auto subsection-title">Solar data</div>
                                 </div>
 
                                 <v-select
@@ -312,9 +305,7 @@
                                     type="number"
                                     prepend-inner-icon="mdi-calendar-month-outline"
                                 >
-                                    <template v-slot:append-inner>
-                                        $
-                                    </template>
+                                    <template v-slot:append-inner> $ </template>
                                 </v-text-field>
 
                                 <v-switch v-model="mapSettings.showPanels" inset color="theme" density="compact">
@@ -339,14 +330,13 @@
             </div>
         </v-card>
 
-        <div id="map" class="w-100">
-        </div>
+        <div id="map" class="w-100"></div>
 
         <v-slider
             v-if="mapSettings.layerId === 'monthlyFlux'"
             v-model="timeParams.month"
             @end="timeParams.tick = timeParams.month"
-            :min="0" 
+            :min="0"
             :max="11"
             step="1"
             hide-details
@@ -355,7 +345,7 @@
             rounded
         >
             <template v-slot:append>
-                <div class="ml-1" style="width: 50px;">
+                <div class="ml-1" style="width: 50px">
                     {{ monthCodes[timeParams.month] }}
                 </div>
             </template>
@@ -365,7 +355,7 @@
             v-if="mapSettings.layerId === 'hourlyShade'"
             v-model="timeParams.hour"
             @end="timeParams.tick = timeParams.hour"
-            :min="0" 
+            :min="0"
             :max="23"
             step="1"
             hide-details
@@ -373,41 +363,70 @@
             :class="$vuetify.display.xs ? 'time-slider-mobile' : 'time-slider-computer'"
         >
             <template v-slot:append>
-                <div class="ml-1" style="width: 50px;">
+                <div class="ml-1" style="width: 50px">
                     {{ hourCodes[timeParams.hour] }}
                 </div>
             </template>
         </v-slider>
-        
+
         <div v-if="Object.keys(buildingInsights).length">
-            <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
-            <EnergyReadonlyPanel v-if="solarReadonlyPanel == 1" :buildingInsights="buildingInsights" :userSolarData="userSolarData"/>
+            <BuildingReadonlyPanel
+                v-if="solarReadonlyPanel == 0"
+                :buildingInsights="buildingInsights"
+                :userSolarData="userSolarData"
+            />
+            <EnergyReadonlyPanel
+                v-if="solarReadonlyPanel == 1"
+                :buildingInsights="buildingInsights"
+                :userSolarData="userSolarData"
+            />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 // Vue
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref, watch } from "vue";
 // Util
-import { Coordinates } from "solar-typing/src/general"
-import { BuildingInsights, LayerId, SolarLayers, Layer, SolarPanelConfig, UserSolarData, MapSettings } from "solar-typing/src/solar"
-import { TimeParameters } from '@/util/types';
-import { panelsPalette, monthCodes, hourCodes } from "@/util/constants"
-import { createPalette, rgbToColor, normalize, initMap, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/util/generalHelpers";
-import { getSolarDataLayers, getSingleLayer, findClosestBuilding, getReverseGeocoding, getGeocoding } from "@/api/googleMapsAPI";
+import { Coordinates } from "solar-typing/src/general";
+import {
+    BuildingInsights,
+    LayerId,
+    SolarLayers,
+    Layer,
+    SolarPanelConfig,
+    UserSolarData,
+    MapSettings,
+} from "solar-typing/src/solar";
+import { TimeParameters } from "@/util/types";
+import { panelsPalette, monthCodes, hourCodes } from "@/util/constants";
+import {
+    createPalette,
+    rgbToColor,
+    normalize,
+    initMap,
+    initAutocomplete,
+    prepareHandlerEnterKeyOnSearchBar,
+} from "@/util/generalHelpers";
+import {
+    getSolarDataLayers,
+    getSingleLayer,
+    findClosestBuilding,
+    getReverseGeocoding,
+    getGeocoding,
+} from "@/api/googleMapsAPI";
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
-import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh } from '@/util/solarHelpers';
+import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh } from "@/util/solarHelpers";
 
 // Emit
-const emit = defineEmits(['alert']);
+const emit = defineEmits(["alert"]);
 function emitAlert(type: string, title: string, message: string) {
-    emit('alert', {
-        type: type, 
-        title: title, 
-        message: message
+    emit("alert", {
+        type: type,
+        title: title,
+        message: message,
     });
 }
 
@@ -422,18 +441,18 @@ const mapSettings = ref<MapSettings>({
     layerIdChoices: [
         { name: "annualFlux", displayedName: "Annual" },
         { name: "monthlyFlux", displayedName: "Monthly" },
-        { name: "hourlyShade", displayedName: "Daily" }
+        { name: "hourlyShade", displayedName: "Daily" },
     ],
     showPanels: true,
     showHeatmap: true,
     heatmapAnimation: true,
-    configIdIndex: 0
+    configIdIndex: 0,
 });
 const timeParams = ref<TimeParameters>({
     tick: 0,
     month: 0,
     day: 1,
-    hour: 0
+    hour: 0,
 });
 const userSolarData = ref<UserSolarData>({
     panelCount: 0,
@@ -441,7 +460,7 @@ const userSolarData = ref<UserSolarData>({
     maxPanelCount: 1,
     panelCapacityWatts: 350,
     defaultPanelCapacityWatts: 350,
-    installationCostPerWatt: 4.00,
+    installationCostPerWatt: 4.0,
     yearlyEnergyDcKwh: 0,
     dcToAcDerate: 85,
     averageMonthlyEnergyBill: 300,
@@ -450,7 +469,7 @@ const userSolarData = ref<UserSolarData>({
     yearlyPanelEfficiencyDecline: 0.5,
     yearlyEnergyCostIncrease: 2.2,
     yearlyDiscountRate: 4,
-    installationLifespan: 25
+    installationLifespan: 25,
 });
 
 let map: google.maps.Map;
@@ -460,20 +479,20 @@ let geometryLibrary: google.maps.GeometryLibrary;
 onMounted(async () => {
     const coord: Coordinates = { lat: 46.81701, lng: -71.36838 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
-    
+
     map = await initMap(coord, mapElement, "SOLAR");
     autocomplete = await initAutocomplete("autocomplete-search");
     autocompleteValue.value = await getReverseGeocoding(coord);
 
     if (map == undefined || autocomplete == undefined) {
         emitAlert(
-            "error", 
+            "error",
             "Could not properly load the map",
-            "An error occured when trying to load the map and its components."
+            "An error occured when trying to load the map and its components.",
         );
     }
-    
-    geometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary
+
+    geometryLibrary = (await google.maps.importLibrary("geometry")) as google.maps.GeometryLibrary;
     await initListeners();
     await updateBuildingInsights(coord);
     mapSettings.value.configIdIndex = getConfigIdForFullEnergyCoverage();
@@ -481,9 +500,9 @@ onMounted(async () => {
     syncMapWithNewBuildingInsights();
 
     setInterval(() => {
-			handleTickChange();
+        handleTickChange();
     }, 1000);
-})
+});
 
 function handleTickChange() {
     timeParams.value.tick++;
@@ -494,8 +513,7 @@ function handleTickChange() {
         } else {
             timeParams.value.tick = timeParams.value.month;
         }
-    }
-    else if (layer?.id === "hourlyShade") {
+    } else if (layer?.id === "hourlyShade") {
         if (mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
             timeParams.value.hour = timeParams.value.tick % 24;
         } else {
@@ -504,26 +522,37 @@ function handleTickChange() {
     }
 }
 
-watch(() => mapSettings.value.showPanels, async () => {
-    await syncMapWithNewBuildingInsights();
-});
+watch(
+    () => mapSettings.value.showPanels,
+    async () => {
+        await syncMapWithNewBuildingInsights();
+    },
+);
 
-watch(() => mapSettings.value.layerId, async () => {
-    await showDataLayer(true);
-});
+watch(
+    () => mapSettings.value.layerId,
+    async () => {
+        await showDataLayer(true);
+    },
+);
 
-watch(() => mapSettings.value.showHeatmap, async () => {
-    await showDataLayer(true);
-});
+watch(
+    () => mapSettings.value.showHeatmap,
+    async () => {
+        await showDataLayer(true);
+    },
+);
 
-watch(() => timeParams.value.tick, () => {
-    if (mapSettings.value.layerId === "monthlyFlux") {
-        displayMonthlyFlux();
-    } else if (mapSettings.value.layerId === "hourlyShade") {
-        displayhourlyShade();
-    }
-});
-
+watch(
+    () => timeParams.value.tick,
+    () => {
+        if (mapSettings.value.layerId === "monthlyFlux") {
+            displayMonthlyFlux();
+        } else if (mapSettings.value.layerId === "hourlyShade") {
+            displayhourlyShade();
+        }
+    },
+);
 
 let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events, prevent first one from sending request
 
@@ -534,12 +563,12 @@ async function initListeners() {
 async function setPlaceChangedOnAutocompleteListener() {
     autocomplete.addListener("place_changed", async () => {
         const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
-        if ( !newPlace || !newPlace.formatted_address ) {
+        if (!newPlace || !newPlace.formatted_address) {
             if (autocompleteAlreadyChanged) {
                 emitAlert(
-                    "warning", 
+                    "warning",
                     "Could not process the prompted address",
-                    "Choose a valid address from the dropdown menu."
+                    "Choose a valid address from the dropdown menu.",
                 );
                 autocompleteAlreadyChanged = false;
                 return;
@@ -552,16 +581,16 @@ async function setPlaceChangedOnAutocompleteListener() {
         autocompleteAlreadyChanged = false;
 
         const newCoord: Coordinates | undefined = await getGeocoding(newPlace.formatted_address);
-        if ( !newCoord ) {
+        if (!newCoord) {
             autocompleteValue.value = "";
             emitAlert(
-                "error", 
+                "error",
                 "Could not geocode the prompted address",
-                "An error occured when trying to convert the address to geographic Coordinates."
+                "An error occured when trying to convert the address to geographic Coordinates.",
             );
             return;
         }
-        
+
         await syncCurrentDataWithNewRequest(newCoord, newPlace.formatted_address);
     });
 }
@@ -578,25 +607,32 @@ async function syncCurrentDataWithNewRequest(newCoord: Coordinates, formattedAdd
 async function updateBuildingInsights(coord: Coordinates) {
     buildingInsights.value = await findClosestBuilding(coord);
     userSolarData.value.minPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
-    userSolarData.value.maxPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[buildingInsights.value.solarPotential.solarPanelConfigs.length - 1].panelsCount;
+    userSolarData.value.maxPanelCount =
+        buildingInsights.value.solarPotential.solarPanelConfigs[
+            buildingInsights.value.solarPotential.solarPanelConfigs.length - 1
+        ].panelsCount;
     userSolarData.value.defaultPanelCapacityWatts = buildingInsights.value.solarPotential.panelCapacityWatts;
 }
 
 async function panelCountChange() {
-    userSolarData.value.panelCount = buildingInsights.value.solarPotential.solarPanelConfigs[mapSettings.value.configIdIndex].panelsCount;
+    userSolarData.value.panelCount =
+        buildingInsights.value.solarPotential.solarPanelConfigs[mapSettings.value.configIdIndex].panelsCount;
     await syncMapWithNewBuildingInsights();
 }
 
 function getConfigIdForFullEnergyCoverage() {
     for (let i = 0; i < buildingInsights.value.solarPotential.solarPanelConfigs.length; i++) {
-        if (buildingInsights.value.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh * panelCapacityRatioCalc(userSolarData.value) * dcToAcDerate(userSolarData.value) >= yearlyEnergyConsumptionKwh(userSolarData.value)) {
+        if (
+            buildingInsights.value.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh *
+                panelCapacityRatioCalc(userSolarData.value) *
+                dcToAcDerate(userSolarData.value) >=
+            yearlyEnergyConsumptionKwh(userSolarData.value)
+        ) {
             return i;
         }
     }
     return buildingInsights.value.solarPotential.solarPanelConfigs.length - 1;
 }
-
-
 
 /*
     Solar panels
@@ -638,7 +674,7 @@ function addSolarPanelsToMap() {
             { x: -w, y: +h }, // top left
             { x: +w, y: +h }, //  top right
         ];
-        const orientation = panel.orientation == 'PORTRAIT' ? 90 : 0;
+        const orientation = panel.orientation == "PORTRAIT" ? 90 : 0;
         const azimuth = solarPotential.roofSegmentStats[panel.segmentIndex].azimuthDegrees;
         const colorIndex = Math.round(normalize(panel.yearlyEnergyDcKwh, maxEnergy, minEnergy) * 255);
         return new google.maps.Polygon({
@@ -649,7 +685,7 @@ function addSolarPanelsToMap() {
                     Math.atan2(y, x) * (180 / Math.PI) + orientation + azimuth,
                 ),
             ),
-            strokeColor: '#B0BEC5',
+            strokeColor: "#B0BEC5",
             strokeOpacity: 0.9,
             strokeWeight: 1,
             fillColor: palette[colorIndex],
@@ -658,10 +694,9 @@ function addSolarPanelsToMap() {
     });
 
     solarPanels.map((panel, i) =>
-        panel.setMap(mapSettings.value.showPanels && panelConfig && i < panelConfig.panelsCount ? map : null)
+        panel.setMap(mapSettings.value.showPanels && panelConfig && i < panelConfig.panelsCount ? map : null),
     );
 }
-
 
 /*
     Heatmap layer
@@ -710,13 +745,13 @@ function resetDataLayer() {
     layer = undefined;
 
     // Default values per layer.
-    showRoofOnly = ['annualFlux', 'monthlyFlux', 'hourlyShade'].includes(mapSettings.value.layerId);
-    mapSettings.value.heatmapAnimation = ['monthlyFlux', 'hourlyShade'].includes(mapSettings.value.layerId);
-    map.setMapTypeId('satellite');
+    showRoofOnly = ["annualFlux", "monthlyFlux", "hourlyShade"].includes(mapSettings.value.layerId);
+    mapSettings.value.heatmapAnimation = ["monthlyFlux", "hourlyShade"].includes(mapSettings.value.layerId);
+    map.setMapTypeId("satellite");
 }
 
 function resetHeatmapLayer() {
-    if (!layer ) {
+    if (!layer) {
         return;
     }
 
@@ -724,7 +759,7 @@ function resetHeatmapLayer() {
     overlays.map((overlay) => overlay.setMap(null));
     if (!mapSettings.value.showHeatmap) {
         return;
-    } 
+    }
 
     overlays = layer
         .render(showRoofOnly, timeParams.value.month, timeParams.value.day)

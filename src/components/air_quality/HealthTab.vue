@@ -2,13 +2,21 @@
     <div class="text-center">
         <v-item-group class="my-4" v-model="healthButtonSelection" mandatory>
             <v-item v-for="group in healthRecommendationsList" v-slot="{ toggle, isSelected }">
-                <v-btn @click="toggle" class="mx-2 my-2" :class="isSelected ? 'button-selection-background' : 'button-non-selection-background'" icon density="comfortable">
-                    <v-icon :class="isSelected ? 'icon-selection-color' : 'icon-non-selection-color'" >{{ group.icon }}</v-icon>
+                <v-btn
+                    @click="toggle"
+                    class="mx-2 my-2"
+                    :class="isSelected ? 'button-selection-background' : 'button-non-selection-background'"
+                    icon
+                    density="comfortable"
+                >
+                    <v-icon :class="isSelected ? 'icon-selection-color' : 'icon-non-selection-color'">{{
+                        group.icon
+                    }}</v-icon>
                 </v-btn>
             </v-item>
         </v-item-group>
 
-        <v-divider/>
+        <v-divider />
 
         <v-card class="pa-2 rounded-lg text-left" variant="text">
             <div class="section-title">
@@ -22,75 +30,78 @@
 </template>
 
 <script setup lang="ts">
-// Vue 
-import { ref, PropType, onMounted } from 'vue';
+// Vue
+import { ref, PropType, onMounted } from "vue";
 // Util
-import { HealthRecommendations } from "solar-typing/src/airQuality"
+import { HealthRecommendations } from "solar-typing/src/airQuality";
 
 const props = defineProps({
     healthRecommendations: {
         type: Object as PropType<HealthRecommendations>,
         required: true,
-        default: {}
-    }
+        default: {},
+    },
 });
 
 onMounted(() => {
-    for(let i = 0; i < healthRecommendationsList.value.length; i++) {
-        healthRecommendationsList.value[i].recommendation = props.healthRecommendations[healthRecommendationsList.value[i].group as keyof typeof props.healthRecommendations];
+    for (let i = 0; i < healthRecommendationsList.value.length; i++) {
+        healthRecommendationsList.value[i].recommendation =
+            props.healthRecommendations[
+                healthRecommendationsList.value[i].group as keyof typeof props.healthRecommendations
+            ];
     }
-})
+});
 
 const healthButtonSelection = ref(0);
 const healthRecommendationsList = ref([
-        {
-            index: 0,
-            group: "generalPopulation",
-            displayName: "General population",
-            recommendation: "",
-            icon: "mdi-account-group"
-        },
-        {
-            index: 1,
-            group: "children",
-            displayName: "Children",
-            recommendation: "",
-            icon: "mdi-baby-carriage"
-        },
-        {
-            index: 2,
-            group: "elderly",
-            displayName: "Senior citizens",
-            recommendation: "",
-            icon: "mdi-human-cane"
-        },
-        {
-            index: 3,
-            group: "athletes",
-            displayName: "Athletes",
-            recommendation: "",
-            icon: "mdi-weight-lifter"
-        },
-        {
-            index: 4,
-            group: "pregnantWomen",
-            displayName: "Pregnant women",
-            recommendation: "",
-            icon: "mdi-human-pregnant"
-        },
-        {
-            index: 5,
-            group: "heartDiseasePopulation",
-            displayName: "Individuals with heart-related issues",
-            recommendation: "",
-            icon: "mdi-heart"
-        },
-        {
-            index: 6,
-            group: "lungDiseasePopulation",
-            displayName: "Individuals with lung-related issues",
-            recommendation: "",
-            icon: "mdi-lungs"
-        },
+    {
+        index: 0,
+        group: "generalPopulation",
+        displayName: "General population",
+        recommendation: "",
+        icon: "mdi-account-group",
+    },
+    {
+        index: 1,
+        group: "children",
+        displayName: "Children",
+        recommendation: "",
+        icon: "mdi-baby-carriage",
+    },
+    {
+        index: 2,
+        group: "elderly",
+        displayName: "Senior citizens",
+        recommendation: "",
+        icon: "mdi-human-cane",
+    },
+    {
+        index: 3,
+        group: "athletes",
+        displayName: "Athletes",
+        recommendation: "",
+        icon: "mdi-weight-lifter",
+    },
+    {
+        index: 4,
+        group: "pregnantWomen",
+        displayName: "Pregnant women",
+        recommendation: "",
+        icon: "mdi-human-pregnant",
+    },
+    {
+        index: 5,
+        group: "heartDiseasePopulation",
+        displayName: "Individuals with heart-related issues",
+        recommendation: "",
+        icon: "mdi-heart",
+    },
+    {
+        index: 6,
+        group: "lungDiseasePopulation",
+        displayName: "Individuals with lung-related issues",
+        recommendation: "",
+        icon: "mdi-lungs",
+    },
 ]);
 </script>

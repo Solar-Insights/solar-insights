@@ -1,6 +1,6 @@
 // Util
-import { UserSolarData } from "solar-typing/src/solar"
-import { GoogleCharts } from 'google-charts';
+import { UserSolarData } from "solar-typing/src/solar";
+import { GoogleCharts } from "google-charts";
 
 /*
     Units: None
@@ -13,7 +13,7 @@ export function panelCapacityRatioCalc(userSolarData: UserSolarData) {
     Units: None
 */
 export function yearlyDiscountRate(userSolarData: UserSolarData) {
-    return 1 + userSolarData.yearlyDiscountRate / 100; 
+    return 1 + userSolarData.yearlyDiscountRate / 100;
 }
 
 /*
@@ -34,7 +34,7 @@ export function yearlyEnergyCostIncrease(userSolarData: UserSolarData) {
     Units: None
 */
 export function dcToAcDerate(userSolarData: UserSolarData) {
-    return userSolarData.dcToAcDerate / 100
+    return userSolarData.dcToAcDerate / 100;
 }
 
 /*
@@ -48,7 +48,7 @@ export function yearlyEnergyCalc(userSolarData: UserSolarData) {
     Units: kW
 */
 export function installationSizeCalc(userSolarData: UserSolarData) {
-    return userSolarData.panelCount * userSolarData.panelCapacityWatts / 1000;
+    return (userSolarData.panelCount * userSolarData.panelCapacityWatts) / 1000;
 }
 
 /*
@@ -62,11 +62,14 @@ export function installationCostCalc(userSolarData: UserSolarData) {
     Units: []kWh
     Division by 100 because dcToAcDerate in percent
 */
-export function yearlyEnergyAcProductionKwh(userSolarData: UserSolarData){
+export function yearlyEnergyAcProductionKwh(userSolarData: UserSolarData) {
     const energyProduction: number[] = [];
-    for(let i = 0; i < userSolarData.installationLifespan; i++) {
+    for (let i = 0; i < userSolarData.installationLifespan; i++) {
         energyProduction.push(
-            userSolarData.yearlyEnergyDcKwh * panelCapacityRatioCalc(userSolarData) * dcToAcDerate(userSolarData) * yearlyPanelEfficiencyDecline(userSolarData) ** i
+            userSolarData.yearlyEnergyDcKwh *
+                panelCapacityRatioCalc(userSolarData) *
+                dcToAcDerate(userSolarData) *
+                yearlyPanelEfficiencyDecline(userSolarData) ** i,
         );
     }
 
@@ -77,14 +80,14 @@ export function yearlyEnergyAcProductionKwh(userSolarData: UserSolarData){
     Units: kWh
 */
 export function yearlyEnergyConsumptionKwh(userSolarData: UserSolarData) {
-    return userSolarData.averageMonthlyEnergyBill / userSolarData.energyCostPerKwh * 12;
+    return (userSolarData.averageMonthlyEnergyBill / userSolarData.energyCostPerKwh) * 12;
 }
 
 /*
     Units: %
 */
 export function energyCoveredCalc(userSolarData: UserSolarData) {
-    return yearlyEnergyAcProductionKwh(userSolarData)[0] / yearlyEnergyConsumptionKwh(userSolarData) * 100;
+    return (yearlyEnergyAcProductionKwh(userSolarData)[0] / yearlyEnergyConsumptionKwh(userSolarData)) * 100;
 }
 
 /*
@@ -95,7 +98,13 @@ export function yearlyUtilityBillEstimates(userSolarData: UserSolarData) {
     const energyProduction: number[] = yearlyEnergyAcProductionKwh(userSolarData);
     for (let i = 0; i < userSolarData.installationLifespan; i++) {
         utilityBillEstimates.push(
-            Math.max((yearlyEnergyConsumptionKwh(userSolarData) - energyProduction[i]) * userSolarData.energyCostPerKwh * yearlyEnergyCostIncrease(userSolarData) ** i / yearlyDiscountRate(userSolarData) ** i, 0)
+            Math.max(
+                ((yearlyEnergyConsumptionKwh(userSolarData) - energyProduction[i]) *
+                    userSolarData.energyCostPerKwh *
+                    yearlyEnergyCostIncrease(userSolarData) ** i) /
+                    yearlyDiscountRate(userSolarData) ** i,
+                0,
+            ),
         );
     }
 
@@ -107,7 +116,11 @@ export function yearlyUtilityBillEstimates(userSolarData: UserSolarData) {
 */
 export function costWithSolarInstallation(userSolarData: UserSolarData) {
     const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData);
-    return installationCostCalc(userSolarData) + utilityBillEstimates.reduce((x, y) => x + y, 0) - userSolarData.solarIncentives;
+    return (
+        installationCostCalc(userSolarData) +
+        utilityBillEstimates.reduce((x, y) => x + y, 0) -
+        userSolarData.solarIncentives
+    );
 }
 
 /*
@@ -117,11 +130,12 @@ export function yearlyCostWithoutSolar(userSolarData: UserSolarData) {
     const costWithoutSolar: number[] = [];
     for (let i = 0; i < userSolarData.installationLifespan; i++) {
         costWithoutSolar.push(
-            (userSolarData.averageMonthlyEnergyBill * 12 * yearlyEnergyCostIncrease(userSolarData) ** i) / yearlyDiscountRate(userSolarData) ** i
+            (userSolarData.averageMonthlyEnergyBill * 12 * yearlyEnergyCostIncrease(userSolarData) ** i) /
+                yearlyDiscountRate(userSolarData) ** i,
         );
     }
 
-    return costWithoutSolar
+    return costWithoutSolar;
 }
 
 /*
@@ -139,8 +153,11 @@ export function getBreakEvenYear(userSolarData: UserSolarData) {
     let costWithSolar = 0;
     const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData);
     const cumulativeCostWithSolar: number[] = [];
-    for (let i = 0; i < userSolarData.installationLifespan; i++) { 
-        costWithSolar += i == 0 ? utilityBillEstimates[i] + installationCostCalc(userSolarData) - userSolarData.solarIncentives : utilityBillEstimates[i];
+    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+        costWithSolar +=
+            i == 0
+                ? utilityBillEstimates[i] + installationCostCalc(userSolarData) - userSolarData.solarIncentives
+                : utilityBillEstimates[i];
         cumulativeCostWithSolar.push(costWithSolar);
     }
 
@@ -158,7 +175,10 @@ export function getBreakEvenYear(userSolarData: UserSolarData) {
     }
 
     if (breakEvenYear == userSolarData.installationLifespan) {
-        if (cumulativeCostWithSolar[userSolarData.installationLifespan - 1] > cumulativeCostWithoutSolar[userSolarData.installationLifespan - 1]) {
+        if (
+            cumulativeCostWithSolar[userSolarData.installationLifespan - 1] >
+            cumulativeCostWithoutSolar[userSolarData.installationLifespan - 1]
+        ) {
             return -1;
         }
     }
@@ -167,45 +187,50 @@ export function getBreakEvenYear(userSolarData: UserSolarData) {
 }
 
 export function drawGoogleChart(userSolarData: UserSolarData, costChart: HTMLElement | null) {
-    GoogleCharts.load(() => {
-        if (!costChart) return;
-    
-        const year = new Date().getFullYear();
+    GoogleCharts.load(
+        () => {
+            if (!costChart) return;
 
-        let costWithSolar = 0;
-        const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData);
-        const cumulativeCostWithSolar: number[] = [];
-        for (let i = 0; i < userSolarData.installationLifespan; i++) { 
-            costWithSolar += i == 0 ? utilityBillEstimates[i] + installationCostCalc(userSolarData) - userSolarData.solarIncentives : utilityBillEstimates[i];
-            cumulativeCostWithSolar.push(costWithSolar);
-        }
+            const year = new Date().getFullYear();
 
-        let costWithoutSolar = 0;
-        const yearlyCostWithoutSolarEstimates: number[] = yearlyCostWithoutSolar(userSolarData);
-        const cumulativeCostWithoutSolar: number[] = [];
-        for (let i = 0; i < userSolarData.installationLifespan; i++) {
-            costWithoutSolar += yearlyCostWithoutSolarEstimates[i];
-            cumulativeCostWithoutSolar.push(costWithoutSolar);
-        }
-        
-        const data = google.visualization.arrayToDataTable([
-            ['Year', 'Solar', 'No solar'],
-            [year.toString(), 0, 0],
-            ...cumulativeCostWithSolar.map((_, i) => [
-                (year + i + 1).toString(),
-                cumulativeCostWithSolar[i],
-                cumulativeCostWithoutSolar[i],
-            ]),
-        ]);
+            let costWithSolar = 0;
+            const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData);
+            const cumulativeCostWithSolar: number[] = [];
+            for (let i = 0; i < userSolarData.installationLifespan; i++) {
+                costWithSolar +=
+                    i == 0
+                        ? utilityBillEstimates[i] + installationCostCalc(userSolarData) - userSolarData.solarIncentives
+                        : utilityBillEstimates[i];
+                cumulativeCostWithSolar.push(costWithSolar);
+            }
 
-        const googleCharts = google.charts as any;
-        const chart = new googleCharts.Line(costChart);
-        const options = googleCharts.Line.convertOptions({
-            title: `Cost analysis for ${userSolarData.installationLifespan} years`,
-            width: 325,
-            height: 200,
-        });
-        chart.draw(data, options);
-    },
-    { packages: ['line'] },);
+            let costWithoutSolar = 0;
+            const yearlyCostWithoutSolarEstimates: number[] = yearlyCostWithoutSolar(userSolarData);
+            const cumulativeCostWithoutSolar: number[] = [];
+            for (let i = 0; i < userSolarData.installationLifespan; i++) {
+                costWithoutSolar += yearlyCostWithoutSolarEstimates[i];
+                cumulativeCostWithoutSolar.push(costWithoutSolar);
+            }
+
+            const data = google.visualization.arrayToDataTable([
+                ["Year", "Solar", "No solar"],
+                [year.toString(), 0, 0],
+                ...cumulativeCostWithSolar.map((_, i) => [
+                    (year + i + 1).toString(),
+                    cumulativeCostWithSolar[i],
+                    cumulativeCostWithoutSolar[i],
+                ]),
+            ]);
+
+            const googleCharts = google.charts as any;
+            const chart = new googleCharts.Line(costChart);
+            const options = googleCharts.Line.convertOptions({
+                title: `Cost analysis for ${userSolarData.installationLifespan} years`,
+                width: 325,
+                height: 200,
+            });
+            chart.draw(data, options);
+        },
+        { packages: ["line"] },
+    );
 }

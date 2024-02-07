@@ -1,20 +1,15 @@
 {
-  "compilerOptions": {
-    "composite": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
+    "compilerOptions": {
+        "composite": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "types": ["node", "vuetify", "googlemaps"],
+        "skipLibCheck": true,
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "allowSyntheticDefaultImports": true
     },
-    "types": [
-      "node",
-      "vuetify",
-      "googlemaps"
-    ],
-    "skipLibCheck": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true,
-
-  },
-  "include": ["vite.config.ts"]
+    "include": ["vite.config.ts"]
 }

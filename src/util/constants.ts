@@ -3,9 +3,9 @@
 */
 export function circularBarColorSelector(value: string) {
     const numValue: number = Number(value);
-    if ( isNaN(numValue)) return "green";
-    else if ( numValue < 50 ) return "red";
-    else if ( numValue < 80 ) return "orange";
+    if (isNaN(numValue)) return "green";
+    else if (numValue < 50) return "red";
+    else if (numValue < 80) return "orange";
     else return "green";
 }
 
@@ -22,7 +22,6 @@ export function batteryCharging(value: number) {
     else if (value > 0) return "mdi-battery-charging-10";
 }
 
-
 /*
     Pollutants code and display name
     For an updated list of pollutants, visit https://developers.google.com/maps/documentation/air-quality/pollutants
@@ -30,86 +29,72 @@ export function batteryCharging(value: number) {
 export const pollutants = {
     co: {
         code: "co",
-        displayName: "CO"
+        displayName: "CO",
     },
-    c6h6 : {
+    c6h6: {
         code: "c6h6",
-        displayName: "C6H6"
+        displayName: "C6H6",
     },
-    ox : {
+    ox: {
         code: "ox",
-        displayName: "OX"
+        displayName: "OX",
     },
-    o3 : {
+    o3: {
         code: "o3",
-        displayName: "O3"
+        displayName: "O3",
     },
-    nh3 : {
+    nh3: {
         code: "nh3",
-        displayName: "NH3"
+        displayName: "NH3",
     },
-    nhmc : {
+    nhmc: {
         code: "nhmc",
-        displayName: "NHMC"
+        displayName: "NHMC",
     },
-    no : {
+    no: {
         code: "no",
-        displayName: "NO"
+        displayName: "NO",
     },
-    nox : {
+    nox: {
         code: "nox",
-        displayName: "NOX"
+        displayName: "NOX",
     },
-    no2 : {
+    no2: {
         code: "no2",
-        displayName: "NO2"
+        displayName: "NO2",
     },
-    pm25 : {
+    pm25: {
         code: "pm25",
-        displayName: "PM2.5"
+        displayName: "PM2.5",
     },
-    pm10 : {
+    pm10: {
         code: "pm10",
-        displayName: "PM10"
+        displayName: "PM10",
     },
-    so2 : {
+    so2: {
         code: "so2",
-        displayName: "SO2"
+        displayName: "SO2",
     },
-    trs : {
+    trs: {
         code: "trs",
-        displayName: "TRS"
+        displayName: "TRS",
     },
 };
-
 
 /*
     Solar colors and data
 */
-export const binaryPalette = ['212121', 'B3E5FC'];
+export const binaryPalette = ["212121", "B3E5FC"];
 
-export const rainbowPalette = ['3949AB', '81D4FA', '66BB6A', 'FFE082', 'E53935'];
+export const rainbowPalette = ["3949AB", "81D4FA", "66BB6A", "FFE082", "E53935"];
 
-export const ironPalette = ['00000A', '91009C', 'E64616', 'FEB400', 'FFFFF6'];
+export const ironPalette = ["00000A", "91009C", "E64616", "FEB400", "FFFFF6"];
 
-export const sunlightPalette = ['212121', 'FFCA28'];
+export const sunlightPalette = ["212121", "FFCA28"];
 
-export const panelsPalette = ['E8EAF6', '1A237E'];
+export const panelsPalette = ["E8EAF6", "1A237E"];
 
-export const monthCodes = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-];
+export const monthCodes = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export const hourCodes = [
     "00:00",
@@ -135,5 +120,5 @@ export const hourCodes = [
     "20:00",
     "21:00",
     "22:00",
-    "23:00"
-  ];
+    "23:00",
+];

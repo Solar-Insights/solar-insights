@@ -1,9 +1,9 @@
 $text-theme: #50a490;
-$text-emphasis: #535353; 
+$text-emphasis: #535353;
 
 .universal-font-theme {
     @extend .font-weight-light;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 0.9rem;
 }
 
@@ -29,7 +29,7 @@ $text-emphasis: #535353;
     @extend .mt-4;
 }
 
-.section-title   {
+.section-title {
     @extend .emphasis;
     @extend .mb-2;
     font-size: 1.1rem;
