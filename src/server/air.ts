@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AirQualityData } from 'solar-typing/src/airQuality';
 import { Coordinates } from 'solar-typing/src/general';
-
+import { makeDominantPollutantFirst } from "@/helpers/air";
 axios.defaults.baseURL = import.meta.env.VITE_DEV_URL;
 
 export async function getAirQualityData(coord: Coordinates) {
@@ -15,6 +15,8 @@ export async function getAirQualityData(coord: Coordinates) {
         }
       })
         .then((response) => {
+            const airQualityData: AirQualityData = response.data.airQualityData;
+            makeDominantPollutantFirst(airQualityData.indexes[0].dominantPollutant, airQualityData.pollutants);
             return response.data.airQualityData as AirQualityData;
         })
         .catch((error) => {

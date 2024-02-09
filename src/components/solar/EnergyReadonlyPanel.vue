@@ -108,16 +108,16 @@ import { PropType, onMounted, watch, ref } from "vue";
 import { BuildingInsights, UserSolarData } from "solar-typing/src/solar";
 import {
     getBreakEvenYear,
-    drawGoogleChart,
     yearlyEnergyCalc,
     installationSizeCalc,
     installationCostCalc,
     energyCoveredCalc,
     costWithSolarInstallation,
     costWithoutSolarInstallation,
-} from "@/util/solarHelpers";
-import { batteryCharging } from "@/util/constants";
-import { strToLargeNumberDisplay } from "@/util/generalHelpers";
+} from "@/helpers/solarMath";
+import { drawGoogleChart } from "@/helpers/solar";
+import { batteryCharging } from "@/helpers/constants";
+import { strToLargeNumberDisplay } from "@/helpers/util";
 
 const props = defineProps({
     buildingInsights: {

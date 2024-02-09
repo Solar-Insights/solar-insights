@@ -399,24 +399,18 @@ import {
     MapSettings,
 } from "solar-typing/src/solar";
 import { TimeParameters } from "@/util/types";
-import { panelsPalette, monthCodes, hourCodes } from "@/util/constants";
-import {
-    createPalette,
-    rgbToColor,
-    normalize,
-    initMap,
-    initAutocomplete,
-    prepareHandlerEnterKeyOnSearchBar,
-} from "@/util/generalHelpers";
-import { getSingleLayer } from "@/api/googleMapsAPI";
-
+import { panelsPalette, monthCodes, hourCodes } from "@/helpers/constants";
+import { initMap, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
+import { normalize } from "@/helpers/solarMath";
+import { rgbToColor, createPalette } from "@/helpers/solar";
+import { getSingleLayer } from "@/helpers/solar";
 import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
 import { getGeocoding, getReverseGeocoding } from "@/server/util";
 
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
-import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh } from "@/util/solarHelpers";
+import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh } from "@/helpers/solarMath";
 
 // Emit
 const emit = defineEmits(["alert"]);

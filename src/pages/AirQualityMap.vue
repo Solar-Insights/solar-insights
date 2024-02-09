@@ -96,8 +96,8 @@ import _ from "lodash";
 // Util
 import { AirQualityData } from "solar-typing/src/airQuality";
 import { Coordinates } from "solar-typing/src/general";
-import { pollutants, circularBarColorSelector } from "@/util/constants";
-import { initMap, initMarker, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/util/generalHelpers";
+import { pollutants, circularBarColorSelector } from "@/helpers/constants";
+import { initMap, initMarker, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
 import { getAirQualityData } from "@/server/air";
 import { getGeocoding, getReverseGeocoding } from "@/server/util";
 // Components
