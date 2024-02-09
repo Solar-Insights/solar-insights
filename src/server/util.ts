@@ -4,12 +4,12 @@ import { Coordinates } from 'solar-typing/src/general';
 axios.defaults.baseURL = import.meta.env.VITE_DEV_URL;
 
 export async function getGeocoding(formattedAddress: string) { 
-    axios({
+    await axios({
         method: "get",
         responseType: 'json',
         url: `/util/geocoding`,
         params: {
-            address: undefined
+            address: formattedAddress
         }
       })
         .then((response) => {
@@ -21,13 +21,13 @@ export async function getGeocoding(formattedAddress: string) {
 }
 
 export async function getReverseGeocoding(coord: Coordinates) {
-    axios({
+    await axios({
         method: "get",
         responseType: 'json',
         url: `/util/reverse-geocoding`,
         params: {
-            lat: 0,
-            lng: 0
+            lat: coord.lat,
+            lng: coord.lng
         }
       })
         .then((response) => {
