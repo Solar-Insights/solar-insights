@@ -408,13 +408,11 @@ import {
     initAutocomplete,
     prepareHandlerEnterKeyOnSearchBar,
 } from "@/util/generalHelpers";
-import {
-    getSolarDataLayers,
-    getSingleLayer,
-    findClosestBuilding,
-    getReverseGeocoding,
-    getGeocoding,
-} from "@/api/googleMapsAPI";
+import { getSingleLayer } from "@/api/googleMapsAPI";
+
+import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
+import { getGeocoding, getReverseGeocoding } from "@/server/util";
+
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
@@ -431,7 +429,7 @@ function emitAlert(type: string, title: string, message: string) {
 }
 
 // Component data
-const autocompleteValue = ref("");
+const autocompleteValue = ref<string | null>("");
 const solarReadonlyPanel = ref(0);
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
@@ -484,7 +482,7 @@ onMounted(async () => {
     autocomplete = await initAutocomplete("autocomplete-search");
     autocompleteValue.value = await getReverseGeocoding(coord);
 
-    if (map == undefined || autocomplete == undefined) {
+    if (map == undefined || autocomplete == undefined || autocompleteValue.value === null) {
         emitAlert(
             "error",
             "Could not properly load the map",
@@ -580,8 +578,8 @@ async function setPlaceChangedOnAutocompleteListener() {
 
         autocompleteAlreadyChanged = false;
 
-        const newCoord: Coordinates | undefined = await getGeocoding(newPlace.formatted_address);
-        if (!newCoord) {
+        const newCoord: Coordinates | null = await getGeocoding(newPlace.formatted_address);
+        if (newCoord === null) {
             autocompleteValue.value = "";
             emitAlert(
                 "error",
@@ -605,7 +603,7 @@ async function syncCurrentDataWithNewRequest(newCoord: Coordinates, formattedAdd
 }
 
 async function updateBuildingInsights(coord: Coordinates) {
-    buildingInsights.value = await findClosestBuilding(coord);
+    buildingInsights.value = await getClosestBuildingInsights(coord);
     userSolarData.value.minPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
     userSolarData.value.maxPanelCount =
         buildingInsights.value.solarPotential.solarPanelConfigs[
@@ -701,7 +699,7 @@ function addSolarPanelsToMap() {
 /*
     Heatmap layer
 */
-let dataLayersResponse: SolarLayers | undefined;
+let dataLayersResponse: SolarLayers | null;
 let layer: Layer | undefined;
 let overlays: google.maps.GroundOverlay[] = [];
 let showRoofOnly = false;
@@ -715,7 +713,10 @@ async function showDataLayer(reset: boolean = false) {
     }
 
     if (!layer) {
-        const center = buildingInsights.value.center;
+        const center: Coordinates = {
+            lat: buildingInsights.value.center.latitude,
+            lng: buildingInsights.value.center.longitude
+        };
         const ne = buildingInsights.value.boundingBox.ne;
         const sw = buildingInsights.value.boundingBox.sw;
         const diameter = geometryLibrary.spherical.computeDistanceBetween(
@@ -725,7 +726,7 @@ async function showDataLayer(reset: boolean = false) {
         const radius = Math.ceil(diameter / 2);
 
         try {
-            dataLayersResponse = await getSolarDataLayers(center, radius);
+            dataLayersResponse = await getSolarLayers(center, radius);
         } catch (error) {
             return;
         }
@@ -741,7 +742,7 @@ async function showDataLayer(reset: boolean = false) {
 }
 
 function resetDataLayer() {
-    dataLayersResponse = undefined;
+    dataLayersResponse = null;
     layer = undefined;
 
     // Default values per layer.

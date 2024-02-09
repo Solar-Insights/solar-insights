@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { Coordinates } from 'solar-typing/src/general';
+import { BuildingInsights, SolarLayers } from 'solar-typing/src/solar';
 
 axios.defaults.baseURL = import.meta.env.VITE_DEV_URL;
 
-export async function getClosestBuildingInsights(coord: Coordinates, radius: number) {
-    await axios({
+export async function getClosestBuildingInsights(coord: Coordinates) {
+    return await axios({
         method: "get",
         responseType: 'json',
         url: `/solar/closest-building-insights`,
@@ -15,14 +16,16 @@ export async function getClosestBuildingInsights(coord: Coordinates, radius: num
       })
         .then((response) => {
             console.log(response.data);
+            return response.data.buildingInsights as BuildingInsights;
         })
         .catch((error) => {
             console.log(error);
+            return {} as BuildingInsights;
         });
 }
 
 export async function getSolarLayers(coord: Coordinates, radius: number) {
-    await axios({
+    return await axios({
         method: "get",
         responseType: 'json',
         url: `/solar/solar-layers`,
@@ -33,9 +36,10 @@ export async function getSolarLayers(coord: Coordinates, radius: number) {
         }
       })
         .then((response) => {
-            console.log(response.data);
+            return response.data.solarLayers as SolarLayers;
         })
         .catch((error) => {
             console.log(error);
+            return null;
         });
 }
