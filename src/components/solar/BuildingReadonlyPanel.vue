@@ -31,9 +31,7 @@
                 <v-icon class="mr-3" color="theme">mdi-sun-clock-outline</v-icon>
                 <div class="me-auto emphasis flex-shrink-1">Annual sunlight</div>
                 <div>
-                    {{
-                        strToLargeNumberDisplay(buildingInsights?.solarPotential.maxSunshineHoursPerYear.toFixed(0))
-                    }}
+                    {{ strToLargeNumberDisplay(buildingInsights?.solarPotential.maxSunshineHoursPerYear.toFixed(0)) }}
                     hrs
                 </div>
             </div>

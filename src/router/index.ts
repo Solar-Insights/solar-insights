@@ -12,7 +12,7 @@ const router = createRouter({
         { path: "/solar-map", name: "solar-map", component: () => import("@/pages/SolarMap.vue") },
 
         { path: "/test", name: "test", component: () => import("@/pages/Test.vue") },
-        
+
         { path: "/:catchAll(.*)", name: "catch-all", component: () => import("@/pages/CatchAll.vue") },
     ],
 });

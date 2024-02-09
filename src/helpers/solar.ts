@@ -1,6 +1,12 @@
 import { UserSolarData } from "solar-typing/src/solar";
 import { GoogleCharts } from "google-charts";
-import { lerp, normalize, yearlyUtilityBillEstimates, installationCostCalc, yearlyCostWithoutSolar } from "@/helpers/solarMath";
+import {
+    lerp,
+    normalize,
+    yearlyUtilityBillEstimates,
+    installationCostCalc,
+    yearlyCostWithoutSolar,
+} from "@/helpers/solarMath";
 import { LayerId, SolarLayers, Layer, GeoTiff } from "solar-typing/src/solar";
 import { getGeotiff } from "@/server/solar";
 import { ironPalette, sunlightPalette } from "@/helpers/constants";
@@ -95,7 +101,7 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
                 await getGeotiff(urls.maskUrl),
                 await getGeotiff(urls.annualFluxUrl),
             ]);
-            
+
             const colors = ironPalette;
             return {
                 id: layerId,

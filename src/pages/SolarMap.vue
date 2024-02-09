@@ -709,7 +709,7 @@ async function showDataLayer(reset: boolean = false) {
     if (!layer) {
         const center: Coordinates = {
             lat: buildingInsights.value.center.latitude,
-            lng: buildingInsights.value.center.longitude
+            lng: buildingInsights.value.center.longitude,
         };
         const ne = buildingInsights.value.boundingBox.ne;
         const sw = buildingInsights.value.boundingBox.sw;
