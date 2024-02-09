@@ -9,11 +9,11 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { geocoding } from "@/util/api";
+import { getReverseGeocoding } from "@/util/server";
 
 const mockedData = ref();
 
-onMounted(() => {
-    geocoding("1233 rue Fenelon, Quebec, Quebec, Canada");
+onMounted(async () => {
+    await getReverseGeocoding({lat: 46.81701, lng: -71.36838});
 })
 </script>
