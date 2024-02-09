@@ -98,7 +98,8 @@ import { AirQualityData } from "solar-typing/src/airQuality";
 import { Coordinates } from "solar-typing/src/general";
 import { pollutants, circularBarColorSelector } from "@/util/constants";
 import { initMap, initMarker, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/util/generalHelpers";
-import { getGeocoding, getReverseGeocoding, getAirQualityData } from "@/api/googleMapsAPI";
+import { getAirQualityData } from "@/server/air";
+import { getGeocoding, getReverseGeocoding } from "@/server/util";
 // Components
 import PollutantTab from "@/components/air_quality/PollutantTab.vue";
 import HealthTab from "@/components/air_quality/HealthTab.vue";
@@ -114,7 +115,7 @@ function emitAlert(type: string, title: string, message: string) {
 }
 
 // Component data
-const autocompleteValue = ref("");
+const autocompleteValue = ref<string | null>("");
 const airQualityPanel = ref(0);
 const airQualityDataDisplayed = ref<AirQualityData>({} as AirQualityData);
 
@@ -133,7 +134,7 @@ onMounted(async () => {
     autocomplete = await initAutocomplete("autocomplete-search");
     autocompleteValue.value = await getReverseGeocoding(coord);
 
-    if (map == undefined || marker == undefined || autocomplete == undefined) {
+    if (map == undefined || marker == undefined || autocomplete == undefined || autocompleteValue.value === null) {
         emitAlert(
             "error",
             "Could not properly load the map",
@@ -175,8 +176,8 @@ async function setPlaceChangedOnAutocompleteListener() {
 
         autocompleteAlreadyChanged = false;
 
-        const newCoord: Coordinates | undefined = await getGeocoding(newPlace.formatted_address);
-        if (!newCoord) {
+        const newCoord: Coordinates | null = await getGeocoding(newPlace.formatted_address);
+        if (newCoord === null) {
             autocompleteValue.value = "";
             emitAlert(
                 "error",
