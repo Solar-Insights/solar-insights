@@ -9,11 +9,11 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { getReverseGeocoding } from "@/util/server";
+import { } from "@/server/util";
 
 const mockedData = ref();
 
 onMounted(async () => {
-    await getReverseGeocoding({lat: 46.81701, lng: -71.36838});
+    
 })
 </script>
