@@ -26,8 +26,8 @@ export async function getReverseGeocoding(coord: Coordinates) {
         responseType: 'json',
         url: `/util/reverse-geocoding`,
         params: {
-            lat: coord.lat,
-            lng: coord.lng
+            lat: 0,
+            lng: 0
         }
       })
         .then((response) => {
