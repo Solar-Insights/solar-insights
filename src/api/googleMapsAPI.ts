@@ -13,7 +13,7 @@ import {
 
 import { binaryPalette, rainbowPalette, ironPalette, sunlightPalette } from "@/util/constants";
 import { colorToRGB, rgbToColor, lerp, normalize, clamp, createPalette } from "@/util/generalHelpers";
-
+import { getGeotiff } from "@/server/solar";
 import * as geotiff from "geotiff";
 import * as geokeysToProj4 from "geotiff-geokeys-to-proj4";
 import proj4 from "proj4";
@@ -122,9 +122,10 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
     const get: Record<LayerId, () => Promise<Layer>> = {
         annualFlux: async () => {
             const [mask, data] = await Promise.all([
-                downloadGeoTIFF(urls.maskUrl),
-                downloadGeoTIFF(urls.annualFluxUrl),
+                await getGeotiff(urls.maskUrl),
+                await getGeotiff(urls.annualFluxUrl),
             ]);
+            
             const colors = ironPalette;
             return {
                 id: layerId,
@@ -147,10 +148,11 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
         },
         monthlyFlux: async () => {
             const [mask, data] = await Promise.all([
-                downloadGeoTIFF(urls.maskUrl),
-                downloadGeoTIFF(urls.monthlyFluxUrl),
+                await getGeotiff(urls.maskUrl),
+                await getGeotiff(urls.monthlyFluxUrl),
             ]);
             const colors = ironPalette;
+
             return {
                 id: layerId,
                 bounds: mask.bounds,
@@ -174,9 +176,10 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
         },
         hourlyShade: async () => {
             const [mask, ...months] = await Promise.all([
-                downloadGeoTIFF(urls.maskUrl),
-                ...urls.hourlyShadeUrls.map((url) => downloadGeoTIFF(url)),
+                await getGeotiff(urls.maskUrl),
+                ...urls.hourlyShadeUrls.map(async (url) => await getGeotiff(url)),
             ]);
+
             const colors = sunlightPalette;
             return {
                 id: layerId,
