@@ -398,7 +398,7 @@ import {
     UserSolarData,
     MapSettings,
 } from "solar-typing/src/solar";
-import { TimeParameters } from "@/util/types";
+import { TimeParameters } from "@/helpers/types";
 import { panelsPalette, monthCodes, hourCodes } from "@/helpers/constants";
 import { initMap, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
 import { normalize } from "@/helpers/solarMath";
