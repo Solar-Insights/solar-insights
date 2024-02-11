@@ -1,33 +1,24 @@
 // Vue
 import { defineStore } from "pinia";
 import { Alert } from "@/helpers/types";
+import { VueError } from "@/helpers/customErrors"; 
 
 
 export const useUserSessionStore = defineStore("userSessionStore", {
     state: () => ({
         displayAlert: false,
-        alert: {
-            type: "",
-            title: "",
-            message: ""
-        } as Alert
+        alert: new VueError()
     }),
 
     actions: {
         resetUserStore() {
             this.displayAlert = false;
-            this.alert = {
-                type: "",
-                title: "",
-                message: ""
-            } as Alert;
+            this.alert = new VueError();
         },
 
-        setAlert(alert: Alert) {
+        setAlert(alert: VueError) {
             this.displayAlert = true;
-            this.alert.message = alert.message;
-            this.alert.title = alert.title;
-            this.alert.type = alert.type;
+            this.alert = alert;
         },
     }
 });

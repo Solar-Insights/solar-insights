@@ -1,5 +1,7 @@
 import axios from "axios";
 import { Coordinates } from "solar-typing/src/general";
+import { useUserSessionStore } from "@/stores/userSessionStore";
+import { GeocodingError, ReverseGeocodingError } from "@/helpers/customErrors";
 
 axios.defaults.baseURL = import.meta.env.VITE_DEV_URL;
 
@@ -16,6 +18,7 @@ export async function getGeocoding(formattedAddress: string) {
             return response.data.coordinates as Coordinates;
         })
         .catch((error) => {
+            useUserSessionStore().setAlert(new GeocodingError());
             throw(error);
         });
 }
@@ -31,9 +34,10 @@ export async function getReverseGeocoding(coord: Coordinates) {
         },
     })
         .then((response) => {
-            return response.data.formattedAddress as string;
+            return response.data.address as string;
         })
         .catch((error) => {
+            useUserSessionStore().setAlert(new ReverseGeocodingError());
             throw(error);
         });
 }

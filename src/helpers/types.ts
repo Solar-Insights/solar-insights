@@ -6,7 +6,9 @@ export type TimeParameters = {
 };
 
 export type Alert = {
-    type: string,
+    type: AlertType,
     title: string,
     message: string
 };
+
+export type AlertType = "warning" | "error" | "success";

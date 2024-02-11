@@ -104,15 +104,14 @@ import { getGeocoding, getReverseGeocoding } from "@/server/util";
 // Components
 import PollutantTab from "@/components/air_quality/PollutantTab.vue";
 import HealthTab from "@/components/air_quality/HealthTab.vue";
+import { AutocompleteInputError, MapInitializationError, UserInputError } from "@/helpers/customErrors";
 
 const userSessionStore = useUserSessionStore();
 
-// Component data
 const autocompleteValue = ref<string | null>("");
 const airQualityPanel = ref(0);
 const airQualityDataDisplayed = ref<AirQualityData>({} as AirQualityData);
 
-// Google components
 let map: google.maps.Map;
 let marker: google.maps.Marker;
 let autocomplete: google.maps.places.Autocomplete;
@@ -120,33 +119,23 @@ let autocomplete: google.maps.places.Autocomplete;
 onMounted(async () => {
     const coord: Coordinates = { lat: 46.811943, lng: -71.205002 };
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
-    const parent: HTMLInputElement = document.getElementById("parent-search") as HTMLInputElement;
 
     map = await initMap(coord, mapElement, "AIR_QUALITY");
     marker = initMarker(coord, map);
     autocomplete = await initAutocomplete("autocomplete-search");
+
     autocompleteValue.value = await getReverseGeocoding(coord)
         .then((address: string) => {
             return address;
         })
         .catch((error) => {
-            userSessionStore.setAlert({
-                type: "error",
-                title: "Could not reverse geocode the prompted Coordinates",
-                message: "An error occured when trying to convert geographic Coordinates to an address."
-            });
             return "";
         });
 
     if (map == undefined || marker == undefined || autocomplete == undefined) {
-        userSessionStore.setAlert({
-            type: "error",
-            title: "Could not properly load the map",
-            message: "An error occured when trying to load the map and its components."
-        });
+        userSessionStore.setAlert(new MapInitializationError());
     }
 
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
     airQualityDataDisplayed.value = await getAirQualityData(coord);
     handleEmptyAirQualityData();
 
@@ -165,11 +154,7 @@ async function setPlaceChangedOnAutocompleteListener() {
         const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
         if (!newPlace || !newPlace.formatted_address) {
             if (autocompleteAlreadyChanged) {
-                userSessionStore.setAlert({
-                    type: "warning",
-                    title: "Could not process the prompted address",
-                    message: "Choose a valid address from the dropdown menu."
-                });
+                userSessionStore.setAlert(new AutocompleteInputError());
                 autocompleteAlreadyChanged = false;
                 return;
             } else {
@@ -185,11 +170,6 @@ async function setPlaceChangedOnAutocompleteListener() {
             })
             .catch((error) => {
                 autocompleteValue.value = "";
-                userSessionStore.setAlert({
-                    type: "error",
-                    title: "Could not geocode the prompted address",
-                    message: "An error occured when trying to convert the address to geographic Coordinates."
-                });
             });
     });
 }
@@ -206,11 +186,6 @@ async function setDblClickListenerToMap() {
                 return address;
             })
             .catch((error) => {
-                userSessionStore.setAlert({
-                    type: "error",
-                    title: "Could not reverse geocode the prompted Coordinates",
-                    message: "An error occured when trying to convert geographic Coordinates to an address."
-                });
                 return "";
             });
             
@@ -233,11 +208,7 @@ async function syncCurrentDataWithNewRequest(newCoord: Coordinates, formattedAdd
 
 function handleEmptyAirQualityData() {
     if (_.isEqual(airQualityDataDisplayed.value, {})) {
-        userSessionStore.setAlert({
-            type: "error",
-            title: "Could not fetch the air quality data associated to this address",
-            message: "An error occured when trying to fetch the air quality data. Try again with another address if the problem persists."
-        });
+        userSessionStore.setAlert(new MapInitializationError());
     }
 }
 </script>

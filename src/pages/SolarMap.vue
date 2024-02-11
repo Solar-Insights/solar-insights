@@ -411,6 +411,7 @@ import { getGeocoding, getReverseGeocoding } from "@/server/util";
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
 import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh } from "@/helpers/solarMath";
+import { AutocompleteInputError, MapInitializationError } from "@/helpers/customErrors";
 
 const userSessionStore = useUserSessionStore();
 
@@ -471,21 +472,12 @@ onMounted(async () => {
             return address;
         })
         .catch((error) => {
-            userSessionStore.setAlert({
-                type: "error",
-                title: "Could not reverse geocode the prompted Coordinates",
-                message: "An error occured when trying to convert geographic Coordinates to an address."
-            });
             return "";
         });
     
 
     if (map == undefined || autocomplete == undefined) {
-        userSessionStore.setAlert({
-            type: "error",
-            title: "Could not properly load the map",
-            message: "An error occured when trying to load the map and its components."
-        });
+        userSessionStore.setAlert(new MapInitializationError());
     }
 
     geometryLibrary = (await google.maps.importLibrary("geometry")) as google.maps.GeometryLibrary;
@@ -561,11 +553,7 @@ async function setPlaceChangedOnAutocompleteListener() {
         const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
         if (!newPlace || !newPlace.formatted_address) {
             if (autocompleteAlreadyChanged) {
-                userSessionStore.setAlert({
-                    type: "warning",
-                    title: "Could not process the prompted address",
-                    message: "Choose a valid address from the dropdown menu."
-                });
+                userSessionStore.setAlert(new AutocompleteInputError());
                 autocompleteAlreadyChanged = false;
                 return;
             } else {
@@ -581,11 +569,6 @@ async function setPlaceChangedOnAutocompleteListener() {
             })
             .catch((error) => {
                 autocompleteValue.value = "";
-                userSessionStore.setAlert({
-                    type: "error",
-                    title: "Could not geocode the prompted address",
-                    message: "An error occured when trying to convert the address to geographic Coordinates."
-                });
             });
     });
 }

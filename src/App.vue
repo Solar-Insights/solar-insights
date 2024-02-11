@@ -38,7 +38,7 @@ watch(displayAlert, () => {
     }
 })
 
-watch(alert.value, () => {
+watch(alert, () => {
     resetIteProgression();
 });
 
