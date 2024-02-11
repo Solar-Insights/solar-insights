@@ -582,7 +582,14 @@ async function syncCurrentDataWithNewRequest(newCoord: Coordinates, formattedAdd
 }
 
 async function updateBuildingInsights(coord: Coordinates) {
-    buildingInsights.value = await getClosestBuildingInsights(coord);
+    await getClosestBuildingInsights(coord)
+        .then((data: BuildingInsights) => {
+            buildingInsights.value = data;
+        })
+        .catch(() => {
+            // Handle error
+        });
+        
     userSolarData.value.minPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
     userSolarData.value.maxPanelCount =
         buildingInsights.value.solarPotential.solarPanelConfigs[

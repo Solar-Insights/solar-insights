@@ -94,3 +94,15 @@ export class AirQualityDataError extends VueError {
         super(type, name, title, message, code);
     }
 };
+
+export class BuildingInsightsError extends VueError {
+    constructor(
+        type: AlertType = "error", 
+        name: string = "BuildingInsightsError",
+        title: string = "The server could not fetch building insights with the given parameters",
+        message: string = "An error occured when trying to fetch building insights.",
+        code: number = 500
+    ){
+        super(type, name, title, message, code);
+    }
+};

@@ -1,3 +1,5 @@
+import { BuildingInsightsError } from "@/helpers/customErrors";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 import axios from "axios";
 import { Coordinates } from "solar-typing/src/general";
 import { BuildingInsights, GeoTiff, SolarLayers } from "solar-typing/src/solar";
@@ -18,8 +20,8 @@ export async function getClosestBuildingInsights(coord: Coordinates) {
             return response.data.buildingInsights as BuildingInsights;
         })
         .catch((error) => {
-            console.log(error);
-            return {} as BuildingInsights;
+            useUserSessionStore().setAlert(new BuildingInsightsError());
+            throw(error);
         });
 }
 
