@@ -2,6 +2,9 @@ import axios from "axios";
 import { AirQualityData } from "solar-typing/src/airQuality";
 import { Coordinates } from "solar-typing/src/general";
 import { makeDominantPollutantFirst } from "@/helpers/air";
+import { useUserSessionStore } from "@/stores/userSessionStore";
+import { AirQualityDataError } from "@/helpers/customErrors";
+
 axios.defaults.baseURL = import.meta.env.VITE_DEV_URL;
 
 export async function getAirQualityData(coord: Coordinates) {
@@ -20,7 +23,7 @@ export async function getAirQualityData(coord: Coordinates) {
             return response.data.airQualityData as AirQualityData;
         })
         .catch((error) => {
-            console.log(error);
-            return {} as AirQualityData;
+            useUserSessionStore().setAlert(new AirQualityDataError());
+            throw(error);
         });
 }

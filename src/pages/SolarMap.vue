@@ -467,6 +467,10 @@ onMounted(async () => {
 
     map = await initMap(coord, mapElement, "SOLAR");
     autocomplete = await initAutocomplete("autocomplete-search");
+    if (map == undefined || autocomplete == undefined) {
+        userSessionStore.setAlert(new MapInitializationError());
+    }
+
     autocompleteValue.value = await getReverseGeocoding(coord)
         .then((address: string) => {
             return address;
@@ -474,11 +478,6 @@ onMounted(async () => {
         .catch((error) => {
             return "";
         });
-    
-
-    if (map == undefined || autocomplete == undefined) {
-        userSessionStore.setAlert(new MapInitializationError());
-    }
 
     geometryLibrary = (await google.maps.importLibrary("geometry")) as google.maps.GeometryLibrary;
     await initListeners();

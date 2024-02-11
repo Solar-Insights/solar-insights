@@ -23,30 +23,6 @@ export class VueError extends Error {
     }
 };
 
-export class GeocodingError extends VueError {
-    constructor(
-        type: AlertType = "warning",
-        name: string = "GeocodingError",
-        title: string = "The server could not geocode the given address",
-        message: string = "An error occured when trying to convert the address to geographic goordinates.",
-        code: number = 500
-    ){
-        super(type, name, title, message, code);
-    }
-};
-
-export class ReverseGeocodingError extends VueError {
-    constructor(
-        type: AlertType = "warning", 
-        name: string = "ReverseGeocodingError",
-        title: string = "The server could not reverse geocode the given geographic coordinates",
-        message: string = "An error occured when trying to convert geographic coordinates to an address.",
-        code: number = 500
-    ){
-        super(type, name, title, message, code);
-    }
-};
-
 export class MapInitializationError extends VueError {
     constructor(
         type: AlertType = "error", 
@@ -83,3 +59,38 @@ export class AutocompleteInputError extends UserInputError {
     }
 }
 
+export class GeocodingError extends VueError {
+    constructor(
+        type: AlertType = "warning",
+        name: string = "GeocodingError",
+        title: string = "The server could not geocode the given address",
+        message: string = "An error occured when trying to convert the address to geographic goordinates.",
+        code: number = 500
+    ){
+        super(type, name, title, message, code);
+    }
+};
+
+export class ReverseGeocodingError extends VueError {
+    constructor(
+        type: AlertType = "warning", 
+        name: string = "ReverseGeocodingError",
+        title: string = "The server could not reverse geocode the given geographic coordinates",
+        message: string = "An error occured when trying to convert geographic coordinates to an address.",
+        code: number = 500
+    ){
+        super(type, name, title, message, code);
+    }
+};
+
+export class AirQualityDataError extends VueError {
+    constructor(
+        type: AlertType = "error", 
+        name: string = "AirQualityDataError",
+        title: string = "The server could not fetch valid air quality data with the given parameters",
+        message: string = "An error occured when trying to fetch air quality data.",
+        code: number = 500
+    ){
+        super(type, name, title, message, code);
+    }
+};

@@ -104,7 +104,7 @@ import { getGeocoding, getReverseGeocoding } from "@/server/util";
 // Components
 import PollutantTab from "@/components/air_quality/PollutantTab.vue";
 import HealthTab from "@/components/air_quality/HealthTab.vue";
-import { AutocompleteInputError, MapInitializationError, UserInputError } from "@/helpers/customErrors";
+import { AutocompleteInputError, MapInitializationError } from "@/helpers/customErrors";
 
 const userSessionStore = useUserSessionStore();
 
@@ -123,6 +123,9 @@ onMounted(async () => {
     map = await initMap(coord, mapElement, "AIR_QUALITY");
     marker = initMarker(coord, map);
     autocomplete = await initAutocomplete("autocomplete-search");
+    if (map == undefined || marker == undefined || autocomplete == undefined) {
+        userSessionStore.setAlert(new MapInitializationError());
+    }
 
     autocompleteValue.value = await getReverseGeocoding(coord)
         .then((address: string) => {
@@ -132,12 +135,13 @@ onMounted(async () => {
             return "";
         });
 
-    if (map == undefined || marker == undefined || autocomplete == undefined) {
-        userSessionStore.setAlert(new MapInitializationError());
-    }
-
-    airQualityDataDisplayed.value = await getAirQualityData(coord);
-    handleEmptyAirQualityData();
+    await getAirQualityData(coord)
+        .then((data: AirQualityData) => {
+            airQualityDataDisplayed.value = data;
+        })
+        .catch(() => {
+            // handle error
+        })
 
     await initListeners();
 });
@@ -201,14 +205,15 @@ async function syncCurrentDataWithNewRequest(newCoord: Coordinates, formattedAdd
     map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
     marker.setMap(null);
     marker = initMarker(newCoord, map);
-    airQualityDataDisplayed.value = await getAirQualityData(newCoord);
     autocompleteValue.value = formattedAddress;
-    handleEmptyAirQualityData();
-}
-
-function handleEmptyAirQualityData() {
-    if (_.isEqual(airQualityDataDisplayed.value, {})) {
-        userSessionStore.setAlert(new MapInitializationError());
-    }
+    
+    await getAirQualityData(newCoord)
+        .then((data: AirQualityData) => {
+            airQualityDataDisplayed.value = data;
+        })
+        .catch(() => {
+            // handle error
+        })
+    
 }
 </script>
