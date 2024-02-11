@@ -16,8 +16,7 @@ export async function getGeocoding(formattedAddress: string) {
             return response.data.coordinates as Coordinates;
         })
         .catch((error) => {
-            console.log(error);
-            return null;
+            throw(error);
         });
 }
 
@@ -35,7 +34,6 @@ export async function getReverseGeocoding(coord: Coordinates) {
             return response.data.formattedAddress as string;
         })
         .catch((error) => {
-            console.log(error);
-            return null;
+            throw(error);
         });
 }

@@ -387,6 +387,7 @@
 <script setup lang="ts">
 // Vue
 import { onMounted, ref, watch } from "vue";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 // Util
 import { Coordinates } from "solar-typing/src/general";
 import {
@@ -411,6 +412,8 @@ import { getGeocoding, getReverseGeocoding } from "@/server/util";
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
 import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh } from "@/helpers/solarMath";
+
+const userSessionStore = useUserSessionStore();
 
 // Emit
 const emit = defineEmits(["alert"]);
@@ -474,14 +477,26 @@ onMounted(async () => {
 
     map = await initMap(coord, mapElement, "SOLAR");
     autocomplete = await initAutocomplete("autocomplete-search");
-    autocompleteValue.value = await getReverseGeocoding(coord);
+    autocompleteValue.value = await getReverseGeocoding(coord)
+        .then((address: string) => {
+            return address;
+        })
+        .catch((error) => {
+            userSessionStore.setAlert({
+                type: "error",
+                title: "Could not reverse geocode the prompted Coordinates",
+                message: "An error occured when trying to convert geographic Coordinates to an address."
+            });
+            return "";
+        });
+    
 
-    if (map == undefined || autocomplete == undefined || autocompleteValue.value === null) {
-        emitAlert(
-            "error",
-            "Could not properly load the map",
-            "An error occured when trying to load the map and its components.",
-        );
+    if (map == undefined || autocomplete == undefined) {
+        userSessionStore.setAlert({
+            type: "error",
+            title: "Could not properly load the map",
+            message: "An error occured when trying to load the map and its components."
+        });
     }
 
     geometryLibrary = (await google.maps.importLibrary("geometry")) as google.maps.GeometryLibrary;
@@ -571,19 +586,18 @@ async function setPlaceChangedOnAutocompleteListener() {
         }
 
         autocompleteAlreadyChanged = false;
-
-        const newCoord: Coordinates | null = await getGeocoding(newPlace.formatted_address);
-        if (newCoord === null) {
-            autocompleteValue.value = "";
-            emitAlert(
-                "error",
-                "Could not geocode the prompted address",
-                "An error occured when trying to convert the address to geographic Coordinates.",
-            );
-            return;
-        }
-
-        await syncCurrentDataWithNewRequest(newCoord, newPlace.formatted_address);
+        await getGeocoding(newPlace.formatted_address)
+            .then(async (newCoord: Coordinates) => {
+                await syncCurrentDataWithNewRequest(newCoord, newPlace.formatted_address!);
+            })
+            .catch((error) => {
+                autocompleteValue.value = "";
+                userSessionStore.setAlert({
+                    type: "error",
+                    title: "Could not geocode the prompted address",
+                    message: "An error occured when trying to convert the address to geographic Coordinates."
+                });
+            });
     });
 }
 

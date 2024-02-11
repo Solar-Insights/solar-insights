@@ -93,6 +93,7 @@
 // Vue
 import { onMounted, ref } from "vue";
 import _ from "lodash";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 // Util
 import { AirQualityData } from "solar-typing/src/airQuality";
 import { Coordinates } from "solar-typing/src/general";
@@ -103,6 +104,8 @@ import { getGeocoding, getReverseGeocoding } from "@/server/util";
 // Components
 import PollutantTab from "@/components/air_quality/PollutantTab.vue";
 import HealthTab from "@/components/air_quality/HealthTab.vue";
+
+const userSessionStore = useUserSessionStore();
 
 // Emit
 const emit = defineEmits(["alert"]);
@@ -132,14 +135,25 @@ onMounted(async () => {
     map = await initMap(coord, mapElement, "AIR_QUALITY");
     marker = initMarker(coord, map);
     autocomplete = await initAutocomplete("autocomplete-search");
-    autocompleteValue.value = await getReverseGeocoding(coord);
+    autocompleteValue.value = await getReverseGeocoding(coord)
+        .then((address: string) => {
+            return address;
+        })
+        .catch((error) => {
+            userSessionStore.setAlert({
+                type: "error",
+                title: "Could not reverse geocode the prompted Coordinates",
+                message: "An error occured when trying to convert geographic Coordinates to an address."
+            });
+            return "";
+        });
 
-    if (map == undefined || marker == undefined || autocomplete == undefined || autocompleteValue.value === null) {
-        emitAlert(
-            "error",
-            "Could not properly load the map",
-            "An error occured when trying to load the map and its components.",
-        );
+    if (map == undefined || marker == undefined || autocomplete == undefined) {
+        userSessionStore.setAlert({
+            type: "error",
+            title: "Could not properly load the map",
+            message: "An error occured when trying to load the map and its components."
+        });
     }
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(parent);
@@ -175,19 +189,18 @@ async function setPlaceChangedOnAutocompleteListener() {
         }
 
         autocompleteAlreadyChanged = false;
-
-        const newCoord: Coordinates | null = await getGeocoding(newPlace.formatted_address);
-        if (newCoord === null) {
-            autocompleteValue.value = "";
-            emitAlert(
-                "error",
-                "Could not geocode the prompted address",
-                "An error occured when trying to convert the address to geographic Coordinates.",
-            );
-            return;
-        }
-
-        await syncCurrentDataWithNewRequest(newCoord, newPlace.formatted_address);
+        await getGeocoding(newPlace.formatted_address)
+            .then(async (newCoord: Coordinates) => {
+                await syncCurrentDataWithNewRequest(newCoord, newPlace.formatted_address!);
+            })
+            .catch((error) => {
+                autocompleteValue.value = "";
+                userSessionStore.setAlert({
+                    type: "error",
+                    title: "Could not geocode the prompted address",
+                    message: "An error occured when trying to convert the address to geographic Coordinates."
+                });
+            });
     });
 }
 
@@ -198,14 +211,20 @@ async function setDblClickListenerToMap() {
             lng: mouseEvent.latLng.lng(),
         };
 
-        const formattedAddress = await getReverseGeocoding(newCoord);
-        if (!formattedAddress) {
-            autocompleteValue.value = "";
-            emitAlert(
-                "error",
-                "Could not reverse geocode the double click on the map",
-                "An error occured when trying to convert geographic Coordinates to an address.",
-            );
+        const formattedAddress = await getReverseGeocoding(newCoord)
+            .then((address: string) => {
+                return address;
+            })
+            .catch((error) => {
+                userSessionStore.setAlert({
+                    type: "error",
+                    title: "Could not reverse geocode the prompted Coordinates",
+                    message: "An error occured when trying to convert geographic Coordinates to an address."
+                });
+                return "";
+            });
+            
+        if (formattedAddress === "") {
             return;
         }
 
