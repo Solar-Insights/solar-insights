@@ -4,12 +4,12 @@
             <v-container class="app-container" fluid>
                 <AlertComponent
                     v-if="displayAlert"
-                    :type="alertValue.type"
-                    :title="alertValue.title"
-                    :message="alertValue.message"
-                    :timer-progress="iteLeft"
+                    :type="alert.type"
+                    :title="alert.title"
+                    :message="alert.message"
+                    :timer-progress="iteLeftPercentage"
                 />
-                <router-view :key="$route.fullPath" @alert="handleAlertLifeCycle"></router-view>
+                <router-view :key="$route.fullPath"></router-view>
             </v-container>
         </v-main>
     </v-app>
@@ -17,45 +17,50 @@
 
 <script setup lang="ts">
 // Vue
-import { ref, reactive } from "vue";
+import { ref, watch } from "vue";
+import { storeToRefs } from "pinia";
+import { useUserSessionStore } from "./stores/userSessionStore";
 // Components
 import AlertComponent from "@/components/util/AlertComponent.vue";
 
-type alertData = {
-    type: string;
-    title: string;
-    message: string;
-};
-const displayAlert = ref(false);
-const alertValue: alertData = reactive({
-    type: "",
-    title: "",
-    message: "",
+const userSessionStore = useUserSessionStore();
+const { displayAlert, alert } = storeToRefs(userSessionStore); 
+
+const iteLeftPercentage = ref(100);
+let interval: NodeJS.Timeout | undefined = undefined;
+
+watch(displayAlert, () => {
+    resetIteProgression();
+    resetNodeInterval();
+    
+    if (displayAlert.value) {
+        initNodeInterval();
+    }
+})
+
+watch(alert.value, () => {
+    resetIteProgression();
 });
 
-const iteLeft = ref(100.0);
-let currentInterval: NodeJS.Timeout | undefined = undefined;
+function resetIteProgression() {
+    iteLeftPercentage.value = 100;
+}
 
-const handleAlertLifeCycle = (data: alertData) => {
-    displayAlert.value = true;
-    alertValue.type = data.type;
-    alertValue.title = data.title;
-    alertValue.message = data.message;
-
-    // Resets number of ite, deletes interval if exists, runs interval.
-    // Removes display and interval when over.
-    iteLeft.value = 100;
-    if (currentInterval != undefined) {
-        clearInterval(currentInterval);
-        currentInterval = undefined;
+function resetNodeInterval() {
+    if (interval) {
+        clearInterval(interval);
+        interval = undefined;
     }
-    currentInterval = setInterval(() => {
-        if (iteLeft.value == 0) {
-            clearInterval(currentInterval);
+}
+
+function initNodeInterval() {
+    interval = setInterval(() => {
+        if (iteLeftPercentage.value <= 0) {
             displayAlert.value = false;
-            return;
+            resetNodeInterval();
+        } else {
+            iteLeftPercentage.value -= 0.20;
         }
-        iteLeft.value -= 0.25;
     }, 10);
-};
+}
 </script>

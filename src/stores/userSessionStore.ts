@@ -15,6 +15,7 @@ export const useUserSessionStore = defineStore("userSessionStore", {
 
     actions: {
         resetUserStore() {
+            this.displayAlert = false;
             this.alert = {
                 type: "",
                 title: "",
@@ -23,14 +24,10 @@ export const useUserSessionStore = defineStore("userSessionStore", {
         },
 
         setAlert(alert: Alert) {
-            this.displayAlert = false; // To make sure alert timer resets & old alert is removed 
             this.displayAlert = true;
-
             this.alert.message = alert.message;
             this.alert.title = alert.title;
             this.alert.type = alert.type;
-        }
-    },
-
-    persist: true,
+        },
+    }
 });

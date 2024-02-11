@@ -7,12 +7,20 @@
             :text="matchMessage()"
             closable
             close-label="Close"
+            @click:close="displayAlert = false;"
         />
         <hr :color="matchColorToType()" :width="`${timerProgress}%`" style="height: 5px" />
     </div>
 </template>
 
 <script setup lang="ts">
+// Vue
+import { useUserSessionStore } from '@/stores/userSessionStore';
+import { storeToRefs } from 'pinia';
+
+const userSessionStore = useUserSessionStore();
+const { displayAlert } = storeToRefs(userSessionStore);
+
 const props = defineProps({
     type: {
         type: String,
