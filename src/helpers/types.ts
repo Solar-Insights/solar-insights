@@ -4,3 +4,9 @@ export type TimeParameters = {
     day: number;
     hour: number;
 };
+
+export type Alert = {
+    type: string,
+    title: string,
+    message: string
+};
