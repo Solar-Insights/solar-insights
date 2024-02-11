@@ -392,7 +392,6 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 import { Coordinates } from "solar-typing/src/general";
 import {
     BuildingInsights,
-    LayerId,
     SolarLayers,
     Layer,
     SolarPanelConfig,
@@ -414,16 +413,6 @@ import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
 import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh } from "@/helpers/solarMath";
 
 const userSessionStore = useUserSessionStore();
-
-// Emit
-const emit = defineEmits(["alert"]);
-function emitAlert(type: string, title: string, message: string) {
-    emit("alert", {
-        type: type,
-        title: title,
-        message: message,
-    });
-}
 
 // Component data
 const autocompleteValue = ref<string | null>("");
@@ -572,11 +561,11 @@ async function setPlaceChangedOnAutocompleteListener() {
         const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
         if (!newPlace || !newPlace.formatted_address) {
             if (autocompleteAlreadyChanged) {
-                emitAlert(
-                    "warning",
-                    "Could not process the prompted address",
-                    "Choose a valid address from the dropdown menu.",
-                );
+                userSessionStore.setAlert({
+                    type: "warning",
+                    title: "Could not process the prompted address",
+                    message: "Choose a valid address from the dropdown menu."
+                });
                 autocompleteAlreadyChanged = false;
                 return;
             } else {

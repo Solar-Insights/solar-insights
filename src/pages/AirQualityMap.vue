@@ -107,16 +107,6 @@ import HealthTab from "@/components/air_quality/HealthTab.vue";
 
 const userSessionStore = useUserSessionStore();
 
-// Emit
-const emit = defineEmits(["alert"]);
-function emitAlert(type: string, title: string, message: string) {
-    emit("alert", {
-        type: type,
-        title: title,
-        message: message,
-    });
-}
-
 // Component data
 const autocompleteValue = ref<string | null>("");
 const airQualityPanel = ref(0);
@@ -175,11 +165,11 @@ async function setPlaceChangedOnAutocompleteListener() {
         const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
         if (!newPlace || !newPlace.formatted_address) {
             if (autocompleteAlreadyChanged) {
-                emitAlert(
-                    "warning",
-                    "Could not process the prompted address",
-                    "Choose a valid address from the dropdown menu.",
-                );
+                userSessionStore.setAlert({
+                    type: "warning",
+                    title: "Could not process the prompted address",
+                    message: "Choose a valid address from the dropdown menu."
+                });
                 autocompleteAlreadyChanged = false;
                 return;
             } else {
@@ -243,11 +233,11 @@ async function syncCurrentDataWithNewRequest(newCoord: Coordinates, formattedAdd
 
 function handleEmptyAirQualityData() {
     if (_.isEqual(airQualityDataDisplayed.value, {})) {
-        emitAlert(
-            "error",
-            "Could not fetch the air quality data associated to this address",
-            "An error occured when trying to fetch the air quality data. Try again with another address if the problem persists.",
-        );
+        userSessionStore.setAlert({
+            type: "error",
+            title: "Could not fetch the air quality data associated to this address",
+            message: "An error occured when trying to fetch the air quality data. Try again with another address if the problem persists."
+        });
     }
 }
 </script>
