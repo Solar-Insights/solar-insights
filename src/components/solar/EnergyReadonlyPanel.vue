@@ -104,7 +104,7 @@
 <script setup lang="ts">
 // Vue
 import { PropType, onMounted, watch, ref } from "vue";
-// Util
+// Helpers
 import { BuildingInsights, UserSolarData } from "solar-typing/src/solar";
 import {
     getBreakEvenYear,

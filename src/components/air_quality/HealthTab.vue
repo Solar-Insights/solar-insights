@@ -32,7 +32,7 @@
 <script setup lang="ts">
 // Vue
 import { ref, PropType, onMounted } from "vue";
-// Util
+// Helpers
 import { HealthRecommendations } from "solar-typing/src/airQuality";
 
 const props = defineProps({

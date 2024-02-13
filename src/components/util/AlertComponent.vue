@@ -18,7 +18,7 @@
 import { useUserSessionStore } from '@/stores/userSessionStore';
 import { storeToRefs } from 'pinia';
 import { watch, ref } from 'vue';
-// Errors
+// Helpers
 import { matchType, matchTitle, matchMessage, matchColorToType } from "@/helpers/customErrors";
 
 const userSessionStore = useUserSessionStore();

@@ -94,17 +94,18 @@
 import { onMounted, ref } from "vue";
 import _ from "lodash";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-// Util
+// Helpers
 import { AirQualityData } from "solar-typing/src/airQuality";
 import { Coordinates } from "solar-typing/src/general";
 import { pollutants, circularBarColorSelector } from "@/helpers/constants";
-import { initMapComponents, initMap, initMarker, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
+import { initMapComponents, initMarker, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
+import { AutocompleteInputError } from "@/helpers/customErrors";
+// Server
 import { getAirQualityData } from "@/server/air";
 import { getGeocoding, getReverseGeocoding } from "@/server/util";
 // Components
 import PollutantTab from "@/components/air_quality/PollutantTab.vue";
 import HealthTab from "@/components/air_quality/HealthTab.vue";
-import { AutocompleteInputError, MapInitializationError } from "@/helpers/customErrors";
 
 const userSessionStore = useUserSessionStore();
 

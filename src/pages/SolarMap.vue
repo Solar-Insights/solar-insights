@@ -388,7 +388,7 @@
 // Vue
 import { onMounted, ref, watch } from "vue";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-// Util
+// Helpers
 import { Coordinates } from "solar-typing/src/general";
 import {
     BuildingInsights,
@@ -398,29 +398,31 @@ import {
     UserSolarData,
     MapSettings,
 } from "solar-typing/src/solar";
+import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solarMath";
+import { AutocompleteInputError } from "@/helpers/customErrors";
 import { TimeParameters } from "@/helpers/types";
 import { panelsPalette, monthCodes, hourCodes } from "@/helpers/constants";
-import { initMapComponents, initMap, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
-import { normalize } from "@/helpers/solarMath";
-import { rgbToColor, createPalette } from "@/helpers/solar";
-import { getSingleLayer } from "@/helpers/solar";
+import { initMapComponents, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
+import { rgbToColor, createPalette, getSingleLayer } from "@/helpers/solar";
+// Server
 import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
 import { getGeocoding, getReverseGeocoding } from "@/server/util";
-
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
-import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh } from "@/helpers/solarMath";
-import { AutocompleteInputError, MapInitializationError } from "@/helpers/customErrors";
 
 const userSessionStore = useUserSessionStore();
 
-// Component data
 const autocompleteValue = ref<string | null>("");
 const solarReadonlyPanel = ref(0);
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
-const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
+const timeParams = ref<TimeParameters>({
+    tick: 0,
+    month: 0,
+    day: 1,
+    hour: 0,
+});
 const mapSettings = ref<MapSettings>({
     layerId: "annualFlux",
     layerIdChoices: [
@@ -433,12 +435,8 @@ const mapSettings = ref<MapSettings>({
     heatmapAnimation: true,
     configIdIndex: 0,
 });
-const timeParams = ref<TimeParameters>({
-    tick: 0,
-    month: 0,
-    day: 1,
-    hour: 0,
-});
+
+const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
 const userSolarData = ref<UserSolarData>({
     panelCount: 0,
     minPanelCount: 0,
@@ -465,22 +463,17 @@ onMounted(async () => {
     const coord: Coordinates = { lat: 46.81701, lng: -71.36838 };
     ({ map, autocomplete } = await initMapComponents(coord, "SOLAR"));
 
-
-    autocompleteValue.value = await getReverseGeocoding(coord)
+    const formattedAddress = await getReverseGeocoding(coord)
         .then((address: string) => {
             return address;
         })
         .catch((error) => {
-            return "";
+            return ""; // DO_SOMETHING
         });
 
     geometryLibrary = (await google.maps.importLibrary("geometry")) as google.maps.GeometryLibrary;
+    await syncWithNewRequest(coord, formattedAddress);
     await initListeners();
-    await updateBuildingInsights(coord);
-    mapSettings.value.configIdIndex = getConfigIdForFullEnergyCoverage();
-    showDataLayer(true);
-    syncMapWithNewBuildingInsights();
-
     setInterval(() => {
         handleTickChange();
     }, 1000);
@@ -507,7 +500,7 @@ function handleTickChange() {
 watch(
     () => mapSettings.value.showPanels,
     async () => {
-        await syncMapWithNewBuildingInsights();
+        await syncMapWithNewRequest();
     },
 );
 
@@ -536,7 +529,7 @@ watch(
     },
 );
 
-let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events, prevent first one from sending request
+let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events (arrow keydown + enter), prevent first one from sending request
 
 async function initListeners() {
     await setPlaceChangedOnAutocompleteListener();
@@ -559,7 +552,7 @@ async function setPlaceChangedOnAutocompleteListener() {
         autocompleteAlreadyChanged = false;
         await getGeocoding(newPlace.formatted_address)
             .then(async (newCoord: Coordinates) => {
-                await syncCurrentDataWithNewRequest(newCoord, newPlace.formatted_address!);
+                await syncWithNewRequest(newCoord, newPlace.formatted_address!);
             })
             .catch((error) => {
                 autocompleteValue.value = "";
@@ -567,16 +560,10 @@ async function setPlaceChangedOnAutocompleteListener() {
     });
 }
 
-async function syncCurrentDataWithNewRequest(newCoord: Coordinates, formattedAddress: string) {
+async function syncWithNewRequest(coord: Coordinates, formattedAddress: string) {
     autocompleteValue.value = formattedAddress;
-    map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
-    await updateBuildingInsights({ lat: newCoord.lat, lng: newCoord.lng });
-    mapSettings.value.configIdIndex = getConfigIdForFullEnergyCoverage();
-    showDataLayer(true);
-    syncMapWithNewBuildingInsights();
-}
+    map.setCenter(coord);
 
-async function updateBuildingInsights(coord: Coordinates) {
     await getClosestBuildingInsights(coord)
         .then((data: BuildingInsights) => {
             buildingInsights.value = data;
@@ -584,19 +571,27 @@ async function updateBuildingInsights(coord: Coordinates) {
         .catch(() => {
             // Handle error
         });
-        
+    
+    syncTemplateVariableFollowingNewRequest();
+    syncMapWithNewRequest();
+    showDataLayer(true);
+}
+
+async function syncTemplateVariableFollowingNewRequest() {
     userSolarData.value.minPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
+    userSolarData.value.defaultPanelCapacityWatts = buildingInsights.value.solarPotential.panelCapacityWatts;
     userSolarData.value.maxPanelCount =
         buildingInsights.value.solarPotential.solarPanelConfigs[
             buildingInsights.value.solarPotential.solarPanelConfigs.length - 1
         ].panelsCount;
-    userSolarData.value.defaultPanelCapacityWatts = buildingInsights.value.solarPotential.panelCapacityWatts;
+
+    mapSettings.value.configIdIndex = getConfigIdForFullEnergyCoverage();
 }
 
 async function panelCountChange() {
     userSolarData.value.panelCount =
         buildingInsights.value.solarPotential.solarPanelConfigs[mapSettings.value.configIdIndex].panelsCount;
-    await syncMapWithNewBuildingInsights();
+    await syncMapWithNewRequest();
 }
 
 function getConfigIdForFullEnergyCoverage() {
@@ -618,7 +613,7 @@ function getConfigIdForFullEnergyCoverage() {
 */
 let panelConfig: SolarPanelConfig | undefined;
 let solarPanels: google.maps.Polygon[] = [];
-async function syncMapWithNewBuildingInsights() {
+async function syncMapWithNewRequest() {
     if (buildingInsights.value == null) {
         return;
     }

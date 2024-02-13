@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-// Util
+// Helpers
 import { AirPollutant } from "solar-typing/src/airQuality";
 
 const props = defineProps({

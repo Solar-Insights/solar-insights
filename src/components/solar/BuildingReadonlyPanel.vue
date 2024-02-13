@@ -53,7 +53,7 @@
 <script setup lang="ts">
 // Vue
 import { PropType } from "vue";
-// Util
+// Helpers
 import { strToLargeNumberDisplay } from "@/helpers/util";
 import { BuildingInsights, UserSolarData } from "solar-typing/src/solar";
 
