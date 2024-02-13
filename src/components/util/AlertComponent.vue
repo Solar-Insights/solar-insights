@@ -1,15 +1,15 @@
 <template>
-    <div class="alert-component">
+    <div class="alert-component" v-if="displayAlert">
         <v-alert
             class="alert-component"
-            :type="matchType()"
-            :title="matchTitle()"
-            :text="matchMessage()"
+            :type="matchType(alert.type)"
+            :title="matchTitle(alert.title)"
+            :text="matchMessage(alert.message)"
             closable
             close-label="Close"
             @click:close="displayAlert = false;"
         />
-        <hr :color="matchColorToType()" :width="`${timerProgress}%`" style="height: 5px" />
+        <hr :color="matchColorToType(alert.type)" :width="`${iteLeftPercentage}%`" style="height: 5px" />
     </div>
 </template>
 
@@ -17,88 +17,47 @@
 // Vue
 import { useUserSessionStore } from '@/stores/userSessionStore';
 import { storeToRefs } from 'pinia';
+import { watch, ref } from 'vue';
+// Errors
+import { matchType, matchTitle, matchMessage, matchColorToType } from "@/helpers/customErrors";
 
 const userSessionStore = useUserSessionStore();
-const { displayAlert } = storeToRefs(userSessionStore);
 
-const props = defineProps({
-    type: {
-        type: String,
-        required: true,
-        default: "",
-    },
-    title: {
-        type: String,
-        required: true,
-        default: "",
-    },
-    message: {
-        type: String,
-        required: true,
-        default: "",
-    },
-    timerProgress: {
-        type: Number,
-        required: true,
-        default: 100,
-    },
+const { displayAlert, alert } = storeToRefs(userSessionStore);
+const iteLeftPercentage = ref(100);
+let interval: NodeJS.Timeout | undefined = undefined;
+watch(displayAlert, () => {
+    resetIteProgression();
+    resetNodeInterval();
+    
+    if (displayAlert.value) {
+        initNodeInterval();
+    }
+})
+
+watch(alert, () => {
+    resetIteProgression();
 });
 
-function matchType() {
-    switch (props.type) {
-        case "success": {
-            return "success";
-        }
-        case "warning": {
-            return "warning";
-        }
-        case "error": {
-            return "error";
-        }
-        default: {
-            return "warning";
-        }
+function resetIteProgression() {
+    iteLeftPercentage.value = 100;
+}
+
+function resetNodeInterval() {
+    if (interval) {
+        clearInterval(interval);
+        interval = undefined;
     }
 }
 
-function matchTitle() {
-    switch (props.title) {
-        case "": {
-            return "Error encountered";
+function initNodeInterval() {
+    interval = setInterval(() => {
+        if (iteLeftPercentage.value <= 0) {
+            displayAlert.value = false;
+            resetNodeInterval();
+        } else {
+            iteLeftPercentage.value -= 0.20;
         }
-        default: {
-            return props.title;
-        }
-    }
-}
-
-function matchMessage() {
-    switch (props.message) {
-        case "": {
-            return "Something has happened";
-        }
-        default: {
-            return props.message;
-        }
-    }
-}
-
-// Pour choix des couleurs
-// https://vuetifyjs.com/en/styles/colors/#material-colors
-function matchColorToType() {
-    switch (props.type) {
-        case "success": {
-            return "#A5D6A7";
-        }
-        case "warning": {
-            return "#FFCC80";
-        }
-        case "error": {
-            return "#EF9A9A";
-        }
-        default: {
-            return "#FFCC80";
-        }
-    }
+    }, 10);
 }
 </script>

@@ -12,13 +12,13 @@ export const useUserSessionStore = defineStore("userSessionStore", {
 
     actions: {
         resetUserStore() {
-            this.displayAlert = false;
             this.alert = new VueError();
+            this.displayAlert = false;
         },
 
         setAlert(alert: VueError) {
-            this.displayAlert = true;
             this.alert = alert;
+            this.displayAlert = true;
         },
     }
 });

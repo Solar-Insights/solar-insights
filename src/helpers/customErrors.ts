@@ -1,5 +1,63 @@
 import { AlertType } from "./types";
 
+export function matchType(type: AlertType) {
+    switch (type) {
+        case "success": {
+            return "success";
+        }
+        case "warning": {
+            return "warning";
+        }
+        case "error": {
+            return "error";
+        }
+        default: {
+            return "warning";
+        }
+    }
+}
+
+export function matchTitle(title: string) {
+    switch (title) {
+        case "": {
+            return "Error encountered";
+        }
+        default: {
+            return title;
+        }
+    }
+}
+
+export function matchMessage(message: string) {
+    switch (message) {
+        case "": {
+            return "Something has happened";
+        }
+        default: {
+            return message;
+        }
+    }
+}
+
+// Pour choix des couleurs
+// https://vuetifyjs.com/en/styles/colors/#material-colors
+export function matchColorToType(type: AlertType) {
+    switch (type) {
+        case "success": {
+            return "#A5D6A7";
+        }
+        case "warning": {
+            return "#FFCC80";
+        }
+        case "error": {
+            return "#EF9A9A";
+        }
+        default: {
+            return "#FFCC80";
+        }
+    }
+}
+
 export class VueError extends Error {
     type: AlertType;
     name: string;
