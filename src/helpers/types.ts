@@ -11,4 +11,10 @@ export type Alert = {
     message: string
 };
 
+export type MapElements = {
+    map: google.maps.Map,
+    marker: google.maps.Marker,
+    autocomplete: google.maps.places.Autocomplete
+};
+
 export type AlertType = "warning" | "error" | "success";

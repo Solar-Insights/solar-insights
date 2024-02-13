@@ -98,7 +98,7 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 import { AirQualityData } from "solar-typing/src/airQuality";
 import { Coordinates } from "solar-typing/src/general";
 import { pollutants, circularBarColorSelector } from "@/helpers/constants";
-import { initMap, initMarker, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
+import { initMapComponents, initMap, initMarker, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
 import { getAirQualityData } from "@/server/air";
 import { getGeocoding, getReverseGeocoding } from "@/server/util";
 // Components
@@ -118,21 +118,14 @@ let autocomplete: google.maps.places.Autocomplete;
 
 onMounted(async () => {
     const coord: Coordinates = { lat: 46.811943, lng: -71.205002 };
-    const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
-
-    map = await initMap(coord, mapElement, "AIR_QUALITY");
-    marker = initMarker(coord, map);
-    autocomplete = await initAutocomplete("autocomplete-search");
-    if (map == undefined || marker == undefined || autocomplete == undefined) {
-        userSessionStore.setAlert(new MapInitializationError());
-    }
+    ({ map, marker, autocomplete } = await initMapComponents(coord, "AIR_QUALITY"));
 
     autocompleteValue.value = await getReverseGeocoding(coord)
         .then((address: string) => {
             return address;
         })
         .catch((error) => {
-            return "";
+            return ""; // DO_SOMETHING
         });
 
     await getAirQualityData(coord)
@@ -140,7 +133,7 @@ onMounted(async () => {
             airQualityDataDisplayed.value = data;
         })
         .catch(() => {
-            // handle error
+            // DO_SOMETHING
         })
 
     await initListeners();
@@ -170,10 +163,10 @@ async function setPlaceChangedOnAutocompleteListener() {
         autocompleteAlreadyChanged = false;
         await getGeocoding(newPlace.formatted_address)
             .then(async (newCoord: Coordinates) => {
-                await syncCurrentDataWithNewRequest(newCoord, newPlace.formatted_address!);
+                await syncWithNewRequest(newCoord, newPlace.formatted_address!);
             })
             .catch((error) => {
-                autocompleteValue.value = "";
+                autocompleteValue.value = ""; // DO_SOMETHING
             });
     });
 }
@@ -190,18 +183,14 @@ async function setDblClickListenerToMap() {
                 return address;
             })
             .catch((error) => {
-                return "";
+                return ""; // DO_SOMETHING
             });
-            
-        if (formattedAddress === "") {
-            return;
-        }
 
-        await syncCurrentDataWithNewRequest(newCoord, formattedAddress);
+        formattedAddress === "" ? true : await syncWithNewRequest(newCoord, formattedAddress);
     });
 }
 
-async function syncCurrentDataWithNewRequest(newCoord: Coordinates, formattedAddress: string) {
+async function syncWithNewRequest(newCoord: Coordinates, formattedAddress: string) {
     map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
     marker.setMap(null);
     marker = initMarker(newCoord, map);
@@ -212,8 +201,7 @@ async function syncCurrentDataWithNewRequest(newCoord: Coordinates, formattedAdd
             airQualityDataDisplayed.value = data;
         })
         .catch(() => {
-            // handle error
+            // DO_SOMETHING
         })
-    
 }
 </script>

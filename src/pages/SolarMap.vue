@@ -400,7 +400,7 @@ import {
 } from "solar-typing/src/solar";
 import { TimeParameters } from "@/helpers/types";
 import { panelsPalette, monthCodes, hourCodes } from "@/helpers/constants";
-import { initMap, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
+import { initMapComponents, initMap, initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
 import { normalize } from "@/helpers/solarMath";
 import { rgbToColor, createPalette } from "@/helpers/solar";
 import { getSingleLayer } from "@/helpers/solar";
@@ -463,13 +463,8 @@ let geometryLibrary: google.maps.GeometryLibrary;
 
 onMounted(async () => {
     const coord: Coordinates = { lat: 46.81701, lng: -71.36838 };
-    const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
+    ({ map, autocomplete } = await initMapComponents(coord, "SOLAR"));
 
-    map = await initMap(coord, mapElement, "SOLAR");
-    autocomplete = await initAutocomplete("autocomplete-search");
-    if (map == undefined || autocomplete == undefined) {
-        userSessionStore.setAlert(new MapInitializationError());
-    }
 
     autocompleteValue.value = await getReverseGeocoding(coord)
         .then((address: string) => {

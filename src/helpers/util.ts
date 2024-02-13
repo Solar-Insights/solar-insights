@@ -1,4 +1,7 @@
 import { MapType, Coordinates } from "solar-typing/src/general";
+import { MapElements } from "@/helpers/types";
+import { useUserSessionStore } from "@/stores/userSessionStore";
+import { MapInitializationError } from "./customErrors";
 
 /* String manipulation */
 export function strToLargeNumberDisplay(input: string | number): String {
@@ -65,6 +68,23 @@ function maxZoom(mapType: MapType) {
         default:
             return 0;
     }
+}
+
+export async function initMapComponents(coord: Coordinates, mapType: MapType) {
+    const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
+    let map: google.maps.Map = await initMap(coord, mapElement, mapType);;
+    let autocomplete: google.maps.places.Autocomplete = await initAutocomplete("autocomplete-search");
+    let marker: google.maps.Marker | true = mapType === "SOLAR" ? true : initMarker(coord, map);
+
+    if (map === undefined || marker === undefined || autocomplete === undefined) {
+        useUserSessionStore().setAlert(new MapInitializationError());
+    }
+
+    return {
+        map: map,
+        marker: marker,
+        autocomplete: autocomplete
+    } as MapElements;
 }
 
 export async function initMap(coord: Coordinates, mapElement: HTMLElement, mapType: MapType): Promise<google.maps.Map> {
