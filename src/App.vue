@@ -2,7 +2,7 @@
     <v-app>
         <v-main>
             <v-container class="app-container" fluid>
-                <AlertComponent/>
+                <AlertComponent />
                 <router-view :key="$route.fullPath"></router-view>
             </v-container>
         </v-main>

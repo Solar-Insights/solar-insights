@@ -38,7 +38,7 @@
                             for (k in g)
                                 e.set(
                                     k.replace(/[A-Z]/g, (t) => "_" + t[0].toLowerCase()),
-                                    g[k],
+                                    g[k]
                                 );
                             e.set("callback", c + ".maps." + q);
                             a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
@@ -53,7 +53,7 @@
             })({
                 key: "AIzaSyC6bRqXwNudfkA-DuWH44Lmq-77k6_niMc",
                 v: "weekly",
-                libraries: "geometry",
+                libraries: "geometry"
                 // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
                 // Add other bootstrap parameters as needed, using camel case.
             });

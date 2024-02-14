@@ -11,15 +11,15 @@ export async function getGeocoding(formattedAddress: string) {
         responseType: "json",
         url: `/util/geocoding`,
         params: {
-            address: formattedAddress,
-        },
+            address: formattedAddress
+        }
     })
         .then((response) => {
             return response.data.coordinates as Coordinates;
         })
         .catch((error) => {
             useUserSessionStore().setAlert(new GeocodingError());
-            throw(error);
+            throw error;
         });
 }
 
@@ -30,14 +30,14 @@ export async function getReverseGeocoding(coord: Coordinates) {
         url: `/util/reverse-geocoding`,
         params: {
             lat: coord.lat,
-            lng: coord.lng,
-        },
+            lng: coord.lng
+        }
     })
         .then((response) => {
             return response.data.address as string;
         })
         .catch((error) => {
             useUserSessionStore().setAlert(new ReverseGeocodingError());
-            throw(error);
+            throw error;
         });
 }

@@ -76,7 +76,7 @@
                         strToLargeNumberDisplay(
                             (
                                 costWithoutSolarInstallation(userSolarData) - costWithSolarInstallation(userSolarData)
-                            ).toFixed(0),
+                            ).toFixed(0)
                         )
                     }}
                     $
@@ -113,7 +113,7 @@ import {
     installationCostCalc,
     energyCoveredCalc,
     costWithSolarInstallation,
-    costWithoutSolarInstallation,
+    costWithoutSolarInstallation
 } from "@/helpers/solarMath";
 import { drawGoogleChart } from "@/helpers/solar";
 import { batteryCharging } from "@/helpers/constants";
@@ -123,13 +123,13 @@ const props = defineProps({
     buildingInsights: {
         type: Object as PropType<BuildingInsights>,
         required: true,
-        default: {},
+        default: {}
     },
     userSolarData: {
         type: Object as PropType<UserSolarData>,
         required: true,
-        default: {},
-    },
+        default: {}
+    }
 });
 
 const breakEvenYear = ref(0);

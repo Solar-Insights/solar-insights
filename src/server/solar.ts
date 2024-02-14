@@ -13,15 +13,15 @@ export async function getClosestBuildingInsights(coord: Coordinates) {
         url: `/solar/closest-building-insights`,
         params: {
             lat: coord.lat,
-            lng: coord.lng,
-        },
+            lng: coord.lng
+        }
     })
         .then((response) => {
             return response.data.buildingInsights as BuildingInsights;
         })
         .catch((error) => {
             useUserSessionStore().setAlert(new BuildingInsightsError());
-            throw(error);
+            throw error;
         });
 }
 
@@ -33,8 +33,8 @@ export async function getSolarLayers(coord: Coordinates, radius: number) {
         params: {
             lat: coord.lat,
             lng: coord.lng,
-            radius: radius,
-        },
+            radius: radius
+        }
     })
         .then((response) => {
             return response.data.solarLayers as SolarLayers;
@@ -51,8 +51,8 @@ export async function getGeotiff(url: string) {
         responseType: "json",
         url: `/solar/geotiff`,
         params: {
-            url: encodeURIComponent(url),
-        },
+            url: encodeURIComponent(url)
+        }
     })
         .then((response) => {
             return response.data.geotiff as GeoTiff;

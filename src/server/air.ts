@@ -14,8 +14,8 @@ export async function getAirQualityData(coord: Coordinates) {
         url: `/air/air-quality-data`,
         params: {
             lat: coord.lat,
-            lng: coord.lng,
-        },
+            lng: coord.lng
+        }
     })
         .then((response) => {
             const airQualityData: AirQualityData = response.data.airQualityData;
@@ -24,6 +24,6 @@ export async function getAirQualityData(coord: Coordinates) {
         })
         .catch((error) => {
             useUserSessionStore().setAlert(new AirQualityDataError());
-            throw(error);
+            throw error;
         });
 }

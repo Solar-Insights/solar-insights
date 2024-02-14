@@ -13,8 +13,8 @@ const router = createRouter({
 
         { path: "/test", name: "test", component: () => import("@/pages/Test.vue") },
 
-        { path: "/:catchAll(.*)", name: "catch-all", component: () => import("@/pages/CatchAll.vue") },
-    ],
+        { path: "/:catchAll(.*)", name: "catch-all", component: () => import("@/pages/CatchAll.vue") }
+    ]
 });
 
 router.beforeEach(async (to, from, next) => {

@@ -1,8 +1,7 @@
 // Vue
 import { defineStore } from "pinia";
 import { Alert } from "@/helpers/types";
-import { VueError } from "@/helpers/customErrors"; 
-
+import { VueError } from "@/helpers/customErrors";
 
 export const useUserSessionStore = defineStore("userSessionStore", {
     state: () => ({
@@ -19,6 +18,6 @@ export const useUserSessionStore = defineStore("userSessionStore", {
         setAlert(alert: VueError) {
             this.alert = alert;
             this.displayAlert = true;
-        },
+        }
     }
 });

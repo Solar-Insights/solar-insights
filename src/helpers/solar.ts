@@ -5,7 +5,7 @@ import {
     normalize,
     yearlyUtilityBillEstimates,
     installationCostCalc,
-    yearlyCostWithoutSolar,
+    yearlyCostWithoutSolar
 } from "@/helpers/solarMath";
 import { LayerId, SolarLayers, Layer, GeoTiff } from "solar-typing/src/solar";
 import { getGeotiff } from "@/server/solar";
@@ -16,7 +16,7 @@ export function colorToRGB(color: string): { r: number; g: number; b: number } {
     return {
         r: parseInt(hex.substring(0, 2), 16),
         g: parseInt(hex.substring(2, 4), 16),
-        b: parseInt(hex.substring(4, 6), 16),
+        b: parseInt(hex.substring(4, 6), 16)
     };
 }
 
@@ -40,7 +40,7 @@ export function createPalette(hexColors: string[], size = 256) {
             return {
                 r: lerp(rgb[j].r, rgb[k].r, index - j),
                 g: lerp(rgb[j].g, rgb[k].g, index - j),
-                b: lerp(rgb[j].b, rgb[k].b, index - j),
+                b: lerp(rgb[j].b, rgb[k].b, index - j)
             };
         });
 }
@@ -77,8 +77,8 @@ export function drawGoogleChart(userSolarData: UserSolarData, costChart: HTMLEle
                 ...cumulativeCostWithSolar.map((_, i) => [
                     (year + i + 1).toString(),
                     cumulativeCostWithSolar[i],
-                    cumulativeCostWithoutSolar[i],
-                ]),
+                    cumulativeCostWithoutSolar[i]
+                ])
             ]);
 
             const googleCharts = google.charts as any;
@@ -86,11 +86,11 @@ export function drawGoogleChart(userSolarData: UserSolarData, costChart: HTMLEle
             const options = googleCharts.Line.convertOptions({
                 title: `Cost analysis for ${userSolarData.installationLifespan} years`,
                 width: 325,
-                height: 200,
+                height: 200
             });
             chart.draw(data, options);
         },
-        { packages: ["line"] },
+        { packages: ["line"] }
     );
 }
 
@@ -99,7 +99,7 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
         annualFlux: async () => {
             const [mask, data] = await Promise.all([
                 await getGeotiff(urls.maskUrl),
-                await getGeotiff(urls.annualFluxUrl),
+                await getGeotiff(urls.annualFluxUrl)
             ]);
 
             const colors = ironPalette;
@@ -109,7 +109,7 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
                 palette: {
                     colors: colors,
                     min: "Shady",
-                    max: "Sunny",
+                    max: "Sunny"
                 },
                 render: (showRoofOnly) => [
                     renderPalette({
@@ -117,15 +117,15 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
                         mask: showRoofOnly ? mask : undefined,
                         colors: colors,
                         min: 0,
-                        max: 1800,
-                    }),
-                ],
+                        max: 1800
+                    })
+                ]
             };
         },
         monthlyFlux: async () => {
             const [mask, data] = await Promise.all([
                 await getGeotiff(urls.maskUrl),
-                await getGeotiff(urls.monthlyFluxUrl),
+                await getGeotiff(urls.monthlyFluxUrl)
             ]);
             const colors = ironPalette;
 
@@ -135,7 +135,7 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
                 palette: {
                     colors: colors,
                     min: "Shady",
-                    max: "Sunny",
+                    max: "Sunny"
                 },
                 render: (showRoofOnly) =>
                     [...Array(12).keys()].map((month) =>
@@ -145,15 +145,15 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
                             colors: colors,
                             min: 0,
                             max: 200,
-                            index: month,
-                        }),
-                    ),
+                            index: month
+                        })
+                    )
             };
         },
         hourlyShade: async () => {
             const [mask, ...months] = await Promise.all([
                 await getGeotiff(urls.maskUrl),
-                ...urls.hourlyShadeUrls.map(async (url) => await getGeotiff(url)),
+                ...urls.hourlyShadeUrls.map(async (url) => await getGeotiff(url))
             ]);
 
             const colors = sunlightPalette;
@@ -163,24 +163,24 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
                 palette: {
                     colors: colors,
                     min: "Shade",
-                    max: "Sun",
+                    max: "Sun"
                 },
                 render: (showRoofOnly, month, day) =>
                     [...Array(24).keys()].map((hour) =>
                         renderPalette({
                             data: {
                                 ...months[month],
-                                rasters: months[month].rasters.map((values) => values.map((x) => x & (1 << (day - 1)))),
+                                rasters: months[month].rasters.map((values) => values.map((x) => x & (1 << (day - 1))))
                             },
                             mask: showRoofOnly ? mask : undefined,
                             colors: colors,
                             min: 0,
                             max: 1,
-                            index: hour,
-                        }),
-                    ),
+                            index: hour
+                        })
+                    )
             };
-        },
+        }
     };
     try {
         return get[layerId]();
@@ -224,7 +224,7 @@ export function renderPalette({
     colors,
     min,
     max,
-    index,
+    index
 }: {
     data: GeoTiff;
     mask?: GeoTiff;
@@ -244,9 +244,9 @@ export function renderPalette({
             rasters: [
                 indices.map((i: number) => palette[i].r),
                 indices.map((i: number) => palette[i].g),
-                indices.map((i: number) => palette[i].b),
-            ],
+                indices.map((i: number) => palette[i].b)
+            ]
         },
-        mask,
+        mask
     );
 }

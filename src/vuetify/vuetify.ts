@@ -24,8 +24,8 @@ const customTheme: ThemeDefinition = {
         warning: "#FB8C00",
         theme: "#50a490",
         "text-emphasis": "#535353",
-        "bg-whitey": "#fffbfe",
-    },
+        "bg-whitey": "#fffbfe"
+    }
 };
 
 const vuetifyThemesAndComponents = createVuetify({
@@ -34,15 +34,15 @@ const vuetifyThemesAndComponents = createVuetify({
     theme: {
         defaultTheme: "customTheme",
         themes: {
-            customTheme,
-        },
+            customTheme
+        }
     },
     icons: {
         defaultSet: "mdi",
         sets: {
             fa,
-            mdi,
-        },
-    },
+            mdi
+        }
+    }
 });
 export default vuetifyThemesAndComponents;

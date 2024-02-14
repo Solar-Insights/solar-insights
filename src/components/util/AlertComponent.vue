@@ -7,7 +7,7 @@
             :text="matchMessage(alert.message)"
             closable
             close-label="Close"
-            @click:close="displayAlert = false;"
+            @click:close="displayAlert = false"
         />
         <hr :color="matchColorToType(alert.type)" :width="`${iteLeftPercentage}%`" style="height: 5px" />
     </div>
@@ -15,9 +15,9 @@
 
 <script setup lang="ts">
 // Vue
-import { useUserSessionStore } from '@/stores/userSessionStore';
-import { storeToRefs } from 'pinia';
-import { watch, ref } from 'vue';
+import { useUserSessionStore } from "@/stores/userSessionStore";
+import { storeToRefs } from "pinia";
+import { watch, ref } from "vue";
 // Helpers
 import { matchType, matchTitle, matchMessage, matchColorToType } from "@/helpers/customErrors";
 
@@ -29,11 +29,11 @@ let interval: NodeJS.Timeout | undefined = undefined;
 watch(displayAlert, () => {
     resetIteProgression();
     resetNodeInterval();
-    
+
     if (displayAlert.value) {
         initNodeInterval();
     }
-})
+});
 
 watch(alert, () => {
     resetIteProgression();
@@ -56,7 +56,7 @@ function initNodeInterval() {
             displayAlert.value = false;
             resetNodeInterval();
         } else {
-            iteLeftPercentage.value -= 0.20;
+            iteLeftPercentage.value -= 0.2;
         }
     }, 10);
 }

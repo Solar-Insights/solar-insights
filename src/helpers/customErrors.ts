@@ -66,12 +66,12 @@ export class VueError extends Error {
     code: number;
 
     constructor(
-        type: AlertType = "warning", 
+        type: AlertType = "warning",
         name: string = "Error",
         title: string = "Something happened",
         message: string = "An error was encountered during the execution of the program.",
         code: number = 500
-    ){
+    ) {
         super();
         this.type = type;
         this.name = name;
@@ -79,40 +79,40 @@ export class VueError extends Error {
         this.message = message;
         this.code = code;
     }
-};
+}
 
 export class MapInitializationError extends VueError {
     constructor(
-        type: AlertType = "error", 
+        type: AlertType = "error",
         name: string = "MapInitializationError",
         title: string = "The server could not properly load the map",
         message: string = "An error occured when trying to load the map and its components.",
         code: number = 500
-    ){
+    ) {
         super(type, name, title, message, code);
     }
-};
+}
 
 export class UserInputError extends VueError {
     constructor(
         message: string,
-        type: AlertType = "error", 
+        type: AlertType = "error",
         name: string = "UserInputError",
         title: string = "The provided user input provoked an error",
-        code: number = 500,
-    ){
+        code: number = 500
+    ) {
         super(type, name, title, message, code);
     }
-};
+}
 
 export class AutocompleteInputError extends UserInputError {
     constructor(
         message: string = "Select a valid address from the dropdown menu.",
-        type: AlertType = "error", 
+        type: AlertType = "error",
         name: string = "UserInputError",
         title: string = "The provided user input provoked an error",
-        code: number = 500,
-    ){
+        code: number = 500
+    ) {
         super(message, type, name, title, code);
     }
 }
@@ -124,43 +124,43 @@ export class GeocodingError extends VueError {
         title: string = "The server could not geocode the given address",
         message: string = "An error occured when trying to convert the address to geographic goordinates.",
         code: number = 500
-    ){
+    ) {
         super(type, name, title, message, code);
     }
-};
+}
 
 export class ReverseGeocodingError extends VueError {
     constructor(
-        type: AlertType = "warning", 
+        type: AlertType = "warning",
         name: string = "ReverseGeocodingError",
         title: string = "The server could not reverse geocode the given geographic coordinates",
         message: string = "An error occured when trying to convert geographic coordinates to an address.",
         code: number = 500
-    ){
+    ) {
         super(type, name, title, message, code);
     }
-};
+}
 
 export class AirQualityDataError extends VueError {
     constructor(
-        type: AlertType = "error", 
+        type: AlertType = "error",
         name: string = "AirQualityDataError",
         title: string = "The server could not fetch valid air quality data with the given parameters",
         message: string = "An error occured when trying to fetch air quality data.",
         code: number = 500
-    ){
+    ) {
         super(type, name, title, message, code);
     }
-};
+}
 
 export class BuildingInsightsError extends VueError {
     constructor(
-        type: AlertType = "error", 
+        type: AlertType = "error",
         name: string = "BuildingInsightsError",
         title: string = "The server could not fetch building insights with the given parameters",
         message: string = "An error occured when trying to fetch building insights.",
         code: number = 500
-    ){
+    ) {
         super(type, name, title, message, code);
     }
-};
+}

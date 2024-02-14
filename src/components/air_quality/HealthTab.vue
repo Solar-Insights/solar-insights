@@ -39,8 +39,8 @@ const props = defineProps({
     healthRecommendations: {
         type: Object as PropType<HealthRecommendations>,
         required: true,
-        default: {},
-    },
+        default: {}
+    }
 });
 
 onMounted(() => {
@@ -59,49 +59,49 @@ const healthRecommendationsList = ref([
         group: "generalPopulation",
         displayName: "General population",
         recommendation: "",
-        icon: "mdi-account-group",
+        icon: "mdi-account-group"
     },
     {
         index: 1,
         group: "children",
         displayName: "Children",
         recommendation: "",
-        icon: "mdi-baby-carriage",
+        icon: "mdi-baby-carriage"
     },
     {
         index: 2,
         group: "elderly",
         displayName: "Senior citizens",
         recommendation: "",
-        icon: "mdi-human-cane",
+        icon: "mdi-human-cane"
     },
     {
         index: 3,
         group: "athletes",
         displayName: "Athletes",
         recommendation: "",
-        icon: "mdi-weight-lifter",
+        icon: "mdi-weight-lifter"
     },
     {
         index: 4,
         group: "pregnantWomen",
         displayName: "Pregnant women",
         recommendation: "",
-        icon: "mdi-human-pregnant",
+        icon: "mdi-human-pregnant"
     },
     {
         index: 5,
         group: "heartDiseasePopulation",
         displayName: "Individuals with heart-related issues",
         recommendation: "",
-        icon: "mdi-heart",
+        icon: "mdi-heart"
     },
     {
         index: 6,
         group: "lungDiseasePopulation",
         displayName: "Individuals with lung-related issues",
         recommendation: "",
-        icon: "mdi-lungs",
-    },
+        icon: "mdi-lungs"
+    }
 ]);
 </script>

@@ -80,7 +80,7 @@ export function yearlyEnergyAcProductionKwh(userSolarData: UserSolarData) {
             userSolarData.yearlyEnergyDcKwh *
                 panelCapacityRatioCalc(userSolarData) *
                 dcToAcDerate(userSolarData) *
-                yearlyPanelEfficiencyDecline(userSolarData) ** i,
+                yearlyPanelEfficiencyDecline(userSolarData) ** i
         );
     }
 
@@ -114,8 +114,8 @@ export function yearlyUtilityBillEstimates(userSolarData: UserSolarData) {
                     userSolarData.energyCostPerKwh *
                     yearlyEnergyCostIncrease(userSolarData) ** i) /
                     yearlyDiscountRate(userSolarData) ** i,
-                0,
-            ),
+                0
+            )
         );
     }
 
@@ -142,7 +142,7 @@ export function yearlyCostWithoutSolar(userSolarData: UserSolarData) {
     for (let i = 0; i < userSolarData.installationLifespan; i++) {
         costWithoutSolar.push(
             (userSolarData.averageMonthlyEnergyBill * 12 * yearlyEnergyCostIncrease(userSolarData) ** i) /
-                yearlyDiscountRate(userSolarData) ** i,
+                yearlyDiscountRate(userSolarData) ** i
         );
     }
 

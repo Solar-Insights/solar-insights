@@ -5,5 +5,4 @@
     <v-btn :to="{ name: 'solar-map' }"> Carte intensite du soleil </v-btn>
 </template>
 
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>

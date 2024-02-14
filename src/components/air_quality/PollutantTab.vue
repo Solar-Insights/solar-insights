@@ -69,14 +69,14 @@ const props = defineProps({
     pollutants: {
         type: Array<AirPollutant>,
         required: true,
-        default: [],
-    },
+        default: []
+    }
 });
 
 const pollutantsConstantsObject = ref(pollutantsConstants);
 
 const concentrationMap = {
     PARTS_PER_BILLION: "ppb",
-    MICROGRAMS_PER_CUBIC_METER: "μg/m³",
+    MICROGRAMS_PER_CUBIC_METER: "μg/m³"
 };
 </script>

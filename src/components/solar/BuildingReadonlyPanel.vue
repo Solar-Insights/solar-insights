@@ -61,12 +61,12 @@ const props = defineProps({
     buildingInsights: {
         type: Object as PropType<BuildingInsights>,
         required: true,
-        default: {},
+        default: {}
     },
     userSolarData: {
         type: Object as PropType<UserSolarData>,
         required: true,
-        default: {},
-    },
+        default: {}
+    }
 });
 </script>

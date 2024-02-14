@@ -72,7 +72,7 @@ function maxZoom(mapType: MapType) {
 
 export async function initMapComponents(coord: Coordinates, mapType: MapType) {
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
-    let map: google.maps.Map = await initMap(coord, mapElement, mapType);;
+    let map: google.maps.Map = await initMap(coord, mapElement, mapType);
     let autocomplete: google.maps.places.Autocomplete = await initAutocomplete("autocomplete-search");
     let marker: google.maps.Marker | true = mapType === "SOLAR" ? true : initMarker(coord, map);
 
@@ -110,35 +110,35 @@ export async function initMap(coord: Coordinates, mapElement: HTMLElement, mapTy
                 north: 85.0,
                 south: -60.0,
                 west: -179.0,
-                east: 179.0,
+                east: 179.0
             },
-            strictBounds: true,
+            strictBounds: true
         },
         styles: [
             {
                 stylers: [
                     {
-                        visibility: "off",
-                    },
-                ],
+                        visibility: "off"
+                    }
+                ]
             },
             {
                 featureType: "administrative",
                 elementType: "labels",
-                stylers: [{ visibility: "on" }, { color: "#55595C" }],
+                stylers: [{ visibility: "on" }, { color: "#55595C" }]
             },
             {
                 featureType: "administrative",
                 elementType: "labels.text.stroke",
-                stylers: [{ color: "#FFFFFF" }],
-            },
-        ],
+                stylers: [{ color: "#FFFFFF" }]
+            }
+        ]
     });
 }
 
 export function initMarker(coord: Coordinates, map: google.maps.Map) {
     const marker = new google.maps.Marker({
-        position: { lat: coord.lat, lng: coord.lng },
+        position: { lat: coord.lat, lng: coord.lng }
     });
     marker.setMap(map);
     return marker;
@@ -167,8 +167,8 @@ function handleEnterKeyOnSearchBar(autocompleteSearch: HTMLInputElement) {
             keyCode: 40,
             code: "ArrowDown",
             bubbles: true,
-            cancelable: true,
-        }),
+            cancelable: true
+        })
     );
     autocompleteSearch.dispatchEvent(
         new KeyboardEvent("keydown", {
@@ -176,7 +176,7 @@ function handleEnterKeyOnSearchBar(autocompleteSearch: HTMLInputElement) {
             keyCode: 13,
             code: "Enter",
             bubbles: true,
-            cancelable: true,
-        }),
+            cancelable: true
+        })
     );
 }

@@ -313,12 +313,27 @@
                                         <span class="ml-4"> Display panels </span>
                                     </template>
                                 </v-switch>
-                                <v-switch v-model="mapSettings.showHeatmap" inset color="theme" density="compact" :disabled="!['monthlyFlux', 'hourlyShade'].includes(mapSettings.layerId)">
+                                <v-switch
+                                    v-model="mapSettings.showHeatmap"
+                                    inset
+                                    color="theme"
+                                    density="compact"
+                                    :disabled="!['monthlyFlux', 'hourlyShade'].includes(mapSettings.layerId)"
+                                >
                                     <template v-slot:label>
                                         <span class="ml-4"> Display heatmap </span>
                                     </template>
                                 </v-switch>
-                                <v-switch v-model="mapSettings.heatmapAnimation" inset color="theme" density="compact" :disabled="!mapSettings.showHeatmap || !['monthlyFlux', 'hourlyShade'].includes(mapSettings.layerId)">
+                                <v-switch
+                                    v-model="mapSettings.heatmapAnimation"
+                                    inset
+                                    color="theme"
+                                    density="compact"
+                                    :disabled="
+                                        !mapSettings.showHeatmap ||
+                                        !['monthlyFlux', 'hourlyShade'].includes(mapSettings.layerId)
+                                    "
+                                >
                                     <template v-slot:label>
                                         <span class="ml-4"> Heatmap animation </span>
                                     </template>
@@ -335,8 +350,11 @@
         <v-slider
             v-if="mapSettings.layerId === 'monthlyFlux'"
             v-model="timeParams.month"
-            @start="currentlySliding = true;"
-            @end="currentlySliding = false; timeParams.tick = timeParams.month"
+            @start="currentlySliding = true"
+            @end="
+                currentlySliding = false;
+                timeParams.tick = timeParams.month;
+            "
             :min="0"
             :max="11"
             step="1"
@@ -355,8 +373,11 @@
         <v-slider
             v-if="mapSettings.layerId === 'hourlyShade'"
             v-model="timeParams.hour"
-            @start="currentlySliding = true;"
-            @end="currentlySliding = false; timeParams.tick = timeParams.hour"
+            @start="currentlySliding = true"
+            @end="
+                currentlySliding = false;
+                timeParams.tick = timeParams.hour;
+            "
             :min="0"
             :max="23"
             step="1"
@@ -398,7 +419,7 @@ import {
     Layer,
     SolarPanelConfig,
     UserSolarData,
-    MapSettings,
+    MapSettings
 } from "solar-typing/src/solar";
 import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solarMath";
 import { AutocompleteInputError } from "@/helpers/customErrors";
@@ -424,19 +445,19 @@ const timeParams = ref<TimeParameters>({
     tick: 0,
     month: 0,
     day: 1,
-    hour: 0,
+    hour: 0
 });
 const mapSettings = ref<MapSettings>({
     layerId: "annualFlux",
     layerIdChoices: [
         { name: "annualFlux", displayedName: "Annual" },
         { name: "monthlyFlux", displayedName: "Monthly" },
-        { name: "hourlyShade", displayedName: "Daily" },
+        { name: "hourlyShade", displayedName: "Daily" }
     ],
     showPanels: true,
     showHeatmap: true,
     heatmapAnimation: true,
-    configIdIndex: 0,
+    configIdIndex: 0
 });
 
 const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
@@ -455,7 +476,7 @@ const userSolarData = ref<UserSolarData>({
     yearlyPanelEfficiencyDecline: 0.5,
     yearlyEnergyCostIncrease: 2.2,
     yearlyDiscountRate: 4,
-    installationLifespan: 25,
+    installationLifespan: 25
 });
 
 let map: google.maps.Map;
@@ -487,9 +508,19 @@ function handleTickChange() {
         timeParams.value.tick++;
     }
 
-    if (layer?.id === "monthlyFlux" && mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap && !currentlySliding.value) {
+    if (
+        layer?.id === "monthlyFlux" &&
+        mapSettings.value.heatmapAnimation &&
+        mapSettings.value.showHeatmap &&
+        !currentlySliding.value
+    ) {
         timeParams.value.month = (timeParams.value.month + 1) % 12;
-    } else if (layer?.id === "hourlyShade" && mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap && !currentlySliding.value) {
+    } else if (
+        layer?.id === "hourlyShade" &&
+        mapSettings.value.heatmapAnimation &&
+        mapSettings.value.showHeatmap &&
+        !currentlySliding.value
+    ) {
         timeParams.value.hour = (timeParams.value.hour + 1) % 24;
     }
 }
@@ -498,21 +529,21 @@ watch(
     () => mapSettings.value.showPanels,
     async () => {
         await syncMapWithNewRequest();
-    },
+    }
 );
 
 watch(
     () => mapSettings.value.layerId,
     async () => {
         await showDataLayer(true);
-    },
+    }
 );
 
 watch(
     () => mapSettings.value.showHeatmap,
     async () => {
         mapSettings.value.showHeatmap ? await showDataLayer(true) : resetHeatmapLayer();
-    },
+    }
 );
 
 watch(
@@ -523,7 +554,7 @@ watch(
         } else if (mapSettings.value.layerId === "hourlyShade" && mapSettings.value.showHeatmap) {
             displayhourlyShade();
         }
-    },
+    }
 );
 
 let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events (arrow keydown + enter), prevent first one from sending request
@@ -568,7 +599,7 @@ async function syncWithNewRequest(coord: Coordinates, formattedAddress: string) 
         .catch(() => {
             // Handle error
         });
-    
+
     syncTemplateVariableFollowingNewRequest();
     syncMapWithNewRequest();
     showDataLayer(true);
@@ -643,7 +674,7 @@ function addSolarPanelsToMap() {
             { x: +w, y: -h }, // bottom right
             { x: -w, y: -h }, // bottom left
             { x: -w, y: +h }, // top left
-            { x: +w, y: +h }, //  top right
+            { x: +w, y: +h } //  top right
         ];
         const orientation = panel.orientation == "PORTRAIT" ? 90 : 0;
         const azimuth = solarPotential.roofSegmentStats[panel.segmentIndex].azimuthDegrees;
@@ -653,19 +684,19 @@ function addSolarPanelsToMap() {
                 geometryLibrary.spherical.computeOffset(
                     { lat: panel.center.latitude, lng: panel.center.longitude },
                     Math.sqrt(x * x + y * y),
-                    Math.atan2(y, x) * (180 / Math.PI) + orientation + azimuth,
-                ),
+                    Math.atan2(y, x) * (180 / Math.PI) + orientation + azimuth
+                )
             ),
             strokeColor: "#B0BEC5",
             strokeOpacity: 0.9,
             strokeWeight: 1,
             fillColor: palette[colorIndex],
-            fillOpacity: 0.9,
+            fillOpacity: 0.9
         });
     });
 
     solarPanels.map((panel, i) =>
-        panel.setMap(mapSettings.value.showPanels && panelConfig && i < panelConfig.panelsCount ? map : null),
+        panel.setMap(mapSettings.value.showPanels && panelConfig && i < panelConfig.panelsCount ? map : null)
     );
 }
 
@@ -688,13 +719,13 @@ async function showDataLayer(reset: boolean = false) {
     if (!layer) {
         const center: Coordinates = {
             lat: buildingInsights.value.center.latitude,
-            lng: buildingInsights.value.center.longitude,
+            lng: buildingInsights.value.center.longitude
         };
         const ne = buildingInsights.value.boundingBox.ne;
         const sw = buildingInsights.value.boundingBox.sw;
         const diameter = geometryLibrary.spherical.computeDistanceBetween(
             new google.maps.LatLng(ne.latitude, ne.longitude),
-            new google.maps.LatLng(sw.latitude, sw.longitude),
+            new google.maps.LatLng(sw.latitude, sw.longitude)
         );
         const radius = Math.ceil(diameter / 2);
 

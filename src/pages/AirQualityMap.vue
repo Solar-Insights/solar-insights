@@ -135,7 +135,7 @@ onMounted(async () => {
         })
         .catch(() => {
             // DO_SOMETHING
-        })
+        });
 
     await initListeners();
 });
@@ -176,7 +176,7 @@ async function setDblClickListenerToMap() {
     map.addListener("dblclick", async (mouseEvent: any) => {
         const newCoord: Coordinates = {
             lat: mouseEvent.latLng.lat(),
-            lng: mouseEvent.latLng.lng(),
+            lng: mouseEvent.latLng.lng()
         };
 
         const formattedAddress = await getReverseGeocoding(newCoord)
@@ -196,13 +196,13 @@ async function syncWithNewRequest(newCoord: Coordinates, formattedAddress: strin
     marker.setMap(null);
     marker = initMarker(newCoord, map);
     autocompleteValue.value = formattedAddress;
-    
+
     await getAirQualityData(newCoord)
         .then((data: AirQualityData) => {
             airQualityDataDisplayed.value = data;
         })
         .catch(() => {
             // DO_SOMETHING
-        })
+        });
 }
 </script>

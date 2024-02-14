@@ -8,7 +8,7 @@
         "build": "vue-tsc && vite build",
         "preview": "vite preview",
         "test:unit": "vitest",
-        "prettier": "npx prettier --tab-width 4 --print-width 120 -uw --cache --ignore-path .gitignore ."
+        "prettier": "npx prettier --trailing-comma none --tab-width 4 --print-width 120 -uw --cache --ignore-path .gitignore ."
     },
     "dependencies": {
         "@mdi/font": "^7.4.47",
