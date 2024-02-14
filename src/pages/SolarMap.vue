@@ -335,7 +335,8 @@
         <v-slider
             v-if="mapSettings.layerId === 'monthlyFlux'"
             v-model="timeParams.month"
-            @end="timeParams.tick = timeParams.month"
+            @start="mapSettings.heatmapAnimation = false;"
+            @end="mapSettings.heatmapAnimation = true; timeParams.tick = timeParams.month"
             :min="0"
             :max="11"
             step="1"
@@ -354,7 +355,8 @@
         <v-slider
             v-if="mapSettings.layerId === 'hourlyShade'"
             v-model="timeParams.hour"
-            @end="timeParams.tick = timeParams.hour"
+            @start="mapSettings.heatmapAnimation = false;"
+            @end="mapSettings.heatmapAnimation = true; timeParams.tick = timeParams.hour"
             :min="0"
             :max="23"
             step="1"
@@ -481,19 +483,10 @@ onMounted(async () => {
 
 function handleTickChange() {
     timeParams.value.tick++;
-
-    if (layer?.id === "monthlyFlux") {
-        if (mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
-            timeParams.value.month = timeParams.value.tick % 12;
-        } else {
-            timeParams.value.tick = timeParams.value.month;
-        }
-    } else if (layer?.id === "hourlyShade") {
-        if (mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
-            timeParams.value.hour = timeParams.value.tick % 24;
-        } else {
-            timeParams.value.tick = timeParams.value.hour;
-        }
+    if (layer?.id === "monthlyFlux" && mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
+        timeParams.value.month = (timeParams.value.month + 1) % 12;
+    } else if (layer?.id === "hourlyShade" && mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
+        timeParams.value.hour = (timeParams.value.hour + 1) % 24;
     }
 }
 
@@ -514,16 +507,16 @@ watch(
 watch(
     () => mapSettings.value.showHeatmap,
     async () => {
-        await showDataLayer(true);
+        mapSettings.value.showHeatmap ? await showDataLayer(true) : resetHeatmapLayer();
     },
 );
 
 watch(
     () => timeParams.value.tick,
     () => {
-        if (mapSettings.value.layerId === "monthlyFlux") {
+        if (layer?.id === "monthlyFlux" && mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
             displayMonthlyFlux();
-        } else if (mapSettings.value.layerId === "hourlyShade") {
+        } else if (mapSettings.value.layerId === "hourlyShade" && mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
             displayhourlyShade();
         }
     },
