@@ -1,7 +1,4 @@
-import { getAirQualityData } from "@/server/air";
-import { AirPollutant, AirQualityData } from "solar-typing/src/airQuality";
-import { Coordinates } from "solar-typing/src/general";
-import { initMarker } from "@/helpers/util";
+import { AirPollutant } from "solar-typing/src/airQuality";
 
 export function makeDominantPollutantFirst(dominantPollutant: string, listOfPollutants: AirPollutant[]) {
     const index = listOfPollutants.findIndex((pollutant) => pollutant.code == dominantPollutant);
