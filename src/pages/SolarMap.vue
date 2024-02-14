@@ -46,7 +46,7 @@
 
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
                 <v-expansion-panels variant="accordion">
-                    <v-expansion-panel class="mb-2" elevation="0">
+                    <v-expansion-panel elevation="0">
                         <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
                             <div class="section-title d-flex">
                                 <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon>
