@@ -313,12 +313,12 @@
                                         <span class="ml-4"> Display panels </span>
                                     </template>
                                 </v-switch>
-                                <v-switch v-model="mapSettings.showHeatmap" inset color="theme" density="compact">
+                                <v-switch v-model="mapSettings.showHeatmap" inset color="theme" density="compact" :disabled="!['monthlyFlux', 'hourlyShade'].includes(mapSettings.layerId)">
                                     <template v-slot:label>
                                         <span class="ml-4"> Display heatmap </span>
                                     </template>
                                 </v-switch>
-                                <v-switch v-model="mapSettings.heatmapAnimation" inset color="theme" density="compact">
+                                <v-switch v-model="mapSettings.heatmapAnimation" inset color="theme" density="compact" :disabled="!mapSettings.showHeatmap || !['monthlyFlux', 'hourlyShade'].includes(mapSettings.layerId)">
                                     <template v-slot:label>
                                         <span class="ml-4"> Heatmap animation </span>
                                     </template>
@@ -335,8 +335,8 @@
         <v-slider
             v-if="mapSettings.layerId === 'monthlyFlux'"
             v-model="timeParams.month"
-            @start="mapSettings.heatmapAnimation = false;"
-            @end="mapSettings.heatmapAnimation = true; timeParams.tick = timeParams.month"
+            @start="currentlySliding = true;"
+            @end="currentlySliding = false; timeParams.tick = timeParams.month"
             :min="0"
             :max="11"
             step="1"
@@ -355,8 +355,8 @@
         <v-slider
             v-if="mapSettings.layerId === 'hourlyShade'"
             v-model="timeParams.hour"
-            @start="mapSettings.heatmapAnimation = false;"
-            @end="mapSettings.heatmapAnimation = true; timeParams.tick = timeParams.hour"
+            @start="currentlySliding = true;"
+            @end="currentlySliding = false; timeParams.tick = timeParams.hour"
             :min="0"
             :max="23"
             step="1"
@@ -419,6 +419,7 @@ const autocompleteValue = ref<string | null>("");
 const solarReadonlyPanel = ref(0);
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
+const currentlySliding = ref(false);
 const timeParams = ref<TimeParameters>({
     tick: 0,
     month: 0,
@@ -482,10 +483,13 @@ onMounted(async () => {
 });
 
 function handleTickChange() {
-    timeParams.value.tick++;
-    if (layer?.id === "monthlyFlux" && mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
+    if (mapSettings.value.heatmapAnimation) {
+        timeParams.value.tick++;
+    }
+
+    if (layer?.id === "monthlyFlux" && mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap && !currentlySliding.value) {
         timeParams.value.month = (timeParams.value.month + 1) % 12;
-    } else if (layer?.id === "hourlyShade" && mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
+    } else if (layer?.id === "hourlyShade" && mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap && !currentlySliding.value) {
         timeParams.value.hour = (timeParams.value.hour + 1) % 24;
     }
 }
@@ -514,9 +518,9 @@ watch(
 watch(
     () => timeParams.value.tick,
     () => {
-        if (layer?.id === "monthlyFlux" && mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
+        if (layer?.id === "monthlyFlux" && mapSettings.value.showHeatmap) {
             displayMonthlyFlux();
-        } else if (mapSettings.value.layerId === "hourlyShade" && mapSettings.value.heatmapAnimation && mapSettings.value.showHeatmap) {
+        } else if (mapSettings.value.layerId === "hourlyShade" && mapSettings.value.showHeatmap) {
             displayhourlyShade();
         }
     },
@@ -716,7 +720,6 @@ function resetDataLayer() {
 
     // Default values per layer.
     showRoofOnly = ["annualFlux", "monthlyFlux", "hourlyShade"].includes(mapSettings.value.layerId);
-    mapSettings.value.heatmapAnimation = ["monthlyFlux", "hourlyShade"].includes(mapSettings.value.layerId);
     map.setMapTypeId("satellite");
 }
 
