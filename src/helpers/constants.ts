@@ -1,3 +1,5 @@
+import { Pollutants } from "@/helpers/types";
+
 /*
     Enhance interfaces
 */
@@ -26,58 +28,71 @@ export function batteryCharging(value: number) {
     Pollutants code and display name
     For an updated list of pollutants, visit https://developers.google.com/maps/documentation/air-quality/pollutants
 */
-export const pollutants = {
+export const pollutants: Pollutants = {
     co: {
         code: "co",
         displayName: "CO",
+        solution: ""
     },
     c6h6: {
         code: "c6h6",
         displayName: "C6H6",
+        solution: ""
     },
     ox: {
         code: "ox",
         displayName: "OX",
+        solution: ""
     },
     o3: {
         code: "o3",
         displayName: "O3",
+        solution: ""
     },
     nh3: {
         code: "nh3",
         displayName: "NH3",
+        solution: ""
     },
     nhmc: {
         code: "nhmc",
         displayName: "NHMC",
+        solution: ""
     },
     no: {
         code: "no",
         displayName: "NO",
+        solution: ""
     },
     nox: {
         code: "nox",
         displayName: "NOX",
+        solution: ""
     },
     no2: {
         code: "no2",
         displayName: "NO2",
+        solution: ""
     },
     pm25: {
         code: "pm25",
         displayName: "PM2.5",
+        solution: ""
     },
     pm10: {
         code: "pm10",
         displayName: "PM10",
+        solution: ""
     },
     so2: {
         code: "so2",
         displayName: "SO2",
+        solution: ""
     },
     trs: {
         code: "trs",
         displayName: "TRS",
+        solution: ""
     },
 };
 

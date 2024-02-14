@@ -43,6 +43,13 @@
                             <p>
                                 {{ pollutant.additionalInfo.sources }}
                             </p>
+
+                            <v-divider class="my-3" />
+
+                            <div class="section-title">Solutions</div>
+                            <p>
+                                {{ pollutantsConstantsObject[pollutant.code].solution }}
+                            </p>
                         </v-tooltip>
                     </div>
                 </div>
@@ -52,8 +59,11 @@
 </template>
 
 <script setup lang="ts">
+// Vue
+import { ref } from "vue";
 // Helpers
 import { AirPollutant } from "solar-typing/src/airQuality";
+import { pollutants as pollutantsConstants } from "@/helpers/constants";
 
 const props = defineProps({
     pollutants: {
@@ -62,6 +72,8 @@ const props = defineProps({
         default: [],
     },
 });
+
+const pollutantsConstantsObject = ref(pollutantsConstants);
 
 const concentrationMap = {
     PARTS_PER_BILLION: "ppb",

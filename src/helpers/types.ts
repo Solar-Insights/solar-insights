@@ -1,3 +1,5 @@
+import { PollutantCode } from "solar-typing/src/airQuality";
+
 export type TimeParameters = {
     tick: number;
     month: number;
@@ -18,3 +20,11 @@ export type MapElements = {
 };
 
 export type AlertType = "warning" | "error" | "success";
+
+export type Pollutants = {
+    [K in PollutantCode] : {
+        code: K,
+        displayName: string,
+        solution: string
+    }
+};
