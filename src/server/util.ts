@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Coordinates } from "solar-typing/src/general";
+import { Coordinates } from "geo-env-typing/geo";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { GeocodingError, ReverseGeocodingError } from "@/helpers/customErrors";
 

@@ -1,6 +1,6 @@
 import axios from "axios";
-import { AirQualityData } from "solar-typing/src/airQuality";
-import { Coordinates } from "solar-typing/src/general";
+import { AirQualityData } from "geo-env-typing/air";
+import { Coordinates } from "geo-env-typing/geo";
 import { makeDominantPollutantFirst } from "@/helpers/air";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { AirQualityDataError } from "@/helpers/customErrors";

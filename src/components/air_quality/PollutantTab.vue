@@ -62,7 +62,7 @@
 // Vue
 import { ref } from "vue";
 // Helpers
-import { AirPollutant } from "solar-typing/src/airQuality";
+import { AirPollutant } from "geo-env-typing/air";
 import { pollutants as pollutantsConstants } from "@/helpers/constants";
 
 const props = defineProps({

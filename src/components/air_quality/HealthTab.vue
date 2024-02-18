@@ -33,7 +33,7 @@
 // Vue
 import { ref, PropType, onMounted } from "vue";
 // Helpers
-import { HealthRecommendations } from "solar-typing/src/airQuality";
+import { HealthRecommendations } from "geo-env-typing/air";
 
 const props = defineProps({
     healthRecommendations: {

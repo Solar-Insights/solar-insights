@@ -1,4 +1,4 @@
-import { PollutantCode } from "solar-typing/src/airQuality";
+import { PollutantCode } from "geo-env-typing/air";
 
 export type TimeParameters = {
     tick: number;

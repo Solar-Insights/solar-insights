@@ -1,4 +1,4 @@
-import { AirPollutant } from "solar-typing/src/airQuality";
+import { AirPollutant } from "geo-env-typing/air";
 
 export function makeDominantPollutantFirst(dominantPollutant: string, listOfPollutants: AirPollutant[]) {
     const index = listOfPollutants.findIndex((pollutant) => pollutant.code == dominantPollutant);

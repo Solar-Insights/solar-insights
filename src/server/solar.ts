@@ -1,8 +1,8 @@
 import { BuildingInsightsError } from "@/helpers/customErrors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import axios from "axios";
-import { Coordinates } from "solar-typing/src/general";
-import { BuildingInsights, GeoTiff, SolarLayers } from "solar-typing/src/solar";
+import { Coordinates } from "geo-env-typing/geo";
+import { BuildingInsights, GeoTiff, SolarLayers } from "geo-env-typing/solar";
 
 axios.defaults.baseURL = import.meta.env.VITE_DEV_URL;
 

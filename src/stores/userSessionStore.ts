@@ -1,6 +1,5 @@
 // Vue
 import { defineStore } from "pinia";
-import { Alert } from "@/helpers/types";
 import { VueError } from "@/helpers/customErrors";
 
 export const useUserSessionStore = defineStore("userSessionStore", {

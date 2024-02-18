@@ -1,4 +1,4 @@
-import { UserSolarData } from "solar-typing/src/solar";
+import { UserSolarData } from "geo-env-typing/solar";
 
 export function lerp(x: number, y: number, t: number) {
     return x + t * (y - x);

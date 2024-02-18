@@ -1,4 +1,4 @@
-import { MapType, Coordinates } from "solar-typing/src/general";
+import { MapType, Coordinates } from "geo-env-typing/geo";
 import { MapElements } from "@/helpers/types";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { MapInitializationError } from "./customErrors";

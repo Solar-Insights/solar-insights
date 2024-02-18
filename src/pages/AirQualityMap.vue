@@ -95,8 +95,8 @@ import { onMounted, ref } from "vue";
 import _ from "lodash";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 // Helpers
-import { AirQualityData } from "solar-typing/src/airQuality";
-import { Coordinates } from "solar-typing/src/general";
+import { AirQualityData } from "geo-env-typing/air";
+import { Coordinates } from "geo-env-typing/geo";
 import { pollutants, circularBarColorSelector } from "@/helpers/constants";
 import { initMapComponents, initMarker, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
 import { AutocompleteInputError } from "@/helpers/customErrors";

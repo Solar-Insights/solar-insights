@@ -1,4 +1,4 @@
-import { UserSolarData } from "solar-typing/src/solar";
+import { UserSolarData, LayerId, SolarLayers, Layer, GeoTiff  } from "geo-env-typing/solar";
 import { GoogleCharts } from "google-charts";
 import {
     lerp,
@@ -7,7 +7,6 @@ import {
     installationCostCalc,
     yearlyCostWithoutSolar
 } from "@/helpers/solarMath";
-import { LayerId, SolarLayers, Layer, GeoTiff } from "solar-typing/src/solar";
 import { getGeotiff } from "@/server/solar";
 import { ironPalette, sunlightPalette } from "@/helpers/constants";
 
