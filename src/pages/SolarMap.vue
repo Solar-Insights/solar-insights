@@ -429,7 +429,7 @@ import { initMapComponents, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/
 import { rgbToColor, createPalette, getSingleLayer } from "@/helpers/solar";
 // Server
 import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
-import { getGeocoding, getReverseGeocoding } from "@/server/util";
+import { getGeocoding, getReverseGeocoding } from "@/server/geo";
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";

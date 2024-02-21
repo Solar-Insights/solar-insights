@@ -9,7 +9,6 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import {} from "@/server/util";
 
 const mockedData = ref();
 

@@ -9,7 +9,7 @@ export async function getGeocoding(formattedAddress: string) {
     return await axios({
         method: "get",
         responseType: "json",
-        url: `/util/geocoding`,
+        url: `/geo/geocoding`,
         params: {
             address: formattedAddress
         }
@@ -27,7 +27,7 @@ export async function getReverseGeocoding(coord: Coordinates) {
     return await axios({
         method: "get",
         responseType: "json",
-        url: `/util/reverse-geocoding`,
+        url: `/geo/reverse-geocoding`,
         params: {
             lat: coord.lat,
             lng: coord.lng

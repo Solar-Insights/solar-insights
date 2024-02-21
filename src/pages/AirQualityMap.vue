@@ -102,7 +102,7 @@ import { initMapComponents, initMarker, prepareHandlerEnterKeyOnSearchBar } from
 import { AutocompleteInputError } from "@/helpers/customErrors";
 // Server
 import { getAirQualityData } from "@/server/air";
-import { getGeocoding, getReverseGeocoding } from "@/server/util";
+import { getGeocoding, getReverseGeocoding } from "@/server/geo";
 // Components
 import PollutantTab from "@/components/air_quality/PollutantTab.vue";
 import HealthTab from "@/components/air_quality/HealthTab.vue";
