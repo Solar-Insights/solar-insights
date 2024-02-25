@@ -9,7 +9,10 @@
             close-label="Close"
             @click:close="displayAlert = false"
         />
-        <hr :color="matchColorToType(alert.type)" :width="`${iteLeftPercentage}%`" style="height: 5px" />
+        <hr 
+            :width="`${iteLeftPercentage}%`" 
+            style="height: 5px;" 
+            :style="`color: ${matchColorToType(alert.type)}; background-color: ${matchColorToType(alert.type)};`"/>
     </div>
 </template>
 
