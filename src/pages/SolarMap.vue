@@ -412,7 +412,7 @@
 import { onMounted, ref, watch } from "vue";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 // Helpers
-import { Coordinates } from "geo-env-typing/geo";
+import { LatLng } from "geo-env-typing/geo";
 import {
     BuildingInsights,
     SolarLayers,
@@ -484,7 +484,7 @@ let autocomplete: google.maps.places.Autocomplete;
 let geometryLibrary: google.maps.GeometryLibrary;
 
 onMounted(async () => {
-    const coord: Coordinates = { lat: 46.81701, lng: -71.36838 };
+    const coord: LatLng = { lat: 46.81701, lng: -71.36838 };
     ({ map, autocomplete } = await initMapComponents(coord, "SOLAR"));
 
     const formattedAddress = await getReverseGeocoding(coord)
@@ -579,7 +579,7 @@ async function setPlaceChangedOnAutocompleteListener() {
 
         autocompleteAlreadyChanged = false;
         await getGeocoding(newPlace.formatted_address)
-            .then(async (newCoord: Coordinates) => {
+            .then(async (newCoord: LatLng) => {
                 await syncWithNewRequest(newCoord, newPlace.formatted_address!);
             })
             .catch((error) => {
@@ -588,7 +588,7 @@ async function setPlaceChangedOnAutocompleteListener() {
     });
 }
 
-async function syncWithNewRequest(coord: Coordinates, formattedAddress: string) {
+async function syncWithNewRequest(coord: LatLng, formattedAddress: string) {
     autocompleteValue.value = formattedAddress;
     map.setCenter(coord);
 
@@ -717,7 +717,7 @@ async function showDataLayer(reset: boolean = false) {
     }
 
     if (!layer) {
-        const center: Coordinates = {
+        const center: LatLng = {
             lat: buildingInsights.value.center.latitude,
             lng: buildingInsights.value.center.longitude
         };
