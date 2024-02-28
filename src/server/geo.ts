@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Coordinates } from "geo-env-typing/geo";
+import { LatLng } from "geo-env-typing/geo";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { GeocodingError, ReverseGeocodingError } from "@/helpers/customErrors";
 
@@ -15,7 +15,7 @@ export async function getGeocoding(formattedAddress: string) {
         }
     })
         .then((response) => {
-            return response.data.coordinates as Coordinates;
+            return response.data.coordinates as LatLng;
         })
         .catch((error) => {
             useUserSessionStore().setAlert(new GeocodingError());
@@ -23,7 +23,7 @@ export async function getGeocoding(formattedAddress: string) {
         });
 }
 
-export async function getReverseGeocoding(coord: Coordinates) {
+export async function getReverseGeocoding(coord: LatLng) {
     return await axios({
         method: "get",
         responseType: "json",

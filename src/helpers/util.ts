@@ -1,4 +1,4 @@
-import { MapType, Coordinates } from "geo-env-typing/geo";
+import { MapType, LatLng } from "geo-env-typing/geo";
 import { MapElements } from "@/helpers/types";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { MapInitializationError } from "./customErrors";
@@ -70,7 +70,7 @@ function maxZoom(mapType: MapType) {
     }
 }
 
-export async function initMapComponents(coord: Coordinates, mapType: MapType) {
+export async function initMapComponents(coord: LatLng, mapType: MapType) {
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
     let map: google.maps.Map = await initMap(coord, mapElement, mapType);
     let autocomplete: google.maps.places.Autocomplete = await initAutocomplete("autocomplete-search");
@@ -87,7 +87,7 @@ export async function initMapComponents(coord: Coordinates, mapType: MapType) {
     } as MapElements;
 }
 
-export async function initMap(coord: Coordinates, mapElement: HTMLElement, mapType: MapType): Promise<google.maps.Map> {
+export async function initMap(coord: LatLng, mapElement: HTMLElement, mapType: MapType): Promise<google.maps.Map> {
     const { Map } = (await google.maps.importLibrary("maps")) as google.maps.MapsLibrary;
     return new Map(mapElement, {
         mapTypeId: google.maps.MapTypeId.HYBRID,
@@ -136,7 +136,7 @@ export async function initMap(coord: Coordinates, mapElement: HTMLElement, mapTy
     });
 }
 
-export function initMarker(coord: Coordinates, map: google.maps.Map) {
+export function initMarker(coord: LatLng, map: google.maps.Map) {
     const marker = new google.maps.Marker({
         position: { lat: coord.lat, lng: coord.lng }
     });

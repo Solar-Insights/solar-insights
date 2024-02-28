@@ -136,17 +136,15 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
                     min: "Shady",
                     max: "Sunny"
                 },
-                render: (showRoofOnly) =>
-                    [...Array(12).keys()].map((month) =>
-                        renderPalette({
-                            data: data,
-                            mask: showRoofOnly ? mask : undefined,
-                            colors: colors,
-                            min: 0,
-                            max: 200,
-                            index: month
-                        })
-                    )
+                render: (showRoofOnly) => [...Array(12).keys()].map((month) => renderPalette({
+                    data: data,
+                    mask: showRoofOnly ? mask : undefined,
+                    colors: colors,
+                    min: 0,
+                    max: 200,
+                    index: month
+                })
+                )
             };
         },
         hourlyShade: async () => {
@@ -164,21 +162,28 @@ export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
                     min: "Shade",
                     max: "Sun"
                 },
-                render: (showRoofOnly, month, day) =>
-                    [...Array(24).keys()].map((hour) =>
-                        renderPalette({
-                            data: {
-                                ...months[month],
-                                rasters: months[month].rasters.map((values) => values.map((x) => x & (1 << (day - 1))))
-                            },
-                            mask: showRoofOnly ? mask : undefined,
-                            colors: colors,
-                            min: 0,
-                            max: 1,
-                            index: hour
-                        })
-                    )
+                render: (showRoofOnly, month, day) => [...Array(24).keys()].map((hour) => renderPalette({
+                    data: {
+                        ...months[month],
+                        rasters: months[month].rasters.map((values) => values.map((x) => x & (1 << (day - 1))))
+                    },
+                    mask: showRoofOnly ? mask : undefined,
+                    colors: colors,
+                    min: 0,
+                    max: 1,
+                    index: hour
+                })
+                )
             };
+        },
+        mask: function (): Promise<Layer> {
+            throw new Error("Function not implemented.");
+        },
+        dsm: function (): Promise<Layer> {
+            throw new Error("Function not implemented.");
+        },
+        rgb: function (): Promise<Layer> {
+            throw new Error("Function not implemented.");
         }
     };
     try {

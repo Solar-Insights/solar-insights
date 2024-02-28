@@ -96,7 +96,7 @@ import _ from "lodash";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 // Helpers
 import { AirQualityData } from "geo-env-typing/air";
-import { Coordinates } from "geo-env-typing/geo";
+import { LatLng } from "geo-env-typing/geo";
 import { pollutants, circularBarColorSelector } from "@/helpers/constants";
 import { initMapComponents, initMarker, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
 import { AutocompleteInputError } from "@/helpers/customErrors";
@@ -118,7 +118,7 @@ let marker: google.maps.Marker;
 let autocomplete: google.maps.places.Autocomplete;
 
 onMounted(async () => {
-    const coord: Coordinates = { lat: 46.811943, lng: -71.205002 };
+    const coord: LatLng = { lat: 46.811943, lng: -71.205002 };
     ({ map, marker, autocomplete } = await initMapComponents(coord, "AIR_QUALITY"));
 
     autocompleteValue.value = await getReverseGeocoding(coord)
@@ -163,7 +163,7 @@ async function setPlaceChangedOnAutocompleteListener() {
 
         autocompleteAlreadyChanged = false;
         await getGeocoding(newPlace.formatted_address)
-            .then(async (newCoord: Coordinates) => {
+            .then(async (newCoord: LatLng) => {
                 await syncWithNewRequest(newCoord, newPlace.formatted_address!);
             })
             .catch((error) => {
@@ -174,7 +174,7 @@ async function setPlaceChangedOnAutocompleteListener() {
 
 async function setDblClickListenerToMap() {
     map.addListener("dblclick", async (mouseEvent: any) => {
-        const newCoord: Coordinates = {
+        const newCoord: LatLng = {
             lat: mouseEvent.latLng.lat(),
             lng: mouseEvent.latLng.lng()
         };
@@ -191,7 +191,7 @@ async function setDblClickListenerToMap() {
     });
 }
 
-async function syncWithNewRequest(newCoord: Coordinates, formattedAddress: string) {
+async function syncWithNewRequest(newCoord: LatLng, formattedAddress: string) {
     map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
     marker.setMap(null);
     marker = initMarker(newCoord, map);
