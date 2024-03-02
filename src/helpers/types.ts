@@ -28,3 +28,23 @@ export type Pollutants = {
         solution: string;
     };
 };
+
+export type UserSolarData = {
+    minPanelCount: number;
+    maxPanelCount: number;
+    panelCapacityWatts: number;
+    defaultPanelCapacityWatts: number;
+    panelCount: number;
+    installationCostPerWatt: number;
+    yearlyEnergyDcKwh: number;
+    dcToAcDerate: number;
+    averageMonthlyEnergyBill: number;
+    energyCostPerKwh: number;
+    solarIncentives: number;
+    yearlyPanelEfficiencyDecline: number;
+    yearlyEnergyCostIncrease: number;
+    yearlyDiscountRate: number;
+    installationLifespan: number;
+};
+
+export type MapType = "AIR_QUALITY" | "SOLAR";

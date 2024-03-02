@@ -105,7 +105,8 @@
 // Vue
 import { PropType, onMounted, watch, ref } from "vue";
 // Helpers
-import { BuildingInsights, UserSolarData } from "geo-env-typing/solar";
+import { UserSolarData } from "@/helpers/types";
+import { BuildingInsights } from "geo-env-typing/solar";
 import {
     getBreakEvenYear,
     yearlyEnergyCalc,

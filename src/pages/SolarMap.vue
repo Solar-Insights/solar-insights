@@ -418,12 +418,11 @@ import {
     SolarLayers,
     Layer,
     SolarPanelConfig,
-    UserSolarData,
     MapSettings
 } from "geo-env-typing/solar";
 import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solarMath";
 import { AutocompleteInputError } from "@/helpers/customErrors";
-import { TimeParameters } from "@/helpers/types";
+import { TimeParameters, UserSolarData } from "@/helpers/types";
 import { panelsPalette, monthCodes, hourCodes } from "@/helpers/constants";
 import { initMapComponents, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
 import { rgbToColor, createPalette, getSingleLayer } from "@/helpers/solar";

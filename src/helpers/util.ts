@@ -1,5 +1,5 @@
-import { MapType, LatLng } from "geo-env-typing/geo";
-import { MapElements } from "@/helpers/types";
+import { LatLng } from "geo-env-typing/geo";
+import { MapElements, MapType } from "@/helpers/types";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { MapInitializationError } from "./customErrors";
 

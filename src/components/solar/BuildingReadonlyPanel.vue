@@ -55,7 +55,8 @@
 import { PropType } from "vue";
 // Helpers
 import { strToLargeNumberDisplay } from "@/helpers/util";
-import { BuildingInsights, UserSolarData } from "geo-env-typing/solar";
+import { UserSolarData } from "@/helpers/types";
+import { BuildingInsights } from "geo-env-typing/solar";
 
 const props = defineProps({
     buildingInsights: {

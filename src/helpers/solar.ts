@@ -1,4 +1,5 @@
-import { UserSolarData, LayerId, SolarLayers, Layer, GeoTiff  } from "geo-env-typing/solar";
+import { LayerId, SolarLayers, Layer, GeoTiff  } from "geo-env-typing/solar";
+import { UserSolarData } from "@/helpers/types";
 import { GoogleCharts } from "google-charts";
 import {
     lerp,

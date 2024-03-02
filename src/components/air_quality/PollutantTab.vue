@@ -62,7 +62,7 @@
 // Vue
 import { ref } from "vue";
 // Helpers
-import { AirPollutant } from "geo-env-typing/air";
+import { AirPollutant, Unit } from "geo-env-typing/air";
 import { pollutants as pollutantsConstants } from "@/helpers/constants";
 
 const props = defineProps({
@@ -76,7 +76,7 @@ const props = defineProps({
 const pollutantsConstantsObject = ref(pollutantsConstants);
 
 const concentrationMap = {
-    PARTS_PER_BILLION: "ppb",
-    MICROGRAMS_PER_CUBIC_METER: "μg/m³"
+    ["PARTS_PER_BILLION" as Unit]: "ppb",
+    ["MICROGRAMS_PER_CUBIC_METER" as Unit]: "μg/m³"
 };
 </script>
