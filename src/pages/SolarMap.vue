@@ -413,13 +413,7 @@ import { onMounted, ref, watch } from "vue";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 // Helpers
 import { LatLng } from "geo-env-typing/geo";
-import {
-    BuildingInsights,
-    SolarLayers,
-    Layer,
-    SolarPanelConfig,
-    MapSettings
-} from "geo-env-typing/solar";
+import { BuildingInsights, SolarLayers, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
 import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solarMath";
 import { AutocompleteInputError } from "@/helpers/customErrors";
 import { TimeParameters, UserSolarData } from "@/helpers/types";
