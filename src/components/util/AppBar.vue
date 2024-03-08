@@ -1,13 +1,17 @@
 <template>
     <v-toolbar-items class="pl-8" style="height: 50px;">
-        <v-app-bar-nav-icon class="hidden-sm-and-up" variant="text" @click.stop="drawer = !drawer"/>
+        <v-app-bar-nav-icon 
+            class="hidden-sm-and-up" 
+            variant="text" 
+            @click.stop="drawer = !drawer"
+        />
 
         <v-btn 
             class="hidden-xs"
             v-for="route in routes"
             :to="{ name: route.routeName }"
         >
-            {{ route.displayedName }} 
+            {{ route.displayedName }}
         </v-btn>
     </v-toolbar-items>
 
@@ -17,8 +21,8 @@
                 v-for="route in routes"
                 :to="{ name: route.routeName }"
                 :prepend-icon="route.icon"
-            > 
-                {{ route.displayedName }} 
+            >
+                {{ route.displayedName }}
             </v-list-item>
         </v-list>
     </v-navigation-drawer>
