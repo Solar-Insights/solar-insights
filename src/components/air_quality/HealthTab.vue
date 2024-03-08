@@ -19,7 +19,7 @@
         <v-divider />
 
         <v-card class="pa-2 rounded-lg text-left" variant="text">
-            <div class="section-title">
+            <div class="mb-2 emphasis" style="font-size: 1.1rem">
                 {{ healthRecommendationsList[healthButtonSelection].displayName }}
             </div>
             <p>
