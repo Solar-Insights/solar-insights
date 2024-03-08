@@ -141,10 +141,6 @@ onMounted(() => {
     const costChart: HTMLElement | null = document.getElementById("breakeven-chart");
     drawGoogleChart(props.userSolarData, costChart);
     breakEvenYear.value = getBreakEvenYear(props.userSolarData);
-
-    console.log(document.getElementsByTagName("svg").item(0)?.nodeValue)
-    console.log(document.getElementsByTagName("svg").item(1))
-    //chartElement?.classList.add("rounded-lg");
 });
 
 watch(props.userSolarData, () => {
