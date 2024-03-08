@@ -73,17 +73,15 @@ function maxZoom(mapType: MapType) {
 export async function initMapComponents(coord: LatLng, mapType: MapType) {
     const mapElement: HTMLElement = document.getElementById("map") as HTMLElement;
     let map: google.maps.Map = await initMap(coord, mapElement, mapType);
-    let autocomplete: google.maps.places.Autocomplete = await initAutocomplete("autocomplete-search");
     let marker: google.maps.Marker | true = mapType === "SOLAR" ? true : initMarker(coord, map);
 
-    if (map === undefined || marker === undefined || autocomplete === undefined) {
+    if (map === undefined || marker === undefined) {
         useUserSessionStore().setAlert(new MapInitializationError());
     }
 
     return {
         map: map,
         marker: marker,
-        autocomplete: autocomplete
     } as MapElements;
 }
 
@@ -144,16 +142,20 @@ export function initMarker(coord: LatLng, map: google.maps.Map) {
     return marker;
 }
 
-export async function initAutocomplete(autocompleteElementId: string): Promise<google.maps.places.Autocomplete> {
+export async function initAutocomplete(): Promise<google.maps.places.Autocomplete> {
+    const autocompleteElementId = "autocomplete-search";
     const { Autocomplete } = (await google.maps.importLibrary("places")) as google.maps.PlacesLibrary;
+    
     const input = document.getElementById(autocompleteElementId) as HTMLInputElement;
+    const options = {};
 
-    // To only accept valid adresses for the autocomplete (no city, country, region, etc.)
-    const options = {
-        // fields: ["formatted_address"],
-        // types: ["address"]
-    };
-    return new Autocomplete(input, options);
+    const autocomplete = new Autocomplete(input, options);
+
+    if (autocomplete === undefined) {
+        useUserSessionStore().setAlert(new MapInitializationError());
+    }
+
+    return autocomplete;
 }
 
 export function prepareHandlerEnterKeyOnSearchBar() {
