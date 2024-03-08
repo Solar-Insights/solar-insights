@@ -32,11 +32,12 @@
   
 <script setup lang="ts">
 // Vue
-import { ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
+const currentRoute = useRoute();
 const drawer = ref(false);
-const shouldBeVisibleOnRoute = ref(true);
+const shouldBeVisibleOnRoute = computed(() => routeNamesDisplayingAppBar.includes(currentRoute.name?.toString()));
 
 const routes = ref([
     {
@@ -59,13 +60,5 @@ const routes = ref([
     }
 ]);
 
-const currentRoute = useRoute();
-
-watch(currentRoute, () => {
-    routes.value.forEach((route) => {
-        if (currentRoute.name === route.routeName) {
-            shouldBeVisibleOnRoute.value = route.displaysAppBar;
-        }
-    })
-})
+const routeNamesDisplayingAppBar: (string | undefined)[] = [ "home" ];
 </script>
