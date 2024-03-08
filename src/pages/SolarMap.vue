@@ -2,49 +2,44 @@
     <div class="d-flex" style="height: 100vh">
         <v-card id="map-details" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
             <v-card-title class="map-title">
-                <v-icon class="mr-2 mb-1">mdi-weather-sunny</v-icon> Solar Potential
+                <v-icon class="mr-2">mdi-weather-sunny</v-icon> Solar Potential
             </v-card-title>
 
-            <v-row class="autocomplete-container">
-                <v-text-field
-                    v-model="autocompleteValue"
-                    @keypress.enter="prepareHandlerEnterKeyOnSearchBar"
-                    id="autocomplete-search"
-                    :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
-                    placeholder="Find a location"
-                    hide-details
-                    variant="outlined"
-                    prepend-inner-icon="mdi-google-maps"
-                >
-                </v-text-field>
-            </v-row>
-
-            <div class="mb-3 mx-2 pa-2 mt-3">
-                <v-btn
-                    @click="solarReadonlyPanel = 0"
-                    class="w-50 h-100 py-4 universal-font-theme"
-                    :class="solarReadonlyPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'"
-                    :prepend-icon="solarReadonlyPanel == 0 ? 'mdi-home' : 'mdi-home-outline'"
-                    variant="flat"
-                    :ripple="false"
-                >
-                    Building
-                </v-btn>
-                <v-btn
-                    @click="solarReadonlyPanel = 1"
-                    class="w-50 h-100 py-4 universal-font-theme"
-                    :class="solarReadonlyPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'"
-                    :prepend-icon="solarReadonlyPanel == 1 ? 'mdi-transmission-tower' : 'mdi-transmission-tower'"
-                    variant="flat"
-                    :ripple="false"
-                >
-                    Energy
-                </v-btn>
-            </div>
-
-            <v-divider />
+            <v-text-field
+                v-model="autocompleteValue"
+                @keypress.enter="prepareHandlerEnterKeyOnSearchBar"
+                id="autocomplete-search"
+                :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
+                placeholder="Find a location"
+                hide-details
+                variant="outlined"
+                prepend-inner-icon="mdi-google-maps"
+            />
 
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
+                <div class="mb-4">
+                    <v-btn
+                        @click="solarReadonlyPanel = 0"
+                        class="w-50 universal-font-theme"
+                        :class="solarReadonlyPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'"
+                        :prepend-icon="solarReadonlyPanel == 0 ? 'mdi-home' : 'mdi-home-outline'"
+                        variant="flat"
+                        :ripple="false"
+                    >
+                        Building
+                    </v-btn>
+                    <v-btn
+                        @click="solarReadonlyPanel = 1"
+                        class="w-50 universal-font-theme"
+                        :class="solarReadonlyPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'"
+                        :prepend-icon="solarReadonlyPanel == 1 ? 'mdi-transmission-tower' : 'mdi-transmission-tower'"
+                        variant="flat"
+                        :ripple="false"
+                    >
+                        Energy
+                    </v-btn>
+                </div>
+
                 <v-expansion-panels variant="accordion">
                     <v-expansion-panel elevation="0">
                         <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">

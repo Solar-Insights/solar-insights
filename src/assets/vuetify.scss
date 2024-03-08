@@ -1,32 +1,7 @@
-/*
-    Google Map
-*/
-#map {
-}
-
-/*
-    Search bar and its parent
-*/
-#autocomplete-search {
-    font-size: 15px;
-    text-overflow: ellipsis;
-    border: none !important;
-    height: 30px !important;
-}
-#parent-search {
-}
-
-/*
-    Basic button attributes
-*/
 .v-btn {
     text-transform: none;
     font-weight: normal;
 }
-
-/*
-    Main Panel
-*/
 
 #expansion-panel-second-layer .v-expansion-panel-text__wrapper {
     padding-left: 0 !important;
@@ -43,4 +18,16 @@
 
 .v-label {
     opacity: 1;
+}
+
+.v-field__input {
+    height: 40px !important;
+    max-height: 40px !important;
+    min-height: 40px !important;
+}
+
+.v-field {
+    height: 40px !important;
+    max-height: 40px !important;
+    min-height: 40px !important;
 }

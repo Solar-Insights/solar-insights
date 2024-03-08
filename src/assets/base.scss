@@ -44,8 +44,6 @@ $scrollbars: #555;
 */
 .autocomplete-container {
     @extend .mx-4;
-    flex-shrink: 1;
-    flex-grow: 0;
 }
 .autocomplete-search {
 }
@@ -55,8 +53,8 @@ $scrollbars: #555;
 }
 .autocomplete-search-computer {
     @extend .autocomplete-search;
-    @extend .w-100;
-    @extend .my-6;
+    @extend .my-3;
+    @extend .mx-4;
 }
 
 /*
@@ -128,6 +126,7 @@ $scrollbars: #555;
     @extend .mx-2;
     @extend .pa-2;
     @extend .pb-0;
+    @extend .h-100;
     overflow-x: hidden;
     overflow-y: scroll;
 }

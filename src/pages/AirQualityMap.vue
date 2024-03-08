@@ -1,23 +1,22 @@
 <template>
     <div class="d-flex" style="height: 100vh">
         <v-card id="map-details" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
-            <v-card-title class="map-title"> <v-icon class="mr-2">mdi-weather-windy</v-icon> Air Quality </v-card-title>
+            <v-card-title class="map-title"> 
+                <v-icon class="mr-2">mdi-weather-windy</v-icon> Air Quality 
+            </v-card-title>
 
-            <v-row class="autocomplete-container">
-                <v-text-field
-                    v-model="autocompleteValue"
-                    @keypress.enter="prepareHandlerEnterKeyOnSearchBar"
-                    id="autocomplete-search"
-                    :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
-                    placeholder="Find a location"
-                    hide-details
-                    variant="outlined"
-                    prepend-inner-icon="mdi-google-maps"
-                >
-                </v-text-field>
-            </v-row>
+            <v-text-field
+                v-model="autocompleteValue"
+                @keypress.enter="prepareHandlerEnterKeyOnSearchBar"
+                id="autocomplete-search"
+                :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
+                placeholder="Find a location"
+                hide-details
+                variant="outlined"
+                prepend-inner-icon="mdi-google-maps"
+            />
 
-            <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'mt-0 pt-0 map-data-computer'">
+            <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
                 <div v-if="Object.keys(airQualityDataDisplayed).length" class="text-center">
                     <div class="mt-3 mb-8">
                         <div class="mb-2">
@@ -52,7 +51,7 @@
                     <div class="mb-4">
                         <v-btn
                             @click="airQualityPanel = 0"
-                            class="w-50 h-100 py-4 universal-font-theme"
+                            class="w-50 universal-font-theme"
                             :class="airQualityPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'"
                             :prepend-icon="airQualityPanel == 0 ? 'mdi-alert' : 'mdi-alert-outline'"
                             variant="flat"
@@ -62,7 +61,7 @@
                         </v-btn>
                         <v-btn
                             @click="airQualityPanel = 1"
-                            class="w-50 h-100 py-4 universal-font-theme"
+                            class="w-50 universal-font-theme"
                             :class="airQualityPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'"
                             :prepend-icon="airQualityPanel == 1 ? 'mdi-heart' : 'mdi-heart-outline'"
                             variant="flat"
