@@ -6,8 +6,10 @@
                     @click="toggle"
                     class="mx-2 my-2"
                     :class="isSelected ? 'button-selection-background' : 'button-non-selection-background'"
+                    style="border: 1px solid rgba(129, 129, 129, 0.5)"
                     icon
                     density="comfortable"
+                    
                 >
                     <v-icon :class="isSelected ? 'icon-selection-color' : 'icon-non-selection-color'">{{
                         group.icon

@@ -7,11 +7,11 @@
                 :class="isHovering ? 'hovering-over-card-style' : 'not-hovering-over-card-style'"
                 :elevation="isHovering ? 4 : 0"
             >
-                <div class="d-flex emphasis" :class="isHovering ? 'text-theme' : ''">
+                <div class="d-flex">
                     <div class="me-auto">
                         {{ pollutant.displayName }}
                     </div>
-                    <div>{{ pollutant.concentration.value }} {{ concentrationMap[pollutant.concentration.units] }}</div>
+                    <div :class="isHovering ? 'text-theme' : ''">{{ pollutant.concentration.value }} {{ concentrationMap[pollutant.concentration.units] }}</div>
                 </div>
 
                 <div class="d-flex detail-text">
@@ -32,21 +32,21 @@
                             close-on-content-click
                             :persistent="false"
                         >
-                            <div class="section-title">Effects</div>
+                            <div class="mb-1 emphasis">Effects</div>
                             <p>
                                 {{ pollutant.additionalInfo.effects }}
                             </p>
 
                             <v-divider class="my-3" />
 
-                            <div class="section-title">Sources</div>
+                            <div class="mb-1 emphasis">Sources</div>
                             <p>
                                 {{ pollutant.additionalInfo.sources }}
                             </p>
 
                             <v-divider class="my-3" />
 
-                            <div class="section-title">Solutions</div>
+                            <div class="mb-1 emphasis">Solutions</div>
                             <p>
                                 {{ pollutantsConstantsObject[pollutant.code].solution }}
                             </p>

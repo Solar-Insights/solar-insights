@@ -9,7 +9,7 @@
                 <v-icon class="mr-3" color="theme">mdi-home-outline</v-icon>
                 <div class="my-auto">Building Attributes</div>
             </div>
-            <v-divider style="border-width: 2px;"/>
+            <v-divider/>
         </v-card-title>
 
         <div class="mb-5">

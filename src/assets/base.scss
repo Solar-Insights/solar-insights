@@ -189,5 +189,9 @@ $scrollbars: #555;
 }
 
 .not-hovering-over-card-style {
-    border: 2px solid #d6d4d4;
+    border: 1px solid rgba(129, 129, 129, 0.5);
+}
+
+.v-divider {
+    border-width: 1.5px;
 }

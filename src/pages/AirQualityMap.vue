@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex" style="height: 100vh">
-        <v-card id="map-details" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
+        <v-card id="map-details" class="rounded-0" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
             <map-header :coord="coordRef" @sync-with-new-request="syncWithNewRequest"/>
 
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
@@ -39,9 +39,9 @@
                         <v-btn
                             @click="airQualityPanel = 0"
                             class="w-50 universal-font-theme"
-                            :class="airQualityPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'"
+                            :class="airQualityPanel == 0 ? 'button-selection-border' : ''"
                             :prepend-icon="airQualityPanel == 0 ? 'mdi-alert' : 'mdi-alert-outline'"
-                            variant="flat"
+                            variant="outlined"
                             :ripple="false"
                         >
                             Pollutants
@@ -49,9 +49,9 @@
                         <v-btn
                             @click="airQualityPanel = 1"
                             class="w-50 universal-font-theme"
-                            :class="airQualityPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'"
+                            :class="airQualityPanel == 1 ? 'button-selection-border' : ''"
                             :prepend-icon="airQualityPanel == 1 ? 'mdi-heart' : 'mdi-heart-outline'"
-                            variant="flat"
+                            variant="outlined"
                             :ripple="false"
                         >
                             Health
@@ -86,7 +86,6 @@ import { pollutants, circularBarColorSelector } from "@/helpers/constants";
 import { initMapComponents, initMarker } from "@/helpers/util";
 // Server
 import { getAirQualityData } from "@/server/air";
-import { getReverseGeocoding } from "@/server/geo";
 // Components
 import PollutantTab from "@/components/air_quality/PollutantTab.vue";
 import HealthTab from "@/components/air_quality/HealthTab.vue";
@@ -103,7 +102,6 @@ const coordRef: LatLng = { lat: 46.811943, lng: -71.205002 };
 onMounted(async () => {
     const coord: LatLng = { lat: 46.811943, lng: -71.205002 };
     ({ map, marker } = await initMapComponents(coord, "AIR_QUALITY"));
-    // await initListeners();
 });
 
 async function syncWithNewRequest(newCoord: LatLng, formattedAddress: string) {
@@ -119,27 +117,4 @@ async function syncWithNewRequest(newCoord: LatLng, formattedAddress: string) {
             // DO_SOMETHING
         });
 }
-
-// async function initListeners() {
-//     await setDblClickListenerToMap();
-// }
-
-// async function setDblClickListenerToMap() {
-//     map.addListener("dblclick", async (mouseEvent: any) => {
-//         const newCoord: LatLng = {
-//             lat: mouseEvent.latLng.lat(),
-//             lng: mouseEvent.latLng.lng()
-//         };
-
-//         const formattedAddress = await getReverseGeocoding(newCoord)
-//             .then((address: string) => {
-//                 return address;
-//             })
-//             .catch((error) => {
-//                 return ""; // DO_SOMETHING
-//             });
-
-//         formattedAddress === "" ? true : await syncWithNewRequest(newCoord, formattedAddress);
-//     });
-// }
 </script>
