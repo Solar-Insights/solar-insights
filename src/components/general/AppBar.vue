@@ -1,20 +1,28 @@
 <template>
     <div v-if="shouldBeVisibleOnRoute">
-        <v-toolbar-items class="pl-8" style="height: 50px;">
+        <v-toolbar>
             <v-app-bar-nav-icon 
                 class="hidden-sm-and-up" 
                 variant="text" 
                 @click.stop="drawer = !drawer"
             />
+            
+            <v-spacer/>
 
-            <v-btn 
-                class="hidden-xs"
-                v-for="route in routes"
-                :to="{ name: route.routeName }"
-            >
-                {{ route.displayedName }}
-            </v-btn>
-        </v-toolbar-items>
+            <v-toolbar-items class="hidden-xs">
+                    
+                    <v-btn
+                        v-for="route in routes"
+                        :to="{ name: route.routeName }"
+                        style="width: 100px;"
+                    >
+                        {{ route.displayedName }}
+                    </v-btn>
+            </v-toolbar-items>
+
+            <v-spacer/>
+        </v-toolbar>
+        
 
         <v-navigation-drawer v-model="drawer" class="hidden-sm-and-up" disable-resize-watcher>
             <v-list>
