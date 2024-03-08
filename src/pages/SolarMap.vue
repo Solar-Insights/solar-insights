@@ -1,24 +1,7 @@
 <template>
     <div class="d-flex" style="height: 100vh">
         <v-card id="map-details" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
-
-            <v-breadcrumbs :items="[ { title: 'Home', disabled: false, to: { name: 'home' } }, { title: 'Solar', disabled: true, to: { name: 'solar-map' } },]">
-            </v-breadcrumbs>
-
-            <v-card-title class="map-title">
-                <v-icon class="mr-2">mdi-weather-sunny</v-icon> Solar Potential
-            </v-card-title>
-
-            <v-text-field
-                v-model="autocompleteValue"
-                @keypress.enter="prepareHandlerEnterKeyOnSearchBar"
-                id="autocomplete-search"
-                :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
-                placeholder="Find a location"
-                hide-details
-                variant="outlined"
-                prepend-inner-icon="mdi-google-maps"
-            />
+            <map-header :coord="coordRef" @sync-with-new-request="syncWithNewRequest"/>
 
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
                 <div class="mb-4">
@@ -409,26 +392,21 @@
 <script setup lang="ts">
 // Vue
 import { onMounted, ref, watch } from "vue";
-import { useUserSessionStore } from "@/stores/userSessionStore";
 // Helpers
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, SolarLayers, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
 import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solarMath";
-import { AutocompleteInputError } from "@/helpers/customErrors";
 import { TimeParameters, UserSolarData } from "@/helpers/types";
 import { panelsPalette, monthCodes, hourCodes } from "@/helpers/constants";
-import { initMapComponents, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
+import { initMapComponents } from "@/helpers/util";
 import { rgbToColor, createPalette, getSingleLayer } from "@/helpers/solar";
 // Server
 import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
-import { getGeocoding, getReverseGeocoding } from "@/server/geo";
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
+import MapHeader from "@/components/general/MapHeader.vue";
 
-const userSessionStore = useUserSessionStore();
-
-const autocompleteValue = ref<string | null>("");
 const solarReadonlyPanel = ref(0);
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
@@ -472,24 +450,16 @@ const userSolarData = ref<UserSolarData>({
 });
 
 let map: google.maps.Map;
-let autocomplete: google.maps.places.Autocomplete;
 let geometryLibrary: google.maps.GeometryLibrary;
+
+const coordRef = ref<LatLng>({lat: 46.81701, lng: -71.36838});
 
 onMounted(async () => {
     const coord: LatLng = { lat: 46.81701, lng: -71.36838 };
-    ({ map, autocomplete } = await initMapComponents(coord, "SOLAR"));
-
-    const formattedAddress = await getReverseGeocoding(coord)
-        .then((address: string) => {
-            return address;
-        })
-        .catch((error) => {
-            return ""; // DO_SOMETHING
-        });
+    ({ map } = await initMapComponents(coord, "SOLAR"));
 
     geometryLibrary = (await google.maps.importLibrary("geometry")) as google.maps.GeometryLibrary;
-    await syncWithNewRequest(coord, formattedAddress);
-    await initListeners();
+
     setInterval(() => {
         handleTickChange();
     }, 1000);
@@ -549,39 +519,7 @@ watch(
     }
 );
 
-let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events (arrow keydown + enter), prevent first one from sending request
-
-async function initListeners() {
-    await setPlaceChangedOnAutocompleteListener();
-}
-
-async function setPlaceChangedOnAutocompleteListener() {
-    autocomplete.addListener("place_changed", async () => {
-        const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
-        if (!newPlace || !newPlace.formatted_address) {
-            if (autocompleteAlreadyChanged) {
-                userSessionStore.setAlert(new AutocompleteInputError());
-                autocompleteAlreadyChanged = false;
-                return;
-            } else {
-                autocompleteAlreadyChanged = true;
-                return;
-            }
-        }
-
-        autocompleteAlreadyChanged = false;
-        await getGeocoding(newPlace.formatted_address)
-            .then(async (newCoord: LatLng) => {
-                await syncWithNewRequest(newCoord, newPlace.formatted_address!);
-            })
-            .catch((error) => {
-                autocompleteValue.value = "";
-            });
-    });
-}
-
 async function syncWithNewRequest(coord: LatLng, formattedAddress: string) {
-    autocompleteValue.value = formattedAddress;
     map.setCenter(coord);
 
     await getClosestBuildingInsights(coord)
