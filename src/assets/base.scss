@@ -61,7 +61,6 @@ $scrollbars: #555;
     Map components
 */
 .map-details {
-    @extend .bg-white;
 }
 .map-details-mobile {
     @extend .map-details;
