@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex" style="height: 100vh">
+    <div class="d-flex">
         <v-card id="map-details" class="rounded-0" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
             <map-header :coord="coordRef" @sync-with-new-request="syncWithNewRequest"/>
 
@@ -23,7 +23,7 @@
                         variant="outlined"
                         :ripple="false"
                     >
-                        Energy
+                        Insights
                     </v-btn>
                 </div>
 
@@ -351,7 +351,7 @@
                 :buildingInsights="buildingInsights"
                 :userSolarData="userSolarData"
             />
-            <EnergyReadonlyPanel
+            <InsightsReadonlyPanel
                 v-if="solarReadonlyPanel == 1"
                 :buildingInsights="buildingInsights"
                 :userSolarData="userSolarData"
@@ -375,7 +375,7 @@ import { rgbToColor, createPalette, getSingleLayer } from "@/helpers/solar";
 import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
-import EnergyReadonlyPanel from "@/components/solar/EnergyReadonlyPanel.vue";
+import InsightsReadonlyPanel from "@/components/solar/InsightsReadonlyPanel.vue";
 import MapHeader from "@/components/general/MapHeader.vue";
 
 const solarReadonlyPanel = ref(0);

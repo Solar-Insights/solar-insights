@@ -4,12 +4,12 @@
         :class="$vuetify.display.xs ? 'map-readonly-data-mobile' : 'map-readonly-data-computer'"
         elevation="8"
     >
-        <v-card-title class="section-title pl-0 mb-4">
+        <v-card-title class="text-center font-weight-regular pl-0 mb-4">
             <div class="d-flex mb-3">
                 <v-icon class="mr-3" color="theme">mdi-home-outline</v-icon>
                 <div class="my-auto">Building Attributes</div>
             </div>
-            <v-divider style="border: 1px solid black" />
+            <v-divider style="border-width: 2px;"/>
         </v-card-title>
 
         <div class="mb-5">

@@ -1,4 +1,5 @@
 .v-btn {
+    @extend .universal-font-theme;
     text-transform: none;
     font-weight: normal;
 }

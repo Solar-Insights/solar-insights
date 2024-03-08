@@ -75,7 +75,6 @@ $scrollbars: #555;
 }
 
 .map-readonly-data {
-    background-color: $bg-whitey;
 }
 .map-readonly-data-mobile {
     @extend .map-readonly-data;
@@ -84,7 +83,8 @@ $scrollbars: #555;
     @extend .map-readonly-data;
     @extend .ma-3;
     @extend .pa-4;
-    width: 350px;
+    max-height: 85%;
+    width: 400px;
     position: absolute;
     top: 0;
     right: 0;
