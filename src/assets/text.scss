@@ -22,13 +22,6 @@ $text-emphasis: #535353;
 /*
     To use in .vue files
 */
-.map-title {
-    @extend .text-center;
-    @extend .font-weight-regular;
-    @extend .mb-2;
-    @extend .mt-4;
-}
-
 .section-title {
     @extend .emphasis;
     @extend .mb-2;
