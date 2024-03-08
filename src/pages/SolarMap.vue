@@ -1,26 +1,26 @@
 <template>
     <div class="d-flex" style="height: 100vh">
-        <v-card id="map-details" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
+        <v-card id="map-details" class="rounded-0" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
             <map-header :coord="coordRef" @sync-with-new-request="syncWithNewRequest"/>
 
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
                 <div class="mb-4">
                     <v-btn
                         @click="solarReadonlyPanel = 0"
-                        class="w-50 universal-font-theme"
-                        :class="solarReadonlyPanel == 0 ? 'button-selection-border' : 'button-non-selection-border'"
+                        class="w-50"
+                        :class="solarReadonlyPanel == 0 ? 'button-selection-border' : ''"
                         :prepend-icon="solarReadonlyPanel == 0 ? 'mdi-home' : 'mdi-home-outline'"
-                        variant="flat"
+                        variant="outlined"
                         :ripple="false"
                     >
                         Building
                     </v-btn>
                     <v-btn
                         @click="solarReadonlyPanel = 1"
-                        class="w-50 universal-font-theme"
-                        :class="solarReadonlyPanel == 1 ? 'button-selection-border' : 'button-non-selection-border'"
+                        class="w-50"
+                        :class="solarReadonlyPanel == 1 ? 'button-selection-border' : ''"
                         :prepend-icon="solarReadonlyPanel == 1 ? 'mdi-transmission-tower' : 'mdi-transmission-tower'"
-                        variant="flat"
+                        variant="outlined"
                         :ripple="false"
                     >
                         Energy
@@ -30,10 +30,7 @@
                 <v-expansion-panels variant="accordion">
                     <v-expansion-panel elevation="0">
                         <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
-                            <div class="section-title d-flex">
-                                <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon>
-                                <div class="my-auto">Panels</div>
-                            </div>
+                            <v-icon class="mr-3">mdi-solar-power-variant-outline</v-icon> <span class="my-auto"> Panels </span>
                         </v-expansion-panel-title>
 
                         <v-expansion-panel-text>
@@ -44,9 +41,8 @@
 
                             <div>
                                 <div class="d-flex">
-                                    <v-icon class="mr-3" color="theme">mdi-numeric</v-icon>
-                                    <div class="me-auto subsection-title">Count</div>
-                                    <div class="text-right">
+                                    <span class="me-auto"> Count </span>
+                                    <span class="text-right">
                                         {{
                                             buildingInsights.solarPotential === undefined
                                                 ? 0
@@ -55,7 +51,7 @@
                                                   ].panelsCount
                                         }}
                                         / {{ userSolarData.maxPanelCount }} panels
-                                    </div>
+                                    </span>
                                 </div>
                                 <v-slider
                                     v-model="mapSettings.configIdIndex"
@@ -134,23 +130,16 @@
 
                     <v-expansion-panel elevation="0">
                         <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
-                            <div class="section-title d-flex">
-                                <v-icon class="mr-3">mdi-battery-charging-20</v-icon>
-                                <div class="my-auto">Solar Analysis</div>
-                            </div>
+                            <v-icon class="mr-3">mdi-cash</v-icon> <span class="my-auto"> Costs and Incentives </span>
                         </v-expansion-panel-title>
 
                         <v-expansion-panel-text>
                             <div class="detail-text mb-3">
-                                Solar analysis is used to evaluate the financial benefits of solar panels for a specific
+                                Costs and incentives are used to evaluate the financial benefits of solar panels for a specific
                                 building
                             </div>
 
                             <div>
-                                <div class="d-flex mb-2">
-                                    <v-icon class="mr-3" color="theme">mdi-cash</v-icon>
-                                    <div class="my-auto me-auto subsection-title">Costs and Incentives</div>
-                                </div>
                                 <v-text-field
                                     v-model="userSolarData.averageMonthlyEnergyBill"
                                     label="Average monthly energy cost"
@@ -248,10 +237,7 @@
 
                     <v-expansion-panel elevation="0">
                         <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
-                            <div class="section-title d-flex">
-                                <v-icon class="mr-3">mdi-cog-outline</v-icon>
-                                <div class="my-auto">Settings</div>
-                            </div>
+                            <v-icon class="mr-3">mdi-cog-outline</v-icon> <span class="my-auto"> Settings </span>
                         </v-expansion-panel-title>
 
                         <v-expansion-panel-text>
@@ -260,11 +246,6 @@
                             </div>
 
                             <div>
-                                <div class="d-flex mb-2">
-                                    <v-icon class="mr-3" color="theme">mdi-weather-sunny</v-icon>
-                                    <div class="my-auto me-auto subsection-title">Solar data</div>
-                                </div>
-
                                 <v-select
                                     v-model="mapSettings.layerId"
                                     item-title="displayedName"
@@ -278,23 +259,12 @@
                                 >
                                 </v-select>
 
-                                <v-text-field
-                                    v-model="userSolarData.averageMonthlyEnergyBill"
-                                    label="Average monthly energy cost"
-                                    density="compact"
-                                    variant="outlined"
-                                    color="theme"
-                                    type="number"
-                                    prepend-inner-icon="mdi-calendar-month-outline"
-                                >
-                                    <template v-slot:append-inner> $ </template>
-                                </v-text-field>
-
                                 <v-switch v-model="mapSettings.showPanels" inset color="theme" density="compact">
                                     <template v-slot:label>
                                         <span class="ml-4"> Display panels </span>
                                     </template>
                                 </v-switch>
+
                                 <v-switch
                                     v-model="mapSettings.showHeatmap"
                                     inset
@@ -306,6 +276,7 @@
                                         <span class="ml-4"> Display heatmap </span>
                                     </template>
                                 </v-switch>
+
                                 <v-switch
                                     v-model="mapSettings.heatmapAnimation"
                                     inset
