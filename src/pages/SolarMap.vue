@@ -1,6 +1,10 @@
 <template>
     <div class="d-flex" style="height: 100vh">
         <v-card id="map-details" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
+
+            <v-breadcrumbs :items="[ { title: 'Home', disabled: false, to: { name: 'home' } }, { title: 'Solar', disabled: true, to: { name: 'solar-map' } },]">
+            </v-breadcrumbs>
+
             <v-card-title class="map-title">
                 <v-icon class="mr-2">mdi-weather-sunny</v-icon> Solar Potential
             </v-card-title>

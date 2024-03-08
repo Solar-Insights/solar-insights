@@ -3,7 +3,7 @@
         <app-bar/>
         <v-main>
             <v-container class="app-container" fluid>
-                <alert-component/>
+                <alert/>
                 <router-view :key="$route.fullPath"></router-view>
             </v-container>
         </v-main>
@@ -12,8 +12,8 @@
 
 <script setup lang="ts">
 // Components
-import AlertComponent from "@/components/util/AlertComponent.vue";
-import AppBar from "@/components/util/AppBar.vue";
+import Alert from "@/components/general/Alert.vue";
+import AppBar from "@/components/general/AppBar.vue";
 // Style
 import { useTheme } from "vuetify";
 
