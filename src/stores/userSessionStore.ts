@@ -5,7 +5,8 @@ import { VueError } from "@/helpers/customErrors";
 export const useUserSessionStore = defineStore("userSessionStore", {
     state: () => ({
         displayAlert: false,
-        alert: new VueError()
+        alert: new VueError(),
+        theme: "light"
     }),
 
     actions: {
@@ -17,6 +18,16 @@ export const useUserSessionStore = defineStore("userSessionStore", {
         setAlert(alert: VueError) {
             this.alert = alert;
             this.displayAlert = true;
+        },
+        
+        changeTheme() {
+            if (this.theme === "light") {
+                this.theme = "dark";
+            } else {
+                this.theme = "light";
+            }
         }
-    }
+    },
+
+    persist: true,
 });

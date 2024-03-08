@@ -1,5 +1,6 @@
 <template>
-    <v-app>
+    <v-app :theme="theme">
+        <theme-changer/>
         <app-bar/>
         <v-main>
             <v-container class="app-container" fluid>
@@ -11,12 +12,16 @@
 </template>
 
 <script setup lang="ts">
+// Vue 
+import { storeToRefs } from "pinia";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 // Components
 import Alert from "@/components/general/Alert.vue";
 import AppBar from "@/components/general/AppBar.vue";
-// Style
-import { useTheme } from "vuetify";
+import ThemeChanger from "@/components/general/ThemeChanger.vue";
 
-const theme = useTheme();
+const userSessionStore = useUserSessionStore();
+
+const { theme } = storeToRefs(userSessionStore);
 
 </script>
