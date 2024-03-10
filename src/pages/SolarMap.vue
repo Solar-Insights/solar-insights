@@ -376,6 +376,7 @@ import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import InsightsReadonlyPanel from "@/components/solar/InsightsReadonlyPanel.vue";
 import MapHeader from "@/components/general/MapHeader.vue";
+import TimeParam from "@/components/solar/TimeParam.vue";
 
 const solarReadonlyPanel = ref(0);
 const advancedSettingsPanels = ref([] as string[]);
