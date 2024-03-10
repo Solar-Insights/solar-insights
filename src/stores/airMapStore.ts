@@ -10,10 +10,8 @@ import { getAirQualityData } from "@/server/air";
 export const useAirMapStore = defineStore("airMapStore", {
     state: () => ({
         airQualityData: {} as AirQualityData,
-
         map: {} as google.maps.Map,
         marker: {} as google.maps.Marker,
-        geometryLibrary: google.maps.importLibrary("geometry") as Promise<google.maps.GeometryLibrary>,
         centerCoord: { lat: 46.811943, lng: -71.205002 } as LatLng
     }),
 
