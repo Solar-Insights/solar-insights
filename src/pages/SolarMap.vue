@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex">
         <v-card id="map-details" class="rounded-0" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
-            <map-header :coord="coordRef" @sync-with-new-request="syncWithNewRequest"/>
+            <map-header :coord="coord" @sync-with-new-request="syncWithNewRequest"/>
 
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
                 <div class="mb-4">
@@ -370,7 +370,7 @@ import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, norma
 import { TimeParameters, UserSolarData } from "@/helpers/types";
 import { panelsPalette, monthCodes, hourCodes } from "@/helpers/constants";
 import { initMapComponents } from "@/helpers/util";
-import { rgbToColor, createPalette, getSingleLayer } from "@/helpers/solar";
+import { rgbToColor, createPalette, getSingleLayer, makeDefaultUserSolarDataObject, makeDefaultMapSettings } from "@/helpers/solar";
 // Server
 import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
 // Components
@@ -388,46 +388,18 @@ const timeParams = ref<TimeParameters>({
     day: 1,
     hour: 0
 });
-const mapSettings = ref<MapSettings>({
-    layerId: "annualFlux",
-    layerIdChoices: [
-        { name: "annualFlux", displayedName: "Annual" },
-        { name: "monthlyFlux", displayedName: "Monthly" },
-        { name: "hourlyShade", displayedName: "Daily" }
-    ],
-    showPanels: true,
-    showHeatmap: true,
-    heatmapAnimation: true,
-    configIdIndex: 0
-});
 
 const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
-const userSolarData = ref<UserSolarData>({
-    panelCount: 0,
-    minPanelCount: 0,
-    maxPanelCount: 1,
-    panelCapacityWatts: 350,
-    defaultPanelCapacityWatts: 350,
-    installationCostPerWatt: 4.0,
-    yearlyEnergyDcKwh: 0,
-    dcToAcDerate: 85,
-    averageMonthlyEnergyBill: 300,
-    energyCostPerKwh: 0.31,
-    solarIncentives: 7000,
-    yearlyPanelEfficiencyDecline: 0.5,
-    yearlyEnergyCostIncrease: 2.2,
-    yearlyDiscountRate: 4,
-    installationLifespan: 25
-});
+const userSolarData = ref<UserSolarData>(makeDefaultUserSolarDataObject());
+const mapSettings = ref<MapSettings>(makeDefaultMapSettings());
 
 let map: google.maps.Map;
 let geometryLibrary: google.maps.GeometryLibrary;
 
-const coordRef = ref<LatLng>({lat: 46.81701, lng: -71.36838});
+const coord = ref<LatLng>({lat: 46.81701, lng: -71.36838});
 
 onMounted(async () => {
-    const coord: LatLng = { lat: 46.81701, lng: -71.36838 };
-    ({ map } = await initMapComponents(coord, "SOLAR"));
+    ({ map } = await initMapComponents(coord.value, "SOLAR"));
 
     geometryLibrary = (await google.maps.importLibrary("geometry")) as google.maps.GeometryLibrary;
 
