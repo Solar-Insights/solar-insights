@@ -1,5 +1,5 @@
 <template>
-    <template v-for="(pollutant, i) in pollutants" :key="i">
+    <template v-for="(pollutant, i) in airQualityData.pollutants" :key="i">
         <v-hover v-slot="{ isHovering, props }" open-delay="100">
             <v-card
                 v-bind="props"
@@ -61,17 +61,15 @@
 <script setup lang="ts">
 // Vue
 import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useAirMapStore } from "@/stores/airMapStore";
 // Helpers
-import { AirPollutant, Unit } from "geo-env-typing/air";
+import { Unit } from "geo-env-typing/air";
 import { pollutants as pollutantsConstants } from "@/helpers/constants";
 
-const props = defineProps({
-    pollutants: {
-        type: Array<AirPollutant>,
-        required: true,
-        default: []
-    }
-});
+const airMapStore = useAirMapStore();
+
+const { airQualityData } = storeToRefs(airMapStore);
 
 const pollutantsConstantsObject = ref(pollutantsConstants);
 
