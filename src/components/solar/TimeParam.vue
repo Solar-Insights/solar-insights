@@ -49,26 +49,16 @@
 // Vue
 import { PropType, onMounted, ref, watch } from "vue";
 // Helpers
-import { LatLng } from "geo-env-typing/geo";
-import { BuildingInsights, SolarLayers, Layer, SolarPanelConfig, MapSettings, LayerId } from "geo-env-typing/solar";
-import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solarMath";
-import { TimeParameters, UserSolarData } from "@/helpers/types";
-import { panelsPalette, monthCodes, hourCodes } from "@/helpers/constants";
-import { initMapComponents } from "@/helpers/util";
-import { rgbToColor, createPalette, getSingleLayer, makeDefaultUserSolarDataObject, makeDefaultMapSettings } from "@/helpers/solar";
-// Server
-import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
-// Components
-import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
-import InsightsReadonlyPanel from "@/components/solar/InsightsReadonlyPanel.vue";
-import MapHeader from "@/components/general/MapHeader.vue";
+import { Layer, MapSettings } from "geo-env-typing/solar";
+import { TimeParameters } from "@/helpers/types";
+import { monthCodes, hourCodes } from "@/helpers/constants";
+import { makeDefaultMapSettings, makeDefaultTimeParams } from "@/helpers/solar";
 
-const emits = defineEmits(["displayMonthlyFlux", "displayHourlyShade", "currentlySliding", "notCurrentlySliding"]);
+const emits = defineEmits(["updateTimeParams", "displayMonthlyFlux", "displayHourlyShade", "currentlySliding", "notCurrentlySliding"]);
 
 const props = defineProps({
     layer: {
         type: Object as PropType<Layer>,
-        required: true,
         default: undefined
     },
     mapSettings: {
@@ -83,12 +73,7 @@ const props = defineProps({
     }
 });
 
-const timeParams = ref<TimeParameters>({
-    tick: 0,
-    month: 0,
-    day: 1,
-    hour: 0
-});
+const timeParams = ref<TimeParameters>(makeDefaultTimeParams());
 
 onMounted(async () => {
     setInterval(() => {
@@ -116,6 +101,8 @@ function handleTickChange() {
     ) {
         timeParams.value.hour = (timeParams.value.hour + 1) % 24;
     }
+
+    emits("updateTimeParams", timeParams.value.tick, timeParams.value.month, timeParams.value.day, timeParams.value.hour)
 }
 
 watch(

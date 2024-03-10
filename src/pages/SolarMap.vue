@@ -299,50 +299,16 @@
 
         <div id="map" class="w-100"></div>
 
-        <v-slider
-            v-if="mapSettings.layerId === 'monthlyFlux'"
-            v-model="timeParams.month"
-            @start="currentlySliding = true"
-            @end="
-                currentlySliding = false;
-                timeParams.tick = timeParams.month;
-            "
-            :min="0"
-            :max="11"
-            step="1"
-            hide-details
-            color="theme"
-            :class="$vuetify.display.xs ? 'time-slider-mobile' : 'time-slider-computer'"
-            rounded
-        >
-            <template v-slot:append>
-                <div class="ml-1" style="width: 50px">
-                    {{ monthCodes[timeParams.month] }}
-                </div>
-            </template>
-        </v-slider>
-
-        <v-slider
-            v-if="mapSettings.layerId === 'hourlyShade'"
-            v-model="timeParams.hour"
-            @start="currentlySliding = true"
-            @end="
-                currentlySliding = false;
-                timeParams.tick = timeParams.hour;
-            "
-            :min="0"
-            :max="23"
-            step="1"
-            hide-details
-            color="theme"
-            :class="$vuetify.display.xs ? 'time-slider-mobile' : 'time-slider-computer'"
-        >
-            <template v-slot:append>
-                <div class="ml-1" style="width: 50px">
-                    {{ hourCodes[timeParams.hour] }}
-                </div>
-            </template>
-        </v-slider>
+        <time-param 
+            :layer="layer" 
+            :map-settings="mapSettings" 
+            :currently-sliding="currentlySliding"
+            @update-time-params="updateTimeParams"
+            @display-monthly-flux="displayMonthlyFlux()"
+            @display-hourly-shade="displayhourlyShade()"
+            @currently-sliding="currentlySliding = true"
+            @not-currently-sliding="currentlySliding = false"
+        />
 
         <div v-if="Object.keys(buildingInsights).length">
             <BuildingReadonlyPanel
@@ -367,9 +333,9 @@ import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, SolarLayers, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
 import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solarMath";
 import { TimeParameters, UserSolarData } from "@/helpers/types";
-import { panelsPalette, monthCodes, hourCodes } from "@/helpers/constants";
+import { panelsPalette } from "@/helpers/constants";
 import { initMapComponents } from "@/helpers/util";
-import { rgbToColor, createPalette, getSingleLayer, makeDefaultUserSolarDataObject, makeDefaultMapSettings } from "@/helpers/solar";
+import { rgbToColor, createPalette, getSingleLayer, makeDefaultUserSolarDataObject, makeDefaultMapSettings, makeDefaultTimeParams } from "@/helpers/solar";
 // Server
 import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
 // Components
@@ -382,12 +348,7 @@ const solarReadonlyPanel = ref(0);
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
 const currentlySliding = ref(false);
-const timeParams = ref<TimeParameters>({
-    tick: 0,
-    month: 0,
-    day: 1,
-    hour: 0
-});
+const timeParams = ref<TimeParameters>(makeDefaultTimeParams());
 
 const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
 const userSolarData = ref<UserSolarData>(makeDefaultUserSolarDataObject());
@@ -402,33 +363,7 @@ onMounted(async () => {
     ({ map } = await initMapComponents(coord.value, "SOLAR"));
 
     geometryLibrary = (await google.maps.importLibrary("geometry")) as google.maps.GeometryLibrary;
-
-    setInterval(() => {
-        handleTickChange();
-    }, 1000);
 });
-
-function handleTickChange() {
-    if (mapSettings.value.heatmapAnimation) {
-        timeParams.value.tick++;
-    }
-
-    if (
-        layer?.id === "monthlyFlux" &&
-        mapSettings.value.heatmapAnimation &&
-        mapSettings.value.showHeatmap &&
-        !currentlySliding.value
-    ) {
-        timeParams.value.month = (timeParams.value.month + 1) % 12;
-    } else if (
-        layer?.id === "hourlyShade" &&
-        mapSettings.value.heatmapAnimation &&
-        mapSettings.value.showHeatmap &&
-        !currentlySliding.value
-    ) {
-        timeParams.value.hour = (timeParams.value.hour + 1) % 24;
-    }
-}
 
 watch(
     () => mapSettings.value.showPanels,
@@ -448,17 +383,6 @@ watch(
     () => mapSettings.value.showHeatmap,
     async () => {
         mapSettings.value.showHeatmap ? await showDataLayer(true) : resetHeatmapLayer();
-    }
-);
-
-watch(
-    () => timeParams.value.tick,
-    () => {
-        if (layer?.id === "monthlyFlux" && mapSettings.value.showHeatmap) {
-            displayMonthlyFlux();
-        } else if (mapSettings.value.layerId === "hourlyShade" && mapSettings.value.showHeatmap) {
-            displayhourlyShade();
-        }
     }
 );
 
@@ -576,10 +500,11 @@ function addSolarPanelsToMap() {
 /*
     Heatmap layer
 */
+const layer = ref<Layer | undefined>(undefined);
 let dataLayersResponse: SolarLayers | null;
-let layer: Layer | undefined;
 let overlays: google.maps.GroundOverlay[] = [];
 let showRoofOnly = false;
+
 async function showDataLayer(reset: boolean = false) {
     if (reset) {
         resetDataLayer();
@@ -589,7 +514,7 @@ async function showDataLayer(reset: boolean = false) {
         return;
     }
 
-    if (!layer) {
+    if (!layer.value) {
         const center: LatLng = {
             lat: buildingInsights.value.center.latitude,
             lng: buildingInsights.value.center.longitude
@@ -604,7 +529,7 @@ async function showDataLayer(reset: boolean = false) {
 
         try {
             dataLayersResponse = await getSolarLayers(center, radius);
-            layer = await getSingleLayer(mapSettings.value.layerId, dataLayersResponse as SolarLayers);
+            layer.value = await getSingleLayer(mapSettings.value.layerId, dataLayersResponse as SolarLayers);
         } catch (error) {
             return;
         }
@@ -615,7 +540,7 @@ async function showDataLayer(reset: boolean = false) {
 
 function resetDataLayer() {
     dataLayersResponse = null;
-    layer = undefined;
+    layer.value = undefined;
 
     // Default values per layer.
     showRoofOnly = ["annualFlux", "monthlyFlux", "hourlyShade"].includes(mapSettings.value.layerId);
@@ -623,23 +548,23 @@ function resetDataLayer() {
 }
 
 function resetHeatmapLayer() {
-    if (!layer) {
+    if (!layer.value) {
         return;
     }
 
-    const bounds = layer.bounds;
+    const bounds = layer.value.bounds;
     overlays.map((overlay) => overlay.setMap(null));
     if (!mapSettings.value.showHeatmap) {
         return;
     }
 
-    overlays = layer
+    overlays = layer.value
         .render(showRoofOnly, timeParams.value.month, timeParams.value.day)
         .map((canvas) => new google.maps.GroundOverlay(canvas.toDataURL(), bounds));
 
-    if (layer.id === "monthlyFlux") {
+    if (layer.value.id === "monthlyFlux") {
         displayMonthlyFlux();
-    } else if (layer.id === "hourlyShade") {
+    } else if (layer.value.id === "hourlyShade") {
         displayhourlyShade();
     } else {
         overlays[0].setMap(map);
@@ -656,5 +581,12 @@ function displayhourlyShade() {
     if (mapSettings.value.showHeatmap) {
         overlays.map((overlay, i) => overlay.setMap(i == timeParams.value.hour ? map : null));
     }
+}
+
+function updateTimeParams(tick: number, month: number, day: number, hour: number) {
+    timeParams.value.tick = tick;
+    timeParams.value.month = month;
+    timeParams.value.day = day;
+    timeParams.value.hour = hour;
 }
 </script>
