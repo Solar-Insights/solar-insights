@@ -270,7 +270,6 @@
                                     inset
                                     color="theme"
                                     density="compact"
-                                    :disabled="!['monthlyFlux', 'hourlyShade'].includes(mapSettings.layerId)"
                                 >
                                     <template v-slot:label>
                                         <span class="ml-4"> Display heatmap </span>
@@ -604,11 +603,6 @@ async function showDataLayer(reset: boolean = false) {
 
         try {
             dataLayersResponse = await getSolarLayers(center, radius);
-        } catch (error) {
-            return;
-        }
-
-        try {
             layer = await getSingleLayer(mapSettings.value.layerId, dataLayersResponse as SolarLayers);
         } catch (error) {
             return;
