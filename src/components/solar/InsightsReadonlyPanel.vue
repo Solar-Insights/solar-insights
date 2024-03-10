@@ -47,7 +47,7 @@
         <div class="mb-5">
             <div>&nbsp</div>
             <div class="d-flex">
-                <div class="me-auto emphasis">Cost analysis for 25 years</div>
+                <div class="me-auto emphasis">Cost analysis for {{ userSolarData.installationLifespan }} years</div>
             </div>
         </div>
 
