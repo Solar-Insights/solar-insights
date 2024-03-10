@@ -1,5 +1,4 @@
 // Vue
-import { onMounted, ref, watch } from "vue";
 import { defineStore } from "pinia";
 // Helpers
 import { LatLng } from "geo-env-typing/geo";
@@ -10,11 +9,6 @@ import { panelsPalette } from "@/helpers/constants";
 import { rgbToColor, createPalette, makeDefaultUserSolarDataObject, makeDefaultMapSettings, makeDefaultTimeParams, getSingleLayer } from "@/helpers/solar";
 // Server
 import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
-// Components
-import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
-import InsightsReadonlyPanel from "@/components/solar/InsightsReadonlyPanel.vue";
-import MapHeader from "@/components/general/MapHeader.vue";
-import MapLayers from "@/components/solar/MapLayers.vue";
 
 export const useSolarMapStore = defineStore("solarMapStore", {
     state: () => ({
