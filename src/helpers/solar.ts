@@ -1,5 +1,5 @@
 import { LayerId, SolarLayers, Layer, GeoTiff, MapSettings, SolarDataType } from "geo-env-typing/solar";
-import { UserSolarData } from "@/helpers/types";
+import { TimeParameters, UserSolarData } from "@/helpers/types";
 import { GoogleCharts } from "google-charts";
 import {
     lerp,
@@ -316,4 +316,13 @@ export function makeDefaultMapSettings() {
         heatmapAnimation: DefaultSolarMapSettings.HEATMAP_ANIMATION,
         configIdIndex: DefaultSolarMapSettings.CONFIG_ID_INDEX
     } as MapSettings;
+}
+
+export function makeDefaultTimeParams() {
+    return {
+        tick: 0,
+        month: 0,
+        day: 1,
+        hour: 0
+    } as TimeParameters;
 }
