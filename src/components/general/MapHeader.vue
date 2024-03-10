@@ -117,6 +117,7 @@ async function setPlaceChangedOnAutocompleteListener() {
         autocompleteAlreadyChanged = false;
         await getGeocoding(newPlace.formatted_address)
             .then(async (newCoord: LatLng) => {
+                autocompleteValue.value = newPlace.formatted_address!;
                 emits("syncWithNewRequest", newCoord, newPlace.formatted_address);
             })
             .catch((error) => {
