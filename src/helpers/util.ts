@@ -81,7 +81,7 @@ export async function initMapComponents(coord: LatLng, mapType: MapType) {
 
     return {
         map: map,
-        marker: marker,
+        marker: marker
     } as MapElements;
 }
 
@@ -145,7 +145,7 @@ export function initMarker(coord: LatLng, map: google.maps.Map) {
 export async function initAutocomplete(): Promise<google.maps.places.Autocomplete> {
     const autocompleteElementId = "autocomplete-search";
     const { Autocomplete } = (await google.maps.importLibrary("places")) as google.maps.PlacesLibrary;
-    
+
     const input = document.getElementById(autocompleteElementId) as HTMLInputElement;
     const options = {};
 

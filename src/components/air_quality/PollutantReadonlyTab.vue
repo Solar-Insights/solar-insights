@@ -11,7 +11,9 @@
                     <div class="me-auto">
                         {{ pollutant.displayName }}
                     </div>
-                    <div :class="isHovering ? 'text-theme' : ''">{{ pollutant.concentration.value }} {{ concentrationMap[pollutant.concentration.units] }}</div>
+                    <div :class="isHovering ? 'text-theme' : ''">
+                        {{ pollutant.concentration.value }} {{ concentrationMap[pollutant.concentration.units] }}
+                    </div>
                 </div>
 
                 <div class="d-flex detail-text">

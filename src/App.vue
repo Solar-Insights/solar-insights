@@ -1,10 +1,10 @@
 <template>
     <v-app :theme="theme">
-        <theme-changer/>
-        <app-bar/>
+        <theme-changer />
+        <app-bar />
         <v-main>
             <v-container class="app-container" fluid>
-                <alert/>
+                <alert />
                 <router-view :key="$route.fullPath"></router-view>
             </v-container>
         </v-main>
@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-// Vue 
+// Vue
 import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 // Components
@@ -23,5 +23,4 @@ import ThemeChanger from "@/components/general/ThemeChanger.vue";
 const userSessionStore = useUserSessionStore();
 
 const { theme } = storeToRefs(userSessionStore);
-
 </script>

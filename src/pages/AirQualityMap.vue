@@ -1,9 +1,13 @@
 <template>
     <div class="d-flex" style="height: 100vh">
-        <v-card id="map-details" class="rounded-0" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
-            <map-header :coord="centerCoord" @sync-with-new-request="airMapStore.syncWithNewRequest"/>
+        <v-card
+            id="map-details"
+            class="rounded-0"
+            :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'"
+        >
+            <map-header :coord="centerCoord" @sync-with-new-request="airMapStore.syncWithNewRequest" />
 
-            <data-panel/>
+            <data-panel />
         </v-card>
 
         <div id="map" class="w-100"></div>

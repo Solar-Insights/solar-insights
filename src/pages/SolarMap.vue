@@ -1,18 +1,25 @@
 <template>
     <div class="d-flex">
-        <v-card id="map-details" class="rounded-0" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
-            <map-header :coord="centerCoord" @sync-with-new-request="solarMapStore.syncWithNewRequest"/>
+        <v-card
+            id="map-details"
+            class="rounded-0"
+            :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'"
+        >
+            <map-header :coord="centerCoord" @sync-with-new-request="solarMapStore.syncWithNewRequest" />
 
-            <data-panel @show-building-readonly-panel="solarReadonlyPanel = 0;" @show-insights-readonly-panel="solarReadonlyPanel = 1;"/>
+            <data-panel
+                @show-building-readonly-panel="solarReadonlyPanel = 0"
+                @show-insights-readonly-panel="solarReadonlyPanel = 1"
+            />
         </v-card>
 
-        <map-layers/>
+        <map-layers />
 
-        <time-param/>
+        <time-param />
 
         <div v-if="Object.keys(buildingInsights).length">
-            <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0"/>
-            <InsightsReadonlyPanel v-if="solarReadonlyPanel == 1"/>
+            <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" />
+            <InsightsReadonlyPanel v-if="solarReadonlyPanel == 1" />
         </div>
     </div>
 </template>

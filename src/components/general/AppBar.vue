@@ -1,47 +1,33 @@
 <template>
     <div v-if="shouldBeVisibleOnRoute">
         <v-toolbar>
-            <v-app-bar-nav-icon 
-                class="hidden-sm-and-up" 
-                variant="text" 
-                @click.stop="drawer = !drawer"
-            />
-            
-            <v-spacer/>
+            <v-app-bar-nav-icon class="hidden-sm-and-up" variant="text" @click.stop="drawer = !drawer" />
+
+            <v-spacer />
 
             <v-toolbar-items class="hidden-xs">
-                    
-                    <v-btn
-                        v-for="route in routes"
-                        :to="{ name: route.routeName }"
-                        style="width: 100px;"
-                    >
-                        {{ route.displayedName }}
-                    </v-btn>
+                <v-btn v-for="route in routes" :to="{ name: route.routeName }" style="width: 100px">
+                    {{ route.displayedName }}
+                </v-btn>
             </v-toolbar-items>
 
-            <v-spacer/>
+            <v-spacer />
         </v-toolbar>
-        
 
         <v-navigation-drawer v-model="drawer" class="hidden-sm-and-up" disable-resize-watcher>
             <v-list>
-                <v-list-item 
-                    v-for="route in routes"
-                    :to="{ name: route.routeName }"
-                    :prepend-icon="route.icon"
-                >
+                <v-list-item v-for="route in routes" :to="{ name: route.routeName }" :prepend-icon="route.icon">
                     {{ route.displayedName }}
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
     </div>
 </template>
-  
+
 <script setup lang="ts">
 // Vue
-import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed, ref } from "vue";
+import { useRoute } from "vue-router";
 
 const currentRoute = useRoute();
 const drawer = ref(false);
@@ -53,7 +39,7 @@ const routes = ref([
         displayedName: "Home",
         icon: "mdi-home",
         displaysAppBar: true
-    },    
+    },
     {
         routeName: "solar-map",
         displayedName: "Solar",
@@ -68,5 +54,5 @@ const routes = ref([
     }
 ]);
 
-const routeNamesDisplayingAppBar: (string | undefined)[] = [ "home" ];
+const routeNamesDisplayingAppBar: (string | undefined)[] = ["home"];
 </script>

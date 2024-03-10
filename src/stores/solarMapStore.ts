@@ -6,7 +6,14 @@ import { BuildingInsights, Layer, SolarPanelConfig, MapSettings, SolarLayers } f
 import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solarMath";
 import { TimeParameters, UserSolarData } from "@/helpers/types";
 import { panelsPalette } from "@/helpers/constants";
-import { rgbToColor, createPalette, makeDefaultUserSolarDataObject, makeDefaultMapSettings, makeDefaultTimeParams, getSingleLayer } from "@/helpers/solar";
+import {
+    rgbToColor,
+    createPalette,
+    makeDefaultUserSolarDataObject,
+    makeDefaultMapSettings,
+    makeDefaultTimeParams,
+    getSingleLayer
+} from "@/helpers/solar";
 // Server
 import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
 
@@ -33,14 +40,14 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             this.centerCoord = coord;
 
             await getClosestBuildingInsights(coord)
-                .then( async (data: BuildingInsights) => {
+                .then(async (data: BuildingInsights) => {
                     this.buildingInsights = data;
                     await this.showDataLayer(true);
                 })
                 .catch(() => {
                     // Handle error
                 });
-                
+
             this.syncTemplateVariableFollowingNewRequest();
             await this.syncMapWithNewRequest();
         },
@@ -49,20 +56,24 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             this.centerCoord = coord;
             this.map.setCenter(coord);
         },
-        
+
         syncTemplateVariableFollowingNewRequest() {
             this.userSolarData.minPanelCount = this.buildingInsights.solarPotential.solarPanelConfigs[0].panelsCount;
             this.userSolarData.defaultPanelCapacityWatts = this.buildingInsights.solarPotential.panelCapacityWatts;
             this.userSolarData.maxPanelCount =
-            this.buildingInsights.solarPotential.solarPanelConfigs [ this.buildingInsights.solarPotential.solarPanelConfigs.length - 1].panelsCount;
-        
+                this.buildingInsights.solarPotential.solarPanelConfigs[
+                    this.buildingInsights.solarPotential.solarPanelConfigs.length - 1
+                ].panelsCount;
+
             this.mapSettings.configIdIndex = this.getConfigIdForFullEnergyCoverage();
         },
 
         getConfigIdForFullEnergyCoverage() {
             for (let i = 0; i < this.buildingInsights.solarPotential.solarPanelConfigs.length; i++) {
                 if (
-                    this.buildingInsights.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh * panelCapacityRatioCalc(this.userSolarData) * dcToAcDerate(this.userSolarData) >=
+                    this.buildingInsights.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh *
+                        panelCapacityRatioCalc(this.userSolarData) *
+                        dcToAcDerate(this.userSolarData) >=
                     yearlyEnergyConsumptionKwh(this.userSolarData)
                 ) {
                     return i;
@@ -75,7 +86,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             if (this.buildingInsights == null) {
                 return;
             }
-            
+
             this.removeSolarPanelsFromMap();
             this.setNewPanelConfig();
             this.addSolarPanelsToMap();
@@ -85,13 +96,13 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             this.solarPanels.map((panel) => panel.setMap(null));
             this.solarPanels = [];
         },
-        
+
         async setNewPanelConfig() {
             this.panelConfig = this.buildingInsights.solarPotential.solarPanelConfigs[this.mapSettings.configIdIndex];
             this.userSolarData.yearlyEnergyDcKwh = this.panelConfig.yearlyEnergyDcKwh;
             this.userSolarData.panelCount = this.panelConfig.panelsCount;
         },
-        
+
         async addSolarPanelsToMap() {
             const geometryLib = await this.geometryLibrary;
             const solarPotential = this.buildingInsights.solarPotential;
@@ -126,9 +137,13 @@ export const useSolarMapStore = defineStore("solarMapStore", {
                     fillOpacity: 0.9
                 });
             });
-        
+
             this.solarPanels.map((panel, i) =>
-                panel.setMap(this.mapSettings.showPanels && this.panelConfig && i < this.panelConfig.panelsCount ? this.map : null)
+                panel.setMap(
+                    this.mapSettings.showPanels && this.panelConfig && i < this.panelConfig.panelsCount
+                        ? this.map
+                        : null
+                )
             );
         },
 
@@ -142,11 +157,11 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             if (reset) {
                 this.resetDataLayer();
             }
-        
+
             if (this.mapSettings.layerId == null || this.buildingInsights == null) {
                 return;
             }
-        
+
             if (!this.layer) {
                 const geometryLib = await this.geometryLibrary;
                 const center: LatLng = {
@@ -160,7 +175,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
                     new google.maps.LatLng(sw.latitude, sw.longitude)
                 );
                 const radius = Math.ceil(diameter / 2);
-        
+
                 try {
                     this.dataLayersResponse = await getSolarLayers(center, radius);
                     this.layer = await getSingleLayer(this.mapSettings.layerId, this.dataLayersResponse as SolarLayers);
@@ -168,35 +183,34 @@ export const useSolarMapStore = defineStore("solarMapStore", {
                     return;
                 }
             }
-        
+
             this.resetHeatmapLayer();
         },
-        
+
         resetDataLayer() {
             this.dataLayersResponse = null;
             this.layer = undefined;
-        
+
             // Default values per layer.
             this.showRoofOnly = ["annualFlux", "monthlyFlux", "hourlyShade"].includes(this.mapSettings.layerId);
             this.map.setMapTypeId("satellite");
         },
-        
+
         resetHeatmapLayer() {
             if (!this.layer) {
                 return;
             }
-        
+
             const bounds = this.layer.bounds;
             this.overlays.map((overlay) => overlay.setMap(null));
             if (!this.mapSettings.showHeatmap) {
                 return;
             }
-        
+
             this.overlays = this.layer
                 .render(this.showRoofOnly, this.timeParams.month, this.timeParams.day)
                 .map((canvas) => new google.maps.GroundOverlay(canvas.toDataURL(), bounds));
-        
-        
+
             if (this.layer.id === "monthlyFlux") {
                 this.displayMonthlyFlux();
             } else if (this.layer.id === "hourlyShade") {
@@ -205,17 +219,17 @@ export const useSolarMapStore = defineStore("solarMapStore", {
                 this.overlays[0].setMap(this.map);
             }
         },
-        
+
         displayMonthlyFlux() {
             if (this.mapSettings.showHeatmap) {
                 this.overlays.map((overlay, i) => overlay.setMap(i == this.timeParams.month ? this.map : null));
             }
         },
-        
+
         displayHourlyShade() {
             if (this.mapSettings.showHeatmap) {
                 this.overlays.map((overlay, i) => overlay.setMap(i == this.timeParams.hour ? this.map : null));
             }
-        },
+        }
     }
 });

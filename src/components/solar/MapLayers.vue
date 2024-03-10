@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 // Vue
-import { onMounted, watch } from "vue";
+import { onMounted } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
 // Helpers
@@ -18,5 +18,4 @@ onMounted(async () => {
     const mapComponents = await initMapComponents(centerCoord.value, "SOLAR");
     map.value = mapComponents.map;
 });
-
 </script>

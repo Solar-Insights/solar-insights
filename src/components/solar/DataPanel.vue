@@ -31,8 +31,8 @@
 
                 <v-expansion-panel-text>
                     <div class="detail-text mb-3">
-                        Solar panels are ordered from most to least efficient based annual sunlight of the roof
-                        (e.g. an input of 10 panels will use the 10 most efficient)
+                        Solar panels are ordered from most to least efficient based annual sunlight of the roof (e.g. an
+                        input of 10 panels will use the 10 most efficient)
                     </div>
 
                     <div>
@@ -42,9 +42,8 @@
                                 {{
                                     buildingInsights.solarPotential === undefined
                                         ? 0
-                                        : buildingInsights.solarPotential.solarPanelConfigs[
-                                                mapSettings.configIdIndex
-                                            ].panelsCount
+                                        : buildingInsights.solarPotential.solarPanelConfigs[mapSettings.configIdIndex]
+                                              .panelsCount
                                 }}
                                 / {{ userSolarData.maxPanelCount }} panels
                             </span>
@@ -191,9 +190,7 @@
                             "
                             color="theme"
                             variant="text"
-                            :append-icon="
-                                advancedSettingsSolarPotential.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'
-                            "
+                            :append-icon="advancedSettingsSolarPotential.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"
                         >
                             Advanced Settings
                         </v-chip>
@@ -256,7 +253,13 @@
                         >
                         </v-select>
 
-                        <v-switch v-model="mapSettings.showPanels" @change="syncMapWithPanels" inset color="theme" density="compact">
+                        <v-switch
+                            v-model="mapSettings.showPanels"
+                            @change="syncMapWithPanels"
+                            inset
+                            color="theme"
+                            density="compact"
+                        >
                             <template v-slot:label>
                                 <span class="ml-4"> Display panels </span>
                             </template>
@@ -312,13 +315,13 @@ const advancedSettingsSolarPotential = ref([] as string[]);
 const emits = defineEmits(["showBuildingReadonlyPanel", "showInsightsReadonlyPanel"]);
 
 function showBuildingReadonly() {
-    solarReadonlyPanel.value = 0
-    emits('showBuildingReadonlyPanel')
+    solarReadonlyPanel.value = 0;
+    emits("showBuildingReadonlyPanel");
 }
 
 function showInsightsReadonly() {
-    solarReadonlyPanel.value = 1
-    emits('showInsightsReadonlyPanel')
+    solarReadonlyPanel.value = 1;
+    emits("showInsightsReadonlyPanel");
 }
 
 async function syncMapWithPanels() {

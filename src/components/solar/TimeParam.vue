@@ -70,7 +70,7 @@ onMounted(async () => {
 function handleIntervalChange() {
     if (mapSettings.value.heatmapAnimation) {
         timeParams.value.tick++;
-        handleTickUpdate()
+        handleTickUpdate();
     }
 
     if (

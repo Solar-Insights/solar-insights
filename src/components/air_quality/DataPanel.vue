@@ -23,11 +23,7 @@
                 <div>
                     <v-icon class="mr-2" size="medium">mdi-exclamation-thick</v-icon>
                     Dominant pollutant -
-                    {{
-                        pollutants[
-                            airQualityData.indexes[0].dominantPollutant as keyof typeof pollutants
-                        ].displayName
-                    }}
+                    {{ pollutants[airQualityData.indexes[0].dominantPollutant as keyof typeof pollutants].displayName }}
                 </div>
             </div>
 
@@ -57,8 +53,8 @@
             <v-divider />
 
             <div v-if="Object.keys(airQualityData).length">
-                <pollutant-readonly-tab v-if="readonlyPanel == 0"/>
-                <health-readonly-tab v-if="readonlyPanel == 1"/>
+                <pollutant-readonly-tab v-if="readonlyPanel == 0" />
+                <health-readonly-tab v-if="readonlyPanel == 1" />
             </div>
         </div>
     </div>
@@ -81,5 +77,4 @@ const airMapStore = useAirMapStore();
 const { airQualityData } = storeToRefs(airMapStore);
 
 const readonlyPanel = ref(0);
-
 </script>

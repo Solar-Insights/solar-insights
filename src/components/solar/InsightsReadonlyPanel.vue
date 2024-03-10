@@ -3,15 +3,15 @@
         class="rounded-lg map-data"
         :class="$vuetify.display.xs ? 'map-readonly-data-mobile' : 'map-readonly-data-computer'"
         elevation="8"
-    >   
+    >
         <v-card-title class="text-center font-weight-regular pl-0 mb-4">
             <div class="d-flex mb-3">
                 <v-icon class="mr-3" color="theme">mdi-weather-sunny</v-icon>
                 <div class="my-auto">Solar Insights</div>
             </div>
-            <v-divider style="border-width: 2px;"/>
+            <v-divider style="border-width: 2px" />
         </v-card-title>
-        
+
         <div class="mb-5">
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-calendar-clock-outline</v-icon>

@@ -1,6 +1,6 @@
 <template>
     <v-card
-        class="rounded-lg  map-data"
+        class="rounded-lg map-data"
         :class="$vuetify.display.xs ? 'map-readonly-data-mobile' : 'map-readonly-data-computer'"
         elevation="8"
     >
@@ -9,7 +9,7 @@
                 <v-icon class="mr-3" color="theme">mdi-home-outline</v-icon>
                 <div class="my-auto">Building Attributes</div>
             </div>
-            <v-divider/>
+            <v-divider />
         </v-card-title>
 
         <div class="mb-5">

@@ -20,7 +20,7 @@ export const useAirMapStore = defineStore("airMapStore", {
             this.map.setCenter({ lat: newCoord.lat, lng: newCoord.lng });
             this.marker.setMap(null);
             this.marker = initMarker(newCoord, this.map);
-        
+
             await getAirQualityData(newCoord)
                 .then((data: AirQualityData) => {
                     this.airQualityData = data;

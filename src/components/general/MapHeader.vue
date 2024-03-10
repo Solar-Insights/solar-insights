@@ -1,16 +1,16 @@
 <template>
-    <v-breadcrumbs 
-        class="pb-0 mx-auto" 
-        :items="[ 
-            { 
-                title: 'Home', 
-                disabled: false, 
-                to: { name: 'home' } 
-            }, 
-            { 
-                title: currentRouteInformation.displayedName, 
-                disabled: true, 
-                to: { name: currentRouteInformation.routeName } 
+    <v-breadcrumbs
+        class="pb-0 mx-auto"
+        :items="[
+            {
+                title: 'Home',
+                disabled: false,
+                to: { name: 'home' }
+            },
+            {
+                title: currentRouteInformation.displayedName,
+                disabled: true,
+                to: { name: currentRouteInformation.routeName }
             }
         ]"
     />
@@ -34,14 +34,14 @@
 
 <script setup lang="ts">
 // Vue
-import { computed, ref, onMounted, PropType } from 'vue';
-import { useRoute } from 'vue-router';
-import { useUserSessionStore } from '@/stores/userSessionStore';
+import { computed, ref, onMounted, PropType } from "vue";
+import { useRoute } from "vue-router";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 // Utils
-import { initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from '@/helpers/util';
-import { LatLng } from 'geo-env-typing/geo';
-import { getGeocoding, getReverseGeocoding } from '@/server/geo';
-import { AutocompleteInputError } from '@/helpers/customErrors';
+import { initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
+import { LatLng } from "geo-env-typing/geo";
+import { getGeocoding, getReverseGeocoding } from "@/server/geo";
+import { AutocompleteInputError } from "@/helpers/customErrors";
 
 const userSessionStore = useUserSessionStore();
 const currentRoute = useRoute();
@@ -53,17 +53,17 @@ const currentRouteInformation = computed(() => {
             routeName: "solar-map",
             icon: "mdi-weather-sunny"
         };
-    } 
-    else { //if (currentRoute.name === "air-quality-map") {
+    } else {
+        //if (currentRoute.name === "air-quality-map") {
         return {
             displayedName: "Air Quality",
             routeName: "air-quality-map",
             icon: "mdi-weather-windy"
         };
     }
-})
+});
 
-const autocompleteValue = ref<string | null>("")
+const autocompleteValue = ref<string | null>("");
 let autocomplete: google.maps.places.Autocomplete;
 let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events (arrow keydown + enter), prevent first one from sending request
 
@@ -94,7 +94,7 @@ onMounted(async () => {
     await initListeners();
 
     emits("syncWithNewRequest", props.coord, autocompleteValue.value);
-})
+});
 
 async function initListeners() {
     await setPlaceChangedOnAutocompleteListener();
@@ -125,5 +125,4 @@ async function setPlaceChangedOnAutocompleteListener() {
             });
     });
 }
-
 </script>

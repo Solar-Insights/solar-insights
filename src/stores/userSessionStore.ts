@@ -19,7 +19,7 @@ export const useUserSessionStore = defineStore("userSessionStore", {
             this.alert = alert;
             this.displayAlert = true;
         },
-        
+
         changeTheme() {
             if (this.theme === "light") {
                 this.theme = "dark";
@@ -29,5 +29,5 @@ export const useUserSessionStore = defineStore("userSessionStore", {
         }
     },
 
-    persist: true,
+    persist: true
 });
