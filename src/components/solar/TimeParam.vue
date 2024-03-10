@@ -2,9 +2,9 @@
     <v-slider
         v-if="mapSettings.layerId === 'monthlyFlux'"
         v-model="timeParams.month"
-        @start="emits('currentlySliding')"
+        @start="currentlySliding = true"
         @end="
-            emits('notCurrentlySliding')
+            currentlySliding = false;
             timeParams.tick = timeParams.month;
         "
         :min="0"
@@ -25,9 +25,9 @@
     <v-slider
         v-if="mapSettings.layerId === 'hourlyShade'"
         v-model="timeParams.hour"
-        @start="emits('currentlySliding')"
+        @start="currentlySliding = true"
         @end="
-            emits('notCurrentlySliding')
+            currentlySliding = false;
             timeParams.tick = timeParams.hour;
         "
         :min="0"
@@ -54,7 +54,7 @@ import { TimeParameters } from "@/helpers/types";
 import { monthCodes, hourCodes } from "@/helpers/constants";
 import { makeDefaultMapSettings, makeDefaultTimeParams } from "@/helpers/solar";
 
-const emits = defineEmits(["updateTimeParams", "displayMonthlyFlux", "displayHourlyShade", "currentlySliding", "notCurrentlySliding"]);
+const emits = defineEmits(["updateTimeParams", "displayMonthlyFlux", "displayHourlyShade"]);
 
 const props = defineProps({
     layer: {
@@ -65,15 +65,11 @@ const props = defineProps({
         type: Object as PropType<MapSettings>,
         required: true,
         default: makeDefaultMapSettings()
-    },
-    currentlySliding: {
-        type: Boolean,
-        require: true,
-        default: false,
     }
 });
 
 const timeParams = ref<TimeParameters>(makeDefaultTimeParams());
+const currentlySliding = ref(false);
 
 onMounted(async () => {
     setInterval(() => {
@@ -90,14 +86,14 @@ function handleTickChange() {
         props.layer?.id === "monthlyFlux" &&
         props.mapSettings.heatmapAnimation &&
         props.mapSettings.showHeatmap &&
-        !props.currentlySliding
+        !currentlySliding.value
     ) {
         timeParams.value.month = (timeParams.value.month + 1) % 12;
     } else if (
         props.layer?.id === "hourlyShade" &&
         props.mapSettings.heatmapAnimation &&
         props.mapSettings.showHeatmap &&
-        !props.currentlySliding
+        !currentlySliding.value
     ) {
         timeParams.value.hour = (timeParams.value.hour + 1) % 24;
     }

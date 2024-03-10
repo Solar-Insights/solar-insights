@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex">
         <v-card id="map-details" class="rounded-0" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
-            <map-header :coord="coord" @sync-with-new-request="syncWithNewRequest"/>
+            <map-header :coord="centerCoord" @sync-with-new-request="syncWithNewRequest"/>
 
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
                 <div class="mb-4">
@@ -297,18 +297,7 @@
             </div>
         </v-card>
 
-        <div id="map" class="w-100"></div>
-
-        <time-param 
-            :layer="layer" 
-            :map-settings="mapSettings" 
-            :currently-sliding="currentlySliding"
-            @update-time-params="updateTimeParams"
-            @display-monthly-flux="displayMonthlyFlux()"
-            @display-hourly-shade="displayhourlyShade()"
-            @currently-sliding="currentlySliding = true"
-            @not-currently-sliding="currentlySliding = false"
-        />
+        <map-layers :building-insights="buildingInsights" :map-settings="mapSettings" :center-coord="centerCoord" @update-map="updateMap"/>
 
         <div v-if="Object.keys(buildingInsights).length">
             <BuildingReadonlyPanel
@@ -330,38 +319,32 @@
 import { onMounted, ref, watch } from "vue";
 // Helpers
 import { LatLng } from "geo-env-typing/geo";
-import { BuildingInsights, SolarLayers, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
+import { BuildingInsights, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
 import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solarMath";
-import { TimeParameters, UserSolarData } from "@/helpers/types";
+import { UserSolarData } from "@/helpers/types";
 import { panelsPalette } from "@/helpers/constants";
-import { initMapComponents } from "@/helpers/util";
-import { rgbToColor, createPalette, getSingleLayer, makeDefaultUserSolarDataObject, makeDefaultMapSettings, makeDefaultTimeParams } from "@/helpers/solar";
+import { rgbToColor, createPalette, makeDefaultUserSolarDataObject, makeDefaultMapSettings } from "@/helpers/solar";
 // Server
-import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
+import { getClosestBuildingInsights } from "@/server/solar";
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import InsightsReadonlyPanel from "@/components/solar/InsightsReadonlyPanel.vue";
 import MapHeader from "@/components/general/MapHeader.vue";
-import TimeParam from "@/components/solar/TimeParam.vue";
+import MapLayers from "@/components/solar/MapLayers.vue";
 
 const solarReadonlyPanel = ref(0);
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
-const currentlySliding = ref(false);
-const timeParams = ref<TimeParameters>(makeDefaultTimeParams());
 
 const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
 const userSolarData = ref<UserSolarData>(makeDefaultUserSolarDataObject());
 const mapSettings = ref<MapSettings>(makeDefaultMapSettings());
+const centerCoord = ref<LatLng>({lat: 46.81701, lng: -71.36838});
 
 let map: google.maps.Map;
 let geometryLibrary: google.maps.GeometryLibrary;
 
-const coord = ref<LatLng>({lat: 46.81701, lng: -71.36838});
-
 onMounted(async () => {
-    ({ map } = await initMapComponents(coord.value, "SOLAR"));
-
     geometryLibrary = (await google.maps.importLibrary("geometry")) as google.maps.GeometryLibrary;
 });
 
@@ -372,22 +355,8 @@ watch(
     }
 );
 
-watch(
-    () => mapSettings.value.layerId,
-    async () => {
-        await showDataLayer(true);
-    }
-);
-
-watch(
-    () => mapSettings.value.showHeatmap,
-    async () => {
-        mapSettings.value.showHeatmap ? await showDataLayer(true) : resetHeatmapLayer();
-    }
-);
-
 async function syncWithNewRequest(coord: LatLng, formattedAddress: string) {
-    map.setCenter(coord);
+    centerCoord.value = coord;
 
     await getClosestBuildingInsights(coord)
         .then((data: BuildingInsights) => {
@@ -399,7 +368,6 @@ async function syncWithNewRequest(coord: LatLng, formattedAddress: string) {
 
     syncTemplateVariableFollowingNewRequest();
     syncMapWithNewRequest();
-    showDataLayer(true);
 }
 
 async function syncTemplateVariableFollowingNewRequest() {
@@ -497,96 +465,8 @@ function addSolarPanelsToMap() {
     );
 }
 
-/*
-    Heatmap layer
-*/
-const layer = ref<Layer | undefined>(undefined);
-let dataLayersResponse: SolarLayers | null;
-let overlays: google.maps.GroundOverlay[] = [];
-let showRoofOnly = false;
-
-async function showDataLayer(reset: boolean = false) {
-    if (reset) {
-        resetDataLayer();
-    }
-
-    if (mapSettings.value.layerId == null || buildingInsights.value == null) {
-        return;
-    }
-
-    if (!layer.value) {
-        const center: LatLng = {
-            lat: buildingInsights.value.center.latitude,
-            lng: buildingInsights.value.center.longitude
-        };
-        const ne = buildingInsights.value.boundingBox.ne;
-        const sw = buildingInsights.value.boundingBox.sw;
-        const diameter = geometryLibrary.spherical.computeDistanceBetween(
-            new google.maps.LatLng(ne.latitude, ne.longitude),
-            new google.maps.LatLng(sw.latitude, sw.longitude)
-        );
-        const radius = Math.ceil(diameter / 2);
-
-        try {
-            dataLayersResponse = await getSolarLayers(center, radius);
-            layer.value = await getSingleLayer(mapSettings.value.layerId, dataLayersResponse as SolarLayers);
-        } catch (error) {
-            return;
-        }
-    }
-
-    resetHeatmapLayer();
-}
-
-function resetDataLayer() {
-    dataLayersResponse = null;
-    layer.value = undefined;
-
-    // Default values per layer.
-    showRoofOnly = ["annualFlux", "monthlyFlux", "hourlyShade"].includes(mapSettings.value.layerId);
-    map.setMapTypeId("satellite");
-}
-
-function resetHeatmapLayer() {
-    if (!layer.value) {
-        return;
-    }
-
-    const bounds = layer.value.bounds;
-    overlays.map((overlay) => overlay.setMap(null));
-    if (!mapSettings.value.showHeatmap) {
-        return;
-    }
-
-    overlays = layer.value
-        .render(showRoofOnly, timeParams.value.month, timeParams.value.day)
-        .map((canvas) => new google.maps.GroundOverlay(canvas.toDataURL(), bounds));
-
-    if (layer.value.id === "monthlyFlux") {
-        displayMonthlyFlux();
-    } else if (layer.value.id === "hourlyShade") {
-        displayhourlyShade();
-    } else {
-        overlays[0].setMap(map);
-    }
-}
-
-function displayMonthlyFlux() {
-    if (mapSettings.value.showHeatmap) {
-        overlays.map((overlay, i) => overlay.setMap(i == timeParams.value.month ? map : null));
-    }
-}
-
-function displayhourlyShade() {
-    if (mapSettings.value.showHeatmap) {
-        overlays.map((overlay, i) => overlay.setMap(i == timeParams.value.hour ? map : null));
-    }
-}
-
-function updateTimeParams(tick: number, month: number, day: number, hour: number) {
-    timeParams.value.tick = tick;
-    timeParams.value.month = month;
-    timeParams.value.day = day;
-    timeParams.value.hour = hour;
+function updateMap(updatedMap: google.maps.Map) {
+    console.log("updating map")
+    map = updatedMap;
 }
 </script>
