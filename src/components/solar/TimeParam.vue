@@ -6,6 +6,7 @@
         @end="
             currentlySliding = false;
             timeParams.tick = timeParams.month;
+            handleTickUpdate();
         "
         :min="0"
         :max="11"
@@ -29,6 +30,7 @@
         @end="
             currentlySliding = false;
             timeParams.tick = timeParams.hour;
+            handleTickUpdate();
         "
         :min="0"
         :max="23"
@@ -47,68 +49,52 @@
 
 <script setup lang="ts">
 // Vue
-import { PropType, onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
+import { useSolarMapStore } from "@/stores/solarMapStore";
+import { storeToRefs } from "pinia";
 // Helpers
-import { Layer, MapSettings } from "geo-env-typing/solar";
-import { TimeParameters } from "@/helpers/types";
 import { monthCodes, hourCodes } from "@/helpers/constants";
-import { makeDefaultMapSettings, makeDefaultTimeParams } from "@/helpers/solar";
 
-const emits = defineEmits(["updateTimeParams", "displayMonthlyFlux", "displayHourlyShade"]);
+const solarMapStore = useSolarMapStore();
 
-const props = defineProps({
-    layer: {
-        type: Object as PropType<Layer>,
-        default: undefined
-    },
-    mapSettings: {
-        type: Object as PropType<MapSettings>,
-        required: true,
-        default: makeDefaultMapSettings()
-    }
-});
+const { mapSettings, timeParams, layer } = storeToRefs(solarMapStore);
 
-const timeParams = ref<TimeParameters>(makeDefaultTimeParams());
 const currentlySliding = ref(false);
 
 onMounted(async () => {
     setInterval(() => {
-        handleTickChange();
+        handleIntervalChange();
     }, 1000);
 });
 
-function handleTickChange() {
-    if (props.mapSettings.heatmapAnimation) {
+function handleIntervalChange() {
+    if (mapSettings.value.heatmapAnimation) {
         timeParams.value.tick++;
+        handleTickUpdate()
     }
 
     if (
-        props.layer?.id === "monthlyFlux" &&
-        props.mapSettings.heatmapAnimation &&
-        props.mapSettings.showHeatmap &&
+        layer.value?.id === "monthlyFlux" &&
+        mapSettings.value.heatmapAnimation &&
+        mapSettings.value.showHeatmap &&
         !currentlySliding.value
     ) {
         timeParams.value.month = (timeParams.value.month + 1) % 12;
     } else if (
-        props.layer?.id === "hourlyShade" &&
-        props.mapSettings.heatmapAnimation &&
-        props.mapSettings.showHeatmap &&
+        layer.value?.id === "hourlyShade" &&
+        mapSettings.value.heatmapAnimation &&
+        mapSettings.value.showHeatmap &&
         !currentlySliding.value
     ) {
         timeParams.value.hour = (timeParams.value.hour + 1) % 24;
     }
-
-    emits("updateTimeParams", timeParams.value.tick, timeParams.value.month, timeParams.value.day, timeParams.value.hour)
 }
 
-watch(
-    () => timeParams.value.tick,
-    () => {
-        if (props.layer?.id === "monthlyFlux" && props.mapSettings.showHeatmap) {
-            emits("displayMonthlyFlux");
-        } else if (props.mapSettings.layerId === "hourlyShade" && props.mapSettings.showHeatmap) {
-            emits("displayHourlyShade");
-        }
+function handleTickUpdate() {
+    if (layer.value?.id === "monthlyFlux" && mapSettings.value.showHeatmap) {
+        solarMapStore.displayMonthlyFlux();
+    } else if (mapSettings.value.layerId === "hourlyShade" && mapSettings.value.showHeatmap) {
+        solarMapStore.displayHourlyShade();
     }
-);
+}
 </script>

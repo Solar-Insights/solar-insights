@@ -105,10 +105,10 @@
 
 <script setup lang="ts">
 // Vue
-import { PropType, onMounted, watch, ref } from "vue";
+import { onMounted, watch, ref } from "vue";
+import { useSolarMapStore } from "@/stores/solarMapStore";
+import { storeToRefs } from "pinia";
 // Helpers
-import { UserSolarData } from "@/helpers/types";
-import { BuildingInsights } from "geo-env-typing/solar";
 import {
     getBreakEvenYear,
     yearlyEnergyCalc,
@@ -122,30 +122,23 @@ import { drawGoogleChart } from "@/helpers/solar";
 import { batteryCharging } from "@/helpers/constants";
 import { strToLargeNumberDisplay } from "@/helpers/util";
 
-const props = defineProps({
-    buildingInsights: {
-        type: Object as PropType<BuildingInsights>,
-        required: true,
-        default: {}
-    },
-    userSolarData: {
-        type: Object as PropType<UserSolarData>,
-        required: true,
-        default: {}
-    }
-});
+const solarMapStore = useSolarMapStore();
+
+const { userSolarData } = storeToRefs(solarMapStore);
 
 const breakEvenYear = ref(0);
 
 onMounted(() => {
-    const costChart: HTMLElement | null = document.getElementById("breakeven-chart");
-    drawGoogleChart(props.userSolarData, costChart);
-    breakEvenYear.value = getBreakEvenYear(props.userSolarData);
+    drawNewChart();
 });
 
-watch(props.userSolarData, () => {
-    const costChart: HTMLElement | null = document.getElementById("breakeven-chart");
-    drawGoogleChart(props.userSolarData, costChart);
-    breakEvenYear.value = getBreakEvenYear(props.userSolarData);
+watch(userSolarData.value, () => {
+    drawNewChart();
 });
+
+function drawNewChart() {
+    const costChart: HTMLElement | null = document.getElementById("breakeven-chart");
+    drawGoogleChart(userSolarData.value, costChart);
+    breakEvenYear.value = getBreakEvenYear(userSolarData.value);
+}
 </script>

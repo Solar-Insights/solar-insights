@@ -52,22 +52,12 @@
 
 <script setup lang="ts">
 // Vue
-import { PropType } from "vue";
+import { useSolarMapStore } from "@/stores/solarMapStore";
+import { storeToRefs } from "pinia";
 // Helpers
 import { strToLargeNumberDisplay } from "@/helpers/util";
-import { UserSolarData } from "@/helpers/types";
-import { BuildingInsights } from "geo-env-typing/solar";
 
-const props = defineProps({
-    buildingInsights: {
-        type: Object as PropType<BuildingInsights>,
-        required: true,
-        default: {}
-    },
-    userSolarData: {
-        type: Object as PropType<UserSolarData>,
-        required: true,
-        default: {}
-    }
-});
+const solarMapStore = useSolarMapStore();
+
+const { buildingInsights, userSolarData } = storeToRefs(solarMapStore);
 </script>

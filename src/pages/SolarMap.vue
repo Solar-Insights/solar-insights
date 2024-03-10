@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex">
         <v-card id="map-details" class="rounded-0" :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'">
-            <map-header :coord="centerCoord" @sync-with-new-request="syncWithNewRequest"/>
+            <map-header :coord="centerCoord" @sync-with-new-request="solarMapStore.syncWithNewRequest"/>
 
             <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
                 <div class="mb-4">
@@ -55,7 +55,7 @@
                                 </div>
                                 <v-slider
                                     v-model="mapSettings.configIdIndex"
-                                    @end="panelCountChange"
+                                    @end="solarMapStore.panelCountChange"
                                     :min="0"
                                     :max="
                                         buildingInsights.solarPotential === undefined
@@ -248,6 +248,7 @@
                             <div>
                                 <v-select
                                     v-model="mapSettings.layerId"
+                                    @update:modelValue="showDataLayerOnLayerIdChange"
                                     item-title="displayedName"
                                     item-value="name"
                                     :items="mapSettings.layerIdChoices"
@@ -259,7 +260,7 @@
                                 >
                                 </v-select>
 
-                                <v-switch v-model="mapSettings.showPanels" inset color="theme" density="compact">
+                                <v-switch v-model="mapSettings.showPanels" @change="syncMapWithPanels" inset color="theme" density="compact">
                                     <template v-slot:label>
                                         <span class="ml-4"> Display panels </span>
                                     </template>
@@ -267,6 +268,7 @@
 
                                 <v-switch
                                     v-model="mapSettings.showHeatmap"
+                                    @change="changeLayersOnShowHeatmapChange"
                                     inset
                                     color="theme"
                                     density="compact"
@@ -297,176 +299,46 @@
             </div>
         </v-card>
 
-        <map-layers :building-insights="buildingInsights" :map-settings="mapSettings" :center-coord="centerCoord" @update-map="updateMap"/>
+        <map-layers/>
+
+        <time-param/>
 
         <div v-if="Object.keys(buildingInsights).length">
-            <BuildingReadonlyPanel
-                v-if="solarReadonlyPanel == 0"
-                :buildingInsights="buildingInsights"
-                :userSolarData="userSolarData"
-            />
-            <InsightsReadonlyPanel
-                v-if="solarReadonlyPanel == 1"
-                :buildingInsights="buildingInsights"
-                :userSolarData="userSolarData"
-            />
+            <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0"/>
+            <InsightsReadonlyPanel v-if="solarReadonlyPanel == 1"/>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 // Vue
-import { onMounted, ref, watch } from "vue";
-// Helpers
-import { LatLng } from "geo-env-typing/geo";
-import { BuildingInsights, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
-import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solarMath";
-import { UserSolarData } from "@/helpers/types";
-import { panelsPalette } from "@/helpers/constants";
-import { rgbToColor, createPalette, makeDefaultUserSolarDataObject, makeDefaultMapSettings } from "@/helpers/solar";
-// Server
-import { getClosestBuildingInsights } from "@/server/solar";
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useSolarMapStore } from "@/stores/solarMapStore";
 // Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import InsightsReadonlyPanel from "@/components/solar/InsightsReadonlyPanel.vue";
 import MapHeader from "@/components/general/MapHeader.vue";
 import MapLayers from "@/components/solar/MapLayers.vue";
+import TimeParam from "@/components/solar/TimeParam.vue";
+
+const solarMapStore = useSolarMapStore();
+
+const { buildingInsights, mapSettings, userSolarData, map, centerCoord } = storeToRefs(solarMapStore);
 
 const solarReadonlyPanel = ref(0);
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
 
-const buildingInsights = ref<BuildingInsights>({} as BuildingInsights);
-const userSolarData = ref<UserSolarData>(makeDefaultUserSolarDataObject());
-const mapSettings = ref<MapSettings>(makeDefaultMapSettings());
-const centerCoord = ref<LatLng>({lat: 46.81701, lng: -71.36838});
-
-let map: google.maps.Map;
-let geometryLibrary: google.maps.GeometryLibrary;
-
-onMounted(async () => {
-    geometryLibrary = (await google.maps.importLibrary("geometry")) as google.maps.GeometryLibrary;
-});
-
-watch(
-    () => mapSettings.value.showPanels,
-    async () => {
-        await syncMapWithNewRequest();
-    }
-);
-
-async function syncWithNewRequest(coord: LatLng, formattedAddress: string) {
-    centerCoord.value = coord;
-
-    await getClosestBuildingInsights(coord)
-        .then((data: BuildingInsights) => {
-            buildingInsights.value = data;
-        })
-        .catch(() => {
-            // Handle error
-        });
-
-    syncTemplateVariableFollowingNewRequest();
-    syncMapWithNewRequest();
+async function syncMapWithPanels() {
+    await solarMapStore.syncMapWithNewRequest();
 }
 
-async function syncTemplateVariableFollowingNewRequest() {
-    userSolarData.value.minPanelCount = buildingInsights.value.solarPotential.solarPanelConfigs[0].panelsCount;
-    userSolarData.value.defaultPanelCapacityWatts = buildingInsights.value.solarPotential.panelCapacityWatts;
-    userSolarData.value.maxPanelCount =
-        buildingInsights.value.solarPotential.solarPanelConfigs[
-            buildingInsights.value.solarPotential.solarPanelConfigs.length - 1
-        ].panelsCount;
-
-    mapSettings.value.configIdIndex = getConfigIdForFullEnergyCoverage();
+async function showDataLayerOnLayerIdChange() {
+    await solarMapStore.showDataLayer(true);
 }
 
-async function panelCountChange() {
-    userSolarData.value.panelCount =
-        buildingInsights.value.solarPotential.solarPanelConfigs[mapSettings.value.configIdIndex].panelsCount;
-    await syncMapWithNewRequest();
-}
-
-function getConfigIdForFullEnergyCoverage() {
-    for (let i = 0; i < buildingInsights.value.solarPotential.solarPanelConfigs.length; i++) {
-        if (
-            buildingInsights.value.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh *
-                panelCapacityRatioCalc(userSolarData.value) *
-                dcToAcDerate(userSolarData.value) >=
-            yearlyEnergyConsumptionKwh(userSolarData.value)
-        ) {
-            return i;
-        }
-    }
-    return buildingInsights.value.solarPotential.solarPanelConfigs.length - 1;
-}
-
-/*
-    Solar panels
-*/
-let panelConfig: SolarPanelConfig | undefined;
-let solarPanels: google.maps.Polygon[] = [];
-async function syncMapWithNewRequest() {
-    if (buildingInsights.value == null) {
-        return;
-    }
-
-    removeSolarPanelsFromMap();
-    setNewPanelConfig();
-    addSolarPanelsToMap();
-}
-
-function removeSolarPanelsFromMap() {
-    solarPanels.map((panel) => panel.setMap(null));
-    solarPanels = [];
-}
-
-async function setNewPanelConfig() {
-    panelConfig = buildingInsights.value.solarPotential.solarPanelConfigs[mapSettings.value.configIdIndex];
-    userSolarData.value.yearlyEnergyDcKwh = panelConfig.yearlyEnergyDcKwh;
-    userSolarData.value.panelCount = panelConfig.panelsCount;
-}
-
-function addSolarPanelsToMap() {
-    const solarPotential = buildingInsights.value.solarPotential;
-    const palette = createPalette(panelsPalette, 256).map(rgbToColor);
-    const minEnergy = solarPotential.solarPanels.slice(-1)[0].yearlyEnergyDcKwh;
-    const maxEnergy = solarPotential.solarPanels[0].yearlyEnergyDcKwh;
-    solarPanels = solarPotential.solarPanels.map((panel) => {
-        const [w, h] = [solarPotential.panelWidthMeters / 2, solarPotential.panelHeightMeters / 2];
-        const points = [
-            { x: +w, y: +h }, // top right
-            { x: +w, y: -h }, // bottom right
-            { x: -w, y: -h }, // bottom left
-            { x: -w, y: +h }, // top left
-            { x: +w, y: +h } //  top right
-        ];
-        const orientation = panel.orientation == "PORTRAIT" ? 90 : 0;
-        const azimuth = solarPotential.roofSegmentStats[panel.segmentIndex].azimuthDegrees;
-        const colorIndex = Math.round(normalize(panel.yearlyEnergyDcKwh, maxEnergy, minEnergy) * 255);
-        return new google.maps.Polygon({
-            paths: points.map(({ x, y }) =>
-                geometryLibrary.spherical.computeOffset(
-                    { lat: panel.center.latitude, lng: panel.center.longitude },
-                    Math.sqrt(x * x + y * y),
-                    Math.atan2(y, x) * (180 / Math.PI) + orientation + azimuth
-                )
-            ),
-            strokeColor: "#B0BEC5",
-            strokeOpacity: 0.9,
-            strokeWeight: 1,
-            fillColor: palette[colorIndex],
-            fillOpacity: 0.9
-        });
-    });
-
-    solarPanels.map((panel, i) =>
-        panel.setMap(mapSettings.value.showPanels && panelConfig && i < panelConfig.panelsCount ? map : null)
-    );
-}
-
-function updateMap(updatedMap: google.maps.Map) {
-    console.log("updating map")
-    map = updatedMap;
+async function changeLayersOnShowHeatmapChange() {
+    mapSettings.value.showHeatmap ? await solarMapStore.showDataLayer(true) : solarMapStore.resetHeatmapLayer();
 }
 </script>
