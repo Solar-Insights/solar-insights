@@ -1,6 +1,7 @@
 import { LayerId, SolarLayers, Layer, GeoTiff, MapSettings, SolarDataType } from "geo-env-typing/solar";
 import { TimeParameters, UserSolarData } from "@/helpers/types";
 import { GoogleCharts } from "google-charts";
+import ApexCharts from 'apexcharts'
 import {
     lerp,
     normalize,
@@ -88,6 +89,54 @@ export function drawGoogleChart(userSolarData: UserSolarData, costChart: HTMLEle
         },
         { packages: ["line"] }
     );
+}
+
+export async function drawSolarInsightsChart(userSolarData: UserSolarData, costChart: HTMLElement) {
+    const year = new Date().getFullYear();
+    const yearsList = [];
+    for (let i = year; i < year + userSolarData.installationLifespan; i++) {
+        yearsList.push(i);
+    }
+
+    let costWithSolar = 0;
+    const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData);
+    const cumulativeCostWithSolar: number[] = [];
+    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+        costWithSolar +=
+            i == 0
+                ? utilityBillEstimates[i] + installationCostCalc(userSolarData) - userSolarData.solarIncentives
+                : utilityBillEstimates[i];
+        cumulativeCostWithSolar.push(costWithSolar);
+    }
+
+    let costWithoutSolar = 0;
+    const yearlyCostWithoutSolarEstimates: number[] = yearlyCostWithoutSolar(userSolarData);
+    const cumulativeCostWithoutSolar: number[] = [];
+    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+        costWithoutSolar += yearlyCostWithoutSolarEstimates[i];
+        cumulativeCostWithoutSolar.push(costWithoutSolar);
+    }
+
+    console.log(cumulativeCostWithSolar)
+    console.log(cumulativeCostWithoutSolar)
+    console.log(yearsList)
+
+    const options = {
+        chart: {
+          type: 'line'
+        },
+        series: [
+            {
+                name: 'sales',
+                data: [30,40,35,50,49,60,70,91,125]
+            }
+        ],
+        xaxis: {
+          categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
+        }
+      }
+      
+      new ApexCharts(costChart, options).render();
 }
 
 export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
