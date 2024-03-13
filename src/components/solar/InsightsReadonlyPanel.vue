@@ -22,14 +22,6 @@
 
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">mdi-account-hard-hat-outline</v-icon>
-                <div class="me-auto">Installation Size</div>
-                <div>{{ strToLargeNumberDisplay(installationSizeCalc(userSolarData).toFixed(1)) }} kW</div>
-            </div>
-        </div>
-
-        <div class="mb-5">
-            <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-account-cash-outline</v-icon>
                 <div class="me-auto">Installation Cost</div>
                 <div>{{ strToLargeNumberDisplay(installationCostCalc(userSolarData).toFixed(0)) }} $</div>

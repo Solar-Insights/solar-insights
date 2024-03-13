@@ -15,7 +15,7 @@
         <div class="mb-5">
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-math-compass</v-icon>
-                <div class="me-auto emphasis">Roof area</div>
+                <div class="me-auto">Roof area</div>
                 <div>
                     {{
                         strToLargeNumberDisplay(buildingInsights?.solarPotential.wholeRoofStats.areaMeters2.toFixed(0))
@@ -29,7 +29,7 @@
         <div class="mb-5">
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-sun-clock-outline</v-icon>
-                <div class="me-auto emphasis flex-shrink-1">Annual sunlight</div>
+                <div class="me-auto flex-shrink-1">Annual sunlight</div>
                 <div>
                     {{ strToLargeNumberDisplay(buildingInsights?.solarPotential.maxSunshineHoursPerYear.toFixed(0)) }}
                     hrs
@@ -43,8 +43,17 @@
         <div class="mb-5">
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon>
-                <div class="me-auto emphasis">Panels</div>
+                <div class="me-auto">Panels</div>
                 <div>{{ userSolarData.panelCount }} / {{ userSolarData.maxPanelCount }} panels</div>
+            </div>
+        </div>
+
+        
+        <div class="mb-5">
+            <div class="d-flex">
+                <v-icon class="mr-3" color="theme">mdi-account-hard-hat-outline</v-icon>
+                <div class="me-auto">Installation Size</div>
+                <div>{{ strToLargeNumberDisplay(installationSizeCalc(userSolarData).toFixed(1)) }} kW</div>
             </div>
         </div>
     </v-card>
@@ -56,6 +65,7 @@ import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
 // Helpers
 import { strToLargeNumberDisplay } from "@/helpers/util";
+import { installationSizeCalc } from "@/helpers/solarMath";
 
 const solarMapStore = useSolarMapStore();
 
