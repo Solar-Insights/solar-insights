@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, Layer, SolarPanelConfig, MapSettings, SolarLayers } from "geo-env-typing/solar";
 import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solarMath";
-import { TimeParameters, UserSolarData } from "@/helpers/types";
+import { SolarReadonlyPanel, TimeParameters, UserSolarData } from "@/helpers/types";
 import { panelsPalette } from "@/helpers/constants";
 import {
     rgbToColor,
@@ -32,7 +32,8 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         panelConfig: undefined as SolarPanelConfig | undefined,
         solarPanels: [] as google.maps.Polygon[],
         geometryLibrary: google.maps.importLibrary("geometry") as Promise<google.maps.GeometryLibrary>,
-        centerCoord: { lat: 46.81701, lng: -71.36838 } as LatLng
+        centerCoord: { lat: 46.81701, lng: -71.36838 } as LatLng,
+        solarReadonlyPanel: "BUILDING_READONLY" as SolarReadonlyPanel | undefined,
     }),
 
     actions: {
@@ -229,6 +230,16 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         displayHourlyShade() {
             if (this.mapSettings.showHeatmap) {
                 this.overlays.map((overlay, i) => overlay.setMap(i == this.timeParams.hour ? this.map : null));
+            }
+        },
+
+        selectReadonlyPanelToDisplay(buttonClicked: SolarReadonlyPanel) {
+            if (!this.solarReadonlyPanel) {
+                this.solarReadonlyPanel = buttonClicked;
+            } else if (this.solarReadonlyPanel === "BUILDING_READONLY") {
+                this.solarReadonlyPanel = this.solarReadonlyPanel === buttonClicked ? undefined : "INSIGHTS_READONLY"
+            } else if (this.solarReadonlyPanel === "INSIGHTS_READONLY") {
+                this.solarReadonlyPanel = this.solarReadonlyPanel === buttonClicked ? undefined : "BUILDING_READONLY"
             }
         }
     }

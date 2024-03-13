@@ -7,10 +7,7 @@
         >
             <map-header :coord="centerCoord" @sync-with-new-request="solarMapStore.syncWithNewRequest" />
 
-            <data-panel
-                @show-building-readonly-panel="solarReadonlyPanel = 0"
-                @show-insights-readonly-panel="solarReadonlyPanel = 1"
-            />
+            <data-panel/>
         </v-card>
 
         <map-layers />
@@ -18,8 +15,8 @@
         <time-param />
 
         <div v-if="Object.keys(buildingInsights).length">
-            <BuildingReadonlyPanel v-if="solarReadonlyPanel == 0" />
-            <InsightsReadonlyPanel v-if="solarReadonlyPanel == 1" />
+            <BuildingReadonlyPanel v-if="solarReadonlyPanel === 'BUILDING_READONLY'" />
+            <InsightsReadonlyPanel v-if="solarReadonlyPanel === 'INSIGHTS_READONLY'" />
         </div>
     </div>
 </template>
@@ -39,7 +36,5 @@ import DataPanel from "@/components/solar/DataPanel.vue";
 
 const solarMapStore = useSolarMapStore();
 
-const { buildingInsights, centerCoord } = storeToRefs(solarMapStore);
-
-const solarReadonlyPanel = ref(0);
+const { buildingInsights, centerCoord, solarReadonlyPanel } = storeToRefs(solarMapStore);
 </script>

@@ -2,20 +2,20 @@
     <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
         <div class="mb-4">
             <v-btn
-                @click="showBuildingReadonly"
+                @click="solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
                 class="w-50"
-                :class="solarReadonlyPanel == 0 ? 'button-selection-border' : ''"
-                :prepend-icon="solarReadonlyPanel == 0 ? 'mdi-home' : 'mdi-home-outline'"
+                :class="solarReadonlyPanel === 'BUILDING_READONLY' ? 'button-selection-border' : ''"
+                :prepend-icon="solarReadonlyPanel === 'BUILDING_READONLY' ? 'mdi-home' : 'mdi-home-outline'"
                 variant="outlined"
                 :ripple="false"
             >
                 Building
             </v-btn>
             <v-btn
-                @click="showInsightsReadonly"
+                @click="solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY')"
                 class="w-50"
-                :class="solarReadonlyPanel == 1 ? 'button-selection-border' : ''"
-                :prepend-icon="solarReadonlyPanel == 1 ? 'mdi-transmission-tower' : 'mdi-transmission-tower'"
+                :class="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'button-selection-border' : ''"
+                :prepend-icon="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'mdi-transmission-tower' : 'mdi-transmission-tower'"
                 variant="outlined"
                 :ripple="false"
             >
@@ -306,23 +306,12 @@ import { useSolarMapStore } from "@/stores/solarMapStore";
 
 const solarMapStore = useSolarMapStore();
 
-const { buildingInsights, mapSettings, userSolarData } = storeToRefs(solarMapStore);
+const { buildingInsights, mapSettings, userSolarData, solarReadonlyPanel } = storeToRefs(solarMapStore);
 
-const solarReadonlyPanel = ref(0);
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
 
 const emits = defineEmits(["showBuildingReadonlyPanel", "showInsightsReadonlyPanel"]);
-
-function showBuildingReadonly() {
-    solarReadonlyPanel.value = 0;
-    emits("showBuildingReadonlyPanel");
-}
-
-function showInsightsReadonly() {
-    solarReadonlyPanel.value = 1;
-    emits("showInsightsReadonlyPanel");
-}
 
 async function syncMapWithPanels() {
     await solarMapStore.syncMapWithNewRequest();
