@@ -46,80 +46,35 @@ export function createPalette(hexColors: string[], size = 256) {
         });
 }
 
-export function drawGoogleChart(userSolarData: UserSolarData, costChart: HTMLElement | null) {
-    GoogleCharts.load(
-        () => {
-            if (!costChart) return;
-
-            const year = new Date().getFullYear();
-
-            let costWithSolar = 0;
-            const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData);
-            const cumulativeCostWithSolar: number[] = [];
-            for (let i = 0; i < userSolarData.installationLifespan; i++) {
-                costWithSolar +=
-                    i == 0
-                        ? utilityBillEstimates[i] + installationCostCalc(userSolarData) - userSolarData.solarIncentives
-                        : utilityBillEstimates[i];
-                cumulativeCostWithSolar.push(costWithSolar);
-            }
-
-            let costWithoutSolar = 0;
-            const yearlyCostWithoutSolarEstimates: number[] = yearlyCostWithoutSolar(userSolarData);
-            const cumulativeCostWithoutSolar: number[] = [];
-            for (let i = 0; i < userSolarData.installationLifespan; i++) {
-                costWithoutSolar += yearlyCostWithoutSolarEstimates[i];
-                cumulativeCostWithoutSolar.push(costWithoutSolar);
-            }
-
-            const data = google.visualization.arrayToDataTable([
-                ["Year", "Solar", "No solar"],
-                [year.toString(), 0, 0],
-                ...cumulativeCostWithSolar.map((_, i) => [
-                    (year + i + 1).toString(),
-                    cumulativeCostWithSolar[i],
-                    cumulativeCostWithoutSolar[i]
-                ])
-            ]);
-
-            const googleCharts = google.charts as any;
-            const chart = new googleCharts.Line(costChart);
-            const options = googleCharts.Line.convertOptions({});
-            chart.draw(data, options);
-        },
-        { packages: ["line"] }
-    );
-}
-
 export async function drawSolarInsightsChart(userSolarData: UserSolarData, costChart: HTMLElement) {
     const year = new Date().getFullYear();
     const yearsList = [];
     for (let i = year; i < year + userSolarData.installationLifespan; i++) {
-        yearsList.push(i);
+        const currentYear = new Date();
+        currentYear.setFullYear(i);
+        yearsList.push(currentYear);
     }
+
+    console.log(yearsList)
 
     let costWithSolar = 0;
     const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData);
-    const cumulativeCostWithSolar: number[] = [];
+    const cumulativeCostWithSolar: [Date, number][] = [];
     for (let i = 0; i < userSolarData.installationLifespan; i++) {
         costWithSolar +=
             i == 0
                 ? utilityBillEstimates[i] + installationCostCalc(userSolarData) - userSolarData.solarIncentives
                 : utilityBillEstimates[i];
-        cumulativeCostWithSolar.push(costWithSolar);
+        cumulativeCostWithSolar.push([yearsList[i], Math.round(costWithSolar)]);
     }
 
     let costWithoutSolar = 0;
     const yearlyCostWithoutSolarEstimates: number[] = yearlyCostWithoutSolar(userSolarData);
-    const cumulativeCostWithoutSolar: number[] = [];
+    const cumulativeCostWithoutSolar: [Date, number][] = [];
     for (let i = 0; i < userSolarData.installationLifespan; i++) {
         costWithoutSolar += yearlyCostWithoutSolarEstimates[i];
-        cumulativeCostWithoutSolar.push(costWithoutSolar);
+        cumulativeCostWithoutSolar.push([yearsList[i], Math.round(costWithoutSolar)]);
     }
-
-    console.log(cumulativeCostWithSolar)
-    console.log(cumulativeCostWithoutSolar)
-    console.log(yearsList)
 
     const options = {
         chart: {
@@ -127,12 +82,32 @@ export async function drawSolarInsightsChart(userSolarData: UserSolarData, costC
         },
         series: [
             {
-                name: 'sales',
-                data: [30,40,35,50,49,60,70,91,125]
-            }
+                name: 'Solar',
+                data: cumulativeCostWithSolar
+            },
+            {
+                name: 'Current',
+                data: cumulativeCostWithoutSolar
+            },
         ],
         xaxis: {
-          categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
+            type: "datetime",
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false
+            }
+        },
+        yaxis: {},
+        tooltip: {
+            x: {
+                format: "yyyy"
+            },
+        },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'left'
         }
       }
       

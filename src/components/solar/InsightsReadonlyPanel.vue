@@ -89,10 +89,6 @@
             </div>
         </div>
 
-        <v-card class="pa-3 bg-white">
-            <div id="breakeven-chart"></div>
-        </v-card>
-
         <div id="cost-chart"></div>
     </v-card>
 </template>
@@ -111,7 +107,7 @@ import {
     costWithSolarInstallation,
     costWithoutSolarInstallation
 } from "@/helpers/solarMath";
-import { drawGoogleChart, drawSolarInsightsChart } from "@/helpers/solar";
+import { drawSolarInsightsChart } from "@/helpers/solar";
 import { batteryCharging } from "@/helpers/constants";
 import { strToLargeNumberDisplay } from "@/helpers/util";
 
@@ -130,9 +126,7 @@ watch(userSolarData.value, () => {
 });
 
 function drawNewChart() {
-    const costChartGoogle: HTMLElement | null = document.getElementById("breakeven-chart");
     const costChart: HTMLElement = document.getElementById("cost-chart")!;
-    drawGoogleChart(userSolarData.value, costChartGoogle);
     drawSolarInsightsChart(userSolarData.value, costChart)
     breakEvenYear.value = getBreakEvenYear(userSolarData.value);
 }
