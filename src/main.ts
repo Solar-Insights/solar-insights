@@ -6,7 +6,7 @@ import router from "@/router";
 import { createPinia } from "pinia";
 import piniaPluginPersistedState from "pinia-plugin-persistedstate";
 // Style
-import vuetifyThemesAndComponents from "@/vuetify/vuetify";
+import vuetifyThemesAndComponents from "@/vuetify";
 import "./assets/main.scss";
 
 // Create app and add required plugins
