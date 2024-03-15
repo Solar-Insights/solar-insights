@@ -77,7 +77,10 @@ export async function drawSolarInsightsChart(userSolarData: UserSolarData, costC
 
     const options = {
         chart: {
-          type: 'line'
+          type: 'line',
+          zoom: {
+            enabled: false
+          }
         },
         series: [
             {
@@ -89,21 +92,30 @@ export async function drawSolarInsightsChart(userSolarData: UserSolarData, costC
                 data: cumulativeCostWithoutSolar
             },
         ],
+        grid: {
+            show: false
+        },
         xaxis: {
             type: "datetime",
             axisBorder: {
-                show: false
+                show: true
             },
             axisTicks: {
-                show: false
+                show: true
             }
         },
         yaxis: {
+            axisBorder: {
+                show: true
+            },
+            axisTicks: {
+                show: true
+            },
             labels: {
                 formatter: function (value: any) {
                     return strToLargeNumberDisplay(value) + "$";
                 }
-            },
+            }
         },
         tooltip: {
             x: {

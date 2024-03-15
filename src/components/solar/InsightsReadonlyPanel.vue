@@ -89,7 +89,8 @@
             </div>
         </div>
 
-        <div id="cost-chart"></div>
+        <div id="cost-chart" :theme="theme"></div>
+        <vue-apex-charts v-if="series.length !== 0" type="line" :series="series" :options="options" height="200px" width="200px"/>
     </v-card>
 </template>
 
@@ -97,6 +98,7 @@
 // Vue
 import { onMounted, watch, ref } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
 // Helpers
 import {
@@ -105,35 +107,147 @@ import {
     installationCostCalc,
     energyCoveredCalc,
     costWithSolarInstallation,
-    costWithoutSolarInstallation
+    costWithoutSolarInstallation,
+    yearlyUtilityBillEstimates,
+    yearlyCostWithoutSolar
 } from "@/helpers/solarMath";
 import { drawSolarInsightsChart } from "@/helpers/solar";
 import { batteryCharging } from "@/helpers/constants";
 import { strToLargeNumberDisplay } from "@/helpers/util";
+import VueApexCharts from "vue3-apexcharts";
+import { UserSolarData } from "@/helpers/types";
+
 
 const solarMapStore = useSolarMapStore();
+const userSessionStore = useUserSessionStore();
 
 const { userSolarData } = storeToRefs(solarMapStore);
+const { theme } = storeToRefs(userSessionStore);
 
 const breakEvenYear = ref(0);
+const chart = ref<ApexCharts>();
 
 onMounted(async () => {
     await drawNewChart();
+    series.value = await timeSeries(userSolarData.value)
 });
 
 watch(userSolarData.value, async () => {
     await drawNewChart();
 });
 
-let chart: ApexCharts;
+watch(theme, () => {
+    updateChartColors();
+})
+
 async function drawNewChart() {
-    if (chart) {
-        chart.destroy();
+    if (chart.value) {
+        chart.value.destroy();
     }
     
     const costChart: HTMLElement = document.getElementById("cost-chart")!;
-    chart = await drawSolarInsightsChart(userSolarData.value, costChart)
-    chart.render();
+    chart.value = await drawSolarInsightsChart(userSolarData.value, costChart)
+    chart.value.render();
+    updateChartColors();
+
     breakEvenYear.value = getBreakEvenYear(userSolarData.value);
 }
+
+function updateChartColors() {
+    const white = "#FFFFFF";
+    const black = "#000000"
+    const textColor = theme.value === "light" ? black : white;
+    chart.value?.updateOptions({ 
+        chart:  {
+            foreColor: textColor
+        }
+    });
+}
+
+const series = ref([] as any[]);
+
+const options = ref({
+    grid: {
+        show: false
+    },
+    xaxis: {
+        type: "datetime",
+        axisBorder: {
+            show: true
+        },
+        axisTicks: {
+            show: true
+        }
+    },
+    yaxis: {
+        axisBorder: {
+            show: true
+        },
+        axisTicks: {
+            show: true
+        },
+        labels: {
+            formatter: function (value: any) {
+                return strToLargeNumberDisplay(value) + "$";
+            }
+        }
+    },
+    tooltip: {
+        x: {
+            format: "yyyy"
+        },
+    },
+    legend: {
+        position: 'top',
+        horizontalAlign: 'left'
+    }
+})
+
+
+
+async function timeSeries(userSolarData: UserSolarData) {
+    const year = new Date().getFullYear();
+    const yearsList = [];
+    for (let i = year; i < year + userSolarData.installationLifespan; i++) {
+        const currentYear = new Date();
+        currentYear.setFullYear(i);
+        yearsList.push(currentYear);
+    }
+
+    let costWithSolar = 0;
+    const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData);
+    const cumulativeCostWithSolar: [Date, number][] = [];
+    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+        costWithSolar +=
+            i == 0
+                ? utilityBillEstimates[i] + installationCostCalc(userSolarData) - userSolarData.solarIncentives
+                : utilityBillEstimates[i];
+        cumulativeCostWithSolar.push([yearsList[i], Math.round(costWithSolar)]);
+    }
+
+    let costWithoutSolar = 0;
+    const yearlyCostWithoutSolarEstimates: number[] = yearlyCostWithoutSolar(userSolarData);
+    const cumulativeCostWithoutSolar: [Date, number][] = [];
+    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+        costWithoutSolar += yearlyCostWithoutSolarEstimates[i];
+        cumulativeCostWithoutSolar.push([yearsList[i], Math.round(costWithoutSolar)]);
+    }
+
+    return [
+        {
+            name: 'Solar',
+            data: cumulativeCostWithSolar
+        },
+        {
+            name: 'Current',
+            data: cumulativeCostWithoutSolar
+        },
+    ]
+}
+/**
+ * Toujours appeler la fonction "drawNewChart" quand on va la modifier
+ * Ajouter une balise "dataChanged" pour recalculer les donnees
+ * Ajouter une balise "theme" pour choisir les colors de la charte
+ */
 </script>
+
