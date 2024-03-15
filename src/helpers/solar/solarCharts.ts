@@ -77,6 +77,7 @@ export function makeTimeSeriesFromUserSolarData(userSolarData: UserSolarData) {
     return [
         {
             name: 'Solar',
+            color: "#FCB103",
             data: cumulativeCostWithSolar
         },
         {
