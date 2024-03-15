@@ -11,6 +11,7 @@ import {
 } from "@/helpers/solarMath";
 import { getGeotiff } from "@/server/solar";
 import { ironPalette, sunlightPalette } from "@/helpers/constants";
+import { strToLargeNumberDisplay } from "@/helpers/util";
 
 export function colorToRGB(color: string): { r: number; g: number; b: number } {
     const hex = color.startsWith("#") ? color.slice(1) : color;
@@ -97,7 +98,13 @@ export async function drawSolarInsightsChart(userSolarData: UserSolarData, costC
                 show: false
             }
         },
-        yaxis: {},
+        yaxis: {
+            labels: {
+                formatter: function (value: any) {
+                    return strToLargeNumberDisplay(value) + "$";
+                }
+            },
+        },
         tooltip: {
             x: {
                 format: "yyyy"

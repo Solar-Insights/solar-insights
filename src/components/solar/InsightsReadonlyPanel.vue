@@ -134,7 +134,6 @@ async function drawNewChart() {
     const costChart: HTMLElement = document.getElementById("cost-chart")!;
     chart = await drawSolarInsightsChart(userSolarData.value, costChart)
     chart.render();
-    
     breakEvenYear.value = getBreakEvenYear(userSolarData.value);
 }
 </script>
