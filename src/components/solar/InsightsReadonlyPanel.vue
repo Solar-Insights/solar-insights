@@ -89,7 +89,12 @@
             </div>
         </div>
 
-        <vue-apex-charts type="line" :series="timeSeries" :options="chartOptions"/>
+        <vue-apex-charts 
+            :class="theme === 'light' ? 'light-theme-chart' : 'dark-theme-chart'" 
+            type="line" 
+            :series="timeSeries" 
+            :options="chartOptions"
+        />
     </v-card>
 </template>
 

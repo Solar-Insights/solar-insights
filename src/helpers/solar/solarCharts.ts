@@ -4,7 +4,6 @@ import { strToLargeNumberDisplay } from "@/helpers/util";
 import { darkColor, lightColor } from "@/helpers/constants";
 
 export function makeChartOptions(theme: Theme) {
-    console.log("theme changed", theme)
     return {
         chart: {
             type: 'line',
@@ -13,24 +12,25 @@ export function makeChartOptions(theme: Theme) {
               enabled: false
             }
         },
-        grid: {
-            show: false
-        },
         xaxis: {
             type: "datetime",
             axisBorder: {
-                show: true
+                show: true,
+                color: textColorBasedOnTheme(theme)
             },
             axisTicks: {
-                show: true
+                show: true,
+                color: textColorBasedOnTheme(theme)
             }
         },
         yaxis: {
             axisBorder: {
-                show: true
+                show: true,
+                color: textColorBasedOnTheme(theme)
             },
             axisTicks: {
-                show: true
+                show: true,
+                color: textColorBasedOnTheme(theme)
             },
             labels: {
                 formatter: function (value: any) {
@@ -46,7 +46,10 @@ export function makeChartOptions(theme: Theme) {
         legend: {
             position: 'top',
             horizontalAlign: 'left'
-        }
+        },
+        grid: {
+            show: false
+        },
     };
 }
 

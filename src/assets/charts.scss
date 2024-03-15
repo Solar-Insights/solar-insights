@@ -1,0 +1,20 @@
+$dark-theme: #212121;
+$dark-theme-lighter: #424242;
+$light-theme: #FFFFFF;
+$light-theme-darker: #dddddd;
+
+.light-theme-chart {
+    .apexcharts-tooltip, .apexcharts-tooltip-title, .apexcharts-xaxistooltip {
+        border: 1px solid $light-theme-darker !important;
+        background-color: $light-theme !important;
+        color: $dark-theme;
+    }
+}
+
+.dark-theme-chart {
+    .apexcharts-tooltip, .apexcharts-tooltip-title, .apexcharts-xaxistooltip {
+        border: 1px solid $dark-theme-lighter !important;
+        background-color: $dark-theme !important;
+        color: $light-theme;
+    }
+}
