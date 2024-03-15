@@ -117,17 +117,24 @@ const { userSolarData } = storeToRefs(solarMapStore);
 
 const breakEvenYear = ref(0);
 
-onMounted(() => {
-    drawNewChart();
+onMounted(async () => {
+    await drawNewChart();
 });
 
-watch(userSolarData.value, () => {
-    drawNewChart();
+watch(userSolarData.value, async () => {
+    await drawNewChart();
 });
 
-function drawNewChart() {
+let chart: ApexCharts;
+async function drawNewChart() {
+    if (chart) {
+        chart.destroy();
+    }
+    
     const costChart: HTMLElement = document.getElementById("cost-chart")!;
-    drawSolarInsightsChart(userSolarData.value, costChart)
+    chart = await drawSolarInsightsChart(userSolarData.value, costChart)
+    chart.render();
+    
     breakEvenYear.value = getBreakEvenYear(userSolarData.value);
 }
 </script>

@@ -55,8 +55,6 @@ export async function drawSolarInsightsChart(userSolarData: UserSolarData, costC
         yearsList.push(currentYear);
     }
 
-    console.log(yearsList)
-
     let costWithSolar = 0;
     const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData);
     const cumulativeCostWithSolar: [Date, number][] = [];
@@ -111,7 +109,7 @@ export async function drawSolarInsightsChart(userSolarData: UserSolarData, costC
         }
       }
       
-      new ApexCharts(costChart, options).render();
+    return new ApexCharts(costChart, options);
 }
 
 export async function getSingleLayer(layerId: LayerId, urls: SolarLayers) {
