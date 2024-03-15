@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 // Helpers
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, Layer, SolarPanelConfig, MapSettings, SolarLayers } from "geo-env-typing/solar";
-import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solarMath";
+import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solar/solarMath";
 import { SolarReadonlyPanel, TimeParameters, UserSolarData } from "@/helpers/types";
 import { panelsPalette } from "@/helpers/constants";
 import {
@@ -13,7 +13,7 @@ import {
     makeDefaultMapSettings,
     makeDefaultTimeParams,
     getSingleLayer
-} from "@/helpers/solar";
+} from "@/helpers/solar/solar";
 // Server
 import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
 

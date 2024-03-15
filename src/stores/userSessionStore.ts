@@ -1,12 +1,14 @@
 // Vue
 import { defineStore } from "pinia";
+// Helpers
 import { VueError } from "@/helpers/customErrors";
+import { Theme } from "@/helpers/types";
 
 export const useUserSessionStore = defineStore("userSessionStore", {
     state: () => ({
         displayAlert: false,
         alert: new VueError(),
-        theme: "light"
+        theme: "light" as Theme
     }),
 
     actions: {

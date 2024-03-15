@@ -50,3 +50,12 @@ export type UserSolarData = {
 export type MapType = "AIR_QUALITY" | "SOLAR";
 
 export type SolarReadonlyPanel = "BUILDING_READONLY" | "INSIGHTS_READONLY";
+
+export type TimeSerie = {
+    name: String,
+    data: TimeSerieData;
+};
+
+export type TimeSerieData = [Date, number][];
+
+export type Theme = "light" | "dark";

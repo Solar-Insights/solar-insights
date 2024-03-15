@@ -112,6 +112,10 @@ export const pollutants: Pollutants = {
 /*
     Solar colors and data
 */
+export const darkColor = "#212121";
+
+export const lightColor = "#FFFFFF";
+
 export const binaryPalette = ["212121", "B3E5FC"];
 
 export const rainbowPalette = ["3949AB", "81D4FA", "66BB6A", "FFE082", "E53935"];
