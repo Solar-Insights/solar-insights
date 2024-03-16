@@ -8,12 +8,16 @@ export function makeChartOptions(theme: Theme) {
         chart: {
             type: 'line',
             foreColor: textColorBasedOnTheme(theme),
+            background: mainColorBasedOnTheme(theme),
             zoom: {
               enabled: false
             }
         },
         xaxis: {
             type: "datetime",
+            tooltip: {
+                enabled: false
+            },
             axisBorder: {
                 show: true,
                 color: textColorBasedOnTheme(theme)
@@ -88,11 +92,11 @@ export function makeTimeSeriesFromUserSolarData(userSolarData: UserSolarData) {
 }
 
 function makeYearsList(userSolarData: UserSolarData) {
-    const currentYear = new Date().getFullYear();
-    const endOfLifespanYear = currentYear + userSolarData.installationLifespan;
+    const firstYear = new Date().getFullYear() + 1;
+    const endOfLifespanYear = firstYear + userSolarData.installationLifespan;
     const yearsList = [];
 
-    for (let i = currentYear; i < endOfLifespanYear; i++) {
+    for (let i = firstYear; i < endOfLifespanYear; i++) {
         const currentYear = new Date();
         currentYear.setFullYear(i);
         yearsList.push(currentYear);

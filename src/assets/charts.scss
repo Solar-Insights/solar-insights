@@ -4,7 +4,7 @@ $light-theme: #FFFFFF;
 $light-theme-darker: #dddddd;
 
 .light-theme-chart {
-    .apexcharts-tooltip, .apexcharts-tooltip-title, .apexcharts-xaxistooltip {
+    .apexcharts-tooltip, .apexcharts-tooltip-title, .apexcharts-xaxistooltip, .apexcharts-menu, .apexcharts-menu-item:hover {
         border: 1px solid $light-theme-darker !important;
         background-color: $light-theme !important;
         color: $dark-theme;
@@ -12,7 +12,7 @@ $light-theme-darker: #dddddd;
 }
 
 .dark-theme-chart {
-    .apexcharts-tooltip, .apexcharts-tooltip-title, .apexcharts-xaxistooltip {
+    .apexcharts-tooltip, .apexcharts-tooltip-title, .apexcharts-xaxistooltip, .apexcharts-menu, .apexcharts-menu-item:hover {
         border: 1px solid $dark-theme-lighter !important;
         background-color: $dark-theme !important;
         color: $light-theme;
