@@ -186,12 +186,13 @@ $light-theme: #FFFFFF;
 .icon-non-selection-color {
 }
 
-.hovering-over-card-style {
-    border: 1px solid $theme;
-}
-
-.not-hovering-over-card-style {
-    border: 1px solid rgba(129, 129, 129, 0.5);
+.pollutant-card {
+    @extend .my-5;
+    @extend .pa-2;
+    @extend .pb-0;
+    @extend .rounded-lg;
+    @extend .text-center;
+    border: 1px solid $light-grey;
 }
 
 .v-divider {
