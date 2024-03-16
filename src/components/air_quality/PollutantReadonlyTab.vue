@@ -11,7 +11,7 @@
                     <div class="me-auto">
                         {{ pollutant.displayName }}
                     </div>
-                    <div :class="isHovering ? 'text-theme' : ''">
+                    <div>
                         {{ pollutant.concentration.value }} {{ concentrationMap[pollutant.concentration.units] }}
                     </div>
                 </div>
@@ -65,13 +65,16 @@
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useAirMapStore } from "@/stores/airMapStore";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 // Helpers
 import { Unit } from "geo-env-typing/air";
 import { pollutants as pollutantsConstants } from "@/helpers/constants";
 
 const airMapStore = useAirMapStore();
+const userSessionStore = useUserSessionStore();
 
 const { airQualityData } = storeToRefs(airMapStore);
+const { theme } = storeToRefs(userSessionStore);
 
 const pollutantsConstantsObject = ref(pollutantsConstants);
 
