@@ -1,0 +1,18 @@
+@use "../../../node_modules/vuetify/_styles.scss";
+@use "../master";
+
+.light-theme-chart {
+    .apexcharts-tooltip, .apexcharts-tooltip-title, .apexcharts-xaxistooltip, .apexcharts-menu, .apexcharts-menu-item:hover {
+        border: 1px solid master.$light-theme-darker !important;
+        background-color: master.$light-theme !important;
+        color: master.$dark-theme;
+    }
+}
+
+.dark-theme-chart {
+    .apexcharts-tooltip, .apexcharts-tooltip-title, .apexcharts-xaxistooltip, .apexcharts-menu, .apexcharts-menu-item:hover {
+        border: 1px solid master.$dark-theme-lighter !important;
+        background-color: master.$dark-theme !important;
+        color: master.$light-theme;
+    }
+}

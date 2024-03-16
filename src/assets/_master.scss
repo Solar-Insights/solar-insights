@@ -1,0 +1,36 @@
+@use "../../../node_modules/vuetify/_styles.scss";
+
+$theme: #50a490;
+$bg-whitey: #fffbfe;
+$light-grey: #949494;
+$scrollbars: #555;
+
+$dark-theme: #212121;
+$light-theme: #FFFFFF;
+$dark-theme-lighter: #424242;
+$light-theme-darker: #dddddd;
+
+.universal-font-theme {
+    @extend .font-weight-light;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.9rem;
+}
+
+.emphasis {
+    @extend .font-weight-medium;
+}
+
+.no-emphasis {
+    @extend .font-weight-light;
+}
+
+.subsection-title {
+    @extend .mb-2;
+    font-size: 1rem;
+}
+
+.detail-text {
+    @extend .pb-1;
+    @extend .font-weight-regular;
+    font-size: 0.75rem;
+}

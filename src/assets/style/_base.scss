@@ -1,14 +1,5 @@
-@import "../node_modules/vuetify/_styles.scss";
-
-/*
-    Variable definitions
-*/
-$theme: #50a490;
-$bg-whitey: #fffbfe;
-$light-grey: #949494;
-$scrollbars: #555;
-$dark-theme: #212121;
-$light-theme: #FFFFFF;
+@use "../../../node_modules/vuetify/_styles.scss";
+@use "../master";
 
 /*
     Phones
@@ -115,7 +106,7 @@ $light-theme: #FFFFFF;
 .map-data {
     flex-grow: 1;
     overflow: auto;
-    scrollbar-color: $scrollbars;
+    scrollbar-color: master.$scrollbars;
 }
 .map-data-mobile {
     @extend .map-data;
@@ -138,7 +129,7 @@ $light-theme: #FFFFFF;
 .map-data::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    background-color: $scrollbars;
+    background-color: master.$scrollbars;
     border-right: 3px solid white;
 }
 .map-data::-webkit-scrollbar-track {
@@ -153,8 +144,8 @@ $light-theme: #FFFFFF;
 */
 .button-selection-border {
     @extend .emphasis;
-    color: $theme;
-    border: 2px solid $theme;
+    color: master.$theme;
+    border: 2px solid master.$theme;
 }
 
 .button-non-selection-border {
@@ -166,7 +157,7 @@ $light-theme: #FFFFFF;
     bottom: -10px;
     width: 100%;
     height: 2px;
-    background: $theme;
+    background: master.$theme;
 }
 
 .button-non-selection-background::before {
@@ -175,12 +166,12 @@ $light-theme: #FFFFFF;
     bottom: -10px;
     width: 100%;
     height: 2px;
-    background: $light-grey;
+    background: master.$light-grey;
     opacity: 0.2;
 }
 
 .icon-selection-color {
-    color: $theme;
+    color: master.$theme;
 }
 
 .icon-non-selection-color {
@@ -192,11 +183,11 @@ $light-theme: #FFFFFF;
     @extend .pb-0;
     @extend .rounded-lg;
     @extend .text-center;
-    border: 1px solid $light-grey;
+    border: 1px solid master.$light-grey;
 }
 
 .hovering-elevation-card {
-    box-shadow: 0px 3px 3px -2px $light-grey, 0px 3px 4px 0px $light-grey, 0px 1px 8px 0px $light-grey !important;
+    box-shadow: 0px 3px 3px -2px master.$light-grey, 0px 3px 4px 0px master.$light-grey, 0px 1px 8px 0px master.$light-grey !important;
 }
 
 .v-divider {

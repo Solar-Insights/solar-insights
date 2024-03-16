@@ -1,5 +1,5 @@
-$dark-theme: #212121;
-$light-theme: #FFFFFF;
+@use "../../../node_modules/vuetify/_styles.scss";
+@use "../master";
 
 .v-btn {
     @extend .universal-font-theme;
