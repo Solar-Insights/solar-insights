@@ -195,6 +195,10 @@ $light-theme: #FFFFFF;
     border: 1px solid $light-grey;
 }
 
+.hovering-elevation-card {
+    box-shadow: 0px 3px 3px -2px $light-grey, 0px 3px 4px 0px $light-grey, 0px 1px 8px 0px $light-grey !important;
+}
+
 .v-divider {
     border-width: 1.5px;
 }

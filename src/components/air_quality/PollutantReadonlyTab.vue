@@ -1,10 +1,10 @@
 <template>
     <template v-for="(pollutant, i) in airQualityData.pollutants" :key="i">
-        <v-hover v-slot="{ isHovering, props }" open-delay="50">
+        <v-hover v-slot="{ isHovering, props }">
             <v-card
                 v-bind="props"
                 class="pollutant-card"
-                :elevation="isHovering ? 5 : 0"
+                :class="isHovering ? 'hovering-elevation-card' : ''"
             >
                 <div class="d-flex">
                     <div class="me-auto">
