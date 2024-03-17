@@ -186,6 +186,12 @@
     @extend .theme-surface-contrast;
 }
 
+.map-input-field {
+    .v-field {
+        @extend .theme-surface-contrast;
+    }
+}
+
 .panel-selection-btn {
     @extend .mx-2;
     @extend .universal-font-theme;
