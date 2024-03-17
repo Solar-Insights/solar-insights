@@ -10,21 +10,25 @@ import { mdi } from "vuetify/iconsets/mdi";
 import "@mdi/font/css/materialdesignicons.css";
 
 const customTheme: ThemeDefinition = {
-    dark: false,
     colors: {
-        background: "#FFFFFF",
-        surface: "#FFFFFF",
-        primary: "#6200EE",
-        "primary-darken-1": "#3700B3",
-        secondary: "#03DAC6",
-        "secondary-darken-1": "#018786",
-        error: "#B00020",
-        info: "#2196F3",
-        success: "#4CAF50",
-        warning: "#FB8C00",
-        theme: "#50a490",
-        "text-emphasis": "#535353",
-        "bg-whitey": "#fffbfe"
+        "theme": "rgba(80, 164, 144, 1)",
+        "theme-darker-1": "rgba(72, 147, 129, 1)",
+        "theme-darker-2": "rgba(64, 131, 115, 1)",
+        "theme-darker-3": "rgba(56, 114, 100, 1)",
+        "theme-darker-4": "rgba(48, 98, 86, 1)",
+        "theme-lighter-1": "rgba(97, 173, 155, 1)",
+        "theme-lighter-2": "rgba(115, 182, 166, 1)",
+        "theme-lighter-3": "rgba(132, 191, 177, 1)",
+        "theme-lighter-4": "rgba(150, 200, 188, 1)",
+        
+        "dark-surface": "rgba(18, 18, 18, 1)",
+        "dark-surface-lighter-1": "rgba(33, 33, 33, 1)",
+        
+        "light-surface": "rgba(255, 255, 255, 1)",
+        "light-surface-darker-1": "rgba(221, 221, 221, 1)",
+        
+        "scrollbars": "rgba(85, 85, 85, 1)",
+        "light-grey": "rgba(148, 148, 148, 1)"
     }
 };
 
