@@ -183,7 +183,7 @@
     @extend .pb-0;
     @extend .rounded-lg;
     @extend .text-center;
-    border: 1px solid master.$light-grey;
+    @extend .theme-surface-contrast;
 }
 
 .hovering-elevation-card {
