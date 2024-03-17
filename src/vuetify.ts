@@ -11,11 +11,13 @@ import "@mdi/font/css/materialdesignicons.css";
 
 const customTheme: ThemeDefinition = {
     colors: {
+
         "theme": "rgba(80, 164, 144, 1)",
         "theme-darker-1": "rgba(72, 147, 129, 1)",
         "theme-darker-2": "rgba(64, 131, 115, 1)",
         "theme-darker-3": "rgba(56, 114, 100, 1)",
         "theme-darker-4": "rgba(48, 98, 86, 1)",
+
         "theme-lighter-1": "rgba(97, 173, 155, 1)",
         "theme-lighter-2": "rgba(115, 182, 166, 1)",
         "theme-lighter-3": "rgba(132, 191, 177, 1)",

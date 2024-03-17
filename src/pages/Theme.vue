@@ -45,7 +45,16 @@
 
         <v-row class="d-flex align-center justify-center">
             <v-card class="ma-1 flex-grow-1" v-for="i in 5">
-                <v-card style="background-color: rgba(80, 164, 144, 0.16);">
+                <v-card class="theme-surface-contrast">
+                    <v-card-title> v-card </v-card-title>
+                    <v-card-text></v-card-text>
+                </v-card>
+            </v-card>
+        </v-row>
+
+        <v-row class="d-flex align-center justify-center">
+            <v-card class="ma-1 flex-grow-1" v-for="i in 5">
+                <v-card class="dark-surface-lighter-1">
                     <v-card-title> v-card </v-card-title>
                     <v-card-text></v-card-text>
                 </v-card>
