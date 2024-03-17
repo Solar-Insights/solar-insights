@@ -10,6 +10,7 @@ const router = createRouter({
         { path: "/", name: "home", component: () => import("@/pages/Home.vue") },
         { path: "/air-quality-map", name: "air-quality-map", component: () => import("@/pages/AirQualityMap.vue") },
         { path: "/solar-map", name: "solar-map", component: () => import("@/pages/SolarMap.vue") },
+        { path: "/theme", name: "theme", component: () => import("@/pages/Theme.vue") },
         { path: "/:catchAll(.*)", name: "catch-all", component: () => import("@/pages/CatchAll.vue") }
     ]
 });

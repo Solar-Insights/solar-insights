@@ -51,6 +51,12 @@ const routes = ref([
         displayedName: "Air Quality",
         icon: "mdi-weather-windy",
         displaysAppBar: false
+    },
+    {
+        routeName: "theme",
+        displayedName: "Theme",
+        icon: "mdi-paint",
+        displaysAppBar: true,
     }
 ]);
 
