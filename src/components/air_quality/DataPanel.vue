@@ -27,23 +27,21 @@
                 </div>
             </div>
 
-            <div class="mb-4">
+            <div class="mb-4 d-flex">
                 <v-btn
                     @click="readonlyPanel = 0"
-                    class="w-50 universal-font-theme"
-                    :class="readonlyPanel == 0 ? 'button-selection-border' : ''"
-                    :prepend-icon="readonlyPanel == 0 ? 'mdi-alert' : 'mdi-alert-outline'"
-                    variant="outlined"
+                    class="panel-selection-btn"
+                    :class="readonlyPanel === 0 ? 'bg-theme-darker-3' : 'bg-theme'"
+                    :prepend-icon="readonlyPanel === 0 ? 'mdi-alert' : 'mdi-alert-outline'"
                     :ripple="false"
                 >
                     Pollutants
                 </v-btn>
                 <v-btn
                     @click="readonlyPanel = 1"
-                    class="w-50 universal-font-theme"
-                    :class="readonlyPanel == 1 ? 'button-selection-border' : ''"
-                    :prepend-icon="readonlyPanel == 1 ? 'mdi-heart' : 'mdi-heart-outline'"
-                    variant="outlined"
+                    class="panel-selection-btn"
+                    :class="readonlyPanel === 1 ? 'bg-theme-darker-3' : 'bg-theme'"
+                    :prepend-icon="readonlyPanel === 1 ? 'mdi-heart' : 'mdi-heart-outline'"
                     :ripple="false"
                 >
                     Health

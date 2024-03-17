@@ -179,11 +179,17 @@
 
 .pollutant-card {
     @extend .my-5;
-    @extend .pa-2;
+    @extend .pa-3;
     @extend .pb-0;
     @extend .rounded-lg;
     @extend .text-center;
     @extend .theme-surface-contrast;
+}
+
+.panel-selection-btn {
+    @extend .mx-2;
+    @extend .universal-font-theme;
+    width: calc(50% - 16px);
 }
 
 .hovering-elevation-card {

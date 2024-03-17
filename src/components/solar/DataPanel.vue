@@ -3,20 +3,18 @@
         <div class="mb-4">
             <v-btn
                 @click="solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
-                class="w-50"
-                :class="solarReadonlyPanel === 'BUILDING_READONLY' ? 'button-selection-border' : ''"
+                class="panel-selection-btn"
+                :class="solarReadonlyPanel === 'BUILDING_READONLY' ? 'bg-theme-darker-3' : 'bg-theme'"
                 :prepend-icon="solarReadonlyPanel === 'BUILDING_READONLY' ? 'mdi-home' : 'mdi-home-outline'"
-                variant="outlined"
                 :ripple="false"
             >
                 Building
             </v-btn>
             <v-btn
                 @click="solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY')"
-                class="w-50"
-                :class="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'button-selection-border' : ''"
-                :prepend-icon="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'mdi-transmission-tower' : 'mdi-transmission-tower'"
-                variant="outlined"
+                class="panel-selection-btn"
+                :class="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'bg-theme-darker-3' : 'bg-theme'"
+                :prepend-icon="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'mdi-flash' : 'mdi-flash-outline'"
                 :ripple="false"
             >
                 Insights
