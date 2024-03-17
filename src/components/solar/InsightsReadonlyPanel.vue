@@ -6,7 +6,7 @@
     >
         <v-card-title class="text-center font-weight-regular pl-0 mb-4">
             <div class="d-flex mb-3">
-                <v-icon class="mr-3" color="theme">mdi-weather-sunny</v-icon>
+                <v-icon class="mr-3" color="theme">mdi-flash-outline</v-icon>
                 <div class="my-auto">Solar Insights</div>
             </div>
             <v-divider style="border-width: 2px" />
