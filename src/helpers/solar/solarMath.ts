@@ -158,7 +158,6 @@ export function costWithoutSolarInstallation(userSolarData: UserSolarData) {
 }
 
 export function getBreakEvenYear(userSolarData: UserSolarData) {
-    const year = new Date().getFullYear();
     let breakEvenYear: number = 0;
 
     let costWithSolar = 0;
