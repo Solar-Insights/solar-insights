@@ -1,5 +1,6 @@
 // Vue
 import { defineStore } from "pinia";
+import { toRaw } from "vue";
 // Helpers
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, Layer, SolarPanelConfig, MapSettings, SolarLayers } from "geo-env-typing/solar";
@@ -94,7 +95,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         removeSolarPanelsFromMap() {
-            this.solarPanels.map((panel) => panel.setMap(null));
+            this.solarPanels.map((panel) => toRaw(panel).setMap(null));
             this.solarPanels = [];
         },
 
