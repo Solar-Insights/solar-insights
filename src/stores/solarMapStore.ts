@@ -4,7 +4,7 @@ import { toRaw } from "vue";
 // Helpers
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, Layer, SolarPanelConfig, MapSettings, SolarLayers } from "geo-env-typing/solar";
-import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solar/solarMath";
+import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize, makeCumulativeCostWithoutSolar, makeCumulativeCostWithSolar } from "@/helpers/solar/solarMath";
 import { SolarReadonlyPanel, TimeParameters, UserSolarData } from "@/helpers/types";
 import { panelsPalette } from "@/helpers/constants";
 import {
@@ -88,11 +88,53 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         setOptimizedSavingsConfig() {
+            let configId: number | undefined;
+            let maxSavings: number = 0;
 
+            for (let i = 0; i < this.buildingInsights.solarPotential.solarPanelConfigs.length; i++) {
+                const userSolarDataForSpecificConfigId: UserSolarData = this.createUserSolarDataForSpecificConfigId(i);
+                const finalCumulativeCostWithSolar: number = makeCumulativeCostWithSolar(userSolarDataForSpecificConfigId).pop()!;
+                const finalCumulativeCostWithoutSolar: number = makeCumulativeCostWithoutSolar(userSolarDataForSpecificConfigId).pop()!;
+                const solarSavings = finalCumulativeCostWithoutSolar - finalCumulativeCostWithSolar;
+
+                if (i === 0) {
+                    maxSavings = solarSavings;
+                } else if (solarSavings < maxSavings) {
+                    configId = i;
+                    break;
+                } else {
+                    maxSavings = solarSavings;
+                }
+            }
+
+            this.setConfigId(configId);
+        },
+
+        createUserSolarDataForSpecificConfigId(configIdIndex: number) {
+            const userSolarDataCopy: UserSolarData = JSON.parse(JSON.stringify(this.userSolarData));
+            // Only these parameters change based on the configId
+            userSolarDataCopy.panelCount = this.buildingInsights.solarPotential.solarPanelConfigs[configIdIndex].panelsCount;
+            userSolarDataCopy .yearlyEnergyDcKwh = this.buildingInsights.solarPotential.solarPanelConfigs[configIdIndex].yearlyEnergyDcKwh;
+
+            return userSolarDataCopy;
         },
 
         setOptimizedBreakevenConfig() {
+            let configId: number | undefined;
 
+            for (let i = 0; i < this.buildingInsights.solarPotential.solarPanelConfigs.length; i++) {
+                if (
+                    this.buildingInsights.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh *
+                        panelCapacityRatioCalc(this.userSolarData) *
+                        dcToAcDerate(this.userSolarData) >=
+                    yearlyEnergyConsumptionKwh(this.userSolarData)
+                ) {
+                    configId = i;
+                    break;
+                }
+            }
+
+            this.setConfigId(configId);
         },
 
         setConfigId(newConfigId: number | undefined) {
