@@ -21,8 +21,8 @@
             </v-btn>
         </div>
 
-        <v-expansion-panels variant="accordion">
-            <v-expansion-panel elevation="0">
+        <v-expansion-panels variant="accordion" v-model="expansionPanels">
+            <v-expansion-panel elevation="0" value="panels">
                 <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
                     <v-icon class="mr-3">mdi-solar-power-variant-outline</v-icon> <span class="my-auto"> Panels </span>
                 </v-expansion-panel-title>
@@ -118,7 +118,7 @@
                 </v-expansion-panel-text>
             </v-expansion-panel>
 
-            <v-expansion-panel elevation="0">
+            <v-expansion-panel elevation="0" panel="costs">
                 <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
                     <v-icon class="mr-3">mdi-cash</v-icon> <span class="my-auto"> Costs and Incentives </span>
                 </v-expansion-panel-title>
@@ -217,7 +217,7 @@
                 </v-expansion-panel-text>
             </v-expansion-panel>
 
-            <v-expansion-panel elevation="0">
+            <v-expansion-panel elevation="0" value="settings">
                 <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
                     <v-icon class="mr-3">mdi-cog-outline</v-icon> <span class="my-auto"> Settings </span>
                 </v-expansion-panel-title>
@@ -298,6 +298,7 @@ const { buildingInsights, mapSettings, userSolarData, solarReadonlyPanel } = sto
 
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
+const expansionPanels = ref(["panels"]);
 
 const emits = defineEmits(["showBuildingReadonlyPanel", "showInsightsReadonlyPanel"]);
 
