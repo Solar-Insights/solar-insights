@@ -39,7 +39,7 @@
     @extend .mx-4;
 }
 .autocomplete-search {
-    @extend .map-input-field;
+    
 }
 .autocomplete-search-mobile {
     @extend .autocomplete-search;
@@ -187,16 +187,10 @@
     @extend .theme-surface-contrast;
 }
 
-.map-input-field {
-    .v-field {
-        @extend .theme-surface-contrast;
-    }
-}
-
 .panel-selection-btn {
-    @extend .mx-2;
+    @extend .mx-1;
     @extend .universal-font-theme;
-    width: calc(50% - 16px);
+    width: calc(50% - 10px);
 }
 
 .hovering-elevation-card {

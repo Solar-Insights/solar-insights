@@ -66,7 +66,6 @@
                             label="Power rating (capacity)"
                             density="compact"
                             variant="outlined"
-                            class="map-input-field"
                             type="number"
                             prepend-inner-icon="mdi-lightning-bolt"
                         >
@@ -97,7 +96,6 @@
                                     label="DC to AC conversion"
                                     density="compact"
                                     variant="outlined"
-                                    class="map-input-field"
                                     type="number"
                                     prepend-inner-icon="mdi-handshake"
                                 >
@@ -109,7 +107,6 @@
                                     label="Panel efficiency decline per year"
                                     density="compact"
                                     variant="outlined"
-                                    class="map-input-field"
                                     type="number"
                                     prepend-inner-icon="mdi-elevation-decline"
                                 >
@@ -138,7 +135,6 @@
                             label="Average monthly energy cost"
                             density="compact"
                             variant="outlined"
-                            class="map-input-field"
                             type="number"
                             prepend-inner-icon="mdi-calendar-month-outline"
                         >
@@ -149,7 +145,6 @@
                             label="Energy cost per kWh"
                             density="compact"
                             variant="outlined"
-                            class="map-input-field"
                             type="number"
                             prepend-inner-icon="mdi-currency-usd"
                         >
@@ -160,7 +155,6 @@
                             label="Installation cost per Watt"
                             density="compact"
                             variant="outlined"
-                            class="map-input-field"
                             type="number"
                             prepend-inner-icon="mdi-hammer"
                         >
@@ -171,7 +165,6 @@
                             label="Solar incentives"
                             density="compact"
                             variant="outlined"
-                            class="map-input-field"
                             type="number"
                             prepend-inner-icon="mdi-handshake"
                         >
@@ -202,7 +195,6 @@
                                     label="Energy cost increase per year"
                                     density="compact"
                                     variant="outlined"
-                                    class="map-input-field"
                                     type="number"
                                     prepend-inner-icon="mdi-chart-line-variant"
                                 >
@@ -214,7 +206,6 @@
                                     label="Discount rate per year"
                                     density="compact"
                                     variant="outlined"
-                                    class="map-input-field"
                                     type="number"
                                     prepend-inner-icon="mdi-cart-percent"
                                 >
@@ -246,7 +237,6 @@
                             label="Displayed solar data"
                             density="compact"
                             variant="outlined"
-                            class="map-input-field"
                             prepend-inner-icon="mdi-magnify"
                         >
                         </v-select>
