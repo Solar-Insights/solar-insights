@@ -39,6 +39,7 @@
     @extend .mx-4;
 }
 .autocomplete-search {
+    @extend .map-input-field;
 }
 .autocomplete-search-mobile {
     @extend .autocomplete-search;
