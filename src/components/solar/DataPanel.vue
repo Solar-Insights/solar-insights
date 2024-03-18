@@ -33,11 +33,11 @@
                     </div>
 
                     <div>
-                        <v-card @click="solarMapStore.setOptimizedSavingsConfig" class="optimization-card" variant="flat"> 
+                        <v-card @click="solarMapStore.setOptimizedSavingsConfig" class="optimization-card" variant="outlined"> 
                             <v-card-item class="pt-0 px-0" prepend-icon="mdi-currency-usd"> Maximize total savings </v-card-item>
                             <v-card-item class="pa-0 detail-text" prepend-icon="null"> Configuration providing the highest savings at the end of the installation's lifespan. Used by default on new queries. </v-card-item>
                         </v-card> 
-                        <v-card @click="solarMapStore.setOptimizedEnergyCoveredConfig" class="optimization-card" variant="flat"> 
+                        <v-card @click="solarMapStore.setOptimizedEnergyCoveredConfig" class="optimization-card" variant="outlined"> 
                             <v-card-item class="pt-0 px-0" prepend-icon="mdi-home-battery"> Maximize energy covered </v-card-item>
                             <v-card-item class="pa-0 detail-text" prepend-icon="null"> Configuration covering the most of the building's annual energy needs, or the first configuration that covers it all. </v-card-item>
                         </v-card> 
