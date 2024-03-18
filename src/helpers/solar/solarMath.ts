@@ -196,3 +196,32 @@ export function getBreakEvenYear(userSolarData: UserSolarData) {
 
     return breakEvenYear;
 }
+
+export function makeCumulativeCostWithoutSolar(userSolarData: UserSolarData) {
+    const yearlyCostWithoutSolarEstimates: number[] = yearlyCostWithoutSolar(userSolarData);
+    const cumulativeCostWithoutSolar: number[] = [];
+    let cumulation = 0;
+
+    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+        cumulation += yearlyCostWithoutSolarEstimates[i];
+        cumulativeCostWithoutSolar.push(Math.round(cumulation));
+    }
+
+    return cumulativeCostWithoutSolar;
+}
+
+export function makeCumulativeCostWithSolar(userSolarData: UserSolarData) {
+    const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData);
+    const cumulativeCostWithSolar: number[] = [];
+    let cumulation = 0;
+
+    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+        cumulation +=
+            i == 0
+                ? utilityBillEstimates[i] + installationCostCalc(userSolarData) - userSolarData.solarIncentives
+                : utilityBillEstimates[i];
+        cumulativeCostWithSolar.push(Math.round(cumulation));
+    }
+
+    return cumulativeCostWithSolar;
+}
