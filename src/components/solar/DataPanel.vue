@@ -24,7 +24,6 @@
         <div>
             <v-btn @click="solarMapStore.setOptimizedEnergyCoveredConfig"> Optimize for energy covered </v-btn>
             <v-btn @click="solarMapStore.setOptimizedSavingsConfig"> Optimize for savings </v-btn>
-            <v-btn @click="solarMapStore.setOptimizedBreakevenConfig"> Optimize for breakeven </v-btn>
         </div>
 
         <v-expansion-panels variant="accordion" v-model="expansionPanels">

@@ -119,24 +119,6 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             return userSolarDataCopy;
         },
 
-        setOptimizedBreakevenConfig() {
-            let configId: number | undefined;
-
-            for (let i = 0; i < this.buildingInsights.solarPotential.solarPanelConfigs.length; i++) {
-                if (
-                    this.buildingInsights.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh *
-                        panelCapacityRatioCalc(this.userSolarData) *
-                        dcToAcDerate(this.userSolarData) >=
-                    yearlyEnergyConsumptionKwh(this.userSolarData)
-                ) {
-                    configId = i;
-                    break;
-                }
-            }
-
-            this.setConfigId(configId);
-        },
-
         setConfigId(newConfigId: number | undefined) {
             if (newConfigId === undefined) {
                 this.mapSettings.configIdIndex = this.buildingInsights.solarPotential.solarPanelConfigs.length - 1;
