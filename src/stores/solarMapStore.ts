@@ -50,8 +50,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
                     // Handle error
                 });
 
-            this.syncTemplateVariableFollowingNewRequest();
-            await this.syncMapWithNewRequest();
+            this.syncTemplateVariablesAndMapFollowingNewRequest();
         },
 
         setNewCenterCoord(coord: LatLng) {
@@ -59,7 +58,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             this.map.setCenter(coord);
         },
 
-        syncTemplateVariableFollowingNewRequest() {
+        syncTemplateVariablesAndMapFollowingNewRequest() {
             this.userSolarData.minPanelCount = this.buildingInsights.solarPotential.solarPanelConfigs[0].panelsCount;
             this.userSolarData.defaultPanelCapacityWatts = this.buildingInsights.solarPotential.panelCapacityWatts;
             this.userSolarData.maxPanelCount =
@@ -67,10 +66,12 @@ export const useSolarMapStore = defineStore("solarMapStore", {
                     this.buildingInsights.solarPotential.solarPanelConfigs.length - 1
                 ].panelsCount;
 
-            this.mapSettings.configIdIndex = this.getConfigIdForFullEnergyCoverage();
+            this.setOptimizedEnergyCoveredConfig();
         },
 
-        getConfigIdForFullEnergyCoverage() {
+        setOptimizedEnergyCoveredConfig() {
+            let configId: number | undefined;
+
             for (let i = 0; i < this.buildingInsights.solarPotential.solarPanelConfigs.length; i++) {
                 if (
                     this.buildingInsights.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh *
@@ -78,10 +79,30 @@ export const useSolarMapStore = defineStore("solarMapStore", {
                         dcToAcDerate(this.userSolarData) >=
                     yearlyEnergyConsumptionKwh(this.userSolarData)
                 ) {
-                    return i;
+                    configId = i;
+                    break;
                 }
             }
-            return this.buildingInsights.solarPotential.solarPanelConfigs.length - 1;
+
+            this.setConfigId(configId);
+        },
+
+        setOptimizedSavingsConfig() {
+
+        },
+
+        setOptimizedBreakevenConfig() {
+
+        },
+
+        setConfigId(newConfigId: number | undefined) {
+            if (newConfigId === undefined) {
+                this.mapSettings.configIdIndex = this.buildingInsights.solarPotential.solarPanelConfigs.length - 1;
+            } else {
+                this.mapSettings.configIdIndex = newConfigId;
+            }
+
+            this.panelCountChange();
         },
 
         async syncMapWithNewRequest() {
