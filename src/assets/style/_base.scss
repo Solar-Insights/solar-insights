@@ -190,7 +190,15 @@
 .panel-selection-btn {
     @extend .mx-1;
     @extend .universal-font-theme;
+    @extend .text-left;
     width: calc(50% - 10px);
+}
+
+.optimization-card {
+    @extend .w-100;
+    @extend .pa-1;
+    @extend .my-3;
+    @extend .universal-font-theme;
 }
 
 .hovering-elevation-card {
