@@ -65,10 +65,9 @@ import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
 // Helpers
 import { strToLargeNumberDisplay } from "@/helpers/util";
-import { installationSizeCalc } from "@/helpers/solar/solarMath";
+import { installationSizeCalc } from "@/helpers/solar/solarDataMath";
 
 const solarMapStore = useSolarMapStore();
 
 const { buildingInsights, userSolarData } = storeToRefs(solarMapStore);
 </script>
-@/helpers/solar/solarMath@/helpers/solar/solarMath

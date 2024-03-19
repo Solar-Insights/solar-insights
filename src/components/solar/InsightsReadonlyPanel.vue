@@ -106,14 +106,13 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
 // Helpers
 import {
-    getBreakEvenYear,
     yearlyEnergyCalc,
     installationCostCalc,
     energyCoveredCalc,
     costWithSolarInstallation,
-    costWithoutSolarInstallation
-} from "@/helpers/solar/solarMath";
-import { makeChartOptions, makeTimeSeriesFromUserSolarData } from "@/helpers/solar/solarCharts";
+} from "@/helpers/solar/solarDataMath";
+import { getBreakEvenYear, costWithoutSolarInstallation} from "@/helpers/solar/yearlyAndCumulativeCosts";
+import { makeChartOptions, makeTimeSeriesFromUserSolarData } from "@/helpers/solar/charts";
 import { batteryCharging } from "@/helpers/constants";
 import { strToLargeNumberDisplay } from "@/helpers/util";
 import VueApexCharts from "vue3-apexcharts";
