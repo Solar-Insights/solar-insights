@@ -3,18 +3,14 @@ import { defineStore } from "pinia";
 import { toRaw } from "vue";
 // Helpers
 import { LatLng } from "geo-env-typing/geo";
-import { BuildingInsights, Layer, SolarPanelConfig, MapSettings, SolarLayers } from "geo-env-typing/solar";
-import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solar/solarDataMath";
-import { makeCumulativeCostWithoutSolar, makeCumulativeCostWithSolar } from "@/helpers/solar/yearlyAndCumulativeCosts"
+import { BuildingInsights, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
 import { SolarReadonlyPanel, TimeParameters, UserSolarData } from "@/helpers/types";
-import { panelsPalette } from "@/helpers/constants";
-import { rgbToColor, createPalette } from "@/helpers/solar/colorPalettes";
-import { getSingleLayer } from "@/helpers/solar/geotiffs";
 import { makeDefaultUserSolarDataObject, makeDefaultMapSettings, makeDefaultTimeParams, } from "@/helpers/solar/defaultData";
 // Server
-import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
+import { getClosestBuildingInsights } from "@/server/solar";
 import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/panels";
 import { getLayerFromBuildingInsights } from "@/helpers/solar/layers";
+import { getOptimizedEnergyCoveredConfigId, getOptimizedSavingsConfigId } from "@/helpers/solar/optimizeSolarConfig";
 
 export const useSolarMapStore = defineStore("solarMapStore", {
     state: () => ({
@@ -67,53 +63,13 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         setOptimizedEnergyCoveredConfig() {
-            let configId: number | undefined;
-
-            for (let i = 0; i < this.buildingInsights.solarPotential.solarPanelConfigs.length; i++) {
-                if (
-                    this.buildingInsights.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh *
-                        panelCapacityRatioCalc(this.userSolarData) *
-                        dcToAcDerate(this.userSolarData) >=
-                    yearlyEnergyConsumptionKwh(this.userSolarData)
-                ) {
-                    configId = i;
-                    break;
-                }
-            }
-
+            const configId: number | undefined = getOptimizedEnergyCoveredConfigId(this.buildingInsights, this.userSolarData);
             this.setConfigId(configId);
         },
 
         setOptimizedSavingsConfig() {
-            let configId: number | undefined;
-            let maxSavings: number = 0;
-
-            for (let i = 0; i < this.buildingInsights.solarPotential.solarPanelConfigs.length; i++) {
-                const userSolarDataForSpecificConfigId: UserSolarData = this.createUserSolarDataForSpecificConfigId(i);
-                const finalCumulativeCostWithSolar: number = makeCumulativeCostWithSolar(userSolarDataForSpecificConfigId).pop()!;
-                const finalCumulativeCostWithoutSolar: number = makeCumulativeCostWithoutSolar(userSolarDataForSpecificConfigId).pop()!;
-                const solarSavings = finalCumulativeCostWithoutSolar - finalCumulativeCostWithSolar;
-
-                if (i === 0) {
-                    maxSavings = solarSavings;
-                } else if (solarSavings < maxSavings) {
-                    configId = i;
-                    break;
-                } else {
-                    maxSavings = solarSavings;
-                }
-            }
-
+            const configId: number | undefined = getOptimizedSavingsConfigId(this.buildingInsights, this.userSolarData);
             this.setConfigId(configId);
-        },
-
-        createUserSolarDataForSpecificConfigId(configIdIndex: number) {
-            const userSolarDataCopy: UserSolarData = JSON.parse(JSON.stringify(this.userSolarData));
-            // Only these parameters change based on the configId
-            userSolarDataCopy.panelCount = this.buildingInsights.solarPotential.solarPanelConfigs[configIdIndex].panelsCount;
-            userSolarDataCopy .yearlyEnergyDcKwh = this.buildingInsights.solarPotential.solarPanelConfigs[configIdIndex].yearlyEnergyDcKwh;
-
-            return userSolarDataCopy;
         },
 
         setConfigId(newConfigId: number | undefined) {
@@ -176,7 +132,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             }
 
             this.layer = await getLayerFromBuildingInsights(this.buildingInsights, this.mapSettings);
-            
+
             this.resetHeatmapLayer();
         },
 
