@@ -14,6 +14,7 @@ import { makeDefaultUserSolarDataObject, makeDefaultMapSettings, makeDefaultTime
 // Server
 import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
 import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/panels";
+import { getLayerFromBuildingInsights } from "@/helpers/solar/layers";
 
 export const useSolarMapStore = defineStore("solarMapStore", {
     state: () => ({
@@ -22,7 +23,6 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         userSolarData: makeDefaultUserSolarDataObject() as UserSolarData,
         timeParams: makeDefaultTimeParams() as TimeParameters,
         layer: undefined as Layer | undefined,
-        dataLayersResponse: null as SolarLayers | null,
         overlays: [] as google.maps.GroundOverlay[],
         showRoofOnly: false,
 
@@ -171,40 +171,17 @@ export const useSolarMapStore = defineStore("solarMapStore", {
                 this.resetDataLayer();
             }
 
-            if (this.mapSettings.layerId == null || this.buildingInsights == null) {
+            if (this.mapSettings.layerId == null || this.buildingInsights == null || this.layer) {
                 return;
             }
 
-            if (!this.layer) {
-                const geometryLib = await this.geometryLibrary;
-                const center: LatLng = {
-                    lat: this.buildingInsights.center.latitude,
-                    lng: this.buildingInsights.center.longitude
-                };
-                const ne = this.buildingInsights.boundingBox.ne;
-                const sw = this.buildingInsights.boundingBox.sw;
-                const diameter = geometryLib.spherical.computeDistanceBetween(
-                    new google.maps.LatLng(ne.latitude, ne.longitude),
-                    new google.maps.LatLng(sw.latitude, sw.longitude)
-                );
-                const radius = Math.ceil(diameter / 2);
-
-                try {
-                    this.dataLayersResponse = await getSolarLayers(center, radius);
-                    this.layer = await getSingleLayer(this.mapSettings.layerId, this.dataLayersResponse as SolarLayers);
-                } catch (error) {
-                    return;
-                }
-            }
-
+            this.layer = await getLayerFromBuildingInsights(this.buildingInsights, this.mapSettings);
+            
             this.resetHeatmapLayer();
         },
 
         resetDataLayer() {
-            this.dataLayersResponse = null;
             this.layer = undefined;
-
-            // Default values per layer.
             this.showRoofOnly = ["annualFlux", "monthlyFlux", "hourlyShade"].includes(this.mapSettings.layerId);
             this.map.setMapTypeId("satellite");
         },
