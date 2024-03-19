@@ -1,5 +1,5 @@
 import { Theme, TimeSerie, TimeSerieData, UserSolarData } from "@/helpers/types";
-import { makeCumulativeCostWithoutSolar, makeCumulativeCostWithSolar } from "@/helpers/solar/solarMath";
+import { makeCumulativeCostWithoutSolar, makeCumulativeCostWithSolar } from "@/helpers/solar/yearlyAndCumulativeCosts";
 import { strToLargeNumberDisplay } from "@/helpers/util";
 import { darkColor, lightColor } from "@/helpers/constants";
 

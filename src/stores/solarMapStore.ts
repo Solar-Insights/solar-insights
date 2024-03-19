@@ -4,17 +4,12 @@ import { toRaw } from "vue";
 // Helpers
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, Layer, SolarPanelConfig, MapSettings, SolarLayers } from "geo-env-typing/solar";
-import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize, makeCumulativeCostWithoutSolar, makeCumulativeCostWithSolar } from "@/helpers/solar/solarMath";
+import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh, normalize } from "@/helpers/solar/solarDataMath";
+import { makeCumulativeCostWithoutSolar, makeCumulativeCostWithSolar } from "@/helpers/solar/yearlyAndCumulativeCosts"
 import { SolarReadonlyPanel, TimeParameters, UserSolarData } from "@/helpers/types";
 import { panelsPalette } from "@/helpers/constants";
-import {
-    rgbToColor,
-    createPalette,
-    makeDefaultUserSolarDataObject,
-    makeDefaultMapSettings,
-    makeDefaultTimeParams,
-    getSingleLayer
-} from "@/helpers/solar/solar";
+import { rgbToColor, createPalette, getSingleLayer } from "@/helpers/solar/colorsAndLayers";
+import { makeDefaultUserSolarDataObject, makeDefaultMapSettings, makeDefaultTimeParams, } from "@/helpers/solar/defaultData";
 // Server
 import { getClosestBuildingInsights, getSolarLayers } from "@/server/solar";
 
