@@ -2,7 +2,11 @@
 @use "../master";
 
 .light-theme-chart {
-    .apexcharts-tooltip, .apexcharts-tooltip-title, .apexcharts-xaxistooltip, .apexcharts-menu, .apexcharts-menu-item:hover {
+    .apexcharts-tooltip,
+    .apexcharts-tooltip-title,
+    .apexcharts-xaxistooltip,
+    .apexcharts-menu,
+    .apexcharts-menu-item:hover {
         border: 1px solid master.$light-surface-darker-1 !important;
         background-color: master.$light-surface !important;
         color: master.$dark-surface;
@@ -10,7 +14,11 @@
 }
 
 .dark-theme-chart {
-    .apexcharts-tooltip, .apexcharts-tooltip-title, .apexcharts-xaxistooltip, .apexcharts-menu, .apexcharts-menu-item:hover {
+    .apexcharts-tooltip,
+    .apexcharts-tooltip-title,
+    .apexcharts-xaxistooltip,
+    .apexcharts-menu,
+    .apexcharts-menu-item:hover {
         border: 1px solid master.$dark-surface-lighter-1 !important;
         background-color: master.$dark-surface !important;
         color: master.$light-surface;

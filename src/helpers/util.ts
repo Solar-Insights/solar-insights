@@ -163,7 +163,7 @@ export function prepareHandlerEnterKeyOnSearchBar() {
 }
 
 function handleEnterKeyOnSearchBar(autocompleteSearch: HTMLInputElement) {
-    console.log("yuh")
+    console.log("yuh");
     autocompleteSearch.dispatchEvent(
         new KeyboardEvent("keydown", {
             key: "ArrowDown",

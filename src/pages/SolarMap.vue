@@ -7,7 +7,7 @@
         >
             <map-header :coord="centerCoord" @sync-with-new-request="solarMapStore.syncWithNewRequest" />
 
-            <data-panel/>
+            <data-panel />
         </v-card>
 
         <map-layers />

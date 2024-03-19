@@ -52,7 +52,7 @@ export type MapType = "AIR_QUALITY" | "SOLAR";
 export type SolarReadonlyPanel = "BUILDING_READONLY" | "INSIGHTS_READONLY";
 
 export type TimeSerie = {
-    name: String,
+    name: String;
     data: TimeSerieData;
 };
 

@@ -6,11 +6,11 @@ import { darkColor, lightColor } from "@/helpers/constants";
 export function makeChartOptions(theme: Theme) {
     return {
         chart: {
-            type: 'line',
+            type: "line",
             foreColor: textColorBasedOnTheme(theme),
             background: mainColorBasedOnTheme(theme),
             zoom: {
-              enabled: false
+                enabled: false
             }
         },
         xaxis: {
@@ -45,15 +45,15 @@ export function makeChartOptions(theme: Theme) {
         tooltip: {
             x: {
                 format: "yyyy"
-            },
+            }
         },
         legend: {
-            position: 'top',
-            horizontalAlign: 'left'
+            position: "top",
+            horizontalAlign: "left"
         },
         grid: {
             show: false
-        },
+        }
     };
 }
 
@@ -75,19 +75,25 @@ function textColorBasedOnTheme(theme: Theme) {
 
 export function makeTimeSeriesFromUserSolarData(userSolarData: UserSolarData) {
     const yearsList: Date[] = makeYearsList(userSolarData);
-    const cumulativeCostWithSolarTimeSerie: TimeSerieData =  makeCumulativeCostWithSolarTimeSerie(userSolarData, yearsList);
-    const cumulativeCostWithoutSolarTimeSerie: TimeSerieData =  makeCumulativeCostWithoutSolarTimeSerie(userSolarData, yearsList);
+    const cumulativeCostWithSolarTimeSerie: TimeSerieData = makeCumulativeCostWithSolarTimeSerie(
+        userSolarData,
+        yearsList
+    );
+    const cumulativeCostWithoutSolarTimeSerie: TimeSerieData = makeCumulativeCostWithoutSolarTimeSerie(
+        userSolarData,
+        yearsList
+    );
 
     return [
         {
-            name: 'Solar',
+            name: "Solar",
             color: "#FCB103",
             data: cumulativeCostWithSolarTimeSerie
         },
         {
-            name: 'Current',
+            name: "Current",
             data: cumulativeCostWithoutSolarTimeSerie
-        },
+        }
     ] as TimeSerie[];
 }
 
@@ -102,14 +108,14 @@ function makeYearsList(userSolarData: UserSolarData) {
         yearsList.push(currentYear);
     }
 
-    return yearsList
+    return yearsList;
 }
 
 function makeCumulativeCostWithSolarTimeSerie(userSolarData: UserSolarData, yearsList: Date[]) {
     const timeSerie: TimeSerieData = [];
     const cumulativeCostWithSolar: number[] = makeCumulativeCostWithSolar(userSolarData);
 
-    for (let i = 0; i < userSolarData.installationLifespan; i++) { 
+    for (let i = 0; i < userSolarData.installationLifespan; i++) {
         timeSerie.push([yearsList[i], cumulativeCostWithSolar[i]]);
     }
 
@@ -120,7 +126,7 @@ function makeCumulativeCostWithoutSolarTimeSerie(userSolarData: UserSolarData, y
     const timeSerie: TimeSerieData = [];
     const cumulativeCostWithoutSolar: number[] = makeCumulativeCostWithoutSolar(userSolarData);
 
-    for (let i = 0; i < userSolarData.installationLifespan; i++) { 
+    for (let i = 0; i < userSolarData.installationLifespan; i++) {
         timeSerie.push([yearsList[i], cumulativeCostWithoutSolar[i]]);
     }
 

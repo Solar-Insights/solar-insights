@@ -1,18 +1,12 @@
 <template>
     <template v-for="(pollutant, i) in airQualityData.pollutants" :key="i">
         <v-hover v-slot="{ isHovering, props }">
-            <v-card
-                v-bind="props"
-                class="pollutant-card"
-                :class="isHovering ? 'hovering-elevation-card' : ''"
-            >
+            <v-card v-bind="props" class="pollutant-card" :class="isHovering ? 'hovering-elevation-card' : ''">
                 <div class="d-flex">
                     <div class="me-auto">
                         {{ pollutant.displayName }}
                     </div>
-                    <div>
-                        {{ pollutant.concentration.value }} {{ concentrationMap[pollutant.concentration.units] }}
-                    </div>
+                    <div>{{ pollutant.concentration.value }} {{ concentrationMap[pollutant.concentration.units] }}</div>
                 </div>
 
                 <div class="d-flex detail-text">

@@ -89,10 +89,10 @@
             </div>
         </div>
 
-        <vue-apex-charts 
-            :class="theme === 'light' ? 'light-theme-chart' : 'dark-theme-chart'" 
-            type="line" 
-            :series="timeSeries" 
+        <vue-apex-charts
+            :class="theme === 'light' ? 'light-theme-chart' : 'dark-theme-chart'"
+            type="line"
+            :series="timeSeries"
             :options="chartOptions"
         />
     </v-card>
@@ -109,9 +109,9 @@ import {
     yearlyEnergyCalc,
     installationCostCalc,
     energyCoveredCalc,
-    costWithSolarInstallation,
+    costWithSolarInstallation
 } from "@/helpers/solar/solarDataMath";
-import { getBreakEvenYear, costWithoutSolarInstallation} from "@/helpers/solar/yearlyAndCumulativeCosts";
+import { getBreakEvenYear, costWithoutSolarInstallation } from "@/helpers/solar/yearlyAndCumulativeCosts";
 import { makeChartOptions, makeTimeSeriesFromUserSolarData } from "@/helpers/solar/charts";
 import { batteryCharging } from "@/helpers/constants";
 import { strToLargeNumberDisplay } from "@/helpers/util";

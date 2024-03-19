@@ -56,7 +56,7 @@ const routes = ref([
         routeName: "theme",
         displayedName: "Theme",
         icon: "mdi-paint",
-        displaysAppBar: true,
+        displaysAppBar: true
     }
 ]);
 

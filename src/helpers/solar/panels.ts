@@ -4,7 +4,9 @@ import { rgbToColor, createPalette } from "@/helpers/solar/colorPalettes";
 import { BuildingInsights } from "geo-env-typing/solar";
 
 export async function createSolarPanelsFromBuildingInsights(buildingInsights: BuildingInsights) {
-    const geometryLib: google.maps.GeometryLibrary = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary;
+    const geometryLib: google.maps.GeometryLibrary = (await google.maps.importLibrary(
+        "geometry"
+    )) as google.maps.GeometryLibrary;
     const solarPotential = buildingInsights.solarPotential;
 
     const palette = createPalette(panelsPalette, 256).map(rgbToColor);
@@ -41,5 +43,3 @@ export async function createSolarPanelsFromBuildingInsights(buildingInsights: Bu
 
     return solarPanels;
 }
-
-

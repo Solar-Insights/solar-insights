@@ -5,7 +5,11 @@ import { toRaw } from "vue";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
 import { SolarReadonlyPanel, TimeParameters, UserSolarData } from "@/helpers/types";
-import { makeDefaultUserSolarDataObject, makeDefaultMapSettings, makeDefaultTimeParams, } from "@/helpers/solar/defaultData";
+import {
+    makeDefaultUserSolarDataObject,
+    makeDefaultMapSettings,
+    makeDefaultTimeParams
+} from "@/helpers/solar/defaultData";
 // Server
 import { getClosestBuildingInsights } from "@/server/solar";
 import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/panels";
@@ -27,7 +31,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         solarPanels: [] as google.maps.Polygon[],
         geometryLibrary: google.maps.importLibrary("geometry") as Promise<google.maps.GeometryLibrary>,
         centerCoord: { lat: 46.81701, lng: -71.36838 } as LatLng,
-        solarReadonlyPanel: "BUILDING_READONLY" as SolarReadonlyPanel | undefined,
+        solarReadonlyPanel: "BUILDING_READONLY" as SolarReadonlyPanel | undefined
     }),
 
     actions: {
@@ -63,7 +67,10 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         setOptimizedEnergyCoveredConfig() {
-            const configId: number | undefined = getOptimizedEnergyCoveredConfigId(this.buildingInsights, this.userSolarData);
+            const configId: number | undefined = getOptimizedEnergyCoveredConfigId(
+                this.buildingInsights,
+                this.userSolarData
+            );
             this.setConfigId(configId);
         },
 
@@ -105,7 +112,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
 
         async addSolarPanelsToMap() {
             this.solarPanels = await createSolarPanelsFromBuildingInsights(this.buildingInsights);
-            
+
             this.solarPanels.map((panel, i) =>
                 panel.setMap(
                     this.mapSettings.showPanels && this.panelConfig && i < this.panelConfig.panelsCount
@@ -171,7 +178,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
                 this.displayHourlyShade();
             } else {
                 this.overlays[0].setMap(this.map);
-            } 
+            }
         },
 
         displayMonthlyFlux() {
@@ -190,9 +197,9 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             if (!this.solarReadonlyPanel) {
                 this.solarReadonlyPanel = buttonClicked;
             } else if (this.solarReadonlyPanel === "BUILDING_READONLY") {
-                this.solarReadonlyPanel = this.solarReadonlyPanel === buttonClicked ? undefined : "INSIGHTS_READONLY"
+                this.solarReadonlyPanel = this.solarReadonlyPanel === buttonClicked ? undefined : "INSIGHTS_READONLY";
             } else if (this.solarReadonlyPanel === "INSIGHTS_READONLY") {
-                this.solarReadonlyPanel = this.solarReadonlyPanel === buttonClicked ? undefined : "BUILDING_READONLY"
+                this.solarReadonlyPanel = this.solarReadonlyPanel === buttonClicked ? undefined : "BUILDING_READONLY";
             }
         }
     }

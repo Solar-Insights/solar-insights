@@ -1,5 +1,10 @@
 import { UserSolarData } from "@/helpers/types";
-import { yearlyEnergyCostIncrease, yearlyDiscountRate, yearlyUtilityBillEstimates, installationCostCalc } from "@/helpers/solar/solarDataMath";
+import {
+    yearlyEnergyCostIncrease,
+    yearlyDiscountRate,
+    yearlyUtilityBillEstimates,
+    installationCostCalc
+} from "@/helpers/solar/solarDataMath";
 
 /*
     Units: $

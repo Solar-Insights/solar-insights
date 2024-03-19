@@ -26,9 +26,17 @@ export function getOptimizedSavingsConfigId(buildingInsights: BuildingInsights, 
     let maxSavings: number = 0;
 
     for (let i = 0; i < buildingInsights.solarPotential.solarPanelConfigs.length; i++) {
-        const userSolarDataForSpecificConfigId: UserSolarData = createUserSolarDataForSpecificConfigId(buildingInsights, userSolarData, i);
-        const finalCumulativeCostWithSolar: number = makeCumulativeCostWithSolar(userSolarDataForSpecificConfigId).pop()!;
-        const finalCumulativeCostWithoutSolar: number = makeCumulativeCostWithoutSolar(userSolarDataForSpecificConfigId).pop()!;
+        const userSolarDataForSpecificConfigId: UserSolarData = createUserSolarDataForSpecificConfigId(
+            buildingInsights,
+            userSolarData,
+            i
+        );
+        const finalCumulativeCostWithSolar: number = makeCumulativeCostWithSolar(
+            userSolarDataForSpecificConfigId
+        ).pop()!;
+        const finalCumulativeCostWithoutSolar: number = makeCumulativeCostWithoutSolar(
+            userSolarDataForSpecificConfigId
+        ).pop()!;
         const solarSavings = finalCumulativeCostWithoutSolar - finalCumulativeCostWithSolar;
 
         if (i === 0) {
@@ -44,7 +52,11 @@ export function getOptimizedSavingsConfigId(buildingInsights: BuildingInsights, 
     return configId;
 }
 
-function createUserSolarDataForSpecificConfigId(buildingInsights: BuildingInsights, userSolarData: UserSolarData, configId: number) {
+function createUserSolarDataForSpecificConfigId(
+    buildingInsights: BuildingInsights,
+    userSolarData: UserSolarData,
+    configId: number
+) {
     const userSolarDataCopy: UserSolarData = JSON.parse(JSON.stringify(userSolarData));
     // Only these parameters change based on the configId
     userSolarDataCopy.panelCount = buildingInsights.solarPotential.solarPanelConfigs[configId].panelsCount;

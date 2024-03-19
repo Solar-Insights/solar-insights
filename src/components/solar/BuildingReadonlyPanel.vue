@@ -48,7 +48,6 @@
             </div>
         </div>
 
-        
         <div class="mb-5">
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-account-hard-hat-outline</v-icon>
