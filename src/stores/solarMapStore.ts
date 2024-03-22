@@ -63,7 +63,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
                     this.buildingInsights.solarPotential.solarPanelConfigs.length - 1
                 ].panelsCount;
 
-            this.setOptimizedEnergyCoveredConfig();
+            this.setOptimizedSavingsConfig();
         },
 
         setOptimizedEnergyCoveredConfig() {
