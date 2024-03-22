@@ -22,48 +22,6 @@
         </div>
 
         <v-expansion-panels variant="accordion" v-model="expansionPanels">
-            <v-expansion-panel elevation="0" value="optimization">
-                <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
-                    <v-icon class="mr-3">mdi-bullseye-arrow</v-icon>
-                    <span class="mr-auto"> Optimize configuration </span>
-                </v-expansion-panel-title>
-
-                <v-expansion-panel-text>
-                    <div class="detail-text mb-3">
-                        Automatically update the panel's count to optimize the configuration for a specific criteria.
-                    </div>
-
-                    <div>
-                        <v-card
-                            @click="solarMapStore.setOptimizedSavingsConfig"
-                            class="optimization-card"
-                            variant="outlined"
-                        >
-                            <v-card-item class="pt-0 px-0" prepend-icon="mdi-currency-usd">
-                                Maximize total savings
-                            </v-card-item>
-                            <v-card-item class="pa-0 detail-text" prepend-icon="null">
-                                Configuration providing the highest savings at the end of the installation's lifespan.
-                                Used by default on new queries.
-                            </v-card-item>
-                        </v-card>
-                        <v-card
-                            @click="solarMapStore.setOptimizedEnergyCoveredConfig"
-                            class="optimization-card"
-                            variant="outlined"
-                        >
-                            <v-card-item class="pt-0 px-0" prepend-icon="mdi-home-battery">
-                                Maximize energy covered
-                            </v-card-item>
-                            <v-card-item class="pa-0 detail-text" prepend-icon="null">
-                                Configuration covering the most of the building's annual energy needs, or the first
-                                configuration that covers it all.
-                            </v-card-item>
-                        </v-card>
-                    </div>
-                </v-expansion-panel-text>
-            </v-expansion-panel>
-
             <v-expansion-panel elevation="0" value="panels">
                 <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
                     <v-icon class="mr-3">mdi-solar-power-variant-outline</v-icon> <span class="my-auto"> Panels </span>
@@ -256,6 +214,48 @@
                             </v-expansion-panel-text>
                         </v-expansion-panel>
                     </v-expansion-panels>
+                </v-expansion-panel-text>
+            </v-expansion-panel>
+
+            <v-expansion-panel elevation="0" value="optimization">
+                <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
+                    <v-icon class="mr-3">mdi-bullseye-arrow</v-icon>
+                    <span class="mr-auto"> Optimizations </span>
+                </v-expansion-panel-title>
+
+                <v-expansion-panel-text>
+                    <div class="detail-text mb-3">
+                        Automatically update the panel's count to optimize the configuration for a specific criteria.
+                    </div>
+
+                    <div>
+                        <v-card
+                            @click="solarMapStore.setOptimizedSavingsConfig"
+                            class="optimization-card"
+                            variant="outlined"
+                        >
+                            <v-card-item class="pt-0 px-0" prepend-icon="mdi-currency-usd">
+                                Maximize total savings
+                            </v-card-item>
+                            <v-card-item class="pa-0 detail-text" prepend-icon="null">
+                                Configuration providing the highest savings at the end of the installation's lifespan.
+                                Used by default on new queries.
+                            </v-card-item>
+                        </v-card>
+                        <v-card
+                            @click="solarMapStore.setOptimizedEnergyCoveredConfig"
+                            class="optimization-card"
+                            variant="outlined"
+                        >
+                            <v-card-item class="pt-0 px-0" prepend-icon="mdi-home-battery">
+                                Maximize energy covered
+                            </v-card-item>
+                            <v-card-item class="pa-0 detail-text" prepend-icon="null">
+                                Configuration covering the most of the building's annual energy needs, or the first
+                                configuration that covers it all.
+                            </v-card-item>
+                        </v-card>
+                    </div>
                 </v-expansion-panel-text>
             </v-expansion-panel>
 
