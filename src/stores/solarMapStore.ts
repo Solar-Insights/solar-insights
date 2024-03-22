@@ -159,7 +159,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         renderOverlay() {
-            if (!this.layer || !this.mapSettings.showHeatmap) {
+            if (!this.layer) {
                 return;
             }
 
@@ -172,7 +172,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         displayCorrectLayer() {
-            if (!this.layer) {
+            if (!this.layer || !this.mapSettings.showHeatmap) {
                 return;
             }
 
