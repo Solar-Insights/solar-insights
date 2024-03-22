@@ -15,6 +15,7 @@ import { getClosestBuildingInsights } from "@/server/solar";
 import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/panels";
 import { getLayerFromBuildingInsights } from "@/helpers/solar/layers";
 import { getOptimizedEnergyCoveredConfigId, getOptimizedSavingsConfigId } from "@/helpers/solar/optimizeSolarConfig";
+import { monthlyEnergyBillApproximation } from "@/helpers/solar/solarDataMath";
 
 export const useSolarMapStore = defineStore("solarMapStore", {
     state: () => ({
@@ -56,6 +57,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         syncTemplateVariablesAndMapFollowingNewRequest() {
+            this.userSolarData.averageMonthlyEnergyBill = monthlyEnergyBillApproximation(this.buildingInsights.solarPotential.wholeRoofStats.areaMeters2);
             this.userSolarData.minPanelCount = this.buildingInsights.solarPotential.solarPanelConfigs[0].panelsCount;
             this.userSolarData.defaultPanelCapacityWatts = this.buildingInsights.solarPotential.panelCapacityWatts;
             this.userSolarData.maxPanelCount =

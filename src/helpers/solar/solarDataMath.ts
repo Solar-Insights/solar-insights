@@ -1,4 +1,10 @@
 import { UserSolarData } from "@/helpers/types";
+import { DefaultUserSolarData } from "@/helpers/solar/defaultData";
+
+export namespace SolarMathVariables {
+    export const CANADA_2015_TOTAL_RESIDENTIAL_AREA_METERS2 = 2026000000; // https://www.climate-chance.org/wp-content/uploads/2019/03/en_fp13-canada-residentiel_def-1.pdf
+    export const CANADA_2015_TOTAL_RESIDENTIAL_KWH_CONSUMPTION = 164617880556; // https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=2510006001
+}
 
 export function lerp(x: number, y: number, t: number) {
     return x + t * (y - x);
@@ -133,3 +139,13 @@ export function costWithSolarInstallation(userSolarData: UserSolarData) {
         userSolarData.solarIncentives
     );
 }
+
+/**
+    Units: $
+ */
+export function monthlyEnergyBillApproximation(areaMeters2: number) {
+    const canadianResidentialKwhToMeter2Ratio = SolarMathVariables.CANADA_2015_TOTAL_RESIDENTIAL_KWH_CONSUMPTION / SolarMathVariables.CANADA_2015_TOTAL_RESIDENTIAL_AREA_METERS2;
+    const residentialKwhEstimate = areaMeters2 * canadianResidentialKwhToMeter2Ratio;
+    const yearlyEnergyCostEstimate = residentialKwhEstimate * DefaultUserSolarData.ENERGY_COST_PER_KWH;
+    return Math.round(yearlyEnergyCostEstimate / 12);
+};
