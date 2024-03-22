@@ -31,7 +31,7 @@
                 <v-btn
                     @click="readonlyPanel = 0"
                     class="panel-selection-btn"
-                    :class="readonlyPanel === 0 ? 'bg-theme-darker-3' : 'bg-theme'"
+                    :class="readonlyPanel === 0 ? 'bg-theme-lighter-4' : 'bg-theme'"
                     :prepend-icon="readonlyPanel === 0 ? 'mdi-alert' : 'mdi-alert-outline'"
                     :ripple="false"
                 >
@@ -40,7 +40,7 @@
                 <v-btn
                     @click="readonlyPanel = 1"
                     class="panel-selection-btn"
-                    :class="readonlyPanel === 1 ? 'bg-theme-darker-3' : 'bg-theme'"
+                    :class="readonlyPanel === 1 ? 'bg-theme-lighter-4' : 'bg-theme'"
                     :prepend-icon="readonlyPanel === 1 ? 'mdi-heart' : 'mdi-heart-outline'"
                     :ripple="false"
                 >
