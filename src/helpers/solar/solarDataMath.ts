@@ -144,8 +144,10 @@ export function costWithSolarInstallation(userSolarData: UserSolarData) {
     Units: $
  */
 export function monthlyEnergyBillApproximation(areaMeters2: number) {
-    const canadianResidentialKwhToMeter2Ratio = SolarMathVariables.CANADA_2015_TOTAL_RESIDENTIAL_KWH_CONSUMPTION / SolarMathVariables.CANADA_2015_TOTAL_RESIDENTIAL_AREA_METERS2;
+    const canadianResidentialKwhToMeter2Ratio =
+        SolarMathVariables.CANADA_2015_TOTAL_RESIDENTIAL_KWH_CONSUMPTION /
+        SolarMathVariables.CANADA_2015_TOTAL_RESIDENTIAL_AREA_METERS2;
     const residentialKwhEstimate = areaMeters2 * canadianResidentialKwhToMeter2Ratio;
     const yearlyEnergyCostEstimate = residentialKwhEstimate * DefaultUserSolarData.ENERGY_COST_PER_KWH;
     return Math.round(yearlyEnergyCostEstimate / 12);
-};
+}

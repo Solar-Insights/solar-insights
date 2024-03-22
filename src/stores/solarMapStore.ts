@@ -57,7 +57,9 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         syncTemplateVariablesAndMapFollowingNewRequest() {
-            this.userSolarData.averageMonthlyEnergyBill = monthlyEnergyBillApproximation(this.buildingInsights.solarPotential.wholeRoofStats.areaMeters2);
+            this.userSolarData.averageMonthlyEnergyBill = monthlyEnergyBillApproximation(
+                this.buildingInsights.solarPotential.wholeRoofStats.areaMeters2
+            );
             this.userSolarData.minPanelCount = this.buildingInsights.solarPotential.solarPanelConfigs[0].panelsCount;
             this.userSolarData.defaultPanelCapacityWatts = this.buildingInsights.solarPotential.panelCapacityWatts;
             this.userSolarData.maxPanelCount =
