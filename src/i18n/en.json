@@ -8,6 +8,21 @@
     "general": {
         "map_header": {
             "search-placeholder": "Find a location"
+        },
+        "month-codes": {
+            "jan": "Jan",
+            "feb": "Feb",
+            "mar": "Mar",
+            "apr": "Apr",
+            "may": "May",
+            "jun": "Jun",
+            "jul": "Jul",
+            "aug": "Aug",
+            "sep": "Sep",
+            "oct": "Oct",
+            "nov": "Nov",
+            "dec": "Dec"
         }
     }
+
 }

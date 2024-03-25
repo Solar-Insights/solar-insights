@@ -7,9 +7,22 @@
     },
     "general": {
         "map-header": {
-            "search-placeholder": "Rechercher un emplacement",
-            "solar-map": "Potentiel solaire",
-            "air-quality-map": "Qualité de l'air"
+            "search-placeholder": "Rechercher un emplacement"
+        },
+        "month-codes": {
+            "jan": "janv.",
+            "feb": "févr.",
+            "mar": "mars",
+            "apr": "avril",
+            "may": "mai",
+            "jun": "juin",
+            "jul": "juil.",
+            "aug": "août",
+            "sep": "sept.",
+            "oct": "oct.",
+            "nov": "nov.",
+            "dec": "déc."
         }
     }
+
 }

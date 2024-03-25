@@ -18,7 +18,7 @@
     >
         <template v-slot:append>
             <div class="ml-1" style="width: 50px">
-                {{ monthCodes[timeParams.month] }}
+                {{ $t(`general.month-codes.${monthCodes[timeParams.month]}`) }}
             </div>
         </template>
     </v-slider>
