@@ -2,7 +2,8 @@
     "navigation": {
         "home": "Accueil",
         "solar-map": "Potentiel solaire",
-        "air-quality-map": "Qualité de l'air"
+        "air-quality-map": "Qualité de l'air",
+        "theme": "Theme"
     },
     "general": {
         "map-header": {

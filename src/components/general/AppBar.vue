@@ -7,7 +7,7 @@
 
             <v-toolbar-items class="hidden-xs">
                 <v-btn v-for="route in routes" :to="{ name: route.routeName }" style="width: 100px">
-                    {{ route.displayedName }}
+                    {{ $t(`navigation.${route.routeName}`) }}
                 </v-btn>
             </v-toolbar-items>
 
@@ -17,7 +17,7 @@
         <v-navigation-drawer v-model="drawer" class="hidden-sm-and-up" disable-resize-watcher>
             <v-list>
                 <v-list-item v-for="route in routes" :to="{ name: route.routeName }" :prepend-icon="route.icon">
-                    {{ route.displayedName }}
+                    {{ $t(`navigation.${route.routeName}`) }}
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
@@ -36,25 +36,21 @@ const shouldBeVisibleOnRoute = computed(() => routeNamesDisplayingAppBar.include
 const routes = ref([
     {
         routeName: "home",
-        displayedName: "Home",
         icon: "mdi-home",
         displaysAppBar: true
     },
     {
         routeName: "solar-map",
-        displayedName: "Solar",
         icon: "mdi-weather-sunny",
         displaysAppBar: false
     },
     {
         routeName: "air-quality-map",
-        displayedName: "Air Quality",
         icon: "mdi-weather-windy",
         displaysAppBar: false
     },
     {
         routeName: "theme",
-        displayedName: "Theme",
         icon: "mdi-paint",
         displaysAppBar: true
     }

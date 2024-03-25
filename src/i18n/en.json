@@ -2,7 +2,8 @@
     "navigation": {
         "home": "Home",
         "solar-map": "Solar Potential",
-        "air-quality-map": "Air Quality"
+        "air-quality-map": "Air Quality",
+        "theme": "Theme"
     },
     "general": {
         "map_header": {
