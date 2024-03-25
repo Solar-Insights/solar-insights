@@ -1,1 +1,12 @@
-{}
+{
+    "navigation": {
+        "home": "Home",
+        "solar-map": "Solar Potential",
+        "air-quality-map": "Air Quality"
+    },
+    "general": {
+        "map_header": {
+            "search-placeholder": "Find a location"
+        }
+    }
+}

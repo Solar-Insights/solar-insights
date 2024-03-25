@@ -3,12 +3,12 @@
         class="pb-0 mx-auto"
         :items="[
             {
-                title: 'Home',
+                title: $t('navigation.home'),
                 disabled: false,
                 to: { name: 'home' }
             },
             {
-                title: currentRouteInformation.displayedName,
+                title: $t(`navigation.${currentRouteInformation.routeName}`),
                 disabled: true,
                 to: { name: currentRouteInformation.routeName }
             }
@@ -16,7 +16,7 @@
     />
 
     <v-card-title class="text-center font-weight-regular">
-        <v-icon class="mr-2"> {{ currentRouteInformation.icon }} </v-icon> {{ currentRouteInformation.displayedName }}
+        <v-icon class="mr-2"> {{ currentRouteInformation.icon }} </v-icon> {{ $t(`navigation.${currentRouteInformation.routeName}`) }}
     </v-card-title>
 
     <v-text-field
@@ -25,7 +25,7 @@
         class="mt-0"
         id="autocomplete-search"
         :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
-        placeholder="Find a location"
+        :placeholder="$t('general.map-header.search-placeholder')"
         hide-details
         variant="outlined"
         prepend-inner-icon="mdi-google-maps"
@@ -49,14 +49,12 @@ const currentRoute = useRoute();
 const currentRouteInformation = computed(() => {
     if (currentRoute.name === "solar-map") {
         return {
-            displayedName: "Solar Potential",
             routeName: "solar-map",
             icon: "mdi-weather-sunny"
         };
     } else {
         //if (currentRoute.name === "air-quality-map") {
         return {
-            displayedName: "Air Quality",
             routeName: "air-quality-map",
             icon: "mdi-weather-windy"
         };

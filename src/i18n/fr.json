@@ -1,1 +1,14 @@
-{}
+{
+    "navigation": {
+        "home": "Accueil",
+        "solar-map": "Potentiel solaire",
+        "air-quality-map": "Qualité de l'air"
+    },
+    "general": {
+        "map-header": {
+            "search-placeholder": "Rechercher un emplacement",
+            "solar-map": "Potentiel solaire",
+            "air-quality-map": "Qualité de l'air"
+        }
+    }
+}
