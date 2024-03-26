@@ -23,6 +23,63 @@
             "nov": "Nov",
             "dec": "Dec"
         }
-    }
+    },
+    "solar": {
+        "data-panel": {
+            "readonly-panels": {
+                "building": "Building",
+                "insights": "Insights"
+            },
+            "data-panels": {
+                "panels": {
+                    "name": "Panels",
+                    "description": "Solar panels are ordered from most to least efficient based on the annual sunlight received of the roof (e.g. an installation of 10 panels will use the 10 most efficient ones)",
+                    "count": "Count",
+                    "panels": "Panels",
+                    "power-rating": "Power rating (capacity)"
+                },
+                "panels-advanced-settings": {
+                    "name": "Advanced Settings",
+                    "dc-to-ac": "DC to AC conversion",
+                    "efficiency-decline": "Panel efficiency decline per year"
+                },
+                "costs": {
+                    "name": "Costs and Incentives",
+                    "description": "Costs and incentives are used to evaluate the financial benefits of solar panels for a specific building",
+                    "monthly-energy-cost": "Average monthly energy cost",
+                    "energy-cost": "Energy cost per kWh",
+                    "installation-cost": "Installation cost per Watt",
+                    "solar-incentives": "Solar incentives"
+                },
+                "costs-advanced-settings": {
+                    "name": "Advanced Settings",
+                    "energy-cost-increase": "Energy cost increase per year",
+                    "discount-rate": "Discount rate per year"
+                },
+                "optimizations": {
+                    "name": "Optimizations",
+                    "description": "Automatically update the panel's count to optimize the configuration for a specific criteria.",
+                    "choices": {
+                        "total-savings": {
+                            "name": "Maximize total savings",
+                            "description": "Configuration providing the highest savings at the end of the installation's lifespan. Used by default on new queries."
+                        },
+                        "energy-covered": {
+                            "name": "Maximize energy covered",
+                            "description": "Configuration covering the most of the building's annual energy needs, or the first configuration that covers it all."
+                        }
+                    }
 
+                },
+                "settings": {
+                    "name": "Settings",
+                    "description": "Settings to control what information is currently being displayed on the map",
+                    "displayed-data": "Displayed solar data",
+                    "display-panels": "Display panels",
+                    "display-heatmap": "Display heatmap",
+                    "heatmap-animation": "Heatmap animation"
+                }
+            }
+        }
+    }
 }

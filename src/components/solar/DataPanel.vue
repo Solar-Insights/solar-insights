@@ -8,7 +8,7 @@
                 :prepend-icon="solarReadonlyPanel === 'BUILDING_READONLY' ? 'mdi-home' : 'mdi-home-outline'"
                 :ripple="false"
             >
-                Building
+                {{ $t(`solar.data-panel.readonly-panels.building`) }}
             </v-btn>
             <v-btn
                 @click="solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY')"
@@ -17,25 +17,24 @@
                 :prepend-icon="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'mdi-flash' : 'mdi-flash-outline'"
                 :ripple="false"
             >
-                Insights
+            {{ $t(`solar.data-panel.readonly-panels.insights`) }}
             </v-btn>
         </div>
 
         <v-expansion-panels variant="accordion" v-model="expansionPanels">
             <v-expansion-panel elevation="0" value="panels">
                 <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
-                    <v-icon class="mr-3">mdi-solar-power-variant-outline</v-icon> <span class="my-auto"> Panels </span>
+                    <v-icon class="mr-3">mdi-solar-power-variant-outline</v-icon> <span class="my-auto"> {{ $t(`solar.data-panel.data-panels.panels.name`) }} </span>
                 </v-expansion-panel-title>
 
                 <v-expansion-panel-text>
                     <div class="detail-text mb-3">
-                        Solar panels are ordered from most to least efficient based annual sunlight of the roof (e.g. an
-                        input of 10 panels will use the 10 most efficient)
+                        {{ $t(`solar.data-panel.data-panels.panels.description`) }}
                     </div>
 
                     <div>
                         <div class="d-flex">
-                            <span class="me-auto"> Count </span>
+                            <span class="me-auto"> {{ $t(`solar.data-panel.data-panels.panels.count`) }} </span>
                             <span class="text-right">
                                 {{
                                     buildingInsights.solarPotential === undefined
@@ -43,7 +42,7 @@
                                         : buildingInsights.solarPotential.solarPanelConfigs[mapSettings.configIdIndex]
                                               .panelsCount
                                 }}
-                                / {{ userSolarData.maxPanelCount }} panels
+                                / {{ userSolarData.maxPanelCount }} {{ $t(`solar.data-panel.data-panels.panels.panels`) }}
                             </span>
                         </div>
                         <v-slider
@@ -63,7 +62,7 @@
                     <div>
                         <v-text-field
                             v-model="userSolarData.panelCapacityWatts"
-                            label="Power rating (capacity)"
+                            :label="$t(`solar.data-panel.data-panels.panels.power-rating`)"
                             density="compact"
                             variant="outlined"
                             type="number"
@@ -84,7 +83,7 @@
                             variant="text"
                             :append-icon="advancedSettingsPanels.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"
                         >
-                            Advanced Settings
+                            {{ $t(`solar.data-panel.data-panels.panels-advanced-settings.name`) }}
                         </v-chip>
                     </div>
 
@@ -93,7 +92,7 @@
                             <v-expansion-panel-text class="px-0" id="expansion-panel-second-layer">
                                 <v-text-field
                                     v-model="userSolarData.dcToAcDerate"
-                                    label="DC to AC conversion"
+                                    :label="$t(`solar.data-panel.data-panels.panels-advanced-settings.dc-to-ac`)"
                                     density="compact"
                                     variant="outlined"
                                     type="number"
@@ -104,7 +103,7 @@
 
                                 <v-text-field
                                     v-model="userSolarData.yearlyPanelEfficiencyDecline"
-                                    label="Panel efficiency decline per year"
+                                    :label="$t(`solar.data-panel.data-panels.panels-advanced-settings.efficiency-decline`)"
                                     density="compact"
                                     variant="outlined"
                                     type="number"
@@ -120,19 +119,18 @@
 
             <v-expansion-panel elevation="0" panel="costs">
                 <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
-                    <v-icon class="mr-3">mdi-cash</v-icon> <span class="my-auto"> Costs and Incentives </span>
+                    <v-icon class="mr-3">mdi-cash</v-icon> <span class="my-auto"> {{ $t(`solar.data-panel.data-panels.costs.name`) }} </span>
                 </v-expansion-panel-title>
 
                 <v-expansion-panel-text>
                     <div class="detail-text mb-3">
-                        Costs and incentives are used to evaluate the financial benefits of solar panels for a specific
-                        building
+                        {{ $t(`solar.data-panel.data-panels.costs.description`) }}
                     </div>
 
                     <div>
                         <v-text-field
                             v-model="userSolarData.averageMonthlyEnergyBill"
-                            label="Average monthly energy cost"
+                            :label="$t(`solar.data-panel.data-panels.costs.monthly-energy-cost`)"
                             density="compact"
                             variant="outlined"
                             type="number"
@@ -142,7 +140,7 @@
                         </v-text-field>
                         <v-text-field
                             v-model="userSolarData.energyCostPerKwh"
-                            label="Energy cost per kWh"
+                            :label="$t(`solar.data-panel.data-panels.costs.energy-cost`)"
                             density="compact"
                             variant="outlined"
                             type="number"
@@ -152,7 +150,7 @@
                         </v-text-field>
                         <v-text-field
                             v-model="userSolarData.installationCostPerWatt"
-                            label="Installation cost per Watt"
+                            :label="$t(`solar.data-panel.data-panels.costs.installation-cost`)"
                             density="compact"
                             variant="outlined"
                             type="number"
@@ -162,7 +160,7 @@
                         </v-text-field>
                         <v-text-field
                             v-model="userSolarData.solarIncentives"
-                            label="Solar incentives"
+                            :label="$t(`solar.data-panel.data-panels.costs.solar-incentives`)"
                             density="compact"
                             variant="outlined"
                             type="number"
@@ -183,7 +181,7 @@
                             variant="text"
                             :append-icon="advancedSettingsSolarPotential.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"
                         >
-                            Advanced Settings
+                            {{ $t(`solar.data-panel.data-panels.costs-advanced-settings.name`) }}
                         </v-chip>
                     </div>
 
@@ -192,7 +190,7 @@
                             <v-expansion-panel-text class="px-0" id="expansion-panel-second-layer">
                                 <v-text-field
                                     v-model="userSolarData.yearlyEnergyCostIncrease"
-                                    label="Energy cost increase per year"
+                                    :label="$t(`solar.data-panel.data-panels.costs-advanced-settings.energy-cost-increase`)"
                                     density="compact"
                                     variant="outlined"
                                     type="number"
@@ -203,7 +201,7 @@
 
                                 <v-text-field
                                     v-model="userSolarData.yearlyDiscountRate"
-                                    label="Discount rate per year"
+                                    :label="$t(`solar.data-panel.data-panels.costs-advanced-settings.discount-rate`)"
                                     density="compact"
                                     variant="outlined"
                                     type="number"
@@ -220,12 +218,12 @@
             <v-expansion-panel elevation="0" value="optimization">
                 <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
                     <v-icon class="mr-3">mdi-bullseye-arrow</v-icon>
-                    <span class="mr-auto"> Optimizations </span>
+                    <span class="mr-auto"> {{ $t(`solar.data-panel.data-panels.optimizations.name`) }} </span>
                 </v-expansion-panel-title>
 
                 <v-expansion-panel-text>
                     <div class="detail-text mb-3">
-                        Automatically update the panel's count to optimize the configuration for a specific criteria.
+                        {{ $t(`solar.data-panel.data-panels.optimizations.description`) }}
                     </div>
 
                     <div>
@@ -235,11 +233,10 @@
                             variant="outlined"
                         >
                             <v-card-item class="pt-0 px-0" prepend-icon="mdi-currency-usd">
-                                Maximize total savings
+                                {{ $t(`solar.data-panel.data-panels.optimizations.choices.total-savings.name`) }}
                             </v-card-item>
                             <v-card-item class="pa-0 pr-2 detail-text" prepend-icon="null">
-                                Configuration providing the highest savings at the end of the installation's lifespan.
-                                Used by default on new queries.
+                                {{ $t(`solar.data-panel.data-panels.optimizations.choices.total-savings.description`) }}
                             </v-card-item>
                         </v-card>
                         <v-card
@@ -248,11 +245,10 @@
                             variant="outlined"
                         >
                             <v-card-item class="pt-0 px-0" prepend-icon="mdi-home-battery">
-                                Maximize energy covered
+                                {{ $t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.name`) }}
                             </v-card-item>
                             <v-card-item class="pa-0 pr-2 detail-text" prepend-icon="null">
-                                Configuration covering the most of the building's annual energy needs, or the first
-                                configuration that covers it all.
+                                {{ $t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.description`) }}
                             </v-card-item>
                         </v-card>
                     </div>
@@ -261,7 +257,7 @@
 
             <v-expansion-panel elevation="0" value="settings">
                 <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
-                    <v-icon class="mr-3">mdi-cog-outline</v-icon> <span class="my-auto"> Settings </span>
+                    <v-icon class="mr-3">mdi-cog-outline</v-icon> <span class="my-auto"> {{ $t(`solar.data-panel.data-panels.settings.name`) }} </span>
                 </v-expansion-panel-title>
 
                 <v-expansion-panel-text>
@@ -276,7 +272,7 @@
                             item-title="displayedName"
                             item-value="name"
                             :items="mapSettings.layerIdChoices"
-                            label="Displayed solar data"
+                            :label="$t(`solar.data-panel.data-panels.settings.displayed-data`)"
                             density="compact"
                             variant="outlined"
                             prepend-inner-icon="mdi-magnify"
@@ -291,7 +287,7 @@
                             density="compact"
                         >
                             <template v-slot:label>
-                                <span class="ml-4"> Display panels </span>
+                                <span class="ml-4"> {{ $t(`solar.data-panel.data-panels.settings.display-panels`) }} </span>
                             </template>
                         </v-switch>
 
@@ -303,7 +299,7 @@
                             density="compact"
                         >
                             <template v-slot:label>
-                                <span class="ml-4"> Display heatmap </span>
+                                <span class="ml-4"> {{ $t(`solar.data-panel.data-panels.settings.display-heatmap`) }} </span>
                             </template>
                         </v-switch>
 
@@ -318,7 +314,7 @@
                             "
                         >
                             <template v-slot:label>
-                                <span class="ml-4"> Heatmap animation </span>
+                                <span class="ml-4"> {{ $t(`solar.data-panel.data-panels.settings.heatmap-animation`) }} </span>
                             </template>
                         </v-switch>
                     </div>

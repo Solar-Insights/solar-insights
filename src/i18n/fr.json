@@ -23,6 +23,63 @@
             "nov": "nov.",
             "dec": "déc."
         }
-    }
+    },
+    "solar": {
+        "data-panel": {
+            "readonly-panels": {
+                "building": "Bâtiment",
+                "insights": "Aperçu"
+            },
+            "data-panels": {
+                "panels": {
+                    "name": "Panneaux",
+                    "description": "Les panneaux solaires sont ordonnés du plus efficace au moins efficace, basé sur l'ensoleillement annuel du toit (ex: Une installation de 10 panneaux utilise les 10 plus efficaces)",
+                    "count": "Quantité",
+                    "panels": "Panneaux",
+                    "power-rating": "Puissance (capacité)"
+                },
+                "panels-advanced-settings": {
+                    "name": "Paramètres avancés",
+                    "dc-to-ac": "Conversion DC à AC",
+                    "efficiency-decline": "Diminution annuel de l'efficacité des panneaux"
+                },
+                "costs": {
+                    "name": "Coûts et subventions",
+                    "description": "Section permettant d'évaluer la viabilité économique des panneaux solaires pour un bâtiment particulier",
+                    "monthly-energy-cost": "Coût mensuel en énergie",
+                    "energy-cost": "Coût de l'énergie par kWh",
+                    "installation-cost": "Coût de l'installation par Watt",
+                    "solar-incentives": "Subventions solaires"
+                },
+                "costs-advanced-settings": {
+                    "name": "Paramètres avancés",
+                    "energy-cost-increase": "Augmentation annuel du coût de l'énergie",
+                    "discount-rate": "Taux d'escompte annuel"
+                },
+                "optimizations": {
+                    "name": "Optimisations",
+                    "description": "Automatically update the panel's count to optimize the configuration for a specific criteria.",
+                    "choices": {
+                        "total-savings": {
+                            "name": "Maximiser l'épargne totale",
+                            "description": "Configuration étant la plus économiquement favorable à la fin de la durée de vie de l'installation. Option par défaut pour les requêtes."
+                        },
+                        "energy-covered": {
+                            "name": "Maximiser la couverture énergétique",
+                            "description": "Configuration couvrant de manière maximale les besoins annuels en énergie du bâtiment, ou la première configuration les couvrant entièrement."
+                        }
+                    }
 
+                },
+                "settings": {
+                    "name": "Paramètres",
+                    "description": "Paramètres contrôlant les données affichées sur la carte.",
+                    "displayed-data": "Affichage de l'ensoleillement",
+                    "display-panels": "Afficher les panneaux",
+                    "display-heatmap": "Afficher la heatmap",
+                    "heatmap-animation": "Animation de la heatmap"
+                }
+            }
+        }
+    }
 }
