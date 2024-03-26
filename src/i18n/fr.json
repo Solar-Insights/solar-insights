@@ -92,6 +92,17 @@
             "cost-with": "Coût avec panneaux solaires",
             "total-saved-cost": "Économies totales",
             "break-even": "Seuil de rentabilité"
+        },
+        "building-readonly": {
+            "name": "Caractéristiques du bâtiment",
+            "roof-area": "Surface du toit",
+            "based-on": "Basée sur l'analyse 3D du toit",
+            "annual-sunlight": "Ensoleillement annuel",
+            "hours-abbreviation": "h",
+            "derived-from": "Dérivé de l'analyse quotidienne de patterns météorologique",
+            "panels-caps": "Panneaux",
+            "panels": "panneaux",
+            "installation-size": "Taille de l'installation"
         }
     }
 }

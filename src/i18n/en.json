@@ -92,6 +92,17 @@
             "cost-with": "Cost with solar panels",
             "total-saved-cost": "Total saved cost",
             "break-even": "Break-even"
+        },
+        "building-readonly": {
+            "name": "Building Attributes",
+            "roof-area": "Roof area",
+            "based-on": "Based on 3D analysis of the roof",
+            "annual-sunlight": "Annual sunlight",
+            "hours-abbreviation": "hrs",
+            "derived-from": "Derived from daily examination of weather patterns",
+            "panels-caps": "Panels",
+            "panels": "panels",
+            "installation-size": "Installation size"
         }
     }
 }
