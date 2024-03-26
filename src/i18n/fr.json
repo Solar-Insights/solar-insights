@@ -6,6 +6,12 @@
         "theme": "Theme"
     },
     "general": {
+        "quick-settings": {
+            "theme": "Thème",
+            "dark": "Sombre",
+            "light": "Clair",
+            "language": "Langue"
+        },
         "map-header": {
             "search-placeholder": "Rechercher un emplacement"
         },

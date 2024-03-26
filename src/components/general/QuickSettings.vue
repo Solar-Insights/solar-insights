@@ -18,8 +18,7 @@
 
             <v-card 
                 @click="userSessionStore.changeTheme()"
-                class="pa-2 mb-2"
-                rounded="40px"
+                class="pa-2 mb-2 rounded-lg"
                 elevation="2"
                 variant="tonal"
             >
@@ -28,9 +27,11 @@
                         <v-icon>mdi-lightbulb-on-outline</v-icon>
                     </v-col>
                     <v-col cols="9">
-                        <div> Theme </div>
+                        <div> {{ $t(`general.quick-settings.theme`) }} </div>
                         <div class="detail-text pb-0"> 
-                            {{ theme === "dark" ? "Dark" : "Light" }}
+                            {{ 
+                                theme === "dark" ? $t(`general.quick-settings.dark`) : $t(`general.quick-settings.light`)
+                            }}
                         </div>
                     </v-col>
                 </v-row>
@@ -38,8 +39,7 @@
 
             <v-card 
                 @click="userSessionStore.changeLocale(); locale === 'fr' ? $i18n.locale = 'en' : $i18n.locale = 'fr'"
-                class="pa-2"
-                rounded="40px"
+                class="pa-2 rounded-lg"
                 elevation="2"
                 variant="tonal"
             >
@@ -48,7 +48,7 @@
                         <v-icon>mdi-earth</v-icon>
                     </v-col>
                     <v-col cols="9">
-                        <div> Language </div>
+                        <div> {{ $t(`general.quick-settings.language`) }} </div>
                         <div class="detail-text pb-0"> 
                             {{ locale === "fr" ? "Français" : "English" }}
                             -> 
