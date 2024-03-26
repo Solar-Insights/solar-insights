@@ -19,8 +19,14 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 import Alert from "@/components/general/Alert.vue";
 import AppBar from "@/components/general/AppBar.vue";
 import ThemeChanger from "@/components/general/QuickSettings.vue";
+import { onMounted } from "vue";
+import { i18n } from "@/i18n/i18n";
 
 const userSessionStore = useUserSessionStore();
 
-const { theme } = storeToRefs(userSessionStore);
+const { theme, locale } = storeToRefs(userSessionStore);
+
+onMounted(() => {
+    i18n.global.locale.value = locale.value;
+})
 </script>

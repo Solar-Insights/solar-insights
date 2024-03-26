@@ -38,7 +38,7 @@
             </v-card>
 
             <v-card 
-                @click="userSessionStore.changeLocale(); locale === 'fr' ? $i18n.locale = 'en' : $i18n.locale = 'fr'"
+                @click="userSessionStore.changeLocale(); locale === 'fr' ? $i18n.locale = 'fr' : $i18n.locale = 'en'"
                 class="pa-2 rounded-lg"
                 elevation="2"
                 variant="tonal"
