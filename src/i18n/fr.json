@@ -80,6 +80,18 @@
                     "heatmap-animation": "Animation de la heatmap"
                 }
             }
+        },
+        "insights-readonly": {
+            "name": "Aperçus solaires",
+            "yearly-energy": "Énergie annuelle",
+            "installation-cost": "Coût de l'installation",
+            "energy-covered": "Énergie couverte",
+            "cost-analysis-for": "Analyse des coûts pour",
+            "years": "ans",
+            "cost-without": "Coût sans panneau solaire",
+            "cost-with": "Coût avec panneaux solaires",
+            "total-saved-cost": "Économies totales",
+            "break-even": "Seuil de rentabilité"
         }
     }
 }

@@ -80,6 +80,18 @@
                     "heatmap-animation": "Heatmap animation"
                 }
             }
+        },
+        "insights-readonly": {
+            "name": "Solar Insights",
+            "yearly-energy": "Yearly Energy",
+            "installation-cost": "Installation Cost",
+            "energy-covered": "Energy Covered",
+            "cost-analysis-for": "Cost analysis for",
+            "years": "years",
+            "cost-without": "Cost without solar panels",
+            "cost-with": "Cost with solar panels",
+            "total-saved-cost": "Total saved cost",
+            "break-even": "Break-even"
         }
     }
 }
