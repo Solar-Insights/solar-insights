@@ -6,7 +6,7 @@
         "theme": "Theme"
     },
     "general": {
-        "map_header": {
+        "map-header": {
             "search-placeholder": "Find a location"
         },
         "month-codes": {

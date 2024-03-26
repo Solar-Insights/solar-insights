@@ -24,6 +24,7 @@ const customTheme: ThemeDefinition = {
 
         "dark-surface": "rgba(18, 18, 18, 1)",
         "dark-surface-lighter-1": "rgba(33, 33, 33, 1)",
+        "dark-surface-lighter-2": "rgba(43, 43, 43, 1)",
 
         "light-surface": "rgba(255, 255, 255, 1)",
         "light-surface-darker-1": "rgba(221, 221, 221, 1)",

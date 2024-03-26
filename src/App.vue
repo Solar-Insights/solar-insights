@@ -18,7 +18,7 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 // Components
 import Alert from "@/components/general/Alert.vue";
 import AppBar from "@/components/general/AppBar.vue";
-import ThemeChanger from "@/components/general/ThemeChanger.vue";
+import ThemeChanger from "@/components/general/QuickSettings.vue";
 
 const userSessionStore = useUserSessionStore();
 
