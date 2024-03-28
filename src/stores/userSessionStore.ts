@@ -6,21 +6,27 @@ import { Theme, Locale } from "@/helpers/types";
 
 export const useUserSessionStore = defineStore("userSessionStore", {
     state: () => ({
-        displayAlert: false,
-        alert: new VueError(),
+        alert: undefined as VueError | undefined,
+        pendingApiRequest: 0,
         theme: "light" as Theme,
         locale: "en" as Locale
     }),
 
     actions: {
-        resetUserStore() {
-            this.alert = new VueError();
-            this.displayAlert = false;
+        setAlert(alert: VueError) {
+            if (this.alert !== undefined) this.removeAlert();
+            if (this.pendingApiRequest !== 0) this.alert = alert; 
         },
 
-        setAlert(alert: VueError) {
-            this.alert = alert;
-            this.displayAlert = true;
+        resetAlertOnNewPage() {
+            this.alert = undefined;
+            this.pendingApiRequest = 0;
+        },
+
+        removeAlert() {
+            this.pendingApiRequest--;
+            this.alert = undefined;
+            console.log(this.pendingApiRequest)
         },
 
         changeTheme() {

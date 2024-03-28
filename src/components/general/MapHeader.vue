@@ -40,7 +40,7 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 // Utils
 import { initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
 import { LatLng } from "geo-env-typing/geo";
-import { getGeocoding, getReverseGeocoding } from "@/server/geo";
+import { getGeocoding, getReverseGeocoding } from "@/api/geo";
 import { AutocompleteInputError } from "@/helpers/customErrors";
 
 const userSessionStore = useUserSessionStore();
@@ -124,3 +124,4 @@ async function setPlaceChangedOnAutocompleteListener() {
     });
 }
 </script>
+@/api/geo

@@ -1,14 +1,12 @@
-import axios from "axios";
 import { AirQualityData } from "geo-env-typing/air";
 import { LatLng } from "geo-env-typing/geo";
 import { makeDominantPollutantFirst } from "@/helpers/air";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { AirQualityDataError } from "@/helpers/customErrors";
-
-axios.defaults.baseURL = import.meta.env.VITE_DEV_URL;
+import AxiosInstance from "@/api/axiosInit";
 
 export async function getAirQualityData(coord: LatLng) {
-    return await axios({
+    return await AxiosInstance({
         method: "get",
         responseType: "json",
         url: `/air/air-quality-data`,

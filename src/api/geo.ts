@@ -1,12 +1,10 @@
-import axios from "axios";
 import { LatLng } from "geo-env-typing/geo";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { GeocodingError, ReverseGeocodingError } from "@/helpers/customErrors";
-
-axios.defaults.baseURL = import.meta.env.VITE_DEV_URL;
+import AxiosInstance from "@/api/axiosInit";
 
 export async function getGeocoding(formattedAddress: string) {
-    return await axios({
+    return await AxiosInstance({
         method: "get",
         responseType: "json",
         url: `/geo/geocoding`,
@@ -24,7 +22,7 @@ export async function getGeocoding(formattedAddress: string) {
 }
 
 export async function getReverseGeocoding(coord: LatLng) {
-    return await axios({
+    return await AxiosInstance({
         method: "get",
         responseType: "json",
         url: `/geo/reverse-geocoding`,

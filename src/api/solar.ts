@@ -1,13 +1,11 @@
 import { BuildingInsightsError } from "@/helpers/customErrors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import axios from "axios";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, GeoTiff, SolarLayers } from "geo-env-typing/solar";
-
-axios.defaults.baseURL = import.meta.env.VITE_DEV_URL;
+import AxiosInstance from "@/api/axiosInit";
 
 export async function getClosestBuildingInsights(coord: LatLng) {
-    return await axios({
+    return await AxiosInstance({
         method: "get",
         responseType: "json",
         url: `/solar/closest-building-insights`,
@@ -26,7 +24,7 @@ export async function getClosestBuildingInsights(coord: LatLng) {
 }
 
 export async function getSolarLayers(coord: LatLng, radius: number) {
-    return await axios({
+    return await AxiosInstance({
         method: "get",
         responseType: "json",
         url: `/solar/solar-layers`,
@@ -46,7 +44,7 @@ export async function getSolarLayers(coord: LatLng, radius: number) {
 }
 
 export async function getGeotiff(url: string) {
-    return await axios({
+    return await AxiosInstance({
         method: "get",
         responseType: "json",
         url: `/solar/geotiff`,
