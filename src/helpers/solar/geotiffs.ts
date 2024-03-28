@@ -1,5 +1,5 @@
 import { LayerId, SolarLayers, Layer } from "geo-env-typing/solar";
-import { getGeotiff } from "@/server/solar";
+import { getGeotiff } from "@/api/solar";
 import { ironPalette, sunlightPalette } from "@/helpers/constants";
 import { renderPalette } from "@/helpers/solar/colorPalettes";
 

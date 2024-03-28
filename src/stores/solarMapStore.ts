@@ -11,7 +11,7 @@ import {
     makeDefaultTimeParams
 } from "@/helpers/solar/defaultData";
 // Server
-import { getClosestBuildingInsights } from "@/server/solar";
+import { getClosestBuildingInsights } from "@/api/solar";
 import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/panels";
 import { getLayerFromBuildingInsights } from "@/helpers/solar/layers";
 import { getOptimizedEnergyCoveredConfigId, getOptimizedSavingsConfigId } from "@/helpers/solar/optimizeSolarConfig";

@@ -1,4 +1,4 @@
-import { getSolarLayers } from "@/server/solar";
+import { getSolarLayers } from "@/api/solar";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, MapSettings, SolarLayers } from "geo-env-typing/solar";
 import { getSingleLayer } from "@/helpers/solar/geotiffs";
