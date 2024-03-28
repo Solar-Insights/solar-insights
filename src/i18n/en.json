@@ -5,6 +5,40 @@
         "air-quality-map": "Air Quality",
         "theme": "Theme"
     },
+    "errors": {
+        "vue-error": {
+            "title": "Something happened",
+            "message": "An error occured during the execution of the application."
+        },
+        "map-initialization-error": {
+            "title": "The server could not properly load the map",
+            "message": "An error occured when trying to load the map and its components."
+        },
+        "user-input-error": {
+            "title": "The provided user input provoked an error",
+            "message": ""
+        },
+        "autocomplete-input-error": {
+            "title": "The provided user input provoked an error",
+            "message": "Select a valid address from the dropdown menu."
+        },
+        "geocoding-error": {
+            "title": "The server could not geocode the given address",
+            "message": "An error occured when trying to convert the address to valid geographic goordinates."
+        },
+        "reverse-geocoding-error": {
+            "title": "The server could not reverse geocode the given coordinates",
+            "message": "An error occured when trying to convert geographic coordinates to a valid address."
+        },
+        "air-quality-data-error": {
+            "title": "The server could not fetch valid air quality data",
+            "message": "An error occured when trying to fetch the air quality data of the provided region."
+        },
+        "building-insights-error": {
+            "title": "The server could not fetch building insights",
+            "message": "An error occured when trying to fetch the data of the provided building."
+        }
+    },
     "general": {
         "quick-settings": {
             "theme": "Theme",

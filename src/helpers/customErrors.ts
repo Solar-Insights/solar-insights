@@ -1,4 +1,5 @@
 import { AlertType } from "./types";
+import { i18n } from "@/i18n/i18n";
 
 export function matchType(type: AlertType) {
     switch (type) {
@@ -68,8 +69,8 @@ export class VueError extends Error {
     constructor(
         type: AlertType = "warning",
         name: string = "Error",
-        title: string = "Something happened",
-        message: string = "An error was encountered during the execution of the program.",
+        title: string = i18n.global.t("errors.vue-error.title"),
+        message: string = i18n.global.t("errors.vue-error.message"),
         code: number = 500
     ) {
         super();
@@ -85,8 +86,8 @@ export class MapInitializationError extends VueError {
     constructor(
         type: AlertType = "error",
         name: string = "MapInitializationError",
-        title: string = "The server could not properly load the map",
-        message: string = "An error occured when trying to load the map and its components.",
+        title: string = i18n.global.t("errors.map-initialization-error.title"),
+        message: string = i18n.global.t("errors.map-initialization-error.message"),
         code: number = 500
     ) {
         super(type, name, title, message, code);
@@ -98,7 +99,7 @@ export class UserInputError extends VueError {
         message: string,
         type: AlertType = "error",
         name: string = "UserInputError",
-        title: string = "The provided user input provoked an error",
+        title: string = i18n.global.t("errors.user-input-error.title"),
         code: number = 500
     ) {
         super(type, name, title, message, code);
@@ -107,10 +108,10 @@ export class UserInputError extends VueError {
 
 export class AutocompleteInputError extends UserInputError {
     constructor(
-        message: string = "Select a valid address from the dropdown menu.",
+        message: string = i18n.global.t("errors.autocomplete-input-error.message"),
         type: AlertType = "error",
         name: string = "UserInputError",
-        title: string = "The provided user input provoked an error",
+        title: string = i18n.global.t("errors.autocomplete-input-error.title"),
         code: number = 500
     ) {
         super(message, type, name, title, code);
@@ -121,8 +122,8 @@ export class GeocodingError extends VueError {
     constructor(
         type: AlertType = "warning",
         name: string = "GeocodingError",
-        title: string = "The server could not geocode the given address",
-        message: string = "An error occured when trying to convert the address to geographic goordinates.",
+        title: string = i18n.global.t("errors.geocoding-error.title"),
+        message: string = i18n.global.t("errors.geocoding-error.message"),
         code: number = 500
     ) {
         super(type, name, title, message, code);
@@ -133,8 +134,8 @@ export class ReverseGeocodingError extends VueError {
     constructor(
         type: AlertType = "warning",
         name: string = "ReverseGeocodingError",
-        title: string = "The server could not reverse geocode the given geographic coordinates",
-        message: string = "An error occured when trying to convert geographic coordinates to an address.",
+        title: string = i18n.global.t("errors.reverse-geocoding-error.title"),
+        message: string = i18n.global.t("errors.reverse-geocoding-error.message"),
         code: number = 500
     ) {
         super(type, name, title, message, code);
@@ -145,8 +146,8 @@ export class AirQualityDataError extends VueError {
     constructor(
         type: AlertType = "error",
         name: string = "AirQualityDataError",
-        title: string = "The server could not fetch valid air quality data with the given parameters",
-        message: string = "An error occured when trying to fetch air quality data.",
+        title: string = i18n.global.t("errors.air-quality-data-error.title"),
+        message: string = i18n.global.t("errors.air-quality-data-error.message"),
         code: number = 500
     ) {
         super(type, name, title, message, code);
@@ -157,8 +158,8 @@ export class BuildingInsightsError extends VueError {
     constructor(
         type: AlertType = "error",
         name: string = "BuildingInsightsError",
-        title: string = "The server could not fetch building insights with the given parameters",
-        message: string = "An error occured when trying to fetch building insights.",
+        title: string = i18n.global.t("errors.building-insights-error.title"),
+        message: string = i18n.global.t("errors.building-insights-error.message"),
         code: number = 500
     ) {
         super(type, name, title, message, code);
