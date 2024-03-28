@@ -26,7 +26,6 @@ export const useUserSessionStore = defineStore("userSessionStore", {
         removeAlert() {
             this.pendingApiRequest--;
             this.alert = undefined;
-            console.log(this.pendingApiRequest)
         },
 
         changeTheme() {

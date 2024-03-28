@@ -1,5 +1,5 @@
 <template>
-    <div class="alert-component" v-if="displayAlert">
+    <div class="alert-component" v-if="alert !== undefined" style="position: absolute;">
         <v-alert
             class="alert-component"
             :type="matchType(alert.type)"
@@ -7,10 +7,11 @@
             :text="matchMessage(alert.message)"
             closable
             close-label="Close"
-            @click:close="displayAlert = false"
+            @click:close="userSessionStore.removeAlert()"
+            rounded="0"
         />
         <hr
-            :width="`${iteLeftPercentage}%`"
+            :width="`${alertDisplayPercentage}%`"
             style="height: 5px"
             :style="`color: ${matchColorToType(alert.type)}; background-color: ${matchColorToType(alert.type)};`"
         />
@@ -21,47 +22,47 @@
 // Vue
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
-import { watch, ref } from "vue";
+import { watch, ref, onMounted } from "vue";
 // Helpers
 import { matchType, matchTitle, matchMessage, matchColorToType } from "@/helpers/customErrors";
 
 const userSessionStore = useUserSessionStore();
 
-const { displayAlert, alert } = storeToRefs(userSessionStore);
-const iteLeftPercentage = ref(100);
-let interval: NodeJS.Timeout | undefined = undefined;
-watch(displayAlert, () => {
-    resetIteProgression();
-    resetNodeInterval();
+const MAX_DISPLAY_PERCENTAGE = 100;
+const MS_BETWEEN_TICKS = 10;
+const DECREMENT_PERCENTAGE = 0.3;
 
-    if (displayAlert.value) {
-        initNodeInterval();
-    }
-});
+const { alert } = storeToRefs(userSessionStore);
+const alertDisplayPercentage = ref(MAX_DISPLAY_PERCENTAGE);
 
 watch(alert, () => {
-    resetIteProgression();
+    resetAlertDisplay();
 });
 
-function resetIteProgression() {
-    iteLeftPercentage.value = 100;
-}
 
-function resetNodeInterval() {
-    if (interval) {
-        clearInterval(interval);
-        interval = undefined;
+onMounted(async () => {
+    setInterval(() => {
+        handleIntervalChange();
+    }, MS_BETWEEN_TICKS);
+});
+
+function handleIntervalChange() {
+    if (alert.value === undefined) {
+        resetAlertDisplay();
+        return;
+    }
+
+    decrementAlertDisplay();
+    if (alertDisplayPercentage.value <= 0) {
+        userSessionStore.removeAlert();
     }
 }
 
-function initNodeInterval() {
-    interval = setInterval(() => {
-        if (iteLeftPercentage.value <= 0) {
-            displayAlert.value = false;
-            resetNodeInterval();
-        } else {
-            iteLeftPercentage.value -= 0.2;
-        }
-    }, 10);
+function resetAlertDisplay() {
+    alertDisplayPercentage.value = MAX_DISPLAY_PERCENTAGE;
+}
+
+function decrementAlertDisplay() {
+    alertDisplayPercentage.value -= DECREMENT_PERCENTAGE;
 }
 </script>

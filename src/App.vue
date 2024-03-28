@@ -4,7 +4,7 @@
         <app-bar />
         <v-main>
             <v-container class="app-container" fluid>
-                <alert />
+                <alert v-if="alert !== undefined" />
                 <router-view :key="$route.fullPath"></router-view>
             </v-container>
         </v-main>
@@ -24,7 +24,7 @@ import { i18n } from "@/i18n/i18n";
 
 const userSessionStore = useUserSessionStore();
 
-const { theme, locale } = storeToRefs(userSessionStore);
+const { theme, locale, alert } = storeToRefs(userSessionStore);
 
 onMounted(() => {
     i18n.global.locale.value = locale.value;
