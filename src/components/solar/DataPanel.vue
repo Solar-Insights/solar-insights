@@ -4,7 +4,7 @@
             <v-btn
                 @click="solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
                 class="panel-selection-btn"
-                :class="solarReadonlyPanel === 'BUILDING_READONLY' ? 'bg-theme-lighter-2' : 'bg-theme'"
+                :class="solarReadonlyPanel === 'BUILDING_READONLY' ? 'bg-theme-lighter-2' : 'bg-theme-darker-1'"
                 :prepend-icon="solarReadonlyPanel === 'BUILDING_READONLY' ? 'mdi-home' : 'mdi-home-outline'"
                 :ripple="false"
             >
@@ -13,7 +13,7 @@
             <v-btn
                 @click="solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY')"
                 class="panel-selection-btn"
-                :class="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'bg-theme-lighter-2' : 'bg-theme'"
+                :class="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'bg-theme-lighter-2' : 'bg-theme-darker-1'"
                 :prepend-icon="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'mdi-flash' : 'mdi-flash-outline'"
                 :ripple="false"
             >

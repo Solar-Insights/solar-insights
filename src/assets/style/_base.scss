@@ -193,10 +193,6 @@
     width: calc(50% - 10px);
 }
 
-.panel-selection-btn.bg-theme-lighter-2 {
-    border: 2px solid master.$theme-darker-1;
-}
-
 .optimization-card {
     @extend .w-100;
     @extend .pa-1;

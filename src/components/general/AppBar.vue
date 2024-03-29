@@ -4,6 +4,14 @@
             density="comfortable"
             elevation="2"
         >
+            <v-img
+                :src="logo_nobg"
+                class="mx-2"
+                max-height="30"
+                max-width="30"
+                contain
+            />
+        
             <v-app-bar-nav-icon class="hidden-sm-and-up" variant="text" @click.stop="drawer = !drawer" />
 
             <v-spacer />
@@ -33,6 +41,7 @@
 // Vue
 import { ref } from "vue";
 import QuickSettings from "@/components/general/QuickSettings.vue";
+import logo_nobg from "@/assets/images/logo_nobg.png";
 
 const drawer = ref(false);
 
