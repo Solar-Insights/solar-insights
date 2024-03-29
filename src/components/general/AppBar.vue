@@ -1,18 +1,23 @@
 <template>
-    <div v-if="shouldBeVisibleOnRoute">
-        <v-toolbar>
+    <div>
+        <v-app-bar 
+            density="comfortable"
+            elevation="2"
+        >
             <v-app-bar-nav-icon class="hidden-sm-and-up" variant="text" @click.stop="drawer = !drawer" />
 
             <v-spacer />
 
             <v-toolbar-items class="hidden-xs">
-                <v-btn v-for="route in routes" :to="{ name: route.routeName }" style="width: 100px">
+                <v-btn v-for="route in routes" :to="{ name: route.routeName }">
                     {{ $t(`navigation.${route.routeName}`) }}
                 </v-btn>
             </v-toolbar-items>
 
             <v-spacer />
-        </v-toolbar>
+
+            <QuickSettings />
+        </v-app-bar >
 
         <v-navigation-drawer v-model="drawer" class="hidden-sm-and-up" disable-resize-watcher>
             <v-list>
@@ -26,35 +31,27 @@
 
 <script setup lang="ts">
 // Vue
-import { computed, ref } from "vue";
-import { useRoute } from "vue-router";
+import { ref } from "vue";
+import QuickSettings from "@/components/general/QuickSettings.vue";
 
-const currentRoute = useRoute();
 const drawer = ref(false);
-const shouldBeVisibleOnRoute = computed(() => routeNamesDisplayingAppBar.includes(currentRoute.name?.toString()));
 
 const routes = ref([
     {
         routeName: "home",
-        icon: "mdi-home",
-        displaysAppBar: true
+        icon: "mdi-home"
     },
     {
         routeName: "solar-map",
-        icon: "mdi-weather-sunny",
-        displaysAppBar: false
+        icon: "mdi-weather-sunny"
     },
-    {
-        routeName: "air-quality-map",
-        icon: "mdi-weather-windy",
-        displaysAppBar: false
-    },
-    {
-        routeName: "theme",
-        icon: "mdi-paint",
-        displaysAppBar: true
-    }
+    // {
+    //     routeName: "air-quality-map",
+    //     icon: "mdi-weather-windy"
+    // },
+    // {
+    //     routeName: "theme",
+    //     icon: "mdi-paint"
+    // }
 ]);
-
-const routeNamesDisplayingAppBar: (string | undefined)[] = ["home"];
 </script>

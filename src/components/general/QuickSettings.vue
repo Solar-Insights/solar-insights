@@ -6,8 +6,6 @@
         <template v-slot:activator="{ props }">
             <v-btn
                 v-bind="props"
-                class="ma-2"
-                style="z-index: 9999; position: fixed; top: 0; left: 0"
                 icon="mdi-cog"
                 elevation="0"
                 size="small"

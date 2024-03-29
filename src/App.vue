@@ -1,6 +1,5 @@
 <template>
     <v-app :theme="theme">
-        <theme-changer />
         <app-bar />
         <v-main>
             <v-container class="app-container" fluid>
@@ -18,7 +17,6 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 // Components
 import Alert from "@/components/general/Alert.vue";
 import AppBar from "@/components/general/AppBar.vue";
-import ThemeChanger from "@/components/general/QuickSettings.vue";
 import { onMounted } from "vue";
 import { i18n } from "@/i18n/i18n";
 
