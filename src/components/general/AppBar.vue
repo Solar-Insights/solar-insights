@@ -4,20 +4,42 @@
             density="comfortable"
             elevation="2"
         >
-            <v-img
-                :src="logo_nobg"
-                class="mx-2"
-                max-height="30"
-                max-width="30"
-                contain
-            />
-        
+            <v-btn 
+                class="px-2 h-100 ml-0"
+                :to="{ name: 'home' }"
+                style="font-size: 1.1rem;"
+                :active="false"
+            >
+                <v-avatar 
+                    class="mr-2"
+                    :image="logo_nobg"
+                    density="compact"
+                />
+                Solar Insights
+            </v-btn>
+
             <v-app-bar-nav-icon class="hidden-sm-and-up" variant="text" @click.stop="drawer = !drawer" />
 
-            <v-spacer />
+            <v-spacer/>
 
             <v-toolbar-items class="hidden-xs">
-                <v-btn v-for="route in routes" :to="{ name: route.routeName }">
+                <v-btn 
+                    v-for="route in routes" 
+                    :to="{ name: route.routeName }" 
+                    :active="false"
+                >
+                    <template v-slot:prepend>
+                        <v-avatar 
+                            :color="route.routeName === currentRoute.name ? 'theme' : ''" 
+                            :variant="route.routeName === currentRoute.name ? 'flat' : 'tonal'"
+                            density="comfortable" 
+                            size="small" 
+                            style="border-radius: 8px;"
+                            
+                        >
+                            <v-icon>{{ route.icon }}</v-icon>
+                        </v-avatar>
+                    </template>
                     {{ $t(`navigation.${route.routeName}`) }}
                 </v-btn>
             </v-toolbar-items>
@@ -29,7 +51,22 @@
 
         <v-navigation-drawer v-model="drawer" class="hidden-sm-and-up" disable-resize-watcher>
             <v-list>
-                <v-list-item v-for="route in routes" :to="{ name: route.routeName }" :prepend-icon="route.icon">
+                <v-list-item 
+                    v-for="route in routes" 
+                    :to="{ name: route.routeName }"
+                >
+                    <template v-slot:prepend>
+                        <v-avatar 
+                            :color="route.routeName === currentRoute.name ? 'theme' : ''" 
+                            :variant="route.routeName === currentRoute.name ? 'flat' : 'tonal'"
+                            density="comfortable" 
+                            size="small" 
+                            style="border-radius: 8px;"
+                            
+                        >
+                            <v-icon>{{ route.icon }}</v-icon>
+                        </v-avatar>
+                    </template>
                     {{ $t(`navigation.${route.routeName}`) }}
                 </v-list-item>
             </v-list>
@@ -40,15 +77,18 @@
 <script setup lang="ts">
 // Vue
 import { ref } from "vue";
+import { useRoute } from "vue-router";
 import QuickSettings from "@/components/general/QuickSettings.vue";
 import logo_nobg from "@/assets/images/logo_nobg.png";
+
+const currentRoute = useRoute();
 
 const drawer = ref(false);
 
 const routes = ref([
     {
         routeName: "home",
-        icon: "mdi-home"
+        icon: "mdi-home-outline"
     },
     {
         routeName: "solar-map",
