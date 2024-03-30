@@ -21,7 +21,7 @@
         width: 50%;
     }
     .home-subtitle-container {
-        width: 92%;
+        width: 80%;
     }
 }
 
@@ -44,7 +44,7 @@
 }
 
 .home-title {
-    @extend .text-h4;
+    @extend .text-h3;
     @extend .mt-3;
 }
 
@@ -66,12 +66,10 @@
 }
 
 .home-subtitle {
+    @extend .text-h4;
     @extend .mt-3;
-    @extend .mb-10;
+    @extend .mb-12;
     @extend .text-center; 
-    font-size: 1.75rem;
-    font-weight: 400;
-    line-height: 2rem;
 }
 
 .home-subtitle-content {
