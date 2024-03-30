@@ -5,10 +5,12 @@
             elevation="2"
         >
             <v-btn 
-                class="px-2 h-100 ml-0"
+                class="px-2 h-100 ml-0 no-background-hover"
                 :to="{ name: 'home' }"
                 style="font-size: 1.1rem;"
                 :active="false"
+                :ripple="false"
+                variant="plain"
             >
                 <v-avatar 
                     class="mr-2"
