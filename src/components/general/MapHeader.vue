@@ -124,4 +124,3 @@ async function setPlaceChangedOnAutocompleteListener() {
     });
 }
 </script>
-@/api/geo

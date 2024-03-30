@@ -8,6 +8,9 @@
     .home-title-container {
         width: 100%;
     }
+    .home-subtitle-container {
+        width: 100%;
+    }
 }
 
 /*
@@ -16,6 +19,9 @@
 @media screen and (min-width: 600px) {
     .home-title-container {
         width: 50%;
+    }
+    .home-subtitle-container {
+        width: 92%;
     }
 }
 
@@ -32,6 +38,7 @@
 
 .home-title-container {
     @extend .pt-8;
+    @extend .pb-12;
     @extend .text-center; 
     @extend .mx-auto;
 }
@@ -45,6 +52,30 @@
     @extend .mt-5;
     @extend .mx-auto;
     width: 80%;
+    font-size: 1.1rem;
+}
+
+.home-title-action {
+    @extend .mt-5;
+    @extend .mx-auto;
+}
+
+.home-subtitle-container {
+    @extend .py-8;
+    @extend .mx-auto;
+}
+
+.home-subtitle {
+    @extend .mt-3;
+    @extend .mb-10;
+    @extend .text-center; 
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 2rem;
+}
+
+.home-subtitle-content {
+    line-height: 1.5rem;
     font-size: 1.1rem;
 }
 

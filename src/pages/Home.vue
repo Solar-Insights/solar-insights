@@ -1,73 +1,68 @@
 <template>
-    <v-card class="pt-0">
+    <v-card class="pt-0 body-container">
         <div class="home-title-container">
-            <div class="home-title"> Drive solar energy's adoption with Solar Insights </div>
+            <div class="home-title"> Drive adoption of solar energy with Solar&nbspInsights </div>
             <div class="home-title-description"> Easy to use, highly adaptive, and accurate. Observe the viability of a solar installation in one single search. </div>
+            <div class="home-title-action">
+                <v-card 
+                    :to="{ name: 'solar-map' }"
+                    class="pa-8 rounded-lg mx-auto"
+                    style="width: 200px;"
+                    elevation="2"
+                    color="theme"
+                >
+                    <v-row class="pa-0">
+                        <v-col class="pa-0" cols="9">
+                            <div style="font-weight: bold;"> Find a building </div>
+                        </v-col>
+                        <v-col class="pa-0" cols="3">
+                            <v-icon>mdi-magnify</v-icon>
+                        </v-col>
+                    </v-row>
+                </v-card>
+            </div>
         </div>
 
-        <div class="page-title text-center font-weight-bold pt-16 text-h6">
-            <div class="pt-4"> La combinaison parfaite entre une nutrition savoureuse et une science éclairée. </div>
-        </div>
-        <div class="text-center">
-            <div>
-                <v-btn class="mt-6 mb-3 justify-center" color="black"> Explorer les recettes </v-btn>
+        <div class="home-subtitle-container">
+            <div class="home-subtitle"> What can you do with Solar&nbspInsights? </div>
+            <div class="home-subtitle-content"> 
+                <v-row>
+                    <v-col class="mx-auto" cols="12" xs="12" sm="6" md="3"> 
+                        <v-icon class="mb-3 mx-auto" size="x-large">mdi-telescope</v-icon>
+                        <div class="font-weight-bold mb-3"> Visualize accurate solar data </div>
+                        <div> 
+                            Observe a building's daily, monthly, or yearly sunshine patterns. Plus, get estimates on the optimal placement of solar panels.
+                        </div>
+                    </v-col>
+
+                    <v-col class="mx-auto" cols="12" xs="12" sm="6" md="3"> 
+                        <v-icon class="mb-3 mx-auto" size="x-large">mdi-hammer</v-icon>
+                        <div class="font-weight-bold mb-3"> Customize solar installations </div>
+                        <div> 
+                            Optimize a solar installation to fit your budget, or your needs. You can even adjust settings manually.  
+                        </div>
+                    </v-col>
+
+                    <v-col class="mx-auto" cols="12" xs="12" sm="6" md="3"> 
+                        <v-icon class="mb-3 mx-auto" size="x-large">mdi-cash</v-icon>
+                        <div class="font-weight-bold mb-3"> Assess the viability of solar panels </div>
+                        <div> 
+                            Customize financial parameters to find out the economic value of solar panels over their lifespan.
+                        </div>
+                    </v-col>
+
+                    <v-col class="mx-auto" cols="12" xs="12" sm="6" md="3"> 
+                        <v-icon class="mb-3 mx-auto" size="x-large">mdi-earth</v-icon>
+                        <div class="font-weight-bold mb-3"> Access globally available data </div>
+                        <div> 
+                            Enjoy the availability and precision of public solar data and weather patterns across the globe, ranging from North America to Oceania.
+                        </div>
+                    </v-col>
+                </v-row>
             </div>
-            <div> 
-                ou
-            </div>
-            <div>
-                <v-btn class="mt-3 justify-center" color="black"> Parcourir les articles </v-btn>
-            </div>
-        </div>
-        
-        <div>
-            <div  class="page-title text-center font-weight-bold pt-16 text-h6"> Rejoignez-moi en créant un compte! Vous pourrez: </div>
-            
-            <div class="pt-4 text-center font-weight-bold brand-font"> 
-                <ul style="list-style-position: inside;">
-                    <li class="pb-2"> Mettre en favoris vos recettes préférées </li>
-                    <li class="pb-2"> Enregistrer les articles de votre choix </li>
-                    <li class="pb-2"> Être notifié des nouvelles publications </li>
-                </ul>
-                </div>
-        </div>
-        <div class="text-center pb-6">
-            <v-btn class="mt-6 justify-center" color="black"> S'inscrire </v-btn>
         </div>
     </v-card>
-
-    <div class="body-container">
-        <div class="page-subtitle text-center mt-16 mb-8" style="font-weight: normal !important">
-            Savoir Gourmand en bref
-        </div>
-
-        <div class="text-center mb-6">
-            <v-icon class="my-3" size="x-large">mdi-bowl-outline</v-icon>
-            <div class="font-weight-bold mb-3"> Découvrir des recettes à votre goût </div>
-            <div> 
-                En filtrant par type de repas et ingrédients, trouvez les recettes qui conviennent à vos choix et désirs alimentaires. 
-            </div>
-        </div>
-
-        <div class="text-center mb-6">
-            <v-icon class="my-3" size="x-large">mdi-book-open-page-variant-outline</v-icon>
-            <div class="font-weight-bold mb-3"> Trouver réponses à vos questions </div>
-            <div> 
-                Allez découvrir des articles abordant différents aspects de la nutrition pour s'informer sur les répercussions de certaines habitudes alimentaires! 
-            </div>
-        </div>
-
-        <div class="text-center mb-6">
-            <v-icon class="my-3" size="x-large">mdi-account-outline</v-icon>
-            <div class="font-weight-bold mb-3"> Garder à portée de main vos articles et recettes préférés </div>
-            <div> 
-                Créer un compte pour pouvoir accéder rapidement à vos classiques de la semaine ou articles fréquemment consultés.
-            </div>
-        </div>
-    </div> 
 </template>
 
 <script setup lang="ts">
-// Components
-import logo_nobg from '@/assets/images/logo_nobg.png';
 </script>
