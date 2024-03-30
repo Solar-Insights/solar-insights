@@ -1,0 +1,34 @@
+@use "../../../node_modules/vuetify/_styles.scss";
+@use "../master";
+
+/*
+    Phones
+*/
+@media screen and (max-width: 599px) {
+    .parallax {
+        background-attachment: scroll;
+    }
+}
+
+/*
+  Tablets and computers
+*/
+@media screen and (min-width: 600px) {
+    .parallax {
+        background-attachment: fixed;
+     }
+}
+  
+.parallax {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.parallax-content {
+  position: relative;
+  z-index: 100;
+}

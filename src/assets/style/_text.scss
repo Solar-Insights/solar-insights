@@ -1,28 +1,24 @@
 @use "../../../node_modules/vuetify/_styles.scss";
 @use "../master";
-@use "text";
 
-.universal-font-theme {
-    @extend .font-weight-light;
-    font-family: "Roboto", sans-serif;
-    font-size: 0.9rem;
+/*
+    Phones
+*/
+@media screen and (max-width: 599px) {
+    .home-title-container {
+        width: 100%;
+    }
 }
 
 /*
-    To create other classes with and to use in combination
+  Tablets and computers
 */
-
-.emphasis {
-    @extend .font-weight-medium;
+@media screen and (min-width: 600px) {
+    .home-title-container {
+        width: 50%;
+    }
 }
 
-.no-emphasis {
-    @extend .font-weight-light;
-}
-
-/*
-    To use in .vue files
-*/
 .subsection-title {
     @extend .mb-2;
     font-size: 1rem;
@@ -32,4 +28,31 @@
     @extend .pb-1;
     @extend .font-weight-regular;
     font-size: 0.75rem;
+}
+
+.home-title-container {
+    @extend .pt-8;
+    @extend .text-center; 
+    @extend .mx-auto;
+}
+
+.home-title {
+    @extend .text-h4;
+    @extend .mt-3;
+}
+
+.home-title-description {
+    @extend .mt-5;
+    @extend .mx-auto;
+    width: 80%;
+    font-size: 1.1rem;
+}
+
+.page-title {
+    @extend .text-h4;
+}
+
+.page-subtitle {
+    @extend .text-h5;
+    @extend .font-weight-bold;
 }
