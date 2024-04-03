@@ -2,7 +2,7 @@
     <div>
         <v-app-bar 
             density="comfortable"
-            elevation="2"
+            elevation="1"
         >
             <v-btn 
                 class="px-2 h-100 ml-0 no-background-hover"

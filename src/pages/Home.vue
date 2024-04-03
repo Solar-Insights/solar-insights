@@ -13,7 +13,7 @@
                 >
                     <v-row class="pa-0">
                         <v-col class="pa-0" cols="9">
-                            <div style="font-weight: bold;"> Find a building </div>
+                            <div style="font-weight: bold;"> Discover potential savings </div>
                         </v-col>
                         <v-col class="pa-0" cols="3">
                             <v-icon>mdi-magnify</v-icon>
@@ -22,6 +22,8 @@
                 </v-card>
             </div>
         </div>
+
+        
 
         <div class="home-subtitle-container">
             <div class="home-subtitle"> What can you do with Solar&nbspInsights? </div>
