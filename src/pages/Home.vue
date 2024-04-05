@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        
+        <ImageSlider/>
 
         <div class="home-subtitle-container">
             <div class="home-subtitle"> What can you do with Solar&nbspInsights? </div>
@@ -67,4 +67,5 @@
 </template>
 
 <script setup lang="ts">
+import ImageSlider from "@/components/general/ImageSlider.vue";
 </script>

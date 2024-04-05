@@ -5,9 +5,9 @@
             class="rounded-0"
             :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'"
         >
-            <map-header :coord="centerCoord" @sync-with-new-request="solarMapStore.syncWithNewRequest" />
+            <MapHeader :coord="centerCoord" @sync-with-new-request="solarMapStore.syncWithNewRequest" />
 
-            <data-panel />
+            <DataPanel />
         </v-card>
 
         <map-layers />

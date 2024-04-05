@@ -32,3 +32,16 @@
   position: relative;
   z-index: 100;
 }
+
+#image-slider {
+    display: flex;
+    gap: 4vmin;
+    user-select: none;
+}
+  
+#image-slider > .slider-image {
+    width: 20rem;
+    height: 20rem;
+    object-fit: cover;
+    object-position: 100% center;
+}
