@@ -64,6 +64,32 @@
             "dec": "Dec"
         }
     },
+    "home": {
+        "home-title-container": {
+            "title": "Drive adoption of solar energy with Solar Insights",
+            "description": "Easy to use, highly adaptive, and accurate. Observe the viability of solar installations in one single search.",
+            "action": "Discover potential savings"
+        },
+        "usecase-subtitle-container": {
+            "subtitle": "What can you do with Solar Insights?",
+            "visualize": {
+                "title": "Visualize accurate solar data",
+                "description": "Observe estimations of the optimal placement for solar panels on a building's roof. Plus, get information on its daily, monthly, or yearly sunshine patterns."
+            },
+            "customize": {
+                "title": "Customize and optimize solar installations",
+                "description": "Optimize a solar installation to fit your budget and needs. You can also adjust most settings manually."
+            },
+            "viability": {
+                "title": "Assess the viability of solar panels",
+                "description": "Customize financial parameters to find out the economic value of solar panels over their lifespan."
+            },
+            "global": {
+                "title": "Access and utilize wordwide data",
+                "description": "Enjoy the availability and precision of public solar data and weather patterns across the globe, spanning from North America to Oceania."
+            }
+        }
+    },
     "solar": {
         "data-panel": {
             "readonly-panels": {
