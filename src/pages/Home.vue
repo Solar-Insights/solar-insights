@@ -2,7 +2,7 @@
     <v-card class="pt-0 body-container">
         <div class="home-title-container">
             <div class="home-title"> Drive adoption of solar energy with Solar&nbspInsights </div>
-            <div class="home-title-description"> Easy to use, highly adaptive, and accurate. Observe the viability of a solar installation in one single search. </div>
+            <div class="home-title-description"> Easy to use, highly adaptive, and accurate. Observe the viability of solar installations in one single search. </div>
             <div class="home-title-action">
                 <v-card 
                     :to="{ name: 'solar-map' }"

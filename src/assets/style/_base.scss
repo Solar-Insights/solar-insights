@@ -220,3 +220,8 @@
 .v-divider {
     border-width: 1.5px;
 }
+
+.home-carousel {
+    @extend .py-10;
+    @extend .mb-16;
+}
