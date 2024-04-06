@@ -126,7 +126,7 @@ export const sunlightPalette = ["212121", "FFCA28"];
 
 export const panelsPalette = ["E8EAF6", "1A237E"];
 
-export const monthCodes = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "vov", "dec"];
+export const monthCodes = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
 
 export const hourCodes = [
     "00:00",
