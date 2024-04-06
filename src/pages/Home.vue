@@ -23,8 +23,10 @@
             </div>
         </div>
 
-        <v-img v-if="theme === 'dark'" class="home-main-image" :src="home_main_image_dark"/>
-        <v-img v-if="theme === 'light'" class="home-main-image" :src="home_main_image_light"/>
+        <v-img v-if="theme === 'dark' && locale === 'en'" class="home-main-image" :src="solar_insights_dark_en"/>
+        <v-img v-else-if="theme === 'dark' && locale === 'fr'" class="home-main-image" :src="solar_insights_dark_fr"/>
+        <v-img v-else-if="theme === 'light' && locale === 'en'" class="home-main-image" :src="solar_insights_light_en"/>
+        <v-img v-else-if="theme === 'light' && locale === 'fr'" class="home-main-image" :src="solar_insights_light_fr"/>
 
         <div class="home-subtitle-container">
             <div class="home-subtitle"> {{ $t(`home.usecase-subtitle-container.subtitle`) }} </div>
@@ -68,13 +70,15 @@
 </template>
 
 <script setup lang="ts">
-import home_main_image_dark from "@/assets/images/home_main_image_dark.png";
-import home_main_image_light from "@/assets/images/home_main_image_light.png";
+import solar_insights_dark_en from "@/assets/images/solar_insights_dark_en.png";
+import solar_insights_dark_fr from "@/assets/images/solar_insights_dark_fr.png";
+import solar_insights_light_en from "@/assets/images/solar_insights_light_en.png";
+import solar_insights_light_fr from "@/assets/images/solar_insights_light_fr.png";
 // Vue
 import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 
 const userSessionStore = useUserSessionStore();
-const { theme } = storeToRefs(userSessionStore);
+const { locale, theme } = storeToRefs(userSessionStore);
 
 </script>
