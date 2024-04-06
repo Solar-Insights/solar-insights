@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar density="comfortable" elevation="1">
+        <v-app-bar density="comfortable" elevation="0" scroll-behavior="hide" scroll-threshold="1">
             <v-btn
                 class="px-2 h-100 ml-0 no-background-hover"
                 :to="{ name: 'home' }"
@@ -10,7 +10,7 @@
                 variant="plain"
             >
                 <v-avatar class="mr-2" :image="logo_nobg" density="compact" />
-                Solar Insights
+                SOLAR INSIGHTS
             </v-btn>
 
             <v-app-bar-nav-icon class="hidden-sm-and-up" variant="text" @click.stop="drawer = !drawer" />
