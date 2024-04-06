@@ -2,7 +2,7 @@ import axios from "axios";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 
 const AxiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_DEV_URL
+    baseURL: import.meta.env.VITE_SERVER_URL
 });
 
 AxiosInstance.interceptors.request.use(
