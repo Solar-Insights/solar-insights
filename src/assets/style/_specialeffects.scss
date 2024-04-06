@@ -34,6 +34,9 @@
 }
 
 #image-slider {
+    @extend .py-10;
+    @extend .mt-10;
+    @extend .mb-16;
     display: flex;
     gap: 4vmin;
     user-select: none;

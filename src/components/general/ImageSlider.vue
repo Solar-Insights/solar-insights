@@ -14,8 +14,8 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
-
 let tracker: HTMLElement
+let downOutsideBoundingBox = false;
 
 onMounted(() => {
     tracker = document.getElementById("image-slider")!;
@@ -23,31 +23,43 @@ onMounted(() => {
     window.onmousedown = e => onDown(e);
     window.ontouchstart = e => onDown(e.touches[0]);
 
-    window.onmouseup = e => onUp();
-    window.ontouchend = e => onUp();
-
     window.onmousemove = e => onMove(e);
     window.ontouchmove = e => onMove(e.touches[0]);
+
+    window.onmouseup = e => onUp();
+    window.ontouchend = e => onUp();
 })
 
+function getVerticalBoundariesOfSlider() {
+    return {
+        top: tracker.getBoundingClientRect().top,
+        bottom: tracker.getBoundingClientRect().bottom
+    };
+}
+
+function clickOutsideOfVerticalBoundaries(event: MouseEvent | Touch) {
+    const clickY = event.clientY;
+    const verticalBoundaries = getVerticalBoundariesOfSlider();
+
+    if (verticalBoundaries.top > clickY || verticalBoundaries.bottom < clickY ) return true;
+
+    return false;
+}
+
 function onDown(event: MouseEvent | Touch) {
+    downOutsideBoundingBox = clickOutsideOfVerticalBoundaries(event);
     tracker.dataset.mouseDownAt = event.clientX.toString();
 }
 
-function onUp() {
-    tracker.dataset.mouseDownAt = "0";  
-    tracker.dataset.prevPercentage = tracker.dataset.percentage;
-}
-
 function onMove(event: MouseEvent | Touch) {
-    if (tracker.dataset.mouseDownAt === "0") return;
+    if (tracker.dataset.mouseDownAt === "0" || downOutsideBoundingBox) return;
     const mouseDelta = parseFloat(tracker.dataset.mouseDownAt!) - event.clientX;
     const maxDelta = window.innerWidth / 2;
 
     const percentage = (mouseDelta / maxDelta) * -100;
     const nextPercentageUnconstrained = parseFloat(tracker.dataset.prevPercentage!) + percentage;
     const nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
-    
+
     tracker.dataset.percentage = nextPercentage.toString();
     
     tracker.animate({
@@ -59,5 +71,11 @@ function onMove(event: MouseEvent | Touch) {
             objectPosition: `${100 + nextPercentage}% center`
         }, { duration: 1200, fill: "forwards" });
     }
+}
+
+function onUp() {
+    if (downOutsideBoundingBox) return;
+    tracker.dataset.mouseDownAt = "0";  
+    tracker.dataset.prevPercentage = tracker.dataset.percentage;
 }
 </script>
