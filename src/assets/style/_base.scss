@@ -221,7 +221,9 @@
     border-width: 1.5px;
 }
 
-.home-carousel {
+.home-main-image {
+    @extend .mx-auto;
     @extend .py-10;
     @extend .mb-16;
+    width: 85%;
 }

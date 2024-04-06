@@ -23,7 +23,8 @@
             </div>
         </div>
 
-        <ImageSlider/>
+        <v-img v-if="theme === 'dark'" class="home-main-image" :src="home_main_image_dark"/>
+        <v-img v-if="theme === 'light'" class="home-main-image" :src="home_main_image_light"/>
 
         <div class="home-subtitle-container">
             <div class="home-subtitle"> What can you do with Solar&nbspInsights? </div>
@@ -67,5 +68,13 @@
 </template>
 
 <script setup lang="ts">
-import ImageSlider from "@/components/general/ImageSlider.vue";
+import home_main_image_dark from "@/assets/images/home_main_image_dark.png";
+import home_main_image_light from "@/assets/images/home_main_image_light.png";
+// Vue
+import { storeToRefs } from "pinia";
+import { useUserSessionStore } from "@/stores/userSessionStore";
+
+const userSessionStore = useUserSessionStore();
+const { theme } = storeToRefs(userSessionStore);
+
 </script>
