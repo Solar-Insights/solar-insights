@@ -1,6 +1,6 @@
 <template>
     <v-app :theme="theme">
-        <app-bar />
+        <app-bar v-if="route.name !== 'solar-map'" />
         <v-main>
             <v-container class="app-container" fluid>
                 <alert v-if="alert !== undefined" />
@@ -14,11 +14,14 @@
 // Vue
 import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";
+import { useRoute } from "vue-router";
 // Components
 import Alert from "@/components/general/Alert.vue";
 import AppBar from "@/components/general/AppBar.vue";
 import { onMounted } from "vue";
 import { i18n } from "@/i18n/i18n";
+
+const route = useRoute();
 
 const userSessionStore = useUserSessionStore();
 
