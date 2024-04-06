@@ -135,7 +135,6 @@
                             "description": "Configuration covering the most of the building's annual energy needs, or the first configuration that covers it all."
                         }
                     }
-
                 },
                 "settings": {
                     "name": "Settings",

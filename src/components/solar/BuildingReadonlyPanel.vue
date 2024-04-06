@@ -44,7 +44,10 @@
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-solar-power-variant-outline</v-icon>
                 <div class="me-auto">{{ $t("solar.building-readonly.panels-caps") }}</div>
-                <div>{{ userSolarData.panelCount }} / {{ userSolarData.maxPanelCount }} {{ $t("solar.building-readonly.panels") }}</div>
+                <div>
+                    {{ userSolarData.panelCount }} / {{ userSolarData.maxPanelCount }}
+                    {{ $t("solar.building-readonly.panels") }}
+                </div>
             </div>
         </div>
 

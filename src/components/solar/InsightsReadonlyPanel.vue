@@ -39,7 +39,10 @@
         <div class="mb-5">
             <div>&nbsp</div>
             <div class="d-flex">
-                <div class="me-auto">{{ $t("solar.insights-readonly.cost-analysis-for") }} {{ userSolarData.installationLifespan }} {{ $t("solar.insights-readonly.years") }}</div>
+                <div class="me-auto">
+                    {{ $t("solar.insights-readonly.cost-analysis-for") }} {{ userSolarData.installationLifespan }}
+                    {{ $t("solar.insights-readonly.years") }}
+                </div>
             </div>
         </div>
 
@@ -82,7 +85,8 @@
                 <div class="me-auto">{{ $t("solar.insights-readonly.break-even") }}</div>
                 <div>
                     <div v-if="breakEvenYear != -1">
-                        {{ breakEvenYear + new Date().getFullYear() }} ({{ breakEvenYear }} {{ $t("solar.insights-readonly.years") }})
+                        {{ breakEvenYear + new Date().getFullYear() }} ({{ breakEvenYear }}
+                        {{ $t("solar.insights-readonly.years") }})
                     </div>
                     <div v-if="breakEvenYear == -1">- {{ $t("solar.insights-readonly.years") }}</div>
                 </div>

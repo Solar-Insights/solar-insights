@@ -1,5 +1,5 @@
 <template>
-    <div class="alert-component" v-if="alert !== undefined" style="position: absolute;">
+    <div class="alert-component" v-if="alert !== undefined" style="position: absolute">
         <v-alert
             class="alert-component"
             :type="matchType(alert.type)"
@@ -38,7 +38,6 @@ const alertDisplayPercentage = ref(MAX_DISPLAY_PERCENTAGE);
 watch(alert, () => {
     resetAlertDisplay();
 });
-
 
 onMounted(async () => {
     setInterval(() => {

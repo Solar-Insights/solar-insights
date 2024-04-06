@@ -1,19 +1,19 @@
 <template>
     <v-card class="pt-0 body-container">
         <div class="home-title-container">
-            <div class="home-title"> {{ $t(`home.home-title-container.title`) }} </div>
-            <div class="home-title-description"> {{ $t(`home.home-title-container.description`) }} </div>
+            <div class="home-title">{{ $t(`home.home-title-container.title`) }}</div>
+            <div class="home-title-description">{{ $t(`home.home-title-container.description`) }}</div>
             <div class="home-title-action">
-                <v-card 
+                <v-card
                     :to="{ name: 'solar-map' }"
                     class="pa-6 rounded-lg mx-auto"
-                    style="width: 250px;"
+                    style="width: 250px"
                     elevation="2"
                     color="theme"
                 >
                     <v-row class="pa-0">
                         <v-col class="pa-0" cols="9">
-                            <div style="font-weight: bold;"> {{ $t(`home.home-title-container.action`) }} </div>
+                            <div style="font-weight: bold">{{ $t(`home.home-title-container.action`) }}</div>
                         </v-col>
                         <v-col class="pa-0" cols="3">
                             <v-icon>mdi-magnify</v-icon>
@@ -23,43 +23,59 @@
             </div>
         </div>
 
-        <v-img v-if="theme === 'dark' && locale === 'en'" class="home-main-image" :src="solar_insights_dark_en"/>
-        <v-img v-else-if="theme === 'dark' && locale === 'fr'" class="home-main-image" :src="solar_insights_dark_fr"/>
-        <v-img v-else-if="theme === 'light' && locale === 'en'" class="home-main-image" :src="solar_insights_light_en"/>
-        <v-img v-else-if="theme === 'light' && locale === 'fr'" class="home-main-image" :src="solar_insights_light_fr"/>
+        <v-img v-if="theme === 'dark' && locale === 'en'" class="home-main-image" :src="solar_insights_dark_en" />
+        <v-img v-else-if="theme === 'dark' && locale === 'fr'" class="home-main-image" :src="solar_insights_dark_fr" />
+        <v-img
+            v-else-if="theme === 'light' && locale === 'en'"
+            class="home-main-image"
+            :src="solar_insights_light_en"
+        />
+        <v-img
+            v-else-if="theme === 'light' && locale === 'fr'"
+            class="home-main-image"
+            :src="solar_insights_light_fr"
+        />
 
         <div class="home-subtitle-container">
-            <div class="home-subtitle"> {{ $t(`home.usecase-subtitle-container.subtitle`) }} </div>
-            <div class="home-subtitle-content"> 
+            <div class="home-subtitle">{{ $t(`home.usecase-subtitle-container.subtitle`) }}</div>
+            <div class="home-subtitle-content">
                 <v-row>
-                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3"> 
+                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-telescope</v-icon>
-                        <div class="font-weight-bold mb-3"> {{ $t(`home.usecase-subtitle-container.visualize.title`) }} </div>
-                        <div> 
+                        <div class="font-weight-bold mb-3">
+                            {{ $t(`home.usecase-subtitle-container.visualize.title`) }}
+                        </div>
+                        <div>
                             {{ $t(`home.usecase-subtitle-container.visualize.description`) }}
                         </div>
                     </v-col>
 
-                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3"> 
+                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-hammer</v-icon>
-                        <div class="font-weight-bold mb-3"> {{ $t(`home.usecase-subtitle-container.customize.title`) }}  </div>
-                        <div> 
-                            {{ $t(`home.usecase-subtitle-container.customize.description`) }}  
+                        <div class="font-weight-bold mb-3">
+                            {{ $t(`home.usecase-subtitle-container.customize.title`) }}
+                        </div>
+                        <div>
+                            {{ $t(`home.usecase-subtitle-container.customize.description`) }}
                         </div>
                     </v-col>
 
-                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3"> 
+                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-cash</v-icon>
-                        <div class="font-weight-bold mb-3"> {{ $t(`home.usecase-subtitle-container.viability.title`) }}  </div>
-                        <div> 
+                        <div class="font-weight-bold mb-3">
+                            {{ $t(`home.usecase-subtitle-container.viability.title`) }}
+                        </div>
+                        <div>
                             {{ $t(`home.usecase-subtitle-container.viability.description`) }}
                         </div>
                     </v-col>
 
-                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3"> 
+                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-earth</v-icon>
-                        <div class="font-weight-bold mb-3"> {{ $t(`home.usecase-subtitle-container.global.title`) }} </div>
-                        <div> 
+                        <div class="font-weight-bold mb-3">
+                            {{ $t(`home.usecase-subtitle-container.global.title`) }}
+                        </div>
+                        <div>
                             {{ $t(`home.usecase-subtitle-container.global.description`) }}
                         </div>
                     </v-col>
@@ -80,5 +96,4 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 
 const userSessionStore = useUserSessionStore();
 const { locale, theme } = storeToRefs(userSessionStore);
-
 </script>

@@ -16,7 +16,8 @@
     />
 
     <v-card-title class="text-center font-weight-regular">
-        <v-icon class="mr-2"> {{ currentRouteInformation.icon }} </v-icon> {{ $t(`navigation.${currentRouteInformation.routeName}`) }}
+        <v-icon class="mr-2"> {{ currentRouteInformation.icon }} </v-icon>
+        {{ $t(`navigation.${currentRouteInformation.routeName}`) }}
     </v-card-title>
 
     <v-text-field

@@ -15,7 +15,7 @@ export const useUserSessionStore = defineStore("userSessionStore", {
     actions: {
         setAlert(alert: VueError) {
             if (this.alert !== undefined) this.removeAlert();
-            if (this.pendingApiRequest !== 0) this.alert = alert; 
+            if (this.pendingApiRequest !== 0) this.alert = alert;
         },
 
         resetAlertOnNewPage() {

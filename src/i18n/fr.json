@@ -135,7 +135,6 @@
                             "description": "Configuration couvrant de manière maximale les besoins annuels en énergie du bâtiment, ou la première configuration les couvrant entièrement."
                         }
                     }
-
                 },
                 "settings": {
                     "name": "Paramètres",

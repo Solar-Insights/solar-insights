@@ -29,5 +29,5 @@ const { theme, locale, alert } = storeToRefs(userSessionStore);
 
 onMounted(() => {
     i18n.global.locale.value = locale.value;
-})
+});
 </script>

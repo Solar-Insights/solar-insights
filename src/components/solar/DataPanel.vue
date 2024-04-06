@@ -17,14 +17,15 @@
                 :prepend-icon="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'mdi-flash' : 'mdi-flash-outline'"
                 :ripple="false"
             >
-            {{ $t(`solar.data-panel.readonly-panels.insights`) }}
+                {{ $t(`solar.data-panel.readonly-panels.insights`) }}
             </v-btn>
         </div>
 
         <v-expansion-panels variant="accordion" v-model="expansionPanels">
             <v-expansion-panel elevation="0" value="panels">
                 <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
-                    <v-icon class="mr-3">mdi-solar-power-variant-outline</v-icon> <span class="my-auto"> {{ $t(`solar.data-panel.data-panels.panels.name`) }} </span>
+                    <v-icon class="mr-3">mdi-solar-power-variant-outline</v-icon>
+                    <span class="my-auto"> {{ $t(`solar.data-panel.data-panels.panels.name`) }} </span>
                 </v-expansion-panel-title>
 
                 <v-expansion-panel-text>
@@ -42,7 +43,8 @@
                                         : buildingInsights.solarPotential.solarPanelConfigs[mapSettings.configIdIndex]
                                               .panelsCount
                                 }}
-                                / {{ userSolarData.maxPanelCount }} {{ $t(`solar.data-panel.data-panels.panels.panels`) }}
+                                / {{ userSolarData.maxPanelCount }}
+                                {{ $t(`solar.data-panel.data-panels.panels.panels`) }}
                             </span>
                         </div>
                         <v-slider
@@ -103,7 +105,9 @@
 
                                 <v-text-field
                                     v-model="userSolarData.yearlyPanelEfficiencyDecline"
-                                    :label="$t(`solar.data-panel.data-panels.panels-advanced-settings.efficiency-decline`)"
+                                    :label="
+                                        $t(`solar.data-panel.data-panels.panels-advanced-settings.efficiency-decline`)
+                                    "
                                     density="compact"
                                     variant="outlined"
                                     type="number"
@@ -119,7 +123,8 @@
 
             <v-expansion-panel elevation="0" panel="costs">
                 <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
-                    <v-icon class="mr-3">mdi-cash</v-icon> <span class="my-auto"> {{ $t(`solar.data-panel.data-panels.costs.name`) }} </span>
+                    <v-icon class="mr-3">mdi-cash</v-icon>
+                    <span class="my-auto"> {{ $t(`solar.data-panel.data-panels.costs.name`) }} </span>
                 </v-expansion-panel-title>
 
                 <v-expansion-panel-text>
@@ -190,7 +195,9 @@
                             <v-expansion-panel-text class="px-0" id="expansion-panel-second-layer">
                                 <v-text-field
                                     v-model="userSolarData.yearlyEnergyCostIncrease"
-                                    :label="$t(`solar.data-panel.data-panels.costs-advanced-settings.energy-cost-increase`)"
+                                    :label="
+                                        $t(`solar.data-panel.data-panels.costs-advanced-settings.energy-cost-increase`)
+                                    "
                                     density="compact"
                                     variant="outlined"
                                     type="number"
@@ -248,7 +255,9 @@
                                 {{ $t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.name`) }}
                             </v-card-item>
                             <v-card-item class="pa-0 pr-2 detail-text" prepend-icon="null">
-                                {{ $t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.description`) }}
+                                {{
+                                    $t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.description`)
+                                }}
                             </v-card-item>
                         </v-card>
                     </div>
@@ -257,7 +266,8 @@
 
             <v-expansion-panel elevation="0" value="settings">
                 <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
-                    <v-icon class="mr-3">mdi-cog-outline</v-icon> <span class="my-auto"> {{ $t(`solar.data-panel.data-panels.settings.name`) }} </span>
+                    <v-icon class="mr-3">mdi-cog-outline</v-icon>
+                    <span class="my-auto"> {{ $t(`solar.data-panel.data-panels.settings.name`) }} </span>
                 </v-expansion-panel-title>
 
                 <v-expansion-panel-text>
@@ -287,7 +297,9 @@
                             density="compact"
                         >
                             <template v-slot:label>
-                                <span class="ml-4"> {{ $t(`solar.data-panel.data-panels.settings.display-panels`) }} </span>
+                                <span class="ml-4">
+                                    {{ $t(`solar.data-panel.data-panels.settings.display-panels`) }}
+                                </span>
                             </template>
                         </v-switch>
 
@@ -299,7 +311,9 @@
                             density="compact"
                         >
                             <template v-slot:label>
-                                <span class="ml-4"> {{ $t(`solar.data-panel.data-panels.settings.display-heatmap`) }} </span>
+                                <span class="ml-4">
+                                    {{ $t(`solar.data-panel.data-panels.settings.display-heatmap`) }}
+                                </span>
                             </template>
                         </v-switch>
 
@@ -314,7 +328,9 @@
                             "
                         >
                             <template v-slot:label>
-                                <span class="ml-4"> {{ $t(`solar.data-panel.data-panels.settings.heatmap-animation`) }} </span>
+                                <span class="ml-4">
+                                    {{ $t(`solar.data-panel.data-panels.settings.heatmap-animation`) }}
+                                </span>
                             </template>
                         </v-switch>
                     </div>

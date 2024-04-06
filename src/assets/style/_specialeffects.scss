@@ -16,9 +16,9 @@
 @media screen and (min-width: 600px) {
     .parallax {
         background-attachment: fixed;
-     }
+    }
 }
-  
+
 .parallax {
     background-position: center;
     background-repeat: no-repeat;
@@ -29,6 +29,6 @@
 }
 
 .parallax-content {
-  position: relative;
-  z-index: 100;
+    position: relative;
+    z-index: 100;
 }
