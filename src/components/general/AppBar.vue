@@ -25,25 +25,29 @@
             <v-spacer/>
 
             <v-toolbar-items class="hidden-xs">
-                <v-btn 
-                    v-for="route in routes" 
-                    :to="{ name: route.routeName }" 
-                    :active="false"
-                >
-                    <template v-slot:prepend>
-                        <v-avatar 
-                            :color="route.routeName === currentRoute.name ? 'theme' : ''" 
-                            :variant="route.routeName === currentRoute.name ? 'flat' : 'tonal'"
-                            density="comfortable" 
-                            size="small" 
-                            style="border-radius: 8px;"
-                            
-                        >
-                            <v-icon>{{ route.icon }}</v-icon>
-                        </v-avatar>
-                    </template>
-                    {{ $t(`navigation.${route.routeName}`) }}
-                </v-btn>
+                <v-hover v-for="route in routes" v-slot="{ isHovering, props }">
+                    <v-btn 
+                        v-bind="props"
+                        class="navbar-btn"
+                        :class="isHovering ? 'text-theme' : ''"
+                        :ripple="false"
+                        :to="{ name: route.routeName }" 
+                        :active="false"
+                    >
+                        <template v-slot:prepend>
+                            <v-avatar 
+                                :color="route.routeName === currentRoute.name ? 'theme' : ''" 
+                                variant="tonal"
+                                density="comfortable" 
+                                size="small" 
+                                style="border-radius: 8px;"
+                            >
+                                <v-icon>{{ route.icon }}</v-icon>
+                            </v-avatar>
+                        </template>
+                        {{ $t(`navigation.${route.routeName}`) }}
+                    </v-btn>
+                </v-hover>
             </v-toolbar-items>
 
             <v-spacer />
