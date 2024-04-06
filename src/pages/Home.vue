@@ -29,7 +29,7 @@
             <div class="home-subtitle"> What can you do with Solar&nbspInsights? </div>
             <div class="home-subtitle-content"> 
                 <v-row>
-                    <v-col class="mx-auto" cols="12" xs="12" sm="6" md="3"> 
+                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3"> 
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-telescope</v-icon>
                         <div class="font-weight-bold mb-3"> Visualize accurate solar data </div>
                         <div> 
@@ -37,7 +37,7 @@
                         </div>
                     </v-col>
 
-                    <v-col class="mx-auto" cols="12" xs="12" sm="6" md="3"> 
+                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3"> 
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-hammer</v-icon>
                         <div class="font-weight-bold mb-3"> Customize solar installations </div>
                         <div> 
@@ -45,7 +45,7 @@
                         </div>
                     </v-col>
 
-                    <v-col class="mx-auto" cols="12" xs="12" sm="6" md="3"> 
+                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3"> 
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-cash</v-icon>
                         <div class="font-weight-bold mb-3"> Assess the viability of solar panels </div>
                         <div> 
@@ -53,7 +53,7 @@
                         </div>
                     </v-col>
 
-                    <v-col class="mx-auto" cols="12" xs="12" sm="6" md="3"> 
+                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3"> 
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-earth</v-icon>
                         <div class="font-weight-bold mb-3"> Access globally available data </div>
                         <div> 
