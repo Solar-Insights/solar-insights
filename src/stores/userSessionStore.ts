@@ -7,7 +7,8 @@ export const useUserSessionStore = defineStore("userSessionStore", {
         alert: undefined as VueError | undefined,
         pendingApiRequest: 0,
         theme: "light" as Theme,
-        locale: "en" as Locale
+        locale: "en" as Locale,
+        isLoggedIn: false,
     }),
 
     actions: {
