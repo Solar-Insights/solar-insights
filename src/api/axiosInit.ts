@@ -6,7 +6,10 @@ const AxiosInstance = axios.create({
 });
 
 AxiosInstance.interceptors.request.use(
-    (config) => {
+    async(config) => {
+        const accessToken = useUserSessionStore().accessToken;
+        config.headers.Authorization = `Bearer ${accessToken}`;
+
         useUserSessionStore().pendingApiRequest++;
         return config;
     },

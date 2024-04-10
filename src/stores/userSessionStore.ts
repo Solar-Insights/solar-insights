@@ -4,6 +4,7 @@ import { Theme, Locale } from "@/helpers/types";
 
 export const useUserSessionStore = defineStore("userSessionStore", {
     state: () => ({
+        accessToken: "",
         alert: undefined as VueError | undefined,
         pendingApiRequest: 0,
         theme: "light" as Theme,
