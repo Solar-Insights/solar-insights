@@ -94,25 +94,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { useAuth0 } from '@auth0/auth0-vue';
 import UserMenu from "@/components/general/UserMenu.vue";
 import logo_nobg from "@/assets/images/logo_nobg.png";
 
-const auth0 = useAuth0();
 const currentRoute = useRoute();
 const drawer = ref(false);
-
-onMounted(() => {
-    console.log(auth0.isAuthenticated.value)
-    console.log(auth0.checkSession())
-    console.log(auth0.isLoading)
-})
-
-watch(auth0.isAuthenticated, () => {
-    console.log("auth change", auth0.isAuthenticated.value)
-})
 
 const routes = ref([
     {
@@ -132,16 +120,4 @@ const routes = ref([
     //     icon: "mdi-paint"
     // }
 ]);
-
-function login() {
-    auth0.loginWithRedirect();
-}
-
-function logout() {
-    auth0.logout({ 
-        logoutParams: { 
-            returnTo: window.location.origin 
-        } 
-    });
-}
 </script>
