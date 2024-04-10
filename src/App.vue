@@ -16,16 +16,23 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useRoute } from "vue-router";
 import Alert from "@/components/general/Alert.vue";
 import AppBar from "@/components/general/AppBar.vue";
-import { onMounted } from "vue";
+import { onMounted, watch } from "vue";
 import { i18n } from "@/i18n/i18n";
+import { useAuth0 } from "@auth0/auth0-vue";
 
+const auth0 = useAuth0();
 const route = useRoute();
-
 const userSessionStore = useUserSessionStore();
-
 const { theme, locale, alert } = storeToRefs(userSessionStore);
 
-onMounted(() => {
+onMounted(async () => {
     i18n.global.locale.value = locale.value;
 });
+
+watch(auth0.isLoading, async () => {
+    if (auth0.isLoading.value) return;
+    
+    const accessToken = await auth0.getAccessTokenSilently();
+    userSessionStore.accessToken = accessToken;
+})
 </script>
