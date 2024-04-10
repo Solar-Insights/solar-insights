@@ -11,9 +11,10 @@ import { createAuth0 } from "@auth0/auth0-vue";
 const app = createApp(App);
 
 app.use(createAuth0({
-    domain: "dev-ubs32bgn56n1z15q.us.auth0.com",
-    clientId: "2m5fiinQSDYS5Zvw1K5SWJjGkKUSgANi",
+    domain: import.meta.env.VITE_AUTH0_DOMAIN,
+    clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
     authorizationParams: {
+        audience: import.meta.env.VITE_AUTH0_AUDIENCE,
         redirect_uri: window.location.origin // will choose http://localhost:5173 or https://solarinsights.ca
     }
 }));
