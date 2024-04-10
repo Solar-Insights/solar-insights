@@ -1,9 +1,5 @@
 <template>
-    <v-menu v-model="showMenu" :close-on-content-click="false">
-        <template v-slot:activator="{ props }">
-            <v-btn v-bind="props" icon="mdi-cog" elevation="0" size="small" />
-        </template>
-
+    <v-menu activator="parent" :close-on-content-click="false">
         <v-card class="pa-2" min-width="200px">
             <v-card @click="userSessionStore.changeTheme()" class="pa-2 mb-2 rounded-lg" elevation="2" variant="tonal">
                 <v-row>
@@ -51,12 +47,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 
 const userSessionStore = useUserSessionStore();
 const { theme, locale } = storeToRefs(userSessionStore);
-
-const showMenu = ref(false);
 </script>

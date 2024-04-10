@@ -45,7 +45,31 @@
 
             <v-spacer />
 
-            <QuickSettings />
+            <v-hover v-slot="{ isHovering, props }">
+                <v-btn
+                    v-bind="props"
+                    class="navbar-btn"
+                    :class="isHovering ? 'text-theme' : ''"
+                    :ripple="false"
+                    :active="false"
+                >
+                    <template v-slot:prepend>
+                        <v-avatar
+                            variant="tonal"
+                            density="comfortable"
+                            size="small"
+                            style="border-radius: 8px"
+                        >
+                            <v-icon>mdi-account-outline</v-icon>
+                        </v-avatar>
+                    </template>
+                    
+                    <UserMenu />
+                </v-btn>
+            </v-hover>
+            
+            <!-- <v-btn @click="login"> Log in </v-btn>
+            <v-btn @click="logout"> Log out </v-btn> -->
         </v-app-bar>
 
         <v-navigation-drawer v-model="drawer" class="hidden-sm-and-up" disable-resize-watcher>
@@ -70,14 +94,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import QuickSettings from "@/components/general/QuickSettings.vue";
+import { useAuth0 } from '@auth0/auth0-vue';
+import UserMenu from "@/components/general/UserMenu.vue";
 import logo_nobg from "@/assets/images/logo_nobg.png";
 
+const auth0 = useAuth0();
 const currentRoute = useRoute();
-
 const drawer = ref(false);
+
+onMounted(() => {
+    console.log(auth0.isAuthenticated.value)
+    console.log(auth0.checkSession())
+    console.log(auth0.isLoading)
+})
+
+watch(auth0.isAuthenticated, () => {
+    console.log("auth change", auth0.isAuthenticated.value)
+})
 
 const routes = ref([
     {
@@ -97,4 +132,16 @@ const routes = ref([
     //     icon: "mdi-paint"
     // }
 ]);
+
+function login() {
+    auth0.loginWithRedirect();
+}
+
+function logout() {
+    auth0.logout({ 
+        logoutParams: { 
+            returnTo: window.location.origin 
+        } 
+    });
+}
 </script>
