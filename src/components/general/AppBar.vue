@@ -70,7 +70,6 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import QuickSettings from "@/components/general/QuickSettings.vue";

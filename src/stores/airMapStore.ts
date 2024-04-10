@@ -1,10 +1,7 @@
-// Vue
 import { defineStore } from "pinia";
-// Helpers
 import { LatLng } from "geo-env-typing/geo";
 import { AirQualityData } from "geo-env-typing/air";
 import { initMarker } from "@/helpers/util";
-// Server
 import { getAirQualityData } from "@/api/air";
 
 export const useAirMapStore = defineStore("airMapStore", {

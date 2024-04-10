@@ -11,11 +11,9 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useRoute } from "vue-router";
-// Components
 import Alert from "@/components/general/Alert.vue";
 import AppBar from "@/components/general/AppBar.vue";
 import { onMounted } from "vue";

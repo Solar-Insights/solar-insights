@@ -3,11 +3,9 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { onMounted } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
-// Helpers
 import { initMapComponents } from "@/helpers/util";
 
 const solarMapStore = useSolarMapStore();

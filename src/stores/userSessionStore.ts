@@ -1,6 +1,4 @@
-// Vue
 import { defineStore } from "pinia";
-// Helpers
 import { VueError } from "@/helpers/customErrors";
 import { Theme, Locale } from "@/helpers/types";
 

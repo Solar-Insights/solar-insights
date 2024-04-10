@@ -19,11 +19,9 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
 import { watch, ref, onMounted } from "vue";
-// Helpers
 import { matchType, matchTitle, matchMessage, matchColorToType } from "@/helpers/customErrors";
 
 const userSessionStore = useUserSessionStore();

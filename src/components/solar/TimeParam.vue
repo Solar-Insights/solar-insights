@@ -48,11 +48,9 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { onMounted, ref } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
-// Helpers
 import { monthCodes, hourCodes } from "@/helpers/constants";
 
 const solarMapStore = useSolarMapStore();

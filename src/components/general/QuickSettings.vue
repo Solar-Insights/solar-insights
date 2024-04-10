@@ -51,7 +51,6 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";

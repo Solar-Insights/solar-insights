@@ -31,7 +31,6 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { ref, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useAirMapStore } from "@/stores/airMapStore";

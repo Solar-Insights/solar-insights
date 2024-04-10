@@ -1,4 +1,3 @@
-// Vue
 import { createRouter, createWebHistory } from "vue-router";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 

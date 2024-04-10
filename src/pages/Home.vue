@@ -90,7 +90,6 @@ import solar_insights_dark_en from "@/assets/images/solar_insights_dark_en.png";
 import solar_insights_dark_fr from "@/assets/images/solar_insights_dark_fr.png";
 import solar_insights_light_en from "@/assets/images/solar_insights_light_en.png";
 import solar_insights_light_fr from "@/assets/images/solar_insights_light_fr.png";
-// Vue
 import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 

@@ -1,7 +1,5 @@
-// Vue
 import { defineStore } from "pinia";
 import { toRaw } from "vue";
-// Helpers
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
 import { SolarReadonlyPanel, TimeParameters, UserSolarData } from "@/helpers/types";
@@ -10,7 +8,6 @@ import {
     makeDefaultMapSettings,
     makeDefaultTimeParams
 } from "@/helpers/solar/defaultData";
-// Server
 import { getClosestBuildingInsights } from "@/api/solar";
 import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/panels";
 import { getLayerFromBuildingInsights } from "@/helpers/solar/layers";

@@ -62,10 +62,8 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
-// Helpers
 import { strToLargeNumberDisplay } from "@/helpers/util";
 import { installationSizeCalc } from "@/helpers/solar/solarDataMath";
 

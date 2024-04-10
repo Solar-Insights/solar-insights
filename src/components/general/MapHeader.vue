@@ -34,11 +34,9 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { computed, ref, onMounted, PropType } from "vue";
 import { useRoute } from "vue-router";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-// Utils
 import { initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
 import { LatLng } from "geo-env-typing/geo";
 import { getGeocoding, getReverseGeocoding } from "@/api/geo";

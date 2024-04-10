@@ -15,13 +15,11 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { onMounted } from "vue";
 import _ from "lodash";
 import { useAirMapStore } from "@/stores/airMapStore";
 import { storeToRefs } from "pinia";
 import { initMapComponents } from "@/helpers/util";
-// Components
 import MapHeader from "@/components/general/MapHeader.vue";
 import DataPanel from "@/components/air_quality/DataPanel.vue";
 

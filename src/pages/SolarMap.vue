@@ -22,11 +22,8 @@
 </template>
 
 <script setup lang="ts">
-// Vue
-import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSolarMapStore } from "@/stores/solarMapStore";
-// Components
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import InsightsReadonlyPanel from "@/components/solar/InsightsReadonlyPanel.vue";
 import MapHeader from "@/components/general/MapHeader.vue";

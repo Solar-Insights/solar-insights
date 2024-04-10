@@ -54,12 +54,10 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useAirMapStore } from "@/stores/airMapStore";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-// Helpers
 import { Unit } from "geo-env-typing/air";
 import { pollutants as pollutantsConstants } from "@/helpers/constants";
 

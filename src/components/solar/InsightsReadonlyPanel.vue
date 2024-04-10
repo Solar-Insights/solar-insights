@@ -103,12 +103,10 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { computed } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
-// Helpers
 import {
     yearlyEnergyCalc,
     installationCostCalc,

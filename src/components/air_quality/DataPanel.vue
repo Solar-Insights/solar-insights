@@ -59,14 +59,11 @@
 </template>
 
 <script setup lang="ts">
-// Vue
 import { ref } from "vue";
 import _ from "lodash";
 import { useAirMapStore } from "@/stores/airMapStore";
 import { storeToRefs } from "pinia";
-// Helpers
 import { pollutants, circularBarColorSelector } from "@/helpers/constants";
-// Components
 import PollutantReadonlyTab from "@/components/air_quality/PollutantReadonlyTab.vue";
 import HealthReadonlyTab from "@/components/air_quality/HealthReadonlyTab.vue";
 
