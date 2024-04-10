@@ -11,6 +11,7 @@
         "format": "prettier --trailing-comma none --tab-width 4 --print-width 120 -uw --cache --ignore-path .prettierignore ."
     },
     "dependencies": {
+        "@auth0/auth0-vue": "^2.3.3",
         "@mdi/font": "^7.4.47",
         "apexcharts": "^3.47.0",
         "axios": "^1.6.7",
