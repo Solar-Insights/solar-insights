@@ -7,6 +7,7 @@
             :ripple="false"
             :to="{ name: routeName }"
             :active="false"
+            :disabled="auth0.isLoading.value"
         >
             <template v-slot:prepend>
                 <v-avatar
@@ -26,7 +27,9 @@
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
+import { useAuth0 } from "@auth0/auth0-vue";
 
+const auth0 = useAuth0();
 const currentRoute = useRoute();
 
 const props = defineProps({
