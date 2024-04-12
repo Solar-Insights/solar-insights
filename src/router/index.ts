@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useUserSessionStore } from "@/stores/userSessionStore";
+import { useAuth0 } from '@auth0/auth0-vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,7 +18,7 @@ const router = createRouter({
             path: "/solar-map", 
             name: "solar-map", 
             component: () => import("@/pages/SolarMap.vue"),
-            meta: { requiresAuth: false }
+            meta: { requiresAuth: true }
         },
         { 
             path: "/:catchAll(.*)", 
@@ -33,9 +34,9 @@ router.beforeEach(async (to, from, next) => {
     const userSessionStore = useUserSessionStore();
     userSessionStore.resetAlertOnNewPage();
 
-    if (meta.requiresAuth && !userSessionStore.isLoggedIn) {
-        next({ name: "home" });
-        return;
+    const auth0 = useAuth0();
+    if (meta.requiresAuth && !auth0.isAuthenticated.value) {
+        auth0.loginWithRedirect();
     }
 
     next();

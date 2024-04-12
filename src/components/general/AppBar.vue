@@ -67,9 +67,6 @@
                     <UserMenu />
                 </v-btn>
             </v-hover>
-            
-            <!-- <v-btn @click="login"> Log in </v-btn>
-            <v-btn @click="logout"> Log out </v-btn> -->
         </v-app-bar>
 
         <v-navigation-drawer v-model="drawer" class="hidden-sm-and-up" disable-resize-watcher>

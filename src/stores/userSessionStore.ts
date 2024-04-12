@@ -9,7 +9,6 @@ export const useUserSessionStore = defineStore("userSessionStore", {
         pendingApiRequest: 0,
         theme: "light" as Theme,
         locale: "en" as Locale,
-        isLoggedIn: false,
     }),
 
     actions: {
@@ -34,6 +33,10 @@ export const useUserSessionStore = defineStore("userSessionStore", {
 
         changeLocale() {
             this.locale = this.locale === "fr" ? "en" : "fr";
+        },
+
+        hasAccessToken() {
+            return this.accessToken !== "";
         }
     },
 

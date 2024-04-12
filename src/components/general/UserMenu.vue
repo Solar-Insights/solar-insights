@@ -82,9 +82,6 @@ const userAuthenticated = computed(() => auth0.isAuthenticated.value );
 
 function login() {
     auth0.loginWithRedirect()
-        .then(() => {
-            userSessionStore.isLoggedIn = true;
-        });
 }
 
 function logout() {
@@ -92,9 +89,6 @@ function logout() {
         logoutParams: { 
             returnTo: window.location.origin 
         } 
-    })        
-        .then(() => {
-            userSessionStore.isLoggedIn = false;
-        });
+    })
 }
 </script>

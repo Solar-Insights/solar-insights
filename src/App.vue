@@ -31,7 +31,7 @@ onMounted(async () => {
 
 watch(auth0.isLoading, async () => {
     if (auth0.isLoading.value) return;
-    console.log(auth0.isAuthenticated.value)
+    
     await auth0.getAccessTokenSilently()
         .then((accessToken) => {
             userSessionStore.accessToken = accessToken;
