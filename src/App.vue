@@ -15,7 +15,7 @@ import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useRoute } from "vue-router";
 import Alert from "@/components/general/Alert.vue";
-import AppBar from "@/components/general/AppBar.vue";
+import AppBar from "@/components/general/appbar/AppBar.vue";
 import { onMounted, watch } from "vue";
 import { i18n } from "@/i18n/i18n";
 import { useAuth0 } from "@auth0/auth0-vue";

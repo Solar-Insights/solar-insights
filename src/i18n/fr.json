@@ -2,7 +2,9 @@
     "navigation": {
         "home": "Accueil",
         "solar-map": "Potentiel solaire",
-        "theme": "Theme"
+        "theme": "Thème",
+        "user": "Utilisateur",
+        "settings": "Paramètres"
     },
     "errors": {
         "vue-error": {
