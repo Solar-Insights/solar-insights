@@ -26,7 +26,7 @@ import { storeToRefs } from "pinia";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import InsightsReadonlyPanel from "@/components/solar/InsightsReadonlyPanel.vue";
-import MapHeader from "@/components/general/MapHeader.vue";
+import MapHeader from "@/components/solar/MapHeader.vue";
 import MapLayers from "@/components/solar/MapLayers.vue";
 import TimeParam from "@/components/solar/TimeParam.vue";
 import DataPanel from "@/components/solar/DataPanel.vue";

@@ -2,7 +2,6 @@
     "navigation": {
         "home": "Accueil",
         "solar-map": "Potentiel solaire",
-        "air-quality-map": "Qualité de l'air",
         "theme": "Theme"
     },
     "errors": {
@@ -29,10 +28,6 @@
         "reverse-geocoding-error": {
             "title": "Le serveur n'a pas pu effectuer le géocodage inversé à partir des coordonnées fournies",
             "message": "Une erreur est survenue lors de la requête visant à convertir des coordonnées géographiques en une adresse valide."
-        },
-        "air-quality-data-error": {
-            "title": "Le serveur n'a pas pu récupérer les informations sur la qualité de l'air",
-            "message": "Une erreur est survenue lors de la requête visant à récupérer les données de qualité de l'air de la région visée."
         },
         "building-insights-error": {
             "title": "Le serveur n'a pas pu récupérer les informations du bâtiment",

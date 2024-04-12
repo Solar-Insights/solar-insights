@@ -142,18 +142,6 @@ export class ReverseGeocodingError extends VueError {
     }
 }
 
-export class AirQualityDataError extends VueError {
-    constructor(
-        type: AlertType = "error",
-        name: string = "AirQualityDataError",
-        title: string = i18n.global.t("errors.air-quality-data-error.title"),
-        message: string = i18n.global.t("errors.air-quality-data-error.message"),
-        code: number = 500
-    ) {
-        super(type, name, title, message, code);
-    }
-}
-
 export class BuildingInsightsError extends VueError {
     constructor(
         type: AlertType = "error",

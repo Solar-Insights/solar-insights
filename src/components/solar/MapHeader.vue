@@ -8,16 +8,16 @@
                 to: { name: 'home' }
             },
             {
-                title: $t(`navigation.${currentRouteInformation.routeName}`),
+                title: $t(`navigation.solar-map`),
                 disabled: true,
-                to: { name: currentRouteInformation.routeName }
+                to: { name: 'solar-map' }
             }
         ]"
     />
 
     <v-card-title class="text-center font-weight-regular">
-        <v-icon class="mr-2"> {{ currentRouteInformation.icon }} </v-icon>
-        {{ $t(`navigation.${currentRouteInformation.routeName}`) }}
+        <v-icon class="mr-2">mdi-weather-windy</v-icon>
+        {{ $t(`navigation.solar-map`) }}
     </v-card-title>
 
     <v-text-field
@@ -37,28 +37,13 @@
 import { computed, ref, onMounted, PropType } from "vue";
 import { useRoute } from "vue-router";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import { initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/util";
+import { initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/maps/components_util";
 import { LatLng } from "geo-env-typing/geo";
 import { getGeocoding, getReverseGeocoding } from "@/api/geo";
 import { AutocompleteInputError } from "@/helpers/customErrors";
 
 const userSessionStore = useUserSessionStore();
 const currentRoute = useRoute();
-
-const currentRouteInformation = computed(() => {
-    if (currentRoute.name === "solar-map") {
-        return {
-            routeName: "solar-map",
-            icon: "mdi-weather-sunny"
-        };
-    } else {
-        //if (currentRoute.name === "air-quality-map") {
-        return {
-            routeName: "air-quality-map",
-            icon: "mdi-weather-windy"
-        };
-    }
-});
 
 const autocompleteValue = ref<string | null>("");
 let autocomplete: google.maps.places.Autocomplete;

@@ -14,12 +14,6 @@ const router = createRouter({
             meta: { requiresAuth: false }
         },
         { 
-            path: "/air-quality-map", 
-            name: "air-quality-map", 
-            component: () => import("@/pages/AirQualityMap.vue"),
-            meta: { requiresAuth: false }
-        },
-        { 
             path: "/solar-map", 
             name: "solar-map", 
             component: () => import("@/pages/SolarMap.vue"),

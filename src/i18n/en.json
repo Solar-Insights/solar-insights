@@ -2,7 +2,6 @@
     "navigation": {
         "home": "Home",
         "solar-map": "Solar Potential",
-        "air-quality-map": "Air Quality",
         "theme": "Theme"
     },
     "errors": {
@@ -29,10 +28,6 @@
         "reverse-geocoding-error": {
             "title": "The server could not reverse geocode the given coordinates",
             "message": "An error occured when trying to convert geographic coordinates to a valid address."
-        },
-        "air-quality-data-error": {
-            "title": "The server could not fetch valid air quality data",
-            "message": "An error occured when trying to fetch the air quality data of the provided region."
         },
         "building-insights-error": {
             "title": "The server could not fetch building insights",

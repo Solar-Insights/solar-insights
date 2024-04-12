@@ -6,14 +6,14 @@
 import { onMounted } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
-import { initMapComponents } from "@/helpers/util";
+import { initMapComponents } from "@/helpers/maps/components_util";
 
 const solarMapStore = useSolarMapStore();
 
 const { map, centerCoord } = storeToRefs(solarMapStore);
 
 onMounted(async () => {
-    const mapComponents = await initMapComponents(centerCoord.value, "SOLAR");
+    const mapComponents = await initMapComponents(centerCoord.value);
     map.value = mapComponents.map;
 });
 </script>

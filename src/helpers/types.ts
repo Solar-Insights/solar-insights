@@ -1,5 +1,3 @@
-import { PollutantCode } from "geo-env-typing/air";
-
 export type TimeParameters = {
     tick: number;
     month: number;
@@ -21,14 +19,6 @@ export type MapElements = {
 
 export type AlertType = "warning" | "error" | "success";
 
-export type Pollutants = {
-    [K in PollutantCode]: {
-        code: K;
-        displayName: string;
-        solution: string;
-    };
-};
-
 export type UserSolarData = {
     minPanelCount: number;
     maxPanelCount: number;
@@ -46,8 +36,6 @@ export type UserSolarData = {
     yearlyDiscountRate: number;
     installationLifespan: number;
 };
-
-export type MapType = "AIR_QUALITY" | "SOLAR";
 
 export type SolarReadonlyPanel = "BUILDING_READONLY" | "INSIGHTS_READONLY";
 

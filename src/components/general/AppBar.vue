@@ -111,13 +111,5 @@ const routes = ref([
         routeName: "solar-map",
         icon: "mdi-weather-sunny"
     }
-    // {
-    //     routeName: "air-quality-map",
-    //     icon: "mdi-weather-windy"
-    // },
-    // {
-    //     routeName: "theme",
-    //     icon: "mdi-paint"
-    // }
 ]);
 </script>
