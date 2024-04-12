@@ -1,7 +1,7 @@
 <template>
     <v-menu activator="parent" :close-on-content-click="false">
         <v-card class="pa-2" min-width="200px">
-            <v-card v-if="auth0.isAuthenticated.value && !auth0.isLoading.value">
+            <v-card v-if="auth0.isAuthenticated.value && !auth0.isLoading.value" elevation="0">
                 <v-card-title> {{ auth0.user.value!.nickname }} </v-card-title>
                 <v-card-text> {{ auth0.user.value!.email }} </v-card-text>
             </v-card>

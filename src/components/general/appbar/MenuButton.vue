@@ -7,6 +7,7 @@
             :ripple="false"
             :active="false"
             :disabled="auth0.isLoading.value"
+            elevation="0"
         >
             <template v-slot:prepend>
                 <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">

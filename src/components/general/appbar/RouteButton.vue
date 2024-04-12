@@ -8,6 +8,7 @@
             :to="{ name: routeName }"
             :active="false"
             :disabled="auth0.isLoading.value"
+            elevation="0"
         >
             <template v-slot:prepend>
                 <v-avatar
