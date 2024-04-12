@@ -13,32 +13,32 @@
                 SOLAR INSIGHTS
             </v-btn>
 
-            <v-spacer/>
+            <v-spacer />
 
             <v-app-bar-nav-icon class="hidden-sm-and-up" variant="text" @click.stop="drawer = !drawer" />
 
             <v-toolbar-items class="hidden-xs">
-                <RouteButton v-for="route in routes" :routeName="route.routeName" :icon="route.icon"/>
+                <RouteButton v-for="route in routes" :routeName="route.routeName" :icon="route.icon" />
             </v-toolbar-items>
 
-            <v-spacer class="hidden-xs"/>
+            <v-spacer class="hidden-xs" />
 
             <v-toolbar-items class="hidden-xs">
-                <MenuButton v-for="menu in menus" :menu="menu.menuName" :icon="menu.icon" :isMobile="false"/>
+                <MenuButton v-for="menu in menus" :menu="menu.menuName" :icon="menu.icon" :isMobile="false" />
             </v-toolbar-items>
         </v-app-bar>
 
         <v-navigation-drawer v-model="drawer" class="hidden-sm-and-up" disable-resize-watcher>
             <v-list>
                 <v-list-item v-for="route in routes">
-                    <RouteButton :routeName="route.routeName" :icon="route.icon"/>
+                    <RouteButton :routeName="route.routeName" :icon="route.icon" />
                 </v-list-item>
             </v-list>
 
             <template v-slot:append>
                 <v-list>
                     <v-list-item v-for="menu in menus">
-                        <MenuButton :menu="menu.menuName" :icon="menu.icon" :isMobile="true"/>
+                        <MenuButton :menu="menu.menuName" :icon="menu.icon" :isMobile="true" />
                     </v-list-item>
                 </v-list>
             </template>
@@ -69,7 +69,7 @@ const menus = ref([
     {
         menuName: "user",
         icon: "mdi-account-outline"
-    }, 
+    },
     {
         menuName: "settings",
         icon: "mdi-cog-outline"

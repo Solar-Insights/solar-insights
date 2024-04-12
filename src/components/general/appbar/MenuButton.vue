@@ -9,19 +9,14 @@
             :disabled="auth0.isLoading.value"
         >
             <template v-slot:prepend>
-                <v-avatar
-                    variant="tonal"
-                    density="comfortable"
-                    size="small"
-                    style="border-radius: 8px"
-                >
+                <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
                     <v-icon>{{ icon }}</v-icon>
                 </v-avatar>
             </template>
             <span v-if="isMobile"> {{ $t(`navigation.${menu}`) }} </span>
-            
-            <UserMenu v-if="menu === 'user'"/>
-            <SettingsMenu v-else-if="menu === 'settings'"/>
+
+            <UserMenu v-if="menu === 'user'" />
+            <SettingsMenu v-else-if="menu === 'settings'" />
         </v-btn>
     </v-hover>
 </template>

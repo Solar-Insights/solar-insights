@@ -31,13 +31,14 @@ onMounted(async () => {
 
 watch(auth0.isLoading, async () => {
     if (auth0.isLoading.value) return;
-    
-    await auth0.getAccessTokenSilently()
+
+    await auth0
+        .getAccessTokenSilently()
         .then((accessToken) => {
             userSessionStore.accessToken = accessToken;
         })
         .catch((error) => {
             userSessionStore.accessToken = "";
         });
-})
+});
 </script>

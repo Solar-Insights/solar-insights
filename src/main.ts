@@ -10,14 +10,16 @@ import { createAuth0 } from "@auth0/auth0-vue";
 
 const app = createApp(App);
 
-app.use(createAuth0({
-    domain: import.meta.env.VITE_AUTH0_DOMAIN,
-    clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
-    authorizationParams: {
-        audience: import.meta.env.VITE_AUTH0_AUDIENCE,
-        redirect_uri: window.location.origin // will choose http://localhost:5173 or https://solarinsights.ca
-    }
-}));
+app.use(
+    createAuth0({
+        domain: import.meta.env.VITE_AUTH0_DOMAIN,
+        clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
+        authorizationParams: {
+            audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+            redirect_uri: window.location.origin // will choose http://localhost:5173 or https://solarinsights.ca
+        }
+    })
+);
 app.use(i18n);
 app.use(createPinia().use(piniaPluginPersistedState));
 app.use(router);

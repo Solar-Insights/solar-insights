@@ -22,7 +22,6 @@ export function batteryCharging(value: number) {
     else if (value > 0) return "mdi-battery-charging-10";
 }
 
-
 /*
     Solar colors and data
 */

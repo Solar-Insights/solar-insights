@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import { useAuth0 } from '@auth0/auth0-vue';
+import { useAuth0 } from "@auth0/auth0-vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,21 +8,21 @@ const router = createRouter({
         return { top: 0 };
     },
     routes: [
-        { 
-            path: "/", 
-            name: "home", 
+        {
+            path: "/",
+            name: "home",
             component: () => import("@/pages/Home.vue"),
             meta: { requiresAuth: false }
         },
-        { 
-            path: "/solar-map", 
-            name: "solar-map", 
+        {
+            path: "/solar-map",
+            name: "solar-map",
             component: () => import("@/pages/SolarMap.vue"),
             meta: { requiresAuth: true }
         },
-        { 
-            path: "/:catchAll(.*)", 
-            name: "catch-all", 
+        {
+            path: "/:catchAll(.*)",
+            name: "catch-all",
             component: () => import("@/pages/CatchAll.vue"),
             meta: { requiresAuth: false }
         }
