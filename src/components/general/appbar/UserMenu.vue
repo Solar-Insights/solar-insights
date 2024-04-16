@@ -14,7 +14,7 @@
                 variant="tonal"
             >
                 <v-row>
-                    <v-col cols="3" align-self="center">
+                    <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
                         <v-icon>mdi-login</v-icon>
                     </v-col>
                     <v-col cols="9">
@@ -31,7 +31,7 @@
                 variant="tonal"
             >
                 <v-row>
-                    <v-col cols="3" align-self="center">
+                    <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
                         <v-icon>mdi-logout</v-icon>
                     </v-col>
                     <v-col cols="9">

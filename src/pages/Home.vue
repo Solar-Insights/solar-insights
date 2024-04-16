@@ -15,7 +15,7 @@
                         <v-col class="pa-0" cols="9">
                             <div style="font-weight: bold">{{ $t(`home.home-title-container.action`) }}</div>
                         </v-col>
-                        <v-col class="pa-0" cols="3">
+                        <v-col class="pa-0" cols="3" align-self="center">
                             <v-icon>mdi-magnify</v-icon>
                         </v-col>
                     </v-row>

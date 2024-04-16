@@ -238,3 +238,8 @@
     @extend .my-2;
     @extend .rounded-xl;
 }
+
+.app-menu-option-icon-container {
+    @extend .pl-4;
+    @extend .pr-0;
+}

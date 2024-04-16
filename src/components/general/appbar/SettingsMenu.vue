@@ -8,12 +8,12 @@
                 variant="tonal"
             >
                 <v-row>
-                    <v-col class="mb-2" cols="3" align-self="center">
+                    <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
                         <v-icon>mdi-lightbulb-on-outline</v-icon>
                     </v-col>
                     <v-col cols="9">
                         <div>{{ $t(`general.quick-settings.theme`) }}</div>
-                        <div class="detail-text pb-0">
+                        <div class="detail-text">
                             {{
                                 theme === "dark"
                                     ? $t(`general.quick-settings.dark`)
@@ -34,7 +34,7 @@
                 variant="tonal"
             >
                 <v-row>
-                    <v-col class="mb-2" cols="3" align-self="center">
+                    <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
                         <v-icon>mdi-earth</v-icon>
                     </v-col>
                     <v-col cols="9">
