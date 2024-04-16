@@ -35,7 +35,8 @@ router.beforeEach(async (to, from, next) => {
     userSessionStore.resetAlertOnNewPage();
 
     const auth0 = useAuth0();
-    if (meta.requiresAuth && !auth0.isAuthenticated.value) {
+
+    if (meta.requiresAuth && !userSessionStore.accessToken) {
         auth0.loginWithRedirect();
     }
 
