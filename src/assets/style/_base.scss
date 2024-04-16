@@ -226,3 +226,15 @@
     @extend .mb-16;
     width: 85%;
 }
+
+.app-menu-card {
+    @extend .pa-2;
+    @extend .rounded-xl;
+    min-width: 200px;
+}
+
+.app-menu-option {
+    @extend .pa-2; 
+    @extend .my-2;
+    @extend .rounded-xl;
+}

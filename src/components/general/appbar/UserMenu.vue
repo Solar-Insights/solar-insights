@@ -1,12 +1,18 @@
 <template>
     <v-menu activator="parent" :close-on-content-click="false">
-        <v-card class="pa-2" min-width="200px">
+        <v-card class="app-menu-card">
             <v-card v-if="auth0.isAuthenticated.value && !auth0.isLoading.value" elevation="0">
                 <v-card-title> {{ auth0.user.value!.nickname }} </v-card-title>
                 <v-card-text> {{ auth0.user.value!.email }} </v-card-text>
             </v-card>
 
-            <v-card v-if="!userAuthenticated" @click="login" class="pa-2 mb-2 rounded-lg" elevation="2" variant="tonal">
+            <v-card 
+                v-if="!userAuthenticated" 
+                @click="login" 
+                class="app-menu-option" 
+                elevation="2" 
+                variant="tonal"
+            >
                 <v-row>
                     <v-col cols="3" align-self="center">
                         <v-icon>mdi-login</v-icon>
@@ -17,7 +23,13 @@
                 </v-row>
             </v-card>
 
-            <v-card v-if="userAuthenticated" @click="logout" class="pa-2 mb-2 rounded-lg" elevation="2" variant="tonal">
+            <v-card 
+                v-if="userAuthenticated" 
+                @click="logout"
+                class="app-menu-option" 
+                elevation="2" 
+                variant="tonal"
+            >
                 <v-row>
                     <v-col cols="3" align-self="center">
                         <v-icon>mdi-logout</v-icon>

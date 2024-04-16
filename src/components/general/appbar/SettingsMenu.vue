@@ -1,7 +1,12 @@
 <template>
     <v-menu activator="parent" :close-on-content-click="false">
-        <v-card class="pa-2" min-width="200px">
-            <v-card @click="userSessionStore.changeTheme()" class="pa-2 mb-2 rounded-lg" elevation="2" variant="tonal">
+        <v-card class="app-menu-card">
+            <v-card 
+                @click="userSessionStore.changeTheme()" 
+                class="app-menu-option" 
+                elevation="2" 
+                variant="tonal"
+            >
                 <v-row>
                     <v-col class="mb-2" cols="3" align-self="center">
                         <v-icon>mdi-lightbulb-on-outline</v-icon>
@@ -24,7 +29,7 @@
                     userSessionStore.changeLocale();
                     locale === 'fr' ? ($i18n.locale = 'fr') : ($i18n.locale = 'en');
                 "
-                class="pa-2 rounded-lg"
+                class="app-menu-option"
                 elevation="2"
                 variant="tonal"
             >
