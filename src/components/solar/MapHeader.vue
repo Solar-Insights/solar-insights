@@ -8,6 +8,11 @@
                 to: { name: 'home' }
             },
             {
+                title: $t('navigation.search-name'),
+                disabled: false,
+                to: { name: 'search' }
+            },
+            {
                 title: $t(`navigation.solar-map`),
                 disabled: true,
                 to: { name: 'solar-map' }

@@ -2,6 +2,8 @@
     "navigation": {
         "home": "Home",
         "search": "Solar Potential",
+        "solar-map": "Solar Potential",
+        "search-name": "Search",
         "theme": "Theme",
         "user": "User",
         "settings": "Settings"

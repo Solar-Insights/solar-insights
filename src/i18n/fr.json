@@ -2,6 +2,8 @@
     "navigation": {
         "home": "Accueil",
         "search": "Potentiel solaire",
+        "solar-map": "Potentiel solaire",
+        "search-name": "Recherche",
         "theme": "Thème",
         "user": "Utilisateur",
         "settings": "Paramètres"
