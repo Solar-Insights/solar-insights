@@ -114,17 +114,15 @@ function handleEnterKeyOnSearchBar(autocompleteSearch: HTMLInputElement) {
 }
 
 export function validRouteCoordinates(queryParams: LocationQuery) {
-    if (queryParams.lat === undefined || queryParams.lng === undefined) return false;
+    return existingRouteCoordinates(queryParams) && nonZeroCoordinates(queryParams)
+}
 
+export function existingRouteCoordinates(queryParams: LocationQuery) {
+    return queryParams.lat !== undefined && queryParams.lng !== undefined;
+}
+
+export function nonZeroCoordinates(queryParams: LocationQuery) {
     const lat = Number(queryParams.lat);
     const lng = Number(queryParams.lng);
-
-    if (lat === 0 && lng === 0) return false;
-
-    const coordinates: Coordinates = {
-        lat: lat,
-        lng: lng
-    };
-
-    return validCoordinates(coordinates);
+    return lat !== 0 && lng !== 0;
 }
