@@ -5,7 +5,7 @@
             class="rounded-0"
             :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'"
         >
-            <MapHeader :coord="requestCoordinates" @sync-with-new-request="solarMapStore.syncWithNewRequest" />
+            <MapHeader :coord="requestCoordinates"/>
 
             <DataPanel />
         </v-card>

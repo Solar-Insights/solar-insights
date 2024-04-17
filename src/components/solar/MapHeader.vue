@@ -25,34 +25,16 @@
         {{ $t(`navigation.solar-map`) }}
     </v-card-title>
 
-    <v-text-field
-        v-model="autocompleteValue"
-        @keypress.enter="prepareHandlerEnterKeyOnSearchBar"
-        class="mt-0"
-        id="autocomplete-search"
-        :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
-        :placeholder="$t('general.map-header.search-placeholder')"
-        hide-details
-        variant="outlined"
-        prepend-inner-icon="mdi-google-maps"
-    />
+    <AutocompleteField :coord="coord" @sync-with-new-request="solarMapStore.syncWithNewRequest"/>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, PropType } from "vue";
-import { useRoute } from "vue-router";
-import { useUserSessionStore } from "@/stores/userSessionStore";
-import { initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/maps/components_util";
+import { PropType } from "vue";
 import { LatLng } from "geo-env-typing/geo";
-import { getGeocoding, getReverseGeocoding } from "@/api/geo";
-import { AutocompleteInputError } from "@/helpers/customErrors";
+import AutocompleteField from "@/components/general/AutocompleteField.vue";
+import { useSolarMapStore } from "@/stores/solarMapStore";
 
-const userSessionStore = useUserSessionStore();
-const currentRoute = useRoute();
-
-const autocompleteValue = ref<string | null>("");
-let autocomplete: google.maps.places.Autocomplete;
-let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events (arrow keydown + enter), prevent first one from sending request
+const solarMapStore = useSolarMapStore();
 
 const props = defineProps({
     coord: {
@@ -64,52 +46,4 @@ const props = defineProps({
         }
     }
 });
-
-const emits = defineEmits(["syncWithNewRequest"]);
-
-onMounted(async () => {
-    autocomplete = await initAutocomplete();
-
-    autocompleteValue.value = await getReverseGeocoding(props.coord)
-        .then((address: string) => {
-            return address;
-        })
-        .catch((error) => {
-            return ""; // DO_SOMETHING
-        });
-
-    await initListeners();
-
-    emits("syncWithNewRequest", props.coord, autocompleteValue.value);
-});
-
-async function initListeners() {
-    await setPlaceChangedOnAutocompleteListener();
-}
-
-async function setPlaceChangedOnAutocompleteListener() {
-    autocomplete.addListener("place_changed", async () => {
-        const newPlace: google.maps.places.PlaceResult = autocomplete.getPlace();
-        if (!newPlace || !newPlace.formatted_address) {
-            if (autocompleteAlreadyChanged) {
-                userSessionStore.setAlert(new AutocompleteInputError());
-                autocompleteAlreadyChanged = false;
-                return;
-            } else {
-                autocompleteAlreadyChanged = true;
-                return;
-            }
-        }
-
-        autocompleteAlreadyChanged = false;
-        await getGeocoding(newPlace.formatted_address)
-            .then(async (newCoord: LatLng) => {
-                autocompleteValue.value = newPlace.formatted_address!;
-                emits("syncWithNewRequest", newCoord, newPlace.formatted_address);
-            })
-            .catch((error) => {
-                autocompleteValue.value = "";
-            });
-    });
-}
 </script>
