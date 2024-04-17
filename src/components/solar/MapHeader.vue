@@ -25,7 +25,7 @@
         {{ $t(`navigation.solar-map`) }}
     </v-card-title>
 
-    <AutocompleteField :coord="coord" @sync-with-new-request="solarMapStore.syncWithNewRequest"/>
+    <AutocompleteField :reverseGeocodeOnLoad="true" :coord="coord" @sync-with-new-request="handleNewSolarRequest"/>
 </template>
 
 <script setup lang="ts">
@@ -33,6 +33,7 @@ import { PropType } from "vue";
 import { LatLng } from "geo-env-typing/geo";
 import AutocompleteField from "@/components/general/AutocompleteField.vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
+import router from "@/router";
 
 const solarMapStore = useSolarMapStore();
 
@@ -46,4 +47,9 @@ const props = defineProps({
         }
     }
 });
+
+function handleNewSolarRequest(coord: LatLng, address: string) {
+    solarMapStore.syncWithNewRequest(coord, address);
+    router.push({ query: { lat: coord.lat, lng: coord.lng }});
+}
 </script>

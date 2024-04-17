@@ -29,11 +29,15 @@ let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2
 const props = defineProps({
     coord: {
         type: Object as PropType<LatLng>,
-        required: true,
         default: {
             lat: 0,
             lng: 0
         }
+    },
+    reverseGeocodeOnLoad: {
+        type: Boolean,
+        required: true,
+        default: false,
     }
 });
 
@@ -42,17 +46,18 @@ const emits = defineEmits(["syncWithNewRequest"]);
 onMounted(async () => {
     autocomplete = await initAutocomplete();
 
-    autocompleteValue.value = await getReverseGeocoding(props.coord)
-        .then((address: string) => {
-            return address;
-        })
-        .catch((error) => {
-            return ""; // DO_SOMETHING
-        });
+    if (props.reverseGeocodeOnLoad) {
+        await getReverseGeocoding(props.coord)
+            .then((address: string) => {
+                autocompleteValue.value = address;
+                emits("syncWithNewRequest", props.coord, autocompleteValue.value);
+            })
+            .catch((error) => {
+                emits("syncWithNewRequest", props.coord, autocompleteValue.value);
+            });
+    }    
 
     await initListeners();
-
-    emits("syncWithNewRequest", props.coord, autocompleteValue.value);
 });
 
 async function initListeners() {
