@@ -6,7 +6,6 @@
             :class="isHovering ? 'text-theme' : ''"
             :ripple="false"
             :active="false"
-            :disabled="auth0.isLoading.value"
             elevation="0"
         >
             <template v-slot:prepend>
@@ -25,9 +24,6 @@
 <script setup lang="ts">
 import UserMenu from "@/components/general/appbar/UserMenu.vue";
 import SettingsMenu from "@/components/general/appbar/SettingsMenu.vue";
-import { useAuth0 } from "@auth0/auth0-vue";
-
-const auth0 = useAuth0();
 
 const props = defineProps({
     menu: {

@@ -6,39 +6,44 @@
                 <v-card-text> {{ auth0.user.value!.email }} </v-card-text>
             </v-card>
 
-            <v-card 
-                v-if="!userAuthenticated" 
-                @click="login" 
-                class="app-menu-option" 
-                elevation="2" 
-                variant="tonal"
+            <v-skeleton-loader
+                :loading="auth0.isLoading.value"
+                type="heading"
             >
-                <v-row>
-                    <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
-                        <v-icon>mdi-login</v-icon>
-                    </v-col>
-                    <v-col cols="9">
-                        <div>Sign in</div>
-                    </v-col>
-                </v-row>
-            </v-card>
+                <v-card 
+                    v-if="!userAuthenticated && !auth0.isLoading.value" 
+                    @click="login" 
+                    class="app-menu-option" 
+                    elevation="2" 
+                    variant="tonal"
+                >
+                    <v-row>
+                        <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
+                            <v-icon>mdi-login</v-icon>
+                        </v-col>
+                        <v-col cols="9">
+                            <div>Sign in</div>
+                        </v-col>
+                    </v-row>
+                </v-card>
 
-            <v-card 
-                v-if="userAuthenticated" 
-                @click="logout"
-                class="app-menu-option" 
-                elevation="2" 
-                variant="tonal"
-            >
-                <v-row>
-                    <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
-                        <v-icon>mdi-logout</v-icon>
-                    </v-col>
-                    <v-col cols="9">
-                        <div>Sign out</div>
-                    </v-col>
-                </v-row>
-            </v-card>
+                <v-card 
+                    v-if="userAuthenticated" 
+                    @click="logout"
+                    class="app-menu-option" 
+                    elevation="2" 
+                    variant="tonal"
+                >
+                    <v-row>
+                        <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
+                            <v-icon>mdi-logout</v-icon>
+                        </v-col>
+                        <v-col cols="9">
+                            <div>Sign out</div>
+                        </v-col>
+                    </v-row>
+                </v-card>
+            </v-skeleton-loader>
         </v-card>
     </v-menu>
 </template>
