@@ -24,14 +24,24 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useSolarMapStore } from "@/stores/solarMapStore";
+import { onMounted } from "vue";
+import { useRoute } from "vue-router";
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import InsightsReadonlyPanel from "@/components/solar/InsightsReadonlyPanel.vue";
 import MapHeader from "@/components/solar/MapHeader.vue";
 import MapLayers from "@/components/solar/MapLayers.vue";
 import TimeParam from "@/components/solar/TimeParam.vue";
 import DataPanel from "@/components/solar/DataPanel.vue";
+import { validRouteCoordinates } from "@/helpers/maps/components_util";
+import router from "@/router";
 
 const solarMapStore = useSolarMapStore();
 
 const { buildingInsights, centerCoord, solarReadonlyPanel } = storeToRefs(solarMapStore);
+
+onMounted(() => {
+    if (!validRouteCoordinates(useRoute().query)) {
+        router.push({ name: "search" });
+    }
+})
 </script>
