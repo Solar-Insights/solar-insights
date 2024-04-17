@@ -1,20 +1,17 @@
 <template>
     <v-menu activator="parent" :close-on-content-click="false">
         <v-card class="app-menu-card">
-            <v-skeleton-loader
-                :loading="authProcessGoingOn"
-                type="heading"
-            >
+            <v-skeleton-loader :loading="authProcessGoingOn" type="heading">
                 <v-card v-if="auth0.isAuthenticated.value" elevation="0">
                     <v-card-title> {{ auth0.user.value?.nickname }} </v-card-title>
                     <v-card-text> {{ auth0.user.value?.email }} </v-card-text>
                 </v-card>
-                
-                <v-card 
-                    v-if="!auth0.isAuthenticated.value" 
-                    @click="login" 
-                    class="app-menu-option" 
-                    elevation="2" 
+
+                <v-card
+                    v-if="!auth0.isAuthenticated.value"
+                    @click="login"
+                    class="app-menu-option"
+                    elevation="2"
                     :variant="theme === 'dark' ? 'tonal' : 'outlined'"
                 >
                     <v-row>
@@ -27,11 +24,11 @@
                     </v-row>
                 </v-card>
 
-                <v-card 
-                    v-if="auth0.isAuthenticated.value" 
+                <v-card
+                    v-if="auth0.isAuthenticated.value"
                     @click="logout"
-                    class="app-menu-option" 
-                    elevation="2" 
+                    class="app-menu-option"
+                    elevation="2"
                     :variant="theme === 'dark' ? 'tonal' : 'outlined'"
                 >
                     <v-row>
@@ -58,7 +55,9 @@ const auth0 = useAuth0();
 const userSessionStore = useUserSessionStore();
 
 const { theme } = storeToRefs(userSessionStore);
-const authProcessGoingOn = computed(() => auth0.isLoading.value || (!auth0.isAuthenticated.value && userSessionStore.accessToken !== ''));
+const authProcessGoingOn = computed(
+    () => auth0.isLoading.value || (!auth0.isAuthenticated.value && userSessionStore.accessToken !== "")
+);
 
 function login() {
     auth0.loginWithRedirect();

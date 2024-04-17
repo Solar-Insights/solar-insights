@@ -38,7 +38,7 @@ const props = defineProps({
     reverseGeocodeOnLoad: {
         type: Boolean,
         required: true,
-        default: false,
+        default: false
     }
 });
 
@@ -56,7 +56,7 @@ onMounted(async () => {
             .catch((error) => {
                 emits("syncWithNewRequest", props.coord, autocompleteValue.value);
             });
-    }    
+    }
 
     await initListeners();
 });

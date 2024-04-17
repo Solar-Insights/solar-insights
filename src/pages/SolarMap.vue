@@ -5,7 +5,7 @@
             class="rounded-0"
             :class="$vuetify.display.xs ? 'map-details-mobile' : 'map-details-computer'"
         >
-            <MapHeader :coord="requestCoordinates"/>
+            <MapHeader :coord="requestCoordinates" />
 
             <DataPanel />
         </v-card>
@@ -48,11 +48,11 @@ onMounted(() => {
         lat: Number(route.query.lat),
         lng: Number(route.query.lng)
     };
-    
+
     if (!validRouteCoordinates(route.query) || !validCoordinates(coordinates)) {
         router.push({ name: "search" });
     }
 
     requestCoordinates.value = coordinates;
-})
+});
 </script>

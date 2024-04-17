@@ -25,7 +25,7 @@
         {{ $t(`navigation.solar-map`) }}
     </v-card-title>
 
-    <AutocompleteField :reverseGeocodeOnLoad="true" :coord="coord" @sync-with-new-request="handleNewSolarRequest"/>
+    <AutocompleteField :reverseGeocodeOnLoad="true" :coord="coord" @sync-with-new-request="handleNewSolarRequest" />
 </template>
 
 <script setup lang="ts">
@@ -50,6 +50,6 @@ const props = defineProps({
 
 function handleNewSolarRequest(coord: LatLng, address: string) {
     solarMapStore.syncWithNewRequest(coord, address);
-    router.push({ query: { lat: coord.lat, lng: coord.lng }});
+    router.push({ query: { lat: coord.lat, lng: coord.lng } });
 }
 </script>

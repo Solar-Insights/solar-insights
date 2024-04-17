@@ -114,7 +114,7 @@ function handleEnterKeyOnSearchBar(autocompleteSearch: HTMLInputElement) {
 }
 
 export function validRouteCoordinates(queryParams: LocationQuery) {
-    return existingRouteCoordinates(queryParams) && nonZeroCoordinates(queryParams)
+    return existingRouteCoordinates(queryParams) && nonZeroCoordinates(queryParams);
 }
 
 export function existingRouteCoordinates(queryParams: LocationQuery) {

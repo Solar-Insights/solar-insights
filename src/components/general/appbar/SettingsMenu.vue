@@ -1,10 +1,10 @@
 <template>
     <v-menu activator="parent" :close-on-content-click="false">
         <v-card class="app-menu-card">
-            <v-card 
-                @click="userSessionStore.changeTheme()" 
-                class="app-menu-option" 
-                elevation="2" 
+            <v-card
+                @click="userSessionStore.changeTheme()"
+                class="app-menu-option"
+                elevation="2"
                 :variant="theme === 'dark' ? 'tonal' : 'outlined'"
             >
                 <v-row>
