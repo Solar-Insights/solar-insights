@@ -8,6 +8,7 @@
         :placeholder="$t('general.map-header.search-placeholder')"
         hide-details
         variant="outlined"
+        rounded
         prepend-inner-icon="mdi-google-maps"
     />
 </template>
