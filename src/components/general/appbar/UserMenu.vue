@@ -1,8 +1,6 @@
 <template>
     <v-menu activator="parent" :close-on-content-click="false">
         <v-card class="app-menu-card">
-
-
             <v-skeleton-loader
                 :loading="authProcessGoingOn"
                 type="heading"
@@ -17,7 +15,7 @@
                     @click="login" 
                     class="app-menu-option" 
                     elevation="2" 
-                    variant="tonal"
+                    :variant="theme === 'dark' ? 'tonal' : 'outlined'"
                 >
                     <v-row>
                         <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
@@ -34,7 +32,7 @@
                     @click="logout"
                     class="app-menu-option" 
                     elevation="2" 
-                    variant="tonal"
+                    :variant="theme === 'dark' ? 'tonal' : 'outlined'"
                 >
                     <v-row>
                         <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
@@ -58,6 +56,8 @@ import { computed } from "vue";
 
 const auth0 = useAuth0();
 const userSessionStore = useUserSessionStore();
+
+const { theme } = storeToRefs(userSessionStore);
 const authProcessGoingOn = computed(() => auth0.isLoading.value || (!auth0.isAuthenticated.value && userSessionStore.accessToken !== ''));
 
 function login() {

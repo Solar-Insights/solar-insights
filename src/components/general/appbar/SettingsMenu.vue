@@ -5,7 +5,7 @@
                 @click="userSessionStore.changeTheme()" 
                 class="app-menu-option" 
                 elevation="2" 
-                variant="tonal"
+                :variant="theme === 'dark' ? 'tonal' : 'outlined'"
             >
                 <v-row>
                     <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
@@ -31,7 +31,7 @@
                 "
                 class="app-menu-option"
                 elevation="2"
-                variant="tonal"
+                :variant="theme === 'dark' ? 'tonal' : 'outlined'"
             >
                 <v-row>
                     <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
