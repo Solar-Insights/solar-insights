@@ -15,6 +15,12 @@ const router = createRouter({
             meta: { requiresAuth: false }
         },
         {
+            path: "/search",
+            name: "search",
+            component: () => import("@/pages/Search.vue"),
+            meta: { requiresAuth: true }
+        },
+        {
             path: "/solar-map",
             name: "solar-map",
             component: () => import("@/pages/SolarMap.vue"),

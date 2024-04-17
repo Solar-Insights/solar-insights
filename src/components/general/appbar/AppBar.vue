@@ -60,7 +60,7 @@ const routes = ref([
         icon: "mdi-home-outline"
     },
     {
-        routeName: "solar-map",
+        routeName: "search",
         icon: "mdi-weather-sunny"
     }
 ]);
