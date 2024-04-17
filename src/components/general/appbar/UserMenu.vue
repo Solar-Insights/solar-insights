@@ -1,17 +1,19 @@
 <template>
     <v-menu activator="parent" :close-on-content-click="false">
         <v-card class="app-menu-card">
-            <v-card v-if="auth0.isAuthenticated.value && !auth0.isLoading.value" elevation="0">
-                <v-card-title> {{ auth0.user.value!.nickname }} </v-card-title>
-                <v-card-text> {{ auth0.user.value!.email }} </v-card-text>
-            </v-card>
+
 
             <v-skeleton-loader
-                :loading="auth0.isLoading.value"
+                :loading="authProcessGoingOn"
                 type="heading"
             >
+                <v-card v-if="auth0.isAuthenticated.value" elevation="0">
+                    <v-card-title> {{ auth0.user.value?.nickname }} </v-card-title>
+                    <v-card-text> {{ auth0.user.value?.email }} </v-card-text>
+                </v-card>
+                
                 <v-card 
-                    v-if="!userAuthenticated && !auth0.isLoading.value" 
+                    v-if="!auth0.isAuthenticated.value" 
                     @click="login" 
                     class="app-menu-option" 
                     elevation="2" 
@@ -28,7 +30,7 @@
                 </v-card>
 
                 <v-card 
-                    v-if="userAuthenticated" 
+                    v-if="auth0.isAuthenticated.value" 
                     @click="logout"
                     class="app-menu-option" 
                     elevation="2" 
@@ -49,11 +51,14 @@
 </template>
 
 <script setup lang="ts">
+import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useAuth0 } from "@auth0/auth0-vue";
+import { storeToRefs } from "pinia";
 import { computed } from "vue";
 
 const auth0 = useAuth0();
-const userAuthenticated = computed(() => auth0.isAuthenticated.value);
+const userSessionStore = useUserSessionStore();
+const authProcessGoingOn = computed(() => auth0.isLoading.value || (!auth0.isAuthenticated.value && userSessionStore.accessToken !== ''));
 
 function login() {
     auth0.loginWithRedirect();
