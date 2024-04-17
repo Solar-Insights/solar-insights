@@ -1,6 +1,6 @@
 <template>
     <v-card
-        class="rounded-lg map-data"
+        class="rounded-xl map-data"
         :class="$vuetify.display.xs ? 'map-readonly-data-mobile' : 'map-readonly-data-computer'"
         elevation="8"
     >
@@ -9,7 +9,7 @@
                 <v-icon class="mr-3" color="theme">mdi-flash-outline</v-icon>
                 <div class="my-auto">{{ $t("solar.insights-readonly.name") }}</div>
             </div>
-            <v-divider style="border-width: 2px" />
+            <v-divider />
         </v-card-title>
 
         <div class="mb-5">

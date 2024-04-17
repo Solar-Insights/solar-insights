@@ -7,6 +7,7 @@
                 :class="solarReadonlyPanel === 'BUILDING_READONLY' ? 'bg-theme-lighter-2' : 'bg-theme-darker-1'"
                 :prepend-icon="solarReadonlyPanel === 'BUILDING_READONLY' ? 'mdi-home' : 'mdi-home-outline'"
                 :ripple="false"
+                rounded
             >
                 {{ $t(`solar.data-panel.readonly-panels.building`) }}
             </v-btn>
@@ -16,6 +17,7 @@
                 :class="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'bg-theme-lighter-2' : 'bg-theme-darker-1'"
                 :prepend-icon="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'mdi-flash' : 'mdi-flash-outline'"
                 :ripple="false"
+                rounded
             >
                 {{ $t(`solar.data-panel.readonly-panels.insights`) }}
             </v-btn>
@@ -69,6 +71,7 @@
                             variant="outlined"
                             type="number"
                             prepend-inner-icon="mdi-lightning-bolt"
+                            rounded
                         >
                             <template v-slot:append-inner> Watts </template>
                         </v-text-field>
@@ -99,6 +102,7 @@
                                     variant="outlined"
                                     type="number"
                                     prepend-inner-icon="mdi-handshake"
+                                    rounded
                                 >
                                     <template v-slot:append-inner> % </template>
                                 </v-text-field>
@@ -112,6 +116,7 @@
                                     variant="outlined"
                                     type="number"
                                     prepend-inner-icon="mdi-elevation-decline"
+                                    rounded
                                 >
                                     <template v-slot:append-inner> % </template>
                                 </v-text-field>
@@ -140,6 +145,7 @@
                             variant="outlined"
                             type="number"
                             prepend-inner-icon="mdi-calendar-month-outline"
+                            rounded
                         >
                             <template v-slot:append-inner> $ </template>
                         </v-text-field>
@@ -150,6 +156,7 @@
                             variant="outlined"
                             type="number"
                             prepend-inner-icon="mdi-currency-usd"
+                            rounded
                         >
                             <template v-slot:append-inner> $ </template>
                         </v-text-field>
@@ -160,6 +167,7 @@
                             variant="outlined"
                             type="number"
                             prepend-inner-icon="mdi-hammer"
+                            rounded
                         >
                             <template v-slot:append-inner> $ </template>
                         </v-text-field>
@@ -170,6 +178,7 @@
                             variant="outlined"
                             type="number"
                             prepend-inner-icon="mdi-handshake"
+                            rounded
                         >
                             <template v-slot:append-inner> $ </template>
                         </v-text-field>
@@ -202,6 +211,7 @@
                                     variant="outlined"
                                     type="number"
                                     prepend-inner-icon="mdi-chart-line-variant"
+                                    rounded
                                 >
                                     <template v-slot:append-inner> % </template>
                                 </v-text-field>
@@ -213,6 +223,7 @@
                                     variant="outlined"
                                     type="number"
                                     prepend-inner-icon="mdi-cart-percent"
+                                    rounded
                                 >
                                     <template v-slot:append-inner> % </template>
                                 </v-text-field>
@@ -286,6 +297,7 @@
                             density="compact"
                             variant="outlined"
                             prepend-inner-icon="mdi-magnify"
+                            rounded
                         >
                         </v-select>
 
