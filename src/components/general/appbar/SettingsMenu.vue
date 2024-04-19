@@ -8,10 +8,10 @@
                 :variant="theme === 'dark' ? 'tonal' : 'outlined'"
             >
                 <v-row>
-                    <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
+                    <v-col class="app-menu-option-icon-container" cols="auto" align-self="center">
                         <v-icon>mdi-lightbulb-on-outline</v-icon>
                     </v-col>
-                    <v-col cols="9">
+                    <v-col>
                         <div>{{ $t(`general.quick-settings.theme`) }}</div>
                         <div class="detail-text">
                             {{
@@ -34,10 +34,10 @@
                 :variant="theme === 'dark' ? 'tonal' : 'outlined'"
             >
                 <v-row>
-                    <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
+                    <v-col class="app-menu-option-icon-container" cols="auto" align-self="center">
                         <v-icon>mdi-earth</v-icon>
                     </v-col>
-                    <v-col cols="9">
+                    <v-col>
                         <div>{{ $t(`general.quick-settings.language`) }}</div>
                         <div class="detail-text pb-0">
                             {{ locale === "fr" ? "Français" : "English" }}

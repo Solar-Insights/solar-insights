@@ -15,10 +15,10 @@
                     :variant="theme === 'dark' ? 'tonal' : 'outlined'"
                 >
                     <v-row>
-                        <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
+                        <v-col class="app-menu-option-icon-container" cols="auto" align-self="center">
                             <v-icon>mdi-login</v-icon>
                         </v-col>
-                        <v-col cols="9">
+                        <v-col class="app-menu-option-text-container">
                             <div>Sign in</div>
                         </v-col>
                     </v-row>
@@ -32,10 +32,10 @@
                     :variant="theme === 'dark' ? 'tonal' : 'outlined'"
                 >
                     <v-row>
-                        <v-col class="app-menu-option-icon-container" cols="3" align-self="center">
+                        <v-col class="app-menu-option-icon-container" cols="auto" align-self="center">
                             <v-icon>mdi-logout</v-icon>
                         </v-col>
-                        <v-col cols="9">
+                        <v-col class="app-menu-option-text-container">
                             <div>Sign out</div>
                         </v-col>
                     </v-row>
