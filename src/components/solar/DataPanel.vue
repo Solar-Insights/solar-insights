@@ -1,26 +1,56 @@
 <template>
     <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
         <div class="mb-4">
-            <v-btn
-                @click="solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY')"
-                class="panel-selection-btn"
-                :class="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'bg-theme-lighter-2' : 'bg-theme-darker-1'"
-                :prepend-icon="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'mdi-flash' : 'mdi-flash-outline'"
-                :ripple="false"
-                rounded
-            >
-                {{ $t(`solar.data-panel.readonly-panels.insights`) }}
-            </v-btn>
-            <v-btn
-                @click="solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
-                class="panel-selection-btn"
-                :class="solarReadonlyPanel === 'BUILDING_READONLY' ? 'bg-theme-lighter-2' : 'bg-theme-darker-1'"
-                :prepend-icon="solarReadonlyPanel === 'BUILDING_READONLY' ? 'mdi-home' : 'mdi-home-outline'"
-                :ripple="false"
-                rounded
-            >
-                {{ $t(`solar.data-panel.readonly-panels.building`) }}
-            </v-btn>
+            <v-hover v-slot="{ isHovering, props }">
+                <v-btn
+                    v-bind="props"
+                    @click="solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY')"
+                    class="navbar-btn panel-selection-btn"
+                    :class="isHovering || solarMapStore.solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'text-theme' : ''"
+                    :ripple="false"
+                    :active="false"
+                    elevation="0"
+                    rounded
+                >
+                    <template v-slot:prepend>
+                        <v-avatar
+                            :color="solarMapStore.solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'theme' : ''"
+                            variant="tonal"
+                            density="comfortable"
+                            size="small"
+                            style="border-radius: 8px"
+                        >
+                            <v-icon>mdi-flash-outline</v-icon>
+                        </v-avatar>
+                    </template>
+                    {{ $t(`solar.data-panel.readonly-panels.insights`) }}
+                </v-btn>
+            </v-hover>
+            <v-hover v-slot="{ isHovering, props }">
+                <v-btn
+                    v-bind="props"
+                    @click="solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
+                    class="navbar-btn panel-selection-btn"
+                    :class="isHovering || solarMapStore.solarReadonlyPanel === 'BUILDING_READONLY'  ? 'text-theme' : ''"
+                    :ripple="false"
+                    :active="false"
+                    elevation="0"
+                    rounded
+                >
+                    <template v-slot:prepend>
+                        <v-avatar
+                            :color="solarMapStore.solarReadonlyPanel === 'BUILDING_READONLY' ? 'theme' : ''"
+                            variant="tonal"
+                            density="comfortable"
+                            size="small"
+                            style="border-radius: 8px"
+                        >
+                            <v-icon>mdi-home-outline</v-icon>
+                        </v-avatar>
+                    </template>
+                    {{ $t(`solar.data-panel.readonly-panels.building`) }}
+                </v-btn>
+            </v-hover>
         </div>
 
         <v-expansion-panels variant="accordion" v-model="expansionPanels">
