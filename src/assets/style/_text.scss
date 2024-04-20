@@ -87,3 +87,17 @@
     @extend .text-h5;
     @extend .font-weight-bold;
 }
+
+.v-card-text {
+    * {
+        @extend .universal-font-size;
+        @extend .universal-font-family;
+        line-height: 2rem !important;
+        font-size: 1.1rem !important;
+        font-weight: 300;
+    }
+}
+
+b {
+    @extend .font-weight-bold;
+}

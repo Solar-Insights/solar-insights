@@ -26,10 +26,18 @@ $light-grey: rgba(148, 148, 148, 1);
     background-color: $theme-surface-contrast !important;
 }
 
+.universal-font-size {
+    font-size: 0.9rem;
+}
+
+.universal-font-family {
+    font-family: "Roboto", sans-serif;
+}
+
 .universal-font-theme {
     @extend .font-weight-light;
-    font-family: "Roboto", sans-serif;
-    font-size: 0.9rem;
+    @extend .universal-font-size;
+    @extend .universal-font-family;
 }
 
 .emphasis {
