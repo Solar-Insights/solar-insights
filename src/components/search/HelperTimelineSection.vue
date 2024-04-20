@@ -1,6 +1,6 @@
 <template>
     <div class="home-subtitle-container pt-12">
-            <div class="home-subtitle"> A {{ steps.length }}-step starter guide to Solar Insights </div>
+            <div class="home-subtitle"> {{ steps.length }}{{ $t(`search.timeline.title`) }} </div>
             <div class="home-subtitle-content">
                 <v-timeline density="compact">
                     <v-timeline-item
@@ -37,37 +37,39 @@ import optimizations_en from "@/assets/images/search/optimizations_en.png";
 import panels_section from "@/assets/images/search/panels_section_en.png";
 import settings_en from "@/assets/images/search/settings_en.png";
 import solar_insights_en from "@/assets/images/search/solar_insights_en.png";
+import { useI18n } from 'vue-i18n';
 
+const t = useI18n().t;
 
 const steps = ref([
     {
         icon: "mdi-magnify",
-        title: "Find a building",
-        contents: ["Use the above text field to locate buildings.", "You will be redirected to the map to start creating a new solar installation."],
+        title: t(`search.timeline.step-1.title`),
+        contents: [t(`search.timeline.step-1.content-1`), t(`search.timeline.step-1.content-2`)],
         images: []
     },
     {
         icon: "mdi-weather-sunny",
-        title: "Gain insights on a solar installation",
-        contents: ["Once redirected, take a look at the <b>Solar Insights</b> panel.", "It displays valuable informations about the solar installation of building.", "By default, the installation is opmitized to maximize total savings."],
+        title: t(`search.timeline.step-2.title`),
+        contents: [t(`search.timeline.step-2.content-1`), t(`search.timeline.step-2.content-2`), t(`search.timeline.step-2.content-3`)],
         images: [solar_insights_en]
     },
     {
         icon: "mdi-pencil",
-        title: "Customize a solar installation and its parameters",
-        contents: ["Two sections enable you to customize your installation and parameters used for their analysis:", "The <b>Panels</b> section contains parameters like the power rating and the yearly efficiency decline of panels. They have been prefilled with industry-standard values.", "The <b>Cost and incentives</b> section incorporates financial data for the average Canadian household.", "Make adjustments to these sections to better reflect your unique situation."],
+        title: t(`search.timeline.step-3.title`),
+        contents: [t(`search.timeline.step-3.content-1`), t(`search.timeline.step-3.content-2`), t(`search.timeline.step-3.content-3`), t(`search.timeline.step-3.content-4`)],
         images: [panels_section]
     },
     {
         icon: "mdi-podium-gold",
-        title: "Optimize a solar installation",
-        contents:  ["The <b>Optimizations</b> section is aimed at users wishing to optimize the current solar installation for a specific criteria", "Select the one you prefer, and see the changes for yourself!"],
+        title: t(`search.timeline.step-4.title`),
+        contents:  [t(`search.timeline.step-4.content-1`), t(`search.timeline.step-4.content-2`)],
         images: [optimizations_en]
     },
     {
         icon: "mdi-map-marker",
-        title: "Adjust the look and feel of the map",
-        contents:  ["The <b>Settings</b> section gives you the ability to enable / disable the visbility of certain map elements like the panels.", "Also, you can use the drop-down menu to display monthly or daily solar patterns."],
+        title: t(`search.timeline.step-4.title`),
+        contents:  [t(`search.timeline.step-5.content-1`), t(`search.timeline.step-5.content-2`)],
         images: [settings_en]
     }
 ]);

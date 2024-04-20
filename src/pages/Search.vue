@@ -1,7 +1,7 @@
 <template>
     <v-card class="pt-0 body-container">
         <div class="home-title-container">
-            <div class="home-title">Find your next solar installation</div>
+            <div class="home-title">{{ $t(`search.title`) }}</div>
             <div class="home-title-action mt-12">
                 <AutocompleteField :reverseGeocodeOnLoad="false" @sync-with-new-request="sendToMap" />
             </div>
@@ -18,8 +18,6 @@ import AutocompleteField from "@/components/general/AutocompleteField.vue";
 import HelperTimelineSection from "@/components/search/HelperTimelineSection.vue";
 
 function sendToMap(coords: LatLng, address: string) {
-    console.log(address);
-    console.log(coords);
     router.push({ name: "solar-map", query: coords });
 }
 </script>
