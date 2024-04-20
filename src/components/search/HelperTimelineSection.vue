@@ -68,7 +68,7 @@ const steps = ref([
     },
     {
         icon: "mdi-map-marker",
-        title: t(`search.timeline.step-4.title`),
+        title: t(`search.timeline.step-5.title`),
         contents:  [t(`search.timeline.step-5.content-1`), t(`search.timeline.step-5.content-2`)],
         images: [settings_en]
     }
