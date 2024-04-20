@@ -50,7 +50,7 @@
 import { ref } from "vue";
 import RouteButton from "@/components/general/appbar/RouteButton.vue";
 import MenuButton from "@/components/general/appbar/MenuButton.vue";
-import logo_nobg from "@/assets/images/logo_nobg.png";
+import logo_nobg from "@/assets/images/general/logo_nobg.png";
 
 const drawer = ref(false);
 
