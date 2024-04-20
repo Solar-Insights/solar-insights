@@ -29,7 +29,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         solarPanels: [] as google.maps.Polygon[],
         geometryLibrary: google.maps.importLibrary("geometry") as Promise<google.maps.GeometryLibrary>,
         centerCoord: { lat: 46.81701, lng: -71.36838 } as LatLng,
-        solarReadonlyPanel: "BUILDING_READONLY" as SolarReadonlyPanel | undefined
+        solarReadonlyPanel: "INSIGHTS_READONLY" as SolarReadonlyPanel | undefined
     }),
 
     actions: {

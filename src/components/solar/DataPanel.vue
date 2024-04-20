@@ -2,16 +2,6 @@
     <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
         <div class="mb-4">
             <v-btn
-                @click="solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
-                class="panel-selection-btn"
-                :class="solarReadonlyPanel === 'BUILDING_READONLY' ? 'bg-theme-lighter-2' : 'bg-theme-darker-1'"
-                :prepend-icon="solarReadonlyPanel === 'BUILDING_READONLY' ? 'mdi-home' : 'mdi-home-outline'"
-                :ripple="false"
-                rounded
-            >
-                {{ $t(`solar.data-panel.readonly-panels.building`) }}
-            </v-btn>
-            <v-btn
                 @click="solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY')"
                 class="panel-selection-btn"
                 :class="solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'bg-theme-lighter-2' : 'bg-theme-darker-1'"
@@ -20,6 +10,16 @@
                 rounded
             >
                 {{ $t(`solar.data-panel.readonly-panels.insights`) }}
+            </v-btn>
+            <v-btn
+                @click="solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
+                class="panel-selection-btn"
+                :class="solarReadonlyPanel === 'BUILDING_READONLY' ? 'bg-theme-lighter-2' : 'bg-theme-darker-1'"
+                :prepend-icon="solarReadonlyPanel === 'BUILDING_READONLY' ? 'mdi-home' : 'mdi-home-outline'"
+                :ripple="false"
+                rounded
+            >
+                {{ $t(`solar.data-panel.readonly-panels.building`) }}
             </v-btn>
         </div>
 
