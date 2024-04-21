@@ -7,11 +7,11 @@
             :showingData="displayedInfo === DATA"
             @showData="displayedInfo = DATA;"
 
-            :showingSolarInsights="displayedInfo === SOLAR_INSIGHTS"
-            @showSolarInsights="displayedInfo = SOLAR_INSIGHTS;"
+            :showingSolarInsights="solarReadonlyPanel === 'INSIGHTS_READONLY'"
+            @showSolarInsights="solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY')"
             
-            :showingBuildingAttributes="displayedInfo === BUILDING_ATTRIBUTES"
-            @showBuildingAttributes="displayedInfo = BUILDING_ATTRIBUTES;"
+            :showingBuildingAttributes="solarReadonlyPanel === 'BUILDING_READONLY'"
+            @showBuildingAttributes="solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
         />
 
         <v-col class="pa-0" cols="12">
@@ -33,6 +33,11 @@
             <map-layers :showMap="displayedInfo === MAP"/>
 
             <time-param />
+
+            <div v-if="Object.keys(buildingInsights).length && displayedInfo === MAP">
+                <BuildingReadonlyPanel v-if="solarReadonlyPanel === 'BUILDING_READONLY'" />
+                <InsightsReadonlyPanel v-if="solarReadonlyPanel === 'INSIGHTS_READONLY'" />
+            </div>
         </v-col>
     </div>
 </template>
@@ -52,7 +57,7 @@ import DataPanel from "@/components/solar/DataPanel.vue";
 
 const solarMapStore = useSolarMapStore();
 
-const { buildingInsights } = storeToRefs(solarMapStore);
+const { buildingInsights, solarReadonlyPanel } = storeToRefs(solarMapStore);
 
 const props = defineProps({
     requestCoordinates: {
@@ -60,10 +65,7 @@ const props = defineProps({
     }
 });
 
-const displayedInfo = ref(0);
-
 const MAP = 0;
 const DATA = 1;
-const SOLAR_INSIGHTS = 2;
-const BUILDING_ATTRIBUTES = 3;
+const displayedInfo = ref(MAP);
 </script>

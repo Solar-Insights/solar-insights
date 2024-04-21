@@ -1,6 +1,6 @@
 <template>
     <v-card class="rounded-lg my-2" variant="outlined">
-        <v-card-title class="d-flex title-break"> 
+        <v-card-title class="d-flex"> 
             <div class="mr-6">
                 {{ i + 1 }}
             </div>

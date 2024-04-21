@@ -1,7 +1,7 @@
 <template>
     <v-card
         class="rounded-xl map-data"
-        :class="$vuetify.display.xs ? 'map-readonly-data-mobile' : 'map-readonly-data-computer'"
+        :class="$vuetify.display.smAndDown ? 'map-readonly-data-mobile' : 'map-readonly-data-computer'"
         elevation="8"
     >
         <v-card-title class="text-center font-weight-regular pl-0 mb-4">

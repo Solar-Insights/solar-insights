@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar class="mx-auto" elevation="0">
+    <v-app-bar elevation="0">
         <v-btn
             @click="emits('showMap')"
             class="navbar-btn"
@@ -11,21 +11,6 @@
             <template v-slot:prepend>
                 <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
                     <v-icon>mdi-earth</v-icon>
-                </v-avatar>
-            </template>
-        </v-btn>
-
-        <v-btn
-            @click="emits('showData')"
-            class="navbar-btn"
-            :class="showingData ? 'text-theme' : ''"
-            :ripple="false"
-            :active="false"
-            elevation="0"
-        >
-            <template v-slot:prepend>
-                <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
-                    <v-icon>mdi-pencil</v-icon>
                 </v-avatar>
             </template>
         </v-btn>
@@ -47,7 +32,7 @@
 
         <v-btn
             @click="emits('showBuildingAttributes')"
-            class="navbar-btn"
+            class="navbar-btn mr-4"
             :class="showingBuildingAttributes ? 'text-theme' : ''"
             :ripple="false"
             :active="false"
@@ -56,6 +41,21 @@
             <template v-slot:prepend>
                 <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
                     <v-icon>mdi-home-outline</v-icon>
+                </v-avatar>
+            </template>
+        </v-btn>
+
+        <v-btn
+            @click="emits('showData')"
+            class="navbar-btn ml-10"
+            :class="showingData ? 'text-theme' : ''"
+            :ripple="false"
+            :active="false"
+            elevation="0"
+        >
+            <template v-slot:prepend>
+                <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
+                    <v-icon>mdi-pencil</v-icon>
                 </v-avatar>
             </template>
         </v-btn>
