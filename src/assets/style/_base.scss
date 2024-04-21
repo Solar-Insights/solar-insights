@@ -68,8 +68,6 @@
     @extend .map-details;
     @extend .ml-0;
     height: 100vh;
-    display: flex !important;
-    flex-direction: column;
 }
 .map-details-computer {
     @extend .map-details;
@@ -142,6 +140,7 @@
 }
 .map-data-mobile {
     @extend .map-data;
+    @extend .mt-8;
 }
 .map-data-computer {
     @extend .map-data;
@@ -151,6 +150,7 @@
     @extend .pa-2;
     @extend .pb-0;
     @extend .h-100;
+
     overflow-x: hidden;
     overflow-y: scroll;
 }
