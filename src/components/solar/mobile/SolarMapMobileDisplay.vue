@@ -1,5 +1,5 @@
 <template>
-    <div v-if="requestCoordinates !== undefined" class="d-flex">
+    <div v-if="requestCoordinates !== undefined" class="d-flex w-100">
         <MobileAppBar 
             :showingMap="displayedInfo === MAP"
             @showMap="displayedInfo = MAP;"
@@ -31,9 +31,9 @@
             </v-card>
 
             <map-layers :showMap="displayedInfo === MAP"/>
+
+            <time-param />
         </v-col>
-        
-        <time-param />
     </div>
 </template>
 

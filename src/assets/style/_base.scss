@@ -99,6 +99,18 @@
 }
 .time-slider-mobile {
     @extend .time-slider;
+    @extend .mb-6;
+    @extend .py-1;
+    @extend .pl-3;
+    @extend .pr-3;
+    @extend .bg-white;
+    @extend .rounded-lg;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 90vw;
+    max-width: 300px;
+    bottom: 0;
 }
 .time-slider-computer {
     @extend .time-slider;

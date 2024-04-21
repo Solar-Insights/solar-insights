@@ -13,7 +13,7 @@
         step="1"
         hide-details
         color="theme"
-        :class="$vuetify.display.xs ? 'time-slider-mobile' : 'time-slider-computer'"
+        :class="$vuetify.display.smAndDown ? 'time-slider-mobile' : 'time-slider-computer'"
         rounded
     >
         <template v-slot:append>
