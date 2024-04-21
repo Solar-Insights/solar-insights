@@ -67,6 +67,9 @@
 .map-details-mobile {
     @extend .map-details;
     @extend .ml-0;
+    height: 100vh;
+    display: flex !important;
+    flex-direction: column;
 }
 .map-details-computer {
     @extend .map-details;

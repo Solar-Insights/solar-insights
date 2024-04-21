@@ -20,7 +20,7 @@
         ]"
     />
 
-    <v-card-title class="text-center font-weight-regular">
+    <v-card-title class="text-center font-weight-regular my-3">
         <v-icon class="mr-2">mdi-weather-windy</v-icon>
         {{ $t(`navigation.solar-map`) }}
     </v-card-title>
