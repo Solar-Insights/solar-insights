@@ -2,31 +2,23 @@
     <div class="home-subtitle-container pt-12">
             <div class="home-subtitle"> {{ steps.length }}{{ $t(`search.timeline.title`) }} </div>
             <div class="home-subtitle-content">
-                <v-timeline density="compact">
+                <v-timeline class="hidden-sm-and-down" density="compact" direction="vertical">
                     <v-timeline-item
                         v-for="(step, i) in steps"
                         :key="i"
+                        class="pl-0 ml-0 pa-0"
+                        density="compact"
                         min-width="100%"
                         fill-dot
                         dot-color="theme"
                         :icon="step.icon"
                     >
-                        <v-card class="rounded-lg" variant="outlined">
-                            <v-card-title class="d-flex"> 
-                                <div class="mr-6">
-                                    {{ i + 1 }}
-                                </div>
-                                <div>
-                                    {{ step.title }}
-                                </div>
-                            </v-card-title>
-                            <v-card-text class="pa-2">
-                                <div v-for="content in step.contents" class="pa-2" v-html="content"></div>
-                                <v-img v-for="img in step.images" class="mx-auto my-6" :src="img" cover height="300" width="500"/>
-                            </v-card-text>
-                        </v-card>
+                        <StepCard :i="i" :step="step"/>
                     </v-timeline-item>
                 </v-timeline>
+                <div class="hidden-md-and-up">
+                    <StepCard v-for="(step, i) in steps" :i="i" :step="step"/>
+                </div>
             </div>
         </div>
 </template>
@@ -38,6 +30,7 @@ import panels_section from "@/assets/images/search/panels_section_en.png";
 import settings_en from "@/assets/images/search/settings_en.png";
 import solar_insights_en from "@/assets/images/search/solar_insights_en.png";
 import { useI18n } from 'vue-i18n';
+import StepCard from '@/components/search/StepCard.vue';
 
 const t = useI18n().t;
 

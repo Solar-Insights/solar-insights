@@ -18,7 +18,7 @@
 */
 @media screen and (min-width: 600px) {
     .home-title-container {
-        width: 50%;
+        width: 70%;
     }
     .home-subtitle-container {
         width: 80%;
@@ -100,4 +100,9 @@
 
 b {
     @extend .font-weight-bold;
+}
+
+.title-break {
+    white-space: normal;
+    word-break: break-word;
 }
