@@ -61,7 +61,7 @@
                 </v-expansion-panel-title>
 
                 <v-expansion-panel-text>
-                    <div class="detail-text mb-3">
+                    <div class="detail-text mb-5">
                         {{ $t(`solar.data-panel.data-panels.panels.description`) }}
                     </div>
 
@@ -163,7 +163,7 @@
                 </v-expansion-panel-title>
 
                 <v-expansion-panel-text>
-                    <div class="detail-text mb-3">
+                    <div class="detail-text mb-5">
                         {{ $t(`solar.data-panel.data-panels.costs.description`) }}
                     </div>
 
@@ -270,7 +270,7 @@
                 </v-expansion-panel-title>
 
                 <v-expansion-panel-text>
-                    <div class="detail-text mb-3">
+                    <div class="detail-text mb-5">
                         {{ $t(`solar.data-panel.data-panels.optimizations.description`) }}
                     </div>
 
@@ -312,7 +312,7 @@
                 </v-expansion-panel-title>
 
                 <v-expansion-panel-text>
-                    <div class="detail-text mb-3">
+                    <div class="detail-text mb-5">
                         Settings to control what information is currently being displayed on the map
                     </div>
 
@@ -389,11 +389,11 @@ import { useSolarMapStore } from "@/stores/solarMapStore";
 
 const solarMapStore = useSolarMapStore();
 
-const { buildingInsights, mapSettings, userSolarData, solarReadonlyPanel } = storeToRefs(solarMapStore);
+const { buildingInsights, mapSettings, userSolarData } = storeToRefs(solarMapStore);
 
 const advancedSettingsPanels = ref([] as string[]);
 const advancedSettingsSolarPotential = ref([] as string[]);
-const expansionPanels = ref([]);
+const expansionPanels = ref(["settings"]);
 
 const emits = defineEmits(["showBuildingReadonlyPanel", "showInsightsReadonlyPanel"]);
 

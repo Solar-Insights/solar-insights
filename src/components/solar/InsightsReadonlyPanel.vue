@@ -39,7 +39,7 @@
         <div class="mb-5">
             <div>&nbsp</div>
             <div class="d-flex">
-                <div class="me-auto">
+                <div class="me-auto font-weight-medium">
                     {{ $t("solar.insights-readonly.cost-analysis-for") }} {{ userSolarData.installationLifespan }}
                     {{ $t("solar.insights-readonly.years") }}
                 </div>
