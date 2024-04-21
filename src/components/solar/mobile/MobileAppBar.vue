@@ -1,16 +1,18 @@
 <template>
     <v-app-bar elevation="0">
+        <span class="mx-8"> Extensions </span>
+
         <v-btn
-            @click="emits('showMap')"
+            @click="emits('showData')"
             class="navbar-btn"
-            :class="showingMap ? 'text-theme' : ''"
+            :class="showingData ? 'text-theme' : ''"
             :ripple="false"
             :active="false"
             elevation="0"
         >
             <template v-slot:prepend>
                 <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
-                    <v-icon>mdi-earth</v-icon>
+                    <v-icon>mdi-pencil</v-icon>
                 </v-avatar>
             </template>
         </v-btn>
@@ -32,7 +34,7 @@
 
         <v-btn
             @click="emits('showBuildingAttributes')"
-            class="navbar-btn mr-4"
+            class="navbar-btn"
             :class="showingBuildingAttributes ? 'text-theme' : ''"
             :ripple="false"
             :active="false"
@@ -44,31 +46,12 @@
                 </v-avatar>
             </template>
         </v-btn>
-
-        <v-btn
-            @click="emits('showData')"
-            class="navbar-btn ml-10"
-            :class="showingData ? 'text-theme' : ''"
-            :ripple="false"
-            :active="false"
-            elevation="0"
-        >
-            <template v-slot:prepend>
-                <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
-                    <v-icon>mdi-pencil</v-icon>
-                </v-avatar>
-            </template>
-        </v-btn>
     </v-app-bar>
 </template>
 
 <script setup lang="ts">
 
 const props = defineProps({
-    showingMap: {
-        type: Boolean,
-        required: true
-    },
     showingData: {
         type: Boolean,
         required: true
@@ -83,5 +66,5 @@ const props = defineProps({
     }
 });
 
-const emits = defineEmits(["showMap", "showData", "showSolarInsights", "showBuildingAttributes"]);
+const emits = defineEmits(["showData", "showSolarInsights", "showBuildingAttributes"]);
 </script>

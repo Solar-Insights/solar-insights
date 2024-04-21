@@ -1,50 +1,48 @@
 <template>
-    <div v-if="requestCoordinates !== undefined" class="d-flex w-100">
-        <MobileAppBar 
-            :showingMap="displayedInfo === MAP"
-            @showMap="displayedInfo = MAP;"
-
-            :showingData="displayedInfo === DATA"
-            @showData="displayedInfo = DATA;"
+    <div>
+        <MobileAppBar
+            :showingData="displayingData"
+            @showData="solarMapStore.removeReadonlyPanelSelection(); displayingData = !displayingData;"
 
             :showingSolarInsights="solarReadonlyPanel === 'INSIGHTS_READONLY'"
-            @showSolarInsights="solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY')"
+            @showSolarInsights="displayingData = false; solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY')"
             
             :showingBuildingAttributes="solarReadonlyPanel === 'BUILDING_READONLY'"
-            @showBuildingAttributes="solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
+            @showBuildingAttributes="displayingData = false; solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
         />
-
-        <v-col class="pa-0" cols="12">
-            <v-card
-                :width="displayedInfo === DATA ? '100%' : '0'"
-                :height="displayedInfo === DATA ? '100%' : '0'"
-                permanent
-            >
+    
+        <div v-if="requestCoordinates !== undefined" class="d-flex w-100">
+            <v-col class="pa-0" cols="12">
                 <v-card
-                    id="map-details"
-                    class="rounded-0 map-details-mobile"
+                    :width="displayingData ? '100%' : '0'"
+                    :height="displayingData ? '100%' : '0'"
                 >
-                    <MapHeader :coord="requestCoordinates" />
+                    <v-card
+                        id="map-details"
+                        class="rounded-0 map-details-mobile"
+                    >
+                        <MapHeader :coord="requestCoordinates" />
 
-                    <DataPanel />
+                        <DataPanel />
+                    </v-card>
                 </v-card>
-            </v-card>
 
-            <map-layers :showMap="displayedInfo === MAP"/>
+                <map-layers :showMap="displayingData === false"/>
 
-            <time-param />
+                <time-param />
 
-            <div v-if="Object.keys(buildingInsights).length && displayedInfo === MAP">
-                <BuildingReadonlyPanel v-if="solarReadonlyPanel === 'BUILDING_READONLY'" />
-                <InsightsReadonlyPanel v-if="solarReadonlyPanel === 'INSIGHTS_READONLY'" />
-            </div>
-        </v-col>
+                <div v-if="Object.keys(buildingInsights).length && displayingData === false">
+                    <BuildingReadonlyPanel v-if="solarReadonlyPanel === 'BUILDING_READONLY'" />
+                    <InsightsReadonlyPanel v-if="solarReadonlyPanel === 'INSIGHTS_READONLY'" />
+                </div>
+            </v-col>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { LatLng } from 'geo-env-typing/geo';
-import { PropType, ref } from 'vue';
+import { onMounted, PropType, ref } from 'vue';
 import { storeToRefs } from "pinia";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
@@ -54,6 +52,11 @@ import MapHeader from "@/components/solar/MapHeader.vue";
 import MapLayers from "@/components/solar/MapLayers.vue";
 import TimeParam from "@/components/solar/TimeParam.vue";
 import DataPanel from "@/components/solar/DataPanel.vue";
+
+onMounted(() => {
+    solarMapStore.removeReadonlyPanelSelection();
+    solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY');
+})
 
 const solarMapStore = useSolarMapStore();
 
@@ -65,7 +68,5 @@ const props = defineProps({
     }
 });
 
-const MAP = 0;
-const DATA = 1;
-const displayedInfo = ref(MAP);
+const displayingData = ref(false);
 </script>

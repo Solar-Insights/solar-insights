@@ -202,6 +202,10 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             } else if (this.solarReadonlyPanel === "INSIGHTS_READONLY") {
                 this.solarReadonlyPanel = this.solarReadonlyPanel === buttonClicked ? undefined : "BUILDING_READONLY";
             }
+        },
+
+        removeReadonlyPanelSelection() {
+            this.solarReadonlyPanel = undefined;
         }
     }
 });
