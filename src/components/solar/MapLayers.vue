@@ -1,5 +1,9 @@
 <template>
-    <div id="map" class="w-100"></div>
+    <div
+        id="map" 
+        class="w-100"
+        :style="$vuetify.display.mdAndUp ? '' : `height: ${ showMap ? '92vh' : '0'}; visibility: ${ showMap ? 'visible' : 'hidden'};`"
+    ></div>
 </template>
 
 <script setup lang="ts">
@@ -11,6 +15,14 @@ import { initMapComponents } from "@/helpers/maps/components_util";
 const solarMapStore = useSolarMapStore();
 
 const { map, centerCoord } = storeToRefs(solarMapStore);
+
+const props = defineProps({
+    showMap: {
+        type: Boolean,
+        required: false,
+        default: true
+    }
+});
 
 onMounted(async () => {
     const mapComponents = await initMapComponents(centerCoord.value);
