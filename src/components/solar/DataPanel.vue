@@ -1,5 +1,5 @@
 <template>
-    <div :class="$vuetify.display.xs ? 'map-data-mobile' : 'map-data-computer'">
+    <div :class="$vuetify.display.smAndDown ? 'map-data-mobile' : 'map-data-computer'">
         <div class="mb-4 hidden-sm-and-down">
             <v-hover v-slot="{ isHovering, props }">
                 <v-btn
