@@ -2,7 +2,7 @@
     <div class="home-subtitle-container pt-12">
             <div class="home-subtitle"> {{ steps.length }}{{ $t(`search.timeline.title`) }} </div>
             <div class="home-subtitle-content">
-                <v-timeline class="hidden-sm-and-down" density="compact" direction="vertical">
+                <v-timeline class="hidden-sm-and-down mx-auto" density="compact" direction="vertical" style="width: 65%;">
                     <v-timeline-item
                         v-for="(step, i) in steps"
                         :key="i"
