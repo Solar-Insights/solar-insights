@@ -10,32 +10,28 @@
             :showingBuildingAttributes="solarReadonlyPanel === 'BUILDING_READONLY'"
             @showBuildingAttributes="displayingData = false; solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
         />
-    
-        <div v-if="requestCoordinates !== undefined" class="d-flex w-100">
-            <v-col class="pa-0" cols="12">
+
+        <div v-if="requestCoordinates !== undefined" class="d-flex">
+            <v-col class="pa-0">
                 <v-card
-                    :width="displayingData ? '100%' : '0'"
-                    :height="displayingData ? '100%' : '0'"
+                    id="map-details"
+                    class="rounded-0 map-details-mobile"
+                    :width="displayingData ? '100vw' : '0'"
                 >
-                    <v-card
-                        id="map-details"
-                        class="rounded-0 map-details-mobile"
-                    >
-                        <MapHeader :coord="requestCoordinates" />
+                    <MapHeader :coord="requestCoordinates" />
 
-                        <DataPanel />
-                    </v-card>
+                    <DataPanel />
                 </v-card>
-
-                <map-layers :showMap="displayingData === false"/>
-
-                <time-param />
-
-                <div v-if="Object.keys(buildingInsights).length && displayingData === false">
-                    <BuildingReadonlyPanel v-if="solarReadonlyPanel === 'BUILDING_READONLY'" />
-                    <InsightsReadonlyPanel v-if="solarReadonlyPanel === 'INSIGHTS_READONLY'" />
-                </div>
             </v-col>
+
+            <map-layers/>
+            
+            <time-param v-if="!displayingData" />
+
+            <div v-if="Object.keys(buildingInsights).length">
+                <BuildingReadonlyPanel v-if="solarReadonlyPanel === 'BUILDING_READONLY'" />
+                <InsightsReadonlyPanel v-if="solarReadonlyPanel === 'INSIGHTS_READONLY'" />
+            </div>
         </div>
     </div>
 </template>
