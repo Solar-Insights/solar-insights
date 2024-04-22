@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
 import { monthCodes, hourCodes } from "@/helpers/constants";
@@ -58,12 +58,17 @@ const solarMapStore = useSolarMapStore();
 const { mapSettings, timeParams, layer } = storeToRefs(solarMapStore);
 
 const currentlySliding = ref(false);
+let intervalId: NodeJS.Timeout;
 
 onMounted(async () => {
-    setInterval(() => {
+    intervalId = setInterval(() => {
         handleIntervalChange();
     }, 1000);
 });
+
+onUnmounted(() => {
+    clearInterval(intervalId);
+})
 
 function handleIntervalChange() {
     if (mapSettings.value.heatmapAnimation) {
