@@ -44,7 +44,11 @@ router.beforeEach(async (to, from, next) => {
 
     if (meta.requiresAuth && !userSessionStore.accessToken) {
         auth0.loginWithRedirect();
+        next({ name: "home" });
+        return;
     }
+
+    console.log(from)
 
     next();
     return;
