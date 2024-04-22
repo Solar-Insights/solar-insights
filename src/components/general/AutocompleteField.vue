@@ -4,7 +4,7 @@
         @keypress.enter="prepareHandlerEnterKeyOnSearchBar"
         class="mt-0 px-1"
         id="autocomplete-search"
-        :class="$vuetify.display.xs ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
+        :class="$vuetify.display.smAndDown ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
         :placeholder="$t('general.map-header.search-placeholder')"
         hide-details
         variant="outlined"

@@ -37,7 +37,7 @@
         step="1"
         hide-details
         color="theme"
-        :class="$vuetify.display.xs ? 'time-slider-mobile' : 'time-slider-computer'"
+        :class="$vuetify.display.smAndDown ? 'time-slider-mobile' : 'time-slider-computer'"
     >
         <template v-slot:append>
             <div class="ml-1" style="width: 50px">

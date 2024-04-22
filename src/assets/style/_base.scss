@@ -102,15 +102,15 @@
 }
 
 .time-slider {
-}
-.time-slider-mobile {
-    @extend .time-slider;
     @extend .mb-6;
     @extend .py-1;
     @extend .pl-3;
     @extend .pr-3;
     @extend .bg-white;
     @extend .rounded-lg;
+}
+.time-slider-mobile {
+    @extend .time-slider;
     width: 90vw;
     max-width: 300px;
     position: absolute;
@@ -120,12 +120,6 @@
 }
 .time-slider-computer {
     @extend .time-slider;
-    @extend .mb-6;
-    @extend .py-1;
-    @extend .pl-6;
-    @extend .pr-3;
-    @extend .bg-white;
-    @extend .rounded-lg;
     position: absolute;
     left: 50%;
     right: 50%;
@@ -134,8 +128,6 @@
 }
 
 .map-data {
-    flex-grow: 1;
-    overflow: auto;
     scrollbar-color: master.$scrollbars;
 }
 .map-data-mobile {
@@ -150,7 +142,8 @@
     @extend .pa-2;
     @extend .pb-0;
     @extend .h-100;
-
+    flex-grow: 1;
+    overflow: auto;
     overflow-x: hidden;
     overflow-y: scroll;
 }
