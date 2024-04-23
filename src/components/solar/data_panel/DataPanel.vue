@@ -16,77 +16,7 @@
             </v-expansion-panel>
 
             <v-expansion-panel elevation="0" value="settings">
-                <v-expansion-panel-title v-ripple="{ class: 'text-theme' }">
-                    <v-icon class="mr-3">mdi-cog-outline</v-icon>
-                    <span class="my-auto"> {{ $t(`solar.data-panel.data-panels.settings.name`) }} </span>
-                </v-expansion-panel-title>
-
-                <v-expansion-panel-text>
-                    <div class="detail-text mb-5">
-                        Settings to control what information is currently being displayed on the map
-                    </div>
-
-                    <div>
-                        <v-select
-                            v-model="mapSettings.layerId"
-                            @update:modelValue="showDataLayerOnLayerIdChange"
-                            item-title="displayedName"
-                            item-value="name"
-                            :items="mapSettings.layerIdChoices"
-                            :label="$t(`solar.data-panel.data-panels.settings.displayed-data`)"
-                            density="compact"
-                            variant="outlined"
-                            prepend-inner-icon="mdi-magnify"
-                            rounded
-                        >
-                        </v-select>
-
-                        <v-switch
-                            v-model="mapSettings.showPanels"
-                            @change="syncMapWithPanels"
-                            inset
-                            color="theme"
-                            density="compact"
-                        >
-                            <template v-slot:label>
-                                <span class="ml-4">
-                                    {{ $t(`solar.data-panel.data-panels.settings.display-panels`) }}
-                                </span>
-                            </template>
-                        </v-switch>
-
-                        <v-switch
-                            v-model="mapSettings.showHeatmap"
-                            @change="changeLayersOnShowHeatmapChange"
-                            inset
-                            color="theme"
-                            density="compact"
-                        >
-                            <template v-slot:label>
-                                <span class="ml-4">
-                                    {{ $t(`solar.data-panel.data-panels.settings.display-heatmap`) }}
-                                </span>
-                            </template>
-                        </v-switch>
-
-                        <v-switch
-                            v-model="mapSettings.heatmapAnimation"
-                            inset
-                            color="theme"
-                            density="compact"
-                            :disabled="
-                                !mapSettings.showHeatmap ||
-                                !['monthlyFlux', 'hourlyShade'].includes(mapSettings.layerId)
-                            "
-                        >
-                            <template v-slot:label>
-                                <span class="ml-4">
-                                    {{ $t(`solar.data-panel.data-panels.settings.heatmap-animation`) }}
-                                </span>
-                            </template>
-                        </v-switch>
-                    </div>
-                </v-expansion-panel-text>
+                <ExpansionSettings/>
             </v-expansion-panel>
         </v-expansion-panels>
     </div>
@@ -100,6 +30,7 @@ import ReadonlyPanelSelector from "@/components/solar/pc/ReadonlyPanelSelector.v
 import ExpansionPanels from "@/components/solar/data_panel/ExpansionPanels.vue";
 import ExpansionCosts from "@/components/solar/data_panel/ExpansionCosts.vue";
 import ExpansionOptimization from "@/components/solar/data_panel/ExpansionOptimization.vue";
+import ExpansionSettings from "@/components/solar/data_panel/ExpansionSettings.vue";
 
 const solarMapStore = useSolarMapStore();
 
