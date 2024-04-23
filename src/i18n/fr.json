@@ -63,6 +63,13 @@
             "dec": "déc."
         }
     },
+    "catch-all": {
+        "oops": "Oups!",
+        "404": "404 - Page introuvable",
+        "message": "La page que vous recherchiez a peut-être changé de nom, été supprimée, ou est temporairement inaccessible.",
+        "home-button": "Aller à l'accueil ",
+        "back-button": "Retourner sur mes pas"
+    },
     "home": {
         "home-title-container": {
             "title": "Propulser l'adoption de l'énergie solaire avec Solar Insights",
