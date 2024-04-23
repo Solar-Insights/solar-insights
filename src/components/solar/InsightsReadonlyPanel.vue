@@ -103,7 +103,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
@@ -118,6 +118,7 @@ import { makeChartOptions, makeTimeSeriesFromUserSolarData } from "@/helpers/sol
 import { batteryCharging } from "@/helpers/constants";
 import { strToLargeNumberDisplay } from "@/helpers/util";
 import VueApexCharts from "vue3-apexcharts";
+import { TimeSerie } from "@/helpers/types";
 
 const solarMapStore = useSolarMapStore();
 const userSessionStore = useUserSessionStore();
@@ -125,7 +126,19 @@ const userSessionStore = useUserSessionStore();
 const { userSolarData } = storeToRefs(solarMapStore);
 const { theme } = storeToRefs(userSessionStore);
 
-const timeSeries = computed(() => makeTimeSeriesFromUserSolarData(userSolarData.value));
 const chartOptions = computed(() => makeChartOptions(theme.value));
-const breakEvenYear = computed(() => getBreakEvenYear(userSolarData.value));
+const timeSeries = ref<TimeSerie[]>(makeTimeSeriesFromUserSolarData(userSolarData.value));
+const breakEvenYear = ref<number>(getBreakEvenYear(userSolarData.value));
+
+const DELAY_TIME_MS = 1500;
+let updateTimeout: NodeJS.Timeout | undefined;
+
+watch(() => userSolarData, () => {
+    clearTimeout(updateTimeout);
+
+    updateTimeout = setTimeout(() => {
+            timeSeries.value = makeTimeSeriesFromUserSolarData(userSolarData.value);
+            breakEvenYear.value = getBreakEvenYear(userSolarData.value)
+    }, DELAY_TIME_MS);
+}, { deep: true });
 </script>
