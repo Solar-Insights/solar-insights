@@ -40,12 +40,8 @@ export const useSolarMapStore = defineStore("solarMapStore", {
                 .then(async (data: BuildingInsights) => {
                     this.buildingInsights = data;
                     await this.showDataLayer(true);
+                    this.syncTemplateVariablesAndMapFollowingNewRequest();
                 })
-                .catch(() => {
-                    // Handle error
-                });
-
-            this.syncTemplateVariablesAndMapFollowingNewRequest();
         },
 
         setNewCenterCoord(coord: LatLng) {
