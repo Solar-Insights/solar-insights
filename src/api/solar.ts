@@ -1,4 +1,4 @@
-import { BuildingInsightsError } from "@/helpers/customErrors";
+import { BuildingInsightsError, GeotiffError, SolarLayersError } from "@/helpers/customErrors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, GeoTiff, SolarLayers } from "geo-env-typing/solar";
@@ -38,8 +38,8 @@ export async function getSolarLayers(coord: LatLng, radius: number) {
             return response.data.solarLayers as SolarLayers;
         })
         .catch((error) => {
-            console.log(error);
-            return null;
+            useUserSessionStore().setAlert(new SolarLayersError());
+            throw error;
         });
 }
 
@@ -56,7 +56,7 @@ export async function getGeotiff(url: string) {
             return response.data.geotiff as GeoTiff;
         })
         .catch((error) => {
-            console.log(error);
-            return {} as GeoTiff;
+            useUserSessionStore().setAlert(new GeotiffError());
+            throw error;
         });
 }

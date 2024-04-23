@@ -36,6 +36,14 @@
         "building-insights-error": {
             "title": "The server could not fetch building insights",
             "message": "An error occured when trying to fetch the data of the provided building."
+        },
+        "solar-layers-error": {
+            "title": "The server could not fetch data layers",
+            "message": "An error occured when trying to fetch the data layers for the provided building."
+        },
+        "geotiff-error": {
+            "title": "The server could not load the geotiffs associated to the data layer",
+            "message": "An error occured when trying to fetch geotiffs for the wanted data layer."
         }
     },
     "general": {

@@ -36,6 +36,14 @@
         "building-insights-error": {
             "title": "Le serveur n'a pas pu récupérer les informations du bâtiment",
             "message": "Une erreur est survenue lors de la requête visant à récupérer les données du bâtiment visé."
+        },
+        "solar-layers-error": {
+            "title": "Le serveur n'a pas pu récupérer les couches de données du bâtiment",
+            "message": "Une erreur est survenue lors de la requête visant à récupérer les couches de données bâtiment visé."
+        },
+        "geotiff-error": {
+            "title": "Le serveur n'a pas pu chargé les geotiffs associés à la couche de donnée",
+            "message": "Une erreur est survenue lors de la requête visant à récupérer les geotiffs de la couche de donnée présente."
         }
     },
     "general": {

@@ -153,3 +153,27 @@ export class BuildingInsightsError extends VueError {
         super(type, name, title, message, code);
     }
 }
+
+export class SolarLayersError extends VueError {
+    constructor(
+        type: AlertType = "error",
+        name: string = "SolarLayersError",
+        title: string = i18n.global.t("errors.solar-layers-error.title"),
+        message: string = i18n.global.t("errors.solar-layers-error.message"),
+        code: number = 500
+    ) {
+        super(type, name, title, message, code);
+    }
+}
+
+export class GeotiffError extends VueError {
+    constructor(
+        type: AlertType = "error",
+        name: string = "GeotiffError",
+        title: string = i18n.global.t("errors.geotiff-error.title"),
+        message: string = i18n.global.t("errors.geotiff-error.message"),
+        code: number = 500
+    ) {
+        super(type, name, title, message, code);
+    }
+}
