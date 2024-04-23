@@ -32,7 +32,7 @@ import InsightsReadonlyPanel from "@/components/solar/InsightsReadonlyPanel.vue"
 import MapHeader from "@/components/solar/MapHeader.vue";
 import MapLayers from "@/components/solar/MapLayers.vue";
 import TimeParam from "@/components/solar/TimeParam.vue";
-import DataPanel from "@/components/solar/DataPanel.vue";
+import DataPanel from "@/components/solar/data_panel/DataPanel.vue";
 
 const solarMapStore = useSolarMapStore();
 
