@@ -50,7 +50,6 @@
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps({
     showingData: {
         type: Boolean,

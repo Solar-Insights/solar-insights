@@ -77,9 +77,7 @@
                     <v-expansion-panel-text class="px-0" id="expansion-panel-second-layer">
                         <v-text-field
                             v-model="userSolarData.yearlyEnergyCostIncrease"
-                            :label="
-                                $t(`solar.data-panel.data-panels.costs-advanced-settings.energy-cost-increase`)
-                            "
+                            :label="$t(`solar.data-panel.data-panels.costs-advanced-settings.energy-cost-increase`)"
                             density="compact"
                             variant="outlined"
                             type="number"

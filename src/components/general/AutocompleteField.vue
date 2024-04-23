@@ -53,9 +53,9 @@ onMounted(async () => {
                 autocompleteValue.value = address;
                 emits("syncWithNewRequest", props.coord, autocompleteValue.value);
             })
-            .catch((error) => {})
+            .catch((error) => {});
     }
-    
+
     await initListeners();
 });
 

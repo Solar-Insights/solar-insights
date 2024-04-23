@@ -133,12 +133,16 @@ const breakEvenYear = ref<number>(getBreakEvenYear(userSolarData.value));
 const DELAY_TIME_MS = 1500;
 let updateTimeout: NodeJS.Timeout | undefined;
 
-watch(() => userSolarData, () => {
-    clearTimeout(updateTimeout);
+watch(
+    () => userSolarData,
+    () => {
+        clearTimeout(updateTimeout);
 
-    updateTimeout = setTimeout(() => {
+        updateTimeout = setTimeout(() => {
             timeSeries.value = makeTimeSeriesFromUserSolarData(userSolarData.value);
-            breakEvenYear.value = getBreakEvenYear(userSolarData.value)
-    }, DELAY_TIME_MS);
-}, { deep: true });
+            breakEvenYear.value = getBreakEvenYear(userSolarData.value);
+        }, DELAY_TIME_MS);
+    },
+    { deep: true }
+);
 </script>

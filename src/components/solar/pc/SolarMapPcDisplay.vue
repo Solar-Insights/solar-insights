@@ -1,18 +1,15 @@
 <template>
     <div v-if="requestCoordinates !== undefined" class="d-flex">
         <v-col class="pa-0">
-            <v-card
-                id="map-details"
-                class="rounded-0 map-details-computer"
-            >
+            <v-card id="map-details" class="rounded-0 map-details-computer">
                 <MapHeader :coord="requestCoordinates" />
 
                 <DataPanel />
             </v-card>
         </v-col>
 
-        <map-layers/>
-        
+        <map-layers />
+
         <time-param />
 
         <div v-if="Object.keys(buildingInsights).length">
@@ -23,8 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import { LatLng } from 'geo-env-typing/geo';
-import { PropType } from 'vue';
+import { LatLng } from "geo-env-typing/geo";
+import { PropType } from "vue";
 import { storeToRefs } from "pinia";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
@@ -43,5 +40,4 @@ const props = defineProps({
         type: Object as PropType<LatLng>
     }
 });
-
 </script>

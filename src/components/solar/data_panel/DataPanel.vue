@@ -1,22 +1,22 @@
 <template>
     <div :class="$vuetify.display.smAndDown ? 'map-data-mobile' : 'map-data-computer'">
-        <ReadonlyPanelSelector/>
+        <ReadonlyPanelSelector />
 
         <v-expansion-panels variant="accordion" v-model="expansionPanels">
             <v-expansion-panel elevation="0" value="panels">
-                <ExpansionPanels/>
+                <ExpansionPanels />
             </v-expansion-panel>
 
             <v-expansion-panel elevation="0" panel="costs">
-                <ExpansionCosts/>
+                <ExpansionCosts />
             </v-expansion-panel>
 
             <v-expansion-panel elevation="0" value="optimization">
-                <ExpansionOptimization/>
+                <ExpansionOptimization />
             </v-expansion-panel>
 
             <v-expansion-panel elevation="0" value="settings">
-                <ExpansionSettings/>
+                <ExpansionSettings />
             </v-expansion-panel>
         </v-expansion-panels>
     </div>

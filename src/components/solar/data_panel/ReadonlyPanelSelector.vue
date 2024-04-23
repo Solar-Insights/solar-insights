@@ -30,7 +30,7 @@
                 v-bind="props"
                 @click="solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
                 class="navbar-btn panel-selection-btn"
-                :class="isHovering || solarMapStore.solarReadonlyPanel === 'BUILDING_READONLY'  ? 'text-theme' : ''"
+                :class="isHovering || solarMapStore.solarReadonlyPanel === 'BUILDING_READONLY' ? 'text-theme' : ''"
                 :ripple="false"
                 :active="false"
                 elevation="0"

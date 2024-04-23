@@ -1,6 +1,6 @@
 <template>
-    <SolarMapPcDisplay v-if="$vuetify.display.mdAndUp" :requestCoordinates="requestCoordinates"/>
-    <SolarMapMobileDisplay v-if="$vuetify.display.smAndDown" :requestCoordinates="requestCoordinates"/>
+    <SolarMapPcDisplay v-if="$vuetify.display.mdAndUp" :requestCoordinates="requestCoordinates" />
+    <SolarMapMobileDisplay v-if="$vuetify.display.smAndDown" :requestCoordinates="requestCoordinates" />
 </template>
 
 <script setup lang="ts">

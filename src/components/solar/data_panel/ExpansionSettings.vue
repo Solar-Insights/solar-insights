@@ -59,8 +59,7 @@
                     color="theme"
                     density="compact"
                     :disabled="
-                        !mapSettings.showHeatmap ||
-                        !['monthlyFlux', 'hourlyShade'].includes(mapSettings.layerId)
+                        !mapSettings.showHeatmap || !['monthlyFlux', 'hourlyShade'].includes(mapSettings.layerId)
                     "
                 >
                     <template v-slot:label>

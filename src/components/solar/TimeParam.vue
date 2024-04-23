@@ -68,7 +68,7 @@ onMounted(async () => {
 
 onUnmounted(() => {
     clearInterval(intervalId);
-})
+});
 
 function handleIntervalChange() {
     if (mapSettings.value.heatmapAnimation) {

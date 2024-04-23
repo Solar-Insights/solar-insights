@@ -11,11 +11,7 @@
             </div>
 
             <div>
-                <v-card
-                    @click="solarMapStore.setOptimizedSavingsConfig"
-                    class="optimization-card"
-                    variant="outlined"
-                >
+                <v-card @click="solarMapStore.setOptimizedSavingsConfig" class="optimization-card" variant="outlined">
                     <v-card-item class="pt-0 px-0" prepend-icon="mdi-currency-usd">
                         {{ $t(`solar.data-panel.data-panels.optimizations.choices.total-savings.name`) }}
                     </v-card-item>
@@ -32,9 +28,7 @@
                         {{ $t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.name`) }}
                     </v-card-item>
                     <v-card-item class="pa-0 pr-2 detail-text" prepend-icon="null">
-                        {{
-                            $t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.description`)
-                        }}
+                        {{ $t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.description`) }}
                     </v-card-item>
                 </v-card>
             </div>

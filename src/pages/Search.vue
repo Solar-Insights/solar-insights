@@ -7,7 +7,7 @@
             </div>
         </div>
 
-        <HelperTimelineSection/>
+        <HelperTimelineSection />
     </v-card>
 </template>
 

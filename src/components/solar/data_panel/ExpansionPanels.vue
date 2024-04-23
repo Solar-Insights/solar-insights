@@ -18,7 +18,7 @@
                             buildingInsights.solarPotential === undefined
                                 ? 0
                                 : buildingInsights.solarPotential.solarPanelConfigs[mapSettings.configIdIndex]
-                                        .panelsCount
+                                      .panelsCount
                         }}
                         / {{ userSolarData.maxPanelCount }}
                         {{ $t(`solar.data-panel.data-panels.panels.panels`) }}
@@ -84,9 +84,7 @@
 
                         <v-text-field
                             v-model="userSolarData.yearlyPanelEfficiencyDecline"
-                            :label="
-                                $t(`solar.data-panel.data-panels.panels-advanced-settings.efficiency-decline`)
-                            "
+                            :label="$t(`solar.data-panel.data-panels.panels-advanced-settings.efficiency-decline`)"
                             density="compact"
                             variant="outlined"
                             type="number"

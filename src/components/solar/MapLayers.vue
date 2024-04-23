@@ -1,8 +1,5 @@
 <template>
-    <div
-        id="map" 
-        class="w-100"
-    ></div>
+    <div id="map" class="w-100"></div>
 </template>
 
 <script setup lang="ts">
