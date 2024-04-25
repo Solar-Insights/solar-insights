@@ -2,6 +2,8 @@
     <div v-if="requestCoordinates !== undefined" class="d-flex">
         <v-col class="pa-0">
             <v-card id="map-details" class="rounded-0 map-details-computer">
+                <MapToolBar />
+
                 <MapHeader />
 
                 <DataPanel />
@@ -24,6 +26,7 @@ import { LatLng } from "geo-env-typing/geo";
 import { PropType } from "vue";
 import { storeToRefs } from "pinia";
 import { useSolarMapStore } from "@/stores/solarMapStore";
+import MapToolBar from "@/components/solar/MapToolBar.vue";
 import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
 import InsightsReadonlyPanel from "@/components/solar/InsightsReadonlyPanel.vue";
 import MapHeader from "@/components/solar/MapHeader.vue";

@@ -1,7 +1,5 @@
 <template>
     <div>
-        <MapToolBar />
-
         <v-breadcrumbs
             class="pb-0 justify-center"
             :items="[
@@ -31,5 +29,4 @@
 </template>
 
 <script setup lang="ts">
-import MapToolBar from "@/components/solar/MapToolBar.vue";
 </script>

@@ -1,5 +1,10 @@
 <template>
     <v-app-bar elevation="0" density="compact">
+        <MapToolBar />
+    </v-app-bar>
+
+    <v-app-bar elevation="0" density="compact">
+        
         <v-spacer/>
         
         <v-btn
@@ -11,10 +16,12 @@
             elevation="0"
             icon
         >
-            <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
+            <v-avatar variant="tonal" density="comfortable" style="border-radius: 8px">
                 <v-icon>mdi-pencil</v-icon>
             </v-avatar>
         </v-btn>
+
+        <v-spacer/>
 
         <v-btn
             @click="emits('showSolarInsights')"
@@ -25,10 +32,12 @@
             elevation="0"
             icon
         >
-            <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
+            <v-avatar variant="tonal" density="comfortable" style="border-radius: 8px">
                 <v-icon>mdi-flash-outline</v-icon>
             </v-avatar>
         </v-btn>
+
+        <v-spacer/>
 
         <v-btn
             @click="emits('showBuildingAttributes')"
@@ -39,7 +48,7 @@
             elevation="0"
             icon
         >
-            <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
+            <v-avatar variant="tonal" density="comfortable" style="border-radius: 8px">
                 <v-icon>mdi-home-outline</v-icon>
             </v-avatar>
         </v-btn>
@@ -49,6 +58,8 @@
 </template>
 
 <script setup lang="ts">
+import MapToolBar from "@/components/solar/MapToolBar.vue";
+
 const props = defineProps({
     showingData: {
         type: Boolean,
