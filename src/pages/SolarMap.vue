@@ -1,6 +1,6 @@
 <template>
-    <SolarMapPcDisplay v-if="$vuetify.display.mdAndUp" :requestCoordinates="requestCoordinates" />
-    <SolarMapMobileDisplay v-if="$vuetify.display.smAndDown" :requestCoordinates="requestCoordinates" />
+    <SolarMapPcDisplay v-if="$vuetify.display.mdAndUp" :requestCoordinates="requestCoordinates" :requestAddress="requestAddress"/>
+    <SolarMapMobileDisplay v-if="$vuetify.display.smAndDown" :requestCoordinates="requestCoordinates" :requestAddress="requestAddress"/>
 </template>
 
 <script setup lang="ts">
@@ -11,20 +11,34 @@ import SolarMapMobileDisplay from "@/components/solar/SolarMapMobileDisplay.vue"
 import { validRouteCoordinates } from "@/helpers/maps/components_util";
 import router from "@/router";
 import { LatLng, validCoordinates } from "geo-env-typing/geo";
+import { getReverseGeocoding } from "@/api/geo";
+import { useSolarMapStore } from "@/stores/solarMapStore";
+import { useI18n } from "vue-i18n";
 
-const requestCoordinates = ref<LatLng>();
+const route = useRoute();
+const solarMapStore = useSolarMapStore();
+const t = useI18n().t;
 
-onMounted(() => {
-    const route = useRoute();
-    const coordinates: LatLng = {
-        lat: Number(route.query.lat),
-        lng: Number(route.query.lng)
-    };
+const requestAddress = ref<string>("");
+const requestCoordinates = ref<LatLng>({
+    lat: Number(useRoute().query.lat),
+    lng: Number(useRoute().query.lng)
+});
 
-    if (!validRouteCoordinates(route.query) || !validCoordinates(coordinates)) {
+onMounted(async () => {
+    if (!validRouteCoordinates(route.query) || !validCoordinates(requestCoordinates.value)) {
         router.push({ name: "search" });
     }
 
-    requestCoordinates.value = coordinates;
+    requestAddress.value = await getReverseGeocoding(requestCoordinates.value)
+            .then((address: string) => {
+                solarMapStore.syncWithNewRequest(requestCoordinates.value, requestAddress.value);
+                return address;
+            })
+            .catch((error) => {
+                return t(`solar.reverse-geocoding-error`);
+            });
+
+    console.log(requestAddress.value);
 });
 </script>

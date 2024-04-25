@@ -139,6 +139,7 @@
         }
     },
     "solar": {
+        "reverse-geocoding-error": "Could not get the address.",
         "data-panel": {
             "readonly-panels": {
                 "building": "Building",
