@@ -1,51 +1,50 @@
 <template>
-    <v-app-bar elevation="0">
-        <span class="mx-8"> Extensions </span>
-
+    <v-app-bar elevation="0" density="compact">
+        <v-spacer/>
+        
         <v-btn
             @click="emits('showData')"
-            class="navbar-btn"
+            class="navbar-btn mx-2"
             :class="showingData ? 'text-theme' : ''"
             :ripple="false"
             :active="false"
             elevation="0"
+            icon
         >
-            <template v-slot:prepend>
-                <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
-                    <v-icon>mdi-pencil</v-icon>
-                </v-avatar>
-            </template>
+            <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
+                <v-icon>mdi-pencil</v-icon>
+            </v-avatar>
         </v-btn>
 
         <v-btn
             @click="emits('showSolarInsights')"
-            class="navbar-btn"
+            class="navbar-btn mx-2"
             :class="showingSolarInsights ? 'text-theme' : ''"
             :ripple="false"
             :active="false"
             elevation="0"
+            icon
         >
-            <template v-slot:prepend>
-                <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
-                    <v-icon>mdi-flash-outline</v-icon>
-                </v-avatar>
-            </template>
+            <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
+                <v-icon>mdi-flash-outline</v-icon>
+            </v-avatar>
         </v-btn>
 
         <v-btn
             @click="emits('showBuildingAttributes')"
-            class="navbar-btn"
+            class="navbar-btn mx-2"
             :class="showingBuildingAttributes ? 'text-theme' : ''"
             :ripple="false"
             :active="false"
             elevation="0"
+            icon
         >
-            <template v-slot:prepend>
-                <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
-                    <v-icon>mdi-home-outline</v-icon>
-                </v-avatar>
-            </template>
+            <v-avatar variant="tonal" density="comfortable" size="small" style="border-radius: 8px">
+                <v-icon>mdi-home-outline</v-icon>
+            </v-avatar>
         </v-btn>
+
+        <v-spacer/>
     </v-app-bar>
 </template>
 
