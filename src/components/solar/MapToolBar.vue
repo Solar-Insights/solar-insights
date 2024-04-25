@@ -1,5 +1,23 @@
 <template>
     <v-toolbar density="compact">
+        <v-btn icon :to="{ name: 'search' }">
+            <v-icon>mdi-magnify</v-icon>
+        </v-btn>
+
+        <v-btn icon>
+            <v-icon>mdi-file-document-plus-outline</v-icon>
+        </v-btn>
+
+        <v-btn icon>
+            <v-icon>mdi-code-json</v-icon>
+        </v-btn>
+
+        <v-btn icon>
+            <v-icon>mdi-share</v-icon>
+        </v-btn>
+
+        <v-spacer />
+
         <v-btn icon>
             <v-icon>mdi-cog-outline</v-icon>
             <SettingsMenu />
