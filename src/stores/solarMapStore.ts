@@ -199,8 +199,8 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             }
         },
 
-        removeReadonlyPanelSelection() {
-            this.solarReadonlyPanel = undefined;
+        setReadonlyPanelToDisplay(buttonClicked: SolarReadonlyPanel | undefined) {
+            this.solarReadonlyPanel = buttonClicked;
         }
     }
 });

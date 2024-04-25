@@ -3,18 +3,23 @@
         <MobileAppBar
             :showingData="displayingData"
             @showData="
-                solarMapStore.removeReadonlyPanelSelection();
+                solarMapStore.setReadonlyPanelToDisplay(undefined);
                 displayingData = !displayingData;
+            "
+            :showingMap="solarReadonlyPanel === undefined && displayingData === false"
+            @showMap="
+                displayingData = false;
+                solarMapStore.setReadonlyPanelToDisplay(undefined);
             "
             :showingSolarInsights="solarReadonlyPanel === 'INSIGHTS_READONLY'"
             @showSolarInsights="
                 displayingData = false;
-                solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY');
+                solarMapStore.setReadonlyPanelToDisplay('INSIGHTS_READONLY');
             "
             :showingBuildingAttributes="solarReadonlyPanel === 'BUILDING_READONLY'"
             @showBuildingAttributes="
                 displayingData = false;
-                solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY');
+                solarMapStore.setReadonlyPanelToDisplay('BUILDING_READONLY');
             "
         />
 
@@ -53,8 +58,7 @@ import DataPanel from "@/components/solar/building_blocks/DataPanel.vue";
 import MobileAppBar from "@/components/solar/building_blocks/mobile/MobileAppBar.vue";
 
 onMounted(() => {
-    solarMapStore.removeReadonlyPanelSelection();
-    solarMapStore.selectReadonlyPanelToDisplay("INSIGHTS_READONLY");
+    solarMapStore.setReadonlyPanelToDisplay("INSIGHTS_READONLY");
 });
 
 const solarMapStore = useSolarMapStore();

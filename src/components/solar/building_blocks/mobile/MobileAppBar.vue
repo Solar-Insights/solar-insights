@@ -16,7 +16,7 @@
             elevation="0"
             icon
         >
-            <v-avatar variant="tonal" density="comfortable" style="border-radius: 8px">
+            <v-avatar variant="tonal" density="compact" style="border-radius: 8px">
                 <v-icon>mdi-pencil</v-icon>
             </v-avatar>
         </v-btn>
@@ -32,7 +32,7 @@
             elevation="0"
             icon
         >
-            <v-avatar variant="tonal" density="comfortable" style="border-radius: 8px">
+            <v-avatar variant="tonal" density="compact" style="border-radius: 8px">
                 <v-icon>mdi-flash-outline</v-icon>
             </v-avatar>
         </v-btn>
@@ -48,12 +48,26 @@
             elevation="0"
             icon
         >
-            <v-avatar variant="tonal" density="comfortable" style="border-radius: 8px">
+            <v-avatar variant="tonal" density="compact" style="border-radius: 8px">
                 <v-icon>mdi-home-outline</v-icon>
             </v-avatar>
         </v-btn>
 
         <v-spacer/>
+
+        <v-btn
+            @click="emits('showMap')"
+            class="navbar-btn mx-2"
+            :class="showingMap ? 'text-theme' : ''"
+            :ripple="false"
+            :active="false"
+            elevation="0"
+            icon
+        >
+            <v-avatar variant="tonal" density="compact" style="border-radius: 8px">
+                <v-icon>mdi-earth</v-icon>
+            </v-avatar>
+        </v-btn>
     </v-app-bar>
 </template>
 
@@ -65,6 +79,10 @@ const props = defineProps({
         type: Boolean,
         required: true
     },
+    showingMap: {
+        type: Boolean,
+        required: true
+    },
     showingSolarInsights: {
         type: Boolean,
         required: true
@@ -72,8 +90,8 @@ const props = defineProps({
     showingBuildingAttributes: {
         type: Boolean,
         required: true
-    }
+    },
 });
 
-const emits = defineEmits(["showData", "showSolarInsights", "showBuildingAttributes"]);
+const emits = defineEmits(["showData",  "showMap", "showSolarInsights", "showBuildingAttributes"]);
 </script>
