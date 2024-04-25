@@ -38,7 +38,5 @@ onMounted(async () => {
             .catch((error) => {
                 return t(`solar.reverse-geocoding-error`);
             });
-
-    console.log(requestAddress.value);
 });
 </script>
