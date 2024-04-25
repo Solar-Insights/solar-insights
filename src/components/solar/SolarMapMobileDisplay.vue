@@ -26,7 +26,7 @@
         <div v-if="requestCoordinates !== undefined" class="d-flex">
             <v-col class="pa-0">
                 <v-card id="map-details" class="rounded-0 map-details-mobile" :width="displayingData ? '100vw' : '0'">
-                    <MapHeader />
+                    <MapHeader :requestAddress="requestAddress"/>
 
                     <DataPanel />
                 </v-card>
@@ -67,7 +67,12 @@ const { buildingInsights, solarReadonlyPanel } = storeToRefs(solarMapStore);
 
 const props = defineProps({
     requestCoordinates: {
-        type: Object as PropType<LatLng>
+        type: Object as PropType<LatLng>,
+        required: true
+    },
+    requestAddress: {
+        type: String,
+        required: true
     }
 });
 

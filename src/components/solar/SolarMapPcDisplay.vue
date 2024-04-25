@@ -4,7 +4,7 @@
             <v-card id="map-details" class="rounded-0 map-details-computer">
                 <MapToolBar />
 
-                <MapHeader />
+                <MapHeader :requestAddress="requestAddress"/>
 
                 <DataPanel />
             </v-card>
@@ -40,7 +40,12 @@ const { buildingInsights, solarReadonlyPanel } = storeToRefs(solarMapStore);
 
 const props = defineProps({
     requestCoordinates: {
-        type: Object as PropType<LatLng>
+        type: Object as PropType<LatLng>,
+        required: true
+    },
+    requestAddress: {
+        type: String,
+        required: true
     }
 });
 </script>

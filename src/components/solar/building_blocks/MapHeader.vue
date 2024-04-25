@@ -25,8 +25,19 @@
             <v-icon class="mr-2">mdi-weather-windy</v-icon>
             {{ $t(`navigation.solar-map`) }}
         </v-card-title>
+
+        <v-card-subtitle class="text-center font-weight-regular title-break">
+            {{ requestAddress }}
+        </v-card-subtitle>
     </div>
 </template>
 
 <script setup lang="ts">
+const props = defineProps({
+    requestAddress: {
+        type: String,
+        required: true
+    }
+});
+
 </script>
