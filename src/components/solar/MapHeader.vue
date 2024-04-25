@@ -1,5 +1,7 @@
 <template>
     <div>
+        <MapToolBar />
+
         <v-breadcrumbs
             class="pb-0 justify-center"
             :items="[
@@ -36,6 +38,7 @@ import { LatLng } from "geo-env-typing/geo";
 import AutocompleteField from "@/components/general/AutocompleteField.vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import router from "@/router";
+import MapToolBar from "@/components/solar/MapToolBar.vue";
 
 const solarMapStore = useSolarMapStore();
 
