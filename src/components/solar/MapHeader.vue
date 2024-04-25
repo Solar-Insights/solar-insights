@@ -27,34 +27,9 @@
             <v-icon class="mr-2">mdi-weather-windy</v-icon>
             {{ $t(`navigation.solar-map`) }}
         </v-card-title>
-
-        <AutocompleteField :reverseGeocodeOnLoad="true" :coord="coord" @sync-with-new-request="handleNewSolarRequest" />
     </div>
 </template>
 
 <script setup lang="ts">
-import { PropType } from "vue";
-import { LatLng } from "geo-env-typing/geo";
-import AutocompleteField from "@/components/general/AutocompleteField.vue";
-import { useSolarMapStore } from "@/stores/solarMapStore";
-import router from "@/router";
 import MapToolBar from "@/components/solar/MapToolBar.vue";
-
-const solarMapStore = useSolarMapStore();
-
-const props = defineProps({
-    coord: {
-        type: Object as PropType<LatLng>,
-        required: true,
-        default: {
-            lat: 0,
-            lng: 0
-        }
-    }
-});
-
-function handleNewSolarRequest(coord: LatLng, address: string) {
-    solarMapStore.syncWithNewRequest(coord, address);
-    router.push({ query: { lat: coord.lat, lng: coord.lng } });
-}
 </script>

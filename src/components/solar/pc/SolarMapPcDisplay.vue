@@ -2,7 +2,7 @@
     <div v-if="requestCoordinates !== undefined" class="d-flex">
         <v-col class="pa-0">
             <v-card id="map-details" class="rounded-0 map-details-computer">
-                <MapHeader :coord="requestCoordinates" />
+                <MapHeader />
 
                 <DataPanel />
             </v-card>
