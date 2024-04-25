@@ -23,12 +23,12 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         layer: undefined as Layer | undefined,
         overlays: [] as google.maps.GroundOverlay[],
         showRoofOnly: false,
-
+        
         map: {} as google.maps.Map,
         panelConfig: undefined as SolarPanelConfig | undefined,
         solarPanels: [] as google.maps.Polygon[],
         geometryLibrary: google.maps.importLibrary("geometry") as Promise<google.maps.GeometryLibrary>,
-        centerCoord: { lat: 46.81701, lng: -71.36838 } as LatLng,
+        centerCoord: { lat: 46.81221406773517, lng: -71.20572802264097 } as LatLng,
         solarReadonlyPanel: "INSIGHTS_READONLY" as SolarReadonlyPanel | undefined
     }),
 
