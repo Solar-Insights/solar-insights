@@ -44,13 +44,13 @@ import { LatLng } from "geo-env-typing/geo";
 import { onMounted, PropType, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSolarMapStore } from "@/stores/solarMapStore";
-import BuildingReadonlyPanel from "@/components/solar/BuildingReadonlyPanel.vue";
-import InsightsReadonlyPanel from "@/components/solar/InsightsReadonlyPanel.vue";
-import MobileAppBar from "@/components/solar/mobile/MobileAppBar.vue";
-import MapHeader from "@/components/solar/MapHeader.vue";
-import MapLayers from "@/components/solar/MapLayers.vue";
-import TimeParam from "@/components/solar/TimeParam.vue";
-import DataPanel from "@/components/solar/data_panel/DataPanel.vue";
+import BuildingReadonlyPanel from "@/components/solar/building_blocks/BuildingReadonlyPanel.vue";
+import InsightsReadonlyPanel from "@/components/solar/building_blocks/InsightsReadonlyPanel.vue";
+import MapHeader from "@/components/solar/building_blocks/MapHeader.vue";
+import MapLayers from "@/components/solar/building_blocks/MapLayers.vue";
+import TimeParam from "@/components/solar/building_blocks/TimeParam.vue";
+import DataPanel from "@/components/solar/building_blocks/DataPanel.vue";
+import MobileAppBar from "@/components/solar/building_blocks/mobile/MobileAppBar.vue";
 
 onMounted(() => {
     solarMapStore.removeReadonlyPanelSelection();

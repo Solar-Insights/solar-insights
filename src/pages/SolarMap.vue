@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-import SolarMapPcDisplay from "@/components/solar/pc/SolarMapPcDisplay.vue";
-import SolarMapMobileDisplay from "@/components/solar/mobile/SolarMapMobileDisplay.vue";
+import SolarMapPcDisplay from "@/components/solar/SolarMapPcDisplay.vue";
+import SolarMapMobileDisplay from "@/components/solar/SolarMapMobileDisplay.vue";
 import { validRouteCoordinates } from "@/helpers/maps/components_util";
 import router from "@/router";
 import { LatLng, validCoordinates } from "geo-env-typing/geo";

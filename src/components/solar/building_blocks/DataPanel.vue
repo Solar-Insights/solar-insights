@@ -24,11 +24,11 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import ReadonlyPanelSelector from "@/components/solar/data_panel/ReadonlyPanelSelector.vue";
-import ExpansionPanels from "@/components/solar/data_panel/ExpansionPanels.vue";
-import ExpansionCosts from "@/components/solar/data_panel/ExpansionCosts.vue";
-import ExpansionOptimization from "@/components/solar/data_panel/ExpansionOptimization.vue";
-import ExpansionSettings from "@/components/solar/data_panel/ExpansionSettings.vue";
+import ReadonlyPanelSelector from "@/components/solar/building_blocks/data_panel/ReadonlyPanelSelector.vue";
+import ExpansionPanels from "@/components/solar/building_blocks/data_panel/ExpansionPanels.vue";
+import ExpansionCosts from "@/components/solar/building_blocks/data_panel/ExpansionCosts.vue";
+import ExpansionOptimization from "@/components/solar/building_blocks/data_panel/ExpansionOptimization.vue";
+import ExpansionSettings from "@/components/solar/building_blocks/data_panel/ExpansionSettings.vue";
 
 const expansionPanels = ref(["settings"]);
 </script>

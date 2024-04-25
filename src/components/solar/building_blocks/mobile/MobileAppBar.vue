@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import MapToolBar from "@/components/solar/MapToolBar.vue";
+import MapToolBar from "@/components/solar/building_blocks/MapToolBar.vue";
 
 const props = defineProps({
     showingData: {
