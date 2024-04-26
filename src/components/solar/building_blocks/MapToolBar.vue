@@ -1,9 +1,6 @@
 <template>
-    <v-sheet>
         <v-toolbar density="compact">
-            <v-btn icon :to="{ name: 'search' }">
-                <v-icon>mdi-magnify</v-icon>
-            </v-btn>
+            <SearchBtn/>
 
             <v-btn icon>
                 <v-icon>mdi-file-document-plus-outline</v-icon>
@@ -24,10 +21,9 @@
                 <SettingsMenu />
             </v-btn>
         </v-toolbar>
-    </v-sheet>
 </template>
 
-<style scoped>
+ <style scoped>
     .v-toolbar {
         background-color: var(--v-theme-surface)
     }
@@ -35,4 +31,5 @@
 
 <script setup lang="ts">
 import SettingsMenu from '@/components/general/appbar/SettingsMenu.vue';
+import SearchBtn from '@/components/solar/building_blocks/map_tool_bar/SearchBtn.vue';
 </script>
