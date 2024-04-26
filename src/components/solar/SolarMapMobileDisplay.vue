@@ -1,6 +1,27 @@
 <template>
     <div>
-        <MobileAppBar
+        <MapToolBar />
+
+        <div v-if="requestCoordinates !== undefined" class="d-flex">
+            <v-col class="pa-0">
+                <v-card id="map-details" class="rounded-0 map-details-mobile" :width="displayingData ? '100vw' : '0'">
+                    <MapHeader :requestAddress="requestAddress"/>
+
+                    <DataPanel />
+                </v-card>
+            </v-col>
+
+            <map-layers />
+
+            <time-param v-if="!displayingData" />
+
+            <div v-if="Object.keys(buildingInsights).length">
+                <BuildingReadonlyPanel v-if="solarReadonlyPanel === 'BUILDING_READONLY'" />
+                <InsightsReadonlyPanel v-if="solarReadonlyPanel === 'INSIGHTS_READONLY'" />
+            </div>
+        </div>
+
+        <MobileBottomNav
             :showingData="displayingData"
             @showData="
                 solarMapStore.setReadonlyPanelToDisplay(undefined);
@@ -22,25 +43,6 @@
                 solarMapStore.setReadonlyPanelToDisplay('BUILDING_READONLY');
             "
         />
-
-        <div v-if="requestCoordinates !== undefined" class="d-flex">
-            <v-col class="pa-0">
-                <v-card id="map-details" class="rounded-0 map-details-mobile" :width="displayingData ? '100vw' : '0'">
-                    <MapHeader :requestAddress="requestAddress"/>
-
-                    <DataPanel />
-                </v-card>
-            </v-col>
-
-            <map-layers />
-
-            <time-param v-if="!displayingData" />
-
-            <div v-if="Object.keys(buildingInsights).length">
-                <BuildingReadonlyPanel v-if="solarReadonlyPanel === 'BUILDING_READONLY'" />
-                <InsightsReadonlyPanel v-if="solarReadonlyPanel === 'INSIGHTS_READONLY'" />
-            </div>
-        </div>
     </div>
 </template>
 
@@ -55,7 +57,9 @@ import MapHeader from "@/components/solar/building_blocks/MapHeader.vue";
 import MapLayers from "@/components/solar/building_blocks/MapLayers.vue";
 import TimeParam from "@/components/solar/building_blocks/TimeParam.vue";
 import DataPanel from "@/components/solar/building_blocks/DataPanel.vue";
-import MobileAppBar from "@/components/solar/building_blocks/mobile/MobileAppBar.vue";
+import MapToolBar from "@/components/solar/building_blocks/MapToolBar.vue";
+import MobileBottomNav from "@/components/solar/building_blocks/mobile/MobileBottomNav.vue";
+
 
 onMounted(() => {
     solarMapStore.setReadonlyPanelToDisplay("INSIGHTS_READONLY");
