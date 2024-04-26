@@ -16,10 +16,7 @@
 
             <v-spacer />
 
-            <v-btn icon>
-                <v-icon>mdi-cog-outline</v-icon>
-                <SettingsMenu />
-            </v-btn>
+            <SettingsBtn />
         </v-toolbar>
 </template>
 
@@ -30,6 +27,6 @@
 </style>
 
 <script setup lang="ts">
-import SettingsMenu from '@/components/general/appbar/SettingsMenu.vue';
 import SearchBtn from '@/components/solar/building_blocks/map_tool_bar/SearchBtn.vue';
+import SettingsBtn from '@/components/solar/building_blocks/map_tool_bar/SettingsBtn.vue';
 </script>
