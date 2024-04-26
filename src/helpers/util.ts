@@ -30,3 +30,31 @@ export function strToLargeNumberDisplay(input: string | number): String {
 
     return inputStrNegative + inputStrTempo + inputStrDecimal;
 }
+
+export function copyToClipboard(textToCopy: string) {
+    if (navigator.clipboard) 
+        clipBoardApi(textToCopy);
+    else 
+        fallbackExecCommand(textToCopy);
+}
+
+function clipBoardApi(textToCopy: string) {
+    navigator.clipboard.writeText(textToCopy);
+}
+
+function fallbackExecCommand(textToCopy: string) {
+    const textArea = document.createElement("textarea");
+    textArea.value = textToCopy;
+
+    // Avoid scrolling to bottom
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+}
