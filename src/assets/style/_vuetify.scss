@@ -58,3 +58,10 @@
     max-height: 40px !important;
     min-height: 40px !important;
 }
+
+.tooltip {
+    .v-overlay__content {
+        @extend .font-weight-bold;
+        border-radius: 20px !important;
+    }
+}
