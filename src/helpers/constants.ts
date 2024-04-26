@@ -1,6 +1,3 @@
-/*
-    Enhance interfaces
-*/
 export function circularBarColorSelector(value: string) {
     const numValue: number = Number(value);
     if (isNaN(numValue)) return "green";
@@ -22,9 +19,6 @@ export function batteryCharging(value: number) {
     else if (value > 0) return "mdi-battery-charging-10";
 }
 
-/*
-    Solar colors and data
-*/
 export const darkColor = "#212121";
 
 export const lightColor = "#FFFFFF";

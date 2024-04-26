@@ -1,4 +1,3 @@
-/* String manipulation */
 export function strToLargeNumberDisplay(input: string | number): String {
     let inputStr: string = input.toString().trim();
 

@@ -40,9 +40,8 @@ export function matchMessage(message: string) {
     }
 }
 
-// Pour choix des couleurs
-// https://vuetifyjs.com/en/styles/colors/#material-colors
 export function matchColorToType(type: AlertType) {
+    // https://vuetifyjs.com/en/styles/colors/#material-colors
     switch (type) {
         case "success": {
             return "#A5D6A7";
