@@ -9,8 +9,8 @@ import {
     makeDefaultTimeParams
 } from "@/helpers/solar/math_and_data/defaultData";
 import { getClosestBuildingInsights } from "@/api/solar";
-import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/layers_and_panels/panels";
-import { getLayerFromBuildingInsights } from "@/helpers/solar/layers_and_panels/layers";
+import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/map/panels";
+import { getLayerFromBuildingInsights } from "@/helpers/solar/map/layers";
 import { getOptimizedEnergyCoveredConfigId, getOptimizedSavingsConfigId } from "@/helpers/solar/math_and_data/optimizeSolarConfig";
 import { monthlyEnergyBillApproximation } from "@/helpers/solar/math_and_data/solarDataMath";
 

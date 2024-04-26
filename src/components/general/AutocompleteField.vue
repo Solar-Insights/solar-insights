@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { ref, onMounted, PropType } from "vue";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import { initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/maps/components_util";
+import { initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/solar/map/components_util";
 import { LatLng } from "geo-env-typing/geo";
 import { getGeocoding, getReverseGeocoding } from "@/api/geo";
 import { AutocompleteInputError } from "@/helpers/customErrors";

@@ -6,7 +6,7 @@
 import { onMounted } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
-import { initMapComponents } from "@/helpers/maps/components_util";
+import { initMapComponents } from "@/helpers/solar/map/components_util";
 
 const solarMapStore = useSolarMapStore();
 
