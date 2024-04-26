@@ -36,7 +36,7 @@ onMounted(async () => {
                 return address;
             })
             .catch((error) => {
-                return t(`solar.reverse-geocoding-error`);
+                return t(`solar.data-panel.header.reverse-geocoding-error`);
             });
 });
 </script>

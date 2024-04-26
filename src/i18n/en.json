@@ -139,8 +139,13 @@
         }
     },
     "solar": {
-        "reverse-geocoding-error": "Could not get the address.",
         "data-panel": {
+            "header": {
+                "reverse-geocoding-error": "Could not get the address.",
+                "toolbar": {
+                    "share-tooltip": "Map URL copied to clipboard!"
+                }
+            },
             "readonly-panels": {
                 "building": "Building",
                 "insights": "Insights"

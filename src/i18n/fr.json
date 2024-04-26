@@ -139,8 +139,13 @@
         }
     },
     "solar": {
-        "reverse-geocoding-error": "Impossible d'obtenir l'adresse souhaitée",
         "data-panel": {
+            "header": {
+                "reverse-geocoding-error": "Impossible d'obtenir l'adresse souhaitée",
+                "toolbar": {
+                    "share-tooltip": "URL de la carte copié au presse-papiers!"
+                }
+            },
             "readonly-panels": {
                 "building": "Bâtiment",
                 "insights": "Aperçu"
