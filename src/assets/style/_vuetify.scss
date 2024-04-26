@@ -23,11 +23,12 @@
     opacity: 100% !important;
 }
 
-.navbar-btn {
+.no-btn-hover-bg {
     .v-btn__overlay {
         background-color: transparent !important;
     }
 }
+
 
 #expansion-panel-second-layer .v-expansion-panel-text__wrapper {
     padding-left: 0 !important;

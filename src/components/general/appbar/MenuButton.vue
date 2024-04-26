@@ -2,7 +2,7 @@
     <v-hover v-slot="{ isHovering, props }">
         <v-btn
             v-bind="props"
-            class="navbar-btn"
+            class="no-btn-hover-bg"
             :class="isHovering ? 'text-theme' : ''"
             :ripple="false"
             :active="false"

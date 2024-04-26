@@ -4,7 +4,7 @@
             <v-btn
                 v-bind="props"
                 @click="solarMapStore.selectReadonlyPanelToDisplay('INSIGHTS_READONLY')"
-                class="navbar-btn panel-selection-btn"
+                class="no-btn-hover-bg panel-selection-btn"
                 :class="isHovering || solarMapStore.solarReadonlyPanel === 'INSIGHTS_READONLY' ? 'text-theme' : ''"
                 :ripple="false"
                 :active="false"
@@ -29,7 +29,7 @@
             <v-btn
                 v-bind="props"
                 @click="solarMapStore.selectReadonlyPanelToDisplay('BUILDING_READONLY')"
-                class="navbar-btn panel-selection-btn"
+                class="no-btn-hover-bg panel-selection-btn"
                 :class="isHovering || solarMapStore.solarReadonlyPanel === 'BUILDING_READONLY' ? 'text-theme' : ''"
                 :ripple="false"
                 :active="false"
