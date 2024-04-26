@@ -1,6 +1,6 @@
 <template>
     <v-btn @click="copyRouteToClipboard()" icon>
-        <v-icon>mdi-share</v-icon>
+        <v-icon>mdi-share-outline</v-icon>
         <Tooltip :message="t(`solar.data-panel.header.toolbar.share-tooltip`)"/>
     </v-btn>
 </template>

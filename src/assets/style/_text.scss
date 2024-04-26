@@ -110,3 +110,11 @@ b {
 .v-card-title {
     @extend .title-break;
 }
+
+.form-subtitle-in-card {
+    @extend .font-weight-medium;
+}
+
+.form-section-in-sheet {
+    @extend .pa-2;
+}
