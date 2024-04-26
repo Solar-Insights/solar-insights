@@ -4,7 +4,7 @@ import {
     yearlyDiscountRate,
     yearlyUtilityBillEstimates,
     installationCostCalc
-} from "@/helpers/solar/solarDataMath";
+} from "@/helpers/solar/math_and_data/solarDataMath";
 
 /*
     Units: $

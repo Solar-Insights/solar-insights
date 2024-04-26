@@ -1,5 +1,5 @@
 import { UserSolarData } from "@/helpers/types";
-import { DefaultUserSolarData } from "@/helpers/solar/defaultData";
+import { DefaultUserSolarData } from "@/helpers/solar/math_and_data/defaultData";
 
 export namespace SolarMathVariables {
     export const CANADA_2015_TOTAL_RESIDENTIAL_AREA_METERS2 = 2026000000; // https://www.climate-chance.org/wp-content/uploads/2019/03/en_fp13-canada-residentiel_def-1.pdf

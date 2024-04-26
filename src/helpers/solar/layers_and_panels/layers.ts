@@ -1,7 +1,7 @@
 import { getSolarLayers } from "@/api/solar";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, MapSettings, SolarLayers } from "geo-env-typing/solar";
-import { getSingleLayer } from "@/helpers/solar/geotiffs";
+import { getSingleLayer } from "@/helpers/solar/layers_and_panels/geotiffs";
 
 export async function getLayerFromBuildingInsights(buildingInsights: BuildingInsights, mapSettings: MapSettings) {
     const geometryLibrary: google.maps.GeometryLibrary = (await google.maps.importLibrary(

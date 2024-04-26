@@ -112,9 +112,9 @@ import {
     installationCostCalc,
     energyCoveredCalc,
     costWithSolarInstallation
-} from "@/helpers/solar/solarDataMath";
-import { getBreakEvenYear, costWithoutSolarInstallation } from "@/helpers/solar/yearlyAndCumulativeCosts";
-import { makeChartOptions, makeTimeSeriesFromUserSolarData } from "@/helpers/solar/charts";
+} from "@/helpers/solar/math_and_data/solarDataMath";
+import { getBreakEvenYear, costWithoutSolarInstallation } from "@/helpers/solar/math_and_data/yearlyAndCumulativeCosts";
+import { makeChartOptions, makeTimeSeriesFromUserSolarData } from "@/helpers/solar/ui/charts";
 import { batteryCharging } from "@/helpers/constants";
 import { strToLargeNumberDisplay } from "@/helpers/util";
 import VueApexCharts from "vue3-apexcharts";

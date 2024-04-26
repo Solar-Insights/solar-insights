@@ -1,4 +1,4 @@
-import { Coordinates, LatLng, validCoordinates } from "geo-env-typing/geo";
+import { LatLng } from "geo-env-typing/geo";
 import { MapElements } from "@/helpers/types";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { MapInitializationError } from "@/helpers/customErrors";

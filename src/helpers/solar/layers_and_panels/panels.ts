@@ -1,6 +1,6 @@
-import { normalize } from "@/helpers/solar/solarDataMath";
+import { normalize } from "@/helpers/solar/math_and_data/solarDataMath";
 import { panelsPalette } from "@/helpers/constants";
-import { rgbToColor, createPalette } from "@/helpers/solar/colorPalettes";
+import { rgbToColor, createPalette } from "@/helpers/solar/ui/colorPalettes";
 import { BuildingInsights } from "geo-env-typing/solar";
 
 export async function createSolarPanelsFromBuildingInsights(buildingInsights: BuildingInsights) {

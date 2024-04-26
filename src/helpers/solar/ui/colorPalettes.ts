@@ -1,5 +1,5 @@
 import { GeoTiff } from "geo-env-typing/solar";
-import { lerp, normalize } from "@/helpers/solar/solarDataMath";
+import { lerp, normalize } from "@/helpers/solar/math_and_data/solarDataMath";
 
 export function colorToRGB(color: string): { r: number; g: number; b: number } {
     const hex = color.startsWith("#") ? color.slice(1) : color;
