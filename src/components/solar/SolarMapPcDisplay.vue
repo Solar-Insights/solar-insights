@@ -1,7 +1,7 @@
 <template>
-    <div v-if="requestCoordinates !== undefined" class="d-flex">
+    <v-sheet v-if="requestCoordinates !== undefined" class="d-flex">
         <v-col class="pa-0">
-            <v-card id="map-details" class="rounded-0 map-details-computer">
+            <v-card class="rounded-0 map-details-computer">
                 <MapToolBar />
 
                 <MapHeader :requestAddress="requestAddress"/>
@@ -18,7 +18,7 @@
             <BuildingReadonlyPanel v-if="solarReadonlyPanel === 'BUILDING_READONLY'" />
             <InsightsReadonlyPanel v-if="solarReadonlyPanel === 'INSIGHTS_READONLY'" />
         </div>
-    </div>
+    </v-sheet>
 </template>
 
 <script setup lang="ts">

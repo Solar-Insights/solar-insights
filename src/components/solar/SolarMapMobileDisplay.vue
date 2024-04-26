@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <v-sheet v-if="requestCoordinates !== undefined">
         <MapToolBar />
 
-        <div v-if="requestCoordinates !== undefined" class="d-flex">
+        <div  class="d-flex">
             <v-col class="pa-0">
-                <v-card id="map-details" class="rounded-0 map-details-mobile" :width="displayingData ? '100vw' : '0'">
+                <v-card class="rounded-0 map-details-mobile" :width="displayingData ? '100vw' : '0'">
                     <MapHeader :requestAddress="requestAddress"/>
 
                     <DataPanel />
@@ -43,7 +43,7 @@
                 solarMapStore.setReadonlyPanelToDisplay('BUILDING_READONLY');
             "
         />
-    </div>
+    </v-sheet>
 </template>
 
 <script setup lang="ts">
