@@ -32,18 +32,20 @@ export function strToLargeNumberDisplay(input: string | number): String {
 
 export function copyToClipboard(textToCopy: string) {
     if (navigator.clipboard) clipBoardApi(textToCopy);
-    else fallbackExecCommand(textToCopy);
+    else fallbackClipboardExecCommand(textToCopy);
 }
 
 function clipBoardApi(textToCopy: string) {
     navigator.clipboard.writeText(textToCopy);
 }
 
-function fallbackExecCommand(textToCopy: string) {
+function fallbackClipboardExecCommand(textToCopy: string) {
     const textArea = document.createElement("textarea");
+    textArea.style.display = "none";
     textArea.value = textToCopy;
 
     // Avoid scrolling to bottom
+    
     textArea.style.top = "0";
     textArea.style.left = "0";
     textArea.style.position = "fixed";
