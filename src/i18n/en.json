@@ -139,6 +139,25 @@
         }
     },
     "solar": {
+        "toolbar": {
+            "save": {
+                "title": "Save current solar installation",
+                "included-data": {
+                    "title": "Included data",
+                    "insights-and-parameters": "Solar insights and parameters",
+                    "building-attributes": "Building attributes",
+                    "panel-config": "Panel configuration"
+                },
+                "export-format": {
+                    "title": "Format",
+                    "json": "Json"
+                },
+                "actions": {
+                    "save": "Save",
+                    "cancel": "Cancel"
+                }
+            }
+        },
         "data-panel": {
             "header": {
                 "reverse-geocoding-error": "Could not get the address.",

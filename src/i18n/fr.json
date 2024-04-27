@@ -139,6 +139,25 @@
         }
     },
     "solar": {
+        "toolbar": {
+            "save": {
+                "title": "Sauvegarder l'installation solaire courante",
+                "included-data": {
+                    "title": "Données incluses",
+                    "insights-and-parameters": "Aperçus solaires et paramètres",
+                    "building-attributes": "Attributs du bâtiment",
+                    "panel-config": "Configuration des panneaux"
+                },
+                "export-format": {
+                    "title": "Format",
+                    "json": "Json"
+                },
+                "actions": {
+                    "save": "Sauvegarder",
+                    "cancel": "Annuler"
+                }
+            }
+        },
         "data-panel": {
             "header": {
                 "reverse-geocoding-error": "Impossible d'obtenir l'adresse souhaitée",
