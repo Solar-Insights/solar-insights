@@ -1,54 +1,33 @@
-<template>
+]<template>
     <v-btn icon>
         <v-icon>mdi-file-document-plus-outline</v-icon>
+        
         <v-dialog activator="parent" max-width="600">
-            <v-card
-                prepend-icon="mdi-file-document-plus-outline"
-                title="Save the solar installation"
-            >
-                <v-card-text class="mt-5">
+            <v-card>
+                <v-card-title class="mt-3">
+                    <div class="d-flex">
+                        <v-icon>mdi-file-document-plus-outline</v-icon>
+                        <div class="ml-4">Save the solar installation</div>
+                    </div>
+                </v-card-title>
+
+                <v-card-text>
                     <div class="form-subtitle-in-card"> Included data </div>
                     <v-sheet class="form-section-in-sheet">
-                        <v-switch
-                            v-model="solarInsightsAndParameters"
-                            color="theme"
-                            density="compact"
-                        >
-                            <template v-slot:label>
-                                <span class="ml-4">
-                                    Solar insights and parameters
-                                </span>
-                            </template>
-                        </v-switch>
+                        <v-switch v-model="solarInsightsAndParameters" class="switch-custom-label" label="Solar insights and parameters" color="theme" density="compact"/>
 
-                        <v-switch
-                            v-model="buildingAttributes"
-                            color="theme"
-                            density="compact"
-                        >
-                            <template v-slot:label>
-                                <span class="ml-4">
-                                    Building attributes
-                                </span>
-                            </template>
-                        </v-switch>
+                        <v-switch v-model="buildingAttributes" class="switch-custom-label" label="Building attributes" color="theme" density="compact"/>
 
-                        <v-switch
-                            v-model="panelConfiguration"
-                            color="theme"
-                            density="compact"
-                        >
-                            <template v-slot:label>
-                                <span class="ml-4">
-                                    Panel configuration
-                                </span>
-                            </template>
-                        </v-switch>
+                        <v-switch v-model="panelConfiguration" class="switch-custom-label" label="Panel configuration" color="theme" density="compact"/>
                     </v-sheet>
                     
-                    <v-card-subtitle class="font-weight-medium"> Format </v-card-subtitle>
+                    <div class="form-subtitle-in-card"> Format </div>
                     <v-sheet class="form-section-in-sheet">
-                        
+                        <v-radio-group color="theme">
+                            <v-radio class="radio-custom-label" label="Json"/>
+
+                            <v-radio class="radio-custom-label" label="Json"/>
+                        </v-radio-group>
                     </v-sheet>
                 </v-card-text>
             </v-card>

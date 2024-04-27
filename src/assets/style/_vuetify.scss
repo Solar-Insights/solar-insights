@@ -65,3 +65,15 @@
         border-radius: 20px !important;
     }
 }
+
+.radio-custom-label {
+    .v-label {
+        @extend .ml-4;
+    }
+}
+
+.switch-custom-label {
+    .v-label {
+        @extend .ml-4;
+    }
+}

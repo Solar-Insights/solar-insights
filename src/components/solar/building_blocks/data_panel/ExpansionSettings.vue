@@ -31,27 +31,19 @@
                     inset
                     color="theme"
                     density="compact"
-                >
-                    <template v-slot:label>
-                        <span class="ml-4">
-                            {{ $t(`solar.data-panel.data-panels.settings.display-panels`) }}
-                        </span>
-                    </template>
-                </v-switch>
-
+                    class="switch-custom-label"
+                    :label="$t(`solar.data-panel.data-panels.settings.display-panels`)"
+                />
+                
                 <v-switch
                     v-model="mapSettings.showHeatmap"
                     @change="changeLayersOnShowHeatmapChange"
                     inset
                     color="theme"
                     density="compact"
-                >
-                    <template v-slot:label>
-                        <span class="ml-4">
-                            {{ $t(`solar.data-panel.data-panels.settings.display-heatmap`) }}
-                        </span>
-                    </template>
-                </v-switch>
+                    class="switch-custom-label"
+                    :label="$t(`solar.data-panel.data-panels.settings.display-heatmap`)"
+                />
 
                 <v-switch
                     v-model="mapSettings.heatmapAnimation"
@@ -61,13 +53,9 @@
                     :disabled="
                         !mapSettings.showHeatmap || !['monthlyFlux', 'hourlyShade'].includes(mapSettings.layerId)
                     "
-                >
-                    <template v-slot:label>
-                        <span class="ml-4">
-                            {{ $t(`solar.data-panel.data-panels.settings.heatmap-animation`) }}
-                        </span>
-                    </template>
-                </v-switch>
+                    class="switch-custom-label"
+                    :label="$t(`solar.data-panel.data-panels.settings.heatmap-animation`)"
+                />
             </div>
         </v-expansion-panel-text>
     </div>
