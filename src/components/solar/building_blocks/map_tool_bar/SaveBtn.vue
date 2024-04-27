@@ -16,7 +16,7 @@
                     <div class="form-subtitle-in-card">{{ $t("solar.toolbar.save.included-data.title") }}</div>
                     <v-sheet class="form-section-in-sheet">
                         <v-switch
-                            v-model="solarInsightsAndParameters"
+                            v-model="exportOptions.solarInsightsAndParameters"
                             class="switch-custom-label"
                             :label="$t(`solar.toolbar.save.included-data.insights-and-parameters`)"
                             color="theme"
@@ -25,7 +25,7 @@
                         />
 
                         <v-switch
-                            v-model="buildingAttributes"
+                            v-model="exportOptions.buildingAttributes"
                             class="switch-custom-label"
                             :label="$t(`solar.toolbar.save.included-data.building-attributes`)"
                             color="theme"
@@ -34,7 +34,7 @@
                         />
 
                         <v-switch
-                            v-model="panelConfiguration"
+                            v-model="exportOptions.panelConfiguration"
                             class="switch-custom-label"
                             :label="$t(`solar.toolbar.save.included-data.panel-config`)"
                             color="theme"
@@ -45,7 +45,7 @@
 
                     <div class="form-subtitle-in-card">{{ $t("solar.toolbar.save.export-format.title") }}</div>
                     <v-sheet class="form-section-in-sheet">
-                        <v-radio-group v-model="exportType" color="theme">
+                        <v-radio-group v-model="exportOptions.exportType" color="theme">
                             <v-radio
                                 class="radio-custom-label"
                                 :label="$t(`solar.toolbar.save.export-format.json`)"
@@ -83,21 +83,24 @@
 import { ref } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
-import { ExportType } from "@/helpers/types";
+import { InstallationExportOptions, getDefaultInstallationExportOptions } from "@/helpers/types";
+import { downloadInstallationData } from "@/helpers/downloadFile";
 
 const solarMapStore = useSolarMapStore();
 
-const {} = storeToRefs(solarMapStore);
+const { buildingInsights, userSolarData, panelConfig } = storeToRefs(solarMapStore);
 
 const openedDialog = ref<boolean>(false);
 
-const solarInsightsAndParameters = ref<boolean>(true); // userSolarData + financial
-const buildingAttributes = ref<boolean>(true); // part of buildingInsights
-const panelConfiguration = ref<boolean>(true); // part of buildingInsights
+const exportOptions = ref<InstallationExportOptions>(getDefaultInstallationExportOptions());
 
-const exportType = ref<ExportType>("json");
-
-function saveFile() {
+async function saveFile() {
     console.log("saving file");
+    await downloadInstallationData(
+        exportOptions.value, 
+        buildingInsights.value, 
+        userSolarData.value, 
+        panelConfig.value!
+    );
 }
 </script>

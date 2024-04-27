@@ -51,3 +51,21 @@ export type Theme = "light" | "dark";
 export type Locale = "fr" | "en";
 
 export type ExportType = "json";
+
+export type InstallationExportOptions = {
+    solarInsightsAndParameters: boolean,
+    buildingAttributes: boolean,
+    panelConfiguration: boolean,
+    exportType: ExportType
+};
+
+export function getDefaultInstallationExportOptions() {
+    return {
+        solarInsightsAndParameters: true,
+        buildingAttributes: true,
+        panelConfiguration: true,
+        exportType: "json"
+    } as InstallationExportOptions;
+}
+
+
