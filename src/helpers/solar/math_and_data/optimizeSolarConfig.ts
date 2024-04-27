@@ -1,7 +1,14 @@
 import { BuildingInsights } from "geo-env-typing/solar";
 import { UserSolarData } from "@/helpers/types";
-import { panelCapacityRatioCalc, dcToAcDerate, yearlyEnergyConsumptionKwh } from "@/helpers/solar/math_and_data/solarDataMath";
-import { makeCumulativeCostWithSolar, makeCumulativeCostWithoutSolar } from "@/helpers/solar/math_and_data/yearlyAndCumulativeCosts";
+import {
+    panelCapacityRatioCalc,
+    dcToAcDerate,
+    yearlyEnergyConsumptionKwh
+} from "@/helpers/solar/math_and_data/solarDataMath";
+import {
+    makeCumulativeCostWithSolar,
+    makeCumulativeCostWithoutSolar
+} from "@/helpers/solar/math_and_data/yearlyAndCumulativeCosts";
 
 export function getOptimizedEnergyCoveredConfigId(buildingInsights: BuildingInsights, userSolarData: UserSolarData) {
     let configId: number | undefined;

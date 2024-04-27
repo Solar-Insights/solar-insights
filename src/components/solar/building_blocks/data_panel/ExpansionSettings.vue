@@ -34,7 +34,7 @@
                     class="switch-custom-label"
                     :label="$t(`solar.data-panel.data-panels.settings.display-panels`)"
                 />
-                
+
                 <v-switch
                     v-model="mapSettings.showHeatmap"
                     @change="changeLayersOnShowHeatmapChange"

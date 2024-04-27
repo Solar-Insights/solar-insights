@@ -1,6 +1,14 @@
 <template>
-    <SolarMapPcDisplay v-if="$vuetify.display.mdAndUp" :requestCoordinates="requestCoordinates" :requestAddress="requestAddress"/>
-    <SolarMapMobileDisplay v-if="$vuetify.display.smAndDown" :requestCoordinates="requestCoordinates" :requestAddress="requestAddress"/>
+    <SolarMapPcDisplay
+        v-if="$vuetify.display.mdAndUp"
+        :requestCoordinates="requestCoordinates"
+        :requestAddress="requestAddress"
+    />
+    <SolarMapMobileDisplay
+        v-if="$vuetify.display.smAndDown"
+        :requestCoordinates="requestCoordinates"
+        :requestAddress="requestAddress"
+    />
 </template>
 
 <script setup lang="ts">
@@ -31,12 +39,12 @@ onMounted(async () => {
     }
 
     requestAddress.value = await getReverseGeocoding(requestCoordinates.value)
-            .then((address: string) => {
-                solarMapStore.syncWithNewRequest(requestCoordinates.value, requestAddress.value);
-                return address;
-            })
-            .catch((error) => {
-                return t(`solar.data-panel.header.reverse-geocoding-error`);
-            });
+        .then((address: string) => {
+            solarMapStore.syncWithNewRequest(requestCoordinates.value, requestAddress.value);
+            return address;
+        })
+        .catch((error) => {
+            return t(`solar.data-panel.header.reverse-geocoding-error`);
+        });
 });
 </script>

@@ -2,10 +2,10 @@
     <v-sheet v-if="requestCoordinates !== undefined">
         <MapToolBar />
 
-        <div  class="d-flex">
+        <div class="d-flex">
             <v-col class="pa-0">
                 <v-card class="rounded-0 map-details-mobile" :width="displayingData ? '100vw' : '0'">
-                    <MapHeader :requestAddress="requestAddress"/>
+                    <MapHeader :requestAddress="requestAddress" />
 
                     <DataPanel />
                 </v-card>
@@ -59,7 +59,6 @@ import TimeParam from "@/components/solar/building_blocks/TimeParam.vue";
 import DataPanel from "@/components/solar/building_blocks/DataPanel.vue";
 import MapToolBar from "@/components/solar/building_blocks/MapToolBar.vue";
 import MobileBottomNav from "@/components/solar/building_blocks/mobile/MobileBottomNav.vue";
-
 
 onMounted(() => {
     solarMapStore.setReadonlyPanelToDisplay("INSIGHTS_READONLY");

@@ -4,7 +4,7 @@
             <v-card class="rounded-0 map-details-computer">
                 <MapToolBar />
 
-                <MapHeader :requestAddress="requestAddress"/>
+                <MapHeader :requestAddress="requestAddress" />
 
                 <DataPanel />
             </v-card>

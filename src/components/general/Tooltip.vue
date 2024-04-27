@@ -1,10 +1,10 @@
 <template>
-    <v-tooltip 
-        v-model="displayTooltip" 
+    <v-tooltip
+        v-model="displayTooltip"
         class="tooltip"
         activator="parent"
         rounded
-        :open-on-click="true" 
+        :open-on-click="true"
         :open-on-hover="false"
     >
         {{ message }}
@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch } from "vue";
 
 const props = defineProps({
     message: {

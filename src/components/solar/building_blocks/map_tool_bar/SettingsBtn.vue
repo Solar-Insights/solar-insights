@@ -6,5 +6,5 @@
 </template>
 
 <script setup lang="ts">
-import SettingsMenu from '@/components/general/appbar/SettingsMenu.vue';
+import SettingsMenu from "@/components/general/appbar/SettingsMenu.vue";
 </script>

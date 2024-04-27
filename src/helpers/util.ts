@@ -31,10 +31,8 @@ export function strToLargeNumberDisplay(input: string | number): String {
 }
 
 export function copyToClipboard(textToCopy: string) {
-    if (navigator.clipboard) 
-        clipBoardApi(textToCopy);
-    else 
-        fallbackExecCommand(textToCopy);
+    if (navigator.clipboard) clipBoardApi(textToCopy);
+    else fallbackExecCommand(textToCopy);
 }
 
 function clipBoardApi(textToCopy: string) {
@@ -54,6 +52,6 @@ function fallbackExecCommand(textToCopy: string) {
     textArea.focus();
     textArea.select();
 
-    document.execCommand('copy');
+    document.execCommand("copy");
     document.body.removeChild(textArea);
 }

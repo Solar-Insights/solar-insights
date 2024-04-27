@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const props = defineProps({
     showingData: {
@@ -41,10 +41,10 @@ const props = defineProps({
     showingBuildingAttributes: {
         type: Boolean,
         required: true
-    },
+    }
 });
 
-const emits = defineEmits(["showData",  "showMap", "showSolarInsights", "showBuildingAttributes"]);
+const emits = defineEmits(["showData", "showMap", "showSolarInsights", "showBuildingAttributes"]);
 
 const navigationIndex = ref(mapNavigationIndexToSolarInsights());
 

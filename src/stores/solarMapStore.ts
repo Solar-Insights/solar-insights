@@ -11,7 +11,10 @@ import {
 import { getClosestBuildingInsights } from "@/api/solar";
 import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/map/panels";
 import { getLayerFromBuildingInsights } from "@/helpers/solar/map/layers";
-import { getOptimizedEnergyCoveredConfigId, getOptimizedSavingsConfigId } from "@/helpers/solar/math_and_data/optimizeSolarConfig";
+import {
+    getOptimizedEnergyCoveredConfigId,
+    getOptimizedSavingsConfigId
+} from "@/helpers/solar/math_and_data/optimizeSolarConfig";
 import { monthlyEnergyBillApproximation } from "@/helpers/solar/math_and_data/solarDataMath";
 
 export const useSolarMapStore = defineStore("solarMapStore", {
@@ -23,7 +26,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         layer: undefined as Layer | undefined,
         overlays: [] as google.maps.GroundOverlay[],
         showRoofOnly: false,
-        
+
         map: {} as google.maps.Map,
         panelConfig: undefined as SolarPanelConfig | undefined,
         solarPanels: [] as google.maps.Polygon[],
