@@ -46,5 +46,7 @@ onMounted(async () => {
         .catch((error) => {
             return t(`solar.data-panel.header.reverse-geocoding-error`);
         });
+
+    solarMapStore.address = requestAddress.value;
 });
 </script>
