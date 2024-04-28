@@ -53,9 +53,9 @@ export type Locale = "fr" | "en";
 export type ExportType = "json";
 
 export type InstallationExportOptions = {
-    solarInsightsAndParameters: boolean,
-    panelConfiguration: boolean,
-    exportType: ExportType
+    solarInsightsAndParameters: boolean;
+    panelConfiguration: boolean;
+    exportType: ExportType;
 };
 
 export function getDefaultInstallationExportOptions() {
@@ -66,5 +66,3 @@ export function getDefaultInstallationExportOptions() {
         exportType: "json"
     } as InstallationExportOptions;
 }
-
-

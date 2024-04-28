@@ -17,20 +17,17 @@ export function saveFileToLocal(data: any, suggestedName: string, exportType: Ex
 }
 
 function mapExportTypeToBlobFactory(data: any, exportType: ExportType) {
-    switch(exportType) {
+    switch (exportType) {
         case "json":
             return jsonBlobFactory(data);
-    };
+    }
 }
 
 function jsonBlobFactory(data: any) {
     const jsonData = JSON.stringify(data, null, 4);
-    const blob = new Blob(
-        [jsonData], 
-        { 
-            type: "application/json"
-        }
-    );
+    const blob = new Blob([jsonData], {
+        type: "application/json"
+    });
     const blobURL = URL.createObjectURL(blob);
 
     return { blob, blobURL };

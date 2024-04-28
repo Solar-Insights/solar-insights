@@ -83,8 +83,12 @@ const solarMapStore = useSolarMapStore();
 const { buildingInsights, userSolarData, panelConfig, address } = storeToRefs(solarMapStore);
 
 const requiredInfoUnavailable = computed(() => {
-    return Object.keys(buildingInsights.value).length === 0 || Object.keys(userSolarData.value).length === 0 || panelConfig === undefined;
-})
+    return (
+        Object.keys(buildingInsights.value).length === 0 ||
+        Object.keys(userSolarData.value).length === 0 ||
+        panelConfig === undefined
+    );
+});
 
 const openedDialog = ref<boolean>(false);
 
@@ -92,9 +96,9 @@ const exportOptions = ref<InstallationExportOptions>(getDefaultInstallationExpor
 
 function saveFile() {
     downloadInstallationData(
-        exportOptions.value, 
-        buildingInsights.value, 
-        userSolarData.value, 
+        exportOptions.value,
+        buildingInsights.value,
+        userSolarData.value,
         panelConfig.value!,
         address.value
     );
