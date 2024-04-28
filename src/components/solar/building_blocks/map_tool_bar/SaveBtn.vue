@@ -1,6 +1,6 @@
 ]
 <template>
-    <v-btn icon>
+    <v-btn icon :disabled="requiredInfoUnavailable">
         <v-icon>mdi-file-document-plus-outline</v-icon>
 
         <v-dialog v-model="openedDialog" activator="parent" max-width="600">
@@ -19,15 +19,6 @@
                             v-model="exportOptions.solarInsightsAndParameters"
                             class="switch-custom-label"
                             :label="$t(`solar.toolbar.save.included-data.insights-and-parameters`)"
-                            color="theme"
-                            density="compact"
-                            inset
-                        />
-
-                        <v-switch
-                            v-model="exportOptions.buildingAttributes"
-                            class="switch-custom-label"
-                            :label="$t(`solar.toolbar.save.included-data.building-attributes`)"
                             color="theme"
                             density="compact"
                             inset
@@ -80,27 +71,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import _ from "lodash";
+import { ref, computed } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
 import { InstallationExportOptions, getDefaultInstallationExportOptions } from "@/helpers/types";
-import { downloadInstallationData } from "@/helpers/downloadFile";
+import { downloadInstallationData } from "@/helpers/solar/math_and_data/downloads";
 
 const solarMapStore = useSolarMapStore();
 
-const { buildingInsights, userSolarData, panelConfig } = storeToRefs(solarMapStore);
+const { buildingInsights, userSolarData, panelConfig, address } = storeToRefs(solarMapStore);
+
+const requiredInfoUnavailable = computed(() => {
+    return Object.keys(buildingInsights.value).length === 0 || Object.keys(userSolarData.value).length === 0 || panelConfig === undefined;
+})
 
 const openedDialog = ref<boolean>(false);
 
 const exportOptions = ref<InstallationExportOptions>(getDefaultInstallationExportOptions());
 
-async function saveFile() {
-    console.log("saving file");
-    await downloadInstallationData(
+function saveFile() {
+    downloadInstallationData(
         exportOptions.value, 
         buildingInsights.value, 
         userSolarData.value, 
-        panelConfig.value!
+        panelConfig.value!,
+        address.value
     );
 }
 </script>

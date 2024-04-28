@@ -1,7 +1,6 @@
-import { ExportType, InstallationExportOptions, UserSolarData } from "@/helpers/types";
-import { BuildingInsights, SolarPanelConfig } from "geo-env-typing/solar";
+import { ExportType } from "@/helpers/types";
 
-function saveFileToLocal(data: any, suggestedName: string, exportType: ExportType) {
+export function saveFileToLocal(data: any, suggestedName: string, exportType: ExportType) {
     const { blob, blobURL } = mapExportTypeToBlobFactory(data, exportType);
 
     const anchor = document.createElement("a");
@@ -35,20 +34,4 @@ function jsonBlobFactory(data: any) {
     const blobURL = URL.createObjectURL(blob);
 
     return { blob, blobURL };
-}
-
-
-export function downloadInstallationData(exportOptions: InstallationExportOptions, buildingInsights: BuildingInsights, userSolarData: UserSolarData, panelConfig: SolarPanelConfig) {
-    const data = {
-        "nom": "Mathis",
-        "allo" : "alhuile"
-    };
-
-    const suggestedName = "solar_insights"
-
-    saveFileToLocal(data, suggestedName, exportOptions.exportType);
-}
-
-function createExportedInstallationData() {
-
 }

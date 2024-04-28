@@ -20,11 +20,12 @@ export type MapElements = {
 export type AlertType = "warning" | "error" | "success";
 
 export type UserSolarData = {
+    panelCount: number;
     minPanelCount: number;
     maxPanelCount: number;
     panelCapacityWatts: number;
     defaultPanelCapacityWatts: number;
-    panelCount: number;
+    installationLifespan: number;
     installationCostPerWatt: number;
     yearlyEnergyDcKwh: number;
     dcToAcDerate: number;
@@ -34,7 +35,6 @@ export type UserSolarData = {
     yearlyPanelEfficiencyDecline: number;
     yearlyEnergyCostIncrease: number;
     yearlyDiscountRate: number;
-    installationLifespan: number;
 };
 
 export type SolarReadonlyPanel = "BUILDING_READONLY" | "INSIGHTS_READONLY";
@@ -54,7 +54,6 @@ export type ExportType = "json";
 
 export type InstallationExportOptions = {
     solarInsightsAndParameters: boolean,
-    buildingAttributes: boolean,
     panelConfiguration: boolean,
     exportType: ExportType
 };
