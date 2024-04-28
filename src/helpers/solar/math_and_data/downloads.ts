@@ -33,7 +33,7 @@ function createExportedInstallationData(exportOptions: InstallationExportOptions
 
 function addMetadataToObject(data: any, address: string, buildingInsights: BuildingInsights) {
     data.metadata = {
-        link: window.location.origin,
+        link: window.location.href,
         address: address,
         regionCode: buildingInsights.regionCode,
         postalCode: buildingInsights.postalCode,
