@@ -13,7 +13,7 @@ export function downloadInstallationData(exportOptions: InstallationExportOption
         address
     );
 
-    const suggestedName = "solar_insights"
+    const suggestedName = `Solar installation - ${address}`
     saveFileToLocal(data, suggestedName, exportOptions.exportType);
 }
 
