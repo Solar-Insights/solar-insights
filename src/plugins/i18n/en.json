@@ -139,6 +139,12 @@
         }
     },
     "solar": {
+        "mobile-bottom-nav": {
+            "edit": "Edit",
+            "map": "Map",
+            "insights": "Insights",
+            "building": "Building"
+        },
         "toolbar": {
             "save": {
                 "title": "Save current solar installation",

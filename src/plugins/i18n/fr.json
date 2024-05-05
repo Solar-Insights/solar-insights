@@ -139,6 +139,12 @@
         }
     },
     "solar": {
+        "mobile-bottom-nav": {
+            "edit": "Éditer",
+            "map": "Carte",
+            "insights": "Aperçus",
+            "building": "Bâtiment"
+        },
         "toolbar": {
             "save": {
                 "title": "Sauvegarder l'installation solaire courante",

@@ -2,22 +2,22 @@
     <v-bottom-navigation v-model="navigationIndex" color="theme" mandatory>
         <v-btn @click="emits('showData')" class="no-btn-hover-bg">
             <v-icon>mdi-pencil</v-icon>
-            <span> Edit </span>
+            <span> {{ $t(`solar.mobile-bottom-nav.edit`) }} </span>
         </v-btn>
 
         <v-btn @click="emits('showMap')" class="no-btn-hover-bg">
             <v-icon>mdi-earth</v-icon>
-            <span> Map </span>
+            <span> {{ $t(`solar.mobile-bottom-nav.map`) }} </span>
         </v-btn>
 
         <v-btn @click="emits('showSolarInsights')" class="no-btn-hover-bg">
             <v-icon>mdi-flash-outline</v-icon>
-            <span> Insights </span>
+            <span> {{ $t(`solar.mobile-bottom-nav.insights`) }} </span>
         </v-btn>
 
         <v-btn @click="emits('showBuildingAttributes')" class="no-btn-hover-bg">
             <v-icon>mdi-home-outline</v-icon>
-            <span> Building </span>
+            <span> {{ $t(`solar.mobile-bottom-nav.building`) }} </span>
         </v-btn>
     </v-bottom-navigation>
 </template>
