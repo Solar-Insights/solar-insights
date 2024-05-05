@@ -1,7 +1,7 @@
 import { LatLng } from "geo-env-typing/geo";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { GeocodingError, ReverseGeocodingError } from "@/helpers/customErrors";
-import AxiosInstance from "@/api/axiosInit";
+import AxiosInstance from "@/plugins/axios";
 
 export async function getGeocoding(formattedAddress: string) {
     return await AxiosInstance({

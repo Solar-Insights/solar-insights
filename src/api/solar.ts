@@ -2,7 +2,7 @@ import { BuildingInsightsError, GeotiffError, SolarLayersError } from "@/helpers
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, GeoTiff, SolarLayers } from "geo-env-typing/solar";
-import AxiosInstance from "@/api/axiosInit";
+import AxiosInstance from "@/plugins/axios";
 
 export async function getClosestBuildingInsights(coord: LatLng) {
     return await AxiosInstance({
