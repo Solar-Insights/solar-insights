@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import router from "@/router";
+import router from "@/plugins/router";
 import { LatLng } from "geo-env-typing/geo";
 import AutocompleteField from "@/components/general/AutocompleteField.vue";
 import HelperTimelineSection from "@/components/search/HelperTimelineSection.vue";

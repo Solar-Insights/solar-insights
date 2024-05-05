@@ -17,7 +17,7 @@ import { useRoute } from "vue-router";
 import SolarMapPcDisplay from "@/components/solar/SolarMapPcDisplay.vue";
 import SolarMapMobileDisplay from "@/components/solar/SolarMapMobileDisplay.vue";
 import { validRouteCoordinates } from "@/helpers/solar/map/components_util";
-import router from "@/router";
+import router from "@/plugins/router";
 import { LatLng, validCoordinates } from "geo-env-typing/geo";
 import { getReverseGeocoding } from "@/api/geo";
 import { useSolarMapStore } from "@/stores/solarMapStore";

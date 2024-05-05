@@ -17,7 +17,7 @@ import { useRoute } from "vue-router";
 import Alert from "@/components/general/Alert.vue";
 import AppBar from "@/components/general/appbar/AppBar.vue";
 import { onMounted, watch } from "vue";
-import { i18n } from "@/i18n/i18n";
+import { i18n } from "@/plugins/i18n/i18n";
 import { useAuth0 } from "@auth0/auth0-vue";
 
 const auth0 = useAuth0();

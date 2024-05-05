@@ -1,5 +1,5 @@
 import { AlertType } from "./types";
-import { i18n } from "@/i18n/i18n";
+import { i18n } from "@/plugins/i18n/i18n";
 
 export function matchType(type: AlertType) {
     switch (type) {
