@@ -1,15 +1,15 @@
 <template>
     <v-menu activator="parent" :close-on-content-click="false">
         <v-card class="app-menu-card">
-            <v-skeleton-loader :loading="authProcessGoingOn" type="heading">
-                <v-card v-if="auth0.isAuthenticated.value" elevation="0">
-                    <v-card-title> {{ auth0.user.value?.nickname }} </v-card-title>
-                    <v-card-text> {{ auth0.user.value?.email }} </v-card-text>
+            <v-skeleton-loader :loading="isLoading" type="heading">
+                <v-card v-if="isAuthenticated" elevation="0">
+                    <v-card-title> {{ user?.nickname }} </v-card-title>
+                    <v-card-text> {{ user?.email }} </v-card-text>
                 </v-card>
 
                 <v-card
-                    v-if="!auth0.isAuthenticated.value"
-                    @click="login"
+                    v-if="!isAuthenticated"
+                    @click="loginUser"
                     class="app-menu-option"
                     elevation="2"
                     :variant="theme === 'dark' ? 'tonal' : 'outlined'"
@@ -25,8 +25,8 @@
                 </v-card>
 
                 <v-card
-                    v-if="auth0.isAuthenticated.value"
-                    @click="logout"
+                    v-if="isAuthenticated"
+                    @click="logoutUser"
                     class="app-menu-option"
                     elevation="2"
                     :variant="theme === 'dark' ? 'tonal' : 'outlined'"
@@ -49,22 +49,18 @@
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { storeToRefs } from "pinia";
-import { computed } from "vue";
 
-const auth0 = useAuth0();
+const { isLoading, isAuthenticated, user, loginWithRedirect, logout} = useAuth0();
 const userSessionStore = useUserSessionStore();
 
 const { theme } = storeToRefs(userSessionStore);
-const authProcessGoingOn = computed(
-    () => auth0.isLoading.value || (!auth0.isAuthenticated.value && userSessionStore.accessToken !== "")
-);
 
-function login() {
-    auth0.loginWithRedirect();
+function loginUser() {
+    loginWithRedirect();
 }
 
-function logout() {
-    auth0.logout({
+function logoutUser() {
+    logout({
         logoutParams: {
             returnTo: window.location.origin
         }
