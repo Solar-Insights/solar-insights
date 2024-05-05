@@ -83,7 +83,6 @@
     overflow-y: scroll;
     max-height: 85%;
     position: absolute;
-    top: 0;
 }
 .map-readonly-data-mobile {
     @extend .map-readonly-data;
@@ -97,6 +96,7 @@
     @extend .ma-3;
     width: 400px;
     right: 0;
+    top: 0;
 }
 
 .time-slider {
