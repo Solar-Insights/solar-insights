@@ -6,20 +6,11 @@ import { createPinia } from "pinia";
 import piniaPluginPersistedState from "pinia-plugin-persistedstate";
 import vuetifyThemesAndComponents from "@/vuetify";
 import "@/assets/_main.scss";
-import { createAuth0 } from "@auth0/auth0-vue";
+import { auth0 } from "@/plugins/auth";
 
 const app = createApp(App);
 
-app.use(
-    createAuth0({
-        domain: import.meta.env.VITE_AUTH0_DOMAIN,
-        clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
-        authorizationParams: {
-            audience: import.meta.env.VITE_AUTH0_AUDIENCE,
-            redirect_uri: window.location.origin // will choose http://localhost:5173 or https://solarinsights.ca
-        }
-    })
-);
+app.use(auth0);
 app.use(i18n);
 app.use(createPinia().use(piniaPluginPersistedState));
 app.use(router);

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useUserSessionStore } from "@/stores/userSessionStore";
+import { auth0 } from "@/plugins/auth";
 
 const AxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_SERVER_URL
@@ -7,10 +8,12 @@ const AxiosInstance = axios.create({
 
 AxiosInstance.interceptors.request.use(
     async (config) => {
-        const accessToken = useUserSessionStore().accessToken;
-        config.headers.Authorization = `Bearer ${accessToken}`;
+        const { getAccessTokenSilently } = auth0;
+        const accessToken = await getAccessTokenSilently();
 
+        config.headers.Authorization = `Bearer ${accessToken}`;
         useUserSessionStore().pendingApiRequest++;
+        
         return config;
     },
     (error) => {
