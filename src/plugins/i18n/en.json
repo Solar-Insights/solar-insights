@@ -6,7 +6,8 @@
         "search-name": "Search",
         "theme": "Theme",
         "user": "User",
-        "settings": "Settings"
+        "settings": "Settings",
+        "my-organization": "Mon organisation"
     },
     "errors": {
         "vue-error": {

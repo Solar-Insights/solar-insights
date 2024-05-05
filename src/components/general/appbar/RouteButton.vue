@@ -7,6 +7,7 @@
             :ripple="false"
             :to="{ name: routeName }"
             :active="false"
+            :disabled="requiresAuth && isLoading"
             elevation="0"
         >
             <template v-slot:prepend>
@@ -27,6 +28,9 @@
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
+import { useAuth0 } from "@auth0/auth0-vue";
+
+const { isLoading } = useAuth0();
 
 const currentRoute = useRoute();
 
@@ -37,6 +41,10 @@ const props = defineProps({
     },
     icon: {
         type: String,
+        required: true
+    },
+    requiresAuth: {
+        type: Boolean,
         required: true
     }
 });
