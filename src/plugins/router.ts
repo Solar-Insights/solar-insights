@@ -1,6 +1,15 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { authGuard } from "@auth0/auth0-vue";
+
+async function requiresOrgAdmin(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
+    if (true) {
+        // TODO Validate that user is admin of org
+        next();
+    }
+    else 
+        next({ name: "not-found" });
+}
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,18 +26,28 @@ const router = createRouter({
             path: "/search-location",
             name: "search",
             component: () => import("@/pages/Search.vue"),
-            beforeEnter: authGuard,
+            beforeEnter: [authGuard],
         },
         {
             path: "/solar-map",
             name: "solar-map",
             component: () => import("@/pages/SolarMap.vue"),
-            beforeEnter: authGuard,
+            beforeEnter: [authGuard],
+        },
+        {
+            path: "/my-organization",
+            name: "my-organization",
+            component: () => import("@/pages/OrganizationAdmin.vue"),
+            beforeEnter: [requiresOrgAdmin]
+        },
+        {
+            path: "/not-found",
+            name: "not-found",
+            component: () => import("@/pages/CatchAll.vue"),
         },
         {
             path: "/:catchAll(.*)",
-            name: "catch-all",
-            component: () => import("@/pages/CatchAll.vue"),
+            redirect: "/not-found",
         }
     ]
 });
