@@ -5,6 +5,21 @@
                 <v-card v-if="isAuthenticated" elevation="0">
                     <v-card-title> {{ user?.nickname }} </v-card-title>
                     <v-card-text> {{ user?.email }} </v-card-text>
+                    <v-card
+                        @click="logoutUser"
+                        class="app-menu-option"
+                        elevation="2"
+                        :variant="theme === 'dark' ? 'tonal' : 'outlined'"
+                    >
+                        <v-row>
+                            <v-col class="app-menu-option-icon-container" cols="auto" align-self="center">
+                                <v-icon>mdi-logout</v-icon>
+                            </v-col>
+                            <v-col class="app-menu-option-text-container">
+                                <div>Sign out</div>
+                            </v-col>
+                        </v-row>
+                    </v-card>
                 </v-card>
 
                 <v-card
@@ -20,23 +35,6 @@
                         </v-col>
                         <v-col class="app-menu-option-text-container">
                             <div>Sign in</div>
-                        </v-col>
-                    </v-row>
-                </v-card>
-
-                <v-card
-                    v-if="isAuthenticated"
-                    @click="logoutUser"
-                    class="app-menu-option"
-                    elevation="2"
-                    :variant="theme === 'dark' ? 'tonal' : 'outlined'"
-                >
-                    <v-row>
-                        <v-col class="app-menu-option-icon-container" cols="auto" align-self="center">
-                            <v-icon>mdi-logout</v-icon>
-                        </v-col>
-                        <v-col class="app-menu-option-text-container">
-                            <div>Sign out</div>
                         </v-col>
                     </v-row>
                 </v-card>
