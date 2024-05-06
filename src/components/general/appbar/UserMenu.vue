@@ -54,7 +54,11 @@ const userSessionStore = useUserSessionStore();
 const { theme } = storeToRefs(userSessionStore);
 
 function loginUser() {
-    loginWithRedirect();
+    loginWithRedirect({
+        appState: {
+            target: window.location.origin
+        }
+    });
 }
 
 function logoutUser() {

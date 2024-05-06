@@ -8,7 +8,7 @@
 
                     <v-card
                         v-else
-                        @click="loginWithRedirect"
+                        @click="loginUser"
                         class="pa-6 rounded-lg mx-auto"
                         style="width: 250px"
                         elevation="2"
@@ -42,5 +42,13 @@ const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
 
 function sendToMap(coords: LatLng, address: string) {
     router.push({ name: "solar-map", query: coords });
+}
+
+function loginUser() {
+    loginWithRedirect({
+        appState: {
+            target: window.location.origin
+        }
+    });
 }
 </script>
