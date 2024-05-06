@@ -48,6 +48,10 @@
         }
     },
     "general": {
+        "user-menu": {
+            "signin": "Sign in",
+            "signout": "Sign out"
+        },
         "quick-settings": {
             "theme": "Theme",
             "dark": "Dark",

@@ -16,7 +16,7 @@
                                 <v-icon>mdi-logout</v-icon>
                             </v-col>
                             <v-col class="app-menu-option-text-container">
-                                <div>Sign out</div>
+                                <div> {{ $t(`general.user-menu.signout`) }} </div>
                             </v-col>
                         </v-row>
                     </v-card>
@@ -34,7 +34,7 @@
                             <v-icon>mdi-login</v-icon>
                         </v-col>
                         <v-col class="app-menu-option-text-container">
-                            <div>Sign in</div>
+                            <div> {{ $t(`general.user-menu.signin`) }} </div>
                         </v-col>
                     </v-row>
                 </v-card>
