@@ -76,3 +76,11 @@
         @extend .ml-4;
     }
 }
+
+.search-loader {
+    .v-skeleton-loader__chip {
+        @extend .w-100;
+        @extend .my-0;
+        max-width: 100%;
+    }
+}

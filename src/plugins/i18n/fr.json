@@ -111,6 +111,9 @@
         }
     },
     "search": {
+        "not-logged-in": {
+            "action": "Se connecter pour visualiser un bâtiment"
+        },
         "title": "Trouvez votre prochaine installation solaire",
         "timeline": {
             "title": " étapes pour démarrer avec Solar Insights",

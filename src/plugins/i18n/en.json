@@ -111,6 +111,9 @@
         }
     },
     "search": {
+        "not-logged-in": {
+            "action": "Sign in to gain insights on a building"
+        },
         "title": "Find your next solar installation",
         "timeline": {
             "title": "-Step starter guide to Solar Insights",
