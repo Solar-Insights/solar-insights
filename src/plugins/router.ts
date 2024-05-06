@@ -21,12 +21,13 @@ const router = createRouter({
             path: "/",
             name: "home",
             component: () => import("@/pages/Home.vue"),
+            beforeEnter: [],
         },
         {
             path: "/search-location",
             name: "search",
             component: () => import("@/pages/Search.vue"),
-            beforeEnter: [authGuard],
+            beforeEnter: [],
         },
         {
             path: "/solar-map",
@@ -44,6 +45,7 @@ const router = createRouter({
             path: "/not-found",
             name: "not-found",
             component: () => import("@/pages/CatchAll.vue"),
+            beforeEnter: [],
         },
         {
             path: "/:catchAll(.*)",

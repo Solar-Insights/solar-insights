@@ -18,7 +18,7 @@
             <v-app-bar-nav-icon class="hidden-sm-and-up" variant="text" @click.stop="drawer = !drawer" />
 
             <v-toolbar-items class="hidden-xs">
-                <RouteButton v-for="route in routes" :routeName="route.routeName" :icon="route.icon" :requiresAuth="route.requiresAuth"/>
+                <RouteButton v-for="route in routes" :routeInfo="route" />
             </v-toolbar-items>
 
             <v-spacer class="hidden-xs" />
@@ -31,7 +31,7 @@
         <v-navigation-drawer v-model="drawer" class="hidden-sm-and-up" disable-resize-watcher>
             <v-list>
                 <v-list-item v-for="route in routes">
-                    <RouteButton :routeName="route.routeName" :icon="route.icon" :requiresAuth="route.requiresAuth" />
+                    <RouteButton :routeInfo="route" />
                 </v-list-item>
             </v-list>
 
@@ -48,30 +48,28 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { useAuth0 } from "@auth0/auth0-vue";
 import RouteButton from "@/components/general/appbar/RouteButton.vue";
 import MenuButton from "@/components/general/appbar/MenuButton.vue";
 import logo_nobg from "@/assets/images/general/logo_nobg.png";
-
-const { isAuthenticated } = useAuth0();
+import { RouteInfo } from "@/helpers/types";
 
 const drawer = ref(false);
 
-const routes = ref([
+const routes = ref<RouteInfo[]>([
     {
-        routeName: "home",
+        name: "home",
         icon: "mdi-home-outline",
-        requiresAuth: false,
+        requiresAuth: false
     },
     {
-        routeName: "search",
+        name: "search",
         icon: "mdi-weather-sunny",
-        requiresAuth: false,
+        requiresAuth: false
     },
     {
-        routeName: "my-organization",
+        name: "my-organization",
         icon: "mdi-account-group-outline",
-        requiresAuth: true,
+        requiresAuth: true
     },
 ]);
 

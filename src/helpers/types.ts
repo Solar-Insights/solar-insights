@@ -66,3 +66,9 @@ export function getDefaultInstallationExportOptions() {
         exportType: "json"
     } as InstallationExportOptions;
 }
+
+export type RouteInfo = {
+    name: string,
+    icon: string,
+    requiresAuth: boolean
+};
