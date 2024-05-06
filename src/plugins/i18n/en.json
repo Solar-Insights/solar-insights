@@ -7,7 +7,8 @@
         "theme": "Theme",
         "user": "User",
         "settings": "Settings",
-        "my-organization": "Mon organisation"
+        "organization": "Organization",
+        "my-organization": "My organization"
     },
     "errors": {
         "vue-error": {

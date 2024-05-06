@@ -7,6 +7,7 @@
         "theme": "Thème",
         "user": "Utilisateur",
         "settings": "Paramètres",
+        "organization": "Organisation",
         "my-organization": "Mon organisation"
     },
     "errors": {

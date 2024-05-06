@@ -1,6 +1,6 @@
 <template>
     <v-card class="pt-0 body-container">
-        <h1> Bonzour </h1>
+        <h1> My Organization </h1>
     </v-card>
 </template>
 
