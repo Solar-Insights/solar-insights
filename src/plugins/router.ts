@@ -39,13 +39,13 @@ const router = createRouter({
             path: "/organization",
             name: "organization",
             component: () => import("@/pages/Organization.vue"),
-            beforeEnter: [requiresOrgAdmin]
+            beforeEnter: []
         },
         {
             path: "/my-organization",
             name: "my-organization",
             component: () => import("@/pages/MyOrganization.vue"),
-            beforeEnter: [requiresOrgAdmin]
+            beforeEnter: [authGuard]
         },
         {
             path: "/not-found",
