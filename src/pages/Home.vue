@@ -5,7 +5,7 @@
             <div class="home-title-description">{{ $t(`home.home-title-container.description`) }}</div>
             <div class="home-title-action">
                 <v-card
-                    :to="{ name: 'solar-map' }"
+                    :to="{ name: 'search' }"
                     class="pa-6 rounded-lg mx-auto"
                     style="width: 250px"
                     elevation="2"
