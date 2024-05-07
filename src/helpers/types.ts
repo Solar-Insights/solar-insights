@@ -72,3 +72,5 @@ export type RouteInfo = {
     icon: string,
     requiresAuth: boolean
 };
+
+export type MyOrganization = {};
