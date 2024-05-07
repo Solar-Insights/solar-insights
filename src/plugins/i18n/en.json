@@ -46,6 +46,10 @@
         "geotiff-error": {
             "title": "The server could not load the geotiffs associated to the data layer",
             "message": "An error occured when trying to fetch geotiffs for the wanted data layer."
+        },
+        "organization-error": {
+            "title": "The server could not fetch or update data for your organization",
+            "message": "An error occured when trying to access your organization's database."
         }
     },
     "general": {

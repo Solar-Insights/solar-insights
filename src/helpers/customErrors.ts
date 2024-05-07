@@ -176,3 +176,15 @@ export class GeotiffError extends VueError {
         super(type, name, title, message, code);
     }
 }
+
+export class OrganizationError extends VueError {
+    constructor(
+        type: AlertType = "error",
+        name: string = "OrganizationError",
+        title: string = i18n.global.t("errors.organization-error.title"),
+        message: string = i18n.global.t("errors.organization-error.message"),
+        code: number = 500
+    ) {
+        super(type, name, title, message, code);
+    }
+}
