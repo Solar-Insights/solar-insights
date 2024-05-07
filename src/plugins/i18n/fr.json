@@ -48,9 +48,14 @@
             "message": "Une erreur est survenue lors de la requête visant à récupérer les geotiffs de la couche de donnée présente."
         },
         "organization-error": {
-            "title": "Le serveur n'a pas pu récupérer ou modifier les informations de votre organisation",
+            "title": "Le serveur n'a pas pu récupérer ou modifier les données de votre organisation",
             "message": "Une erreur est survenue lors de la requête visant à accéder à votre base de données organisationnelles."
+        },
+        "user-error": {
+            "title": "Le serveur n'a pas pu récupérer ou modifier votre profil",
+            "message": "Une erreur est survenue lors de la requête visant à accéder à votre profil."
         }
+        
     },
     "general": {
         "user-menu": {

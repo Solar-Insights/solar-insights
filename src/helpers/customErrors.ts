@@ -188,3 +188,15 @@ export class OrganizationError extends VueError {
         super(type, name, title, message, code);
     }
 }
+
+export class UserError extends VueError {
+    constructor(
+        type: AlertType = "error",
+        name: string = "UserError",
+        title: string = i18n.global.t("errors.user-error.title"),
+        message: string = i18n.global.t("errors.user-error.message"),
+        code: number = 500
+    ) {
+        super(type, name, title, message, code);
+    }
+}

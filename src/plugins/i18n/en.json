@@ -50,6 +50,10 @@
         "organization-error": {
             "title": "The server could not fetch or update data for your organization",
             "message": "An error occured when trying to access your organization's database."
+        },
+        "user-error": {
+            "title": "The server could not fetch or update your profile",
+            "message": "An error occured when trying to access your profile."
         }
     },
     "general": {
