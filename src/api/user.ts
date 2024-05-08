@@ -10,7 +10,7 @@ export async function getMyOrganizationInfo() {
         url: `/user/my-organization`
     })
         .then((response) => {
-            return response.data.myOrganization as MyOrganization;
+            return response.data.myOrganization as MyOrganization; // includes administrators data
         })
         .catch((error) => {
             useUserSessionStore().setAlert(new OrganizationError());
@@ -18,7 +18,7 @@ export async function getMyOrganizationInfo() {
         });
 }
 
-export async function createUserForOrganization(user: UserData) {
+export async function createUserForOrganization(email: string, name: string) {
     console.log("created user");
     return {};
 }

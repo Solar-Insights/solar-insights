@@ -1,4 +1,8 @@
 <template>
+    <div class="home-subtitle-container pt-16">
+        <div class="page-subtitle mb-3"> Members </div>
+    </div>
+
     <v-data-table :items="users" :headers="headers">
         <template v-slot:top>
             <v-toolbar flat>
@@ -22,7 +26,7 @@
                                 <div class="form-subtitle-in-card">User info</div>
                                 <v-sheet class="form-section-in-sheet">
                                     <v-text-field
-                                        v-model="newUserForm.email"
+                                        v-model="newUserEmail"
                                         label="Email"
                                         density="compact"
                                         variant="outlined"
@@ -32,7 +36,7 @@
                                     />
 
                                     <v-text-field
-                                        v-model="newUserForm.name"
+                                        v-model="newUserName"
                                         label="Name"
                                         density="compact"
                                         variant="outlined"
@@ -52,7 +56,7 @@
                                 <v-btn
                                     @click="
                                         addUserDialog = false;
-                                        createUser(newUserForm);
+                                        createUser;
                                     "
                                     class="font-weight-medium"
                                     variant="flat"
@@ -123,26 +127,14 @@ const props = defineProps({
 const headers = ref(UserDataHeaders);
 const addUserDialog = ref<boolean>(false);
 const deleteUserDialog = ref<boolean>(false);
-const newUserForm = ref<UserData>({
-    created_date: "",
-    email: "",
-    name: ""
-})
+const newUserName = ref<string>("");
+const newUserEmail = ref<string>("");
 
-async function createUser(user: UserData) {
-    const newUserCopy: UserData = {
-        created_date: new Date().toISOString().substring(0, 10),
-        email: user.email,
-        name: user.email
-    }
+async function createUser() {
+    await createUserForOrganization(newUserEmail.value, newUserName.value);
 
-    newUserForm.value = {
-        created_date: "",
-        email: "",
-        name: ""
-    }
-
-    await createUserForOrganization(newUserCopy);
+    newUserEmail.value = "";
+    newUserName.value = "";
 }
 
 async function deleteUser(user: UserData) {

@@ -78,6 +78,6 @@ export type MyOrganization = {};
 export type UserData = {
     created_date: string,
     email: string,
-    name: string
-}; 
-
+    name: string,
+    avatar: string,
+};
