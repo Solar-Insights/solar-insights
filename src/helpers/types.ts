@@ -73,7 +73,10 @@ export type RouteInfo = {
     requiresAuth: boolean;
 };
 
-export type MyOrganization = {};
+export type MyOrganization = {
+    name: string,
+    admins: MyOrganizationMember[]
+};
 
 export type MyOrganizationMember = {
     created_date: string;

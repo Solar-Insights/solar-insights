@@ -53,7 +53,7 @@ export async function createUserForOrganization(email: string, name: string) {
 }
 
 export async function deleteUserFromOrganization(user: MyOrganizationMember) {
-    return await AxiosInstance({
+    await AxiosInstance({
         method: "delete",
         responseType: "json",
         url: `/user/my-organization/members`,

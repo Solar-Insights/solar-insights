@@ -123,6 +123,8 @@ const props = defineProps({
     }
 });
 
+const emits = defineEmits(["addUser", "deleteUser"])
+
 const headers = ref(UserDataHeaders);
 const addUserDialog = ref<boolean>(false);
 const deleteUserDialog = ref<boolean>(false);
@@ -130,13 +132,20 @@ const newUserName = ref<string>("");
 const newUserEmail = ref<string>("");
 
 async function createUser() {
-    await createUserForOrganization(newUserEmail.value, newUserName.value);
-
-    newUserEmail.value = "";
-    newUserName.value = "";
+    await createUserForOrganization(newUserEmail.value, newUserName.value)
+        .then((data: MyOrganizationMember) => {
+            newUserEmail.value = "";
+            newUserName.value = "";
+            emits("addUser", data)
+        })
+        .catch(() => {})
 }
 
 async function deleteUser(user: MyOrganizationMember) {
-    await deleteUserFromOrganization(user);
+    await deleteUserFromOrganization(user)
+        .then(() => {
+            emits("deleteUser", user)
+        })
+        .catch(() => {})
 }
 </script>

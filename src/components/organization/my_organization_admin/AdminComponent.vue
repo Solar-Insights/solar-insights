@@ -1,7 +1,7 @@
 <template>
     <div class="home-subtitle-container">
         <div class="home-subtitle-content">
-            <UserTable :users="myOrganizationMembers" />
+            <UserTable :users="myOrganizationMembers" @addUser="addOrganizationMember" @deleteUser="deleteOrganizationMember"/>
         </div>
     </div>
 </template>
@@ -84,4 +84,18 @@ onMounted(async () => {
         })
         .catch(() => {});
 })
+
+function addOrganizationMember(user: MyOrganizationMember) {
+    myOrganizationMembers.value.push(user);
+}
+
+function deleteOrganizationMember(user: MyOrganizationMember) {
+    const indexToRemove = myOrganizationMembers.value.findIndex(
+        (userToDelete: MyOrganizationMember) => userToDelete.email === user.email
+    )
+
+    if (indexToRemove === -1) return;
+
+    myOrganizationMembers.value.splice(indexToRemove, 1)
+}
 </script>
