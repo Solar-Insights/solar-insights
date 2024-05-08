@@ -72,7 +72,7 @@
                     </v-dialog>
                 </v-btn>
 
-                <v-dialog v-model="deleteUserDialog" activator="#delete-user-activator-target" max-width="600">
+                <v-dialog v-model="deleteUserDialog" max-width="600">
                     <v-card class="rounded-lg">
                         <v-card-title class="mt-3">
                             <div class="d-flex">
@@ -91,7 +91,7 @@
                             <v-btn
                                 @click="
                                     deleteUserDialog = false;
-                                    deleteUser;
+                                    deleteUser();
                                 "
                                 class="font-weight-medium"
                                 variant="flat"
@@ -105,8 +105,8 @@
             </v-toolbar>
         </template>
 
-        <template v-slot:item.actions>
-            <v-btn size="small" icon flat id="delete-user-activator-target">
+        <template v-slot:item.actions="{ item }">
+            <v-btn size="small" icon flat @click="openDeleteUserDialog(item)">
                 <v-icon>mdi-delete</v-icon>
             </v-btn>
         </template>
@@ -152,6 +152,13 @@ const emailRules = ref([
     }
 ]);
 
+const selectedUserToDelete = ref<MyOrganizationMember>({} as MyOrganizationMember);
+
+function openDeleteUserDialog(user: MyOrganizationMember) {
+    selectedUserToDelete.value = user;
+    deleteUserDialog.value = true;
+}
+
 async function createUser() {
     if (!validForm.value) { return; }
 
@@ -166,10 +173,10 @@ async function createUser() {
         .catch(() => {})
 }
 
-async function deleteUser(user: MyOrganizationMember) {
-    await deleteUserFromOrganization(user)
+async function deleteUser() {
+    await deleteUserFromOrganization(selectedUserToDelete.value)
         .then(() => {
-            emits("deleteUser", user)
+            emits("deleteUser", selectedUserToDelete.value)
         })
         .catch(() => {})
 }
