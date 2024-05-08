@@ -1,4 +1,4 @@
-]]<template>
+<template>
     <v-card class="pt-0 body-container">
         <div class="home-title-container">
             <div class="home-title">{{ $t(`search.title`) }}</div>
