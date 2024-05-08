@@ -7,11 +7,11 @@
 </template>
 
 <script setup lang="ts">
-import { UserData } from "@/helpers/types";
+import { MyOrganizationMember } from "@/helpers/types";
 import { ref } from "vue";
 import UserTable from "@/components/organization//my_organization_admin/UserTable.vue";
 
-const fakeUsers = ref<UserData[]>([
+const fakeUsers = ref<MyOrganizationMember[]>([
     {
         created_date: "2024-05-01",
         email: "user1@example.com",

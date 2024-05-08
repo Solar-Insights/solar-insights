@@ -30,11 +30,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import AdminComponent from "@/components/organization/my_organization_admin/AdminComponent.vue";
-import { UserData } from "@/helpers/types";
+import { MyOrganizationMember } from "@/helpers/types";
 
 const isAdmin = ref<boolean>(true);
 
-const listOfAdmins = ref<UserData[]>([
+const listOfAdmins = ref<MyOrganizationMember[]>([
     {
         created_date: "2024-05-01",
         email: "user1@example.com",

@@ -75,7 +75,7 @@ export type RouteInfo = {
 
 export type MyOrganization = {};
 
-export type UserData = {
+export type MyOrganizationMember = {
     created_date: string;
     email: string;
     name: string;

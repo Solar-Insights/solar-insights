@@ -3,7 +3,7 @@
         <div class="page-subtitle mb-3">Members</div>
     </div>
 
-    <v-data-table :items="users" :headers="headers">
+    <v-data-table :items="users" :headers="headers" :sort-by="[{ key: 'created_date', 'order': 'desc' }]">
         <template v-slot:top>
             <v-toolbar flat>
                 <v-toolbar-title> Members </v-toolbar-title>
@@ -111,14 +111,14 @@
 </template>
 
 <script setup lang="ts">
-import { UserData } from "@/helpers/types";
+import { MyOrganizationMember } from "@/helpers/types";
 import { PropType, ref } from "vue";
 import { deleteUserFromOrganization, createUserForOrganization } from "@/api/user";
 import { UserDataHeaders } from "@/helpers/constants";
 
 const props = defineProps({
     users: {
-        type: Object as PropType<UserData[]>,
+        type: Object as PropType<MyOrganizationMember[]>,
         required: true
     }
 });
@@ -136,9 +136,7 @@ async function createUser() {
     newUserName.value = "";
 }
 
-async function deleteUser(user: UserData) {
-    console.log(user);
-
+async function deleteUser(user: MyOrganizationMember) {
     await deleteUserFromOrganization(user);
 }
 </script>
