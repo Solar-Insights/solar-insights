@@ -21,50 +21,53 @@
                                     <div class="ml-4">Create a new user</div>
                                 </div>
                             </v-card-title>
+                            
+                            <v-form v-model="validForm" @submit.prevent>
+                                <v-card-text>
+                                    <div class="form-subtitle-in-card">User info</div>
+                                    <v-sheet class="form-section-in-sheet">
+                                        <v-text-field
+                                            v-model="newUserEmail"
+                                            :rules="emailRules"
+                                            label="*Email"
+                                            density="compact"
+                                            variant="outlined"
+                                            prepend-inner-icon="mdi-at"
+                                            rounded
+                                            required
+                                        />
 
-                            <v-card-text>
-                                <div class="form-subtitle-in-card">User info</div>
-                                <v-sheet class="form-section-in-sheet">
-                                    <v-text-field
-                                        v-model="newUserEmail"
-                                        label="Email"
-                                        density="compact"
-                                        variant="outlined"
-                                        type="email"
-                                        prepend-inner-icon="mdi-at"
-                                        rounded
-                                    />
+                                        <v-text-field
+                                            v-model="newUserName"
+                                            :rules="nameRules"
+                                            label="*Name"
+                                            density="compact"
+                                            variant="outlined"
+                                            prepend-inner-icon="mdi-account-circle-outline"
+                                            rounded
+                                            required
+                                        />
+                                    </v-sheet>
+                                </v-card-text>
 
-                                    <v-text-field
-                                        v-model="newUserName"
-                                        label="Name"
-                                        density="compact"
-                                        variant="outlined"
-                                        prepend-inner-icon="mdi-account-circle-outline"
-                                        rounded
-                                    />
-                                </v-sheet>
-                            </v-card-text>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
 
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
+                                    <v-btn @click="addUserDialog = false" class="font-weight-medium" variant="flat">
+                                        Cancel
+                                    </v-btn>
 
-                                <v-btn @click="addUserDialog = false" class="font-weight-medium" variant="flat">
-                                    Cancel
-                                </v-btn>
-
-                                <v-btn
-                                    @click="
-                                        addUserDialog = false;
-                                        createUser;
-                                    "
-                                    class="font-weight-medium"
-                                    variant="flat"
-                                    color="theme"
-                                >
-                                    Create user account
-                                </v-btn>
-                            </v-card-actions>
+                                    <v-btn
+                                        @click="createUser"
+                                        class="font-weight-medium"
+                                        variant="flat"
+                                        color="theme"
+                                        type="submit"
+                                    >
+                                        Create user account
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-form>
                         </v-card>
                     </v-dialog>
                 </v-btn>
@@ -128,10 +131,32 @@ const emits = defineEmits(["addUser", "deleteUser"])
 const headers = ref(UserDataHeaders);
 const addUserDialog = ref<boolean>(false);
 const deleteUserDialog = ref<boolean>(false);
+
+const validForm = ref<boolean>(false);
 const newUserName = ref<string>("");
+const nameRules = ref([
+    (value: string) => {
+        if (value) return true;
+        return "";
+    }
+]);
 const newUserEmail = ref<string>("");
+const emailRules = ref([
+    (value: string) => {
+        if (value) return true;
+        return "";
+    },
+    (value: string) => {
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value)) return true;
+        return "";
+    }
+]);
 
 async function createUser() {
+    if (!validForm.value) { return; }
+
+    addUserDialog.value = false;
+    
     await createUserForOrganization(newUserEmail.value, newUserName.value)
         .then((data: MyOrganizationMember) => {
             newUserEmail.value = "";
