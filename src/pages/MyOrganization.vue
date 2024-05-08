@@ -47,29 +47,6 @@ const myOrganization = ref<MyOrganization>({
     name: ""
 });
 
-const organizationName = ref<string>("");
-
-const organizationAdmins = ref<MyOrganizationMember[]>([
-    {
-        created_date: "2024-05-01",
-        email: "user1@example.com",
-        name: "John Doe",
-        avatar: "https://s.gravatar.com/avatar/ee05b160c94adaa5c69e28f130fd4b06?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fma.png"
-    },
-    {
-        created_date: "2024-04-25",
-        email: "user2@example.com",
-        name: "Alice Smith",
-        avatar: "https://s.gravatar.com/avatar/ee05b160c94adaa5c69e28f130fd4b06?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fma.png"
-    },
-    {
-        created_date: "2024-04-30",
-        email: "user3@example.com",
-        name: "Bob Johnson",
-        avatar: "https://s.gravatar.com/avatar/ee05b160c94adaa5c69e28f130fd4b06?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fma.png"
-    }
-]);
-
 onMounted(async () => {
     await getMyOrganizationInfo()
         .then((data: MyOrganization) => {
