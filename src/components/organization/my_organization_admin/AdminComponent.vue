@@ -1,15 +1,16 @@
 <template>
     <div class="home-subtitle-container">
         <div class="home-subtitle-content">
-            <UserTable :users="fakeUsers" />
+            <UserTable :users="myOrganizationMembers" />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { MyOrganizationMember } from "@/helpers/types";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import UserTable from "@/components/organization//my_organization_admin/UserTable.vue";
+import { getMyOrganizationMembers } from "@/api/user";
 
 const fakeUsers = ref<MyOrganizationMember[]>([
     {
@@ -73,4 +74,14 @@ const fakeUsers = ref<MyOrganizationMember[]>([
         avatar: "https://s.gravatar.com/avatar/ee05b160c94adaa5c69e28f130fd4b06?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fma.png"
     }
 ]);
+
+const myOrganizationMembers = ref<MyOrganizationMember[]>([]);
+
+onMounted(async () => {
+    await getMyOrganizationMembers()
+        .then((data: MyOrganizationMember[]) => {
+            myOrganizationMembers.value = data;
+        })
+        .catch(() => {});
+})
 </script>

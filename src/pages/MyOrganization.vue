@@ -1,7 +1,7 @@
 <template>
     <v-card class="pt-0 body-container">
         <div class="home-title-container">
-            <div class="home-title">Beneva</div>
+            <div class="home-title"> {{ myOrganization.name }} </div>
 
             <div class="home-title-description">
                 The one and only organization associated to your Solar Insights account.
@@ -12,7 +12,7 @@
             <div class="page-subtitle mb-3">Any question or problem regarding your account?</div>
             <div class="page-subsubtitle mb-3">Contact one of your organization's administrator</div>
             <v-list class="d-flex justify-center flex-wrap">
-                <v-list-item v-for="admin in listOfAdmins" class="my-2 mx-auto" :prepend-avatar="admin.avatar">
+                <v-list-item v-for="admin in myOrganization.admins" class="my-2 mx-auto" :prepend-avatar="admin.avatar">
                     <v-list-item-title> {{ admin.name }}</v-list-item-title>
                     <v-list-item-subtitle>
                         <a :href="`mailto: ${admin.email}`"> {{ admin.email }} </a>
@@ -28,13 +28,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import AdminComponent from "@/components/organization/my_organization_admin/AdminComponent.vue";
-import { MyOrganizationMember } from "@/helpers/types";
+import { MyOrganization, MyOrganizationMember } from "@/helpers/types";
+import { getMyOrganizationInfo } from "@/api/user";
+import { useAuth0 } from "@auth0/auth0-vue";
 
-const isAdmin = ref<boolean>(true);
+const { user } = useAuth0();
 
-const listOfAdmins = ref<MyOrganizationMember[]>([
+const isAdmin = computed(() => 
+    myOrganization.value.admins.findIndex(
+        (admin) => admin.email === user.value?.email
+    ) !== -1
+);
+
+const myOrganization = ref<MyOrganization>({
+    admins: [],
+    name: ""
+});
+
+const organizationName = ref<string>("");
+
+const organizationAdmins = ref<MyOrganizationMember[]>([
     {
         created_date: "2024-05-01",
         email: "user1@example.com",
@@ -54,4 +69,12 @@ const listOfAdmins = ref<MyOrganizationMember[]>([
         avatar: "https://s.gravatar.com/avatar/ee05b160c94adaa5c69e28f130fd4b06?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fma.png"
     }
 ]);
+
+onMounted(async () => {
+    await getMyOrganizationInfo()
+        .then((data: MyOrganization) => {
+            myOrganization.value = data;
+        })
+        .catch(() => {});
+})
 </script>
