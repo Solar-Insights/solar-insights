@@ -55,7 +55,6 @@
             "title": "Le serveur n'a pas pu récupérer ou modifier votre profil",
             "message": "Une erreur est survenue lors de la requête visant à accéder à votre profil."
         }
-        
     },
     "general": {
         "user-menu": {

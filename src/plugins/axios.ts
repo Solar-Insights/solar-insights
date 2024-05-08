@@ -13,7 +13,7 @@ AxiosInstance.interceptors.request.use(
 
         config.headers.Authorization = `Bearer ${accessToken}`;
         useUserSessionStore().pendingApiRequest++;
-        
+
         return config;
     },
     (error) => {

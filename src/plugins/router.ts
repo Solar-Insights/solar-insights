@@ -6,9 +6,7 @@ async function requiresOrgAdmin(to: RouteLocationNormalized, from: RouteLocation
     if (true) {
         // TODO Validate that user is admin of org
         next();
-    }
-    else 
-        next({ name: "not-found" });
+    } else next({ name: "not-found" });
 }
 
 const router = createRouter({
@@ -21,19 +19,19 @@ const router = createRouter({
             path: "/",
             name: "home",
             component: () => import("@/pages/Home.vue"),
-            beforeEnter: [],
+            beforeEnter: []
         },
         {
             path: "/search-location",
             name: "search",
             component: () => import("@/pages/Search.vue"),
-            beforeEnter: [],
+            beforeEnter: []
         },
         {
             path: "/solar-map",
             name: "solar-map",
             component: () => import("@/pages/SolarMap.vue"),
-            beforeEnter: [authGuard],
+            beforeEnter: [authGuard]
         },
         {
             path: "/organization",
@@ -51,11 +49,11 @@ const router = createRouter({
             path: "/not-found",
             name: "not-found",
             component: () => import("@/pages/CatchAll.vue"),
-            beforeEnter: [],
+            beforeEnter: []
         },
         {
             path: "/:catchAll(.*)",
-            redirect: "/not-found",
+            redirect: "/not-found"
         }
     ]
 });

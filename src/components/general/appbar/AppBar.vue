@@ -74,10 +74,9 @@ const routes = computed(() => {
             name: isAuthenticated.value ? "my-organization" : "organization",
             icon: "mdi-account-group-outline",
             requiresAuth: true
-        },
+        }
     ] as RouteInfo[];
-})
-
+});
 
 const menus = ref([
     {

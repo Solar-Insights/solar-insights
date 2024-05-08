@@ -17,7 +17,7 @@
                                 <v-icon>mdi-logout</v-icon>
                             </v-col>
                             <v-col class="app-menu-option-text-container">
-                                <div> {{ $t(`general.user-menu.signout`) }} </div>
+                                <div>{{ $t(`general.user-menu.signout`) }}</div>
                             </v-col>
                         </v-row>
                     </v-card>
@@ -35,7 +35,7 @@
                             <v-icon>mdi-login</v-icon>
                         </v-col>
                         <v-col class="app-menu-option-text-container">
-                            <div> {{ $t(`general.user-menu.signin`) }} </div>
+                            <div>{{ $t(`general.user-menu.signin`) }}</div>
                         </v-col>
                     </v-row>
                 </v-card>
@@ -49,7 +49,7 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { storeToRefs } from "pinia";
 
-const { isLoading, isAuthenticated, user, loginWithRedirect, logout} = useAuth0();
+const { isLoading, isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
 const userSessionStore = useUserSessionStore();
 
 const { theme } = storeToRefs(userSessionStore);

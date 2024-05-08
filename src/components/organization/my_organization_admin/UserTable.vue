@@ -1,6 +1,6 @@
 <template>
     <div class="home-subtitle-container pt-16">
-        <div class="page-subtitle mb-3"> Members </div>
+        <div class="page-subtitle mb-3">Members</div>
     </div>
 
     <v-data-table :items="users" :headers="headers">
@@ -12,13 +12,13 @@
 
                 <v-btn class="mb-2 font-weight-bold" color="theme">
                     New user
-                
+
                     <v-dialog v-model="addUserDialog" activator="parent" max-width="600">
                         <v-card class="rounded-lg">
                             <v-card-title class="mt-3">
                                 <div class="d-flex">
                                     <v-icon>mdi-account-plus-outline</v-icon>
-                                    <div class="ml-4"> Create a new user </div>
+                                    <div class="ml-4">Create a new user</div>
                                 </div>
                             </v-card-title>
 
@@ -74,7 +74,7 @@
                         <v-card-title class="mt-3">
                             <div class="d-flex">
                                 <v-icon>mdi-delete-outline</v-icon>
-                                <div class="ml-4"> Do you really want to delete this user? </div>
+                                <div class="ml-4">Do you really want to delete this user?</div>
                             </div>
                         </v-card-title>
 
@@ -99,7 +99,6 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
-
             </v-toolbar>
         </template>
 
@@ -112,10 +111,10 @@
 </template>
 
 <script setup lang="ts">
-import { UserData } from '@/helpers/types';
-import { PropType, ref } from 'vue';
-import { deleteUserFromOrganization, createUserForOrganization } from '@/api/user';
-import { UserDataHeaders } from '@/helpers/constants';
+import { UserData } from "@/helpers/types";
+import { PropType, ref } from "vue";
+import { deleteUserFromOrganization, createUserForOrganization } from "@/api/user";
+import { UserDataHeaders } from "@/helpers/constants";
 
 const props = defineProps({
     users: {

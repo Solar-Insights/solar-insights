@@ -63,23 +63,23 @@ export const hourCodes = [
 ];
 
 export const UserDataHeaders = [
-    { 
-        title: "Email", 
+    {
+        title: "Email",
         key: "email",
         sortable: true
     },
-    { 
-        title: "Name", 
+    {
+        title: "Name",
         key: "name",
         sortable: true
     },
-    { 
-        title: "Created date", 
+    {
+        title: "Created date",
         key: "created_date",
         sortable: true
     },
-    { 
-        title: "Actions", 
+    {
+        title: "Actions",
         key: "actions",
         align: "center",
         sortable: false

@@ -4,7 +4,11 @@
             <div class="home-title">{{ $t(`search.title`) }}</div>
             <div class="home-title-action mt-12">
                 <v-skeleton-loader class="search-loader" :loading="isLoading" type="chip">
-                    <AutocompleteField v-if="isAuthenticated" :reverseGeocodeOnLoad="false" @sync-with-new-request="sendToMap" />
+                    <AutocompleteField
+                        v-if="isAuthenticated"
+                        :reverseGeocodeOnLoad="false"
+                        @sync-with-new-request="sendToMap"
+                    />
 
                     <v-card
                         v-else

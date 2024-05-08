@@ -37,7 +37,7 @@ const props = defineProps({
     routeInfo: {
         type: Object as PropType<RouteInfo>,
         required: true
-    },
+    }
 });
 
 const { isLoading } = useAuth0();
@@ -45,5 +45,4 @@ const { isLoading } = useAuth0();
 const currentRoute = useRoute();
 
 const waitForAuthToEnable = computed(() => props.routeInfo.requiresAuth && isLoading.value);
-
 </script>

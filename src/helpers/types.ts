@@ -68,16 +68,16 @@ export function getDefaultInstallationExportOptions() {
 }
 
 export type RouteInfo = {
-    name: string,
-    icon: string,
-    requiresAuth: boolean
+    name: string;
+    icon: string;
+    requiresAuth: boolean;
 };
 
 export type MyOrganization = {};
 
 export type UserData = {
-    created_date: string,
-    email: string,
-    name: string,
-    avatar: string,
+    created_date: string;
+    email: string;
+    name: string;
+    avatar: string;
 };
