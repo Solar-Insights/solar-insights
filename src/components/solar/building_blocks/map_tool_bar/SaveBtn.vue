@@ -4,7 +4,7 @@
         <v-icon>mdi-file-document-plus-outline</v-icon>
 
         <v-dialog v-model="openedDialog" activator="parent" max-width="600">
-            <v-card>
+            <v-card class="rounded-lg">
                 <v-card-title class="mt-3">
                     <div class="d-flex">
                         <v-icon>mdi-file-document-plus-outline</v-icon>

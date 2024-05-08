@@ -18,6 +18,12 @@ export async function getMyOrganizationInfo() {
         });
 }
 
+export async function createUserForOrganization(user: UserData) {
+    console.log("created user");
+    return {};
+}
+
 export async function deleteUserFromOrganization(user: UserData) {
-    return {}
+    console.log("deleted user");
+    return {};
 }

@@ -5,6 +5,7 @@
                 <v-card v-if="isAuthenticated" elevation="0">
                     <v-card-title> {{ user?.nickname }} </v-card-title>
                     <v-card-text> {{ user?.email }} </v-card-text>
+                    {{ user }}
                     <v-card
                         @click="logoutUser"
                         class="app-menu-option"
