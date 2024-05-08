@@ -61,3 +61,27 @@ export const hourCodes = [
     "22:00",
     "23:00"
 ];
+
+export const UserDataHeaders = [
+    { 
+        title: "Email", 
+        key: "email",
+        sortable: true
+    },
+    { 
+        title: "Name", 
+        key: "name",
+        sortable: true
+    },
+    { 
+        title: "Created date", 
+        key: "created_date",
+        sortable: true
+    },
+    { 
+        title: "Actions", 
+        key: "actions",
+        align: "center",
+        sortable: false
+    }
+] as any[];

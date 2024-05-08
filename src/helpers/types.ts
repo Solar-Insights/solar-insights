@@ -74,3 +74,10 @@ export type RouteInfo = {
 };
 
 export type MyOrganization = {};
+
+export type UserData = {
+    created_date: string,
+    email: string,
+    name: string
+}; 
+

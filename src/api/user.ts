@@ -1,7 +1,7 @@
 import { OrganizationError } from "@/helpers/customErrors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import AxiosInstance from "@/plugins/axios";
-import { MyOrganization } from "@/helpers/types";
+import { MyOrganization, UserData } from "@/helpers/types";
 
 export async function getMyOrganizationInfo() {
     return await AxiosInstance({
@@ -16,4 +16,8 @@ export async function getMyOrganizationInfo() {
             useUserSessionStore().setAlert(new OrganizationError());
             throw error;
         });
+}
+
+export async function deleteUserFromOrganization(user: UserData) {
+    return {}
 }
