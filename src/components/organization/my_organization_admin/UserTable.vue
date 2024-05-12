@@ -1,12 +1,12 @@
 <template>
     <div class="home-subtitle-container pt-16">
-        <div class="page-subtitle mb-3">Members</div>
+        <div class="page-subtitle mb-3">Your team (except yourself)</div>
     </div>
 
     <v-data-table :items="users" :headers="headers" :sort-by="[{ key: 'created_date', 'order': 'desc' }]">
         <template v-slot:top>
             <v-toolbar flat>
-                <v-toolbar-title> Members </v-toolbar-title>
+                <v-toolbar-title> User  </v-toolbar-title>
 
                 <v-spacer></v-spacer>
 
