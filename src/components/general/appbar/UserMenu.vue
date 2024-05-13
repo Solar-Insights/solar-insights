@@ -48,25 +48,10 @@
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { storeToRefs } from "pinia";
+import { handleUserState } from "@/composables/users";
 
-const { isLoading, isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
+const { loginUser, logoutUser } = handleUserState();
+const { isLoading, isAuthenticated, user } = useAuth0();
 const userSessionStore = useUserSessionStore();
-
 const { theme } = storeToRefs(userSessionStore);
-
-function loginUser() {
-    loginWithRedirect({
-        appState: {
-            target: window.location.origin
-        }
-    });
-}
-
-function logoutUser() {
-    logout({
-        logoutParams: {
-            returnTo: window.location.origin
-        }
-    });
-}
 </script>

@@ -41,18 +41,13 @@ import { LatLng } from "geo-env-typing/geo";
 import AutocompleteField from "@/components/general/AutocompleteField.vue";
 import HelperTimelineSection from "@/components/search/HelperTimelineSection.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
+import { handleUserState } from "@/composables/users";
 
-const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
+const { loginUser } = handleUserState();
+
+const { isLoading, isAuthenticated } = useAuth0();
 
 function sendToMap(coords: LatLng, address: string) {
     router.push({ name: "solar-map", query: coords });
-}
-
-function loginUser() {
-    loginWithRedirect({
-        appState: {
-            target: window.location.origin
-        }
-    });
 }
 </script>
