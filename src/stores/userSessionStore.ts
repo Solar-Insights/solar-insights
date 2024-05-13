@@ -7,7 +7,8 @@ export const useUserSessionStore = defineStore("userSessionStore", {
         alert: undefined as VueError | undefined,
         pendingApiRequest: 0,
         theme: "light" as Theme,
-        locale: "en" as Locale
+        locale: "en" as Locale,
+        callbackUrl: "" as string
     }),
 
     actions: {
@@ -32,6 +33,16 @@ export const useUserSessionStore = defineStore("userSessionStore", {
 
         changeLocale() {
             this.locale = this.locale === "fr" ? "en" : "fr";
+        },
+
+        setCallbackUrl(url: string) {
+            this.callbackUrl = url;
+        },
+
+        getAndClearCallbackUrl() {
+            const callbackUrl = this.callbackUrl;
+            this.callbackUrl = "";
+            return callbackUrl;
         }
     },
 
