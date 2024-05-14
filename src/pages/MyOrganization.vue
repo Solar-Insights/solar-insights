@@ -1,7 +1,11 @@
 <template>
     <v-card class="pt-0 body-container">
         <div class="home-title-container">
-            <div class="home-title"> {{ myOrganization.name }} </div>
+            <v-skeleton-loader v-if="myOrganization.name === ''" type="text"/>
+
+            <div class="home-title"> 
+                {{ myOrganization.name }} 
+            </div>
 
             <div class="home-title-description">
                 The one and only organization associated to your Solar Insights account.
@@ -11,7 +15,13 @@
         <div class="home-subtitle-container pt-16">
             <div class="page-subtitle mb-3">Any question or problem regarding your account?</div>
             <div class="page-subsubtitle mb-3">Contact one of your organization's administrator</div>
+            
+
             <v-list class="d-flex justify-center flex-wrap">
+                <v-list-item v-if="myOrganization.admins.length === 0" class="my-2 mx-auto" min-width="320px">
+                    <v-skeleton-loader type="avatar, sentences"/>
+                </v-list-item>
+
                 <v-list-item v-for="admin in myOrganization.admins" class="my-2 mx-auto" :prepend-avatar="admin.avatar">
                     <v-list-item-title> {{ admin.name }}</v-list-item-title>
                     <v-list-item-subtitle>
