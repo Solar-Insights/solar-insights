@@ -46,6 +46,12 @@ const router = createRouter({
             beforeEnter: [authGuard]
         },
         {
+            path: "/callback",
+            name: "callback",
+            component: () => import("@/pages/Callback.vue"),
+            beforeEnter: []
+        },
+        {
             path: "/not-found",
             name: "not-found",
             component: () => import("@/pages/CatchAll.vue"),

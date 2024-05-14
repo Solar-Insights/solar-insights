@@ -8,7 +8,7 @@ export const useUserSessionStore = defineStore("userSessionStore", {
         pendingApiRequest: 0,
         theme: "light" as Theme,
         locale: "en" as Locale,
-        callbackUrl: "" as string
+        callbackPath: "" as string
     }),
 
     actions: {
@@ -35,14 +35,14 @@ export const useUserSessionStore = defineStore("userSessionStore", {
             this.locale = this.locale === "fr" ? "en" : "fr";
         },
 
-        setCallbackUrl(url: string) {
-            this.callbackUrl = url;
+        setCallbackPath(path: string) {
+            this.callbackPath = path;
         },
 
-        getAndClearCallbackUrl() {
-            const callbackUrl = this.callbackUrl;
-            this.callbackUrl = "";
-            return callbackUrl;
+        getAndClearCallbackPath() {
+            const callbackPath = this.callbackPath;
+            this.callbackPath = "";
+            return callbackPath;
         }
     },
 

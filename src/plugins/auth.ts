@@ -5,6 +5,6 @@ export const auth0 = createAuth0({
     clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
     authorizationParams: {
         audience: import.meta.env.VITE_AUTH0_AUDIENCE,
-        redirect_uri: window.location.origin // will choose http://localhost:5173 or https://solarinsights.ca
+        redirect_uri: `${window.location.origin}/callback` // e.g. https://solarinsights.ca/callback
     }
 });
