@@ -92,6 +92,43 @@
         "home-button": "Go to homepage",
         "back-button": "Go back"
     },
+    "my-organization": {
+        "home-title-container": {
+            "description": "The one and only organization associated to your Solar Insights account."
+        },
+        "help-subtitle-container": {
+            "subtitle": "Any question or problem regarding your account?",
+            "description": "Contact one of your organization's administrator."
+        },
+        "admin-component": {
+            "title": "Your team (except yourself)",
+            "user-table": {
+                "title": "Users",
+                "actions": {
+                    "new-user": {
+                        "action-name": "New user",
+                        "title": "Create a new user",
+                        "user-info": "User info",
+                        "email": "Email*",
+                        "name": "Name*",
+                        "create-new-user": "Create user account",
+                        "cancel": "Cancel"
+                    },
+                    "delete-user": {
+                        "title": "Do you really want to delete this user?",
+                        "confirm": "Confirm",
+                        "cancel": "Cancel"
+                    }
+                },
+                "column-titles": {
+                    "email": "Email",
+                    "name": "Name",
+                    "creation-date": "Creation date",
+                    "actions": "Actions"
+                }
+            }
+        }
+    },
     "home": {
         "home-title-container": {
             "title": "Drive adoption of solar energy with Solar Insights",

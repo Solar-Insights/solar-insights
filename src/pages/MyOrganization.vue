@@ -8,13 +8,13 @@
             </div>
 
             <div class="home-title-description">
-                The one and only organization associated to your Solar Insights account.
+                {{ $t(`my-organization.home-title-container.description`) }}
             </div>
         </div>
 
         <div class="home-subtitle-container pt-16">
-            <div class="page-subtitle mb-3">Any question or problem regarding your account?</div>
-            <div class="page-subsubtitle mb-3">Contact one of your organization's administrator</div>
+            <div class="page-subtitle mb-3">{{ $t(`my-organization.help-subtitle-container.subtitle`) }}</div>
+            <div class="page-subsubtitle mb-3">{{ $t(`my-organization.help-subtitle-container.description`) }}</div>
             
 
             <v-list class="d-flex justify-center flex-wrap">

@@ -1,35 +1,35 @@
 <template>
     <div class="home-subtitle-container pt-16">
-        <div class="page-subtitle mb-3">Your team (except yourself)</div>
+        <div class="page-subtitle mb-3">{{ $t(`my-organization.admin-component.title`) }}</div>
     </div>
 
     <v-data-table :items="users" :headers="headers" :sort-by="[{ key: 'created_date', 'order': 'desc' }]">
         <template v-slot:top>
             <v-toolbar flat>
-                <v-toolbar-title> User  </v-toolbar-title>
+                <v-toolbar-title> {{ $t(`my-organization.admin-component.user-table.title`) }} </v-toolbar-title>
 
                 <v-spacer></v-spacer>
 
                 <v-btn class="mb-2 font-weight-bold" color="theme">
-                    New user
+                    {{ $t(`my-organization.admin-component.user-table.actions.new-user.action-name`) }}
 
                     <v-dialog v-model="addUserDialog" activator="parent" max-width="600">
                         <v-card class="rounded-lg">
                             <v-card-title class="mt-3">
                                 <div class="d-flex">
                                     <v-icon>mdi-account-plus-outline</v-icon>
-                                    <div class="ml-4">Create a new user</div>
+                                    <div class="ml-4">{{ $t(`my-organization.admin-component.user-table.actions.new-user.title`) }}</div>
                                 </div>
                             </v-card-title>
                             
                             <v-form v-model="validForm" @submit.prevent>
                                 <v-card-text>
-                                    <div class="form-subtitle-in-card">User info</div>
+                                    <div class="form-subtitle-in-card">{{ $t(`my-organization.admin-component.user-table.actions.new-user.user-info`) }}</div>
                                     <v-sheet class="form-section-in-sheet">
                                         <v-text-field
                                             v-model="newUserEmail"
                                             :rules="emailRules"
-                                            label="*Email"
+                                            :label="$t(`my-organization.admin-component.user-table.actions.new-user.email`)"
                                             density="compact"
                                             variant="outlined"
                                             prepend-inner-icon="mdi-at"
@@ -40,7 +40,7 @@
                                         <v-text-field
                                             v-model="newUserName"
                                             :rules="nameRules"
-                                            label="*Name"
+                                            :label="$t(`my-organization.admin-component.user-table.actions.new-user.name`)"
                                             density="compact"
                                             variant="outlined"
                                             prepend-inner-icon="mdi-account-circle-outline"
@@ -54,7 +54,7 @@
                                     <v-spacer></v-spacer>
 
                                     <v-btn @click="addUserDialog = false" class="font-weight-medium" variant="flat">
-                                        Cancel
+                                        {{ $t(`my-organization.admin-component.user-table.actions.new-user.cancel`) }}
                                     </v-btn>
 
                                     <v-btn
@@ -64,7 +64,7 @@
                                         color="theme"
                                         type="submit"
                                     >
-                                        Create user account
+                                    {{ $t(`my-organization.admin-component.user-table.actions.new-user.create-new-user`) }}
                                     </v-btn>
                                 </v-card-actions>
                             </v-form>
@@ -77,7 +77,7 @@
                         <v-card-title class="mt-3">
                             <div class="d-flex">
                                 <v-icon>mdi-delete-outline</v-icon>
-                                <div class="ml-4">Do you really want to delete this user?</div>
+                                <div class="ml-4">{{ $t(`my-organization.admin-component.user-table.actions.delete-user.title`) }}</div>
                             </div>
                         </v-card-title>
 
@@ -85,7 +85,7 @@
                             <v-spacer></v-spacer>
 
                             <v-btn @click="deleteUserDialog = false" class="font-weight-medium" variant="flat">
-                                Cancel
+                                {{ $t(`my-organization.admin-component.user-table.actions.delete-user.cancel`) }}
                             </v-btn>
 
                             <v-btn
@@ -97,7 +97,7 @@
                                 variant="flat"
                                 color="theme"
                             >
-                                Confirm
+                            {{ $t(`my-organization.admin-component.user-table.actions.delete-user.confirm`) }}
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -117,7 +117,32 @@
 import { MyOrganizationMember } from "@/helpers/types";
 import { PropType, ref } from "vue";
 import { deleteUserFromOrganization, createUserForOrganization } from "@/api/user";
-import { UserDataHeaders } from "@/helpers/constants";
+import { useI18n } from "vue-i18n";
+
+const t = useI18n().t;
+const UserDataHeaders = [
+    {
+        title: t(`my-organization.admin-component.user-table.column-titles.email`),
+        key: "email",
+        sortable: true
+    },
+    {
+        title: t(`my-organization.admin-component.user-table.column-titles.name`),
+        key: "name",
+        sortable: true
+    },
+    {
+        title: t(`my-organization.admin-component.user-table.column-titles.creation-date`),
+        key: "created_date",
+        sortable: true
+    },
+    {
+        title:t(`my-organization.admin-component.user-table.column-titles.actions`), 
+        key: "actions",
+        align: "center",
+        sortable: false
+    }
+] as any[];
 
 const props = defineProps({
     users: {
