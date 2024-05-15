@@ -19,7 +19,7 @@
             >
                 <v-row class="pa-0">
                     <v-col class="pa-0" cols="9">
-                        <div style="font-weight: bold">{{ props.pageSubtitleAction?.text }}</div>
+                        <div class="font-weight-medium">{{ props.pageSubtitleAction?.text }}</div>
                     </v-col>
                     <v-col class="pa-0" cols="3" align-self="center">
                         <v-icon>{{ props.pageSubtitleAction?.icon }}</v-icon>

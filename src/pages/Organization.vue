@@ -1,7 +1,5 @@
 <template>
-    <v-card class="pt-0 body-container">
-        <h1>Organization</h1>
-    </v-card>
+    <h1>Organization</h1>
 </template>
 
 <script setup lang="ts"></script>

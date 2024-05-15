@@ -1,37 +1,35 @@
 <template>
-    <v-card class="pt-0 body-container">
-        <PageTitleContainer
-            :pageTitle="$t(`search.title`)"
-        >
-            <v-skeleton-loader class="search-loader" :loading="isLoading" type="chip">
-                <AutocompleteField
-                    v-if="isAuthenticated"
-                    :reverseGeocodeOnLoad="false"
-                    @sync-with-new-request="sendToMap"
-                />
+    <PageTitleContainer
+        :pageTitle="$t(`search.title`)"
+    >
+        <v-skeleton-loader class="search-loader" :loading="isLoading" type="chip">
+            <AutocompleteField
+                v-if="isAuthenticated"
+                :reverseGeocodeOnLoad="false"
+                @sync-with-new-request="sendToMap"
+            />
 
-                <v-card
-                    v-else
-                    @click="loginUser"
-                    class="pa-6 rounded-lg mx-auto"
-                    style="width: 250px"
-                    elevation="2"
-                    color="theme"
-                >
-                    <v-row class="pa-0">
-                        <v-col class="pa-0" cols="9">
-                            <div style="font-weight: bold">{{ $t(`search.not-logged-in.action`) }}</div>
-                        </v-col>
-                        <v-col class="pa-0" cols="3" align-self="center">
-                            <v-icon>mdi-login</v-icon>
-                        </v-col>
-                    </v-row>
-                </v-card>
-            </v-skeleton-loader>
-        </PageTitleContainer>
+            <v-card
+                v-else
+                @click="loginUser"
+                class="pa-6 rounded-lg mx-auto"
+                style="width: 250px"
+                elevation="2"
+                color="theme"
+            >
+                <v-row class="pa-0">
+                    <v-col class="pa-0" cols="9">
+                        <div class="font-weight-medium">{{ $t(`search.not-logged-in.action`) }}</div>
+                    </v-col>
+                    <v-col class="pa-0" cols="3" align-self="center">
+                        <v-icon>mdi-login</v-icon>
+                    </v-col>
+                </v-row>
+            </v-card>
+        </v-skeleton-loader>
+    </PageTitleContainer>
 
-        <HelperTimelineSection />
-    </v-card>
+    <HelperTimelineSection />
 </template>
 
 <script setup lang="ts">

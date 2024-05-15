@@ -1,5 +1,5 @@
 <template>
-    <v-card class="pt-0 body-container text-center">
+    <v-card class="text-center" elevation="0">
         <v-card-title class="pa-0 mb-3">
             <div class="text-h1 my-6">{{ $t(`catch-all.oops`) }}</div>
             <div class="text-h3 my-6">{{ $t(`catch-all.404`) }}</div>
