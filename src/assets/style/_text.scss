@@ -47,7 +47,7 @@
 
 .page-title {
     @extend .text-h3;
-    @extend .mt-3;
+    @extend .my-3;
     @extend .font-weight-thin;
 }
 
@@ -73,7 +73,13 @@
 
 .page-subtitle {
     @extend .text-h4;
-    @extend .mb-16;
+    @extend .my-3;
+    @extend .text-center;
+    @extend .font-weight-thin;
+}
+
+.page-subtitle-precision {
+    @extend .text-h6;
     @extend .text-center;
     @extend .font-weight-thin;
 }
@@ -84,22 +90,6 @@
 }
 
 .page-subtitle-action {}
-
-.page-title {
-    @extend .text-h4;
-}
-
-.page-subtitle {
-    @extend .text-h4;
-    @extend .text-center;
-    @extend .font-weight-thin;
-}
-
-.page-subsubtitle {
-    @extend .text-h6;
-    @extend .text-center;
-    @extend .font-weight-thin;
-}
 
 .v-card-text {
     * {

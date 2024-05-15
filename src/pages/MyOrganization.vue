@@ -11,11 +11,10 @@
          -->
 
 
-        <div class="home-subtitle-container pt-16">
-            <div class="page-subtitle mb-3">{{ $t(`my-organization.help-subtitle-container.subtitle`) }}</div>
-            <div class="page-subsubtitle mb-3">{{ $t(`my-organization.help-subtitle-container.description`) }}</div>
-            
-
+         <PageSubtitleContainer
+            :pageSubtitle="$t(`my-organization.help-subtitle-container.subtitle`)"
+            :pageSubtitlePrecision="$t(`my-organization.help-subtitle-container.description`)"
+         >
             <v-list class="d-flex justify-center flex-wrap">
                 <v-list-item v-if="myOrganization.admins.length === 0" class="my-2 mx-auto" min-width="320px">
                     <v-skeleton-loader type="avatar, sentences"/>
@@ -28,7 +27,7 @@
                     </v-list-item-subtitle>
                 </v-list-item>
             </v-list>
-        </div>
+         </PageSubtitleContainer>
 
         <div v-if="isAdmin">
             <AdminComponent />
@@ -43,6 +42,7 @@ import { MyOrganization, MyOrganizationMember } from "@/helpers/types";
 import { getMyOrganizationInfo } from "@/api/user";
 import { useAuth0 } from "@auth0/auth0-vue";
 import PageTitleContainer from "@/components/general/PageTitleContainer.vue";
+import PageSubtitleContainer from "@/components/general/PageSubtitleContainer.vue";
 
 const { user } = useAuth0();
 

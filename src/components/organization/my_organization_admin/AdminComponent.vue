@@ -1,9 +1,5 @@
 <template>
-    <div class="home-subtitle-container">
-        <div class="home-subtitle-content">
-            <UserTable :users="myOrganizationMembers" @addUser="addOrganizationMember" @deleteUser="deleteOrganizationMember"/>
-        </div>
-    </div>
+    <UserTable :users="myOrganizationMembers" @addUser="addOrganizationMember" @deleteUser="deleteOrganizationMember"/>
 </template>
 
 <script setup lang="ts">

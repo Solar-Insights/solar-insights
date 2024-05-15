@@ -1,7 +1,7 @@
 <template>
-    <div class="home-subtitle-container pt-16">
-        <div class="page-subtitle mb-3">{{ $t(`my-organization.admin-component.title`) }}</div>
-    </div>
+    <PageSubtitleContainer
+        :pageSubtitle="$t(`my-organization.admin-component.title`)"
+    />
 
     <v-data-table :items="users" :headers="headers" :sort-by="[{ key: 'created_date', 'order': 'desc' }]">
         <template v-slot:top>
@@ -118,6 +118,7 @@ import { MyOrganizationMember } from "@/helpers/types";
 import { PropType, ref } from "vue";
 import { deleteUserFromOrganization, createUserForOrganization } from "@/api/user";
 import { useI18n } from "vue-i18n";
+import PageSubtitleContainer from "@/components/general/PageSubtitleContainer.vue";
 
 const t = useI18n().t;
 const UserDataHeaders = [

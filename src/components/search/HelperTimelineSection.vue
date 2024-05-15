@@ -1,26 +1,25 @@
 <template>
-    <div class="home-subtitle-container pt-12">
-        <div class="home-subtitle">{{ steps.length }}{{ $t(`search.timeline.title`) }}</div>
-        <div class="home-subtitle-content">
-            <v-timeline class="hidden-sm-and-down mx-auto" density="compact" direction="vertical" style="width: 65%">
-                <v-timeline-item
-                    v-for="(step, i) in steps"
-                    :key="i"
-                    class="pl-0 ml-0 pa-0"
-                    density="compact"
-                    min-width="100%"
-                    fill-dot
-                    dot-color="theme"
-                    :icon="step.icon"
-                >
-                    <StepCard :i="i" :step="step" />
-                </v-timeline-item>
-            </v-timeline>
-            <div class="hidden-md-and-up">
-                <StepCard v-for="(step, i) in steps" :i="i" :step="step" />
-            </div>
+    <PageSubtitleContainer
+        :pageSubtitle="`${steps.length}${ t('search.timeline.title')}`"
+    >
+        <v-timeline class="hidden-sm-and-down mx-auto" density="compact" direction="vertical" style="width: 65%">
+            <v-timeline-item
+                v-for="(step, i) in steps"
+                :key="i"
+                class="pl-0 ml-0 pa-0"
+                density="compact"
+                min-width="100%"
+                fill-dot
+                dot-color="theme"
+                :icon="step.icon"
+            >
+                <StepCard :i="i" :step="step" />
+            </v-timeline-item>
+        </v-timeline>
+        <div class="hidden-md-and-up">
+            <StepCard v-for="(step, i) in steps" :i="i" :step="step" />
         </div>
-    </div>
+    </PageSubtitleContainer>
 </template>
 
 <script setup lang="ts">
@@ -31,6 +30,7 @@ import settings_en from "@/assets/images/search/settings_en.png";
 import solar_insights_en from "@/assets/images/search/solar_insights_en.png";
 import { useI18n } from "vue-i18n";
 import StepCard from "@/components/search/StepCard.vue";
+import PageSubtitleContainer from "../general/PageSubtitleContainer.vue";
 
 const t = useI18n().t;
 
