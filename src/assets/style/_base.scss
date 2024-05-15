@@ -2,27 +2,6 @@
 @use "../master";
 
 /*
-    Phones
-*/
-@media screen and (max-width: 599px) {
-    .body-container {
-        min-height: 100%;
-        padding: 4vw !important;
-        padding-top: 6vw !important;
-    }
-}
-
-/*
-  Tablets and computers
-*/
-@media screen and (min-width: 600px) {
-    .body-container {
-        min-height: 100%;
-        padding: 3vw 5vw 3vw 5vw !important;
-    }
-}
-
-/*
     App skeleton
 */
 .app-container {

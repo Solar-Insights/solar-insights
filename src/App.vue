@@ -4,7 +4,9 @@
         <v-main>
             <v-container class="app-container" fluid>
                 <alert v-if="alert !== undefined" />
-                <router-view :key="$route.fullPath"></router-view>
+                <PageContainer>
+                    <router-view :key="$route.fullPath"></router-view>
+                </PageContainer>
             </v-container>
         </v-main>
     </v-app>
@@ -18,6 +20,7 @@ import Alert from "@/components/general/Alert.vue";
 import AppBar from "@/components/general/appbar/AppBar.vue";
 import { onMounted } from "vue";
 import { i18n } from "@/plugins/i18n/i18n";
+import PageContainer from "@/components/page_sections/PageContainer.vue";
 
 const route = useRoute();
 const userSessionStore = useUserSessionStore();

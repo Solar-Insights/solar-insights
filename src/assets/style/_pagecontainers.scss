@@ -1,0 +1,95 @@
+@use "../../../node_modules/vuetify/_styles.scss";
+@use "../master";
+
+/*
+    Phones
+*/
+@media screen and (max-width: 599px) {
+    .page-container {
+        min-height: 100%;
+        padding: 3vw 5vw 3vw 5vw !important;
+    }
+    .page-title-container {
+        width: 100%;
+    }
+    .page-subtitle-container {
+        width: 100%;
+    }
+}
+
+/*
+  Tablets and computers
+*/
+@media screen and (min-width: 600px) {
+    .page-container {
+        min-height: 100%;
+        padding: 4vw !important;
+        padding-top: 6vw !important;
+    }
+    .page-title-container {
+        width: 70%;
+    }
+    .page-subtitle-container {
+        width: 80%;
+    }
+}
+
+.page-container {
+    @extend .pt-0;
+    padding-top: 0 !important;
+}
+
+.page-title-container {
+    @extend .mt-8;
+    @extend .mb-11;
+    @extend .text-center;
+    @extend .mx-auto;
+}
+
+.page-title-precontent {}
+
+.page-title {
+    @extend .text-h3;
+    @extend .my-3;
+    @extend .font-weight-thin;
+}
+
+.page-title-precision {
+    @extend .mt-5;
+    @extend .mx-auto;
+    width: 80%;
+    font-size: 1.1rem;
+}
+
+.page-title-action {
+    @extend .mt-5;
+    @extend .mx-auto;
+}
+
+.page-subtitle-container {
+    @extend .my-8;
+    @extend .mx-auto;
+    width: 95%;
+}
+
+.page-subtitle-precontent {}
+
+.page-subtitle {
+    @extend .text-h4;
+    @extend .my-3;
+    @extend .text-center;
+    @extend .font-weight-thin;
+}
+
+.page-subtitle-precision {
+    @extend .text-h6;
+    @extend .text-center;
+    @extend .font-weight-thin;
+}
+
+.page-subtitle-content {
+    line-height: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.page-subtitle-action {}
