@@ -1,9 +1,9 @@
 <template>
     <div class="page-title-container">
-        <div class="page-title-precontent">{{ props.pageTitlePrecontent }}</div>
-        <div class="page-title">{{ props.pageTitle }}</div>
-        <div class="page-title-precision">{{ props.pageTitlePrecision }}</div>
-        <div class="page-title-action">
+        <div v-if="stringHasValue(props.pageTitlePrecontent)" class="page-title-precontent">{{ props.pageTitlePrecontent }}</div>
+        <div v-if="stringHasValue(props.pageTitle)" class="page-title">{{ props.pageTitle }}</div>
+        <div v-if="stringHasValue(props.pageTitlePrecision)" class="page-title-precision">{{ props.pageTitlePrecision }}</div>
+        <div v-if="objectHasValue(props.pageTitleAction)" class="page-title-action">
             <v-card
                 @click="emits('onPageTitleActionClick')"
                 class="pa-6 rounded-lg mx-auto"
@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
 import { PropType } from 'vue';
+import { stringHasValue, objectHasValue } from '@/helpers/componentConditionals';
 
 const props = defineProps({
     pageTitlePrecontent: {
