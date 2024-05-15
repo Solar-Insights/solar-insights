@@ -1,16 +1,15 @@
 <template>
     <v-card class="pt-0 body-container">
-        <div class="page-title-container">
+        <PageTitleContainer
+            :pageTitle="myOrganization.name"
+            :pageTitlePrecision="$t(`my-organization.page-title-container.description`)"
+        />
+
+        <!-- 
+            Was previously in page title, to check
             <v-skeleton-loader v-if="myOrganization.name === ''" type="text"/>
+         -->
 
-            <div class="page-title"> 
-                {{ myOrganization.name }} 
-            </div>
-
-            <div class="page-title-precision">
-                {{ $t(`my-organization.page-title-container.description`) }}
-            </div>
-        </div>
 
         <div class="home-subtitle-container pt-16">
             <div class="page-subtitle mb-3">{{ $t(`my-organization.help-subtitle-container.subtitle`) }}</div>
@@ -43,6 +42,7 @@ import AdminComponent from "@/components/organization/my_organization_admin/Admi
 import { MyOrganization, MyOrganizationMember } from "@/helpers/types";
 import { getMyOrganizationInfo } from "@/api/user";
 import { useAuth0 } from "@auth0/auth0-vue";
+import PageTitleContainer from "@/components/general/PageTitleContainer.vue";
 
 const { user } = useAuth0();
 

@@ -1,27 +1,11 @@
 <template>
     <v-card class="pt-0 body-container">
-        <div class="page-title-container">
-            <div class="page-title">{{ $t(`home.page-title-container.title`) }}</div>
-            <div class="page-title-precision">{{ $t(`home.page-title-container.description`) }}</div>
-            <div class="page-title-action">
-                <v-card
-                    :to="{ name: 'search' }"
-                    class="pa-6 rounded-lg mx-auto"
-                    style="width: 250px"
-                    elevation="2"
-                    color="theme"
-                >
-                    <v-row class="pa-0">
-                        <v-col class="pa-0" cols="9">
-                            <div style="font-weight: bold">{{ $t(`home.page-title-container.action`) }}</div>
-                        </v-col>
-                        <v-col class="pa-0" cols="3" align-self="center">
-                            <v-icon>mdi-magnify</v-icon>
-                        </v-col>
-                    </v-row>
-                </v-card>
-            </div>
-        </div>
+        <PageTitleContainer
+            :pageTitle="$t(`home.page-title-container.title`)"
+            :pageTitlePrecision="$t(`home.page-title-container.description`)"
+            :pageTitleAction="{ text: $t(`home.page-title-container.action`), icon: `mdi-magnify` }"
+            @onPageTitleActionClick="router.push({ name: 'search' })"
+        />
 
         <v-img v-if="theme === 'dark' && locale === 'en'" class="home-main-image" :src="solar_insights_dark_en" />
         <v-img v-else-if="theme === 'dark' && locale === 'fr'" class="home-main-image" :src="solar_insights_dark_fr" />
@@ -92,6 +76,8 @@ import solar_insights_light_en from "@/assets/images/general/solar_insights_ligh
 import solar_insights_light_fr from "@/assets/images/general/solar_insights_light_fr.png";
 import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";
+import router from "@/plugins/router";
+import PageTitleContainer from "@/components/general/PageTitleContainer.vue";
 
 const userSessionStore = useUserSessionStore();
 const { locale, theme } = storeToRefs(userSessionStore);

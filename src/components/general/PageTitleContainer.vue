@@ -21,6 +21,11 @@
                 </v-row>
             </v-card>
         </div>
+
+        <!-- Add custom actions for special pages -->
+        <div v-if="!objectHasValue(props.pageTitleAction)" class="page-title-action">
+            <slot></slot>
+        </div>
     </div>
 </template>
 
