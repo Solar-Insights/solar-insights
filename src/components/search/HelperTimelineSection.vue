@@ -30,7 +30,7 @@ import settings_en from "@/assets/images/search/settings_en.png";
 import solar_insights_en from "@/assets/images/search/solar_insights_en.png";
 import { useI18n } from "vue-i18n";
 import StepCard from "@/components/search/StepCard.vue";
-import PageSubtitleContainer from "../general/PageSubtitleContainer.vue";
+import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 
 const t = useI18n().t;
 

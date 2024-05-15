@@ -76,8 +76,8 @@ import solar_insights_light_fr from "@/assets/images/general/solar_insights_ligh
 import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import router from "@/plugins/router";
-import PageTitleContainer from "@/components/general/PageTitleContainer.vue";
-import PageSubtitleContainer from "@/components/general/PageSubtitleContainer.vue";
+import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
+import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 
 const userSessionStore = useUserSessionStore();
 const { locale, theme } = storeToRefs(userSessionStore);

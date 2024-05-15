@@ -38,11 +38,11 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import AdminComponent from "@/components/organization/my_organization_admin/AdminComponent.vue";
-import { MyOrganization, MyOrganizationMember } from "@/helpers/types";
+import { MyOrganization } from "@/helpers/types";
 import { getMyOrganizationInfo } from "@/api/user";
 import { useAuth0 } from "@auth0/auth0-vue";
-import PageTitleContainer from "@/components/general/PageTitleContainer.vue";
-import PageSubtitleContainer from "@/components/general/PageSubtitleContainer.vue";
+import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
+import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 
 const { user } = useAuth0();
 

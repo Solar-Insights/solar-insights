@@ -41,7 +41,7 @@ import AutocompleteField from "@/components/general/AutocompleteField.vue";
 import HelperTimelineSection from "@/components/search/HelperTimelineSection.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { handleUserState } from "@/composables/users";
-import PageTitleContainer from "@/components/general/PageTitleContainer.vue";
+import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
 
 const { loginUser } = handleUserState();
 

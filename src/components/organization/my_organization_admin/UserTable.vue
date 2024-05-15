@@ -118,7 +118,7 @@ import { MyOrganizationMember } from "@/helpers/types";
 import { PropType, ref } from "vue";
 import { deleteUserFromOrganization, createUserForOrganization } from "@/api/user";
 import { useI18n } from "vue-i18n";
-import PageSubtitleContainer from "@/components/general/PageSubtitleContainer.vue";
+import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 
 const t = useI18n().t;
 const UserDataHeaders = [
