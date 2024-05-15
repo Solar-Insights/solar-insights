@@ -3,6 +3,12 @@
         <div v-if="stringHasValue(props.pageSubtitlePrecontent)" class="page-subtitle-precontent">{{ props.pageSubtitlePrecontent }}</div>
         <div v-if="stringHasValue(props.pageSubtitle)" class="page-subtitle">{{ props.pageSubtitle }}</div>
         <div v-if="stringHasValue(props.pageSubtitlePrecision)" class="page-subtitle-precision">{{ props.pageSubtitlePrecision }}</div>
+
+        <!-- Add custom content -->
+        <div class="page-subtitle-content">
+            <slot></slot>
+        </div>
+
         <div v-if="objectHasValue(props.pageSubtitleAction)" class="page-subtitle-action">
             <v-card
                 @click="emits('onPageSubtitleActionClick')"
@@ -20,11 +26,6 @@
                     </v-col>
                 </v-row>
             </v-card>
-        </div>
-
-        <!-- Add custom content -->
-        <div class="page-subtitle-content">
-            <slot></slot>
         </div>
     </div>
 </template>

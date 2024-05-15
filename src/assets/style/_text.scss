@@ -8,7 +8,7 @@
     .page-title-container {
         width: 100%;
     }
-    .home-subtitle-container {
+    .page-subtitle-container {
         width: 100%;
     }
 }
@@ -20,7 +20,7 @@
     .page-title-container {
         width: 70%;
     }
-    .home-subtitle-container {
+    .page-subtitle-container {
         width: 80%;
     }
 }
@@ -43,6 +43,8 @@
     @extend .mx-auto;
 }
 
+.page-title-precontent {}
+
 .page-title {
     @extend .text-h3;
     @extend .mt-3;
@@ -61,23 +63,27 @@
     @extend .mx-auto;
 }
 
-.home-subtitle-container {
+.page-subtitle-container {
     @extend .my-8;
     @extend .mx-auto;
     width: 95%;
 }
 
-.home-subtitle {
+.page-subtitle-precontent {}
+
+.page-subtitle {
     @extend .text-h4;
     @extend .mb-16;
     @extend .text-center;
     @extend .font-weight-thin;
 }
 
-.home-subtitle-content {
+.page-subtitle-content {
     line-height: 1.5rem;
     font-size: 1.1rem;
 }
+
+.page-subtitle-action {}
 
 .page-title {
     @extend .text-h4;
