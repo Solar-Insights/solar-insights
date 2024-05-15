@@ -1,14 +1,14 @@
 <template>
     <v-card class="pt-0 body-container">
-        <div class="home-title-container">
+        <div class="page-title-container">
             <v-skeleton-loader v-if="myOrganization.name === ''" type="text"/>
 
-            <div class="home-title"> 
+            <div class="page-title"> 
                 {{ myOrganization.name }} 
             </div>
 
-            <div class="home-title-description">
-                {{ $t(`my-organization.home-title-container.description`) }}
+            <div class="page-title-precision">
+                {{ $t(`my-organization.page-title-container.description`) }}
             </div>
         </div>
 

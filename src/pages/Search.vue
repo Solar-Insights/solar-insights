@@ -1,8 +1,8 @@
 <template>
     <v-card class="pt-0 body-container">
-        <div class="home-title-container">
-            <div class="home-title">{{ $t(`search.title`) }}</div>
-            <div class="home-title-action mt-12">
+        <div class="page-title-container">
+            <div class="page-title">{{ $t(`search.title`) }}</div>
+            <div class="page-title-action mt-12">
                 <v-skeleton-loader class="search-loader" :loading="isLoading" type="chip">
                     <AutocompleteField
                         v-if="isAuthenticated"

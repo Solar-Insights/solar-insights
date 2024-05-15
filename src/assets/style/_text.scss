@@ -5,7 +5,7 @@
     Phones
 */
 @media screen and (max-width: 599px) {
-    .home-title-container {
+    .page-title-container {
         width: 100%;
     }
     .home-subtitle-container {
@@ -17,7 +17,7 @@
   Tablets and computers
 */
 @media screen and (min-width: 600px) {
-    .home-title-container {
+    .page-title-container {
         width: 70%;
     }
     .home-subtitle-container {
@@ -36,27 +36,27 @@
     font-size: 0.75rem;
 }
 
-.home-title-container {
+.page-title-container {
     @extend .mt-8;
     @extend .mb-11;
     @extend .text-center;
     @extend .mx-auto;
 }
 
-.home-title {
+.page-title {
     @extend .text-h3;
     @extend .mt-3;
     @extend .font-weight-thin;
 }
 
-.home-title-description {
+.page-title-precision {
     @extend .mt-5;
     @extend .mx-auto;
     width: 80%;
     font-size: 1.1rem;
 }
 
-.home-title-action {
+.page-title-action {
     @extend .mt-5;
     @extend .mx-auto;
 }

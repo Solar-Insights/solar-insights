@@ -1,9 +1,9 @@
 <template>
     <v-card class="pt-0 body-container">
-        <div class="home-title-container">
-            <div class="home-title">{{ $t(`home.home-title-container.title`) }}</div>
-            <div class="home-title-description">{{ $t(`home.home-title-container.description`) }}</div>
-            <div class="home-title-action">
+        <div class="page-title-container">
+            <div class="page-title">{{ $t(`home.page-title-container.title`) }}</div>
+            <div class="page-title-precision">{{ $t(`home.page-title-container.description`) }}</div>
+            <div class="page-title-action">
                 <v-card
                     :to="{ name: 'search' }"
                     class="pa-6 rounded-lg mx-auto"
@@ -13,7 +13,7 @@
                 >
                     <v-row class="pa-0">
                         <v-col class="pa-0" cols="9">
-                            <div style="font-weight: bold">{{ $t(`home.home-title-container.action`) }}</div>
+                            <div style="font-weight: bold">{{ $t(`home.page-title-container.action`) }}</div>
                         </v-col>
                         <v-col class="pa-0" cols="3" align-self="center">
                             <v-icon>mdi-magnify</v-icon>
