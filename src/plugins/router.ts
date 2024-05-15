@@ -18,43 +18,43 @@ const router = createRouter({
         {
             path: "/",
             name: "home",
-            component: () => import("@/pages/Home.vue"),
+            component: () => import("@/pages/HomePage.vue"),
             beforeEnter: []
         },
         {
             path: "/search-location",
             name: "search",
-            component: () => import("@/pages/Search.vue"),
+            component: () => import("@/pages/SearchPage.vue"),
             beforeEnter: []
         },
         {
             path: "/solar-map",
             name: "solar-map",
-            component: () => import("@/pages/SolarMap.vue"),
+            component: () => import("@/pages/SolarMapPage.vue"),
             beforeEnter: [authGuard]
         },
         {
             path: "/organization",
             name: "organization",
-            component: () => import("@/pages/Organization.vue"),
+            component: () => import("@/pages/OrganizationPage.vue"),
             beforeEnter: []
         },
         {
             path: "/my-organization",
             name: "my-organization",
-            component: () => import("@/pages/MyOrganization.vue"),
+            component: () => import("@/pages/MyOrganizationPage.vue"),
             beforeEnter: [authGuard]
         },
         {
             path: "/callback",
             name: "callback",
-            component: () => import("@/pages/Callback.vue"),
+            component: () => import("@/pages/CallbackPage.vue"),
             beforeEnter: []
         },
         {
             path: "/not-found",
             name: "not-found",
-            component: () => import("@/pages/CatchAll.vue"),
+            component: () => import("@/pages/CatchAllPage.vue"),
             beforeEnter: []
         },
         {
