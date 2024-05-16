@@ -52,9 +52,6 @@ import RouteButton from "@/components/general/appbar/RouteButton.vue";
 import MenuButton from "@/components/general/appbar/MenuButton.vue";
 import logo_nobg from "@/assets/images/general/logo_nobg.png";
 import { RouteInfo } from "@/helpers/types";
-import { useAuth0 } from "@auth0/auth0-vue";
-
-const { isAuthenticated, isLoading } = useAuth0();
 
 const drawer = ref(false);
 
@@ -66,12 +63,17 @@ const routes = computed(() => {
             requiresAuth: false
         },
         {
+            name: "get-started",
+            icon: "mdi-rocket-launch-outline",
+            requiresAuth: false
+        },
+        {
             name: "search",
             icon: "mdi-weather-sunny",
             requiresAuth: false
         },
         {
-            name: isAuthenticated.value ? "my-organization" : "organization",
+            name: "my-organization",
             icon: "mdi-account-group-outline",
             requiresAuth: true
         }

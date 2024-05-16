@@ -1,6 +1,6 @@
 <template>
     <PageSection>
-        <h1>Organization</h1>
+        <h1> Get Started </h1>
     </PageSection>
 </template>
 
