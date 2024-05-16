@@ -9,6 +9,9 @@
         min-height: 100%;
         padding: 3vw 5vw 3vw 5vw !important;
     }
+    .page-section-container {
+        padding: 6vw 0vw 6vw 0vw !important;
+    }
     .page-title-container {
         width: 100%;
     }
@@ -26,6 +29,9 @@
         padding: 4vw !important;
         padding-top: 6vw !important;
     }
+    .page-section-container {
+        padding: 4vw 0vw 4vw 0vw !important;
+    }
     .page-title-container {
         width: 70%;
     }
@@ -38,9 +44,7 @@
     padding-top: 0 !important;
 }
 
-.page-section-container {
-    @extend .py-10;
-}
+.page-section-container {}
 
 .page-title-container {
     @extend .text-center;
@@ -88,6 +92,7 @@
 }
 
 .page-subtitle-content {
+    @extend .py-5;
     line-height: 1.5rem;
     font-size: 1.1rem;
 }

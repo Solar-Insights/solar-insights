@@ -28,7 +28,7 @@
             <PageSubtitleContainer
                 :pageSubtitle="$t(`home.usecase-subtitle-container.subtitle`)"
             >
-                <v-row class="pt-12">
+                <v-row>
                     <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-telescope</v-icon>
                         <div class="font-weight-bold mb-3">
