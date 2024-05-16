@@ -4,9 +4,7 @@
         <v-main>
             <v-container class="app-container" fluid>
                 <alert v-if="alert !== undefined" />
-                <PageContainer>
-                    <router-view :key="$route.fullPath"></router-view>
-                </PageContainer>
+                <router-view :key="$route.fullPath"></router-view>
             </v-container>
         </v-main>
     </v-app>
