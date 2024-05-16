@@ -1,8 +1,12 @@
 <template>
     <div class="page-subtitle-container">
-        <div v-if="stringHasValue(props.pageSubtitlePrecontent)" class="page-subtitle-precontent">{{ props.pageSubtitlePrecontent }}</div>
+        <div v-if="stringHasValue(props.pageSubtitlePrecontent)" class="page-subtitle-precontent">
+            {{ props.pageSubtitlePrecontent }}
+        </div>
         <div v-if="stringHasValue(props.pageSubtitle)" class="page-subtitle">{{ props.pageSubtitle }}</div>
-        <div v-if="stringHasValue(props.pageSubtitlePrecision)" class="page-subtitle-precision">{{ props.pageSubtitlePrecision }}</div>
+        <div v-if="stringHasValue(props.pageSubtitlePrecision)" class="page-subtitle-precision">
+            {{ props.pageSubtitlePrecision }}
+        </div>
 
         <!-- Add custom content -->
         <div class="page-subtitle-content">
@@ -31,8 +35,8 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue';
-import { stringHasValue, objectHasValue } from '@/helpers/componentConditionals';
+import { PropType } from "vue";
+import { stringHasValue, objectHasValue } from "@/helpers/componentConditionals";
 
 const props = defineProps({
     pageSubtitlePrecontent: {
@@ -56,7 +60,7 @@ const props = defineProps({
 const emits = defineEmits(["onPageSubtitleActionClick"]);
 
 interface PageSubtitleAction {
-    text: string,
-    icon: string
-};
+    text: string;
+    icon: string;
+}
 </script>

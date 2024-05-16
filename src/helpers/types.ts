@@ -74,8 +74,8 @@ export type RouteInfo = {
 };
 
 export type MyOrganization = {
-    name: string,
-    admins: MyOrganizationMember[]
+    name: string;
+    admins: MyOrganizationMember[];
 };
 
 export type MyOrganizationMember = {

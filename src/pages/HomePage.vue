@@ -11,7 +11,11 @@
 
         <PageSection>
             <v-img v-if="theme === 'dark' && locale === 'en'" class="home-main-image" :src="solar_insights_dark_en" />
-            <v-img v-else-if="theme === 'dark' && locale === 'fr'" class="home-main-image" :src="solar_insights_dark_fr" />
+            <v-img
+                v-else-if="theme === 'dark' && locale === 'fr'"
+                class="home-main-image"
+                :src="solar_insights_dark_fr"
+            />
             <v-img
                 v-else-if="theme === 'light' && locale === 'en'"
                 class="home-main-image"
@@ -23,11 +27,9 @@
                 :src="solar_insights_light_fr"
             />
         </PageSection>
-        
+
         <PageSection>
-            <PageSubtitleContainer
-                :pageSubtitle="$t(`home.usecase-subtitle-container.subtitle`)"
-            >
+            <PageSubtitleContainer :pageSubtitle="$t(`home.usecase-subtitle-container.subtitle`)">
                 <v-row>
                     <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-telescope</v-icon>

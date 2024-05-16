@@ -1,9 +1,7 @@
 <template>
     <PageContainer>
         <PageSection>
-            <PageTitleContainer
-                :pageTitle="$t(`search.title`)"
-            >
+            <PageTitleContainer :pageTitle="$t(`search.title`)">
                 <v-skeleton-loader class="search-loader" :loading="isLoading" type="chip">
                     <AutocompleteField
                         v-if="isAuthenticated"

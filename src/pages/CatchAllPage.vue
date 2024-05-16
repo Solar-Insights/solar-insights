@@ -1,10 +1,7 @@
 <template>
     <PageContainer>
         <PageSection>
-            <PageTitleContainer
-                :pageTitle="$t(`catch-all.oops`)"
-                :pageTitlePrecision="$t(`catch-all.404`)"
-            >
+            <PageTitleContainer :pageTitle="$t(`catch-all.oops`)" :pageTitlePrecision="$t(`catch-all.404`)">
                 <v-btn :to="{ name: 'home' }" class="px-4 mx-4 my-3" color="theme" variant="flat" size="large" rounded>
                     {{ $t(`catch-all.home-button`) }}
                 </v-btn>

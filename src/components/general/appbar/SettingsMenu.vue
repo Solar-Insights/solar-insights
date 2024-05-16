@@ -55,11 +55,11 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import { useLocale } from 'vuetify'
+import { useLocale } from "vuetify";
 
 const userSessionStore = useUserSessionStore();
 const { theme, locale } = storeToRefs(userSessionStore);
-const { current } = useLocale()
+const { current } = useLocale();
 
 function updateVuetifyLocale() {
     current.value = locale.value;

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { VueError } from "@/helpers/customErrors";
 import { Theme, Locale } from "@/helpers/types";
-import { useLocale } from 'vuetify';
+import { useLocale } from "vuetify";
 
 export const useUserSessionStore = defineStore("userSessionStore", {
     state: () => ({

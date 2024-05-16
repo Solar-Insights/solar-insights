@@ -15,7 +15,7 @@ export function handleUserState() {
                 target: callbackPage
             }
         });
-    }
+    };
 
     const logoutUser = () => {
         auth0.logout({
@@ -23,7 +23,7 @@ export function handleUserState() {
                 returnTo: window.location.origin
             }
         });
-    }
+    };
 
     return {
         loginUser,

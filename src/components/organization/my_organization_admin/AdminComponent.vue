@@ -1,5 +1,5 @@
 <template>
-    <UserTable :users="myOrganizationMembers" @addUser="addOrganizationMember" @deleteUser="deleteOrganizationMember"/>
+    <UserTable :users="myOrganizationMembers" @addUser="addOrganizationMember" @deleteUser="deleteOrganizationMember" />
 </template>
 
 <script setup lang="ts">
@@ -16,7 +16,7 @@ onMounted(async () => {
             myOrganizationMembers.value = data;
         })
         .catch(() => {});
-})
+});
 
 function addOrganizationMember(user: MyOrganizationMember) {
     myOrganizationMembers.value.push(user);
@@ -25,10 +25,10 @@ function addOrganizationMember(user: MyOrganizationMember) {
 function deleteOrganizationMember(user: MyOrganizationMember) {
     const indexToRemove = myOrganizationMembers.value.findIndex(
         (userToDelete: MyOrganizationMember) => userToDelete.email === user.email
-    )
+    );
 
     if (indexToRemove === -1) return;
 
-    myOrganizationMembers.value.splice(indexToRemove, 1)
+    myOrganizationMembers.value.splice(indexToRemove, 1);
 }
 </script>

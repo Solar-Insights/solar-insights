@@ -19,10 +19,14 @@
             >
                 <v-list class="d-flex justify-center flex-wrap">
                     <v-list-item v-if="myOrganization.admins.length === 0" class="my-2 mx-auto" min-width="320px">
-                        <v-skeleton-loader type="avatar, sentences"/>
+                        <v-skeleton-loader type="avatar, sentences" />
                     </v-list-item>
 
-                    <v-list-item v-for="admin in myOrganization.admins" class="my-2 mx-auto" :prepend-avatar="admin.avatar">
+                    <v-list-item
+                        v-for="admin in myOrganization.admins"
+                        class="my-2 mx-auto"
+                        :prepend-avatar="admin.avatar"
+                    >
                         <v-list-item-title> {{ admin.name }}</v-list-item-title>
                         <v-list-item-subtitle>
                             <a :href="`mailto: ${admin.email}`"> {{ admin.email }} </a>
@@ -51,10 +55,8 @@ import PageContainer from "@/components/page_sections/PageContainer.vue";
 
 const { user } = useAuth0();
 
-const isAdmin = computed(() => 
-    myOrganization.value.admins.findIndex(
-        (admin) => admin.email === user.value?.email
-    ) !== -1
+const isAdmin = computed(
+    () => myOrganization.value.admins.findIndex((admin) => admin.email === user.value?.email) !== -1
 );
 
 const myOrganization = ref<MyOrganization>({
@@ -68,5 +70,5 @@ onMounted(async () => {
             myOrganization.value = data;
         })
         .catch(() => {});
-})
+});
 </script>

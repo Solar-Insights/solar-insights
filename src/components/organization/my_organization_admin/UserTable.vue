@@ -1,9 +1,7 @@
 <template>
-    <PageSubtitleContainer
-        :pageSubtitle="$t(`my-organization.admin-component.title`)"
-    />
+    <PageSubtitleContainer :pageSubtitle="$t(`my-organization.admin-component.title`)" />
 
-    <v-data-table :items="users" :headers="headers" :sort-by="[{ key: 'created_date', 'order': 'desc' }]">
+    <v-data-table :items="users" :headers="headers" :sort-by="[{ key: 'created_date', order: 'desc' }]">
         <template v-slot:top>
             <v-toolbar flat>
                 <v-toolbar-title> {{ $t(`my-organization.admin-component.user-table.title`) }} </v-toolbar-title>
@@ -18,18 +16,26 @@
                             <v-card-title class="mt-3">
                                 <div class="d-flex">
                                     <v-icon>mdi-account-plus-outline</v-icon>
-                                    <div class="ml-4">{{ $t(`my-organization.admin-component.user-table.actions.new-user.title`) }}</div>
+                                    <div class="ml-4">
+                                        {{ $t(`my-organization.admin-component.user-table.actions.new-user.title`) }}
+                                    </div>
                                 </div>
                             </v-card-title>
-                            
+
                             <v-form v-model="validForm" @submit.prevent>
                                 <v-card-text>
-                                    <div class="form-subtitle-in-card">{{ $t(`my-organization.admin-component.user-table.actions.new-user.user-info`) }}</div>
+                                    <div class="form-subtitle-in-card">
+                                        {{
+                                            $t(`my-organization.admin-component.user-table.actions.new-user.user-info`)
+                                        }}
+                                    </div>
                                     <v-sheet class="form-section-in-sheet">
                                         <v-text-field
                                             v-model="newUserEmail"
                                             :rules="emailRules"
-                                            :label="$t(`my-organization.admin-component.user-table.actions.new-user.email`)"
+                                            :label="
+                                                $t(`my-organization.admin-component.user-table.actions.new-user.email`)
+                                            "
                                             density="compact"
                                             variant="outlined"
                                             prepend-inner-icon="mdi-at"
@@ -40,7 +46,9 @@
                                         <v-text-field
                                             v-model="newUserName"
                                             :rules="nameRules"
-                                            :label="$t(`my-organization.admin-component.user-table.actions.new-user.name`)"
+                                            :label="
+                                                $t(`my-organization.admin-component.user-table.actions.new-user.name`)
+                                            "
                                             density="compact"
                                             variant="outlined"
                                             prepend-inner-icon="mdi-account-circle-outline"
@@ -64,7 +72,11 @@
                                         color="theme"
                                         type="submit"
                                     >
-                                    {{ $t(`my-organization.admin-component.user-table.actions.new-user.create-new-user`) }}
+                                        {{
+                                            $t(
+                                                `my-organization.admin-component.user-table.actions.new-user.create-new-user`
+                                            )
+                                        }}
                                     </v-btn>
                                 </v-card-actions>
                             </v-form>
@@ -77,7 +89,9 @@
                         <v-card-title class="mt-3">
                             <div class="d-flex">
                                 <v-icon>mdi-delete-outline</v-icon>
-                                <div class="ml-4">{{ $t(`my-organization.admin-component.user-table.actions.delete-user.title`) }}</div>
+                                <div class="ml-4">
+                                    {{ $t(`my-organization.admin-component.user-table.actions.delete-user.title`) }}
+                                </div>
                             </div>
                         </v-card-title>
 
@@ -97,7 +111,7 @@
                                 variant="flat"
                                 color="theme"
                             >
-                            {{ $t(`my-organization.admin-component.user-table.actions.delete-user.confirm`) }}
+                                {{ $t(`my-organization.admin-component.user-table.actions.delete-user.confirm`) }}
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -138,7 +152,7 @@ const UserDataHeaders = [
         sortable: true
     },
     {
-        title:t(`my-organization.admin-component.user-table.column-titles.actions`), 
+        title: t(`my-organization.admin-component.user-table.column-titles.actions`),
         key: "actions",
         align: "center",
         sortable: false
@@ -152,7 +166,7 @@ const props = defineProps({
     }
 });
 
-const emits = defineEmits(["addUser", "deleteUser"])
+const emits = defineEmits(["addUser", "deleteUser"]);
 
 const headers = ref(UserDataHeaders);
 const addUserDialog = ref<boolean>(false);
@@ -173,7 +187,12 @@ const emailRules = ref([
         return "";
     },
     (value: string) => {
-        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value)) return true;
+        if (
+            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
+                value
+            )
+        )
+            return true;
         return "";
     }
 ]);
@@ -186,24 +205,26 @@ function openDeleteUserDialog(user: MyOrganizationMember) {
 }
 
 async function createUser() {
-    if (!validForm.value) { return; }
+    if (!validForm.value) {
+        return;
+    }
 
     addUserDialog.value = false;
-    
+
     await createUserForOrganization(newUserEmail.value, newUserName.value)
         .then((data: MyOrganizationMember) => {
             newUserEmail.value = "";
             newUserName.value = "";
-            emits("addUser", data)
+            emits("addUser", data);
         })
-        .catch(() => {})
+        .catch(() => {});
 }
 
 async function deleteUser() {
     await deleteUserFromOrganization(selectedUserToDelete.value)
         .then(() => {
-            emits("deleteUser", selectedUserToDelete.value)
+            emits("deleteUser", selectedUserToDelete.value);
         })
-        .catch(() => {})
+        .catch(() => {});
 }
 </script>

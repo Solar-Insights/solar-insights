@@ -44,14 +44,16 @@
     padding-top: 0 !important;
 }
 
-.page-section-container {}
+.page-section-container {
+}
 
 .page-title-container {
     @extend .text-center;
     @extend .mx-auto;
 }
 
-.page-title-precontent {}
+.page-title-precontent {
+}
 
 .page-title {
     @extend .text-h3;
@@ -76,7 +78,8 @@
     width: 95%;
 }
 
-.page-subtitle-precontent {}
+.page-subtitle-precontent {
+}
 
 .page-subtitle {
     @extend .text-h4;
@@ -97,4 +100,5 @@
     font-size: 1.1rem;
 }
 
-.page-subtitle-action {}
+.page-subtitle-action {
+}

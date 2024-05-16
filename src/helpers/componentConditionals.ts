@@ -3,7 +3,7 @@ function instanceIsNotNull(instance: any) {
 }
 
 function instanceIsDefined(instance: any) {
-    return instance !== undefined
+    return instance !== undefined;
 }
 
 function instanceIsDefinedAndNotNull(instance: any) {

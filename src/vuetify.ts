@@ -6,7 +6,7 @@ import * as directives from "vuetify/directives";
 import { fa } from "vuetify/iconsets/fa";
 import { mdi } from "vuetify/iconsets/mdi";
 import "@mdi/font/css/materialdesignicons.css";
-import { en, fr } from 'vuetify/locale'
+import { en, fr } from "vuetify/locale";
 
 const customTheme: ThemeDefinition = {
     colors: {
@@ -52,7 +52,7 @@ const vuetifyThemesAndComponents = createVuetify({
     locale: {
         locale: "en",
         fallback: "en",
-        messages: { en, fr}
+        messages: { en, fr }
     }
 });
 export default vuetifyThemesAndComponents;

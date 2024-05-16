@@ -1,8 +1,12 @@
 <template>
     <div class="page-title-container">
-        <div v-if="stringHasValue(props.pageTitlePrecontent)" class="page-title-precontent">{{ props.pageTitlePrecontent }}</div>
+        <div v-if="stringHasValue(props.pageTitlePrecontent)" class="page-title-precontent">
+            {{ props.pageTitlePrecontent }}
+        </div>
         <div v-if="stringHasValue(props.pageTitle)" class="page-title">{{ props.pageTitle }}</div>
-        <div v-if="stringHasValue(props.pageTitlePrecision)" class="page-title-precision">{{ props.pageTitlePrecision }}</div>
+        <div v-if="stringHasValue(props.pageTitlePrecision)" class="page-title-precision">
+            {{ props.pageTitlePrecision }}
+        </div>
         <div v-if="objectHasValue(props.pageTitleAction)" class="page-title-action">
             <v-card
                 @click="emits('onPageTitleActionClick')"
@@ -30,8 +34,8 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue';
-import { stringHasValue, objectHasValue } from '@/helpers/componentConditionals';
+import { PropType } from "vue";
+import { stringHasValue, objectHasValue } from "@/helpers/componentConditionals";
 
 const props = defineProps({
     pageTitlePrecontent: {
@@ -55,7 +59,7 @@ const props = defineProps({
 const emits = defineEmits(["onPageTitleActionClick"]);
 
 interface PageTitleAction {
-    text: string,
-    icon: string
-};
+    text: string;
+    icon: string;
+}
 </script>

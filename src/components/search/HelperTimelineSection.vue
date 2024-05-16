@@ -1,7 +1,5 @@
 <template>
-    <PageSubtitleContainer
-        :pageSubtitle="`${steps.length}${ t('search.timeline.title')}`"
-    >
+    <PageSubtitleContainer :pageSubtitle="`${steps.length}${t('search.timeline.title')}`">
         <v-timeline class="hidden-sm-and-down mx-auto" density="compact" direction="vertical" style="width: 65%">
             <v-timeline-item
                 v-for="(step, i) in steps"

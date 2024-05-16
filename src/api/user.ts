@@ -25,10 +25,10 @@ export async function getMyOrganizationMembers() {
         url: `/user/my-organization/members`
     })
         .then((response) => {
-            const myOrganizationMembers: MyOrganizationMember[] = response.data.myOrganizationMembers; 
+            const myOrganizationMembers: MyOrganizationMember[] = response.data.myOrganizationMembers;
             myOrganizationMembers.forEach((member) => {
                 member.created_date = cleanIsoStringToKeepYYYYmmdd(member.created_date);
-            })
+            });
             return response.data.myOrganizationMembers as MyOrganizationMember[];
         })
         .catch((error) => {
@@ -64,14 +64,13 @@ export async function deleteUserFromOrganization(user: MyOrganizationMember) {
         data: {
             myOrganizationMember: user
         }
-    })
-        .catch((error) => {
-            useUserSessionStore().setAlert(new OrganizationError());
-            throw error;
-        });
+    }).catch((error) => {
+        useUserSessionStore().setAlert(new OrganizationError());
+        throw error;
+    });
 }
 
-    function cleanIsoStringToKeepYYYYmmdd(isoString: string) {
-        if (isoString.length < 10) return isoString;
-        return isoString.substring(0, 10);
-    }
+function cleanIsoStringToKeepYYYYmmdd(isoString: string) {
+    if (isoString.length < 10) return isoString;
+    return isoString.substring(0, 10);
+}

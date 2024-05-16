@@ -70,5 +70,4 @@ const { loginUser, logoutUser } = handleUserState();
 const { isLoading, isAuthenticated, user } = useAuth0();
 const userSessionStore = useUserSessionStore();
 const { theme } = storeToRefs(userSessionStore);
-
 </script>
