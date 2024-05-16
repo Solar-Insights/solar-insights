@@ -1,6 +1,6 @@
 <template>
     <v-menu activator="parent" :close-on-content-click="false">
-        <v-card class="app-menu-card">
+        <v-card class="app-menu-card" elevation="20">
             <v-card
                 @click="userSessionStore.changeTheme()"
                 class="app-menu-option"

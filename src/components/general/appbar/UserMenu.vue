@@ -1,11 +1,27 @@
 <template>
-    <v-menu activator="parent" :close-on-content-click="false">
-        <v-card class="app-menu-card">
+    <v-menu activator="parent">
+        <v-card class="app-menu-card" elevation="20">
             <v-skeleton-loader :loading="isLoading" type="heading">
                 <v-card v-if="isAuthenticated" elevation="0">
                     <v-card-title> {{ user?.nickname }} </v-card-title>
                     <v-card-text> {{ user?.email }} </v-card-text>
-                    {{ user }}
+
+                    <v-card
+                        :to="{ name: 'my-organization' }"
+                        class="app-menu-option"
+                        elevation="2"
+                        :variant="theme === 'dark' ? 'tonal' : 'outlined'"
+                    >
+                        <v-row>
+                            <v-col class="app-menu-option-icon-container" cols="auto" align-self="center">
+                                <v-icon>mdi-account-group-outline</v-icon>
+                            </v-col>
+                            <v-col class="app-menu-option-text-container">
+                                <div>{{ $t(`navigation.my-organization`) }}</div>
+                            </v-col>
+                        </v-row>
+                    </v-card>
+
                     <v-card
                         @click="logoutUser"
                         class="app-menu-option"
@@ -54,4 +70,5 @@ const { loginUser, logoutUser } = handleUserState();
 const { isLoading, isAuthenticated, user } = useAuth0();
 const userSessionStore = useUserSessionStore();
 const { theme } = storeToRefs(userSessionStore);
+
 </script>

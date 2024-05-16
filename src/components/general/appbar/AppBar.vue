@@ -71,11 +71,6 @@ const routes = computed(() => {
             name: "search",
             icon: "mdi-weather-sunny",
             requiresAuth: false
-        },
-        {
-            name: "my-organization",
-            icon: "mdi-account-group-outline",
-            requiresAuth: true
         }
     ] as RouteInfo[];
 });
