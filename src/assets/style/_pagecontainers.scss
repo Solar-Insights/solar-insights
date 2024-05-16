@@ -35,13 +35,14 @@
 }
 
 .page-container {
-    @extend .pt-0;
     padding-top: 0 !important;
 }
 
+.page-section-container {
+    @extend .py-10;
+}
+
 .page-title-container {
-    @extend .mt-8;
-    @extend .mb-11;
     @extend .text-center;
     @extend .mx-auto;
 }
@@ -67,7 +68,6 @@
 }
 
 .page-subtitle-container {
-    @extend .my-8;
     @extend .mx-auto;
     width: 95%;
 }
