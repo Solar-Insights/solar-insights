@@ -49,6 +49,11 @@
     }
 }
 
+.normal-page-content-font {
+    line-height: 1.5rem;
+    font-size: 1.1rem;
+}
+
 .page-container {
     padding-top: 0 !important;
 }
@@ -104,8 +109,7 @@
 
 .page-subtitle-content {
     @extend .py-5;
-    line-height: 1.5rem;
-    font-size: 1.1rem;
+    @extend .normal-page-content-font;
 }
 
 .page-subtitle-action {
@@ -117,6 +121,7 @@
 
 .short-description-single-item-container {
     @extend .mx-auto; 
+    @extend .my-6;
     @extend .px-5;
 }
 
@@ -132,4 +137,16 @@
 
 .short-description-item-content {
     
+}
+
+.paragraph-container {
+    @extend .my-4;
+}
+
+.paragraph-content {
+    @extend .normal-page-content-font;
+    @extend .mb-3;
+}
+
+.paragraph-action {
 }

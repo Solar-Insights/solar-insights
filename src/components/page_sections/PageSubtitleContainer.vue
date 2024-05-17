@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import { PropType } from "vue";
 import { stringHasValue, objectHasValue } from "@/helpers/componentConditionals";
+import { ButtonAction } from "@/helpers/types";
 
 const props = defineProps({
     pageSubtitlePrecontent: {
@@ -52,15 +53,10 @@ const props = defineProps({
         required: false
     },
     pageSubtitleAction: {
-        type: Object as PropType<PageSubtitleAction>,
+        type: Object as PropType<ButtonAction>,
         required: false
     }
 });
 
 const emits = defineEmits(["onPageSubtitleActionClick"]);
-
-interface PageSubtitleAction {
-    text: string;
-    icon: string;
-}
 </script>

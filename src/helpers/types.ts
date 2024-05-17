@@ -84,3 +84,8 @@ export type MyOrganizationMember = {
     name: string;
     avatar: string;
 };
+
+export type ButtonAction = {
+    text: string;
+    icon: string;
+}
