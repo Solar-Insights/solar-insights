@@ -149,9 +149,9 @@
                 "title": "Assess the viability of solar panels",
                 "description": "Customize financial parameters to find out the economic value of solar panels over their lifespan."
             },
-            "global": {
-                "title": "Access and utilize wordwide data",
-                "description": "Enjoy the availability and precision of public solar data and weather patterns across the globe, spanning from North America to Oceania."
+            "collaborate": {
+                "title": "Collaborate with members of your organization",
+                "description": "By being part of an organization, you will be able to collaborate efficiently with your colleagues. Share data, solar installations, and even visual content."
             }
         }
     },
@@ -196,8 +196,8 @@
                     "description": "Save relevant Solar Insights data on your device to reuse later, or even integrate with different tools."
                 },
                 "graphs": {
-                    "title": "Save charts and other visual material",
-                    "description": "Use integrated tools to save clean and presentable visual material of solar installations."
+                    "title": "Save charts and other visual content",
+                    "description": "Use integrated tools to save clean and presentable visual content of solar installations and data."
                 }
             }
         }

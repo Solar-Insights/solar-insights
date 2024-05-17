@@ -47,9 +47,9 @@
                         :itemIcon="`mdi-cash`"
                     />
                     <ShortDescriptionItem
-                        :itemTitle="$t(`home.usecase-subtitle-container.global.title`)"
-                        :itemContent="$t(`home.usecase-subtitle-container.global.description`)"
-                        :itemIcon="`mdi-earth`"
+                        :itemTitle="$t(`home.usecase-subtitle-container.collaborate.title`)"
+                        :itemContent="$t(`home.usecase-subtitle-container.collaborate.description`)"
+                        :itemIcon="`mdi-account-group-outline`"
                     />
                 </ShortDescriptionItemsContainer>
             </PageSubtitleContainer>

@@ -1,5 +1,5 @@
 <template>
-    <v-col class="short-description-single-item-container" cols="12" xs="12" sm="6" md="3">
+    <v-col class="short-description-single-item-container" cols="12" xs="12" sm="6" md="4">
         <v-icon 
             v-if="stringHasValue(props.itemIcon)" 
             class="short-description-item-icon" 

@@ -149,9 +149,9 @@
                 "title": "Évaluer la viabilité économique des panneaux solaires",
                 "description": "Ajustez des paramètres financiers pour calculer la valeur économique d'une installation sur toute sa durée de vie."
             },
-            "global": {
-                "title": "Obtenir et employer des données mondiales",
-                "description": "Appréciez la disponibilité et précision de données solaires et météorologiques publiques à travers le monde, de l'Amérique de Nord à l'Océanie."
+            "collaborate": {
+                "title": "Collaborer avec les membres de votre organisation",
+                "description": "En faisant partie d'une organisation, vous pourrez collaborer efficacement avec vos collègues: partage de données, d'installations solaires et de contenu visuel pertinent."
             }
         }
     },
@@ -196,8 +196,8 @@
                     "description": "Sauvegarder des données Solar Insights sur votre appareil pour réutilisation future, ou même pour intégration avec différents outils."
                 },
                 "graphs": {
-                    "title": "Sauvegarder des chartes et autres supports visuels",
-                    "description": "Utilisez les outils intégrés pour enregistrer des supports visuels propres et présentables d'installations solaires."
+                    "title": "Sauvegarder des chartes et autres contenus visuels",
+                    "description": "Utilisez les outils intégrés pour enregistrer du contenu visuel propre et présentable d'installations solaires et de données."
                 }
             }
         }
