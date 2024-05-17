@@ -8,7 +8,8 @@
         "user": "User",
         "settings": "Settings",
         "get-started": "Get started",
-        "my-organization": "My organization"
+        "my-organization": "My organization",
+        "pricing": "Pricing"
     },
     "errors": {
         "vue-error": {

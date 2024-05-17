@@ -46,6 +46,12 @@ const router = createRouter({
             beforeEnter: [authGuard]
         },
         {
+            path: "/pricing",
+            name: "pricing",
+            component: () => import("@/pages/PricingPage.vue"),
+            beforeEnter: []
+        },
+        {
             path: "/callback",
             name: "callback",
             component: () => import("@/pages/CallbackPage.vue"),

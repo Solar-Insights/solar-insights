@@ -8,7 +8,8 @@
         "user": "Utilisateur",
         "settings": "Paramètres",
         "get-started": "Lancez-vous",
-        "my-organization": "Mon organisation"
+        "my-organization": "Mon organisation",
+        "pricing": "Tarification"
     },
     "errors": {
         "vue-error": {
