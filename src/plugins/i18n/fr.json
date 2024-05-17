@@ -155,6 +155,32 @@
             }
         }
     },
+    "get-started": {
+        "page-title-container": {
+            "title": "Lancez-vous avec Solar Insights",
+            "precision": "Une introduction en quelques étapes à votre parcours.",
+            "action": "Déjà membre? Commenz à utiliser Solar Insights!"
+        },
+        "register-subtitle-container": {
+            "subtitle": "1. Votre organisation",
+            "precision": "Ce sera votre outil principal de collaboration",
+            "short-items": {
+                "invite": {
+                    "title": "Gérer tous les accès utilisateurs",
+                    "description": "Maintenez votre propre liste d'utilisateurs pour répondre à vos besoins organisationnels."
+                },
+                "share": {
+                    "title": "Partager des aperçus avec des collègues",
+                    "description": "Envoyez vos Solar Insights favoris à un collègue par l'entremise d'un simple lien."
+                },
+                "save": {
+                    "title": "Enregistrer des données pour utilisation future",
+                    "description": "Sauvegarder des Solar Insights sur votre appareil pour y avoir accès dans le futur, dans un contexte personnel ou professionnel."
+                }
+            }
+        }
+        
+    },
     "search": {
         "not-logged-in": {
             "action": "Se connecter pour visualiser un bâtiment"

@@ -157,10 +157,29 @@
     },
     "get-started": {
         "page-title-container": {
-            "title": "",
-            "precision": "",
+            "title": "Get started with Solar Insights",
+            "precision": "A quick guide to kickstart your journey.",
             "action": "Already a member? Start using Solar Insights!"
+        },
+        "register-subtitle-container": {
+            "subtitle": "1. Votre organisation",
+            "precision": "It will be your main collaboration tool.",
+            "short-items": {
+                "invite": {
+                    "title": "Handle all user access",
+                    "description": "Maintain your own list of allowed users to fit your organizational needs."
+                },
+                "share": {
+                    "title": "Share insights with colleagues",
+                    "description": "Send your Solar Insights' discoveries to colleagues with a simple link."
+                },
+                "save": {
+                    "title": "Conserve data for future use",
+                    "description": "Save relevant Solar Insights on your device to reuse in a personnal or professional setting."
+                }
+            }
         }
+        
     },
     "search": {
         "not-logged-in": {
