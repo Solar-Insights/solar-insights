@@ -10,21 +10,21 @@
                 variant="plain"
             >
                 <v-avatar class="mr-2" :image="logo_nobg" density="compact" />
-                SOLAR INSIGHTS
+                <span class="hidden-md-and-down"> SOLAR INSIGHTS </span>
             </v-btn>
 
             <v-spacer />
 
             <v-app-bar-nav-icon class="hidden-sm-and-up" variant="text" @click.stop="drawer = !drawer" />
 
-            <v-toolbar-items class="hidden-xs">
-                <RouteButton v-for="route in routes" :routeInfo="route" />
+            <v-toolbar-items class="hidden-xs" v-for="route in routes" >
+                <RouteButton :routeInfo="route" />
             </v-toolbar-items>
 
             <v-spacer class="hidden-xs" />
 
-            <v-toolbar-items class="hidden-xs">
-                <MenuButton v-for="menu in menus" :menu="menu.menuName" :icon="menu.icon" :isMobile="false" />
+            <v-toolbar-items class="hidden-xs" v-for="menu in menus">
+                <MenuButton :menu="menu.menuName" :icon="menu.icon" :isMobile="false" />
             </v-toolbar-items>
         </v-app-bar>
 
@@ -58,14 +58,14 @@ const drawer = ref(false);
 const routes = computed(() => {
     return [
         {
-            name: "home",
-            icon: "mdi-home-outline",
-            requiresAuth: false
-        },
-        {
             name: "get-started",
             icon: "mdi-rocket-launch-outline",
             requiresAuth: false
+        },
+        {
+            name: "pricing",
+            icon: "mdi-currency-usd",
+            requiresAuth: false,
         },
         {
             name: "search",
