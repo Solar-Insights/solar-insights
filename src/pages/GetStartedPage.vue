@@ -4,6 +4,8 @@
             <PageTitleContainer
                 :pageTitle="$t(`get-started.page-title-container.title`)"
                 :pageTitlePrecision="$t(`get-started.page-title-container.precision`)"
+                :pageTitleAction="{ text: $t(`get-started.page-title-container.action`), icon: `mdi-rocket-launch-outline` }"
+                @onPageTitleActionClick="router.push({ name: 'search' })"
             />
         </PageSection>
 
