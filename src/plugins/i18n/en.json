@@ -133,7 +133,7 @@
         "page-title-container": {
             "title": "Drive adoption of solar energy with Solar Insights",
             "description": "Easy to use, highly adaptive, and accurate. Observe the viability of solar installations in one single search.",
-            "action": "Discover potential savings"
+            "action": "Get started on your Solar journey!"
         },
         "usecase-subtitle-container": {
             "subtitle": "What can you do with Solar Insights?",
@@ -153,6 +153,13 @@
                 "title": "Access and utilize wordwide data",
                 "description": "Enjoy the availability and precision of public solar data and weather patterns across the globe, spanning from North America to Oceania."
             }
+        }
+    },
+    "get-started": {
+        "page-title-container": {
+            "title": "",
+            "precision": "",
+            "action": "Already a member? Start using Solar Insights!"
         }
     },
     "search": {

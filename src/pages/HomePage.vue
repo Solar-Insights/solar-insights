@@ -4,8 +4,8 @@
             <PageTitleContainer
                 :pageTitle="$t(`home.page-title-container.title`)"
                 :pageTitlePrecision="$t(`home.page-title-container.description`)"
-                :pageTitleAction="{ text: $t(`home.page-title-container.action`), icon: `mdi-magnify` }"
-                @onPageTitleActionClick="router.push({ name: 'search' })"
+                :pageTitleAction="{ text: $t(`home.page-title-container.action`), icon: `mdi-rocket-launch-outline` }"
+                @onPageTitleActionClick="router.push({ name: 'get-started' })"
             />
         </PageSection>
 
@@ -33,7 +33,7 @@
                 <v-row>
                     <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-telescope</v-icon>
-                        <div class="font-weight-bold mb-3">
+                        <div class="font-weight-medium mb-3">
                             {{ $t(`home.usecase-subtitle-container.visualize.title`) }}
                         </div>
                         <div>
@@ -43,7 +43,7 @@
 
                     <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-hammer</v-icon>
-                        <div class="font-weight-bold mb-3">
+                        <div class="font-weight-medium mb-3">
                             {{ $t(`home.usecase-subtitle-container.customize.title`) }}
                         </div>
                         <div>
@@ -53,7 +53,7 @@
 
                     <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-cash</v-icon>
-                        <div class="font-weight-bold mb-3">
+                        <div class="font-weight-medium mb-3">
                             {{ $t(`home.usecase-subtitle-container.viability.title`) }}
                         </div>
                         <div>
@@ -63,7 +63,7 @@
 
                     <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
                         <v-icon class="mb-3 mx-auto" size="x-large">mdi-earth</v-icon>
-                        <div class="font-weight-bold mb-3">
+                        <div class="font-weight-medium mb-3">
                             {{ $t(`home.usecase-subtitle-container.global.title`) }}
                         </div>
                         <div>
