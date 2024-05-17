@@ -110,3 +110,26 @@
 
 .page-subtitle-action {
 }
+
+.short-description-items-container {
+
+}
+
+.short-description-single-item-container {
+    @extend .mx-auto; 
+    @extend .px-5;
+}
+
+.short-description-item-icon {
+    @extend .mb-3; 
+    @extend .mx-auto;
+}
+
+.short-description-item-title {
+    @extend .font-weight-medium;
+    @extend .mb-3;
+}
+
+.short-description-item-content {
+    
+}
