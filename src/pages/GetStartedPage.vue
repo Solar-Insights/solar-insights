@@ -4,8 +4,6 @@
             <PageTitleContainer
                 :pageTitle="$t(`get-started.page-title-container.title`)"
                 :pageTitlePrecision="$t(`get-started.page-title-container.precision`)"
-                :pageTitleAction="{ text: $t(`get-started.page-title-container.action`), icon: `mdi-magnify` }"
-                @onPageTitleActionClick="router.push({ name: 'search' })"
             />
         </PageSection>
 
@@ -33,7 +31,7 @@
                 </ShortDescriptionItemsContainer>
 
                 <ParagraphContainer 
-                    class="text-center"
+                    class="text-center mx-auto"
                     :paragraphContent="$t(`get-started.register-subtitle-container.create-an-org-paragraph.content`)"
                     :paragraphAction="{ text: $t(`get-started.register-subtitle-container.create-an-org-paragraph.action`), icon: '' }"
                     @onParagraphActionClick="console.log('do something')"
@@ -47,6 +45,20 @@
                 :pageSubtitle="$t(`get-started.use-solar-insights-subtitle-container.subtitle`)"
                 :pageSubtitlePrecision="$t(`get-started.use-solar-insights-subtitle-container.precision`)"
             >
+                <ParagraphContainer 
+                    v-if="!isAuthenticated"
+                    class="text-center mx-auto mb-12"
+                    :paragraphContent="$t(`get-started.use-solar-insights-subtitle-container.new-org-paragraph.content`)"
+                    :paragraphAction="{ text: $t(`get-started.use-solar-insights-subtitle-container.new-org-paragraph.action`), icon: '' }"
+                    @onParagraphActionClick="loginUser"
+                />
+
+                <ParagraphContainer 
+                    class="text-center mx-auto"
+                    :paragraphContent="$t(`get-started.use-solar-insights-subtitle-container.start-using-paragraph.content`)"
+                    :paragraphAction="{ text: $t(`get-started.use-solar-insights-subtitle-container.start-using-paragraph.action`), icon: '' }"
+                    @onParagraphActionClick="console.log('do something')"
+                />
             </PageSubtitleContainer>
         </PageSection>
 
@@ -81,4 +93,10 @@ import ShortDescriptionItem from "@/components/page_sections/ShortDescriptionIte
 import ShortDescriptionItemsContainer from "@/components/page_sections/ShortDescriptionItemsContainer.vue";
 import router from "@/plugins/router";
 import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
+
+import { useAuth0 } from "@auth0/auth0-vue";
+import { handleUserState } from "@/composables/users";
+
+const { loginUser } = handleUserState();
+const { isLoading, isAuthenticated, user } = useAuth0();
 </script>
