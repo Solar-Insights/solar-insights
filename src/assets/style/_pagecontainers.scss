@@ -49,6 +49,11 @@
     }
 }
 
+.bigger-page-content-font {
+    line-height: 1.5rem;
+    font-size: 1.4rem;
+}
+
 .normal-page-content-font {
     line-height: 1.5rem;
     font-size: 1.1rem;
@@ -131,12 +136,13 @@
 }
 
 .short-description-item-title {
+    @extend .bigger-page-content-font;
     @extend .font-weight-medium;
     @extend .mb-3;
 }
 
 .short-description-item-content {
-    
+    @extend .normal-page-content-font;
 }
 
 .paragraph-container {
