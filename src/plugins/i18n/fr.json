@@ -163,9 +163,9 @@
         },
         "register-subtitle-container": {
             "subtitle": "1. Votre organisation",
-            "precision": "Ce sera votre outil principal de collaboration",
+            "precision": "L'outil principal de collaboration",
             "short-items": {
-                "invite": {
+                "manage": {
                     "title": "Gérer tous les accès utilisateurs",
                     "description": "Maintenez votre propre liste d'utilisateurs pour répondre à vos besoins organisationnels."
                 },
@@ -173,9 +173,31 @@
                     "title": "Partager des aperçus avec des collègues",
                     "description": "Envoyez vos Solar Insights favoris à un collègue par l'entremise d'un simple lien."
                 },
-                "save": {
-                    "title": "Enregistrer des données pour utilisation future",
-                    "description": "Sauvegarder des Solar Insights sur votre appareil pour y avoir accès dans le futur, dans un contexte personnel ou professionnel."
+                "help": {
+                    "title": "Collaborer avec d'autres utilisateurs",
+                    "description": "Trouvez les administrateurs et membres de votre organisation en un instant et débuter votre travail d'équipe."
+                }
+            },
+            "create-an-org-paragraph": {
+                "content": "Pour créer une organisation et obtenir l'accès à toutes les fonctionnalités de Solar Insights:",
+                "action": "Contactez notre équipe"
+            }
+        },
+        "use-solar-insights-subtitle-container": {
+            "subtitle": "2. Utiliser et exploiter nos fonctionnalités",
+            "precision": "Le noyau de Solar Insights."
+        },
+        "beyond-solar-insights-subtitle-container": {
+            "subtitle": "3. Aller plus loin que Solar Insights",
+            "precision": "Utilisez nos données de manière optimale, même à l'extérieur de l'application.",
+            "short-items": { 
+                "data": {
+                    "title": "Exporter des données pertinentes",
+                    "description": "Sauvegarder des données Solar Insights sur votre appareil pour réutilisation future, ou même pour intégration avec différents outils."
+                },
+                "graphs": {
+                    "title": "Sauvegarder des chartes et autres supports visuels",
+                    "description": "Utilisez les outils intégrés pour enregistrer des supports visuels propres et présentables d'installations solaires."
                 }
             }
         }

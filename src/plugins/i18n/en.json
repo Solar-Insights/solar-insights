@@ -162,10 +162,10 @@
             "action": "Already a member? Start using Solar Insights!"
         },
         "register-subtitle-container": {
-            "subtitle": "1. Votre organisation",
-            "precision": "It will be your main collaboration tool.",
+            "subtitle": "1. Manage an organization",
+            "precision": "The main collaboration tool.",
             "short-items": {
-                "invite": {
+                "manage": {
                     "title": "Handle all user access",
                     "description": "Maintain your own list of allowed users to fit your organizational needs."
                 },
@@ -173,13 +173,34 @@
                     "title": "Share insights with colleagues",
                     "description": "Send your Solar Insights' discoveries to colleagues with a simple link."
                 },
-                "save": {
-                    "title": "Conserve data for future use",
-                    "description": "Save relevant Solar Insights on your device to reuse in a personnal or professional setting."
+                "help": {
+                    "title": "Collaborate with users",
+                    "description": "Find your organization's admin(s) and members in a matter of seconds and start collaborating."
+                }
+            },
+            "create-an-org-paragraph": {
+                "content": "To create an organization and gain access to every Solar Insights' features:",
+                "action": "Contact our team"
+            }
+        },
+        "use-solar-insights-subtitle-container": {
+            "subtitle": "2. Use and leverage our functionnalities",
+            "precision": "The core of Solar Insights."
+        },
+        "beyond-solar-insights-subtitle-container": {
+            "subtitle": "3. Go beyond Solar Insights",
+            "precision": "Make the most of our data, even outside the app.",
+            "short-items": { 
+                "data": {
+                    "title": "Export valuable data",
+                    "description": "Save relevant Solar Insights data on your device to reuse later, or even integrate with different tools."
+                },
+                "graphs": {
+                    "title": "Save charts and other visual material",
+                    "description": "Use integrated tools to save clean and presentable visual material of solar installations."
                 }
             }
         }
-        
     },
     "search": {
         "not-logged-in": {
