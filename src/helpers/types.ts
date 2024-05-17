@@ -84,9 +84,3 @@ export type MyOrganizationMember = {
     name: string;
     avatar: string;
 };
-
-export type ShortDescriptionItem = {
-    itemTitle: string,
-    itemContent: string,
-    itemIcon?: string
-}

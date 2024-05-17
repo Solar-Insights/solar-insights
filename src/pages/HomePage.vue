@@ -30,47 +30,28 @@
 
         <PageSection>
             <PageSubtitleContainer :pageSubtitle="$t(`home.usecase-subtitle-container.subtitle`)">
-                <v-row>
-                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
-                        <v-icon class="mb-3 mx-auto" size="x-large">mdi-telescope</v-icon>
-                        <div class="font-weight-medium mb-3">
-                            {{ $t(`home.usecase-subtitle-container.visualize.title`) }}
-                        </div>
-                        <div>
-                            {{ $t(`home.usecase-subtitle-container.visualize.description`) }}
-                        </div>
-                    </v-col>
-
-                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
-                        <v-icon class="mb-3 mx-auto" size="x-large">mdi-hammer</v-icon>
-                        <div class="font-weight-medium mb-3">
-                            {{ $t(`home.usecase-subtitle-container.customize.title`) }}
-                        </div>
-                        <div>
-                            {{ $t(`home.usecase-subtitle-container.customize.description`) }}
-                        </div>
-                    </v-col>
-
-                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
-                        <v-icon class="mb-3 mx-auto" size="x-large">mdi-cash</v-icon>
-                        <div class="font-weight-medium mb-3">
-                            {{ $t(`home.usecase-subtitle-container.viability.title`) }}
-                        </div>
-                        <div>
-                            {{ $t(`home.usecase-subtitle-container.viability.description`) }}
-                        </div>
-                    </v-col>
-
-                    <v-col class="mx-auto px-5" cols="12" xs="12" sm="6" md="3">
-                        <v-icon class="mb-3 mx-auto" size="x-large">mdi-earth</v-icon>
-                        <div class="font-weight-medium mb-3">
-                            {{ $t(`home.usecase-subtitle-container.global.title`) }}
-                        </div>
-                        <div>
-                            {{ $t(`home.usecase-subtitle-container.global.description`) }}
-                        </div>
-                    </v-col>
-                </v-row>
+                <ShortDescriptionItemsContainer>
+                    <ShortDescriptionItem
+                        :itemTitle="$t(`home.usecase-subtitle-container.visualize.title`)"
+                        :itemContent="$t(`home.usecase-subtitle-container.visualize.description`)"
+                        :itemIcon="`mdi-telescope`"
+                    />
+                    <ShortDescriptionItem
+                        :itemTitle="$t(`home.usecase-subtitle-container.customize.title`)"
+                        :itemContent="$t(`home.usecase-subtitle-container.customize.description`)"
+                        :itemIcon="`mdi-hammer`"
+                    />
+                    <ShortDescriptionItem
+                        :itemTitle="$t(`home.usecase-subtitle-container.viability.title`)"
+                        :itemContent="$t(`home.usecase-subtitle-container.viability.description`)"
+                        :itemIcon="`mdi-cash`"
+                    />
+                    <ShortDescriptionItem
+                        :itemTitle="$t(`home.usecase-subtitle-container.global.title`)"
+                        :itemContent="$t(`home.usecase-subtitle-container.global.description`)"
+                        :itemIcon="`mdi-earth`"
+                    />
+                </ShortDescriptionItemsContainer>
             </PageSubtitleContainer>
         </PageSection>
     </PageContainer>
@@ -88,6 +69,8 @@ import PageSection from "@/components/page_sections/PageSection.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
 import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 import PageContainer from "@/components/page_sections/PageContainer.vue";
+import ShortDescriptionItem from "@/components/page_sections/ShortDescriptionItem.vue";
+import ShortDescriptionItemsContainer from "@/components/page_sections/ShortDescriptionItemsContainer.vue";
 
 const userSessionStore = useUserSessionStore();
 const { locale, theme } = storeToRefs(userSessionStore);
