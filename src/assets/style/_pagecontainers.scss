@@ -162,3 +162,27 @@
 
 .paragraph-action {
 }
+
+.footer {
+    
+}
+
+.footer-sections-container {
+    @extend .px-12;
+}
+
+.footer-section {
+
+}
+
+.footer-section-title {
+    @extend .pt-6;
+    @extend .pb-2;
+    @extend .font-weight-medium;
+    font-size: 1.1rem;
+}
+
+.footer-section-item {
+    @extend .py-2;
+    @extend .font-weight-light;
+}
