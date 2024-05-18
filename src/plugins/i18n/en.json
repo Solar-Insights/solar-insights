@@ -1,4 +1,8 @@
 {
+    "navigation-sections": {
+        "solar-insights": "Solar Insights",
+        "services": "Services"
+    },
     "navigation": {
         "home": "Home",
         "search": "Solar Potential",
