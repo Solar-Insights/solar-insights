@@ -66,18 +66,21 @@ export const hourCodes = [
 
 export const routes: RouteInfo[] = [
     {
+        section: "Solar Insights",
         name: "get-started",
         icon: "mdi-rocket-launch-outline",
         requiresAuth: false,
         displaysAppBarAndFooter: true,
     },
     {
+        section: "Solar Insights",
         name: "pricing",
         icon: "mdi-currency-usd",
         requiresAuth: false,
         displaysAppBarAndFooter: true,
     },
     {
+        section: "Services",
         name: "search",
         icon: "mdi-weather-sunny",
         requiresAuth: false,

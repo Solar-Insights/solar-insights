@@ -68,6 +68,7 @@ export function getDefaultInstallationExportOptions() {
 }
 
 export type RouteInfo = {
+    section: RouteSection;
     name: string;
     icon: string;
     requiresAuth: boolean;
@@ -90,3 +91,5 @@ export type ButtonAction = {
     text: string;
     icon: string;
 }
+
+export type RouteSection = "Solar Insights" | "Services"

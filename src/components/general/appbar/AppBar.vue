@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar density="comfortable" elevation="0" scroll-behavior="hide" scroll-threshold="1">
+        <v-app-bar density="comfortable" elevation="0">
             <v-btn
                 class="px-2 h-100 ml-0 no-background-hover"
                 :to="{ name: 'home' }"
@@ -17,7 +17,7 @@
 
             <v-app-bar-nav-icon class="hidden-sm-and-up" variant="text" @click.stop="drawer = !drawer" />
 
-            <v-toolbar-items class="hidden-xs" v-for="route in routes" >
+            <v-toolbar-items class="hidden-xs" v-for="route in appBarRoutes" >
                 <RouteButton :routeInfo="route" />
             </v-toolbar-items>
 
@@ -30,7 +30,7 @@
 
         <v-navigation-drawer v-model="drawer" class="hidden-sm-and-up" disable-resize-watcher>
             <v-list>
-                <v-list-item v-for="route in routes">
+                <v-list-item v-for="route in appBarRoutes">
                     <RouteButton :routeInfo="route" />
                 </v-list-item>
             </v-list>
@@ -52,6 +52,10 @@ import RouteButton from "@/components/general/appbar/RouteButton.vue";
 import MenuButton from "@/components/general/appbar/MenuButton.vue";
 import logo_nobg from "@/assets/images/general/logo_nobg.png";
 import { routes, menus } from "@/helpers/constants";
+import { RouteInfo } from "@/helpers/types";
 
 const drawer = ref(false);
+
+const appBarRouteNames = ["get-started", "pricing", "search"];
+const appBarRoutes = ref<RouteInfo[]>(routes.filter((route) => appBarRouteNames.includes(route.name)));
 </script>
