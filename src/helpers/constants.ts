@@ -64,23 +64,38 @@ export const hourCodes = [
     "23:00"
 ];
 
+// All available routes for the sitemap in footer. Helps for appbar too
 export const routes: RouteInfo[] = [
     {
-        section: "Solar Insights",
+        section: "solar-insights",
+        name: "home",
+        icon: "mdi-home-outline",
+        requiresAuth: false,
+        displaysAppBarAndFooter: true,
+    },
+    {
+        section: "solar-insights",
         name: "get-started",
         icon: "mdi-rocket-launch-outline",
         requiresAuth: false,
         displaysAppBarAndFooter: true,
     },
     {
-        section: "Solar Insights",
+        section: "solar-insights",
         name: "pricing",
         icon: "mdi-currency-usd",
         requiresAuth: false,
         displaysAppBarAndFooter: true,
     },
     {
-        section: "Services",
+        section: "services",
+        name: "my-organization",
+        icon: "mdi-weather-sunny",
+        requiresAuth: true,
+        displaysAppBarAndFooter: true,
+    },
+    {
+        section: "services",
         name: "search",
         icon: "mdi-weather-sunny",
         requiresAuth: false,

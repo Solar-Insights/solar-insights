@@ -92,4 +92,4 @@ export type ButtonAction = {
     icon: string;
 }
 
-export type RouteSection = "Solar Insights" | "Services"
+export type RouteSection = "solar-insights" | "services"
