@@ -1,3 +1,5 @@
+import { RouteInfo } from "@/helpers/types";
+
 export function circularBarColorSelector(value: string) {
     const numValue: number = Number(value);
     if (isNaN(numValue)) return "green";
@@ -60,4 +62,36 @@ export const hourCodes = [
     "21:00",
     "22:00",
     "23:00"
+];
+
+export const routes: RouteInfo[] = [
+    {
+        name: "get-started",
+        icon: "mdi-rocket-launch-outline",
+        requiresAuth: false,
+        displaysAppBarAndFooter: true,
+    },
+    {
+        name: "pricing",
+        icon: "mdi-currency-usd",
+        requiresAuth: false,
+        displaysAppBarAndFooter: true,
+    },
+    {
+        name: "search",
+        icon: "mdi-weather-sunny",
+        requiresAuth: false,
+        displaysAppBarAndFooter: true,
+    }
+];
+
+export const menus = [
+    {
+        menuName: "user",
+        icon: "mdi-account-outline"
+    },
+    {
+        menuName: "settings",
+        icon: "mdi-cog-outline"
+    }
 ];

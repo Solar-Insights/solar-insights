@@ -47,42 +47,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import RouteButton from "@/components/general/appbar/RouteButton.vue";
 import MenuButton from "@/components/general/appbar/MenuButton.vue";
 import logo_nobg from "@/assets/images/general/logo_nobg.png";
-import { RouteInfo } from "@/helpers/types";
+import { routes, menus } from "@/helpers/constants";
 
 const drawer = ref(false);
-
-const routes = computed(() => {
-    return [
-        {
-            name: "get-started",
-            icon: "mdi-rocket-launch-outline",
-            requiresAuth: false
-        },
-        {
-            name: "pricing",
-            icon: "mdi-currency-usd",
-            requiresAuth: false,
-        },
-        {
-            name: "search",
-            icon: "mdi-weather-sunny",
-            requiresAuth: false
-        }
-    ] as RouteInfo[];
-});
-
-const menus = ref([
-    {
-        menuName: "user",
-        icon: "mdi-account-outline"
-    },
-    {
-        menuName: "settings",
-        icon: "mdi-cog-outline"
-    }
-]);
 </script>
