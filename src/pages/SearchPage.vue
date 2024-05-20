@@ -32,20 +32,24 @@
             </PageTitleContainer>
         </PageSection>
 
-        <PageSection
-            v-for="step in steps"
-        >
-            <PageSubtitleContainer
-                :pageSubtitle="step.title"
-                :pageSubtitleIcon="step.icon"
-            >
-                <ParagraphContainer
-                    v-for="paragraph in step.contents"
-                    :paragraphContent="paragraph"
-                    class="text-center mx-auto"
-                />
-            </PageSubtitleContainer>
-        </PageSection>
+        <div v-for="step, index in steps">
+            <PageSection>
+                <PageSubtitleContainer
+                    :pageSubtitle="step.title"
+                    :pageSubtitleIcon="step.icon"
+                >
+                    <ParagraphContainer
+                        v-for="paragraph in step.contents"
+                        :paragraphContent="paragraph"
+                        class="text-center mx-auto"
+                    />
+                </PageSubtitleContainer>
+
+                
+            </PageSection>
+
+            <v-divider v-if="index + 1 !== steps.length"/>
+        </div>
     </PageContainer>
 </template>
 
