@@ -191,13 +191,17 @@
         "use-solar-insights-subtitle-container": {
             "subtitle": "2. Use and leverage our functionnalities",
             "precision": "The core of Solar Insights.",
-            "new-org-paragraph": {
-                "content": "Once you are part of an organization, login to start using Solar Insights and its range of tools. You will be redirected for this process.",
-                "action": "Login"
-            },
-            "start-using-paragraph": {
-                "content": "Once authenticated, you should now be able to benefit from everything Solar Insights has to offer. Start a building research now.",
-                "action": "Go to Search page"
+            "short-items": {
+                "new-org": {
+                    "title": "Preliminary step",
+                    "description": "You need to login to start using Solar Insights and its range of tools.",
+                    "action": "Login"
+                },
+                "start-using": {
+                    "title": "Get started",
+                    "description": "Start a building research now to benefit from everything Solar Insights has to offer.",
+                    "action": "Go to Solar Potential page"
+                }
             }
         },
         "beyond-solar-insights-subtitle-container": {

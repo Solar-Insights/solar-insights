@@ -191,13 +191,17 @@
         "use-solar-insights-subtitle-container": {
             "subtitle": "2. Utiliser et exploiter nos fonctionnalités",
             "precision": "Le noyau de Solar Insights.",
-            "new-org-paragraph": {
-                "content": "Une fois membre d'une organisation, connectez-vous pour commencer à utiliser Solar Insights. Vous serez rediriger pour ce processus.",
-                "action": "Connexion"
-            },
-            "start-using-paragraph": {
-                "content": "Une fois authentifié, vous pouvez désormais bénéficier de tout ce que Solar Insights offre. Faites une recherche de bâtiment dès maintenant:",
-                "action": "Aller à la page de recherche"
+            "short-items": {
+                "new-org": {
+                    "title": "Étape préliminaire",
+                    "description": "Vous devez être authentifié pour utiliser Solar Insights et toutes ses fonctionnalités.",
+                    "action": "Connexion"
+                },
+                "start-using": {
+                    "title": "Commencer l'utilisation",
+                    "description": "Faites une recherche de bâtiment dès maintenant pour bénéficier de tout ce que Solar Insights peut vous offrir.",
+                    "action": "Go to Solar Potential page"
+                }
             }
         },
         "beyond-solar-insights-subtitle-container": {

@@ -46,21 +46,24 @@
             <PageSubtitleContainer
                 :pageSubtitle="$t(`get-started.use-solar-insights-subtitle-container.subtitle`)"
                 :pageSubtitlePrecision="$t(`get-started.use-solar-insights-subtitle-container.precision`)"
-            >
-                <ParagraphContainer 
-                    v-if="!isAuthenticated"
-                    class="text-center mx-auto mb-12"
-                    :paragraphContent="$t(`get-started.use-solar-insights-subtitle-container.new-org-paragraph.content`)"
-                    :paragraphAction="{ text: $t(`get-started.use-solar-insights-subtitle-container.new-org-paragraph.action`), icon: '' }"
-                    @onParagraphActionClick="loginUser"
-                />
-
-                <ParagraphContainer 
-                    class="text-center mx-auto"
-                    :paragraphContent="$t(`get-started.use-solar-insights-subtitle-container.start-using-paragraph.content`)"
-                    :paragraphAction="{ text: $t(`get-started.use-solar-insights-subtitle-container.start-using-paragraph.action`), icon: '' }"
-                    @onParagraphActionClick="console.log('do something')"
-                />
+            >   
+                <ShortDescriptionItemsContainer>
+                    <ShortDescriptionItem
+                        v-if="!isAuthenticated"
+                        :itemTitle="$t(`get-started.use-solar-insights-subtitle-container.short-items.new-org.title`)"
+                        :itemContent="$t(`get-started.use-solar-insights-subtitle-container.short-items.new-org.description`)"
+                        :itemIcon="`mdi-account-outline`"
+                        :itemAction="{ 'text': $t('get-started.use-solar-insights-subtitle-container.short-items.new-org.action') }"
+                        @onItemActionClick="loginUser"
+                    />
+                    <ShortDescriptionItem
+                        :itemTitle="$t(`get-started.use-solar-insights-subtitle-container.short-items.start-using.title`)"
+                        :itemContent="$t(`get-started.use-solar-insights-subtitle-container.short-items.start-using.description`)"
+                        :itemIcon="`mdi-play`"
+                        :itemAction="{ 'text': $t('get-started.use-solar-insights-subtitle-container.short-items.start-using.action') }"
+                        @onItemActionClick="console.log('do something')"
+                    />
+                </ShortDescriptionItemsContainer>
             </PageSubtitleContainer>
         </PageSection>
 
@@ -74,6 +77,7 @@
                         :itemTitle="$t(`get-started.beyond-solar-insights-subtitle-container.short-items.data.title`)"
                         :itemContent="$t(`get-started.beyond-solar-insights-subtitle-container.short-items.data.description`)"
                         :itemIcon="`mdi-database-outline`"
+
                     />
                     <ShortDescriptionItem
                         :itemTitle="$t(`get-started.beyond-solar-insights-subtitle-container.short-items.graphs.title`)"

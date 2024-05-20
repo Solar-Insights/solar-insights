@@ -47,12 +47,3 @@ $light-grey: rgba(148, 148, 148, 1);
 .no-emphasis {
     @extend .font-weight-light;
 }
-
-a, a:visited, a:hover, a:active {
-    color: inherit !important;
-    text-decoration: none !important;
-}
-
-a:hover {
-    text-decoration: underline !important;
-}

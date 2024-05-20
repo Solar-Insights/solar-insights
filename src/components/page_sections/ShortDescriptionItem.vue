@@ -13,13 +13,27 @@
         </div>
         
         <div class="short-description-item-content">
-            {{ itemContent}}
+            {{ itemContent }}
+        </div>
+
+        <div v-if="objectHasValue(props.itemAction)" class="short-description-single-item-action">
+            <v-btn
+                @click="emits('onItemActionClick')"
+                class="rounded-lg font-weight-medium"
+                elevation="2"
+                color="theme"
+                :append-icon="props.itemAction?.icon"
+            >
+                {{ props.itemAction?.text }}
+            </v-btn>
         </div>
     </v-col>
 </template>
 
 <script setup lang="ts">
-import { stringHasValue } from '@/helpers/componentConditionals';
+import { stringHasValue, objectHasValue } from '@/helpers/componentConditionals';
+import { ButtonAction } from '@/helpers/types';
+import { PropType } from 'vue';
 
 const props = defineProps({
     itemTitle: {
@@ -33,7 +47,13 @@ const props = defineProps({
     itemIcon: {
         type: String,
         required: false
+    },
+    itemAction: {
+        type: Object as PropType<ButtonAction>,
+        required: false
     }
 });
+
+const emits = defineEmits(["onItemActionClick"]);
 
 </script>

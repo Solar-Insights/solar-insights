@@ -89,7 +89,7 @@ export type MyOrganizationMember = {
 
 export type ButtonAction = {
     text: string;
-    icon: string;
+    icon?: string;
 }
 
 export type RouteSection = "solar-insights" | "services"

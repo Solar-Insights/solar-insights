@@ -149,6 +149,7 @@
 
 .short-description-item-content {
     @extend .normal-page-content-font;
+    @extend .mb-3;
 }
 
 .paragraph-container {
@@ -185,4 +186,13 @@
 .footer-section-item {
     @extend .py-2;
     @extend .font-weight-light;
+}
+
+.footer-section-item a, a:visited, a:hover, a:active {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+.footer-section-item a:hover {
+    text-decoration: underline !important;
 }
