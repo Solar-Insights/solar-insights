@@ -3,12 +3,25 @@
         <div v-if="stringHasValue(props.pageSubtitlePrecontent)" class="page-subtitle-precontent">
             {{ props.pageSubtitlePrecontent }}
         </div>
-        <div v-if="stringHasValue(props.pageSubtitle)" class="page-subtitle">{{ props.pageSubtitle }}</div>
+
+        <div v-if="stringHasValue(props.pageSubtitle)" class="page-subtitle">
+            <v-icon 
+                v-if="stringHasValue(props.pageSubtitleIcon)"
+                class="mb-3"
+                size="small"
+            >
+                {{ props.pageSubtitleIcon }}
+            </v-icon>
+
+            <div>
+                {{ props.pageSubtitle }}
+            </div>
+        </div>
+
         <div v-if="stringHasValue(props.pageSubtitlePrecision)" class="page-subtitle-precision">
             {{ props.pageSubtitlePrecision }}
         </div>
 
-        <!-- Add custom content -->
         <div class="page-subtitle-content">
             <slot></slot>
         </div>
@@ -47,6 +60,10 @@ const props = defineProps({
     pageSubtitle: {
         type: String,
         required: true
+    },
+    pageSubtitleIcon: {
+        type: String,
+        required: false
     },
     pageSubtitlePrecision: {
         type: String,

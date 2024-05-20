@@ -228,6 +228,7 @@
             "action": "Se connecter pour visualiser un bâtiment"
         },
         "title": "Trouvez votre prochaine installation solaire",
+        "precision": " étapes pour démarrer avec Solar Insights",
         "timeline": {
             "title": " étapes pour démarrer avec Solar Insights",
             "step-1": {
@@ -237,25 +238,25 @@
             },
             "step-2": {
                 "title": "Obtenez un aperçu d'une installation solaire",
-                "content-1": "Une fois redirigé, observer le panneau <b>Aperçus solaires</b>.",
+                "content-1": "Une fois redirigé, observer le panneau Aperçus solaires.",
                 "content-2": "Il présente des informations critiques sur l'installation solaire du bâtiment.",
                 "content-3": "Par défaut, l'installation solaire est optimisé pour maximiser l'épargne solaire."
             },
             "step-3": {
                 "title": "Personnaliser une installation solaire et ses paramètres",
                 "content-1": "Deux sections permettent la personnalisation de l'installation et des paramètres de l'analyse financière:",
-                "content-2": "La section <b>Panneaux</b> contient des paramètres la puissance la perte annuelle d'efficacité des panneaux. Ils ont été remplis avec des valeurs provenant de standards de l'industrie solaire.",
-                "content-3": "La section <b>Coûts et subventions</b> emploie des données financières issuent du ménage canadien moyen.",
+                "content-2": "La section Panneaux contient des paramètres la puissance la perte annuelle d'efficacité des panneaux. Ils ont été remplis avec des valeurs provenant de standards de l'industrie solaire.",
+                "content-3": "La section Coûts et subventions emploie des données financières issuent du ménage canadien moyen.",
                 "content-4": "Faites des ajustements à cette section pour mieux représenter votre situation personnelle."
             },
             "step-4": {
                 "title": "Optimiser une installation solaire",
-                "content-1": "La section <b>Optimisations</b> vise les utilisateurs souhaitant optimiser une installation solaire en fonction d'un critère particulier.",
+                "content-1": "La section Optimisations vise les utilisateurs souhaitant optimiser une installation solaire en fonction d'un critère particulier.",
                 "content-2": "Sélectionner le critère que vous préférez, et observez les changements!"
             },
             "step-5": {
                 "title": "Ajuster le style de la carte",
-                "content-1": "La section <b>Paramètres</b> permet d'activer / désactiver la visibilité de certains éléments de la carte comme les panneaux.",
+                "content-1": "La section Paramètres permet d'activer / désactiver la visibilité de certains éléments de la carte comme les panneaux.",
                 "content-2": "Aussi, vous pouvez utiliser le menu déroulant pour visualiser des patterns solaires mensuels ou quotidiens."
             }
         }

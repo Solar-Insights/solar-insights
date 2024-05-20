@@ -227,6 +227,7 @@
             "action": "Sign in to gain insights on a building"
         },
         "title": "Find your next solar installation",
+        "precision": "-Step starter guide to Solar Insights",
         "timeline": {
             "title": "-Step starter guide to Solar Insights",
             "step-1": {
@@ -236,25 +237,25 @@
             },
             "step-2": {
                 "title": "Gain insights on a solar installation",
-                "content-1": "Once redirected, take a look at the <b>Solar Insights</b> panel.",
+                "content-1": "Once redirected, take a look at the Solar Insights panel.",
                 "content-2": "It displays valuable informations about the solar installation of building.",
                 "content-3": "By default, the installation is optimized to maximize total savings."
             },
             "step-3": {
                 "title": "Customize a solar installation and its parameters",
                 "content-1": "Two sections enable you to customize your installation and parameters used for their analysis:",
-                "content-2": "The <b>Panels</b> section contains parameters like the power rating and the yearly efficiency decline of panels. They have been prefilled with industry-standard values.",
-                "content-3": "The <b>Cost and incentives</b> section incorporates financial data for the average Canadian household.",
+                "content-2": "The Panels section contains parameters like the power rating and the yearly efficiency decline of panels. They have been prefilled with industry-standard values.",
+                "content-3": "The Cost and incentives section incorporates financial data for the average Canadian household.",
                 "content-4": "Make adjustments to these sections to better reflect your unique situation."
             },
             "step-4": {
                 "title": "Optimize a solar installation",
-                "content-1": "The <b>Optimizations</b> section is aimed at users wishing to optimize the current solar installation for a specific criteria.",
+                "content-1": "The Optimizations section is aimed at users wishing to optimize the current solar installation for a specific criteria.",
                 "content-2": "Select the one you prefer, and see the changes for yourself!"
             },
             "step-5": {
                 "title": "Adjust the look and feel of the map",
-                "content-1": "The <b>Settings</b> section gives you the ability to enable / disable the visbility of certain map elements like the panels.",
+                "content-1": "The Settings section gives you the ability to enable / disable the visbility of certain map elements like the panels.",
                 "content-2": "Also, you can use the drop-down menu to display monthly or daily solar patterns."
             }
         }

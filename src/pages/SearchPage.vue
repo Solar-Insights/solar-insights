@@ -1,7 +1,9 @@
 <template>
     <PageContainer>
         <PageSection>
-            <PageTitleContainer :pageTitle="$t(`search.title`)">
+            <PageTitleContainer 
+                :pageTitle="$t(`search.title`)"
+            >
                 <v-skeleton-loader class="search-loader" :loading="isLoading" type="chip">
                     <AutocompleteField
                         v-if="isAuthenticated"
@@ -30,22 +32,40 @@
             </PageTitleContainer>
         </PageSection>
 
-        <PageSection>
-            <HelperTimelineSection />
+        <PageSection
+            v-for="step in steps"
+        >
+            <PageSubtitleContainer
+                :pageSubtitle="step.title"
+                :pageSubtitleIcon="step.icon"
+            >
+                <ParagraphContainer
+                    v-for="paragraph in step.contents"
+                    :paragraphContent="paragraph"
+                    class="text-center mx-auto"
+                />
+            </PageSubtitleContainer>
         </PageSection>
     </PageContainer>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import router from "@/plugins/router";
 import { LatLng } from "geo-env-typing/geo";
 import AutocompleteField from "@/components/general/AutocompleteField.vue";
-import HelperTimelineSection from "@/components/search/HelperTimelineSection.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
+import { useI18n } from "vue-i18n";
 import { handleUserState } from "@/composables/users";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageContainer from "@/components/page_sections/PageContainer.vue";
+import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
+import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
+import optimizations_en from "@/assets/images/search/optimizations_en.png";
+import panels_section from "@/assets/images/search/panels_section_en.png";
+import settings_en from "@/assets/images/search/settings_en.png";
+import solar_insights_en from "@/assets/images/search/solar_insights_en.png";
 
 const { loginUser } = handleUserState();
 
@@ -54,4 +74,47 @@ const { isLoading, isAuthenticated } = useAuth0();
 function sendToMap(coords: LatLng, address: string) {
     router.push({ name: "solar-map", query: coords });
 }
+
+const t = useI18n().t;
+const steps = ref([
+    {
+        icon: "mdi-magnify",
+        title: t(`search.timeline.step-1.title`),
+        contents: [t(`search.timeline.step-1.content-1`), t(`search.timeline.step-1.content-2`)],
+        images: []
+    },
+    {
+        icon: "mdi-weather-sunny",
+        title: t(`search.timeline.step-2.title`),
+        contents: [
+            t(`search.timeline.step-2.content-1`),
+            t(`search.timeline.step-2.content-2`),
+            t(`search.timeline.step-2.content-3`)
+        ],
+        images: [solar_insights_en]
+    },
+    {
+        icon: "mdi-pencil",
+        title: t(`search.timeline.step-3.title`),
+        contents: [
+            t(`search.timeline.step-3.content-1`),
+            t(`search.timeline.step-3.content-2`),
+            t(`search.timeline.step-3.content-3`),
+            t(`search.timeline.step-3.content-4`)
+        ],
+        images: [panels_section]
+    },
+    {
+        icon: "mdi-podium-gold",
+        title: t(`search.timeline.step-4.title`),
+        contents: [t(`search.timeline.step-4.content-1`), t(`search.timeline.step-4.content-2`)],
+        images: [optimizations_en]
+    },
+    {
+        icon: "mdi-map-marker",
+        title: t(`search.timeline.step-5.title`),
+        contents: [t(`search.timeline.step-5.content-1`), t(`search.timeline.step-5.content-2`)],
+        images: [settings_en]
+    }
+]);
 </script>
