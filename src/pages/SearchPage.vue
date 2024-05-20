@@ -2,6 +2,7 @@
     <PageContainer>
         <PageSection>
             <PageTitleContainer 
+                :pageTitlePrecontent="`${steps.length}${$t(`search.precontent`)}`"
                 :pageTitle="$t(`search.title`)"
             >
                 <v-skeleton-loader class="search-loader" :loading="isLoading" type="chip">
@@ -35,17 +36,22 @@
         <div v-for="step, index in steps">
             <PageSection>
                 <PageSubtitleContainer
-                    :pageSubtitle="step.title"
+                    :pageSubtitle="`${index+1}. ${step.title}`"
                     :pageSubtitleIcon="step.icon"
                 >
                     <ParagraphContainer
                         v-for="paragraph in step.contents"
                         :paragraphContent="paragraph"
-                        class="text-center mx-auto"
+                        class="text-center mx-auto text-justify"
+                    />
+
+                    <ImageContainer
+                        v-for="image in step.images"
+                        :pcImageSrc="image" 
+                        :mobileImageSrc="image"
+                        :maxWidth="500"
                     />
                 </PageSubtitleContainer>
-
-                
             </PageSection>
 
             <v-divider v-if="index + 1 !== steps.length"/>
@@ -54,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed } from "vue";
 import router from "@/plugins/router";
 import { LatLng } from "geo-env-typing/geo";
 import AutocompleteField from "@/components/general/AutocompleteField.vue";
@@ -70,6 +76,7 @@ import optimizations_en from "@/assets/images/search/optimizations_en.png";
 import panels_section from "@/assets/images/search/panels_section_en.png";
 import settings_en from "@/assets/images/search/settings_en.png";
 import solar_insights_en from "@/assets/images/search/solar_insights_en.png";
+import ImageContainer from "@/components/page_sections/ImageContainer.vue";
 
 const { loginUser } = handleUserState();
 
@@ -80,45 +87,48 @@ function sendToMap(coords: LatLng, address: string) {
 }
 
 const t = useI18n().t;
-const steps = ref([
-    {
-        icon: "mdi-magnify",
-        title: t(`search.timeline.step-1.title`),
-        contents: [t(`search.timeline.step-1.content-1`), t(`search.timeline.step-1.content-2`)],
-        images: []
-    },
-    {
-        icon: "mdi-weather-sunny",
-        title: t(`search.timeline.step-2.title`),
-        contents: [
-            t(`search.timeline.step-2.content-1`),
-            t(`search.timeline.step-2.content-2`),
-            t(`search.timeline.step-2.content-3`)
-        ],
-        images: [solar_insights_en]
-    },
-    {
-        icon: "mdi-pencil",
-        title: t(`search.timeline.step-3.title`),
-        contents: [
-            t(`search.timeline.step-3.content-1`),
-            t(`search.timeline.step-3.content-2`),
-            t(`search.timeline.step-3.content-3`),
-            t(`search.timeline.step-3.content-4`)
-        ],
-        images: [panels_section]
-    },
-    {
-        icon: "mdi-podium-gold",
-        title: t(`search.timeline.step-4.title`),
-        contents: [t(`search.timeline.step-4.content-1`), t(`search.timeline.step-4.content-2`)],
-        images: [optimizations_en]
-    },
-    {
-        icon: "mdi-map-marker",
-        title: t(`search.timeline.step-5.title`),
-        contents: [t(`search.timeline.step-5.content-1`), t(`search.timeline.step-5.content-2`)],
-        images: [settings_en]
-    }
-]);
+const steps = computed(() => {
+    return [
+        {
+            icon: "mdi-magnify",
+            title: t(`search.timeline.step-1.title`),
+            contents: [t(`search.timeline.step-1.content-1`)],
+            images: []
+        },
+        {
+            icon: "mdi-weather-sunny",
+            title: t(`search.timeline.step-2.title`),
+            contents: [t(`search.timeline.step-2.content-1`)],
+            images: [solar_insights_en]
+        },
+        {
+            icon: "mdi-pencil",
+            title: t(`search.timeline.step-3.title`),
+            contents: [
+                t(`search.timeline.step-3.content-1`),
+                t(`search.timeline.step-3.content-2`),
+                t(`search.timeline.step-3.content-3`)
+            ],
+            images: [panels_section]
+        },
+        {
+            icon: "mdi-podium-gold",
+            title: t(`search.timeline.step-4.title`),
+            contents: [t(`search.timeline.step-4.content-1`), t(`search.timeline.step-4.content-2`)],
+            images: [optimizations_en]
+        },
+        {
+            icon: "mdi-map-marker",
+            title: t(`search.timeline.step-5.title`),
+            contents: [t(`search.timeline.step-5.content-1`), t(`search.timeline.step-5.content-2`)],
+            images: [settings_en]
+        },
+        {
+            icon: "mdi-map-marker",
+            title: t(`search.timeline.step-6.title`),
+            contents: [t(`search.timeline.step-6.content-1`)],
+            images: []
+        }
+    ]
+});
 </script>
