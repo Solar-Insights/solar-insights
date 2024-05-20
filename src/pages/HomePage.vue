@@ -10,7 +10,10 @@
         </PageSection>
 
         <PageSection>
-            <v-img class="home-main-image" :src="solar_insights_overview" />
+            <ImageContainer 
+                :pcImageSrc="solar_insights_overview" 
+                :mobileImageSrc="solar_insights_overview"
+            />
         </PageSection>
 
         <PageSection>
