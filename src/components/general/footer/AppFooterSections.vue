@@ -1,8 +1,10 @@
 <template>
     <v-row class="footer-sections-container">
+        <v-divider/>
+
         <v-col 
             v-for="section, sectionName in sections"
-            class="footer-section" 
+            class="footer-section my-12" 
             cols="12" xs="12" sm="6" md="4"
         >
             <div class="footer-section-title">
@@ -20,6 +22,21 @@
                 </div>
             </div>
         </v-col>
+
+        <v-divider/>
+
+        <v-col 
+            class="footer-section text-center" 
+            cols="12"
+        >
+            <div>
+                {{ new Date().getFullYear() }} — Solar Insights 
+            </div>
+            <div >
+                {{ $t(`global.slogan`) }}
+            </div>
+        </v-col>
+
     </v-row>
 </template>
 

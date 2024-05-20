@@ -1,4 +1,7 @@
 {
+    "global": {
+        "slogan": "Propulser l'adoption de l'énergie solaire "
+    },
     "navigation-sections": {
         "solar-insights": "Solar Insights",
         "services": "Services"

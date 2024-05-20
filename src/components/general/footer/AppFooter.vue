@@ -1,8 +1,6 @@
 <template>
     <v-footer class="footer">
-        <v-card class="w-100" elevation="0">
-            <AppFooterSections/>
-        </v-card>
+        <AppFooterSections/>
     </v-footer>
 </template>
 

@@ -1,4 +1,7 @@
 {
+    "global": {
+        "slogan": "Drive adoption of solar energy"
+    },
     "navigation-sections": {
         "solar-insights": "Solar Insights",
         "services": "Services"
