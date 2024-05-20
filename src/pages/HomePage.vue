@@ -10,22 +10,7 @@
         </PageSection>
 
         <PageSection>
-            <v-img v-if="theme === 'dark' && locale === 'en'" class="home-main-image" :src="solar_insights_dark_en" />
-            <v-img
-                v-else-if="theme === 'dark' && locale === 'fr'"
-                class="home-main-image"
-                :src="solar_insights_dark_fr"
-            />
-            <v-img
-                v-else-if="theme === 'light' && locale === 'en'"
-                class="home-main-image"
-                :src="solar_insights_light_en"
-            />
-            <v-img
-                v-else-if="theme === 'light' && locale === 'fr'"
-                class="home-main-image"
-                :src="solar_insights_light_fr"
-            />
+            <v-img class="home-main-image" :src="solar_insights_overview" />
         </PageSection>
 
         <PageSection>
@@ -58,10 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import solar_insights_dark_en from "@/assets/images/general/solar_insights_dark_en.png";
-import solar_insights_dark_fr from "@/assets/images/general/solar_insights_dark_fr.png";
-import solar_insights_light_en from "@/assets/images/general/solar_insights_light_en.png";
-import solar_insights_light_fr from "@/assets/images/general/solar_insights_light_fr.png";
+import solar_insights_overview from "@/assets/images/home/solar_insights_overview.png";
 import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import router from "@/plugins/router";
@@ -71,6 +53,7 @@ import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContai
 import PageContainer from "@/components/page_sections/PageContainer.vue";
 import ShortDescriptionItem from "@/components/page_sections/ShortDescriptionItem.vue";
 import ShortDescriptionItemsContainer from "@/components/page_sections/ShortDescriptionItemsContainer.vue";
+import ImageContainer from "@/components/page_sections/ImageContainer.vue";
 
 const userSessionStore = useUserSessionStore();
 const { locale, theme } = storeToRefs(userSessionStore);
