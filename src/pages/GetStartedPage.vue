@@ -41,6 +41,7 @@
             </PageSubtitleContainer>
         </PageSection>
 
+        <v-divider/>
 
         <PageSection>
             <PageSubtitleContainer
@@ -66,6 +67,8 @@
                 </ShortDescriptionItemsContainer>
             </PageSubtitleContainer>
         </PageSection>
+
+        <v-divider/>
 
         <PageSection>
             <PageSubtitleContainer
