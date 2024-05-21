@@ -2,7 +2,8 @@
     <PageContainer>
         <PageSection>
             <PageTitleContainer
-                :pageTitle="'Pricing'"
+                :pageTitle="'Simple and unsurpricing pricing'"
+                :pageTitlePrecision="`Pay only for what you need`"
             />
         </PageSection>
 
@@ -13,7 +14,22 @@
                     :pricingCardDetails="{
                         name: `Pro`,
                         description: `For production applications with the option to scale.`,
-                        action: `Get Started`
+                        action: `Get Started`,
+                        benefits: {
+                            title: `Get started with`,
+                            benefits: [
+                                {
+                                    title: `Unlimited API requests`
+                                }, 
+                                {
+                                    title: `5 GB bandwidth`,
+                                    description: `then $0.125 per GB`
+                                }, 
+                                {
+                                    title: `Community support`
+                                }
+                            ]
+                        }
                     }"
                 />
             </v-row>

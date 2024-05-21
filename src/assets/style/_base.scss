@@ -196,8 +196,12 @@ $light-line: #dadada;
     @extend .px-4;
 }
 
-.dark-pricing-card {
+.dark-pricing-color {
     background-color: #292929;
+}
+
+.dark-pricing-card {
+    @extend .dark-pricing-color;
     border: 1px solid $dark-line;
 }
 
@@ -221,4 +225,8 @@ $light-line: #dadada;
     @extend .font-weight-medium;
     @extend .w-100;
     @extend .my-4;
+}
+
+.pricing-card-container {
+    @extend .my-6;
 }

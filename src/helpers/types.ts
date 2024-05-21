@@ -98,4 +98,15 @@ export type PricingCardDetails = {
     name: string,
     description: string,
     action: string,
+    benefits: PricingCardBenefits
 };
+
+export type PricingCardBenefits = {
+    title: string,
+    benefits: PricingCardSingleBenefit[]
+};
+
+export type PricingCardSingleBenefit = {
+    title: string,
+    description?: string
+}
