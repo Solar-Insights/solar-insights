@@ -34,6 +34,10 @@ $light-grey: rgba(148, 148, 148, 1);
     font-family: "Roboto", sans-serif;
 }
 
+.titles-font-spacing {
+    letter-spacing: 0.15em;
+}
+
 .universal-font-theme {
     @extend .font-weight-light;
     @extend .universal-font-size;

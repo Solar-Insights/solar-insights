@@ -93,3 +93,9 @@ export type ButtonAction = {
 }
 
 export type RouteSection = "solar-insights" | "services"
+
+export type PricingCardDetails = {
+    name: string,
+    description: string,
+    action: string,
+};

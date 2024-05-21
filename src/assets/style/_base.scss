@@ -187,3 +187,23 @@
 .app-menu-option-text-container {
     @extend .text-center;
 }
+
+.pricing-card {
+    @extend .py-5;
+    @extend .px-2;
+}
+
+.dark-pricing-card {
+    background-color: #292929;
+}
+
+.pricing-card-name {
+    @extend .text-overline;
+    font-size: 1.25rem !important
+}
+
+.pricing-card-description {
+    @extend .text-disabled;
+    font-size: 0.9rem !important;
+    line-height: 1.25rem;
+}
