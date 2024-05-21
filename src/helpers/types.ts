@@ -95,7 +95,7 @@ export type ButtonAction = {
 export type RouteSection = "solar-insights" | "services"
 
 export type PricingCardDetails = {
-    name: string,
+    pricingTier: PricingTier,
     description: string,
     action: string,
     benefits: PricingCardBenefits
@@ -110,3 +110,13 @@ export type PricingCardSingleBenefit = {
     title: string,
     description?: string
 }
+
+export type PricingTier = "Starter" | "Pro" | "Enterprise";
+
+export type NewOrganizationForm = {
+    name: string,
+    contactEmail: string,
+    pricingTier: PricingTier,
+    canadian: boolean,
+    additionnalNotes: string,
+};

@@ -5,7 +5,7 @@
             :class="theme === 'dark' ? 'dark-pricing-card' : 'light-pricing-card'"
             elevation="5"
         >
-            <div class="pricing-card-name">{{ props.pricingCardDetails.name }}</div>
+            <div class="pricing-card-name">{{ props.pricingCardDetails.pricingTier }}</div>
 
             <div class="pricing-card-description">{{ props.pricingCardDetails.description }}</div>
 

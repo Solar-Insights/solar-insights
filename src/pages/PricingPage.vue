@@ -8,11 +8,11 @@
         </PageSection>
 
         <PageSection>
-            <v-row>
+            <v-row class="justify-center">
                 <PricingCard
-                    v-for="i in 4"
+                    v-for="str in ['Starter', 'Pro', 'Enterprise']"
                     :pricingCardDetails="{
-                        name: `Pro`,
+                        pricingTier: str as PricingTier,
                         description: `For production applications with the option to scale.`,
                         action: `Get Started`,
                         benefits: {
@@ -34,6 +34,10 @@
                 />
             </v-row>
         </PageSection>
+
+        <PageSection>
+            <CreateOrganizationForm/>
+        </PageSection>
     </PageContainer>
 </template>
 
@@ -41,5 +45,7 @@
 import PageContainer from '@/components/page_sections/PageContainer.vue';
 import PageSection from '@/components/page_sections/PageSection.vue';
 import PageTitleContainer from '@/components/page_sections/PageTitleContainer.vue';
+import CreateOrganizationForm from '@/components/pricing/CreateOrganizationForm.vue';
 import PricingCard from '@/components/pricing/PricingCard.vue';
+import { PricingTier } from '@/helpers/types';
 </script>
