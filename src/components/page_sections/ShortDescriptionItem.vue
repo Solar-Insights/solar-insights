@@ -19,7 +19,7 @@
         <div v-if="objectHasValue(props.itemAction)" class="short-description-single-item-action">
             <v-btn
                 @click="emits('onItemActionClick')"
-                class="rounded-lg font-weight-medium"
+                class="rounded-lg font-weight-medium w-100"
                 elevation="2"
                 color="theme"
                 :append-icon="props.itemAction?.icon"
