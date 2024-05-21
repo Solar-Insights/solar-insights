@@ -1,6 +1,9 @@
 @use "../../../node_modules/vuetify/_styles.scss";
 @use "../master";
 
+$dark-line: #666666;
+$light-line: #dadada;
+
 /*
     App skeleton
 */
@@ -190,11 +193,16 @@
 
 .pricing-card {
     @extend .py-5;
-    @extend .px-2;
+    @extend .px-4;
 }
 
 .dark-pricing-card {
     background-color: #292929;
+    border: 1px solid $dark-line;
+}
+
+.light-pricing-card {
+    border: 1px solid $light-line;
 }
 
 .pricing-card-name {
@@ -203,7 +211,14 @@
 }
 
 .pricing-card-description {
-    @extend .text-disabled;
+    @extend .text-medium-emphasis;
     font-size: 0.9rem !important;
     line-height: 1.25rem;
+}
+
+.pricing-card-action {
+    @extend .rounded-lg; 
+    @extend .font-weight-medium;
+    @extend .w-100;
+    @extend .my-4;
 }

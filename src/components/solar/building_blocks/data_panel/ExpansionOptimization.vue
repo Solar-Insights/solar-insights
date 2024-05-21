@@ -15,7 +15,7 @@
                     <v-card-item class="pt-0 px-0" prepend-icon="mdi-currency-usd">
                         {{ $t(`solar.data-panel.data-panels.optimizations.choices.total-savings.name`) }}
                     </v-card-item>
-                    <v-card-item class="pa-0 pr-2 detail-text" prepend-icon="null">
+                    <v-card-item class="pa-0 pr-2 detail-text-no-color-change" prepend-icon="null">
                         {{ $t(`solar.data-panel.data-panels.optimizations.choices.total-savings.description`) }}
                     </v-card-item>
                 </v-card>
@@ -27,7 +27,7 @@
                     <v-card-item class="pt-0 px-0" prepend-icon="mdi-home-battery">
                         {{ $t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.name`) }}
                     </v-card-item>
-                    <v-card-item class="pa-0 pr-2 detail-text" prepend-icon="null">
+                    <v-card-item class="pa-0 pr-2 detail-text-no-color-change" prepend-icon="null">
                         {{ $t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.description`) }}
                     </v-card-item>
                 </v-card>

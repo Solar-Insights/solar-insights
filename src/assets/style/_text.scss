@@ -3,7 +3,12 @@
 
 .detail-text {
     @extend .pb-1;
-    @extend .font-weight-regular;
+    @extend .text-medium-emphasis;
+    font-size: 0.75rem;
+}
+
+.detail-text-no-color-change {
+    @extend .pb-1;
     font-size: 0.75rem;
 }
 

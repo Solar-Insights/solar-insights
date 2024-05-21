@@ -2,18 +2,26 @@
     <v-col cols="12" xs="12" sm="4" md="3">
         <v-card
             class="pricing-card"
-            :class="theme === 'dark' ? 'dark-pricing-card' : ''"
-            elevation="12"
+            :class="theme === 'dark' ? 'dark-pricing-card' : 'light-pricing-card'"
+            elevation="5"
         >
-            <v-card-title>
                 <div class="pricing-card-name">{{ props.pricingCardDetails.name }}</div>
 
                 <div class="pricing-card-description">{{ props.pricingCardDetails.description }}</div>
 
-                <v-btn>
-                    
+                <v-btn
+                    @click="emits('onPricingCardActionClick')"
+                    class="pricing-card-action"
+                    elevation="2"
+                    color="theme"
+                >
+                    {{ props.pricingCardDetails.action }}
                 </v-btn>
-            </v-card-title>
+
+            <div>
+                <span class="text-h3"> 25$ </span> 
+                <span class="detail-text"> / month </span>   
+            </div>
 
             <v-divider></v-divider>
 
@@ -41,5 +49,7 @@ const props = defineProps({
         required: true
     }
 });
+
+const emits = defineEmits(["onPricingCardActionClick"]);
 
 </script>
