@@ -9,8 +9,12 @@
                 <div class="pricing-card-name">{{ props.pricingCardDetails.name }}</div>
 
                 <div class="pricing-card-description">{{ props.pricingCardDetails.description }}</div>
+
+                <v-btn>
+                    
+                </v-btn>
             </v-card-title>
-            
+
             <v-divider></v-divider>
 
             <v-list-item
