@@ -117,5 +117,5 @@ export type NewOrganizationForm = {
     name: string,
     contactEmail: string,
     pricingTier: PricingTier,
-    additionnalNotes: string,
+    additionalNotes: string,
 };

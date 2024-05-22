@@ -12,16 +12,6 @@
     font-size: 0.75rem;
 }
 
-.v-card-text {
-    * {
-        @extend .universal-font-size;
-        @extend .universal-font-family;
-        line-height: 2rem !important;
-        font-size: 1.1rem !important;
-        font-weight: 300;
-    }
-}
-
 b {
     @extend .font-weight-bold;
 }
@@ -35,10 +25,11 @@ b {
     @extend .title-break;
 }
 
-.form-subtitle-in-card {
+.form-dialog-section-title {
     @extend .font-weight-medium;
+    @extend .mb-4;
 }
 
-.form-section-in-sheet {
+.form-dialog-section-container {
     @extend .pa-2;
 }

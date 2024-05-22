@@ -24,12 +24,12 @@
 
                             <v-form v-model="validForm" @submit.prevent>
                                 <v-card-text>
-                                    <div class="form-subtitle-in-card">
+                                    <div class="form-dialog-section-title">
                                         {{
                                             $t(`my-organization.admin-component.user-table.actions.new-user.user-info`)
                                         }}
                                     </div>
-                                    <v-sheet class="form-section-in-sheet">
+                                    <v-sheet class="form-dialog-section-container">
                                         <v-text-field
                                             v-model="newUserEmail"
                                             :rules="emailRules"

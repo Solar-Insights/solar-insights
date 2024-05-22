@@ -12,8 +12,8 @@
                 </v-card-title>
 
                 <v-card-text>
-                    <div class="form-subtitle-in-card">{{ $t("solar.toolbar.save.included-data.title") }}</div>
-                    <v-sheet class="form-section-in-sheet">
+                    <div class="form-dialog-section-title">{{ $t("solar.toolbar.save.included-data.title") }}</div>
+                    <v-sheet class="form-dialog-section-container">
                         <v-switch
                             v-model="exportOptions.solarInsightsAndParameters"
                             class="switch-custom-label"
@@ -33,8 +33,8 @@
                         />
                     </v-sheet>
 
-                    <div class="form-subtitle-in-card">{{ $t("solar.toolbar.save.export-format.title") }}</div>
-                    <v-sheet class="form-section-in-sheet">
+                    <div class="form-dialog-section-title">{{ $t("solar.toolbar.save.export-format.title") }}</div>
+                    <v-sheet class="form-dialog-section-container">
                         <v-radio-group v-model="exportOptions.exportType" color="theme">
                             <v-radio
                                 class="radio-custom-label"
