@@ -117,6 +117,5 @@ export type NewOrganizationForm = {
     name: string,
     contactEmail: string,
     pricingTier: PricingTier,
-    canadian: boolean,
     additionnalNotes: string,
 };

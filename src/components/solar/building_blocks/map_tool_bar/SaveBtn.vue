@@ -1,4 +1,3 @@
-]
 <template>
     <v-btn icon :disabled="requiredInfoUnavailable">
         <v-icon>mdi-file-document-plus-outline</v-icon>
