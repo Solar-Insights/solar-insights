@@ -96,9 +96,9 @@ export type RouteSection = "solar-insights" | "services"
 
 export type PricingCardDetails = {
     pricingTier: PricingTier,
+    name: string,
     description: string,
-    action: string,
-    benefits: PricingCardBenefits
+    action: string
 };
 
 export type PricingCardBenefits = {
@@ -111,7 +111,7 @@ export type PricingCardSingleBenefit = {
     description?: string
 }
 
-export type PricingTier = "Starter" | "Pro" | "Enterprise";
+export type PricingTier = "starter" | "pro" | "enterprise";
 
 export type NewOrganizationForm = {
     name: string,

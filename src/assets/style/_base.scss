@@ -216,6 +216,10 @@ $light-line: #dadada;
     border: 1px solid $light-line;
 }
 
+.pricing-card-title-section {
+    min-height: 130px;
+}
+
 .pricing-card-name {
     @extend .text-overline;
     font-size: 1.25rem !important

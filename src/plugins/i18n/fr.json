@@ -223,6 +223,85 @@
         }
         
     },
+    "pricing": {
+        "title": "Une tarification simple et sans surprise",
+        "precision": "Payez seulement pour ce que vous utilisez",
+        "pricing-cards": {
+            "from": "À partir de",
+            "month": "mois",
+            "benefits-title": "Accédez à",
+            "starter": {
+                "name": "Starter",
+                "description": "Idéal pour les nouveaux utilisateurs et une utilisation modérée",
+                "action": "Démarrer",
+                "benefits": [
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    }
+                ]
+            },
+            "pro": {
+                "name": "Pro",
+                "description": "Travaillez avec votre équipe et tous les outils existants dans un environnement extensible",
+                "action": "Démarrer",
+                "benefits": [
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    }
+                ]
+            },
+            "enterprise": {
+                "name": "Entreprise (à venir)",
+                "description": "Pour utilisation à grande échelle avec serveurs dédiés",
+                "action": "À venir",
+                "benefits": []
+            }
+        },
+        "pricing-form": {
+            "title": "Get in touch",
+            "cancel-action": "Cancel",
+            "confirm-action": "Get started",
+            "user-info-section": {
+                "title": "Contact informations",
+                "fields": {
+                    "name": "Name*",
+                    "email": "Contact email*"
+                }
+            },
+            "additional-info-section": {
+                "title": "Additional infos",
+                "fields": {
+                    "situation": "Describe your situation"
+                }
+            }
+        }
+    },
     "search": {
         "not-logged-in": {
             "action": "Se connecter pour visualiser un bâtiment"

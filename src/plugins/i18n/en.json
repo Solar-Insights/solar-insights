@@ -222,6 +222,85 @@
             }
         }
     },
+    "pricing": {
+        "title": "Simple and unsurpricing pricing",
+        "precision": "Pay only for what you need",
+        "pricing-cards": {
+            "from": "From",
+            "month": "month",
+            "benefits-title": "Get started with",
+            "starter": {
+                "name": "Starter",
+                "description": "Ideal for new users and a moderate usage",
+                "action": "Get started",
+                "benefits": [
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    }
+                ]
+            },
+            "pro": {
+                "name": "Pro",
+                "description": "Work with your team and all existing tools in a scaling environnment",
+                "action": "Get started",
+                "benefits": [
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    }
+                ]
+            },
+            "enterprise": {
+                "name": "Enterprise (coming soon)",
+                "action": "Coming soon",
+                "description": "For large-scale usage with dedicated servers",
+                "benefits": []
+            }
+        },
+        "pricing-form": {
+            "title": "Get in touch",
+            "cancel-action": "Cancel",
+            "confirm-action": "Get started",
+            "user-info-section": {
+                "title": "Contact informations",
+                "fields": {
+                    "name": "Name*",
+                    "email": "Contact email*"
+                }
+            },
+            "additional-info-section": {
+                "title": "Additional infos",
+                "fields": {
+                    "situation": "Describe your situation"
+                }
+            }
+        }
+    },
     "search": {
         "not-logged-in": {
             "action": "Sign in to gain insights on a building"

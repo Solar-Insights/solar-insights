@@ -1,19 +1,19 @@
 <template>
     <FormDialog
         :formTitle="`Form title`"
-        :formIcon="`mdi-file-document-plus-outline`"
-        :formCancelButton="`Cancel`"
-        :formConfirmButton="`Confirm`"
+        :formIcon="$t(`pricing.pricing-form.title`)"
+        :formCancelButton="$t(`pricing.pricing-form.cancel-action`)"
+        :formConfirmButton="$t(`pricing.pricing-form.confirm-action`)"
         :formClose="closeForm"
         @validateForm="sendNewOrganizationRequest"
         @formWasClosed="closeForm = false"
     >
-        <FormDialogSection :sectionTitle="`Subtitle 1`">
+        <FormDialogSection :sectionTitle="$t(`pricing.pricing-form.user-info-section.title`)">
             <v-text-field
                 v-model="data.name"
                 class="mb-3"
                 :error-messages="(vuelidate.name.$errors).map(e => e.$message as string)"
-                label="Name*"
+                :label="$t(`pricing.pricing-form.user-info-section.fields.name`)"
                 density="compact"
                 variant="outlined"
                 prepend-inner-icon="mdi-account-outline"
@@ -24,7 +24,7 @@
                 v-model="data.contactEmail"
                 class="mb-3"
                 :error-messages="(vuelidate.contactEmail.$errors).map(e => e.$message as string)"
-                label="Contact email*"
+                :label="$t(`pricing.pricing-form.user-info-section.fields.email`)"
                 density="compact"
                 variant="outlined"
                 prepend-inner-icon="mdi-at"
@@ -44,16 +44,19 @@
             />
         </FormDialogSection>
 
-        <FormDialogSection :sectionTitle="`Subtitle 2`">
-            <v-textarea
-                v-model="data.additionalNotes"
-                :error-messages="(vuelidate.additionalNotes.$errors).map(e => e.$message as string)"
-                label="Additional notes"
-                density="compact"
-                variant="outlined"
-                prepend-inner-icon="mdi-text"
-                rounded
-            />
+        <FormDialogSection :sectionTitle="$t(`pricing.pricing-form.additional-info-section.title`)">
+            <v-lazy>
+                <v-textarea
+                    v-model="data.additionalNotes"
+                    :error-messages="(vuelidate.additionalNotes.$errors).map(e => e.$message as string)"
+                    :label="$t(`pricing.pricing-form.additional-info-section.situation`)"
+                    density="compact"
+                    variant="outlined"
+                    prepend-inner-icon="mdi-text"
+                    rows="3"
+                    auto-grow
+                />
+            </v-lazy>
         </FormDialogSection>
     </FormDialog>
 </template>
@@ -63,7 +66,7 @@ import { NewOrganizationForm, PricingTier } from "@/helpers/types";
 import { computed, PropType, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import useVuelidate from "@vuelidate/core";
-import { required, email, sameAs, maxLength, minLength, helpers, numeric } from "@vuelidate/validators";
+import { required, email, maxLength, helpers } from "@vuelidate/validators";
 import FormDialog from "@/components/page_sections/FormDialog.vue";
 import FormDialogSection from "@/components/page_sections/FormDialogSection.vue";
 
@@ -83,7 +86,7 @@ const closeForm = ref<boolean>(false);
 const data = ref<NewOrganizationForm>({
     name: "",
     contactEmail: "",
-    pricingTier: "Starter",
+    pricingTier: "starter",
     additionalNotes: "",
 });
 
