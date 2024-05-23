@@ -30,6 +30,13 @@ $light-line: #dadada;
     @extend .mx-4;
 }
 .autocomplete-search {
+    @extend .mt-0;
+    @extend .px-1;
+    .v-field__input {
+        height: 40px !important;
+        max-height: 40px !important;
+        min-height: 40px !important;
+    }
 }
 .autocomplete-search-mobile {
     @extend .autocomplete-search;
@@ -229,4 +236,10 @@ $light-line: #dadada;
 
 .pricing-card-container {
     @extend .my-6;
+}
+
+.google-autocompletes {
+    height: 40px !important;
+    max-height: 40px !important;
+    min-height: 40px !important;
 }

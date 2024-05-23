@@ -2,7 +2,7 @@
     <v-text-field
         v-model="autocompleteValue"
         @keypress.enter="prepareHandlerEnterKeyOnSearchBar"
-        class="mt-0 px-1"
+        class="autocomplete-search"
         id="autocomplete-search"
         :class="$vuetify.display.smAndDown ? 'autocomplete-search-mobile' : 'autocomplete-search-computer'"
         :placeholder="$t('general.map-header.search-placeholder')"
