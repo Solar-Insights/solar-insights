@@ -40,7 +40,7 @@
                 </span>
                 <span class="detail-text-same-size"> / {{ $t(`pricing.pricing-cards.month`) }} </span>
                 <span>
-                    + <a class="anchor-with-theme" href="#usage"> {{ $t(`pricing.pricing-cards.usage`) }} </a>
+                    + <a class="anchor-with-theme" href="javascript:document.getElementById('usage').scrollIntoView(true);"> {{ $t(`pricing.pricing-cards.usage`) }} </a>
                 </span>
 
                 <div class="mt-3">
