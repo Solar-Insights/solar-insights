@@ -98,7 +98,10 @@ export type PricingCardDetails = {
     pricingTier: PricingTier,
     name: string,
     description: string,
-    action: string
+    action: string,
+    monthlyStartingPrice: number,
+    maxNbOfUsers: number,
+    pricePerAdditionalUser?: number
 };
 
 export type PricingCardBenefits = {

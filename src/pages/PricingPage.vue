@@ -19,6 +19,11 @@
         <PageSection>
             <CreateOrganizationForm/>
         </PageSection>
+        
+
+        <div id="usage">
+            Allo
+        </div>
     </PageContainer>
 </template>
 
@@ -40,19 +45,27 @@ const pricingCards = computed(() => {
             pricingTier: 'starter',
             name: t(`pricing.pricing-cards.starter.name`),
             description: t(`pricing.pricing-cards.starter.description`),
-            action: t(`pricing.pricing-cards.starter.action`)
+            action: t(`pricing.pricing-cards.starter.action`),
+            monthlyStartingPrice: 25,
+            maxNbOfUsers: 1
         },
         {
             pricingTier: 'pro',
             name: t(`pricing.pricing-cards.pro.name`),
             description: t(`pricing.pricing-cards.pro.description`),
-            action: t(`pricing.pricing-cards.pro.action`)
+            action: t(`pricing.pricing-cards.pro.action`),
+            monthlyStartingPrice: 50,
+            maxNbOfUsers: 8,
+            pricePerAdditionalUser: 5
         },
         {
             pricingTier: 'enterprise',
             name: t(`pricing.pricing-cards.enterprise.name`),
             description: t(`pricing.pricing-cards.enterprise.description`),
-            action: t(`pricing.pricing-cards.enterprise.action`)
+            action: t(`pricing.pricing-cards.enterprise.action`),
+            monthlyStartingPrice: 200,
+            maxNbOfUsers: 16,
+            pricePerAdditionalUser: 5
         },
     ] as PricingCardDetails[];
 })
