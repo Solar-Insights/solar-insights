@@ -36,7 +36,7 @@
             <div class="pricing-card-container" style="min-height: 100px">
                 <div class="detail-text-same-size">{{ $t(`pricing.pricing-cards.from`) }}</div>
                 <span class="text-h3">
-                    {{ priceString(props.pricingCardDetails.monthlyStartingPrice, userSessionStore.locale) }}
+                    {{ priceString(props.pricingCardDetails.monthlyFixedPrice, userSessionStore.locale) }}
                 </span>
                 <span class="detail-text-same-size"> / {{ $t(`pricing.pricing-cards.month`) }} </span>
                 <span>

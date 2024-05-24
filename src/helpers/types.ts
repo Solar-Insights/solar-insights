@@ -99,7 +99,7 @@ export type PricingCardDetails = {
     name: string;
     description: string;
     action: string;
-    monthlyStartingPrice: number;
+    monthlyFixedPrice: number;
     benefits: PricingCardBenefits
 };
 

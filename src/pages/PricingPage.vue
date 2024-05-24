@@ -32,9 +32,8 @@
             </PageSubtitleContainer>
         </PageSection>
 
-        <PageSection>
+        <PageSection id="usage">
             <PageSubtitleContainer
-                id="usage"
                 :pageSubtitle="$t(`pricing.usage-pricing-subtitle-container.subtitle`)"
                 :pageSubtitlePrecision="$t(`pricing.usage-pricing-subtitle-container.precision`)"
             >
@@ -94,6 +93,7 @@ import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { priceString } from "@/helpers/util";
 import { useUserSessionStore } from "@/stores/userSessionStore";
+import { STARTER_MONTHLY_FIXED_PRICE, PRO_MONTHLY_FIXED_PRICE, ENTERPRISE_MONTHLY_FIXED_PRICE, STARTER_AVAILABLE_ORG_USERS, PRO_AVAILABLE_ORG_USERS, ENTERPRISE_AVAILABLE_ORG_USERS, PRO_ADDITIONAL_ORG_USER_COST, ENTERPRISE_ADDITIONAL_ORG_USER_COST, STARTER_MONTHLY_ANALYSIS_REQUESTS, PRO_MONTHLY_ANALYSIS_REQUESTS } from "@/helpers/pricingConstants";
 
 const t = useI18n().t;
 const tm = useI18n().tm;
@@ -106,15 +106,15 @@ const pricingCards = computed(() => {
             name: t(`pricing.pricing-cards.starter.name`),
             description: t(`pricing.pricing-cards.starter.description`),
             action: t(`pricing.pricing-cards.starter.action`),
-            monthlyStartingPrice: 25,
+            monthlyFixedPrice: STARTER_MONTHLY_FIXED_PRICE,
             benefits: {
                 title: t(`pricing.pricing-cards.starter.benefits-title`),
                 benefits: [
                     {
-                        title: `1 ${t(`pricing.pricing-cards.starter.benefits.users.title`)}`
+                        title: `${STARTER_AVAILABLE_ORG_USERS} ${t(`pricing.pricing-cards.starter.benefits.users.title`)}`
                     },
                     {
-                        title: `100 ${t(`pricing.pricing-cards.starter.benefits.requests.title`)}`
+                        title: `${STARTER_MONTHLY_ANALYSIS_REQUESTS} ${t(`pricing.pricing-cards.starter.benefits.requests.title`)}`
                     },
                     {
                         title: t(`pricing.pricing-cards.starter.benefits.tools.title`)
@@ -133,16 +133,16 @@ const pricingCards = computed(() => {
             name: t(`pricing.pricing-cards.pro.name`),
             description: t(`pricing.pricing-cards.pro.description`),
             action: t(`pricing.pricing-cards.pro.action`),
-            monthlyStartingPrice: 50,
+            monthlyFixedPrice: PRO_MONTHLY_FIXED_PRICE,
             benefits: {
                 title: t(`pricing.pricing-cards.pro.benefits-title`),
                 benefits: [
                     {
-                        title: `8 ${t(`pricing.pricing-cards.pro.benefits.users.title`)}`,
-                        description: `${t(`pricing.pricing-cards.enterprise.benefits.users.description`)} ${priceString(5, userSessionStore.locale)} / ${t(`pricing.pricing-cards.additional-user`)}`
+                        title: `${PRO_AVAILABLE_ORG_USERS} ${t(`pricing.pricing-cards.pro.benefits.users.title`)}`,
+                        description: `${t(`pricing.pricing-cards.enterprise.benefits.users.description`)} ${priceString(PRO_ADDITIONAL_ORG_USER_COST, userSessionStore.locale)} / ${t(`pricing.pricing-cards.additional-user`)}`
                     },
                     {
-                        title: `∞ ${t(`pricing.pricing-cards.pro.benefits.requests.title`)}`
+                        title: `${PRO_MONTHLY_ANALYSIS_REQUESTS} ${t(`pricing.pricing-cards.pro.benefits.requests.title`)}`
                     },
                     {
                         title: t(`pricing.pricing-cards.pro.benefits.user-detailed-reports.title`)
@@ -158,13 +158,13 @@ const pricingCards = computed(() => {
             name: t(`pricing.pricing-cards.enterprise.name`),
             description: t(`pricing.pricing-cards.enterprise.description`),
             action: t(`pricing.pricing-cards.enterprise.action`),
-            monthlyStartingPrice: 200,
+            monthlyFixedPrice: ENTERPRISE_MONTHLY_FIXED_PRICE,
             benefits: {
                 title: t(`pricing.pricing-cards.enterprise.benefits-title`),
                 benefits: [
                     {
-                        title: `16 ${t(`pricing.pricing-cards.enterprise.benefits.users.title`)}`,
-                        description: `${t(`pricing.pricing-cards.enterprise.benefits.users.description`)} ${priceString(5, userSessionStore.locale)} / ${t(`pricing.pricing-cards.additional-user`)}`
+                        title: `${ENTERPRISE_AVAILABLE_ORG_USERS} ${t(`pricing.pricing-cards.enterprise.benefits.users.title`)}`,
+                        description: `${t(`pricing.pricing-cards.enterprise.benefits.users.description`)} ${priceString(ENTERPRISE_ADDITIONAL_ORG_USER_COST, userSessionStore.locale)} / ${t(`pricing.pricing-cards.additional-user`)}`
                     },
                     {
                         title: t(`pricing.pricing-cards.enterprise.benefits.dedicated-servers.title`)
