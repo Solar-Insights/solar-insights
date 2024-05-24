@@ -31,7 +31,7 @@
 
             <div class="pricing-card-container" style="min-height: 150px;">
                 <div class="detail-text-same-size"> {{ $t(`pricing.pricing-cards.from`) }} </div>
-                <span class="text-h3"> ${{ $props.pricingCardDetails.monthlyStartingPrice }} </span> 
+                <span class="text-h3"> {{ priceString(props.pricingCardDetails.monthlyStartingPrice, userSessionStore.locale) }} </span> 
                 <span class="detail-text-same-size"> / {{ $t(`pricing.pricing-cards.month`) }} </span>   
                 <span> + <a class="anchor-with-theme" href="#usage"> {{ $t(`pricing.pricing-cards.usage`) }} </a> </span>   
 
@@ -42,7 +42,7 @@
                     v-if="props.pricingCardDetails.pricePerAdditionalUser !== undefined"
                     class="detail-text-same-size" 
                 >
-                    ${{ props.pricingCardDetails.pricePerAdditionalUser }} / {{ $t(`pricing.pricing-cards.additional-user`) }} 
+                    {{ priceString(props.pricingCardDetails.pricePerAdditionalUser, userSessionStore.locale) }} / {{ $t(`pricing.pricing-cards.additional-user`) }} 
                 </div>
             </div>
 
@@ -79,10 +79,11 @@ import { computed, PropType } from 'vue';
 import { useUserSessionStore } from '@/stores/userSessionStore';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
+import { priceString } from '@/helpers/util';
 
 const tm = useI18n().tm;
-
-const { theme } = storeToRefs(useUserSessionStore());
+const userSessionStore = useUserSessionStore();
+const { theme } = storeToRefs(userSessionStore);
 
 const props = defineProps({
     pricingCardDetails: {

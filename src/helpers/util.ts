@@ -1,3 +1,5 @@
+import { Locale } from "@/helpers/types";
+
 export function strToLargeNumberDisplay(input: string | number): String {
     let inputStr: string = input.toString().trim();
 
@@ -56,4 +58,9 @@ function fallbackClipboardExecCommand(textToCopy: string) {
 
     document.execCommand("copy");
     document.body.removeChild(textArea);
+}
+
+export function priceString(amount: number | string, locale: Locale) {
+    if (locale === "fr") return `${amount}$`;
+    return `$${amount}`;
 }
