@@ -346,20 +346,21 @@
             }
         },
         "pricing-form": {
-            "title": "Get in touch",
-            "cancel-action": "Cancel",
-            "confirm-action": "Get started",
+            "title": "Entrez en contact",
+            "cancel-action": "Annuler",
+            "confirm-action": "Lancez-vous",
             "user-info-section": {
-                "title": "Contact informations",
+                "title": "Informations de contact",
                 "fields": {
-                    "name": "Name*",
-                    "email": "Contact email*"
+                    "name": "Nom*",
+                    "email": "Email de contact*",
+                    "pricing-plan": "Plan de tarification*"
                 }
             },
             "additional-info-section": {
-                "title": "Additional infos",
+                "title": "Informations additionnelles",
                 "fields": {
-                    "situation": "Describe your situation"
+                    "situation": "Décrivez votre situation"
                 }
             }
         }

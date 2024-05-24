@@ -27,6 +27,10 @@
                 color="theme"
             >
                 {{ props.pricingCardDetails.action }}
+                <CreateOrganizationForm
+                    :pricingTier="props.pricingCardDetails.pricingTier"
+                    :pricingName="props.pricingCardDetails.name"
+                />
             </v-btn>
 
             <div class="pricing-card-container" style="min-height: 150px">
@@ -79,6 +83,7 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 import { priceString } from "@/helpers/util";
+import CreateOrganizationForm from "@/components/pricing/CreateOrganizationForm.vue";
 
 const tm = useI18n().tm;
 const userSessionStore = useUserSessionStore();

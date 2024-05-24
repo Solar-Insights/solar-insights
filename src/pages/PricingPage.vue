@@ -11,10 +11,6 @@
         </PageSection>
 
         <PageSection>
-            <CreateOrganizationForm />
-        </PageSection>
-
-        <PageSection>
             <PageSubtitleContainer
                 :pageSubtitle="$t(`pricing.pricing-model-subtitle-container.subtitle`)"
                 :pageSubtitlePrecision="$t(`pricing.pricing-model-subtitle-container.precision`)"
@@ -92,7 +88,6 @@ import PageSection from "@/components/page_sections/PageSection.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
 import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
-import CreateOrganizationForm from "@/components/pricing/CreateOrganizationForm.vue";
 import PricingCard from "@/components/pricing/PricingCard.vue";
 import { PricingCardDetails } from "@/helpers/types";
 import { computed } from "vue";

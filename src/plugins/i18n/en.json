@@ -353,7 +353,8 @@
                 "title": "Contact informations",
                 "fields": {
                     "name": "Name*",
-                    "email": "Contact email*"
+                    "email": "Contact email*",
+                    "pricing-plan": "Pricing plan*"
                 }
             },
             "additional-info-section": {

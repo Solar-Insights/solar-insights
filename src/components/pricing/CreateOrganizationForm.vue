@@ -1,7 +1,7 @@
 <template>
     <FormDialog
-        :formTitle="`Form title`"
-        :formIcon="$t(`pricing.pricing-form.title`)"
+        :formTitle="$t(`pricing.pricing-form.title`)"
+        formIcon="mdi-account-multiple-plus-outline"
         :formCancelButton="$t(`pricing.pricing-form.cancel-action`)"
         :formConfirmButton="$t(`pricing.pricing-form.confirm-action`)"
         :formClose="closeForm"
@@ -32,11 +32,10 @@
             />
 
             <v-select
-                v-model="data.pricingTier"
                 class="mb-3"
-                :items="['Starter', 'Pro', 'Enterprise']"
+                v-model="props.pricingName"
                 :error-messages="vuelidate.pricingTier.$errors.map((e) => e.$message as string)"
-                label="Pricing tier*"
+                :label="$t(`pricing.pricing-form.user-info-section.fields.pricing-plan`)"
                 density="compact"
                 variant="outlined"
                 prepend-inner-icon="mdi-currency-usd"
@@ -49,7 +48,7 @@
                 <v-textarea
                     v-model="data.additionalNotes"
                     :error-messages="vuelidate.additionalNotes.$errors.map((e) => e.$message as string)"
-                    :label="$t(`pricing.pricing-form.additional-info-section.situation`)"
+                    :label="$t(`pricing.pricing-form.additional-info-section.fields.situation`)"
                     density="compact"
                     variant="outlined"
                     prepend-inner-icon="mdi-text"
@@ -74,8 +73,12 @@ const t = useI18n().t;
 
 const props = defineProps({
     pricingTier: {
-        type: Object as PropType<PricingTier>,
-        required: false
+        type: String as PropType<PricingTier>,
+        required: true
+    },
+    pricingName: {
+        type: String,
+        required: true
     }
 });
 
@@ -86,7 +89,7 @@ const closeForm = ref<boolean>(false);
 const data = ref<NewOrganizationForm>({
     name: "",
     contactEmail: "",
-    pricingTier: "starter",
+    pricingTier: props.pricingTier,
     additionalNotes: ""
 });
 
