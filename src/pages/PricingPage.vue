@@ -5,7 +5,7 @@
         </PageSection>
 
         <PageSection>
-            <v-row class="justify-center mx-16">
+            <v-row class="pricing-card-container">
                 <PricingCard v-for="pricingCard in pricingCards" :pricingCardDetails="pricingCard" />
             </v-row>
         </PageSection>

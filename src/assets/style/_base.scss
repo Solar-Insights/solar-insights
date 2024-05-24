@@ -198,6 +198,12 @@ $light-line: #dadada;
     @extend .text-center;
 }
 
+.pricing-card-container {
+    @extend .mx-auto;
+    @extend .justify-center;
+    max-width: 1200px;
+}
+
 .pricing-card {
     @extend .py-5;
     @extend .px-4;
