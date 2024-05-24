@@ -302,6 +302,47 @@
                 ]
             }
         },
+        "pricing-model-subtitle-container": {
+            "subtitle": "Our hybrid pricing model",
+            "precision": "The explanation behind a mix of fixed and variable pricing",
+            "introduction-paragraph": {
+                "content": "Our goal at Solar Insights is to charge our customers for what they really need and use on a monthly basis. An hybrid pricing model gives us the opportunity to do exactly that, while keeping our services available at any moment you might need them."
+            },
+            "fixed-costs-paragraph": {
+                "content": "The fixed monthly costs allow us to provide services that are available 24/7 to every organization registered on Solar Insights. Aspects like the number of users and the expected server load is accounted in the pricing."
+            },
+            "variable-costs-paragraph": {
+                "content": "The variable monthly costs based on usage allow us to guarantee our users that they only pay for what they use. This frees you from the costs and complexities of planning and esimating your monthly usage across an entire organization."
+            }
+        },
+        "usage-pricing-subtitle-container": {
+            "subtitle": "Usage pricing",
+            "precision": "More info about your monthly variable costs",
+            "confusion-paragraph": {
+                "content": "With Solar Insight's hybrid pricing model, you might get confused about what will be charged to you at the end of the month. It is understandable. To help with that, the organization's administrator will always receive a detailed monthly report of the charges."
+            },
+            "what-is-included-paragraph": {
+                "content": "Here is a detailed breakdown of every action that incurs a charge on a monthly bill: ",
+                "charges": {
+                    "building-insights-request": "Accessing the Solar installation analysis page (the map)",
+                    "additional-users": "Create an additional user over the limit, if the plan allows it"
+                }
+            },
+            "what-is-not-included-paragraph": {
+                "content": "Here are examples of actions that DO NOT incur any additional charge: ",
+                "non-charges": [
+                    {
+                        "title": "Modifiying a solar installation once already on the map page"
+                    },
+                    {
+                        "title": "Managing your organization"
+                    },
+                    {
+                        "title": "Save data or charts to your local device"
+                    }
+                ]
+            }
+        },
         "pricing-form": {
             "title": "Get in touch",
             "cancel-action": "Cancel",
@@ -345,13 +386,11 @@
             },
             "step-4": {
                 "title": "Optimize a solar installation",
-                "content-1": "The Optimizations section is aimed at users wishing to optimize the current solar installation for a specific criteria. Select the one you prefer, and see the changes for yourself!",
-                "content-2": ""
+                "content-1": "The Optimizations section is aimed at users wishing to optimize the current solar installation for a specific criteria. Select the one you prefer, and see the changes for yourself!"
             },
             "step-5": {
                 "title": "Adjust the look and feel of the map",
-                "content-1": "The Settings section gives you the ability to enable / disable the visbility of certain map elements like the panels.",
-                "content-2": "Also, you can use the drop-down menu to display monthly or daily solar patterns."
+                "content-1": "The Settings section gives you the ability to enable / disable the visbility of certain map elements like the panels. Also, you can use the drop-down menu to display monthly or daily solar patterns."
             },
             "step-6": {
                 "title": "Share and save data",

@@ -20,10 +20,54 @@
             <CreateOrganizationForm/>
         </PageSection>
         
+        <PageSection>
+            <PageSubtitleContainer
+                :pageSubtitle="$t(`pricing.pricing-model-subtitle-container.subtitle`)"
+                :pageSubtitlePrecision="$t(`pricing.pricing-model-subtitle-container.precision`)"
+            >
+                <ParagraphContainer
+                    class="mx-auto" 
+                    :paragraphContent="$t(`pricing.pricing-model-subtitle-container.introduction-paragraph.content`)"
+                />
 
-        <div id="usage">
-            Allo
-        </div>
+                <ParagraphContainer
+                    class="mx-auto"
+                    :paragraphContent="$t(`pricing.pricing-model-subtitle-container.fixed-costs-paragraph.content`)"
+                />
+
+                <ParagraphContainer
+                    class="mx-auto"
+                    :paragraphContent="$t(`pricing.pricing-model-subtitle-container.variable-costs-paragraph.content`)"
+                />
+            </PageSubtitleContainer>
+        </PageSection>
+
+        <PageSection>
+            <PageSubtitleContainer
+                id="usage"
+                :pageSubtitle="$t(`pricing.usage-pricing-subtitle-container.subtitle`)"
+                :pageSubtitlePrecision="$t(`pricing.usage-pricing-subtitle-container.precision`)"
+            >
+                <ParagraphContainer
+                    class="mx-auto"
+                    :paragraphContent="$t(`pricing.usage-pricing-subtitle-container.confusion-paragraph.content`)"
+                />
+
+                <ParagraphContainer
+                    class="mx-auto"
+                    :paragraphContent="$t(`pricing.usage-pricing-subtitle-container.what-is-included-paragraph.content`)"
+                >
+                    ICI ON DOIT METTRE CE QUI EST INCLU
+                </ParagraphContainer>
+
+                <ParagraphContainer
+                    class="mx-auto"
+                    :paragraphContent="$t(`pricing.usage-pricing-subtitle-container.what-is-not-included-paragraph.content`)"
+                >
+                    ICI ON DOIT METTRE CE QUI N'EST PAS INCLU
+                </ParagraphContainer>
+            </PageSubtitleContainer>
+        </PageSection>
     </PageContainer>
 </template>
 
@@ -31,6 +75,8 @@
 import PageContainer from '@/components/page_sections/PageContainer.vue';
 import PageSection from '@/components/page_sections/PageSection.vue';
 import PageTitleContainer from '@/components/page_sections/PageTitleContainer.vue';
+import PageSubtitleContainer from '@/components/page_sections/PageSubtitleContainer.vue';
+import ParagraphContainer from '@/components/page_sections/ParagraphContainer.vue';
 import CreateOrganizationForm from '@/components/pricing/CreateOrganizationForm.vue';
 import PricingCard from '@/components/pricing/PricingCard.vue';
 import { PricingCardDetails } from '@/helpers/types';

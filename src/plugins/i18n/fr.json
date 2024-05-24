@@ -303,6 +303,47 @@
                 ]
             }
         },
+        "pricing-model-subtitle-container": {
+            "subtitle": "Notre modèle de tarification hybride",
+            "precision": "Le raisonnement derrière un mélange de tarification fixe et variable",
+            "introduction-paragraph": {
+                "content": "Notre but chez Solar Insights est que nos clients n'aient besoin de payer que pour ce qu'ils ont réellement besoin sur une base mensuelle. Un modèle de tarification hybride nous donne l'opportunité d'accomplir ceci, tout en s'assurant que nos services soient disponibles à tout moment."
+            },
+            "fixed-costs-paragraph": {
+                "content": "Les coûts fixes nous permettent d'offrir des services disponibles 24/7 à chacune des organisations enregistrées sur Solar Insights. Des variables comme le nombre d'utilisateur et la charge du serveur sont considérés dans ce coût."
+            },
+            "variable-costs-paragraph": {
+                "content": "Les coûts variables basés sur l'utilisation nous permettent de garantir aux utilisateurs de payer seulement pour ce qu'ils utilisent. Cela vous libère des coûts et de la complexité associés à la planification et estimation de l'utilisation mensuelle à travers une organisation."
+            }
+        },
+        "usage-pricing-subtitle-container": {
+            "subtitle": "Tarification à l'utilisation",
+            "precision": "Plus d'informations sur les coûts variables mensuels",
+            "confusion-paragraph": {
+                "content": "Avec le modèle de tarification hybride de Solar Insights, vous pourriez vous demander ce qui sera réellement facturé comme utilisation. C'est comprenable. Pour aider avec cela, l'administrateur d'une organisation recevra toujours un rapport mensuel détaillé des charges accrues au cours du dernier mois."
+            },
+            "what-is-included-paragraph": {
+                "content": "Voici une description détaillée de toutes les actions qui seront facturées à l'utilisation et comptabilisées à la fin du mois: ",
+                "charges": {
+                    "building-insights-request": "Accéder à la page d'analyse d'installation solaire (la carte)",
+                    "additional-users": "Créer un utilisateur additionnel à la limite du plan si celui-ci le permet"
+                }
+            },
+            "what-is-not-included-paragraph": {
+                "content": "Voici des exemples d'actions qui NE SERONT PAS facturées à la fin du mois: ",
+                "non-charges": [
+                    {
+                        "title": "Modifier une installation solaire une fois qu'on est sur la carte"
+                    },
+                    {
+                        "title": "Gérer votre organisation"
+                    },
+                    {
+                        "title": "Enregistrer des données ou graphes sur votre appareil"
+                    }
+                ]
+            }
+        },
         "pricing-form": {
             "title": "Get in touch",
             "cancel-action": "Cancel",
@@ -346,13 +387,11 @@
             },
             "step-4": {
                 "title": "Optimiser une installation solaire",
-                "content-1": "La section Optimisations vise les utilisateurs souhaitant optimiser une installation solaire en fonction d'un critère particulier. Sélectionner le critère que vous préférez, et observez les changements!",
-                "content-2": ""
+                "content-1": "La section Optimisations vise les utilisateurs souhaitant optimiser une installation solaire en fonction d'un critère particulier. Sélectionner le critère que vous préférez, et observez les changements!"
             },
             "step-5": {
                 "title": "Ajuster le style de la carte",
-                "content-1": "La section Paramètres permet d'activer / désactiver la visibilité de certains éléments de la carte comme les panneaux.",
-                "content-2": "Aussi, vous pouvez utiliser le menu déroulant pour visualiser des patterns solaires mensuels ou quotidiens."
+                "content-1": "La section Paramètres permet d'activer / désactiver la visibilité de certains éléments de la carte comme les panneaux. Aussi, vous pouvez utiliser le menu déroulant pour visualiser des patterns solaires mensuels ou quotidiens."
             },
             "step-6": {
                 "title": "Partager et sauvegarder des données",
