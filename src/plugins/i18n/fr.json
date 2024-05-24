@@ -230,6 +230,9 @@
             "from": "À partir de",
             "month": "mois",
             "benefits-title": "Accédez à",
+            "usage": "utilisation",
+            "users-included": "utilisateur(s) inclu(s)",
+            "additional-user": "utilisateur supplémentaire",
             "starter": {
                 "name": "Starter",
                 "description": "Idéal pour les nouveaux utilisateurs et une utilisation modérée",

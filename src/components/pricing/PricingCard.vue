@@ -31,18 +31,18 @@
 
             <div class="pricing-card-container" style="min-height: 150px;">
                 <div class="detail-text-same-size"> {{ $t(`pricing.pricing-cards.from`) }} </div>
-                <span class="text-h3"> $25 </span> 
+                <span class="text-h3"> ${{ $props.pricingCardDetails.monthlyStartingPrice }} </span> 
                 <span class="detail-text-same-size"> / {{ $t(`pricing.pricing-cards.month`) }} </span>   
-                <span> + <a class="anchor-with-theme" href="#usage"> usage </a> </span>   
+                <span> + <a class="anchor-with-theme" href="#usage"> {{ $t(`pricing.pricing-cards.usage`) }} </a> </span>   
 
                 <div class="mt-3">
-                    {{ props.pricingCardDetails.maxNbOfUsers }} {{ `user${$props.pricingCardDetails.maxNbOfUsers === 1 ? '' : 's'}` }} included 
+                    {{ props.pricingCardDetails.maxNbOfUsers }}  {{ $t(`pricing.pricing-cards.users-included`) }} 
                 </div>
                 <div 
                     v-if="props.pricingCardDetails.pricePerAdditionalUser !== undefined"
                     class="detail-text-same-size" 
                 >
-                    ${{ props.pricingCardDetails.pricePerAdditionalUser }} / additional user
+                    ${{ props.pricingCardDetails.pricePerAdditionalUser }} / {{ $t(`pricing.pricing-cards.additional-user`) }} 
                 </div>
             </div>
 

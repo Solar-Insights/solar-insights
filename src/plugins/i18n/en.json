@@ -229,6 +229,9 @@
             "from": "From",
             "month": "month",
             "benefits-title": "Get started with",
+            "usage": "usage",
+            "users-included": "user(s) included",
+            "additional-user": "additional user",
             "starter": {
                 "name": "Starter",
                 "description": "Ideal for new users and a moderate usage",
