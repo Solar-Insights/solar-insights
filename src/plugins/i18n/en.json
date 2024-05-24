@@ -323,6 +323,8 @@
             },
             "what-is-included-paragraph": {
                 "content": "Here is a detailed breakdown of every action that incurs a charge on a monthly bill: ",
+                "depends-on-the-plan": "Price / unit depends on the chosen plan",
+                "per-request": "/ request",
                 "charges": {
                     "building-insights-request": "Accessing the Solar installation analysis page (the map)",
                     "additional-users": "Create an additional user over the limit, if the plan allows it"

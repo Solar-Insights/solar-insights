@@ -15,6 +15,8 @@
                 {{ props.paragraphAction?.text }}
             </v-btn>
         </div>
+
+        <slot></slot>
     </div>
 </template>
 

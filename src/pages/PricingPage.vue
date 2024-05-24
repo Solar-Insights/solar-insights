@@ -54,17 +54,34 @@
                 />
 
                 <ParagraphContainer
-                    class="mx-auto"
+                    class="mx-auto font-weight-bold"
                     :paragraphContent="$t(`pricing.usage-pricing-subtitle-container.what-is-included-paragraph.content`)"
                 >
-                    ICI ON DOIT METTRE CE QUI EST INCLU
+                    <div class="font-weight-regular">
+                        <v-list>
+                            <v-list-item 
+                                v-for="action in incurringActions"
+                                prepend-icon="mdi-circle-small"
+                                :title="action.title"
+                                :subtitle="action.price"
+                            />
+                        </v-list>
+                    </div>
                 </ParagraphContainer>
 
                 <ParagraphContainer
-                    class="mx-auto"
+                    class="mx-auto font-weight-bold"
                     :paragraphContent="$t(`pricing.usage-pricing-subtitle-container.what-is-not-included-paragraph.content`)"
                 >
-                    ICI ON DOIT METTRE CE QUI N'EST PAS INCLU
+                    <div class="font-weight-regular">
+                        <v-list>
+                            <v-list-item 
+                                v-for="action in nonIncurringActions"
+                                prepend-icon="mdi-circle-small"
+                                :title="action.title"
+                            />
+                        </v-list>
+                    </div>
                 </ParagraphContainer>
             </PageSubtitleContainer>
         </PageSection>
@@ -82,8 +99,12 @@ import PricingCard from '@/components/pricing/PricingCard.vue';
 import { PricingCardDetails } from '@/helpers/types';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { priceString } from '@/helpers/util';
+import { useUserSessionStore } from '@/stores/userSessionStore';
 
 const t = useI18n().t;
+const tm = useI18n().tm;
+const userSessionStore = useUserSessionStore();
 
 const pricingCards = computed(() => {
     return [
@@ -115,4 +136,30 @@ const pricingCards = computed(() => {
         },
     ] as PricingCardDetails[];
 })
+
+type NonIncurringAction = {
+    title: string
+};
+
+const nonIncurringActions = computed(() => {
+    return tm(`pricing.usage-pricing-subtitle-container.what-is-not-included-paragraph.non-charges`) as NonIncurringAction[];
+});
+
+type IncurringAction = {
+    title: string,
+    price: number | string
+}
+
+const incurringActions = computed(() => {
+    return [
+        {
+            title: t(`pricing.usage-pricing-subtitle-container.what-is-included-paragraph.charges.building-insights-request`),
+            price: `${priceString(0.15, userSessionStore.locale)} ${t(`pricing.usage-pricing-subtitle-container.what-is-included-paragraph.per-request`)}`
+        },
+        {
+            title: t(`pricing.usage-pricing-subtitle-container.what-is-included-paragraph.charges.additional-users`),
+            price: t(`pricing.usage-pricing-subtitle-container.what-is-included-paragraph.depends-on-the-plan`)
+        }
+    ] as IncurringAction[];
+});
 </script>
