@@ -276,10 +276,27 @@
                 ]
             },
             "enterprise": {
-                "name": "Enterprise (coming soon)",
+                "name": "Enterprise",
                 "action": "Coming soon",
                 "description": "For large-scale usage with dedicated servers",
-                "benefits": []
+                "benefits": [
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    }
+                ]
             }
         },
         "pricing-form": {

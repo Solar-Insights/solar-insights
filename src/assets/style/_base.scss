@@ -201,6 +201,7 @@ $light-line: #dadada;
 .pricing-card {
     @extend .py-5;
     @extend .px-4;
+    min-height: 800px;
 }
 
 .dark-pricing-color {
@@ -217,7 +218,7 @@ $light-line: #dadada;
 }
 
 .pricing-card-title-section {
-    min-height: 130px;
+    min-height: 120px;
 }
 
 .pricing-card-name {
@@ -235,7 +236,7 @@ $light-line: #dadada;
     @extend .rounded-lg; 
     @extend .font-weight-medium;
     @extend .w-100;
-    @extend .my-4;
+    @extend .mb-4;
 }
 
 .pricing-card-container {

@@ -277,10 +277,27 @@
                 ]
             },
             "enterprise": {
-                "name": "Entreprise (à venir)",
+                "name": "Entreprise",
                 "description": "Pour utilisation à grande échelle avec serveurs dédiés",
                 "action": "À venir",
-                "benefits": []
+                "benefits": [
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    },
+                    {
+                        "title": "",
+                        "description": ""
+                    }
+                ]
             }
         },
         "pricing-form": {

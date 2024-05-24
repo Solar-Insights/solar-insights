@@ -41,10 +41,10 @@
                 <div class="detail-text"> {{ $t(`pricing.pricing-cards.benefits-title`) }} </div>
                 <v-list class="my-3 py-0" density="compact">
                     <v-list-item
-                        v-for="benefit in $t(`pricing.pricing-cards.${$props.pricingCardDetails.pricingTier}.benefits`)"
+                        v-for="benefit in benefits"
                         :class="theme === 'dark' ? 'dark-pricing-color' : ''"
                     >
-                        <!-- <v-list-item-title class="detail-text-no-color-change">
+                        <v-list-item-title class="detail-text-no-color-change">
                             {{ benefit.title }}
                         </v-list-item-title>
 
@@ -54,7 +54,7 @@
 
                         <template v-slot:prepend>
                             <v-icon color="theme">mdi-check-circle-outline</v-icon>
-                        </template> -->
+                        </template>
                     </v-list-item>
                 </v-list>
             </div>
@@ -63,11 +63,13 @@
 </template>
 
 <script setup lang="ts">
-import { PricingCardDetails } from '@/helpers/types';
-import { PropType } from 'vue';
+import { PricingCardDetails, PricingCardSingleBenefit } from '@/helpers/types';
+import { computed, PropType } from 'vue';
 import { useUserSessionStore } from '@/stores/userSessionStore';
 import { storeToRefs } from 'pinia';
-import { stringHasValue } from '@/helpers/componentConditionals';
+import { useI18n } from 'vue-i18n';
+
+const tm = useI18n().tm;
 
 const { theme } = storeToRefs(useUserSessionStore());
 
@@ -80,4 +82,7 @@ const props = defineProps({
 
 const emits = defineEmits(["onPricingCardActionClick"]);
 
+const benefits = computed(() => {
+    return tm(`pricing.pricing-cards.${props.pricingCardDetails.pricingTier}.benefits`) as PricingCardSingleBenefit[];
+})
 </script>
