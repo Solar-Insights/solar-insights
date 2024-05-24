@@ -4,7 +4,10 @@
             <PageTitleContainer
                 :pageTitle="$t(`get-started.page-title-container.title`)"
                 :pageTitlePrecision="$t(`get-started.page-title-container.precision`)"
-                :pageTitleAction="{ text: $t(`get-started.page-title-container.action`), icon: `mdi-rocket-launch-outline` }"
+                :pageTitleAction="{
+                    text: $t(`get-started.page-title-container.action`),
+                    icon: `mdi-rocket-launch-outline`
+                }"
                 @onPageTitleActionClick="router.push({ name: 'search' })"
             />
         </PageSection>
@@ -32,43 +35,56 @@
                     />
                 </ShortDescriptionItemsContainer>
 
-                <ParagraphContainer 
+                <ParagraphContainer
                     class="text-center mx-auto"
                     :paragraphContent="$t(`get-started.register-subtitle-container.create-an-org-paragraph.content`)"
-                    :paragraphAction="{ text: $t(`get-started.register-subtitle-container.create-an-org-paragraph.action`), icon: '' }"
+                    :paragraphAction="{
+                        text: $t(`get-started.register-subtitle-container.create-an-org-paragraph.action`),
+                        icon: ''
+                    }"
                     @onParagraphActionClick="console.log('do something')"
                 />
             </PageSubtitleContainer>
         </PageSection>
 
-        <v-divider/>
+        <v-divider />
 
         <PageSection>
             <PageSubtitleContainer
                 :pageSubtitle="$t(`get-started.use-solar-insights-subtitle-container.subtitle`)"
                 :pageSubtitlePrecision="$t(`get-started.use-solar-insights-subtitle-container.precision`)"
-            >   
+            >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
                         v-if="!isAuthenticated"
                         :itemTitle="$t(`get-started.use-solar-insights-subtitle-container.short-items.new-org.title`)"
-                        :itemContent="$t(`get-started.use-solar-insights-subtitle-container.short-items.new-org.description`)"
+                        :itemContent="
+                            $t(`get-started.use-solar-insights-subtitle-container.short-items.new-org.description`)
+                        "
                         :itemIcon="`mdi-account-outline`"
-                        :itemAction="{ 'text': $t('get-started.use-solar-insights-subtitle-container.short-items.new-org.action') }"
+                        :itemAction="{
+                            text: $t('get-started.use-solar-insights-subtitle-container.short-items.new-org.action')
+                        }"
                         @onItemActionClick="loginUser"
                     />
                     <ShortDescriptionItem
-                        :itemTitle="$t(`get-started.use-solar-insights-subtitle-container.short-items.start-using.title`)"
-                        :itemContent="$t(`get-started.use-solar-insights-subtitle-container.short-items.start-using.description`)"
+                        :itemTitle="
+                            $t(`get-started.use-solar-insights-subtitle-container.short-items.start-using.title`)
+                        "
+                        :itemContent="
+                            $t(`get-started.use-solar-insights-subtitle-container.short-items.start-using.description`)
+                        "
                         :itemIcon="`mdi-play`"
-                        :itemAction="{ 'text': $t('get-started.use-solar-insights-subtitle-container.short-items.start-using.action') }"
+                        :itemAction="{
+                            text: $t('get-started.use-solar-insights-subtitle-container.short-items.start-using.action')
+                        }"
                         @onItemActionClick="console.log('do something')"
                     />
                 </ShortDescriptionItemsContainer>
             </PageSubtitleContainer>
         </PageSection>
 
-        <v-divider/>
+        <v-divider />
 
         <PageSection>
             <PageSubtitleContainer
@@ -78,13 +94,16 @@
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
                         :itemTitle="$t(`get-started.beyond-solar-insights-subtitle-container.short-items.data.title`)"
-                        :itemContent="$t(`get-started.beyond-solar-insights-subtitle-container.short-items.data.description`)"
+                        :itemContent="
+                            $t(`get-started.beyond-solar-insights-subtitle-container.short-items.data.description`)
+                        "
                         :itemIcon="`mdi-database-outline`"
-
                     />
                     <ShortDescriptionItem
                         :itemTitle="$t(`get-started.beyond-solar-insights-subtitle-container.short-items.graphs.title`)"
-                        :itemContent="$t(`get-started.beyond-solar-insights-subtitle-container.short-items.graphs.description`)"
+                        :itemContent="
+                            $t(`get-started.beyond-solar-insights-subtitle-container.short-items.graphs.description`)
+                        "
                         :itemIcon="`mdi-chart-line`"
                     />
                 </ShortDescriptionItemsContainer>

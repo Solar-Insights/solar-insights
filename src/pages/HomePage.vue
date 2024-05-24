@@ -10,10 +10,7 @@
         </PageSection>
 
         <PageSection>
-            <ImageContainer 
-                :pcImageSrc="solar_insights_overview" 
-                :mobileImageSrc="solar_insights_overview"
-            />
+            <ImageContainer :pcImageSrc="solar_insights_overview" :mobileImageSrc="solar_insights_overview" />
         </PageSection>
 
         <PageSection>

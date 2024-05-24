@@ -223,7 +223,7 @@ $light-line: #dadada;
 
 .pricing-card-name {
     @extend .text-overline;
-    font-size: 1.25rem !important
+    font-size: 1.25rem !important;
 }
 
 .pricing-card-description {
@@ -233,7 +233,7 @@ $light-line: #dadada;
 }
 
 .pricing-card-action {
-    @extend .rounded-lg; 
+    @extend .rounded-lg;
     @extend .font-weight-medium;
     @extend .w-100;
     @extend .mb-4;

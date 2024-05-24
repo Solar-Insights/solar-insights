@@ -21,9 +21,9 @@
 </template>
 
 <script setup lang="ts">
-import { ButtonAction } from '@/helpers/types';
+import { ButtonAction } from "@/helpers/types";
 import { stringHasValue, objectHasValue } from "@/helpers/componentConditionals";
-import { PropType } from 'vue';
+import { PropType } from "vue";
 
 const props = defineProps({
     paragraphContent: {

@@ -71,35 +71,35 @@ export const routes: RouteInfo[] = [
         name: "home",
         icon: "mdi-home-outline",
         requiresAuth: false,
-        displaysAppBarAndFooter: true,
+        displaysAppBarAndFooter: true
     },
     {
         section: "solar-insights",
         name: "get-started",
         icon: "mdi-rocket-launch-outline",
         requiresAuth: false,
-        displaysAppBarAndFooter: true,
+        displaysAppBarAndFooter: true
     },
     {
         section: "solar-insights",
         name: "pricing",
         icon: "mdi-currency-usd",
         requiresAuth: false,
-        displaysAppBarAndFooter: true,
+        displaysAppBarAndFooter: true
     },
     {
         section: "services",
         name: "my-organization",
         icon: "mdi-weather-sunny",
         requiresAuth: true,
-        displaysAppBarAndFooter: true,
+        displaysAppBarAndFooter: true
     },
     {
         section: "services",
         name: "search",
         icon: "mdi-weather-sunny",
         requiresAuth: false,
-        displaysAppBarAndFooter: true,
+        displaysAppBarAndFooter: true
     }
 ];
 

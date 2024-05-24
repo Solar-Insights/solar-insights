@@ -46,7 +46,10 @@ $light-grey: rgba(148, 148, 148, 1);
 
 .anchor-with-theme {
     color: $theme;
-    a, a:visited, a:hover, a:active {
+    a,
+    a:visited,
+    a:hover,
+    a:active {
         color: inherit !important;
         text-decoration: none !important;
     }

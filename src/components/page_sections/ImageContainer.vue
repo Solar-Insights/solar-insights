@@ -1,5 +1,5 @@
 <template>
-    <v-img 
+    <v-img
         class="hidden-xs pc-image-container"
         :src="props.pcImageSrc"
         :max-width="props.maxWidth"
@@ -7,7 +7,7 @@
         :max-height="props.maxHeight"
         :min-height="props.minHeight"
     />
-    <v-img 
+    <v-img
         class="hidden-sm-and-up mobile-image-container"
         :src="props.mobileImageSrc"
         :max-width="props.maxWidth"

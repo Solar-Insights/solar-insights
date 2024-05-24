@@ -210,7 +210,7 @@
         "beyond-solar-insights-subtitle-container": {
             "subtitle": "3. Go beyond Solar Insights",
             "precision": "Make the most of our data, even outside the app.",
-            "short-items": { 
+            "short-items": {
                 "data": {
                     "title": "Export valuable data",
                     "description": "Save relevant Solar Insights data on your device to reuse later, or even integrate with different tools."

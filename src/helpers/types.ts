@@ -90,35 +90,35 @@ export type MyOrganizationMember = {
 export type ButtonAction = {
     text: string;
     icon?: string;
-}
+};
 
-export type RouteSection = "solar-insights" | "services"
+export type RouteSection = "solar-insights" | "services";
 
 export type PricingCardDetails = {
-    pricingTier: PricingTier,
-    name: string,
-    description: string,
-    action: string,
-    monthlyStartingPrice: number,
-    maxNbOfUsers: number,
-    pricePerAdditionalUser?: number
+    pricingTier: PricingTier;
+    name: string;
+    description: string;
+    action: string;
+    monthlyStartingPrice: number;
+    maxNbOfUsers: number;
+    pricePerAdditionalUser?: number;
 };
 
 export type PricingCardBenefits = {
-    title: string,
-    benefits: PricingCardSingleBenefit[]
+    title: string;
+    benefits: PricingCardSingleBenefit[];
 };
 
 export type PricingCardSingleBenefit = {
-    title: string,
-    description?: string
-}
+    title: string;
+    description?: string;
+};
 
 export type PricingTier = "starter" | "pro" | "enterprise";
 
 export type NewOrganizationForm = {
-    name: string,
-    contactEmail: string,
-    pricingTier: PricingTier,
-    additionalNotes: string,
+    name: string;
+    contactEmail: string;
+    pricingTier: PricingTier;
+    additionalNotes: string;
 };

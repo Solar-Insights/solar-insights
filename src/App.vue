@@ -7,7 +7,7 @@
                 <router-view :key="currentRoute.fullPath"></router-view>
             </v-container>
         </v-main>
-        <AppFooter v-if="displaysAppComponents"/>
+        <AppFooter v-if="displaysAppComponents" />
     </v-app>
 </template>
 
@@ -25,12 +25,12 @@ const currentRoute = useRoute();
 const userSessionStore = useUserSessionStore();
 const { theme, locale, alert } = storeToRefs(userSessionStore);
 
-const routesWithNoAppComponents = ["solar-map"]
+const routesWithNoAppComponents = ["solar-map"];
 
 const displaysAppComponents = computed(() => {
     const currentRouteName: any = currentRoute.name;
     return !routesWithNoAppComponents.includes(currentRouteName);
-})
+});
 
 onMounted(async () => {
     i18n.global.locale.value = locale.value;

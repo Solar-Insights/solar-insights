@@ -19,12 +19,7 @@
                     {{ props.formCancelButton }}
                 </v-btn>
 
-                <v-btn
-                    @click="emits(`validateForm`)"
-                    class="font-weight-medium"
-                    variant="flat"
-                    color="theme"
-                >
+                <v-btn @click="emits(`validateForm`)" class="font-weight-medium" variant="flat" color="theme">
                     {{ props.formConfirmButton }}
                 </v-btn>
             </v-card-actions>
@@ -62,10 +57,13 @@ const emits = defineEmits(["validateForm", "formWasClosed"]);
 
 const dialog = ref<boolean>(false);
 
-watch(() => props.formClose, () => {
-    if (!props.formClose) return;
+watch(
+    () => props.formClose,
+    () => {
+        if (!props.formClose) return;
 
-    dialog.value = false;
-    emits("formWasClosed");
-})
+        dialog.value = false;
+        emits("formWasClosed");
+    }
+);
 </script>

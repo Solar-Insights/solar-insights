@@ -12,7 +12,7 @@
             <v-text-field
                 v-model="data.name"
                 class="mb-3"
-                :error-messages="(vuelidate.name.$errors).map(e => e.$message as string)"
+                :error-messages="vuelidate.name.$errors.map((e) => e.$message as string)"
                 :label="$t(`pricing.pricing-form.user-info-section.fields.name`)"
                 density="compact"
                 variant="outlined"
@@ -23,7 +23,7 @@
             <v-text-field
                 v-model="data.contactEmail"
                 class="mb-3"
-                :error-messages="(vuelidate.contactEmail.$errors).map(e => e.$message as string)"
+                :error-messages="vuelidate.contactEmail.$errors.map((e) => e.$message as string)"
                 :label="$t(`pricing.pricing-form.user-info-section.fields.email`)"
                 density="compact"
                 variant="outlined"
@@ -35,7 +35,7 @@
                 v-model="data.pricingTier"
                 class="mb-3"
                 :items="['Starter', 'Pro', 'Enterprise']"
-                :error-messages="(vuelidate.pricingTier.$errors).map(e => e.$message as string)"
+                :error-messages="vuelidate.pricingTier.$errors.map((e) => e.$message as string)"
                 label="Pricing tier*"
                 density="compact"
                 variant="outlined"
@@ -48,7 +48,7 @@
             <v-lazy>
                 <v-textarea
                     v-model="data.additionalNotes"
-                    :error-messages="(vuelidate.additionalNotes.$errors).map(e => e.$message as string)"
+                    :error-messages="vuelidate.additionalNotes.$errors.map((e) => e.$message as string)"
                     :label="$t(`pricing.pricing-form.additional-info-section.situation`)"
                     density="compact"
                     variant="outlined"
@@ -75,7 +75,7 @@ const t = useI18n().t;
 const props = defineProps({
     pricingTier: {
         type: Object as PropType<PricingTier>,
-        required: false,
+        required: false
     }
 });
 
@@ -87,14 +87,14 @@ const data = ref<NewOrganizationForm>({
     name: "",
     contactEmail: "",
     pricingTier: "starter",
-    additionalNotes: "",
+    additionalNotes: ""
 });
 
 const rules = computed(() => {
     return {
         name: {
             maxLength: helpers.withMessage("Max length", maxLength(256)),
-            required: helpers.withMessage("Needed", required),
+            required: helpers.withMessage("Needed", required)
         },
         contactEmail: {
             maxLength: helpers.withMessage("Max length", maxLength(256)),
@@ -102,12 +102,12 @@ const rules = computed(() => {
             email: helpers.withMessage("Email", email)
         },
         pricingTier: {
-            required: helpers.withMessage("Needed", required),
+            required: helpers.withMessage("Needed", required)
         },
         additionalNotes: {
-            maxLength: helpers.withMessage("Max length", maxLength(1024)),
+            maxLength: helpers.withMessage("Max length", maxLength(1024))
         }
-    }
+    };
 });
 
 const vuelidate = useVuelidate(rules, data);
@@ -117,7 +117,7 @@ const validForm = ref<boolean>(false);
 async function sendNewOrganizationRequest() {
     validForm.value = await vuelidate.value.$validate();
     if (!validForm.value) return;
-    
+
     console.log("form is valid");
     closeForm.value = true;
 }

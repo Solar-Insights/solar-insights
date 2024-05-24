@@ -17,7 +17,7 @@
 
             <v-app-bar-nav-icon class="hidden-sm-and-up" variant="text" @click.stop="drawer = !drawer" />
 
-            <v-toolbar-items class="hidden-xs" v-for="route in appBarRoutes" >
+            <v-toolbar-items class="hidden-xs" v-for="route in appBarRoutes">
                 <RouteButton :routeInfo="route" />
             </v-toolbar-items>
 

@@ -210,7 +210,7 @@
         "beyond-solar-insights-subtitle-container": {
             "subtitle": "3. Aller plus loin que Solar Insights",
             "precision": "Utilisez nos données de manière optimale, même à l'extérieur de l'application.",
-            "short-items": { 
+            "short-items": {
                 "data": {
                     "title": "Exporter des données pertinentes",
                     "description": "Sauvegarder des données Solar Insights sur votre appareil pour réutilisation future, ou même pour intégration avec différents outils."
@@ -221,7 +221,6 @@
                 }
             }
         }
-        
     },
     "pricing": {
         "title": "Une tarification simple et sans surprise",

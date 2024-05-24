@@ -18,7 +18,6 @@
     .page-title {
         font-size: 2.5rem;
         line-height: 2.625rem;
-
     }
     .page-subtitle-container {
         width: 100%;
@@ -127,17 +126,16 @@
 }
 
 .short-description-items-container {
-
 }
 
 .short-description-single-item-container {
-    @extend .mx-auto; 
+    @extend .mx-auto;
     @extend .my-6;
     @extend .px-5;
 }
 
 .short-description-item-icon {
-    @extend .mb-3; 
+    @extend .mb-3;
     @extend .mx-auto;
 }
 
@@ -176,7 +174,6 @@
 }
 
 .footer-section {
-
 }
 
 .footer-section-title {
@@ -188,7 +185,10 @@
 .footer-section-item {
     @extend .py-2;
     @extend .font-weight-light;
-    a, a:visited, a:hover, a:active {
+    a,
+    a:visited,
+    a:hover,
+    a:active {
         color: inherit !important;
         text-decoration: none !important;
     }

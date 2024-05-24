@@ -1,7 +1,7 @@
 <template>
     <PageContainer>
         <PageSection>
-            <PageTitleContainer 
+            <PageTitleContainer
                 :pageTitlePrecontent="`${steps.length}${$t(`search.precontent`)}`"
                 :pageTitle="$t(`search.title`)"
             >
@@ -33,12 +33,9 @@
             </PageTitleContainer>
         </PageSection>
 
-        <div v-for="step, index in steps">
+        <div v-for="(step, index) in steps">
             <PageSection>
-                <PageSubtitleContainer
-                    :pageSubtitle="`${index+1}. ${step.title}`"
-                    :pageSubtitleIcon="step.icon"
-                >
+                <PageSubtitleContainer :pageSubtitle="`${index + 1}. ${step.title}`" :pageSubtitleIcon="step.icon">
                     <ParagraphContainer
                         v-for="paragraph in step.contents"
                         :paragraphContent="paragraph"
@@ -47,14 +44,14 @@
 
                     <ImageContainer
                         v-for="image in step.images"
-                        :pcImageSrc="image" 
+                        :pcImageSrc="image"
                         :mobileImageSrc="image"
                         :maxWidth="500"
                     />
                 </PageSubtitleContainer>
             </PageSection>
 
-            <v-divider v-if="index + 1 !== steps.length"/>
+            <v-divider v-if="index + 1 !== steps.length" />
         </div>
     </PageContainer>
 </template>
@@ -129,6 +126,6 @@ const steps = computed(() => {
             contents: [t(`search.timeline.step-6.content-1`)],
             images: []
         }
-    ]
+    ];
 });
 </script>
