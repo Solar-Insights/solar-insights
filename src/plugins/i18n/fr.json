@@ -327,7 +327,7 @@
                 "per-request": "/ requête",
                 "charges": {
                     "building-insights-request": "Accéder à la page d'analyse d'installation solaire (la carte)",
-                    "additional-users": "Créer un utilisateur additionnel à la limite du plan si celui-ci le permet"
+                    "additional-users": "Créer un utilisateur additionnel après avoir atteint les limites du plan, et si celui-ci le permet"
                 }
             },
             "what-is-not-included-paragraph": {
@@ -337,7 +337,7 @@
                         "title": "Modifier une installation solaire une fois qu'on est sur la carte"
                     },
                     {
-                        "title": "Gérer votre organisation"
+                        "title": "Gérer votre organisation en restant dans les limites du plan"
                     },
                     {
                         "title": "Enregistrer des données ou graphes sur votre appareil"

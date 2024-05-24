@@ -327,7 +327,7 @@
                 "per-request": "/ request",
                 "charges": {
                     "building-insights-request": "Accessing the Solar installation analysis page (the map)",
-                    "additional-users": "Create an additional user over the limit, if the plan allows it"
+                    "additional-users": "Create an additional user after reaching the plan's limit, and if the plan allows it"
                 }
             },
             "what-is-not-included-paragraph": {
@@ -337,7 +337,7 @@
                         "title": "Modifiying a solar installation once already on the map page"
                     },
                     {
-                        "title": "Managing your organization"
+                        "title": "Managing your organization while respecting your plan's limit"
                     },
                     {
                         "title": "Save data or charts to your local device"
