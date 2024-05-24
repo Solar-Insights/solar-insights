@@ -228,7 +228,6 @@
         "pricing-cards": {
             "from": "From",
             "month": "month",
-            "benefits-title": "Get started with",
             "usage": "usage",
             "users-included": "user(s) included",
             "additional-user": "additional user",
@@ -236,70 +235,63 @@
                 "name": "Starter",
                 "description": "Ideal for new users and a moderate usage",
                 "action": "Get started",
-                "benefits": [
-                    {
-                        "title": "",
-                        "description": ""
+                "benefits-title": "Get started with: ",
+                "benefits": {
+                    "users": {
+                        "title": "free available user"
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "requests": {
+                        "title": "monthly solar installation analysis requests"
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "tools": {
+                        "title": "Every solar analysis tool"
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "email-support": {
+                        "title": "Email support"
+                    },
+                    "monthly-usage": {
+                        "title": "Monthly usage tracking"
                     }
-                ]
+                }
             },
             "pro": {
                 "name": "Pro",
                 "description": "Work with your team and all existing tools in a scaling environnment",
                 "action": "Get started",
-                "benefits": [
-                    {
-                        "title": "",
-                        "description": ""
+                "benefits-title": "Everything in the Starter plan, plus:",
+                "benefits": {
+                    "users": {
+                        "title": "free available users",
+                        "description": "then "
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "requests": {
+                        "title": "monthly solar installation analysis requests"
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "user-detailed-reports": {
+                        "title": "Detailed monthly user activity report"
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "private-discord-support": {
+                        "title": "Private Discord support"
                     }
-                ]
+                }
             },
             "enterprise": {
                 "name": "Enterprise",
                 "action": "Coming soon",
                 "description": "For large-scale usage with dedicated servers",
-                "benefits": [
-                    {
-                        "title": "",
-                        "description": ""
+                "benefits-title": "Everything in the Pro plan, plus:",
+                "benefits": {
+                    "users": {
+                        "title": "free available users",
+                        "description": "then "
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "dedicated-servers": {
+                        "title": "Dedicated servers for your organization"
                     },
-                    {
-                        "title": "",
-                        "description": ""
-                    },
-                    {
-                        "title": "",
-                        "description": ""
+                    "feature-requests": {
+                        "title": "New features requests"
                     }
-                ]
+                }
             }
         },
         "pricing-model-subtitle-container": {
@@ -326,7 +318,7 @@
                 "depends-on-the-plan": "Price / unit depends on the chosen plan",
                 "per-request": "/ request",
                 "charges": {
-                    "building-insights-request": "Accessing the Solar installation analysis page (the map)",
+                    "building-insights-request": "Accessing the solar installation analysis page (the map)",
                     "additional-users": "Create an additional user after reaching the plan's limit, and if the plan allows it"
                 }
             },

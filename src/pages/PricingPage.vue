@@ -5,7 +5,7 @@
         </PageSection>
 
         <PageSection>
-            <v-row class="justify-center">
+            <v-row class="justify-center mx-16">
                 <PricingCard v-for="pricingCard in pricingCards" :pricingCardDetails="pricingCard" />
             </v-row>
         </PageSection>
@@ -100,14 +100,33 @@ const tm = useI18n().tm;
 const userSessionStore = useUserSessionStore();
 
 const pricingCards = computed(() => {
-    return [
+    const pricingCardDetails: PricingCardDetails[] = [
         {
             pricingTier: "starter",
             name: t(`pricing.pricing-cards.starter.name`),
             description: t(`pricing.pricing-cards.starter.description`),
             action: t(`pricing.pricing-cards.starter.action`),
             monthlyStartingPrice: 25,
-            maxNbOfUsers: 1
+            benefits: {
+                title: t(`pricing.pricing-cards.starter.benefits-title`),
+                benefits: [
+                    {
+                        title: `1 ${t(`pricing.pricing-cards.starter.benefits.users.title`)}`
+                    },
+                    {
+                        title: `100 ${t(`pricing.pricing-cards.starter.benefits.requests.title`)}`
+                    },
+                    {
+                        title: t(`pricing.pricing-cards.starter.benefits.tools.title`)
+                    },
+                    {
+                        title: t(`pricing.pricing-cards.starter.benefits.email-support.title`)
+                    },
+                    {
+                        title: t(`pricing.pricing-cards.starter.benefits.monthly-usage.title`)
+                    },
+                ]
+            }
         },
         {
             pricingTier: "pro",
@@ -115,8 +134,24 @@ const pricingCards = computed(() => {
             description: t(`pricing.pricing-cards.pro.description`),
             action: t(`pricing.pricing-cards.pro.action`),
             monthlyStartingPrice: 50,
-            maxNbOfUsers: 8,
-            pricePerAdditionalUser: 5
+            benefits: {
+                title: t(`pricing.pricing-cards.pro.benefits-title`),
+                benefits: [
+                    {
+                        title: `8 ${t(`pricing.pricing-cards.pro.benefits.users.title`)}`,
+                        description: `${t(`pricing.pricing-cards.enterprise.benefits.users.description`)} ${priceString(5, userSessionStore.locale)} / ${t(`pricing.pricing-cards.additional-user`)}`
+                    },
+                    {
+                        title: `∞ ${t(`pricing.pricing-cards.pro.benefits.requests.title`)}`
+                    },
+                    {
+                        title: t(`pricing.pricing-cards.pro.benefits.user-detailed-reports.title`)
+                    },
+                    {
+                        title: t(`pricing.pricing-cards.pro.benefits.private-discord-support.title`)
+                    },
+                ]
+            }
         },
         {
             pricingTier: "enterprise",
@@ -124,10 +159,25 @@ const pricingCards = computed(() => {
             description: t(`pricing.pricing-cards.enterprise.description`),
             action: t(`pricing.pricing-cards.enterprise.action`),
             monthlyStartingPrice: 200,
-            maxNbOfUsers: 16,
-            pricePerAdditionalUser: 5
+            benefits: {
+                title: t(`pricing.pricing-cards.enterprise.benefits-title`),
+                benefits: [
+                    {
+                        title: `16 ${t(`pricing.pricing-cards.enterprise.benefits.users.title`)}`,
+                        description: `${t(`pricing.pricing-cards.enterprise.benefits.users.description`)} ${priceString(5, userSessionStore.locale)} / ${t(`pricing.pricing-cards.additional-user`)}`
+                    },
+                    {
+                        title: t(`pricing.pricing-cards.enterprise.benefits.dedicated-servers.title`)
+                    },
+                    {
+                        title: t(`pricing.pricing-cards.enterprise.benefits.feature-requests.title`)
+                    },
+                ]
+            }
         }
-    ] as PricingCardDetails[];
+    ];
+
+    return pricingCardDetails;
 });
 
 type NonIncurringAction = {

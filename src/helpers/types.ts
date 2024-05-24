@@ -100,8 +100,7 @@ export type PricingCardDetails = {
     description: string;
     action: string;
     monthlyStartingPrice: number;
-    maxNbOfUsers: number;
-    pricePerAdditionalUser?: number;
+    benefits: PricingCardBenefits
 };
 
 export type PricingCardBenefits = {

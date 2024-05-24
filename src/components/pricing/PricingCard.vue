@@ -33,7 +33,7 @@
                 />
             </v-btn>
 
-            <div class="pricing-card-container" style="min-height: 150px">
+            <div class="pricing-card-container" style="min-height: 100px">
                 <div class="detail-text-same-size">{{ $t(`pricing.pricing-cards.from`) }}</div>
                 <span class="text-h3">
                     {{ priceString(props.pricingCardDetails.monthlyStartingPrice, userSessionStore.locale) }}
@@ -42,32 +42,27 @@
                 <span>
                     + <a class="anchor-with-theme" href="javascript:document.getElementById('usage').scrollIntoView(true);"> {{ $t(`pricing.pricing-cards.usage`) }} </a>
                 </span>
-
-                <div class="mt-3">
-                    {{ props.pricingCardDetails.maxNbOfUsers }} {{ $t(`pricing.pricing-cards.users-included`) }}
-                </div>
-                <div v-if="props.pricingCardDetails.pricePerAdditionalUser !== undefined" class="detail-text-same-size">
-                    {{ priceString(props.pricingCardDetails.pricePerAdditionalUser, userSessionStore.locale) }} /
-                    {{ $t(`pricing.pricing-cards.additional-user`) }}
-                </div>
             </div>
 
             <v-divider />
 
             <div class="pricing-card-container">
-                <div class="detail-text">{{ $t(`pricing.pricing-cards.benefits-title`) }}</div>
+                <div>{{ props.pricingCardDetails.benefits.title }}</div>
                 <v-list class="my-3 py-0" density="compact">
-                    <v-list-item v-for="benefit in benefits" :class="theme === 'dark' ? 'dark-pricing-color' : ''">
-                        <v-list-item-title class="detail-text-no-color-change">
+                    <v-list-item v-for="benefit in props.pricingCardDetails.benefits.benefits" :class="theme === 'dark' ? 'dark-pricing-color' : ''">
+                        <v-list-item-title class="text-wrap">
                             {{ benefit.title }}
                         </v-list-item-title>
 
-                        <v-list-item-subtitle class="detail-text">
+                        <v-list-item-subtitle 
+                            v-if="stringHasValue(benefit.description)"
+                            class="text-medium-emphasis"
+                        >
                             {{ benefit.description }}
                         </v-list-item-subtitle>
 
                         <template v-slot:prepend>
-                            <v-icon color="theme">mdi-check-circle-outline</v-icon>
+                            <v-icon color="theme">mdi-check-circle</v-icon>
                         </template>
                     </v-list-item>
                 </v-list>
@@ -77,15 +72,14 @@
 </template>
 
 <script setup lang="ts">
-import { PricingCardDetails, PricingCardSingleBenefit } from "@/helpers/types";
-import { computed, PropType } from "vue";
+import { PricingCardDetails } from "@/helpers/types";
+import { PropType } from "vue";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
-import { useI18n } from "vue-i18n";
 import { priceString } from "@/helpers/util";
 import CreateOrganizationForm from "@/components/pricing/CreateOrganizationForm.vue";
+import { stringHasValue } from "@/helpers/componentConditionals";
 
-const tm = useI18n().tm;
 const userSessionStore = useUserSessionStore();
 const { theme } = storeToRefs(userSessionStore);
 
@@ -97,8 +91,4 @@ const props = defineProps({
 });
 
 const emits = defineEmits(["onPricingCardActionClick"]);
-
-const benefits = computed(() => {
-    return tm(`pricing.pricing-cards.${props.pricingCardDetails.pricingTier}.benefits`) as PricingCardSingleBenefit[];
-});
 </script>

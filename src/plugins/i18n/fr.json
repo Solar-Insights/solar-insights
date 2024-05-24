@@ -228,7 +228,6 @@
         "pricing-cards": {
             "from": "À partir de",
             "month": "mois",
-            "benefits-title": "Accédez à",
             "usage": "utilisation",
             "users-included": "utilisateur(s) inclu(s)",
             "additional-user": "utilisateur supplémentaire",
@@ -236,70 +235,63 @@
                 "name": "Starter",
                 "description": "Idéal pour les nouveaux utilisateurs et une utilisation modérée",
                 "action": "Démarrer",
-                "benefits": [
-                    {
-                        "title": "",
-                        "description": ""
+                "benefits-title": "Accédez à:",
+                "benefits": {
+                    "users": {
+                        "title": "utilisateur gratuit"
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "requests": {
+                        "title": "requêtes mensuelles d'analyse d'installation solaire"
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "tools": {
+                        "title": "Tous les outils d'analyse solaire"
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "email-support": {
+                        "title": "Support par email"
+                    },
+                    "monthly-usage": {
+                        "title": "Suivi de l'utilisation mensuelle"
                     }
-                ]
+                }
             },
             "pro": {
                 "name": "Pro",
                 "description": "Travaillez avec votre équipe et tous les outils existants dans un environnement extensible",
                 "action": "Démarrer",
-                "benefits": [
-                    {
-                        "title": "",
-                        "description": ""
+                "benefits-title": "Tout dans le plan Starter, plus:",
+                "benefits": {
+                    "users": {
+                        "title": "utilisateurs gratuits",
+                        "description": "puis"
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "requests": {
+                        "title": "requêtes mensuelles d'analyse d'installation solaire"
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "user-detailed-reports": {
+                        "title": "Rapport mensuel et détaillé des activités utilisateurs"
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "private-discord-support": {
+                        "title": "Support privé sur Discord"
                     }
-                ]
+                }
             },
             "enterprise": {
                 "name": "Entreprise",
                 "description": "Pour utilisation à grande échelle avec serveurs dédiés",
                 "action": "À venir",
-                "benefits": [
-                    {
-                        "title": "",
-                        "description": ""
+                "benefits-title": "Tout dans le plan Pro, plus:",
+                "benefits": {
+                    "users": {
+                        "title": "utilisateurs gratuits",
+                        "description": "puis"
                     },
-                    {
-                        "title": "",
-                        "description": ""
+                    "dedicated-servers": {
+                        "title": "Serveurs dédiés à votre organisation"
                     },
-                    {
-                        "title": "",
-                        "description": ""
-                    },
-                    {
-                        "title": "",
-                        "description": ""
+                    "feature-requests": {
+                        "title": "Requêtes de nouvelles fonctionnalités"
                     }
-                ]
+                }
             }
         },
         "pricing-model-subtitle-container": {
