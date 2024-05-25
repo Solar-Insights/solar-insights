@@ -122,7 +122,9 @@ async function sendNewOrganizationRequest() {
     validForm.value = await vuelidate.value.$validate();
     if (!validForm.value) return;
 
-    await postCreateOrganizationForm(data.value).catch(() => {});
+    await postCreateOrganizationForm(data.value).catch((error) => {
+        console.log(error); // do something here
+    });
 
     closeForm.value = true;
 }

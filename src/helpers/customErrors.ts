@@ -200,3 +200,15 @@ export class UserError extends VueError {
         super(type, name, title, message, code);
     }
 }
+
+export class FormError extends VueError {
+    constructor(
+        type: AlertType = "error",
+        name: string = "FormError",
+        title: string = i18n.global.t("errors.form-error.title"),
+        message: string = i18n.global.t("errors.form-error.message"),
+        code: number = 400
+    ) {
+        super(type, name, title, message, code);
+    }
+}
