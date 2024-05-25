@@ -9,9 +9,12 @@ const AxiosInstance = axios.create({
 AxiosInstance.interceptors.request.use(
     async (config) => {
         const { getAccessTokenSilently } = auth0;
-        const accessToken = await getAccessTokenSilently();
-
-        config.headers.Authorization = `Bearer ${accessToken}`;
+        await getAccessTokenSilently()
+            .then((accessToken) => {
+                config.headers.Authorization = `Bearer ${accessToken}`;
+            })
+            .catch((error) => {})
+        
         useUserSessionStore().pendingApiRequest++;
 
         return config;
