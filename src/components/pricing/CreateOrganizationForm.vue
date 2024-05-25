@@ -68,6 +68,7 @@ import useVuelidate from "@vuelidate/core";
 import { required, email, maxLength, helpers } from "@vuelidate/validators";
 import FormDialog from "@/components/page_sections/FormDialog.vue";
 import FormDialogSection from "@/components/page_sections/FormDialogSection.vue";
+import { postCreateOrganizationForm } from "@/api/client";
 
 const t = useI18n().t;
 
@@ -121,7 +122,8 @@ async function sendNewOrganizationRequest() {
     validForm.value = await vuelidate.value.$validate();
     if (!validForm.value) return;
 
-    console.log("form is valid");
+    await postCreateOrganizationForm(data.value).catch(() => {});
+
     closeForm.value = true;
 }
 </script>

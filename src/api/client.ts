@@ -1,14 +1,15 @@
+import { OrganizationError } from "@/helpers/customErrors";
+import { NewOrganizationForm } from "@/helpers/types";
 import AxiosInstance from "@/plugins/axios";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 
-export async function getMyOrganizationInfo() {
+export async function postCreateOrganizationForm(form: NewOrganizationForm) {
     return await AxiosInstance({
-        method: "get",
+        method: "post",
         responseType: "json",
-        url: `/user/my-organization`
+        url: `/unsecured/organization`,
+        data: form
     })
-        .then((response) => {
-            return response.data.myOrganization as MyOrganization; // includes administrators data
-        })
         .catch((error) => {
             useUserSessionStore().setAlert(new OrganizationError());
             throw error;
