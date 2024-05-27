@@ -14,6 +14,10 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
 $scrollbars: rgb(34, 34, 34);
 $light-grey: rgba(148, 148, 148, 1);
 
+.v-theme--dark {
+    --v-theme-background: 33, 33, 33 !important;
+}
+
 .theme-surface-contrast {
     background-color: $theme-surface-contrast !important;
 }

@@ -1,12 +1,12 @@
 <template>
     <v-app :theme="theme">
         <AppBar v-if="displaysAppComponents" />
-        <v-main>
-            <v-container class="app-container" fluid>
-                <Alert v-if="alert !== undefined" />
-                <router-view :key="currentRoute.fullPath"></router-view>
-            </v-container>
+
+        <v-main fluid>
+            <Alert v-if="alert !== undefined" />
+            <router-view :key="currentRoute.fullPath"/>
         </v-main>
+        
         <AppFooter v-if="displaysAppComponents" />
     </v-app>
 </template>
