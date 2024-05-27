@@ -1,7 +1,7 @@
 <template>
-    <v-card class="page-container">
+    <div class="page-container">
         <slot></slot>
-    </v-card>
+    </div>
 </template>
 
 <script setup lang="ts"></script>
