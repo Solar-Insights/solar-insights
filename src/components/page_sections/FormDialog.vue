@@ -19,7 +19,7 @@
                     {{ props.formCancelButton }}
                 </v-btn>
 
-                <v-btn @click="emits(`validateForm`)" class="font-weight-medium" variant="flat" color="theme">
+                <v-btn @click="emits(`validateForm`)" class="font-weight-medium" variant="flat" color="theme" :loading="formLoadingResponse">
                     {{ props.formConfirmButton }}
                 </v-btn>
             </v-card-actions>
@@ -48,6 +48,10 @@ const props = defineProps({
         required: true
     },
     formClose: {
+        type: Boolean,
+        required: true
+    },
+    formLoadingResponse: {
         type: Boolean,
         required: true
     }

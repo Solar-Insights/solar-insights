@@ -10,6 +10,9 @@ export async function postCreateOrganizationForm(form: NewOrganizationForm) {
         url: `/unsecured/organization`,
         data: form
     })
+        .then((data) => {
+            console.log("sent create organization form successfuly");
+        })
         .catch((error) => {
             useUserSessionStore().setAlert(new OrganizationError());
             throw error;
