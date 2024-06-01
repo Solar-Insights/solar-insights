@@ -26,7 +26,10 @@
             }
         },
         "success": {
-
+            "organization-user-creation": {
+                "title": "Successfully created a user",
+                "message": "Une erreur est survenue lors de la requête visant à convertir des coordonnées géographiques en une adresse valide."
+            }
         },
         "warnings": {
             "reverse-geocoding": {
