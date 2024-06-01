@@ -48,7 +48,10 @@ export async function createUserForOrganization(email: string, name: string) {
         }
     })
         .then((response) => {
-            return response.data.myOrganizationMember as MyOrganizationMember;
+            const myOrganizationMember: MyOrganizationMember = response.data.myOrganizationMember;
+            myOrganizationMember.created_date = cleanIsoStringToKeepYYYYmmdd(myOrganizationMember.created_date);
+            // useUserSessionStore().setAlert();
+            return myOrganizationMember;
         })
         .catch((error) => {
             useUserSessionStore().setAlert(new OrganizationError());
