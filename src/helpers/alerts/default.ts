@@ -11,8 +11,8 @@ export class VueAlert {
     constructor(
         type: AlertType = "warning",
         name: string = "Error",
-        title: string = i18n.global.t("errors.vue-error.title"),
-        message: string = i18n.global.t("errors.vue-error.message"),
+        title: string = i18n.global.t("alerts.default.vue.title"),
+        message: string = i18n.global.t("alerts.default.vue.message"),
         code: number = 500
     ) {
         this.type = type;
