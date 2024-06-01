@@ -6,8 +6,8 @@ export class OrganizationSuccess extends VueAlert {
     constructor(
         type: AlertType = "success",
         name: string = "OrganizationSuccess",
-        title: string = i18n.global.t("success.organization-user-creation.title"),
-        message: string = i18n.global.t("success.organization-user-creation.message"),
+        title: string = i18n.global.t("alerts.success.organization-user-creation.title"),
+        message: string = i18n.global.t("alerts.success.organization-user-creation.message"),
         code: number = 201
     ) {
         super(type, name, title, message, code);

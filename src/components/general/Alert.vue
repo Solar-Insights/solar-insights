@@ -26,12 +26,12 @@
                 </v-icon>
             </template>
 
-            <v-alert-title :class="`text-${alert.type}`">
-                {{ alert.title }}
-            </v-alert-title>
+            <div class="my-1 font-weight-bold" :class="`text-${alert.type}`">
+                {{ $t(`alerts.${alert.type}.prepend`) }}
+            </div>
 
-            <div class="my-2">
-                {{ alert.message }}
+            <div class="my-1">
+                {{ alert.title }}
             </div>
         </v-alert>
     </v-snackbar>

@@ -26,57 +26,60 @@
             }
         },
         "success": {
+            "prepend": "Succès",
             "organization-user-creation": {
-                "title": "Création d'un utilisateur",
-                "message": "Une erreur est survenue lors de la requête visant à convertir des coordonnées géographiques en une adresse valide."
+                "title": "Ajout de l'utilisateur à l'organisation",
+                "message": ""
             }
         },
-        "warnings": {
+        "warning": {
+            "prepend": "Alerte",
             "reverse-geocoding": {
-                "title": "Erreur de géocodage inversé de coordonnées",
-                "message": "Une erreur est survenue lors de la requête visant à convertir des coordonnées géographiques en une adresse valide."
+                "title": "Impossible de faire le géocodage inversé de coordonnées",
+                "message": ""
             }
         },
-        "errors": {
+        "error": {
+            "prepend": "Erreur",
             "map-initialization": {
-                "title": "Erreur de chargement de la carte",
-                "message": "Une erreur est survenue lors du chargement de la carte et de ses composantes."
+                "title": "Impossible de charger la carte",
+                "message": ""
             },
             "user-input": {
-                "title": "Erreur d'entrée de données",
+                "title": "Entrée de données invalides",
                 "message": ""
             },
             "autocomplete-input": {
-                "title": "Erreur d'entrée de données",
-                "message": "Sélectionnez une adresse valide du menu déroulant."
+                "title": "Sélectionnez une adresse valide du menu déroulant.",
+                "message": ""
             },
             "geocoding": {
-                "title": "Erreur de géocodage de l'adresse",
-                "message": "Une erreur est survenue lors de la requête visant à convertir une adresse en coordonnées géographiques valides."
+                "title": "Impossible de géocoder l'adresse",
+                "message": ""
             },
             "building-insights": {
-                "title": "Erreur de chargement du bâtiment",
-                "message": "Une erreur est survenue lors de la requête visant à récupérer les données du bâtiment visé."
+                "title": "Impossible de charger les données du bâtiment",
+                "message": ""
             },
             "solar-layers": {
-                "title": "Erreur de chargement des couches",
-                "message": "Une erreur est survenue lors de la requête visant à récupérer les couches de données bâtiment visé."
+                "title": "Impossible de charger les couches de données",
+                "message": ""
             },
             "geotiff": {
-                "title": "Erreur de chargement des geotiffs",
-                "message": "Une erreur est survenue lors de la requête visant à récupérer les geotiffs de la couche de donnée présente."
+                "title": "Impossible de charger le GeoTIFFs",
+                "message": ""
             },
             "organization": {
-                "title": "Erreur de synchronisation l'organisation",
-                "message": "Une erreur est survenue lors de la requête visant à accéder à votre base de données organisationnelles."
+                "title": "Impossible de synchroniser les informations de l'organisation",
+                "message": ""
             },
             "user": {
-                "title": "Erreur de synchronisation de profil",
-                "message": "Une erreur est survenue lors de la requête visant à accéder à votre profil."
+                "title": "Impossible de synchroniser les données du profil",
+                "message": ""
             },
             "form": {
-                "title": "Erreur de validation de données",
-                "message": "Une erreur est survenue lors de la validation des champs du formulaire."
+                "title": "Impossible de valider les champs du formulaire",
+                "message": ""
             }
         }
     },
