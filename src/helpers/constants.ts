@@ -1,13 +1,5 @@
 import { RouteInfo } from "@/helpers/types";
 
-export function circularBarColorSelector(value: string) {
-    const numValue: number = Number(value);
-    if (isNaN(numValue)) return "green";
-    else if (numValue < 50) return "red";
-    else if (numValue < 80) return "orange";
-    else return "green";
-}
-
 export function batteryCharging(value: number) {
     if (value > 90) return "mdi-battery-charging-100";
     else if (value > 80) return "mdi-battery-charging-90";

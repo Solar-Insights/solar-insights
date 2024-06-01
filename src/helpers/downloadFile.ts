@@ -1,7 +1,7 @@
 import { ExportType } from "@/helpers/types";
 
 export function saveFileToLocal(data: any, suggestedName: string, exportType: ExportType) {
-    const { blob, blobURL } = mapExportTypeToBlobFactory(data, exportType);
+    const { blobURL } = mapExportTypeToBlobFactory(data, exportType);
 
     const anchor = document.createElement("a");
     anchor.href = blobURL;

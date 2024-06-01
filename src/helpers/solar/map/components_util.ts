@@ -1,7 +1,7 @@
 import { LatLng } from "geo-env-typing/geo";
 import { MapElements } from "@/helpers/types";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import { MapInitializationError } from "@/helpers/customErrors";
+import { MapInitializationError } from "@/helpers/alerts/errors";
 import { LocationQuery } from "vue-router";
 
 const SOLAR_MIN_ZOOM = 18;

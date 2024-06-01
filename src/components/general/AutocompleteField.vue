@@ -19,7 +19,7 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 import { initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/solar/map/components_util";
 import { LatLng } from "geo-env-typing/geo";
 import { getGeocoding, getReverseGeocoding } from "@/api/geo";
-import { AutocompleteInputError } from "@/helpers/customErrors";
+import { AutocompleteInputError } from "@/helpers/alerts/errors";
 
 const userSessionStore = useUserSessionStore();
 

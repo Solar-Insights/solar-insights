@@ -1,6 +1,7 @@
 import { LatLng } from "geo-env-typing/geo";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import { GeocodingError, ReverseGeocodingError } from "@/helpers/customErrors";
+import { GeocodingError } from "@/helpers/alerts/errors";
+import { ReverseGeocodingWarning } from "@/helpers/alerts/warnings";
 import AxiosInstance from "@/plugins/axios";
 
 export async function getGeocoding(formattedAddress: string) {
@@ -35,7 +36,7 @@ export async function getReverseGeocoding(coord: LatLng) {
             return response.data.address as string;
         })
         .catch((error) => {
-            useUserSessionStore().setAlert(new ReverseGeocodingError());
+            useUserSessionStore().setAlert(new ReverseGeocodingWarning());
             throw error;
         });
 }

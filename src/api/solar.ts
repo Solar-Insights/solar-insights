@@ -1,4 +1,4 @@
-import { BuildingInsightsError, GeotiffError, SolarLayersError } from "@/helpers/customErrors";
+import { BuildingInsightsError, GeotiffError, SolarLayersError } from "@/helpers/alerts/errors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, GeoTiff, SolarLayers } from "geo-env-typing/solar";

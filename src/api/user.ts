@@ -1,4 +1,4 @@
-import { OrganizationError } from "@/helpers/customErrors";
+import { OrganizationError } from "@/helpers/alerts/errors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import AxiosInstance from "@/plugins/axios";
 import { MyOrganization, MyOrganizationMember } from "@/helpers/types";

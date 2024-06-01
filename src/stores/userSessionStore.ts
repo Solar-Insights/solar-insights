@@ -1,11 +1,10 @@
 import { defineStore } from "pinia";
-import { VueError } from "@/helpers/customErrors";
+import { VueAlert } from "@/helpers/alerts/default";
 import { Theme, Locale } from "@/helpers/types";
-import { useLocale } from "vuetify";
 
 export const useUserSessionStore = defineStore("userSessionStore", {
     state: () => ({
-        alert: undefined as VueError | undefined,
+        alert: undefined as VueAlert | undefined,
         pendingApiRequest: 0,
         theme: "light" as Theme,
         locale: "en" as Locale,
@@ -13,7 +12,7 @@ export const useUserSessionStore = defineStore("userSessionStore", {
     }),
 
     actions: {
-        setAlert(alert: VueError) {
+        setAlert(alert: VueAlert) {
             if (this.alert !== undefined) this.removeAlert();
             if (this.pendingApiRequest !== 0) this.alert = alert;
         },

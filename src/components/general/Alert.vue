@@ -20,18 +20,18 @@
             <template v-slot:prepend>
                 <v-icon 
                     size="x-large" 
-                    :color="matchType(alert.type)"
+                    :color="alert.type"
                 >
-                    {{ matchIconToAlertType(matchType(alert.type)) }}
+                    {{ matchIconToAlertType(alert.type) }}
                 </v-icon>
             </template>
 
-            <v-alert-title :class="`text-${matchType(alert.type)}`">
-                {{ matchTitle(alert.title) }}
+            <v-alert-title :class="`text-${alert.type}`">
+                {{ alert.title }}
             </v-alert-title>
 
             <div class="my-2">
-                {{ matchMessage(alert.message) }}
+                {{ alert.message }}
             </div>
         </v-alert>
     </v-snackbar>
@@ -41,7 +41,6 @@
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
-import { matchType, matchTitle, matchMessage } from "@/helpers/customErrors";
 import { AlertType } from "@/helpers/types";
 
 const userSessionStore = useUserSessionStore();
