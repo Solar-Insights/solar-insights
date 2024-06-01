@@ -15,6 +15,7 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
 
 .dark-toast-container {
     .v-snackbar__wrapper {
+        @extend .rounded-lg;
         background-color: $dark-surface-lighter-1;
         border: 1px solid $dark-line;
     }
@@ -22,6 +23,7 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
 
 .light-toast-container {
     .v-snackbar__wrapper {
+        @extend .rounded-lg;
         background-color: $light-surface;
         border: 1px solid $light-line;
     }
@@ -184,15 +186,16 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
 
 .app-menu-card {
     @extend .pa-2;
-    @extend .rounded-xl;
+    @extend .rounded-lg;
     min-width: 200px;
 }
 
 .app-menu-option {
     @extend .pa-2;
     @extend .my-2;
-    @extend .rounded-xl;
+    @extend .rounded-lg;
     @extend .w-100;
+    border: 1px solid $dark-line
 }
 
 .app-menu-option-icon-container {
