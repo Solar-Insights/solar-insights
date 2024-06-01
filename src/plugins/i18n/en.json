@@ -24,47 +24,47 @@
             "message": "An error occured during the execution of the application."
         },
         "map-initialization-error": {
-            "title": "The server could not properly load the map",
+            "title": "Could not load the map",
             "message": "An error occured when trying to load the map and its components."
         },
         "user-input-error": {
-            "title": "The provided user input provoked an error",
+            "title": "User input provoked an error",
             "message": ""
         },
         "autocomplete-input-error": {
-            "title": "The provided user input provoked an error",
+            "title": "User input provoked an error",
             "message": "Select a valid address from the dropdown menu."
         },
         "geocoding-error": {
-            "title": "The server could not geocode the given address",
+            "title": "Could not geocode an address",
             "message": "An error occured when trying to convert the address to valid geographic goordinates."
         },
         "reverse-geocoding-error": {
-            "title": "The server could not reverse geocode the given coordinates",
+            "title": "Could not reverse geocode coordinates",
             "message": "An error occured when trying to convert geographic coordinates to a valid address."
         },
         "building-insights-error": {
-            "title": "The server could not fetch building insights",
+            "title": "Could not get building insights",
             "message": "An error occured when trying to fetch the data of the provided building."
         },
         "solar-layers-error": {
-            "title": "The server could not fetch data layers",
+            "title": "Could not fetch data layers",
             "message": "An error occured when trying to fetch the data layers for the provided building."
         },
         "geotiff-error": {
-            "title": "The server could not load the geotiffs associated to the data layer",
+            "title": "Could not load geotiffs",
             "message": "An error occured when trying to fetch geotiffs for the wanted data layer."
         },
         "organization-error": {
-            "title": "The server could not fetch or update data for your organization",
+            "title": "Could not sync organization data",
             "message": "An error occured when trying to access your organization's database."
         },
         "user-error": {
-            "title": "The server could not fetch or update your profile",
+            "title": "Could not sync your profile",
             "message": "An error occured when trying to access your profile."
         },
         "form-error": {
-            "title": "The server could not validate the data that was sent",
+            "title": "Could not validate the form",
             "message": "An error occured when trying to validate the form's fields."
         }
     },

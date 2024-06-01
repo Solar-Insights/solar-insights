@@ -1,65 +1,63 @@
-<template>
-    <div class="alert-component" v-if="alert !== undefined" style="position: absolute">
+<template>  
+    <v-snackbar 
+        v-if="alert !== undefined"
+        v-model="snackbar"
+        :class="theme === 'dark' ? 'dark-toast-container' : 'light-toast-container'"
+        max-width="350"
+        location="top right" 
+        variant="elevated"
+        timeout="3000"
+        :multi-line="true"
+        :timer="alert.type"
+    >
         <v-alert
-            class="alert-component"
-            :type="matchType(alert.type)"
-            :title="matchTitle(alert.title)"
-            :text="matchMessage(alert.message)"
+            :class="theme === 'dark' ? 'dark-toast-content' : 'light-toast-content'"
+            class="pa-0"
             closable
             close-label="Close"
             @click:close="userSessionStore.removeAlert()"
-            rounded="0"
-        />
-        <hr
-            :width="`${alertDisplayPercentage}%`"
-            style="height: 5px"
-            :style="`color: ${matchColorToType(alert.type)}; background-color: ${matchColorToType(alert.type)};`"
-        />
-    </div>
+        >   
+            <template v-slot:prepend>
+                <v-icon 
+                    size="x-large" 
+                    :color="matchType(alert.type)"
+                >
+                    {{ matchIconToAlertType(matchType(alert.type)) }}
+                </v-icon>
+            </template>
+
+            <v-alert-title :class="`text-${matchType(alert.type)}`">
+                {{ matchTitle(alert.title) }}
+            </v-alert-title>
+
+            <div class="my-2">
+                {{ matchMessage(alert.message) }}
+            </div>
+        </v-alert>
+    </v-snackbar>
 </template>
 
 <script setup lang="ts">
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
-import { watch, ref, onMounted } from "vue";
-import { matchType, matchTitle, matchMessage, matchColorToType } from "@/helpers/customErrors";
+import { ref } from "vue";
+import { matchType, matchTitle, matchMessage } from "@/helpers/customErrors";
+import { AlertType } from "@/helpers/types";
 
 const userSessionStore = useUserSessionStore();
 
-const MAX_DISPLAY_PERCENTAGE = 100;
-const MS_BETWEEN_TICKS = 10;
-const DECREMENT_PERCENTAGE = 0.3;
+const { theme, alert } = storeToRefs(userSessionStore);
 
-const { alert } = storeToRefs(userSessionStore);
-const alertDisplayPercentage = ref(MAX_DISPLAY_PERCENTAGE);
+const snackbar = ref(true);
 
-watch(alert, () => {
-    resetAlertDisplay();
-});
-
-onMounted(async () => {
-    setInterval(() => {
-        handleIntervalChange();
-    }, MS_BETWEEN_TICKS);
-});
-
-function handleIntervalChange() {
-    if (alert.value === undefined) {
-        resetAlertDisplay();
-        return;
+function matchIconToAlertType(alertType: AlertType) {
+    switch (alertType) {
+        case "success":
+            return "mdi-checkbox-marked-circle-outline";
+        case "warning":
+            return "mdi-alert-circle-outline";
+        case "error":
+            return "mdi-close-circle-outline";
     }
-
-    decrementAlertDisplay();
-    if (alertDisplayPercentage.value <= 0) {
-        userSessionStore.removeAlert();
-    }
-}
-
-function resetAlertDisplay() {
-    alertDisplayPercentage.value = MAX_DISPLAY_PERCENTAGE;
-}
-
-function decrementAlertDisplay() {
-    alertDisplayPercentage.value -= DECREMENT_PERCENTAGE;
 }
 </script>
