@@ -187,6 +187,7 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
 .app-menu-card {
     @extend .pa-2;
     @extend .rounded-lg;
+    border: 1px solid $dark-line;
     min-width: 200px;
 }
 

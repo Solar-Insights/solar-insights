@@ -2,7 +2,7 @@
     <v-app :theme="theme">
         <AppBar v-if="displaysAppComponents" />
 
-        <v-main fluid>
+        <v-main style="min-height: 100vh;">
             <Alert v-if="alert !== undefined" />
             <router-view :key="currentRoute.fullPath"/>
         </v-main>
