@@ -95,13 +95,13 @@ export const routes: RouteInfo[] = [
     }
 ];
 
-export const menus = [
-    {
-        menuName: "user",
+export const menus = {
+    user: {
+        name: "user",
         icon: "mdi-account-outline"
     },
-    {
-        menuName: "settings",
+    settings: {
+        name: "settings",
         icon: "mdi-cog-outline"
     }
-];
+};

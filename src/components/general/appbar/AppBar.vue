@@ -18,27 +18,69 @@
             <v-app-bar-nav-icon class="hidden-sm-and-up" variant="text" @click.stop="drawer = !drawer" />
 
             <v-toolbar-items class="hidden-xs" v-for="route in appBarRoutes">
-                <RouteButton :routeInfo="route" />
+                <AppBarButton
+                    :icon="route.icon"
+                    :requiresAuth="route.requiresAuth"
+                    :text="route.name"
+                    :currentRoute="route.name === currentRoute.name"
+                    @sendAction="$router.push({ name: route.name})"
+                />
             </v-toolbar-items>
 
             <v-spacer class="hidden-xs" />
 
-            <v-toolbar-items class="hidden-xs" v-for="menu in menus">
-                <MenuButton :menu="menu.menuName" :icon="menu.icon" :isMobile="false" />
+            <v-toolbar-items class="hidden-xs">
+                <AppBarButton
+                    :icon="menus[`user`].icon"
+                    :requiresAuth="false"
+                    :text="menus[`user`].name"
+                    :hideText="true"
+                    @sendAction=""
+                > <UserMenu/> </AppBarButton>
+
+                <AppBarButton
+                    :icon="menus[`settings`].icon"
+                    :requiresAuth="false"
+                    :text="menus[`settings`].name"
+                    :hideText="true"
+                    @sendAction=""
+                > <SettingsMenu/> </AppBarButton>
             </v-toolbar-items>
         </v-app-bar>
 
         <v-navigation-drawer v-model="drawer" class="hidden-sm-and-up" disable-resize-watcher>
             <v-list>
                 <v-list-item v-for="route in appBarRoutes">
-                    <RouteButton :routeInfo="route" />
+                    <AppBarButton
+                        :icon="route.icon"
+                        :requiresAuth="route.requiresAuth"
+                        :text="route.name"
+                        :currentRoute="route.name === currentRoute.name"
+                        @sendAction="$router.push({ name: route.name})"
+                    />
                 </v-list-item>
             </v-list>
 
             <template v-slot:append>
                 <v-list>
-                    <v-list-item v-for="menu in menus">
-                        <MenuButton :menu="menu.menuName" :icon="menu.icon" :isMobile="true" />
+                    <v-list-item>
+                        <AppBarButton
+                            :icon="menus[`user`].icon"
+                            :requiresAuth="false"
+                            :text="menus[`user`].name"
+                            :hideText="false"
+                            @sendAction=""
+                        > <UserMenu/> </AppBarButton>
+                    </v-list-item>
+
+                    <v-list-item>
+                        <AppBarButton
+                            :icon="menus[`settings`].icon"
+                            :requiresAuth="false"
+                            :text="menus[`settings`].name"
+                            :hideText="false"
+                            @sendAction=""
+                        > <SettingsMenu/> </AppBarButton>
                     </v-list-item>
                 </v-list>
             </template>
@@ -48,14 +90,19 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import RouteButton from "@/components/general/appbar/RouteButton.vue";
-import MenuButton from "@/components/general/appbar/MenuButton.vue";
+import AppBarButton from "@/components/general/appbar/AppBarButton.vue";
+import UserMenu from "@/components/general/appbar/UserMenu.vue";
+import SettingsMenu from "@/components/general/appbar/SettingsMenu.vue";
 import logo_nobg from "@/assets/images/general/logo_nobg.png";
 import { routes, menus } from "@/helpers/constants";
 import { RouteInfo } from "@/helpers/types";
+import { useRoute } from "vue-router";
+
+const currentRoute = useRoute();
 
 const drawer = ref(false);
 
 const appBarRouteNames = ["get-started", "pricing", "search"];
 const appBarRoutes = ref<RouteInfo[]>(routes.filter((route) => appBarRouteNames.includes(route.name)));
+
 </script>
