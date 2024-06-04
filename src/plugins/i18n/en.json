@@ -85,10 +85,12 @@
     },
     "general": {
         "user-menu": {
+            "signin-title": "Use your Solar Insight's account",
             "signin": "Sign in",
             "signout": "Sign out"
         },
         "quick-settings": {
+            "title": "Settings",
             "theme": "Theme",
             "dark": "Dark",
             "light": "Light",

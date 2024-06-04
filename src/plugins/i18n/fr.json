@@ -85,10 +85,12 @@
     },
     "general": {
         "user-menu": {
+            "signin-title": "Utilisez votre compte Solar Insights",
             "signin": "Se connecter",
             "signout": "Se déconnecter"
         },
         "quick-settings": {
+            "title": "Paramètres",
             "theme": "Thème",
             "dark": "Sombre",
             "light": "Clair",
