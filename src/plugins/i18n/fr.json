@@ -28,7 +28,11 @@
         "success": {
             "prepend": "Succès",
             "organization-user-creation": {
-                "title": "Ajout de l'utilisateur à l'organisation",
+                "title": "Utilisateur ajouté à l'organisation",
+                "message": ""
+            },
+            "organization-user-deletion": {
+                "title": "Utilisateur retirer de l'organisation",
                 "message": ""
             }
         },

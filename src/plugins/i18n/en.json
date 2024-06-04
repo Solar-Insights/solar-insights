@@ -30,6 +30,10 @@
             "organization-user-creation": {
                 "title": "Added user to organization",
                 "message": ""
+            },
+            "organization-user-deletion": {
+                "title": "Removed user from organization",
+                "message": ""
             }
         },
         "warning": {

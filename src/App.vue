@@ -3,7 +3,7 @@
         <AppBar v-if="displaysAppComponents" />
 
         <v-main style="min-height: 100vh;">
-            <Alert v-if="alert !== undefined" />
+            <Alert/>
             <router-view :key="currentRoute.fullPath"/>
         </v-main>
         

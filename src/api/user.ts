@@ -2,6 +2,7 @@ import { OrganizationError } from "@/helpers/alerts/errors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import AxiosInstance from "@/plugins/axios";
 import { MyOrganization, MyOrganizationMember } from "@/helpers/types";
+import { OrganizationUserCreationSuccess, OrganizationUserDeletionSuccess } from "@/helpers/alerts/success";
 
 export async function getMyOrganizationInfo() {
     return await AxiosInstance({
@@ -50,7 +51,7 @@ export async function createUserForOrganization(email: string, name: string) {
         .then((response) => {
             const myOrganizationMember: MyOrganizationMember = response.data.myOrganizationMember;
             myOrganizationMember.created_date = cleanIsoStringToKeepYYYYmmdd(myOrganizationMember.created_date);
-            // useUserSessionStore().setAlert();
+            useUserSessionStore().setAlert(new OrganizationUserCreationSuccess());
             return myOrganizationMember;
         })
         .catch((error) => {
@@ -67,7 +68,11 @@ export async function deleteUserFromOrganization(user: MyOrganizationMember) {
         data: {
             myOrganizationMember: user
         }
-    }).catch((error) => {
+    })
+    .then((response) => {
+        useUserSessionStore().setAlert(new OrganizationUserDeletionSuccess());
+    })
+    .catch((error) => {
         useUserSessionStore().setAlert(new OrganizationError());
         throw error;
     });
