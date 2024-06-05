@@ -5,143 +5,119 @@ import { VueAlert } from "@/helpers/alerts/default";
 export class GeocodingError extends VueAlert {
     constructor(
         type: AlertType = "warning",
-        name: string = "GeocodingError",
         title: string = i18n.global.t("alerts.error.geocoding.title"),
-        message: string = i18n.global.t("alerts.error.geocoding.message"),
         code: number = 500
     ) {
-        super(type, name, title, message, code);
+        super(type, title, code);
     }
 }
 
 export class MapInitializationError extends VueAlert {
     constructor(
         type: AlertType = "error",
-        name: string = "MapInitializationError",
         title: string = i18n.global.t("alerts.error.map-initialization.title"),
-        message: string = i18n.global.t("alerts.error.map-initialization.message"),
         code: number = 500
     ) {
-        super(type, name, title, message, code);
+        super(type, title, code);
     }
 }
 
 export class UserInputError extends VueAlert {
     constructor(
-        message: string,
         type: AlertType = "error",
-        name: string = "UserInputError",
         title: string = i18n.global.t("alerts.error.user-input.title"),
         code: number = 500
     ) {
-        super(type, name, title, message, code);
+        super(type, title, code);
     }
 }
 
 export class AutocompleteInputError extends UserInputError {
     constructor(
-        message: string = i18n.global.t("alerts.error.autocomplete-input.message"),
         type: AlertType = "error",
-        name: string = "UserInputError",
         title: string = i18n.global.t("alerts.error.autocomplete-input.title"),
         code: number = 500
     ) {
-        super(message, type, name, title, code);
+        super(type, title, code);
     }
 }
 
 export class BuildingInsightsError extends VueAlert {
     constructor(
         type: AlertType = "error",
-        name: string = "BuildingInsightsError",
         title: string = i18n.global.t("alerts.error.building-insights.title"),
-        message: string = i18n.global.t("alerts.error.building-insights.message"),
         code: number = 500
     ) {
-        super(type, name, title, message, code);
+        super(type, title, code);
     }
 }
 
 export class SolarLayersError extends VueAlert {
     constructor(
         type: AlertType = "error",
-        name: string = "SolarLayersError",
         title: string = i18n.global.t("alerts.error.solar-layers.title"),
-        message: string = i18n.global.t("alerts.error.solar-layers.message"),
         code: number = 500
     ) {
-        super(type, name, title, message, code);
+        super(type, title, code);
     }
 }
 
 export class GeotiffError extends VueAlert {
     constructor(
         type: AlertType = "error",
-        name: string = "GeotiffError",
         title: string = i18n.global.t("alerts.error.geotiff.title"),
-        message: string = i18n.global.t("alerts.error.geotiff.message"),
         code: number = 500
     ) {
-        super(type, name, title, message, code);
+        super(type, title, code);
     }
 }
 
 export class OrganizationInfosError extends VueAlert {
     constructor(
         type: AlertType = "error",
-        name: string = "OrganizationInfosError",
         title: string = i18n.global.t("alerts.error.organization-infos.title"),
-        message: string = i18n.global.t("alerts.error.organization-infos.message"),
         code: number = 500
     ) {
-        super(type, name, title, message, code);
+        super(type, title, code);
     }
 }
 
 export class OrganizationUserCreationError extends VueAlert {
     constructor(
         type: AlertType = "error",
-        name: string = "OrganizationUserCreationError",
         title: string = i18n.global.t("alerts.error.organization-user-creation.title"),
-        message: string = i18n.global.t("alerts.error.organization-user-creation.message"),
         code: number = 500
     ) {
-        super(type, name, title, message, code);
+        super(type, title, code);
     }
 }
 
 export class OrganizationUserDeletionError extends VueAlert {
     constructor(
         type: AlertType = "error",
-        name: string = "OrganizationUserDeletionError",
         title: string = i18n.global.t("alerts.error.organization-user-deletion.title"),
-        message: string = i18n.global.t("alerts.error.organization-user-deletion.message"),
         code: number = 500
     ) {
-        super(type, name, title, message, code);
+        super(type, title, code);
     }
 }
 
 export class UserError extends VueAlert {
     constructor(
         type: AlertType = "error",
-        name: string = "UserError",
         title: string = i18n.global.t("alerts.error.user.title"),
-        message: string = i18n.global.t("alerts.error.user.message"),
         code: number = 500
     ) {
-        super(type, name, title, message, code);
+        super(type, title, code);
     }
 }
 
 export class FormError extends VueAlert {
     constructor(
         type: AlertType = "error",
-        name: string = "FormError",
         title: string = i18n.global.t("alerts.error.form.title"),
-        message: string = i18n.global.t("alerts.error.form.message"),
         code: number = 400
     ) {
-        super(type, name, title, message, code);
+        super(type, title, code);
     }
 }

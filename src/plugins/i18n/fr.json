@@ -21,81 +21,64 @@
     "alerts": {
         "default": {
             "vue": {
-                "title": "Erreur rencontrée",
-                "message": "Une erreur est survenue lors de l'exécution de l'application."
+                "title": "Erreur rencontrée"
             }
         },
         "success": {
             "prepend": "Succès",
             "organization-user-creation": {
-                "title": "Utilisateur ajouté à l'organisation",
-                "message": ""
+                "title": "Utilisateur ajouté à l'organisation"
             },
             "organization-user-deletion": {
-                "title": "Utilisateur retiré de l'organisation",
-                "message": ""
+                "title": "Utilisateur retiré de l'organisation"
             },
             "create-organization-form": {
-                "title": "Formulaire d'inscription envoyé",
-                "message": ""
+                "title": "Formulaire d'inscription envoyé"
             }
         },
         "warning": {
             "prepend": "Alerte",
             "reverse-geocoding": {
-                "title": "Impossible de faire le géocodage inversé de coordonnées",
-                "message": ""
+                "title": "Impossible de faire le géocodage inversé de coordonnées"
             }
         },
         "error": {
             "prepend": "Erreur",
             "map-initialization": {
-                "title": "Impossible de charger la carte",
-                "message": ""
+                "title": "Impossible de charger la carte"
             },
             "user-input": {
-                "title": "Entrée de données invalides",
-                "message": ""
+                "title": "Entrée de données invalides"
             },
             "autocomplete-input": {
-                "title": "Sélectionnez une adresse valide du menu déroulant.",
-                "message": ""
+                "title": "Sélectionnez une adresse valide du menu déroulant."
             },
             "geocoding": {
-                "title": "Impossible de géocoder l'adresse",
-                "message": ""
+                "title": "Impossible de géocoder l'adresse"
             },
             "building-insights": {
-                "title": "Impossible de charger les données du bâtiment",
-                "message": ""
+                "title": "Impossible de charger les données du bâtiment"
             },
             "solar-layers": {
-                "title": "Impossible de charger les couches de données",
-                "message": ""
+                "title": "Impossible de charger les couches de données"
             },
             "geotiff": {
-                "title": "Impossible de charger le GeoTIFFs",
-                "message": ""
+                "title": "Impossible de charger le GeoTIFFs"
             },
             "organization-infos": {
-                "title": "Impossible de synchroniser les informations de l'organisation",
-                "message": ""
+                "title": "Impossible de synchroniser les informations de l'organisation"
             },
             "organization-user-creation": {
-                "title": "Impossible d'ajouter l'utilisateur à l'organisation",
-                "message": ""
+                "title": "Impossible d'ajouter l'utilisateur à l'organisation"
             },
             "organization-user-deletion": {
-                "title": "Impossible de retirer l'utilisateur de l'organisation",
-                "message": ""
+                "title": "Impossible de retirer l'utilisateur de l'organisation"
             },
             "user": {
-                "title": "Impossible de synchroniser les données du profil",
-                "message": ""
+                "title": "Impossible de synchroniser les données du profil"
             },
             "form": {
-                "title": "Impossible de valider et traiter le formulaire",
-                "message": ""
+                "title": "Impossible de valider et traiter le formulaire"
             }
         }
     },

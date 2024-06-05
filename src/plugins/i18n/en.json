@@ -21,81 +21,64 @@
     "alerts": {
         "default": {
             "vue": {
-                "title": "Something happened",
-                "message": "An error occured during the execution of the application."
+                "title": "Something happened"
             }
         },
         "success": {
             "prepend": "Success",
             "organization-user-creation": {
-                "title": "Added user to organization",
-                "message": ""
+                "title": "Added user to organization"
             },
             "organization-user-deletion": {
-                "title": "Removed user from organization",
-                "message": ""
+                "title": "Removed user from organization"
             },
             "create-organization-form": {
-                "title": "Sent the registration form",
-                "message": ""
+                "title": "Sent the registration form"
             }
         },
         "warning": {
             "prepend": "Warning",
             "reverse-geocoding": {
-                "title": "Could not reverse geocode coordinates",
-                "message": ""
+                "title": "Could not reverse geocode coordinates"
             }
         },
         "error": {
             "prepend": "Error",
             "map-initialization": {
-                "title": "Could not load the map",
-                "message": ""
+                "title": "Could not load the map"
             },
             "user-input": {
-                "title": "Invalid user input",
-                "message": ""
+                "title": "Invalid user input"
             },
             "autocomplete-input": {
-                "title": "Select a valid address from the dropdown",
-                "message": ""
+                "title": "Select a valid address from the dropdown"
             },
             "geocoding": {
-                "title": "Could not geocode an address",
-                "message": ""
+                "title": "Could not geocode an address"
             },
             "building-insights": {
-                "title": "Could not fetch building insights",
-                "message": ""
+                "title": "Could not fetch building insights"
             },
             "solar-layers": {
-                "title": "Could not fetch data layers",
-                "message": ""
+                "title": "Could not fetch data layers"
             },
             "geotiff": {
-                "title": "Could not load GeoTIFFs",
-                "message": ""
+                "title": "Could not load GeoTIFFs"
             },
             "organization-infos": {
-                "title": "Could not sync organization data",
-                "message": ""
+                "title": "Could not sync organization data"
             },
             "organization-user-creation": {
-                "title": "Could not add user to organization",
-                "message": ""
+                "title": "Could not add user to organization"
             },
             "organization-user-deletion": {
-                "title": "Could not remove user from organization",
-                "message": ""
+                "title": "Could not remove user from organization"
             },
             "user": {
-                "title": "Could not sync your profile",
-                "message": ""
+                "title": "Could not sync your profile"
             },
             "form": {
-                "title": "Could not validate and process the form",
-                "message": ""
+                "title": "Could not validate and process the form"
             }
         }
     },
