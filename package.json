@@ -25,7 +25,8 @@
         "vue-i18n": "^9.10.2",
         "vue-router": "^4.2.5",
         "vue3-apexcharts": "^1.5.2",
-        "vuetify": "^3.5.4"
+        "vuetify": "^3.5.4",
+        "vuetify-sonner": "^0.3.19"
     },
     "devDependencies": {
         "@types/google.maps": "^3.55.5",
