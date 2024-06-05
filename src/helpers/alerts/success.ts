@@ -25,3 +25,15 @@ export class OrganizationUserDeletionSuccess extends VueAlert {
         super(type, name, title, message, code);
     }
 }
+
+export class CreateOrganizationFormSuccess extends VueAlert {
+    constructor(
+        type: AlertType = "success",
+        name: string = "CreateOrganizationFormSuccess",
+        title: string = i18n.global.t("alerts.success.create-organization-form.title"),
+        message: string = i18n.global.t("alerts.success.create-organization-form.message"),
+        code: number = 201
+    ) {
+        super(type, name, title, message, code);
+    }
+}

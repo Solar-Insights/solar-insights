@@ -34,6 +34,10 @@
             "organization-user-deletion": {
                 "title": "Removed user from organization",
                 "message": ""
+            },
+            "create-organization-form": {
+                "title": "Sent the registration form",
+                "message": ""
             }
         },
         "warning": {

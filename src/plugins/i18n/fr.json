@@ -34,6 +34,10 @@
             "organization-user-deletion": {
                 "title": "Utilisateur retiré de l'organisation",
                 "message": ""
+            },
+            "create-organization-form": {
+                "title": "Formulaire d'inscription envoyé",
+                "message": ""
             }
         },
         "warning": {

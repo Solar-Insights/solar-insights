@@ -1,4 +1,5 @@
 import { FormError } from "@/helpers/alerts/errors";
+import { CreateOrganizationFormSuccess } from "@/helpers/alerts/success";
 import { NewOrganizationForm } from "@/helpers/types";
 import AxiosInstance from "@/plugins/axios";
 import { useUserSessionStore } from "@/stores/userSessionStore";
@@ -11,7 +12,7 @@ export async function postCreateOrganizationForm(form: NewOrganizationForm) {
         data: form
     })
         .then((data) => {
-            console.log("sent create organization form successfuly");
+            useUserSessionStore().setAlert(new CreateOrganizationFormSuccess());
         })
         .catch((error) => {
             useUserSessionStore().setAlert(new FormError());
