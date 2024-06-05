@@ -73,8 +73,16 @@
                 "title": "Impossible de charger le GeoTIFFs",
                 "message": ""
             },
-            "organization": {
+            "organization-infos": {
                 "title": "Impossible de synchroniser les informations de l'organisation",
+                "message": ""
+            },
+            "organization-user-creation": {
+                "title": "Impossible d'ajouter l'utilisateur à l'organisation",
+                "message": ""
+            },
+            "organization-user-deletion": {
+                "title": "Impossible de retirer l'utilisateur de l'organisation",
                 "message": ""
             },
             "user": {

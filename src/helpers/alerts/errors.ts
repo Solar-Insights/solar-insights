@@ -86,12 +86,36 @@ export class GeotiffError extends VueAlert {
     }
 }
 
-export class OrganizationError extends VueAlert {
+export class OrganizationInfosError extends VueAlert {
     constructor(
         type: AlertType = "error",
-        name: string = "OrganizationError",
-        title: string = i18n.global.t("alerts.error.organization.title"),
-        message: string = i18n.global.t("alerts.error.organization.message"),
+        name: string = "OrganizationInfosError",
+        title: string = i18n.global.t("alerts.error.organization-infos.title"),
+        message: string = i18n.global.t("alerts.error.organization-infos.message"),
+        code: number = 500
+    ) {
+        super(type, name, title, message, code);
+    }
+}
+
+export class OrganizationUserCreationError extends VueAlert {
+    constructor(
+        type: AlertType = "error",
+        name: string = "OrganizationUserCreationError",
+        title: string = i18n.global.t("alerts.error.organization-user-creation.title"),
+        message: string = i18n.global.t("alerts.error.organization-user-creation.message"),
+        code: number = 500
+    ) {
+        super(type, name, title, message, code);
+    }
+}
+
+export class OrganizationUserDeletionError extends VueAlert {
+    constructor(
+        type: AlertType = "error",
+        name: string = "OrganizationUserDeletionError",
+        title: string = i18n.global.t("alerts.error.organization-user-deletion.title"),
+        message: string = i18n.global.t("alerts.error.organization-user-deletion.message"),
         code: number = 500
     ) {
         super(type, name, title, message, code);

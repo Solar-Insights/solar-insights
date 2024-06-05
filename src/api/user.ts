@@ -1,4 +1,4 @@
-import { OrganizationError } from "@/helpers/alerts/errors";
+import { OrganizationInfosError, OrganizationUserCreationError, OrganizationUserDeletionError } from "@/helpers/alerts/errors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import AxiosInstance from "@/plugins/axios";
 import { MyOrganization, MyOrganizationMember } from "@/helpers/types";
@@ -14,7 +14,7 @@ export async function getMyOrganizationInfo() {
             return response.data.myOrganization as MyOrganization; // includes administrators data
         })
         .catch((error) => {
-            useUserSessionStore().setAlert(new OrganizationError());
+            useUserSessionStore().setAlert(new OrganizationInfosError());
             throw error;
         });
 }
@@ -33,7 +33,7 @@ export async function getMyOrganizationMembers() {
             return response.data.myOrganizationMembers as MyOrganizationMember[];
         })
         .catch((error) => {
-            useUserSessionStore().setAlert(new OrganizationError());
+            useUserSessionStore().setAlert(new OrganizationInfosError());
             throw error;
         });
 }
@@ -55,7 +55,7 @@ export async function createUserForOrganization(email: string, name: string) {
             return myOrganizationMember;
         })
         .catch((error) => {
-            useUserSessionStore().setAlert(new OrganizationError());
+            useUserSessionStore().setAlert(new OrganizationUserCreationError());
             throw error;
         });
 }
@@ -73,7 +73,7 @@ export async function deleteUserFromOrganization(user: MyOrganizationMember) {
         useUserSessionStore().setAlert(new OrganizationUserDeletionSuccess());
     })
     .catch((error) => {
-        useUserSessionStore().setAlert(new OrganizationError());
+        useUserSessionStore().setAlert(new OrganizationUserDeletionError());
         throw error;
     });
 }

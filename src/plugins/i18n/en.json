@@ -73,8 +73,16 @@
                 "title": "Could not load GeoTIFFs",
                 "message": ""
             },
-            "organization": {
+            "organization-infos": {
                 "title": "Could not sync organization data",
+                "message": ""
+            },
+            "organization-user-creation": {
+                "title": "Could not add user to organization",
+                "message": ""
+            },
+            "organization-user-deletion": {
+                "title": "Could not remove user from organization",
                 "message": ""
             },
             "user": {
