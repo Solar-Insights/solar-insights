@@ -1,13 +1,5 @@
-import { createRouter, createWebHistory, NavigationGuardNext, RouteLocationNormalized } from "vue-router";
-import { useUserSessionStore } from "@/stores/userSessionStore";
+import { createRouter, createWebHistory } from "vue-router";
 import { authGuard } from "@auth0/auth0-vue";
-
-async function requiresOrgAdmin(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
-    if (true) {
-        // TODO Validate that user is admin of org
-        next();
-    } else next({ name: "not-found" });
-}
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,14 +60,6 @@ const router = createRouter({
             redirect: "/not-found"
         }
     ]
-});
-
-router.beforeEach(async (to, from, next) => {
-    const userSessionStore = useUserSessionStore();
-    userSessionStore.resetAlertOnNewPage();
-
-    next();
-    return;
 });
 
 export default router;
