@@ -90,7 +90,7 @@
                 "message": ""
             },
             "form": {
-                "title": "Could not validate the form's fields",
+                "title": "Could not validate and process the form",
                 "message": ""
             }
         }

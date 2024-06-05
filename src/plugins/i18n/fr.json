@@ -90,7 +90,7 @@
                 "message": ""
             },
             "form": {
-                "title": "Impossible de valider les champs du formulaire",
+                "title": "Impossible de valider et traiter le formulaire",
                 "message": ""
             }
         }
