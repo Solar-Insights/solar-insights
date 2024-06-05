@@ -3,7 +3,7 @@
         <AppBar v-if="displaysAppComponents" />
 
         <v-main style="min-height: 100vh;">
-            <Alert/>
+            <AlertContainer/>
             <router-view :key="currentRoute.fullPath"/>
         </v-main>
         
@@ -15,7 +15,7 @@
 import { storeToRefs } from "pinia";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useRoute } from "vue-router";
-import Alert from "@/components/general/Alert.vue";
+import AlertContainer from "@/components/general/AlertContainer.vue";
 import AppBar from "@/components/general/appbar/AppBar.vue";
 import AppFooter from "@/components/general/footer/AppFooter.vue";
 import { computed, onMounted } from "vue";
@@ -23,7 +23,7 @@ import { i18n } from "@/plugins/i18n/i18n";
 
 const currentRoute = useRoute();
 const userSessionStore = useUserSessionStore();
-const { theme, locale, alert } = storeToRefs(userSessionStore);
+const { theme, locale } = storeToRefs(userSessionStore);
 
 const routesWithNoAppComponents = ["solar-map"];
 
@@ -35,4 +35,5 @@ const displaysAppComponents = computed(() => {
 onMounted(async () => {
     i18n.global.locale.value = locale.value;
 });
+
 </script>
