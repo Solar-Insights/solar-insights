@@ -13,28 +13,40 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
     position: relative;
 }
 
-.dark-toast-container {
-    .v-snackbar__wrapper {
-        @extend .rounded-lg;
-        background-color: $dark-surface-lighter-1;
-        border: 1px solid $dark-line;
+.toast-card {
+}
+
+.dark-toast-card {
+    @extend .toast-card;
+    background-color: $dark-surface-lighter-1 !important;
+    border: 1px solid $dark-line !important;
+}
+
+.light-toast-card {
+    @extend .toast-card;
+    background-color: $light-surface !important;
+    border: 1px solid $light-line !important;
+}
+
+.toast-text {
+    p {
+        @extend .font-weight-regular;
     }
 }
 
-.light-toast-container {
-    .v-snackbar__wrapper {
-        @extend .rounded-lg;
-        background-color: $light-surface;
-        border: 1px solid $light-line;
+.dark-toast-text {
+    @extend .toast-text;
+    p {
+        @extend .text-white;
     }
+    
 }
 
-.dark-toast-content.v-alert--variant-flat {
-    background-color: $dark-surface-lighter-1;
-}
-
-.light-toast-content.v-alert--variant-flat {
-    background-color: $light-surface;
+.light-toast-text {
+    @extend .toast-text;
+    p {
+        @extend .text-black;
+    }
 }
 
 .autocomplete-container {
