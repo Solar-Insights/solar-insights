@@ -14,7 +14,7 @@ export const useUserSessionStore = defineStore("userSessionStore", {
 
     actions: {
         setAlert(alert: VueAlert) {
-            const toastCardClass = this.theme === "dark" ? "dark-toast-card" : "light-toast-card";
+            const toastCardClass = this.theme === "dark" ? "dark-toast-content" : "light-toast-content";
             const toastTextClass = this.theme === "dark" ? "dark-toast-text" : "light-toast-text";
             const closeIconColor = this.theme === "dark" ? "white" : "black";
 

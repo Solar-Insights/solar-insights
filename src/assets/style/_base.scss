@@ -13,17 +13,17 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
     position: relative;
 }
 
-.toast-card {
+.toast-content {
 }
 
-.dark-toast-card {
-    @extend .toast-card;
+.dark-toast-content {
+    @extend .toast-content;
     background-color: $dark-surface-lighter-1 !important;
     border: 1px solid $dark-line !important;
 }
 
-.light-toast-card {
-    @extend .toast-card;
+.light-toast-content {
+    @extend .toast-content;
     background-color: $light-surface !important;
     border: 1px solid $light-line !important;
 }
