@@ -10,51 +10,59 @@
         @formWasClosed="closeForm = false"
     >
         <FormDialogSection :sectionTitle="$t(`pricing.pricing-form.user-info-section.title`)">
-            <v-text-field
-                v-model="data.name"
-                class="mb-3"
-                :error-messages="vuelidate.name.$errors.map((e) => e.$message as string)"
-                :label="$t(`pricing.pricing-form.user-info-section.fields.name`)"
-                density="compact"
-                variant="outlined"
-                prepend-inner-icon="mdi-account-outline"
-                rounded
-            />
+            <FormField>
+                <v-text-field
+                    v-model="data.name"
+                    class="mb-3"
+                    :error-messages="vuelidate.name.$errors.map((e) => e.$message as string)"
+                    :label="$t(`pricing.pricing-form.user-info-section.fields.name`)"
+                    density="compact"
+                    variant="outlined"
+                    prepend-inner-icon="mdi-account-outline"
+                    rounded
+                />
+            </FormField>
 
-            <v-text-field
-                v-model="data.contactEmail"
-                class="mb-3"
-                :error-messages="vuelidate.contactEmail.$errors.map((e) => e.$message as string)"
-                :label="$t(`pricing.pricing-form.user-info-section.fields.email`)"
-                density="compact"
-                variant="outlined"
-                prepend-inner-icon="mdi-at"
-                rounded
-            />
+            <FormField>
+                <v-text-field
+                    v-model="data.contactEmail"
+                    class="mb-3"
+                    :error-messages="vuelidate.contactEmail.$errors.map((e) => e.$message as string)"
+                    :label="$t(`pricing.pricing-form.user-info-section.fields.email`)"
+                    density="compact"
+                    variant="outlined"
+                    prepend-inner-icon="mdi-at"
+                    rounded
+                />
+            </FormField>
 
-            <v-select
-                class="mb-3"
-                v-model="props.pricingName"
-                :error-messages="vuelidate.pricingTier.$errors.map((e) => e.$message as string)"
-                :label="$t(`pricing.pricing-form.user-info-section.fields.pricing-plan`)"
-                density="compact"
-                variant="outlined"
-                prepend-inner-icon="mdi-currency-usd"
-                rounded
-            />
+            <FormField>
+                <v-select
+                    class="mb-3"
+                    v-model="props.pricingName"
+                    :error-messages="vuelidate.pricingTier.$errors.map((e) => e.$message as string)"
+                    :label="$t(`pricing.pricing-form.user-info-section.fields.pricing-plan`)"
+                    density="compact"
+                    variant="outlined"
+                    prepend-inner-icon="mdi-currency-usd"
+                    rounded
+                />
+            </FormField>
         </FormDialogSection>
 
         <FormDialogSection :sectionTitle="$t(`pricing.pricing-form.additional-info-section.title`)">
-            <v-textarea
-                v-model="data.additionalNotes"
-                :error-messages="vuelidate.additionalNotes.$errors.map((e) => e.$message as string)"
-                :label="$t(`pricing.pricing-form.additional-info-section.fields.situation`)"
-                density="compact"
-                variant="outlined"
-                prepend-inner-icon="mdi-text"
-                rows="3"
-                auto-grow
-            />
+            <FormField>
+                <v-textarea
+                    v-model="data.additionalNotes"
+                    :error-messages="vuelidate.additionalNotes.$errors.map((e) => e.$message as string)"
+                    :label="$t(`pricing.pricing-form.additional-info-section.fields.situation`)"
+                    density="compact"
+                    variant="outlined"
+                    prepend-inner-icon="mdi-text"
+                    rows="3"
+                    auto-grow
+                />
+            </FormField>
         </FormDialogSection>
     </FormDialog>
 </template>
@@ -67,6 +75,7 @@ import useVuelidate from "@vuelidate/core";
 import { required, email, maxLength, helpers } from "@vuelidate/validators";
 import FormDialog from "@/components/page_sections/FormDialog.vue";
 import FormDialogSection from "@/components/page_sections/FormDialogSection.vue";
+import FormField from "@/components/page_sections/FormField.vue";
 import { postCreateOrganizationForm } from "@/api/client";
 
 const t = useI18n().t;
