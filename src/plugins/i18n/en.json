@@ -88,6 +88,13 @@
             }
         }
     },
+    "validators": {
+        "required": "This field is required",
+        "characters-long": " characters long",
+        "min-length": "This field must be at least",
+        "max-length": "This field must be no more than",
+        "email": "This field must be a valid email"
+    },
     "general": {
         "user-menu": {
             "signin-title": "Use your Solar Insight's account",
