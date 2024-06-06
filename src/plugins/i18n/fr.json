@@ -174,13 +174,13 @@
         "page-title-container": {
             "title": "Propulser l'adoption de l'énergie solaire avec Solar Insights",
             "description": "Intuitif, hautement adaptif et précis. Observer la viabilité d'une installation de panneaux solaires en une simple recherche.",
-            "action": "Commencez votre parcours Solaire!"
+            "action": "Choisissez votre plan"
         },
         "usecase-subtitle-container": {
             "subtitle": "Pourquoi Solar Insights?",
             "visualize": {
                 "title": "Visualiser des données solaires précises",
-                "description": "Obtenez des estimations sur le positionnement optimal de panneaux solaires pour un bâtiment. Aussi, visualiser des données quotidiennes, mensuelles et annçuelles relatives à l'ensolleillement d'une région."
+                "description": "Obtenez des estimations sur le positionnement optimal de panneaux solaires d'un bâtiment. Aussi, visualiser des données relatives à l'ensoleillement de la toiture."
             },
             "customize": {
                 "title": "Personnaliser et optimiser des installations solaires",
@@ -188,11 +188,11 @@
             },
             "viability": {
                 "title": "Évaluer la viabilité économique des panneaux solaires",
-                "description": "Ajustez des paramètres financiers pour calculer la valeur économique d'une installation sur toute sa durée de vie."
+                "description": "Obtenez des évaluations financières avancées sur la viabilité économique d'installations solaires tout au long de leur durée de vie."
             },
             "collaborate": {
-                "title": "Collaborer avec les membres de votre organisation",
-                "description": "En faisant partie d'une organisation, vous pourrez collaborer efficacement avec vos collègues: partage de données, d'installations solaires et de contenu visuel pertinent."
+                "title": "Collaborer avec les gens",
+                "description": "Partagez des données, des installations solaires et autre contenu visuel pertinent à vos collègues en les invitant dans votre organisation."
             }
         }
     },

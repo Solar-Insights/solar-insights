@@ -4,7 +4,7 @@
             <PageTitleContainer
                 :pageTitle="$t(`home.page-title-container.title`)"
                 :pageTitlePrecision="$t(`home.page-title-container.description`)"
-                :pageTitleAction="{ text: $t(`home.page-title-container.action`), icon: `mdi-rocket-launch-outline` }"
+                :pageTitleAction="{ text: $t(`home.page-title-container.action`), icon: `mdi-send-variant-outline` }"
                 @onPageTitleActionClick="router.push({ name: 'get-started' })"
             />
         </PageSection>
@@ -20,21 +20,25 @@
                         :itemTitle="$t(`home.usecase-subtitle-container.visualize.title`)"
                         :itemContent="$t(`home.usecase-subtitle-container.visualize.description`)"
                         :itemIcon="`mdi-telescope`"
-                    />
-                    <ShortDescriptionItem
-                        :itemTitle="$t(`home.usecase-subtitle-container.customize.title`)"
-                        :itemContent="$t(`home.usecase-subtitle-container.customize.description`)"
-                        :itemIcon="`mdi-hammer`"
+                        :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
                         :itemTitle="$t(`home.usecase-subtitle-container.viability.title`)"
                         :itemContent="$t(`home.usecase-subtitle-container.viability.description`)"
                         :itemIcon="`mdi-cash`"
+                        :itemIconColor="`theme`"
+                    />
+                    <ShortDescriptionItem
+                        :itemTitle="$t(`home.usecase-subtitle-container.customize.title`)"
+                        :itemContent="$t(`home.usecase-subtitle-container.customize.description`)"
+                        :itemIcon="`mdi-hammer`"
+                        :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
                         :itemTitle="$t(`home.usecase-subtitle-container.collaborate.title`)"
                         :itemContent="$t(`home.usecase-subtitle-container.collaborate.description`)"
                         :itemIcon="`mdi-account-group-outline`"
+                        :itemIconColor="`theme`"
                     />
                 </ShortDescriptionItemsContainer>
             </PageSubtitleContainer>

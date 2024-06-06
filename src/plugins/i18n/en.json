@@ -174,25 +174,25 @@
         "page-title-container": {
             "title": "Drive adoption of solar energy with Solar Insights",
             "description": "Easy to use, highly adaptive, and accurate. Observe the viability of solar installations in one single search.",
-            "action": "Get started on your Solar journey!"
+            "action": "Choose your plan"
         },
         "usecase-subtitle-container": {
             "subtitle": "What can you do with Solar Insights?",
             "visualize": {
                 "title": "Visualize accurate solar data",
-                "description": "Observe estimations of the optimal placement for solar panels on a building's roof. Plus, get information on its daily, monthly, or yearly sunshine patterns."
+                "description": "Get estimates on the optimal positioning of solar panels for a building. Also, visualize data regarding a roof's sunlight exposure."
             },
             "customize": {
                 "title": "Customize and optimize solar installations",
                 "description": "Optimize a solar installation to fit your budget and needs. You can also adjust most settings manually."
             },
             "viability": {
-                "title": "Assess the viability of solar panels",
-                "description": "Customize financial parameters to find out the economic value of solar panels over their lifespan."
+                "title": "Assess the economic viability of solar panels",
+                "description": "Obtain advanced financial evaluations on the economic viability of solar installations throughout their lifespan."
             },
             "collaborate": {
-                "title": "Collaborate with members of your organization",
-                "description": "By being part of an organization, you will be able to collaborate efficiently with your colleagues. Share data, solar installations, and even visual content."
+                "title": "Collaborate with people",
+                "description": "Share data, solar installations and other visual content to your colleagues by adding them to your organization."
             }
         }
     },

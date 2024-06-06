@@ -81,19 +81,21 @@
 
 .page-title {
     @extend .my-3;
-    @extend .font-weight-thin;
+    @extend .font-weight-regular;
 }
 
 .page-title-precision {
     @extend .mt-5;
     @extend .mx-auto;
+    @extend .font-weight-regular;
     width: 80%;
     font-size: 1.1rem;
 }
 
 .page-title-action {
-    @extend .mt-5;
+    @extend .mt-7;
     @extend .mx-auto;
+    font-size: 1.1rem;
 }
 
 .page-subtitle-container {
@@ -108,13 +110,13 @@
     @extend .text-h4;
     @extend .my-3;
     @extend .text-center;
-    @extend .font-weight-thin;
+    @extend .font-weight-regular;
 }
 
 .page-subtitle-precision {
     @extend .text-h6;
     @extend .text-center;
-    @extend .font-weight-thin;
+    @extend .font-weight-regular;
 }
 
 .page-subtitle-content {
