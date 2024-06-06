@@ -2,46 +2,125 @@ import { ValidationRuleWithParams } from "@vuelidate/core";
 import { helpers, maxLength, minLength, email, required } from "@vuelidate/validators";
 import { i18n } from "@/plugins/i18n/i18n";
 
-export type GeneralValidator<T> = {
+const VALIDATORS_I18N_PREFIX = "validators";
+
+type ValidationMessagePart = {
+    value: string,
+    isI18n: boolean
+};
+
+type ValidationMessageParams = {
+    message: ValidationMessagePart[]
+};
+
+export function createValidationMessages(validationMessageParams: ValidationMessageParams[]) {
+    const listOfValidationMessages = validationMessageParams.map((validationMessageParams) => {
+        const validationMessage: string = validationMessageParams.message.reduce((acc, message) => {
+            if (message.isI18n) {
+                return acc + i18n.global.t(message.value);
+            } else {
+                return acc + message.value;
+            }
+        }, "");
+
+        return validationMessage;
+    });
+
+    return listOfValidationMessages;
+}
+
+export type GeneralValidatorType<T> = {
     [key in keyof T]: {
         [key: string]: ValidationRuleWithParams
     }
 }
 
 export function requiredValidator() {
-    return helpers.withMessage(i18n.global.t("validators.required"), required);
+    const validationMessage: ValidationMessageParams = {
+        message: [
+            {
+                value: `${VALIDATORS_I18N_PREFIX}.required`,
+                isI18n: true
+            }
+        ]
+    }
+
+    return helpers.withParams(
+        validationMessage,
+        required
+    );
 }
 
 export function maxLengthValidator(max: number) {
-    const message = `${i18n.global.t("validators.max-length")} ${max} ${i18n.global.t("validators.characters-long")}`;
-    return helpers.withMessage(message, maxLength(max))
+    const validationMessage: ValidationMessageParams = {
+        message: [
+            {
+                value: `${VALIDATORS_I18N_PREFIX}.max-length`,
+                isI18n: true
+            },
+            {
+                value: ` ${max} `,
+                isI18n: false
+            },
+            {
+                value: `${VALIDATORS_I18N_PREFIX}.characters-long`,
+                isI18n: true
+            },
+           
+        ]
+    }
+
+    return helpers.withParams(
+        validationMessage,
+        maxLength(max)
+    );
 }
 
 export function minLengthValidator(min: number) {
-    const message = `${i18n.global.t("validators.min-length")} ${min} ${i18n.global.t("validators.characters-long")}`;
-    return helpers.withMessage(message, minLength(min));
+    const validationMessage: ValidationMessageParams = {
+        message: [
+            {
+                value: `${VALIDATORS_I18N_PREFIX}.min-length`,
+                isI18n: true
+            },
+            {
+                value: ` ${min} `,
+                isI18n: false
+            },
+            {
+                value: `${VALIDATORS_I18N_PREFIX}.characters-long`,
+                isI18n: true
+            },
+           
+        ]
+    }
+
+    return helpers.withParams(
+        validationMessage,
+        minLength(min)
+    );
 }
 
 export function isEmailValidator() {
-    return helpers.withMessage(i18n.global.t("validators.email"), email)
+    const validationMessage: ValidationMessageParams = {
+        message: [
+            {
+                value: `${VALIDATORS_I18N_PREFIX}.email`,
+                isI18n: true
+            }
+        ]
+    }
+
+    return helpers.withParams(
+        validationMessage,
+        email
+    );
 }
 
-export function containsLetter(value: string) {
+function containsLetter(value: string) {
     return /[A-Z]/.test(value) || /[a-z]/.test(value);
 }
 
-export function containsNumber(value: string) {
+function containsNumber(value: string) {
     return /[0-9]/.test(value);
-}
-
-export function hasCorrectNumberOfElements(value: number) {
-    return value <= 3 && value >= 0;
-}
-
-export function isValidType(value: string) {
-    return ["Image", "Paragraphe"].includes(value);
-}
-
-export function isValidNewsletter(value: string) {
-    return ["Articles", "Recettes"].includes(value);
 }

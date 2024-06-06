@@ -90,7 +90,7 @@
     },
     "validators": {
         "required": "Ce champ est obligatoire",
-        "characters-long": " caractères",
+        "characters-long": "caractères",
         "min-length": "Ce champ doit contenir au moins",
         "max-length": "Ce champ ne doit pas contenir plus de",
         "email": "Ce champ doit être un email valide"
