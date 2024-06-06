@@ -23,8 +23,8 @@ export const useUserSessionStore = defineStore("userSessionStore", {
                 {
                     description: alert.title,
                     progressBar: true,
-                    progressDuration: 3000,
-                    duration: 3000,
+                    progressDuration: 4000,
+                    duration: 4000,
                     prependIcon: matchIconToAlertType(alert.type),
                     prependIconProps: {
                         size: "x-large",

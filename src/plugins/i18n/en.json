@@ -26,6 +26,12 @@
         },
         "success": {
             "prepend": "Success",
+            "user-login": {
+                "title": "You are now logged in"
+            },
+            "user-logout": {
+                "title": "You are now logged out"
+            },
             "organization-user-creation": {
                 "title": "Added user to organization"
             },

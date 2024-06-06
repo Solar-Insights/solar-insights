@@ -1,6 +1,7 @@
 import { auth0 } from "@/plugins/auth";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import router from "@/plugins/router";
+import { UserLogoutSuccess } from "@/helpers/alerts/success";
 
 export function handleUserState() {
     const userSessionStore = useUserSessionStore();
@@ -18,11 +19,12 @@ export function handleUserState() {
     };
 
     const logoutUser = () => {
+        const callbackPage = `${window.location.origin}/callback?logout=true`;
         auth0.logout({
             logoutParams: {
-                returnTo: window.location.origin
+                returnTo: callbackPage
             }
-        });
+        })
     };
 
     return {

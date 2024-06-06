@@ -26,6 +26,12 @@
         },
         "success": {
             "prepend": "Succès",
+            "user-login": {
+                "title": "Vous êtes maintenant connecté"
+            },
+            "user-logout": {
+                "title": "Vous êtes maintenant déconnecté"
+            },
             "organization-user-creation": {
                 "title": "Utilisateur ajouté à l'organisation"
             },
