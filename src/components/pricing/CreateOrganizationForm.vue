@@ -14,7 +14,10 @@
                 <v-text-field
                     v-model="data.name"
                     class="mb-3"
-                    :error-messages="vuelidate.name.$errors.map((e) => e.$message as string)"
+                    :error-messages="v$.name.$errors.map((e) => e.$message as string)"
+                    :counter="NAME_MAX_LENGTH"
+                    @blur="v$.name.$touch"
+                    @input="v$.name.$touch"
                     :label="$t(`pricing.pricing-form.user-info-section.fields.name`)"
                     density="compact"
                     variant="outlined"
@@ -27,8 +30,11 @@
                 <v-text-field
                     v-model="data.contactEmail"
                     class="mb-3"
-                    :error-messages="vuelidate.contactEmail.$errors.map((e) => e.$message as string)"
+                    :error-messages="v$.contactEmail.$errors.map((e) => e.$message as string)"
+                    :counter="EMAIL_MAX_LENGTH"
                     :label="$t(`pricing.pricing-form.user-info-section.fields.email`)"
+                    @blur="v$.contactEmail.$touch"
+                    @input="v$.contactEmail.$touch"
                     density="compact"
                     variant="outlined"
                     prepend-inner-icon="mdi-at"
@@ -40,7 +46,9 @@
                 <v-select
                     class="mb-3"
                     v-model="props.pricingName"
-                    :error-messages="vuelidate.pricingTier.$errors.map((e) => e.$message as string)"
+                    :error-messages="v$.pricingTier.$errors.map((e) => e.$message as string)"
+                    @blur="v$.pricingTier.$touch"
+                    @input="v$.pricingTier.$touch"
                     :label="$t(`pricing.pricing-form.user-info-section.fields.pricing-plan`)"
                     density="compact"
                     variant="outlined"
@@ -54,7 +62,10 @@
             <FormField>
                 <v-textarea
                     v-model="data.additionalNotes"
-                    :error-messages="vuelidate.additionalNotes.$errors.map((e) => e.$message as string)"
+                    :error-messages="v$.additionalNotes.$errors.map((e) => e.$message as string)"
+                    :counter="ADDITIONAL_NOTES_MAX_LENGTH"
+                    @blur="v$.additionalNotes.$touch"
+                    @input="v$.additionalNotes.$touch"
                     :label="$t(`pricing.pricing-form.additional-info-section.fields.situation`)"
                     density="compact"
                     variant="outlined"
@@ -70,15 +81,13 @@
 <script setup lang="ts">
 import { NewOrganizationForm, PricingTier } from "@/helpers/types";
 import { computed, PropType, ref } from "vue";
-import { useI18n } from "vue-i18n";
 import useVuelidate from "@vuelidate/core";
-import { required, email, maxLength, helpers } from "@vuelidate/validators";
 import FormDialog from "@/components/page_sections/FormDialog.vue";
 import FormDialogSection from "@/components/page_sections/FormDialogSection.vue";
 import FormField from "@/components/page_sections/FormField.vue";
 import { postCreateOrganizationForm } from "@/api/client";
-
-const t = useI18n().t;
+import { newOrganizationFormValidators } from "@/helpers/form_validation/createOrganizationFormValidators";
+import { ADDITIONAL_NOTES_MAX_LENGTH, EMAIL_MAX_LENGTH, NAME_MAX_LENGTH } from "@/helpers/form_validation/createOrganizationFormValidators";
 
 const props = defineProps({
     pricingTier: {
@@ -105,39 +114,20 @@ const data = ref<NewOrganizationForm>({
 });
 
 const rules = computed(() => {
-    return {
-        name: {
-            maxLength: helpers.withMessage("Max length", maxLength(256)),
-            required: helpers.withMessage("Needed", required)
-        },
-        contactEmail: {
-            maxLength: helpers.withMessage("Max length", maxLength(256)),
-            required: helpers.withMessage("Needed", required),
-            email: helpers.withMessage("Email", email)
-        },
-        pricingTier: {
-            required: helpers.withMessage("Needed", required)
-        },
-        additionalNotes: {
-            maxLength: helpers.withMessage("Max length", maxLength(1024))
-        }
-    };
+    return newOrganizationFormValidators;
 });
 
-const vuelidate = useVuelidate(rules, data);
+const v$ = useVuelidate(rules, data);
 
 const validForm = ref<boolean>(false);
 
 async function sendNewOrganizationRequest() {
-    validForm.value = await vuelidate.value.$validate();
+    validForm.value = await v$.value.$validate();
     if (!validForm.value) return;
 
     loadingResponse.value = true;
-    await postCreateOrganizationForm(data.value).catch((error) => {
-        console.log(error); // do something here
-    });
+    await postCreateOrganizationForm(data.value).catch(() => {});
     loadingResponse.value = false;
-
 
     closeForm.value = true;
 }
