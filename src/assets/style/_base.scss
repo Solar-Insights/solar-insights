@@ -7,6 +7,24 @@ $dark-surface-lighter-1: rgba(33, 33, 33, 1);
 $light-surface: rgba(255, 255, 255, 1);
 $light-surface-darker-1: rgba(221, 221, 221, 1);
 
+/*
+    Phones
+*/
+@media screen and (max-width: 599px) {
+    .pricing-card {
+        margin: 3vw 0 3vw 0;
+    }
+}
+
+/*
+  Tablets and computers
+*/
+@media screen and (min-width: 600px) {
+    .pricing-card {
+        margin: 1vw;
+    }
+}
+
 .app-container {
     @extend .h-100;
     @extend .pa-0;
@@ -242,6 +260,7 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
 .pricing-card-container {
     @extend .mx-auto;
     @extend .justify-center;
+    @extend .my-6;
     max-width: 1200px;
 }
 
@@ -287,8 +306,40 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
     @extend .mb-4;
 }
 
-.pricing-card-container {
-    @extend .my-6;
+.pricing-card-suggestions-container {
+    @extend .my-3; 
+    @extend .py-0;
+}
+
+.pricing-card-suggestion {
+    @extend .px-2;
+    @extend .py-3;
+}
+
+.dark-pricing-card-suggestion {
+    @extend .pricing-card-suggestion;
+    @extend .dark-pricing-color;
+}
+
+.light-pricing-card-suggestion {
+    @extend .pricing-card-suggestion;
+}
+
+.pricing-card-suggestion-title {
+    @extend .text-wrap;
+}
+
+.pricing-card-suggestion-description {
+    -webkit-line-clamp: inherit;
+}
+
+.dark-pricing-card-suggestion-description {
+    @extend .pricing-card-suggestion-description;
+    @extend .text-medium-emphasis;
+}
+
+.light-pricing-card-suggestion-description {
+    @extend .pricing-card-suggestion-description;
 }
 
 .google-autocompletes {

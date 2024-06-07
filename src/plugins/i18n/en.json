@@ -268,7 +268,7 @@
             "starter": {
                 "name": "Starter",
                 "description": "Ideal for new users and a moderate usage",
-                "action": "Get started",
+                "action": "Contact us",
                 "benefits-title": "Get started with: ",
                 "benefits": {
                     "users": {
@@ -292,7 +292,7 @@
             "pro": {
                 "name": "Pro",
                 "description": "Work with your team and all existing tools in a scaling environnment",
-                "action": "Get started",
+                "action": "Contact us",
                 "benefits-title": "Everything in the Starter plan, plus:",
                 "benefits": {
                     "users": {

@@ -1,5 +1,5 @@
 <template>
-    <v-col cols="12" xs="12" sm="6" md="4">
+    <v-col class="pa-0" cols="12" xs="12" sm="6" md="4">
         <v-card
             class="pricing-card"
             :class="theme === 'dark' ? 'dark-pricing-card' : 'light-pricing-card'"
@@ -48,15 +48,18 @@
 
             <div class="pricing-card-container">
                 <div>{{ props.pricingCardDetails.benefits.title }}</div>
-                <v-list class="my-3 py-0" density="compact">
-                    <v-list-item v-for="benefit in props.pricingCardDetails.benefits.benefits" :class="theme === 'dark' ? 'dark-pricing-color' : ''">
-                        <v-list-item-title class="text-wrap">
+                <v-list class="pricing-card-suggestions-container">
+                    <v-list-item 
+                        v-for="benefit in props.pricingCardDetails.benefits.benefits" 
+                        :class="theme === 'dark' ? 'dark-pricing-card-suggestion' : 'light-pricing-card-suggestion'"
+                    >
+                        <v-list-item-title class="pricing-card-suggestion-title">
                             {{ benefit.title }}
                         </v-list-item-title>
 
                         <v-list-item-subtitle 
                             v-if="stringHasValue(benefit.description)"
-                            :class="theme === `dark` ? `text-medium-emphasis` : ``"
+                            :class="theme === `dark` ? `dark-pricing-card-suggestion-description` : `light-pricing-card-suggestion-description`"
                         >
                             {{ benefit.description }}
                         </v-list-item-subtitle>

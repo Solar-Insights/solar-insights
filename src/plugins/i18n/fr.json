@@ -268,7 +268,7 @@
             "starter": {
                 "name": "Starter",
                 "description": "Idéal pour les nouveaux utilisateurs et une utilisation modérée",
-                "action": "Démarrer",
+                "action": "Contactez-nous",
                 "benefits-title": "Accédez à:",
                 "benefits": {
                     "users": {
@@ -292,7 +292,7 @@
             "pro": {
                 "name": "Pro",
                 "description": "Travaillez avec votre équipe et tous les outils existants dans un environnement extensible",
-                "action": "Démarrer",
+                "action": "Contactez-nous",
                 "benefits-title": "Tout dans le plan Starter, plus:",
                 "benefits": {
                     "users": {
