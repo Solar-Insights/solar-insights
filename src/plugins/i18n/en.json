@@ -257,13 +257,14 @@
     },
     "pricing": {
         "title": "Simple and unsurpricing pricing",
-        "precision": "Pay only for what you need",
+        "precision": "Pay only for what you need, and nothing more",
         "pricing-cards": {
             "from": "From",
             "month": "month",
             "usage": "usage",
             "users-included": "user(s) included",
             "additional-user": "additional user",
+            "request": "request",
             "starter": {
                 "name": "Starter",
                 "description": "Ideal for new users and a moderate usage",
@@ -274,7 +275,8 @@
                         "title": "free available user"
                     },
                     "requests": {
-                        "title": "monthly solar installation analysis requests"
+                        "title": "monthly solar installation analysis requests",
+                        "description": "at "
                     },
                     "tools": {
                         "title": "Every solar analysis tool"
@@ -298,7 +300,8 @@
                         "description": "then "
                     },
                     "requests": {
-                        "title": "monthly solar installation analysis requests"
+                        "title": "monthly solar installation analysis requests",
+                        "description": "at "
                     },
                     "user-detailed-reports": {
                         "title": "Detailed monthly user activity report"
@@ -327,6 +330,22 @@
                 }
             }
         },
+        "usage-pricing-subtitle-container": {
+            "subtitle": "Usage pricing",
+            "precision": "More info about your monthly variable costs",
+            "confusion-paragraph": {
+                "content": "Variable costs can be confusing. Let us help with that. Belows stands everything you need to know about them."
+            },
+            "what-is-included-paragraph": {
+                "content": "Here is a detailed breakdown of every action that incurs a charge on a monthly bill",
+                "depends-on-the-plan": "Price / additional user depends on the chosen plan",
+                "per-request": "/ request",
+                "charges": {
+                    "building-insights-request": "Making solar installation analysis requests; accessing the solar installation analysis page (the map)",
+                    "additional-users": "Create an additional user after reaching the plan's limit, if the plan allows it"
+                }
+            }
+        },
         "pricing-model-subtitle-container": {
             "subtitle": "Our hybrid pricing model",
             "precision": "The explanation behind a mix of fixed and variable pricing",
@@ -338,36 +357,6 @@
             },
             "variable-costs-paragraph": {
                 "content": "The variable monthly costs based on usage allow us to guarantee our users that they only pay for what they use. This frees you from the costs and complexities of planning and esimating your monthly usage across an entire organization."
-            }
-        },
-        "usage-pricing-subtitle-container": {
-            "subtitle": "Usage pricing",
-            "precision": "More info about your monthly variable costs",
-            "confusion-paragraph": {
-                "content": "With Solar Insight's hybrid pricing model, you might get confused about what will be charged to you at the end of the month. It is understandable. To help with that, the organization's administrator will always receive a detailed monthly report of the charges."
-            },
-            "what-is-included-paragraph": {
-                "content": "Here is a detailed breakdown of every action that incurs a charge on a monthly bill: ",
-                "depends-on-the-plan": "Price / unit depends on the chosen plan",
-                "per-request": "/ request",
-                "charges": {
-                    "building-insights-request": "Accessing the solar installation analysis page (the map)",
-                    "additional-users": "Create an additional user after reaching the plan's limit, and if the plan allows it"
-                }
-            },
-            "what-is-not-included-paragraph": {
-                "content": "Here are examples of actions that DO NOT incur any additional charge: ",
-                "non-charges": [
-                    {
-                        "title": "Modifiying a solar installation once already on the map page"
-                    },
-                    {
-                        "title": "Managing your organization while respecting your plan's limit"
-                    },
-                    {
-                        "title": "Save data or charts to your local device"
-                    }
-                ]
             }
         },
         "pricing-form": {

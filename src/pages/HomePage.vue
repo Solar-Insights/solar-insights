@@ -5,7 +5,7 @@
                 :pageTitle="$t(`home.page-title-container.title`)"
                 :pageTitlePrecision="$t(`home.page-title-container.description`)"
                 :pageTitleAction="{ text: $t(`home.page-title-container.action`), icon: `mdi-send-variant-outline` }"
-                @onPageTitleActionClick="router.push({ name: 'get-started' })"
+                @onPageTitleActionClick="router.push({ name: 'pricing' })"
             />
         </PageSection>
 

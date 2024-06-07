@@ -1,6 +1,10 @@
 <template>
     <div class="paragraph-container">
-        <div v-if="stringHasValue(props.paragraphContent)" class="paragraph-content">
+        <div 
+            v-if="stringHasValue(props.paragraphContent)" 
+            class="paragraph-content"
+            :class="props.centerParagraphContent ? 'text-center' : ''"
+        >
             {{ props.paragraphContent }}
         </div>
 
@@ -32,6 +36,10 @@ const props = defineProps({
     },
     paragraphAction: {
         type: Object as PropType<ButtonAction>,
+        required: false
+    },
+    centerParagraphContent: {
+        type: Boolean,
         required: false
     }
 });

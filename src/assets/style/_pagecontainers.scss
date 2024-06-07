@@ -114,9 +114,12 @@
 }
 
 .page-subtitle-precision {
-    @extend .text-h6;
-    @extend .text-center;
+    @extend .mt-3;
+    @extend .mx-auto;
     @extend .font-weight-regular;
+    @extend .text-center;
+    width: 80%;
+    font-size: 1.1rem;
 }
 
 .page-subtitle-content {

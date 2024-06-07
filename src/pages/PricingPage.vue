@@ -10,6 +10,44 @@
             </v-row>
         </PageSection>
 
+        <PageSection id="usage">
+            <PageSubtitleContainer
+                :pageSubtitle="$t(`pricing.usage-pricing-subtitle-container.subtitle`)"
+                :pageSubtitlePrecision="$t(`pricing.usage-pricing-subtitle-container.precision`)"
+            >
+                <ParagraphContainer
+                    class="mx-auto"
+                    :paragraphContent="$t(`pricing.usage-pricing-subtitle-container.confusion-paragraph.content`)"
+                />
+
+                <ParagraphContainer
+                    class="mx-auto font-weight-bold"
+                    :paragraphContent="
+                        $t(`pricing.usage-pricing-subtitle-container.what-is-included-paragraph.content`)
+                    "
+                    :centerParagraphContent="true"
+                >
+                    <div class="font-weight-regular">
+                        <v-list>
+                            <v-list-item
+                                v-for="action in incurringActions"
+                                class="mb-2"
+                                prepend-icon="mdi-circle-small"
+                            >
+                                <v-list-item-title class="mb-1" style="white-space: normal !important">
+                                    {{ action.title }}
+                                </v-list-item-title>
+                                
+                                <v-list-item-subtitle>
+                                    {{ action.price }}
+                                </v-list-item-subtitle>
+                            </v-list-item>
+                        </v-list>
+                    </div>
+                </ParagraphContainer>
+            </PageSubtitleContainer>
+        </PageSection>
+
         <PageSection>
             <PageSubtitleContainer
                 :pageSubtitle="$t(`pricing.pricing-model-subtitle-container.subtitle`)"
@@ -31,53 +69,6 @@
                 />
             </PageSubtitleContainer>
         </PageSection>
-
-        <PageSection id="usage">
-            <PageSubtitleContainer
-                :pageSubtitle="$t(`pricing.usage-pricing-subtitle-container.subtitle`)"
-                :pageSubtitlePrecision="$t(`pricing.usage-pricing-subtitle-container.precision`)"
-            >
-                <ParagraphContainer
-                    class="mx-auto"
-                    :paragraphContent="$t(`pricing.usage-pricing-subtitle-container.confusion-paragraph.content`)"
-                />
-
-                <ParagraphContainer
-                    class="mx-auto font-weight-bold"
-                    :paragraphContent="
-                        $t(`pricing.usage-pricing-subtitle-container.what-is-included-paragraph.content`)
-                    "
-                >
-                    <div class="font-weight-regular">
-                        <v-list>
-                            <v-list-item
-                                v-for="action in incurringActions"
-                                prepend-icon="mdi-circle-small"
-                                :title="action.title"
-                                :subtitle="action.price"
-                            />
-                        </v-list>
-                    </div>
-                </ParagraphContainer>
-
-                <ParagraphContainer
-                    class="mx-auto font-weight-bold"
-                    :paragraphContent="
-                        $t(`pricing.usage-pricing-subtitle-container.what-is-not-included-paragraph.content`)
-                    "
-                >
-                    <div class="font-weight-regular">
-                        <v-list>
-                            <v-list-item
-                                v-for="action in nonIncurringActions"
-                                prepend-icon="mdi-circle-small"
-                                :title="action.title"
-                            />
-                        </v-list>
-                    </div>
-                </ParagraphContainer>
-            </PageSubtitleContainer>
-        </PageSection>
     </PageContainer>
 </template>
 
@@ -93,7 +84,7 @@ import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { priceString } from "@/helpers/util";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import { STARTER_MONTHLY_FIXED_PRICE, PRO_MONTHLY_FIXED_PRICE, ENTERPRISE_MONTHLY_FIXED_PRICE, STARTER_AVAILABLE_ORG_USERS, PRO_AVAILABLE_ORG_USERS, ENTERPRISE_AVAILABLE_ORG_USERS, PRO_ADDITIONAL_ORG_USER_COST, ENTERPRISE_ADDITIONAL_ORG_USER_COST, STARTER_MONTHLY_ANALYSIS_REQUESTS, PRO_MONTHLY_ANALYSIS_REQUESTS } from "@/helpers/pricingConstants";
+import { STARTER_MONTHLY_FIXED_PRICE, PRO_MONTHLY_FIXED_PRICE, ENTERPRISE_MONTHLY_FIXED_PRICE, STARTER_AVAILABLE_ORG_USERS, PRO_AVAILABLE_ORG_USERS, ENTERPRISE_AVAILABLE_ORG_USERS, PRO_ADDITIONAL_ORG_USER_COST, ENTERPRISE_ADDITIONAL_ORG_USER_COST, STARTER_MONTHLY_ANALYSIS_REQUESTS, PRO_MONTHLY_ANALYSIS_REQUESTS, PRICE_PER_REQUEST } from "@/helpers/pricingConstants";
 
 const t = useI18n().t;
 const tm = useI18n().tm;
@@ -114,7 +105,8 @@ const pricingCards = computed(() => {
                         title: `${STARTER_AVAILABLE_ORG_USERS} ${t(`pricing.pricing-cards.starter.benefits.users.title`)}`
                     },
                     {
-                        title: `${STARTER_MONTHLY_ANALYSIS_REQUESTS} ${t(`pricing.pricing-cards.starter.benefits.requests.title`)}`
+                        title: `${STARTER_MONTHLY_ANALYSIS_REQUESTS} ${t(`pricing.pricing-cards.starter.benefits.requests.title`)}`,
+                        description: `${t(`pricing.pricing-cards.starter.benefits.requests.description`)} ${priceString(PRICE_PER_REQUEST, userSessionStore.locale)} / ${t(`pricing.pricing-cards.request`)}`
                     },
                     {
                         title: t(`pricing.pricing-cards.starter.benefits.tools.title`)
@@ -142,7 +134,9 @@ const pricingCards = computed(() => {
                         description: `${t(`pricing.pricing-cards.enterprise.benefits.users.description`)} ${priceString(PRO_ADDITIONAL_ORG_USER_COST, userSessionStore.locale)} / ${t(`pricing.pricing-cards.additional-user`)}`
                     },
                     {
-                        title: `${PRO_MONTHLY_ANALYSIS_REQUESTS} ${t(`pricing.pricing-cards.pro.benefits.requests.title`)}`
+                        title: `${PRO_MONTHLY_ANALYSIS_REQUESTS} ${t(`pricing.pricing-cards.pro.benefits.requests.title`)}`,
+                        description: `${t(`pricing.pricing-cards.pro.benefits.requests.description`)} ${priceString(PRICE_PER_REQUEST, userSessionStore.locale)} / ${t(`pricing.pricing-cards.request`)}`
+                        
                     },
                     {
                         title: t(`pricing.pricing-cards.pro.benefits.user-detailed-reports.title`)
@@ -180,16 +174,6 @@ const pricingCards = computed(() => {
     return pricingCardDetails;
 });
 
-type NonIncurringAction = {
-    title: string;
-};
-
-const nonIncurringActions = computed(() => {
-    return tm(
-        `pricing.usage-pricing-subtitle-container.what-is-not-included-paragraph.non-charges`
-    ) as NonIncurringAction[];
-});
-
 type IncurringAction = {
     title: string;
     price: number | string;
@@ -201,7 +185,7 @@ const incurringActions = computed(() => {
             title: t(
                 `pricing.usage-pricing-subtitle-container.what-is-included-paragraph.charges.building-insights-request`
             ),
-            price: `${priceString(0.15, userSessionStore.locale)} ${t(`pricing.usage-pricing-subtitle-container.what-is-included-paragraph.per-request`)}`
+            price: `${priceString(PRICE_PER_REQUEST, userSessionStore.locale)} ${t(`pricing.usage-pricing-subtitle-container.what-is-included-paragraph.per-request`)}`
         },
         {
             title: t(`pricing.usage-pricing-subtitle-container.what-is-included-paragraph.charges.additional-users`),

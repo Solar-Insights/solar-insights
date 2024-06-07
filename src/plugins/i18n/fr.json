@@ -257,13 +257,14 @@
     },
     "pricing": {
         "title": "Une tarification simple et sans surprise",
-        "precision": "Payez seulement pour ce que vous utilisez",
+        "precision": "Payez seulement pour ce que vous utilisez, et rien de plus",
         "pricing-cards": {
             "from": "À partir de",
             "month": "mois",
             "usage": "utilisation",
             "users-included": "utilisateur(s) inclu(s)",
             "additional-user": "utilisateur supplémentaire",
+            "request": "requête",
             "starter": {
                 "name": "Starter",
                 "description": "Idéal pour les nouveaux utilisateurs et une utilisation modérée",
@@ -274,7 +275,8 @@
                         "title": "utilisateur gratuit"
                     },
                     "requests": {
-                        "title": "requêtes mensuelles d'analyse d'installation solaire"
+                        "title": "requêtes mensuelles d'analyse d'installation solaire",
+                        "description": "à "
                     },
                     "tools": {
                         "title": "Tous les outils d'analyse solaire"
@@ -298,7 +300,8 @@
                         "description": "puis"
                     },
                     "requests": {
-                        "title": "requêtes mensuelles d'analyse d'installation solaire"
+                        "title": "requêtes mensuelles d'analyse d'installation solaire",
+                        "description": "à "
                     },
                     "user-detailed-reports": {
                         "title": "Rapport mensuel et détaillé des activités utilisateurs"
@@ -327,6 +330,22 @@
                 }
             }
         },
+        "usage-pricing-subtitle-container": {
+            "subtitle": "Tarification à l'utilisation",
+            "precision": "Plus d'informations sur les coûts variables mensuels",
+            "confusion-paragraph": {
+                "content": "Les coûts variables peuvent être troublant. Laissez-nous vous aider avec cela. Tout ce qui est relatif aux coûts variables figure ci-dessous."
+            },
+            "what-is-included-paragraph": {
+                "content": "Voici une description détaillée de toutes les actions qui seront facturées à l'utilisation et comptabilisées à la fin du mois",
+                "depends-on-the-plan": "Prix / utilisateur supplémentaire dépend du plan choisi",
+                "per-request": "/ requête",
+                "charges": {
+                    "building-insights-request": "Effectuer des requêtes d'analyse d'installation solaire; accéder à la page d'analyse d'installation solaire (la carte)",
+                    "additional-users": "Créer un utilisateur additionnel après avoir atteint les limites du plan, si celui-ci le permet"
+                }
+            }
+        },
         "pricing-model-subtitle-container": {
             "subtitle": "Notre modèle de tarification hybride",
             "precision": "Le raisonnement derrière un mélange de tarification fixe et variable",
@@ -338,36 +357,6 @@
             },
             "variable-costs-paragraph": {
                 "content": "Les coûts variables basés sur l'utilisation nous permettent de garantir aux utilisateurs de payer seulement pour ce qu'ils utilisent. Cela vous libère des coûts et de la complexité associés à la planification et estimation de l'utilisation mensuelle à travers une organisation."
-            }
-        },
-        "usage-pricing-subtitle-container": {
-            "subtitle": "Tarification à l'utilisation",
-            "precision": "Plus d'informations sur les coûts variables mensuels",
-            "confusion-paragraph": {
-                "content": "Avec le modèle de tarification hybride de Solar Insights, vous pourriez vous demander ce qui sera réellement facturé comme utilisation. C'est comprenable. Pour aider avec cela, l'administrateur d'une organisation recevra toujours un rapport mensuel détaillé des charges accrues au cours du dernier mois."
-            },
-            "what-is-included-paragraph": {
-                "content": "Voici une description détaillée de toutes les actions qui seront facturées à l'utilisation et comptabilisées à la fin du mois: ",
-                "depends-on-the-plan": "Prix / unité dépend du plan choisi",
-                "per-request": "/ requête",
-                "charges": {
-                    "building-insights-request": "Accéder à la page d'analyse d'installation solaire (la carte)",
-                    "additional-users": "Créer un utilisateur additionnel après avoir atteint les limites du plan, et si celui-ci le permet"
-                }
-            },
-            "what-is-not-included-paragraph": {
-                "content": "Voici des exemples d'actions qui NE SERONT PAS facturées à la fin du mois: ",
-                "non-charges": [
-                    {
-                        "title": "Modifier une installation solaire une fois qu'on est sur la carte"
-                    },
-                    {
-                        "title": "Gérer votre organisation en restant dans les limites du plan"
-                    },
-                    {
-                        "title": "Enregistrer des données ou graphes sur votre appareil"
-                    }
-                ]
             }
         },
         "pricing-form": {

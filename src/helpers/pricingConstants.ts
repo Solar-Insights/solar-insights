@@ -1,3 +1,5 @@
+export const PRICE_PER_REQUEST = 0.15;
+
 export const STARTER_MONTHLY_FIXED_PRICE = 25;
 export const PRO_MONTHLY_FIXED_PRICE = 50;
 export const ENTERPRISE_MONTHLY_FIXED_PRICE = 200;
