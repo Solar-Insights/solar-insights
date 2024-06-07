@@ -15,6 +15,7 @@
 .detail-text-same-size {
     @extend .pb-1;
     @extend .text-medium-emphasis;
+    @extend .font-weight-regular;
 }
 
 b {

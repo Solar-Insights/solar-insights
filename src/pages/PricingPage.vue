@@ -27,18 +27,18 @@
                     "
                     :centerParagraphContent="true"
                 >
-                    <div class="font-weight-regular">
+                    <div>
                         <v-list>
                             <v-list-item
                                 v-for="action in incurringActions"
                                 class="mb-2"
                                 prepend-icon="mdi-circle-small"
                             >
-                                <v-list-item-title class="mb-1" style="white-space: normal !important">
+                                <v-list-item-title class="paragraph-content font-weight-thin mb-1" style="white-space: normal !important">
                                     {{ action.title }}
                                 </v-list-item-title>
                                 
-                                <v-list-item-subtitle>
+                                <v-list-item-subtitle class="font-weight-bold">
                                     {{ action.price }}
                                 </v-list-item-subtitle>
                             </v-list-item>

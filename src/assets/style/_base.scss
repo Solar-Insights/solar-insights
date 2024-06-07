@@ -275,6 +275,7 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
 
 .pricing-card-description {
     @extend .text-medium-emphasis;
+    @extend .font-weight-regular;
     font-size: 0.9rem !important;
     line-height: 1.25rem;
 }

@@ -56,7 +56,7 @@
 
                         <v-list-item-subtitle 
                             v-if="stringHasValue(benefit.description)"
-                            class="text-medium-emphasis"
+                            :class="theme === `dark` ? `text-medium-emphasis` : ``"
                         >
                             {{ benefit.description }}
                         </v-list-item-subtitle>
