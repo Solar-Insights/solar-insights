@@ -199,7 +199,7 @@
     "get-started": {
         "page-title-container": {
             "title": "Lancez-vous avec Solar Insights",
-            "precision": "Une introduction en quelques étapes à votre parcours.",
+            "precision": "Une introduction en quelques étapes.",
             "action": "Analysez une installation solaire"
         },
         "choose-a-plan-subtitle-container": {
@@ -210,7 +210,7 @@
             }
         },
         "register-subtitle-container": {
-            "subtitle": "1. Votre organisation",
+            "subtitle": "2. Gérer votre organisation",
             "precision": "L'outil principal de collaboration",
             "short-items": {
                 "manage": {
@@ -228,23 +228,23 @@
             }
         },
         "use-solar-insights-subtitle-container": {
-            "subtitle": "2. Utiliser et exploiter nos fonctionnalités",
-            "precision": "Le noyau de Solar Insights.",
+            "subtitle": "3. Tirer parti des outils de Solar Insights",
+            "precision": "Visualisez, analysez, et bénéficiez de toute notre offre.",
             "short-items": {
                 "new-org": {
                     "title": "Étape préliminaire",
                     "description": "Vous devez être authentifié pour utiliser Solar Insights et toutes ses fonctionnalités.",
-                    "action": "Connexion"
+                    "action": "Se connecter"
                 },
                 "start-using": {
                     "title": "Commencer l'utilisation",
                     "description": "Faites une recherche de bâtiment dès maintenant pour bénéficier de tout ce que Solar Insights peut vous offrir.",
-                    "action": "Go to Solar Potential page"
+                    "action": "Page de Potentiel solaire"
                 }
             }
         },
         "beyond-solar-insights-subtitle-container": {
-            "subtitle": "3. Aller plus loin que Solar Insights",
+            "subtitle": "4. Aller plus loin que Solar Insights",
             "precision": "Utilisez nos données de manière optimale, même à l'extérieur de l'application.",
             "short-items": {
                 "data": {

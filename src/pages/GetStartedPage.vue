@@ -42,12 +42,13 @@
                     :paragraphContent="``"
                     :paragraphAction="{
                         text: $t(`get-started.choose-a-plan-subtitle-container.create-an-org-paragraph.action`),
-                        icon: 'mdi-send-variant-outline'
                     }"
                     @onParagraphActionClick="router.push({ name: `pricing` })"
                 />
             </PageSubtitleContainer>
         </PageSection>
+
+        <v-divider />
 
         <PageSection>
             <PageSubtitleContainer
@@ -110,7 +111,7 @@
                         :itemAction="{
                             text: $t('get-started.use-solar-insights-subtitle-container.short-items.start-using.action')
                         }"
-                        @onItemActionClick="console.log('do something')"
+                        @onItemActionClick="router.push({ name: `search` })"
                     />
                 </ShortDescriptionItemsContainer>
             </PageSubtitleContainer>

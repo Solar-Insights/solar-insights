@@ -27,10 +27,10 @@
         "success": {
             "prepend": "Success",
             "user-login": {
-                "title": "You are now logged in"
+                "title": "You are now signed in"
             },
             "user-logout": {
-                "title": "You are now logged out"
+                "title": "You are now signed out"
             },
             "organization-user-creation": {
                 "title": "Added user to organization"
@@ -210,7 +210,7 @@
             }
         },
         "register-subtitle-container": {
-            "subtitle": "1. Manage an organization",
+            "subtitle": "2. Manage your organization",
             "precision": "The main collaboration tool.",
             "short-items": {
                 "manage": {
@@ -228,23 +228,23 @@
             }
         },
         "use-solar-insights-subtitle-container": {
-            "subtitle": "2. Use and leverage our functionnalities",
-            "precision": "The core of Solar Insights.",
+            "subtitle": "3. Leverage Solar Insight's tools",
+            "precision": "Visualize, analyze, and benefit from our entire offering.",
             "short-items": {
                 "new-org": {
                     "title": "Preliminary step",
-                    "description": "You need to login to start using Solar Insights and its range of tools.",
-                    "action": "Login"
+                    "description": "You need to sign in to start using Solar Insights and its range of tools.",
+                    "action": "Sign in"
                 },
                 "start-using": {
                     "title": "Get started",
                     "description": "Start a building research now to benefit from everything Solar Insights has to offer.",
-                    "action": "Go to Solar Potential page"
+                    "action": "Solar Potential page"
                 }
             }
         },
         "beyond-solar-insights-subtitle-container": {
-            "subtitle": "3. Go beyond Solar Insights",
+            "subtitle": "4. Go beyond Solar Insights",
             "precision": "Make the most of our data, even outside the app.",
             "short-items": {
                 "data": {
