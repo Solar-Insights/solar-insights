@@ -387,7 +387,7 @@
             "action": "Se connecter pour visualiser un bâtiment"
         },
         "title": "Trouvez votre prochaine installation solaire",
-        "precontent": " étapes pour démarrer avec Solar Insights",
+        "precision": " étapes pour démarrer avec Solar Insights",
         "timeline": {
             "title": " étapes pour démarrer avec Solar Insights",
             "step-1": {

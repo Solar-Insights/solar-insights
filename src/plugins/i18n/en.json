@@ -387,7 +387,7 @@
             "action": "Sign in to gain insights on a building"
         },
         "title": "Find your next solar installation",
-        "precontent": "-Step starter guide to Solar Insights",
+        "precision": "-Step starter guide to Solar Insights",
         "timeline": {
             "title": "-Step starter guide to Solar Insights",
             "step-1": {

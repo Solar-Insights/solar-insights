@@ -16,7 +16,7 @@
         </div>
 
         <!-- Add custom actions for special pages -->
-        <div v-if="!objectHasValue(props.pageTitleAction)" class="page-title-action">
+        <div v-if="!objectHasValue(props.pageTitleAction)">
             <slot></slot>
         </div>
     </div>

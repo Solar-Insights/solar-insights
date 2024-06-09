@@ -2,8 +2,8 @@
     <PageContainer>
         <PageSection>
             <PageTitleContainer
-                :pageTitlePrecontent="`${steps.length}${$t(`search.precontent`)}`"
                 :pageTitle="$t(`search.title`)"
+                :pageTitlePrecision="`${steps.length}${$t(`search.precision`)}`"
             >
                 <v-skeleton-loader class="search-loader" :loading="isLoading" type="chip">
                     <AutocompleteField
@@ -12,23 +12,14 @@
                         @sync-with-new-request="sendToMap"
                     />
 
-                    <v-card
+                    <PageTitleAction
                         v-else
-                        @click="loginUser"
-                        class="pa-6 rounded-lg mx-auto"
-                        style="width: 250px"
-                        elevation="2"
-                        color="theme"
-                    >
-                        <v-row class="pa-0">
-                            <v-col class="pa-0" cols="9">
-                                <div class="font-weight-medium">{{ $t(`search.not-logged-in.action`) }}</div>
-                            </v-col>
-                            <v-col class="pa-0" cols="3" align-self="center">
-                                <v-icon>mdi-login</v-icon>
-                            </v-col>
-                        </v-row>
-                    </v-card>
+                        :pageTitleAction="{
+                            text: `${$t(`search.not-logged-in.action`)}`,
+                            icon: `mdi-login`
+                        }"
+                        @onPageTitleActionClick="loginUser"
+                    />
                 </v-skeleton-loader>
             </PageTitleContainer>
         </PageSection>
@@ -64,6 +55,7 @@ import AutocompleteField from "@/components/general/AutocompleteField.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { useI18n } from "vue-i18n";
 import { handleUserState } from "@/composables/users";
+import PageTitleAction from "@/components/page_sections/PageTitleAction.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageContainer from "@/components/page_sections/PageContainer.vue";
