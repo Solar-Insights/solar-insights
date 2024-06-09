@@ -6,10 +6,47 @@
                 :pageTitlePrecision="$t(`get-started.page-title-container.precision`)"
                 :pageTitleAction="{
                     text: $t(`get-started.page-title-container.action`),
-                    icon: `mdi-rocket-launch-outline`
+                    icon: `mdi-weather-sunny`
                 }"
                 @onPageTitleActionClick="router.push({ name: 'search' })"
             />
+        </PageSection>
+
+        <PageSection>
+            <PageSubtitleContainer
+                :pageSubtitle="$t(`get-started.choose-a-plan-subtitle-container.subtitle`)"
+                :pageSubtitlePrecision="$t(`get-started.choose-a-plan-subtitle-container.precision`)"
+            >
+                <ShortDescriptionItemsContainer>
+                    <ShortDescriptionItem
+                        :itemTitle="$t(`pricing.pricing-cards.starter.name`)"
+                        :itemContent="$t(`pricing.pricing-cards.starter.description`)"
+                        :itemIcon="`mdi-account-outline`"
+                        :itemIconColor="`theme`"
+                    />
+                    <ShortDescriptionItem
+                        :itemTitle="$t(`pricing.pricing-cards.pro.name`)"
+                        :itemContent="$t(`pricing.pricing-cards.pro.description`)"
+                        :itemIcon="`mdi-account-multiple-outline`"
+                        :itemIconColor="`theme`"
+                    />
+                    <ShortDescriptionItem
+                        :itemTitle="$t(`pricing.pricing-cards.enterprise.name`)"
+                        :itemContent="$t(`pricing.pricing-cards.enterprise.description`)"
+                        :itemIcon="`mdi-account-group-outline`"
+                        :itemIconColor="`theme`"
+                    />
+                </ShortDescriptionItemsContainer>
+                <ParagraphContainer
+                    class="text-center mx-auto"
+                    :paragraphContent="``"
+                    :paragraphAction="{
+                        text: $t(`get-started.choose-a-plan-subtitle-container.create-an-org-paragraph.action`),
+                        icon: 'mdi-send-variant-outline'
+                    }"
+                    @onParagraphActionClick="router.push({ name: `pricing` })"
+                />
+            </PageSubtitleContainer>
         </PageSection>
 
         <PageSection>
@@ -22,28 +59,21 @@
                         :itemTitle="$t(`get-started.register-subtitle-container.short-items.manage.title`)"
                         :itemContent="$t(`get-started.register-subtitle-container.short-items.manage.description`)"
                         :itemIcon="`mdi-account-group-outline`"
+                        :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
                         :itemTitle="$t(`get-started.register-subtitle-container.short-items.share.title`)"
                         :itemContent="$t(`get-started.register-subtitle-container.short-items.share.description`)"
                         :itemIcon="`mdi-share-outline`"
+                        :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
                         :itemTitle="$t(`get-started.register-subtitle-container.short-items.help.title`)"
                         :itemContent="$t(`get-started.register-subtitle-container.short-items.help.description`)"
                         :itemIcon="`mdi-account-question-outline`"
+                        :itemIconColor="`theme`"
                     />
                 </ShortDescriptionItemsContainer>
-
-                <ParagraphContainer
-                    class="text-center mx-auto"
-                    :paragraphContent="$t(`get-started.register-subtitle-container.create-an-org-paragraph.content`)"
-                    :paragraphAction="{
-                        text: $t(`get-started.register-subtitle-container.create-an-org-paragraph.action`),
-                        icon: ''
-                    }"
-                    @onParagraphActionClick="console.log('do something')"
-                />
             </PageSubtitleContainer>
         </PageSection>
 
@@ -62,6 +92,7 @@
                             $t(`get-started.use-solar-insights-subtitle-container.short-items.new-org.description`)
                         "
                         :itemIcon="`mdi-account-outline`"
+                        :itemIconColor="`theme`"
                         :itemAction="{
                             text: $t('get-started.use-solar-insights-subtitle-container.short-items.new-org.action')
                         }"
@@ -75,6 +106,7 @@
                             $t(`get-started.use-solar-insights-subtitle-container.short-items.start-using.description`)
                         "
                         :itemIcon="`mdi-play`"
+                        :itemIconColor="`theme`"
                         :itemAction="{
                             text: $t('get-started.use-solar-insights-subtitle-container.short-items.start-using.action')
                         }"
@@ -98,6 +130,7 @@
                             $t(`get-started.beyond-solar-insights-subtitle-container.short-items.data.description`)
                         "
                         :itemIcon="`mdi-database-outline`"
+                        :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
                         :itemTitle="$t(`get-started.beyond-solar-insights-subtitle-container.short-items.graphs.title`)"
@@ -105,6 +138,7 @@
                             $t(`get-started.beyond-solar-insights-subtitle-container.short-items.graphs.description`)
                         "
                         :itemIcon="`mdi-chart-line`"
+                        :itemIconColor="`theme`"
                     />
                 </ShortDescriptionItemsContainer>
             </PageSubtitleContainer>
@@ -124,6 +158,7 @@ import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vu
 
 import { useAuth0 } from "@auth0/auth0-vue";
 import { handleUserState } from "@/composables/users";
+import PageTitleAction from "@/components/page_sections/PageTitleAction.vue";
 
 const { loginUser } = handleUserState();
 const { isLoading, isAuthenticated, user } = useAuth0();

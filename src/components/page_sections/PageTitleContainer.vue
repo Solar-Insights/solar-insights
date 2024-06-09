@@ -26,6 +26,7 @@
 import PageTitleAction from "@/components/page_sections/PageTitleAction.vue";
 import { PropType } from "vue";
 import { stringHasValue, objectHasValue } from "@/helpers/componentConditionals";
+import { PageTitleActionType } from "@/helpers/types";
 
 const props = defineProps({
     pageTitlePrecontent: {
@@ -41,15 +42,10 @@ const props = defineProps({
         required: false
     },
     pageTitleAction: {
-        type: Object as PropType<PageTitleAction>,
+        type: Object as PropType<PageTitleActionType>,
         required: false
     }
 });
 
 const emits = defineEmits(["onPageTitleActionClick"]);
-
-interface PageTitleAction {
-    text: string;
-    icon: string;
-}
 </script>

@@ -17,18 +17,15 @@
 </template>
 
 <script setup lang="ts">
+import { PageTitleActionType } from "@/helpers/types";
 import { PropType } from "vue";
 
 const props = defineProps({
     pageTitleAction: {
-        type: Object as PropType<PageTitleAction>,
+        type: Object as PropType<PageTitleActionType>,
         required: true
     }
 });
-const emits = defineEmits(["onPageTitleActionClick"]);
 
-interface PageTitleAction {
-    text: string;
-    icon: string;
-}
+const emits = defineEmits(["onPageTitleActionClick"]);
 </script>

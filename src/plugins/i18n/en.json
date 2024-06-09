@@ -177,7 +177,7 @@
             "action": "Choose your plan"
         },
         "usecase-subtitle-container": {
-            "subtitle": "What can you do with Solar Insights?",
+            "subtitle": "Why Solar Insights?",
             "visualize": {
                 "title": "Visualize accurate solar data",
                 "description": "Get estimates on the optimal positioning of solar panels for a building. Also, visualize data regarding a roof's sunlight exposure."
@@ -200,7 +200,14 @@
         "page-title-container": {
             "title": "Get started with Solar Insights",
             "precision": "A quick guide to kickstart your journey.",
-            "action": "Don't need a guide, or already a member? Start using Solar Insights!"
+            "action": "Analyze a solar installation"
+        },
+        "choose-a-plan-subtitle-container": {
+            "subtitle": "1. Create an organization",
+            "precision": "Choose a pricing plan aligned with your needs and gain access to every Solar Insights' features",
+            "create-an-org-paragraph": {
+                "action": "Visit the Pricing page"
+            }
         },
         "register-subtitle-container": {
             "subtitle": "1. Manage an organization",
@@ -218,10 +225,6 @@
                     "title": "Collaborate with users",
                     "description": "Find your organization's admin(s) and members in a matter of seconds and start collaborating."
                 }
-            },
-            "create-an-org-paragraph": {
-                "content": "To create an organization and gain access to every Solar Insights' features:",
-                "action": "Contact our team"
             }
         },
         "use-solar-insights-subtitle-container": {

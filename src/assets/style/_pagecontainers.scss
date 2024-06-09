@@ -97,6 +97,7 @@
     @extend .mt-7;
     @extend .mx-auto;
     @extend .rounded-lg; 
+    @extend .text-center;
     font-size: 1.1rem;
     width: 250px;
 }
@@ -171,6 +172,9 @@
 }
 
 .paragraph-action {
+    @extend .rounded-lg; 
+    @extend .font-weight-medium;
+    @extend .mx-auto;
 }
 
 .footer {

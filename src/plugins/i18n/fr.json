@@ -200,7 +200,14 @@
         "page-title-container": {
             "title": "Lancez-vous avec Solar Insights",
             "precision": "Une introduction en quelques étapes à votre parcours.",
-            "action": "Pas besoin de guide, ou déjà membre? Commencez à utiliser Solar Insights!"
+            "action": "Analysez une installation solaire"
+        },
+        "choose-a-plan-subtitle-container": {
+            "subtitle": "1. Créer une organisation",
+            "precision": "Choisissez le plan de tarification aligné avec vos besoins et obtenez l'accès à toutes les fonctionnalités de Solar Insights",
+            "create-an-org-paragraph": {
+                "action": "Visitez la page de Tarification"
+            }
         },
         "register-subtitle-container": {
             "subtitle": "1. Votre organisation",
@@ -218,10 +225,6 @@
                     "title": "Collaborer avec d'autres utilisateurs",
                     "description": "Trouvez les administrateurs et membres de votre organisation en un instant et débuter votre travail d'équipe."
                 }
-            },
-            "create-an-org-paragraph": {
-                "content": "Pour créer une organisation et obtenir l'accès à toutes les fonctionnalités de Solar Insights:",
-                "action": "Contactez notre équipe"
             }
         },
         "use-solar-insights-subtitle-container": {

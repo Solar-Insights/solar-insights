@@ -8,10 +8,10 @@
             {{ props.paragraphContent }}
         </div>
 
-        <div v-if="objectHasValue(props.paragraphAction)" class="paragraph-action">
+        <div v-if="objectHasValue(props.paragraphAction)">
             <v-btn
                 @click="emits('onParagraphActionClick')"
-                class="rounded-lg font-weight-medium"
+                class="paragraph-action"
                 elevation="2"
                 color="theme"
                 :append-icon="props.paragraphAction?.icon"

@@ -121,3 +121,8 @@ export type NewOrganizationForm = {
     pricingTier: PricingTier;
     additionalNotes: string;
 };
+
+export type PageTitleActionType = {
+    text: string;
+    icon: string;
+};
