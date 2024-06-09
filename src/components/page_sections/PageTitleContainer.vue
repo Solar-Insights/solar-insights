@@ -7,23 +7,12 @@
         <div v-if="stringHasValue(props.pageTitlePrecision)" class="page-title-precision">
             {{ props.pageTitlePrecision }}
         </div>
-        <div v-if="objectHasValue(props.pageTitleAction)" class="page-title-action">
-            <v-card
-                @click="emits('onPageTitleActionClick')"
-                class="pa-6 rounded-lg mx-auto"
-                style="width: 250px"
-                elevation="2"
-                color="theme"
-            >
-                <v-row class="pa-0">
-                    <v-col class="pa-0" cols="9">
-                        <div class="font-weight-medium">{{ props.pageTitleAction?.text }}</div>
-                    </v-col>
-                    <v-col class="pa-0" cols="3" align-self="center">
-                        <v-icon>{{ props.pageTitleAction?.icon }}</v-icon>
-                    </v-col>
-                </v-row>
-            </v-card>
+        <div v-if="objectHasValue(props.pageTitleAction)">
+            <PageTitleAction
+                v-if="pageTitleAction"
+                :pageTitleAction="pageTitleAction"
+                @onPageTitleActionClick="emits('onPageTitleActionClick')"
+            />
         </div>
 
         <!-- Add custom actions for special pages -->
@@ -34,6 +23,7 @@
 </template>
 
 <script setup lang="ts">
+import PageTitleAction from "@/components/page_sections/PageTitleAction.vue";
 import { PropType } from "vue";
 import { stringHasValue, objectHasValue } from "@/helpers/componentConditionals";
 

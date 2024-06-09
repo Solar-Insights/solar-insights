@@ -93,9 +93,12 @@
 }
 
 .page-title-action {
+    @extend .pa-6;
     @extend .mt-7;
     @extend .mx-auto;
+    @extend .rounded-lg; 
     font-size: 1.1rem;
+    width: 250px;
 }
 
 .page-subtitle-container {
