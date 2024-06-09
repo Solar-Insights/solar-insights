@@ -4,21 +4,18 @@
             <PageTitleContainer
                 :pageTitle="$t(`search.title`)"
                 :pageTitlePrecision="`${steps.length}${$t(`search.precision`)}`"
+                :pageTitleAction="!isAuthenticated ? {
+                    text: `${$t(`search.not-logged-in.action`)}`,
+                    icon: `mdi-login`
+                } : undefined"
+                @onPageTitleActionClick="loginUser"
             >
                 <v-skeleton-loader class="search-loader" :loading="isLoading" type="chip">
                     <AutocompleteField
                         v-if="isAuthenticated"
+                        class="mt-7"
                         :reverseGeocodeOnLoad="false"
                         @sync-with-new-request="sendToMap"
-                    />
-
-                    <PageTitleAction
-                        v-else
-                        :pageTitleAction="{
-                            text: `${$t(`search.not-logged-in.action`)}`,
-                            icon: `mdi-login`
-                        }"
-                        @onPageTitleActionClick="loginUser"
                     />
                 </v-skeleton-loader>
             </PageTitleContainer>
