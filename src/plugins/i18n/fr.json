@@ -380,6 +380,13 @@
                     "situation": "Décrivez votre situation"
                 }
             }
+        },
+        "create-org-confirmation": {
+            "title": "Demande reçue",
+            "cancel-action": "Compris",
+            "paragraph-1": "Votre demande de création d'une nouvelle organisation / d'informations par rapport à nos plans de tarification a bien été reçue.",
+            "paragraph-2": "Nous allons vous recontacter dès que possible. Notre réponse sera envoyée par courriel à:",
+            "paragraph-3": "Dans les jours à venir, assurez-vous de vérifier vos courriels Indésirables au cas où notre réponse soit tombée dans cette catégorie. Si aucune réponse ne vous est envoyée d'ici 5 jours, nous vous prions de contacter l'équipe de support."
         }
     },
     "search": {

@@ -30,6 +30,12 @@
                 <CreateOrganizationForm
                     :pricingTier="props.pricingCardDetails.pricingTier"
                     :pricingName="props.pricingCardDetails.name"
+                    @formWasSent="openingRequestSentDialog"
+                />
+                <CreateOrganizationRequestSent
+                    :openDialog="createOrganizationRequestSentDialog"
+                    :requesterEmail="requesterEmail"
+                    @dialogWasClosed="createOrganizationRequestSentDialog = false"
                 />
             </v-btn>
 
@@ -76,11 +82,12 @@
 
 <script setup lang="ts">
 import { PricingCardDetails } from "@/helpers/types";
-import { PropType } from "vue";
+import { PropType, ref } from "vue";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
 import { priceString } from "@/helpers/util";
 import CreateOrganizationForm from "@/components/pricing/CreateOrganizationForm.vue";
+import CreateOrganizationRequestSent from "@/components/pricing/CreateOrganizationRequestSent.vue";
 import { stringHasValue } from "@/helpers/componentConditionals";
 
 const userSessionStore = useUserSessionStore();
@@ -94,4 +101,12 @@ const props = defineProps({
 });
 
 const emits = defineEmits(["onPricingCardActionClick"]);
+
+const createOrganizationRequestSentDialog = ref<boolean>(false);
+const requesterEmail = ref<string>("");
+
+function openingRequestSentDialog(email: string) {
+    requesterEmail.value = email;
+    createOrganizationRequestSentDialog.value = true;
+}
 </script>

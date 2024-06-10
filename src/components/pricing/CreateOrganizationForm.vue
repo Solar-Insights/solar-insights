@@ -101,7 +101,7 @@ const props = defineProps({
     }
 });
 
-const emits = defineEmits(["addUser", "deleteUser"]);
+const emits = defineEmits(["addUser", "deleteUser", "formWasSent"]);
 
 const closeForm = ref<boolean>(false);
 
@@ -127,9 +127,13 @@ async function sendNewOrganizationRequest() {
     if (!validForm.value) return;
 
     loadingResponse.value = true;
-    await postCreateOrganizationForm(data.value).catch(() => {});
+    await postCreateOrganizationForm(data.value)
+        .then(() => {
+            emits("formWasSent", data.value.contactEmail);
+        })
+        .catch(() => {});
     loadingResponse.value = false;
-
+    
     closeForm.value = true;
 }
 </script>
