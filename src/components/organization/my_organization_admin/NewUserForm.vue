@@ -63,7 +63,7 @@ import { EMAIL_MAX_LENGTH, NAME_MAX_LENGTH } from "@/helpers/form_validation/con
 import { createValidationMessages } from "@/helpers/form_validation/genericValidators";
 import { createUserForOrganization } from "@/api/user";
 
-const emits = defineEmits(["addUser", "deleteUser", "formWasSent"]);
+const emits = defineEmits(["formWasSent"]);
 
 const closeForm = ref<boolean>(false);
 

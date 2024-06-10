@@ -158,7 +158,10 @@
                     "delete-user": {
                         "title": "Do you really want to delete this user?",
                         "confirm": "Confirm",
-                        "cancel": "Cancel"
+                        "cancel": "Cancel",
+                        "paragraph-1": "Deleting a user is irreversible. Every operation a user has made are kept and will appear in the monthly usage report.",
+                        "paragraph-2": "Also, the deletion of a user increases your organization's available space.",
+                        "paragraph-3": "However, the deletion has no impact on the maximum number of users reached throughout the month; a criteria of your billing."
                     }
                 },
                 "column-titles": {

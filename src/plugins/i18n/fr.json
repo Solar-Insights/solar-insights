@@ -158,7 +158,10 @@
                     "delete-user": {
                         "title": "Souhaitez-vous vraiment supprimer cet utilisateur?",
                         "confirm": "Confirmer",
-                        "cancel": "Annuler"
+                        "cancel": "Annuler",
+                        "paragraph-1": "La suppression d'un utilisateur est irréversible. Toutes les opérations effectuées par celui-ci seront conservées et figureront sur votre rapport d'utilisation mensuel.",
+                        "paragraph-2": "Supprimer un utilisateur augmentera l'espace disponible de votre organisation.",
+                        "paragraph-3": "Cependant, la suppression n'a pas d'impact sur la quantité maximale d'utilisateur atteinte au courant du mois; un des facteurs de facturation."
                     }
                 },
                 "column-titles": {
