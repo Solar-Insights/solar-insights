@@ -92,6 +92,16 @@ export class OrganizationUserCreationError extends VueAlert {
     }
 }
 
+export class OrganizationUserCreationQuotaError extends VueAlert {
+    constructor(
+        type: AlertType = "error",
+        title: string = i18n.global.t("alerts.error.organization-user-creation-quota.title"),
+        code: number = 422
+    ) {
+        super(type, title, code);
+    }
+}
+
 export class OrganizationUserDeletionError extends VueAlert {
     constructor(
         type: AlertType = "error",

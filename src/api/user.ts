@@ -1,8 +1,9 @@
-import { OrganizationInfosError, OrganizationUserCreationError, OrganizationUserDeletionError } from "@/helpers/alerts/errors";
+import { OrganizationInfosError, OrganizationUserCreationError, OrganizationUserCreationQuotaError, OrganizationUserDeletionError } from "@/helpers/alerts/errors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import AxiosInstance from "@/plugins/axios";
 import { MyOrganization, MyOrganizationMember, NewOrganizationUserForm } from "@/helpers/types";
 import { OrganizationUserCreationSuccess, OrganizationUserDeletionSuccess } from "@/helpers/alerts/success";
+import { AxiosError } from "axios";
 
 export async function getMyOrganizationInfo() {
     return await AxiosInstance({
@@ -51,8 +52,13 @@ export async function createUserForOrganization(newUserForm: NewOrganizationUser
             useUserSessionStore().setAlert(new OrganizationUserCreationSuccess());
             return myOrganizationMember;
         })
-        .catch((error) => {
-            useUserSessionStore().setAlert(new OrganizationUserCreationError());
+        .catch((error: AxiosError) => {
+            if (error.response && error.response.status === 422) {
+                useUserSessionStore().setAlert(new OrganizationUserCreationQuotaError());
+            } else {
+                useUserSessionStore().setAlert(new OrganizationUserCreationError());
+            }
+            
             throw error;
         });
 }
