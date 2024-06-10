@@ -31,14 +31,14 @@
 
 <script setup lang="ts">
 import { MyOrganizationMember } from "@/helpers/types";
-import { PropType, ref } from "vue";
+import { computed, PropType, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 import NewUserForm from "@/components/organization/my_organization_admin/NewUserForm.vue";
 import DeleteUserForm from "@/components/organization/my_organization_admin/DeleteUserForm.vue";
 
 const t = useI18n().t;
-const UserDataHeaders = [
+const UserDataHeaders = computed(() => [
     {
         title: t(`my-organization.admin-component.user-table.column-titles.email`),
         key: "email",
@@ -60,7 +60,7 @@ const UserDataHeaders = [
         align: "center",
         sortable: false
     }
-] as any[];
+] as any[]);
 
 const props = defineProps({
     users: {

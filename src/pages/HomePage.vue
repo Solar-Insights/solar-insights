@@ -48,8 +48,6 @@
 
 <script setup lang="ts">
 import solar_insights_overview from "@/assets/images/home/solar_insights_overview.png";
-import { storeToRefs } from "pinia";
-import { useUserSessionStore } from "@/stores/userSessionStore";
 import router from "@/plugins/router";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
@@ -58,7 +56,4 @@ import PageContainer from "@/components/page_sections/PageContainer.vue";
 import ShortDescriptionItem from "@/components/page_sections/ShortDescriptionItem.vue";
 import ShortDescriptionItemsContainer from "@/components/page_sections/ShortDescriptionItemsContainer.vue";
 import ImageContainer from "@/components/page_sections/ImageContainer.vue";
-
-const userSessionStore = useUserSessionStore();
-const { locale, theme } = storeToRefs(userSessionStore);
 </script>
