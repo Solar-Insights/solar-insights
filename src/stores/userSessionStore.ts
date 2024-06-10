@@ -3,7 +3,7 @@ import { VueAlert } from "@/helpers/alerts/default";
 import { Theme, Locale } from "@/helpers/types";
 import { toast } from 'vuetify-sonner'
 import { i18n } from "@/plugins/i18n/i18n";
-import { matchIconToAlertType } from "@/helpers/alerts/components";
+import { getAlertDurationTime, matchIconToAlertType } from "@/helpers/alerts/components";
 
 export const useUserSessionStore = defineStore("userSessionStore", {
     state: () => ({
@@ -17,14 +17,15 @@ export const useUserSessionStore = defineStore("userSessionStore", {
             const toastCardClass = this.theme === "dark" ? "dark-toast-content" : "light-toast-content";
             const toastTextClass = this.theme === "dark" ? "dark-toast-text" : "light-toast-text";
             const closeIconColor = this.theme === "dark" ? "white" : "black";
+            const alertDuration = getAlertDurationTime(alert);
 
             toast(
                 i18n.global.t(`alerts.${alert.type}.prepend`),
                 {
                     description: alert.title,
                     progressBar: true,
-                    progressDuration: 4000,
-                    duration: 4000,
+                    progressDuration: alertDuration,
+                    duration: alertDuration,
                     prependIcon: matchIconToAlertType(alert.type),
                     prependIconProps: {
                         size: "x-large",
@@ -37,6 +38,9 @@ export const useUserSessionStore = defineStore("userSessionStore", {
                     },
                     cardTextProps: {
                         class: `font-weight-bold ${toastTextClass}`,
+                    },
+                    cardActionsProps: {
+                        class: `pa-0`
                     },
                     action: {
                         buttonProps: {
