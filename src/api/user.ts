@@ -1,7 +1,7 @@
 import { OrganizationInfosError, OrganizationUserCreationError, OrganizationUserDeletionError } from "@/helpers/alerts/errors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import AxiosInstance from "@/plugins/axios";
-import { MyOrganization, MyOrganizationMember } from "@/helpers/types";
+import { MyOrganization, MyOrganizationMember, NewOrganizationUserForm } from "@/helpers/types";
 import { OrganizationUserCreationSuccess, OrganizationUserDeletionSuccess } from "@/helpers/alerts/success";
 
 export async function getMyOrganizationInfo() {
@@ -38,15 +38,12 @@ export async function getMyOrganizationMembers() {
         });
 }
 
-export async function createUserForOrganization(email: string, name: string) {
+export async function createUserForOrganization(newUserForm: NewOrganizationUserForm) {
     return await AxiosInstance({
         method: "post",
         responseType: "json",
         url: `/user/my-organization/members`,
-        data: {
-            email: email,
-            name: name
-        }
+        data: newUserForm
     })
         .then((response) => {
             const myOrganizationMember: MyOrganizationMember = response.data.myOrganizationMember;

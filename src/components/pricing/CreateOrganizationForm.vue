@@ -87,7 +87,7 @@ import FormDialogSection from "@/components/page_sections/FormDialogSection.vue"
 import FormField from "@/components/page_sections/FormField.vue";
 import { postCreateOrganizationForm } from "@/api/client";
 import { newOrganizationFormValidators } from "@/helpers/form_validation/createOrganizationFormValidators";
-import { ADDITIONAL_NOTES_MAX_LENGTH, EMAIL_MAX_LENGTH, NAME_MAX_LENGTH } from "@/helpers/form_validation/createOrganizationFormValidators";
+import { ADDITIONAL_NOTES_MAX_LENGTH, EMAIL_MAX_LENGTH, NAME_MAX_LENGTH } from "@/helpers/form_validation/constants";
 import { createValidationMessages } from "@/helpers/form_validation/genericValidators";
 
 const props = defineProps({

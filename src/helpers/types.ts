@@ -122,6 +122,11 @@ export type NewOrganizationForm = {
     additionalNotes: string;
 };
 
+export type NewOrganizationUserForm = {
+    email: string,
+    name: string
+};
+
 export type PageTitleActionType = {
     text: string;
     icon: string;
