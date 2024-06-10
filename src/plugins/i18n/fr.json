@@ -65,6 +65,9 @@
             "building-insights": {
                 "title": "Impossible de charger les données du bâtiment"
             },
+            "building-insights-quota": {
+                "title": "Limite des requêtes d'analyse solaire atteinte. Améliorez votre plan de tarification en nous envoyant un courriel pour augmenter votre limite mensuelle."
+            },
             "solar-layers": {
                 "title": "Impossible de charger les couches de données"
             },
@@ -81,7 +84,7 @@
                 "title": "Impossible de retirer l'utilisateur de l'organisation"
             },
             "organization-user-creation-quota": {
-                "title": "Limite d'utilisateur(s) atteinte. Veuillez l'augmenter, ou améliorer votre plan de tarification en nous envoyant un courriel."
+                "title": "Limite d'utilisateur(s) atteinte. Augmentez-la manuellement, ou améliorer votre plan de tarification en nous envoyant un courriel."
             },
             "user": {
                 "title": "Impossible de synchroniser les données du profil"
@@ -145,7 +148,7 @@
             "description": "Contactez un administrateur de votre organisation."
         },
         "admin-component": {
-            "title": "Votre équipe (exepté vous-même)",
+            "title": "Votre équipe (excepté vous-même)",
             "user-table": {
                 "title": "Utilisateurs",
                 "actions": {

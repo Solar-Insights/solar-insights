@@ -1,4 +1,4 @@
-import { BuildingInsightsError, GeotiffError, SolarLayersError } from "@/helpers/alerts/errors";
+import { BuildingInsightsError, BuildingInsightsQuotaError, GeotiffError, SolarLayersError } from "@/helpers/alerts/errors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, GeoTiff, SolarLayers } from "geo-env-typing/solar";
@@ -18,7 +18,12 @@ export async function getClosestBuildingInsights(coord: LatLng) {
             return response.data.buildingInsights as BuildingInsights;
         })
         .catch((error) => {
-            useUserSessionStore().setAlert(new BuildingInsightsError());
+            if (error.response && error.response.status === 422) {
+                useUserSessionStore().setAlert(new BuildingInsightsQuotaError());
+            } else {
+                useUserSessionStore().setAlert(new BuildingInsightsError());
+            }
+            
             throw error;
         });
 }

@@ -52,6 +52,16 @@ export class BuildingInsightsError extends VueAlert {
     }
 }
 
+export class BuildingInsightsQuotaError extends VueAlert {
+    constructor(
+        type: AlertType = "error",
+        title: string = i18n.global.t("alerts.error.building-insights-quota.title"),
+        code: number = 422
+    ) {
+        super(type, title, code);
+    }
+}
+
 export class SolarLayersError extends VueAlert {
     constructor(
         type: AlertType = "error",

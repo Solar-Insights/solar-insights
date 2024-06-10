@@ -65,6 +65,9 @@
             "building-insights": {
                 "title": "Could not fetch building insights"
             },
+            "building-insights-quota": {
+                "title": "Solar-analysis request limit reached. Upgrade your pricing plan by emailing us to increase your monthly limit."
+            },
             "solar-layers": {
                 "title": "Could not fetch data layers"
             },
@@ -78,7 +81,7 @@
                 "title": "Could not add user to organization"
             },
             "organization-user-creation-quota": {
-                "title": "User limit reached. Please increase it, or upgrade your pricing plan by emailing us."
+                "title": "User limit reached. Increase it manually, or upgrade your pricing plan by emailing us."
             },
             "organization-user-deletion": {
                 "title": "Could not remove user from organization"
