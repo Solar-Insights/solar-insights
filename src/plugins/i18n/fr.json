@@ -148,7 +148,15 @@
             "description": "Contactez un administrateur de votre organisation."
         },
         "admin-component": {
-            "title": "Votre équipe (excepté vous-même)",
+            "billing-recap-subtitle-container": {
+                "subtitle": "Sommaire de facturation"
+            },
+            "billing-recap": {
+
+            },
+            "user-table-subtitle-container": {
+                "subtitle": "Votre équipe (excepté vous-même)"
+            },
             "user-table": {
                 "title": "Utilisateurs",
                 "actions": {

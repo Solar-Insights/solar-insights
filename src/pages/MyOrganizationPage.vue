@@ -36,9 +36,7 @@
             </PageSubtitleContainer>
         </PageSection>
 
-        <PageSection v-if="isAdmin">
-            <AdminComponent />
-        </PageSection>
+        <AdminComponent v-if="isAdmin" />
     </PageContainer>
 </template>
 

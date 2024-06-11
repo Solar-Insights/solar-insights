@@ -1,6 +1,4 @@
 <template>
-    <PageSubtitleContainer :pageSubtitle="$t(`my-organization.admin-component.title`)" />
-
     <v-data-table :items="users" :headers="headers" :sort-by="[{ key: 'created_date', order: 'desc' }]">
         <template v-slot:top>
             <v-toolbar flat>

@@ -148,7 +148,15 @@
             "description": "Contact one of your organization's administrator."
         },
         "admin-component": {
-            "title": "Your team (except yourself)",
+            "billing-recap-subtitle-container": {
+                "subtitle": "Billing summary"
+            },
+            "billing-recap": {
+
+            },
+            "user-table-subtitle-container": {
+                "subtitle": "Your team (except yourself)"
+            },
             "user-table": {
                 "title": "Users",
                 "actions": {

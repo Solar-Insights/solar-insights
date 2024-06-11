@@ -1,13 +1,24 @@
 <template>
-    {{ myOrganizationBillingRecap }}
+    <PageSection>
+        <PageSubtitleContainer :pageSubtitle="$t(`my-organization.admin-component.billing-recap-subtitle-container.subtitle`)" />
+        
+        <BillingRecap v-if="myOrganizationBillingRecap" :billingRecap="myOrganizationBillingRecap"/>
+    </PageSection>
 
-    <UserTable :users="myOrganizationMembers" @addUser="addOrganizationMember" @deleteUser="deleteOrganizationMember" />
+    <PageSection>
+        <PageSubtitleContainer :pageSubtitle="$t(`my-organization.admin-component.user-table-subtitle-container.subtitle`)" />
+
+        <UserTable :users="myOrganizationMembers" @addUser="addOrganizationMember" @deleteUser="deleteOrganizationMember" />
+    </PageSection>
 </template>
 
 <script setup lang="ts">
 import { MyOrganizationMember, MyOrganizationAdminDetails, MyOrganizationBillingRecap } from "@/helpers/types";
 import { onMounted, ref } from "vue";
-import UserTable from "@/components/organization//my_organization_admin/UserTable.vue";
+import UserTable from "@/components/organization/my_organization_admin/UserTable.vue";
+import BillingRecap from "@/components/organization/my_organization_admin//BillingRecap.vue";
+import PageSection from "@/components/page_sections/PageSection.vue";
+import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 import { getMyOrganizationAdminData } from "@/api/user";
 
 const myOrganizationMembers = ref<MyOrganizationMember[]>([]);
