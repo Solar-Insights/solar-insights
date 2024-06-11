@@ -132,6 +132,8 @@ export type PageTitleActionType = {
     icon: string;
 };
 
+export type MonthlyQuotaField = "max_free_members_count" | "max_building_insights_requests";
+
 export type MonthlyBillingField = "max_members_count" | "building_insights_requests";
 
 export type MyOrganizationDetails = {
@@ -139,9 +141,16 @@ export type MyOrganizationDetails = {
     name: string;
 };
 
-export type MyOrganizationBillingRecap = {
-    [key in MonthlyBillingField]: number
-}
+export type MyOrganizationBillingRecap = 
+    { 
+        [key in MonthlyBillingField]: number 
+    } &
+    {
+        [key in MonthlyQuotaField]: number
+    } &
+    { 
+        pricingTier: PricingTier
+    };
 
 export type MyOrganizationAdminDetails = {
     myOrganizationMembers: MyOrganizationMember[];
