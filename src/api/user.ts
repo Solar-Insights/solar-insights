@@ -1,7 +1,7 @@
 import { OrganizationInfosError, OrganizationUserCreationError, OrganizationUserCreationQuotaError, OrganizationUserDeletionError } from "@/helpers/alerts/errors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import AxiosInstance from "@/plugins/axios";
-import { MyOrganization, MyOrganizationMember, NewOrganizationUserForm } from "@/helpers/types";
+import { MyOrganization, MyOrganizationAdminDetails, MyOrganizationMember, NewOrganizationUserForm } from "@/helpers/types";
 import { OrganizationUserCreationSuccess, OrganizationUserDeletionSuccess } from "@/helpers/alerts/success";
 import { AxiosError } from "axios";
 
@@ -20,18 +20,18 @@ export async function getMyOrganizationInfo() {
         });
 }
 
-export async function getMyOrganizationMembers() {
+export async function getMyOrganizationAdminData() {
     return await AxiosInstance({
         method: "get",
         responseType: "json",
-        url: `/user/my-organization/members`
+        url: `/user/my-organization/admin-details`
     })
         .then((response) => {
-            const myOrganizationMembers: MyOrganizationMember[] = response.data.myOrganizationMembers;
-            myOrganizationMembers.forEach((member) => {
+            const myOrganizationAdminDetails: MyOrganizationAdminDetails = response.data;
+            myOrganizationAdminDetails.myOrganizationMembers.forEach((member) => {
                 member.created_date = cleanIsoStringToKeepYYYYmmdd(member.created_date);
             });
-            return response.data.myOrganizationMembers as MyOrganizationMember[];
+            return myOrganizationAdminDetails;
         })
         .catch((error) => {
             useUserSessionStore().setAlert(new OrganizationInfosError());

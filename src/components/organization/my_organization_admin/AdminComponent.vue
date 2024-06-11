@@ -1,19 +1,24 @@
 <template>
+    {{ myOrganizationBillingRecap }}
+
     <UserTable :users="myOrganizationMembers" @addUser="addOrganizationMember" @deleteUser="deleteOrganizationMember" />
 </template>
 
 <script setup lang="ts">
-import { MyOrganizationMember } from "@/helpers/types";
+import { MyOrganizationMember, MyOrganizationAdminDetails, MyOrganizationBillingRecap } from "@/helpers/types";
 import { onMounted, ref } from "vue";
 import UserTable from "@/components/organization//my_organization_admin/UserTable.vue";
-import { getMyOrganizationMembers } from "@/api/user";
+import { getMyOrganizationAdminData } from "@/api/user";
 
 const myOrganizationMembers = ref<MyOrganizationMember[]>([]);
+const myOrganizationBillingRecap = ref<MyOrganizationBillingRecap>();
 
 onMounted(async () => {
-    await getMyOrganizationMembers()
-        .then((data: MyOrganizationMember[]) => {
-            myOrganizationMembers.value = data;
+    await getMyOrganizationAdminData()
+        .then((data: MyOrganizationAdminDetails) => {
+            myOrganizationMembers.value = data.myOrganizationMembers;
+            myOrganizationBillingRecap.value = data.myOrganizationBillingRecap;
+            console.log(myOrganizationBillingRecap.value)
         })
         .catch(() => {});
 });

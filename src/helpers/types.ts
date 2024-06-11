@@ -131,3 +131,19 @@ export type PageTitleActionType = {
     text: string;
     icon: string;
 };
+
+export type MonthlyBillingField = "max_members_count" | "building_insights_requests";
+
+export type MyOrganizationDetails = {
+    admins: MyOrganizationMember[];
+    name: string;
+};
+
+export type MyOrganizationBillingRecap = {
+    [key in MonthlyBillingField]: number
+}
+
+export type MyOrganizationAdminDetails = {
+    myOrganizationMembers: MyOrganizationMember[];
+    myOrganizationBillingRecap: MyOrganizationBillingRecap
+};
