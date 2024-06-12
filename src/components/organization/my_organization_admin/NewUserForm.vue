@@ -1,15 +1,15 @@
 <template>
     <FormDialog
-        :formTitle="$t(`my-organization.admin-component.user-table.actions.new-user.title`)"
+        :formTitle="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.title`)"
         formIcon="mdi-account-plus-outline"
-        :formCancelButton="$t(`my-organization.admin-component.user-table.actions.new-user.cancel`)"
-        :formConfirmButton="$t(`my-organization.admin-component.user-table.actions.new-user.create-new-user`)"
+        :formCancelButton="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.cancel`)"
+        :formConfirmButton="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.create-new-user`)"
         :formClose="closeForm"
         :formLoadingResponse="loadingResponse"
         @validateForm="createUser"
         @formWasClosed="closeForm = false;"
     >
-        <FormDialogSection :sectionTitle="$t(`my-organization.admin-component.user-table.actions.new-user.user-info`)">
+        <FormDialogSection :sectionTitle="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.user-info`)">
             <FormField>
                 <v-text-field
                     v-model="data.email"
@@ -19,7 +19,7 @@
                     @blur="v$.email.$touch"
                     @input="v$.email.$touch"
                     :label="
-                        $t(`my-organization.admin-component.user-table.actions.new-user.email`)
+                        $t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.email`)
                     "
                     density="compact"
                     variant="outlined"
@@ -38,7 +38,7 @@
                     @blur="v$.name.$touch"
                     @input="v$.name.$touch"
                     :label="
-                        $t(`my-organization.admin-component.user-table.actions.new-user.name`)
+                        $t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.name`)
                     "
                     density="compact"
                     variant="outlined"

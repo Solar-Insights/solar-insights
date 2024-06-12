@@ -140,49 +140,45 @@
         "back-button": "Retourner sur mes pas"
     },
     "my-organization": {
-        "page-title-container": {
-            "description": "La seule et unique organisation associée à votre compte Solar Insights."
-        },
-        "help-subtitle-container": {
-            "subtitle": "Une question ou un problème concernant votre compte?",
-            "description": "Contactez un administrateur de votre organisation."
+        "help-section-container": {
+            "title": "Une question ou un problème concernant votre compte?",
+            "subtitle": "Contactez un administrateur de votre organisation."
         },
         "admin-component": {
-            "billing-recap-subtitle-container": {
-                "subtitle": "Sommaire de facturation"
+            "billing-recap-section-container": {
+                "title": "Sommaire de facturation",
+                "subtitle": ""
             },
-            "billing-recap": {
-
-            },
-            "user-table-subtitle-container": {
-                "subtitle": "Votre équipe (excepté vous-même)"
-            },
-            "user-table": {
-                "title": "Utilisateurs",
-                "actions": {
-                    "new-user": {
-                        "action-name": "Nouvel utilisateur",
-                        "title": "Créer un nouvel utilisateur",
-                        "user-info": "Info de l'utilisateur",
-                        "email": "Email*",
-                        "name": "Nom*",
-                        "create-new-user": "Créer l'utilisateur",
-                        "cancel": "Annuler"
+            "user-table-section-container": {
+                "title": "Votre équipe (excepté vous-même)",
+                "subtitle": "",
+                "user-table": {
+                    "title": "Utilisateurs",
+                    "actions": {
+                        "new-user": {
+                            "action-name": "Nouvel utilisateur",
+                            "title": "Créer un nouvel utilisateur",
+                            "user-info": "Info de l'utilisateur",
+                            "email": "Email*",
+                            "name": "Nom*",
+                            "create-new-user": "Créer l'utilisateur",
+                            "cancel": "Annuler"
+                        },
+                        "delete-user": {
+                            "title": "Souhaitez-vous vraiment supprimer cet utilisateur?",
+                            "confirm": "Confirmer",
+                            "cancel": "Annuler",
+                            "paragraph-1": "La suppression d'un utilisateur est irréversible. Toutes les opérations effectuées par celui-ci seront conservées et figureront sur votre rapport d'utilisation mensuel.",
+                            "paragraph-2": "Supprimer un utilisateur augmentera l'espace disponible de votre organisation.",
+                            "paragraph-3": "Cependant, la suppression n'a pas d'impact sur la quantité maximale d'utilisateur atteinte au courant du mois; un des facteurs de facturation."
+                        }
                     },
-                    "delete-user": {
-                        "title": "Souhaitez-vous vraiment supprimer cet utilisateur?",
-                        "confirm": "Confirmer",
-                        "cancel": "Annuler",
-                        "paragraph-1": "La suppression d'un utilisateur est irréversible. Toutes les opérations effectuées par celui-ci seront conservées et figureront sur votre rapport d'utilisation mensuel.",
-                        "paragraph-2": "Supprimer un utilisateur augmentera l'espace disponible de votre organisation.",
-                        "paragraph-3": "Cependant, la suppression n'a pas d'impact sur la quantité maximale d'utilisateur atteinte au courant du mois; un des facteurs de facturation."
+                    "column-titles": {
+                        "email": "Email",
+                        "name": "Nom",
+                        "creation-date": "Date de création",
+                        "actions": "Actions"
                     }
-                },
-                "column-titles": {
-                    "email": "Email",
-                    "name": "Nom",
-                    "creation-date": "Date de création",
-                    "actions": "Actions"
                 }
             }
         }

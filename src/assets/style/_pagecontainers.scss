@@ -71,6 +71,21 @@
 .page-section-container {
 }
 
+.page-section-title-container {
+    @extend .mb-5;
+}
+
+.page-section-title {
+    @extend .px-0;
+    @extend .text-h5;
+}
+
+.page-section-subtitle {
+    @extend .px-0; 
+    @extend .text-subtitle-1;
+    @extend .text-wrap;
+}
+
 .page-title-container {
     @extend .text-center;
     @extend .mx-auto;

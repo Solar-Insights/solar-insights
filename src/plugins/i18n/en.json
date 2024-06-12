@@ -140,50 +140,46 @@
         "back-button": "Go back"
     },
     "my-organization": {
-        "page-title-container": {
-            "description": "The one and only organization associated to your Solar Insights account."
-        },
-        "help-subtitle-container": {
-            "subtitle": "Any question or problem regarding your account?",
-            "description": "Contact one of your organization's administrator."
+        "help-section-container": {
+            "title": "Any question or problem regarding your account?",
+            "subtitle": "Contact one of your organization's administrator."
         },
         "admin-component": {
-            "billing-recap-subtitle-container": {
-                "subtitle": "Billing summary"
+            "billing-recap-section-container": {
+                "title": "Billing summary",
+                "subtitle": ""
             },
-            "billing-recap": {
-
-            },
-            "user-table-subtitle-container": {
-                "subtitle": "Your team (except yourself)"
-            },
-            "user-table": {
-                "title": "Users",
-                "actions": {
-                    "new-user": {
-                        "action-name": "New user",
-                        "title": "Create a new user",
-                        "user-info": "User info",
-                        "email": "Email*",
-                        "name": "Name*",
-                        "create-new-user": "Create user account",
-                        "cancel": "Cancel"
+            "user-table-section-container": {
+                "title": "Your team (except yourself)",
+                "subtitle": "",
+                "user-table": {
+                    "title": "Users",
+                    "actions": {
+                        "new-user": {
+                            "action-name": "New user",
+                            "title": "Create a new user",
+                            "user-info": "User info",
+                            "email": "Email*",
+                            "name": "Name*",
+                            "create-new-user": "Create user account",
+                            "cancel": "Cancel"
+                        },
+                        "delete-user": {
+                            "title": "Do you really want to delete this user?",
+                            "confirm": "Confirm",
+                            "cancel": "Cancel",
+                            "paragraph-1": "Deleting a user is irreversible. Every operation a user has made are kept and will appear in the monthly usage report.",
+                            "paragraph-2": "Also, the deletion of a user increases your organization's available space.",
+                            "paragraph-3": "However, the deletion has no impact on the maximum number of users reached throughout the month; a criteria of your billing."
+                        }
                     },
-                    "delete-user": {
-                        "title": "Do you really want to delete this user?",
-                        "confirm": "Confirm",
-                        "cancel": "Cancel",
-                        "paragraph-1": "Deleting a user is irreversible. Every operation a user has made are kept and will appear in the monthly usage report.",
-                        "paragraph-2": "Also, the deletion of a user increases your organization's available space.",
-                        "paragraph-3": "However, the deletion has no impact on the maximum number of users reached throughout the month; a criteria of your billing."
+                    "column-titles": {
+                        "email": "Email",
+                        "name": "Name",
+                        "creation-date": "Creation date",
+                        "actions": "Actions"
                     }
-                },
-                "column-titles": {
-                    "email": "Email",
-                    "name": "Name",
-                    "creation-date": "Creation date",
-                    "actions": "Actions"
-                }
+                } 
             }
         }
     },

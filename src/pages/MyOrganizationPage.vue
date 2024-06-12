@@ -1,39 +1,25 @@
 <template>
-    <PageContainer>
+    <PageContainer v-if="stringHasValue(myOrganization.name)">
         <PageSection>
-            <PageTitleContainer
-                :pageTitle="myOrganization.name"
-                :pageTitlePrecision="$t(`my-organization.page-title-container.description`)"
-            />
-
-            <!-- 
-                Was previously in page title, to check
-                <v-skeleton-loader v-if="myOrganization.name === ''" type="text"/>
-            -->
+            <PageTitleContainer :pageTitle="myOrganization.name"/>
         </PageSection>
 
-        <PageSection>
-            <PageSubtitleContainer
-                :pageSubtitle="$t(`my-organization.help-subtitle-container.subtitle`)"
-                :pageSubtitlePrecision="$t(`my-organization.help-subtitle-container.description`)"
-            >
-                <v-list class="d-flex justify-center flex-wrap">
-                    <v-list-item v-if="myOrganization.admins.length === 0" class="my-2 mx-auto" min-width="320px">
-                        <v-skeleton-loader type="avatar, sentences" />
-                    </v-list-item>
-
-                    <v-list-item
-                        v-for="admin in myOrganization.admins"
-                        class="my-2 mx-auto"
-                        :prepend-avatar="admin.avatar"
-                    >
-                        <v-list-item-title> {{ admin.name }}</v-list-item-title>
-                        <v-list-item-subtitle>
-                            <a :href="`mailto: ${admin.email}`"> {{ admin.email }} </a>
-                        </v-list-item-subtitle>
-                    </v-list-item>
-                </v-list>
-            </PageSubtitleContainer>
+        <PageSection
+            :pageSectionTitle="$t(`my-organization.help-section-container.title`)"
+            :pageSectionSubtitle="$t(`my-organization.help-section-container.subtitle`)"
+        >
+            <v-list class="d-flex flex-wrap">
+                <v-list-item
+                    v-for="admin in myOrganization.admins"
+                    class="my-2"
+                    :prepend-avatar="admin.avatar"
+                >
+                    <v-list-item-title> {{ admin.name }}</v-list-item-title>
+                    <v-list-item-subtitle>
+                        <a :href="`mailto: ${admin.email}`"> {{ admin.email }} </a>
+                    </v-list-item-subtitle>
+                </v-list-item>
+            </v-list>
         </PageSection>
 
         <AdminComponent v-if="isAdmin" />
@@ -47,9 +33,9 @@ import { MyOrganization } from "@/helpers/types";
 import { getMyOrganizationInfo } from "@/api/user";
 import { useAuth0 } from "@auth0/auth0-vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
-import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageContainer from "@/components/page_sections/PageContainer.vue";
+import { stringHasValue } from "@/helpers/componentConditionals";
 
 const { user } = useAuth0();
 

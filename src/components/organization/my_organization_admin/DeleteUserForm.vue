@@ -1,9 +1,9 @@
 <template>
     <FormDialog
-        :formTitle="$t(`my-organization.admin-component.user-table.actions.delete-user.title`)"
+        :formTitle="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.delete-user.title`)"
         formIcon="mdi-delete-outline"
-        :formCancelButton="$t(`my-organization.admin-component.user-table.actions.delete-user.cancel`)"
-        :formConfirmButton="$t(`my-organization.admin-component.user-table.actions.delete-user.confirm`)"
+        :formCancelButton="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.delete-user.cancel`)"
+        :formConfirmButton="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.delete-user.confirm`)"
         :formClose="closeForm"
         :formLoadingResponse="loadingResponse"
         @validateForm="deleteUser"
@@ -16,17 +16,17 @@
 
         <ParagraphContainer
             class="w-100"
-            :paragraphContent="$t(`my-organization.admin-component.user-table.actions.delete-user.paragraph-1`)"
+            :paragraphContent="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.delete-user.paragraph-1`)"
         />
 
         <ParagraphContainer
             class="w-100"
-            :paragraphContent="$t(`my-organization.admin-component.user-table.actions.delete-user.paragraph-2`)"
+            :paragraphContent="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.delete-user.paragraph-2`)"
         />
 
         <ParagraphContainer
             class="w-100"
-            :paragraphContent="$t(`my-organization.admin-component.user-table.actions.delete-user.paragraph-3`)"
+            :paragraphContent="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.delete-user.paragraph-3`)"
         />
     </FormDialog>
 </template>
