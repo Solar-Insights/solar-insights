@@ -1,7 +1,10 @@
 {
     "global": {
         "slogan": "Propulser l'adoption de l'énergie solaire ",
-        "yyyy-mm-dd": "AAAA-MM-JJ"
+        "yyyy-mm-dd": "AAAA-MM-JJ",
+        "starter": "Starter",
+        "pro": "Pro",
+        "enterprise":" Entreprise"
     },
     "navigation-sections": {
         "solar-insights": "Solar Insights",
@@ -149,6 +152,8 @@
             "billing-recap-section-container": {
                 "title": "Sommaire mensuel",
                 "subtitle": "Pour la période finissant le",
+                "pricing-plan": "Plan actuel: ",
+                "upgrade": "Améliorer",
                 "solar-requests-card": {
                     "title": "Requêtes d'analyse d'installation solaire",
                     "billable-items": {
@@ -197,7 +202,7 @@
                 }
             },
             "user-table-section-container": {
-                "title": "Votre équipe (excepté vous-même)",
+                "title": "Votre équipe",
                 "subtitle": "",
                 "user-table": {
                     "title": "Utilisateurs",

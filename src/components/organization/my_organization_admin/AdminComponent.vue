@@ -4,6 +4,26 @@
             :pageSectionTitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
             :pageSectionSubtitle="`${$t(`my-organization.admin-component.billing-recap-section-container.subtitle`)} ${new Date(myOrganizationBillingRecap!.billingDate).toISOString().substring(0, 10)} (${$t(`global.yyyy-mm-dd`)})`"
         >
+            <div class="my-10">
+                <div class="text-h6 my-1">
+                    {{ $t(`my-organization.admin-component.billing-recap-section-container.pricing-plan`) }}
+                    <span class="font-weight-black">
+                        {{ $t(`global.${myOrganizationBillingRecap.pricingTier}`) }}
+                    </span>
+                </div>
+                
+                <v-btn
+                    @click="$router.push({ name: `pricing` })"
+                    class="paragraph-action my-1"
+                    elevation="2"
+                    color="theme"
+                    append-icon="mdi-arrow-up-bold-outline"
+                >
+                    {{ $t(`my-organization.admin-component.billing-recap-section-container.upgrade`) }}
+                </v-btn>
+            </div>
+            
+
             <BillingRecap 
                 :billingRecap="myOrganizationBillingRecap"
                 :membersCount="myOrganizationMembers.length"
