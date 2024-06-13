@@ -15,7 +15,11 @@
         </template>
 
         <template v-slot:item.actions="{ item }">
-            <v-btn size="small" icon flat>
+            <v-btn 
+                :disabled="user?.email === item.email"
+                size="small" 
+                flat 
+            >
                 <v-icon>mdi-delete</v-icon>
 
                 <DeleteUserForm
@@ -31,9 +35,11 @@
 import { MyOrganizationMember } from "@/helpers/types";
 import { computed, PropType, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useAuth0 } from "@auth0/auth0-vue";
 import NewUserForm from "@/components/organization/my_organization_admin/NewUserForm.vue";
 import DeleteUserForm from "@/components/organization/my_organization_admin/DeleteUserForm.vue";
 
+const { user } = useAuth0();
 const t = useI18n().t;
 const UserDataHeaders = computed(() => [
     {
