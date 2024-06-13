@@ -1,73 +1,59 @@
 <template>
-    <v-row style="align-items: stretch !important">
-        <BillableCard :title="`Solar installation analysis requests`">
+    <v-row class="align-stretch">
+        <BillableCard :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.title`)">
             <BillableItem
-                :title="`Limit`"
-                :precision="`Maximum number of requests made every month`"
-                :value="maxRequestCount"
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-cost.title`)"
+                :precision="`${priceString(PRICE_PER_REQUEST, locale)} ${$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-cost.precision`)}`"
+                :value="priceString(requestsCost, locale)"
             />
             <BillableItem
-                :title="`Current count`"
-                :precision="`Resets monthly`"
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.billable-count.title`)"
+                :precision="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.billable-count.precision`)"
                 :value="billingRecap.building_insights_requests"
-            />
-            <v-progress-linear
-                class="mt-4 mb-6"
-                color="theme"
-                height="10"
-                :model-value="(billingRecap.building_insights_requests / billingRecap.max_building_insights_requests) * 100"
-                rounded="pill"
             />
 
             <v-divider class="my-2"/>
 
             <BillableItem
-                :title="`Billable count`"
-                :precision="`Number of requests billed at the end of the current month`"
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-count.title`)"
+                :precision="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-count.precision`)"
                 :value="billingRecap.building_insights_requests"
             />
             <BillableItem
-                :title="`Current cost`"
-                :precision="`x per request`"
-                :value="billingRecap.building_insights_requests * 0.15"
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.limit.title`)"
+                :precision="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.limit.precision`)"
+                :value="maxRequestCount"
             />
         </BillableCard>
 
-        <BillableCard :title="`Monthly members`">
+        <BillableCard :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.title`)">
             <BillableItem
-                :title="`Free available count`"
-                :precision="`Number of free users`"
-                :value="billingRecap.max_free_members_count"
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-cost.title`)"
+                :precision="`${priceString(PRICE_PER_ADDITIONAL_USER, locale)} ${$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-cost.precision`)}`"
+                :value="priceString(membersCost, locale)"
             />
             <BillableItem
-                :title="`Current count`"
-                :precision="`Resets monthly`"
-                :value="billingRecap.building_insights_requests"
-            />
-            <BillableItem
-                :title="`Highest count`"
-                :precision="`Most amount at any point during the month`"
-                :value="billingRecap.max_members_count"
-            />
-            <v-progress-linear
-                class="mt-4 mb-6"
-                color="theme"
-                height="10"
-                :model-value="(billingRecap.max_members_count / billingRecap.max_free_members_count) * 100"
-                rounded="pill"
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.billable-count.title`)"
+                :precision="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.billable-count.precision`)"
+                :value="billableMembersCount"
             />
 
             <v-divider class="my-2"/>
-            
+
             <BillableItem
-                :title="`Billable count`"
-                :precision="`Difference between highest and free available count`"
-                :value="billableMembersCount"
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-count.title`)"
+                :precision="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-count.precision`)"
+                :value="membersCount"
             />
             <BillableItem
-                :title="`Current cost`"
-                :precision="`x per additional member`"
-                :value="billableMembersCount * 5"
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.free-users.title`)"
+                :precision="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.free-users.precision`)"
+                :value="billingRecap.max_free_members_count"
+            />
+            <BillableItem
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.highest-count.title`)"
+                :precision="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.highest-count.precision`)"
+                :value="billingRecap.max_members_count"
             />
         </BillableCard>
     </v-row>
@@ -76,8 +62,29 @@
 <script setup lang="ts">
 import { MyOrganizationBillingRecap } from '@/helpers/types';
 import { computed, PropType } from 'vue';
+import { useUserSessionStore } from '@/stores/userSessionStore';
+import { storeToRefs } from 'pinia';
+import { priceString } from '@/helpers/util';
+import { PRICE_PER_REQUEST, PRICE_PER_ADDITIONAL_USER } from '@/helpers/pricingConstants';
 import BillableCard from '@/components/organization/my_organization_admin/billable_card/BillableCard.vue';
 import BillableItem from '@/components/organization/my_organization_admin/billable_card/BillableItem.vue';
+
+const props = defineProps({
+    billingRecap: {
+        type: Object as PropType<MyOrganizationBillingRecap>,
+        required: true
+    },
+    membersCount: {
+        type: Number,
+        required: true
+    }
+});
+
+const { locale } = storeToRefs(useUserSessionStore());
+
+const membersCost = computed(() => {
+    return PRICE_PER_ADDITIONAL_USER * billableMembersCount.value;
+})
 
 const billableMembersCount = computed(() => {
     if (props.billingRecap.max_free_members_count >= props.billingRecap.max_members_count) {
@@ -85,6 +92,10 @@ const billableMembersCount = computed(() => {
     }
 
     return props.billingRecap.max_members_count - props.billingRecap.max_free_members_count;
+})
+
+const requestsCost = computed(() => {
+    return PRICE_PER_REQUEST * props.billingRecap.building_insights_requests;
 })
 
 const maxRequestCount = computed(() => {
@@ -95,10 +106,5 @@ const maxRequestCount = computed(() => {
     return props.billingRecap.max_building_insights_requests;
 })
 
-const props = defineProps({
-    billingRecap: {
-        type: Object as PropType<MyOrganizationBillingRecap>,
-        required: true
-    }
-});
+
 </script>

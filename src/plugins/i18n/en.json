@@ -1,6 +1,7 @@
 {
     "global": {
-        "slogan": "Drive adoption of solar energy"
+        "slogan": "Drive adoption of solar energy",
+        "yyyy-mm-dd": "YYYY-MM-DD"
     },
     "navigation-sections": {
         "solar-insights": "Solar Insights",
@@ -147,7 +148,53 @@
         "admin-component": {
             "billing-recap-section-container": {
                 "title": "Monthly summary",
-                "subtitle": ""
+                "subtitle": "For the billing period ending on",
+                "solar-requests-card": {
+                    "title": "Solar installation analysis requests",
+                    "billable-items": {
+                        "limit": {
+                            "title": "Limit",
+                            "precision": "Maximum number of requests made every month"
+                        },
+                        "current-count": {
+                            "title": "Current count",
+                            "precision": "Resets monthly"
+                        },
+                        "billable-count": {
+                            "title": "Billable count",
+                            "precision": "Number of requests billed for the current month"
+                        },
+                        "current-cost": {
+                            "title": "Current cost",
+                            "precision": "/ request"
+                        }
+                    }
+                },
+                "users-card": {
+                    "title": "Users",
+                    "billable-items": {
+                        "free-users": {
+                            "title": "Free limit",
+                            "precision": "Maximum number of free users"
+                        },
+                        "current-count": {
+                            "title": "Current count",
+                            "precision": "Resets monthly"
+                        },
+                        "highest-count": {
+                            "title": "Highest count",
+                            "precision": "Highest count of users at any point during the month"
+                        },
+                        "billable-count": {
+                            "title": "Billable count",
+                            "precision": "Difference between highest and free available count"
+                        },
+                        "current-cost": {
+                            "title": "Current cost",
+                            "precision": "/ additional user"
+                        }
+                    }
+                }
             },
             "user-table-section-container": {
                 "title": "Your team (except yourself)",

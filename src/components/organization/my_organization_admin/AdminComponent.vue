@@ -1,23 +1,26 @@
 <template>
-    <PageSection
-        v-if="myOrganizationBillingRecap" 
-        :pageSectionTitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
-        :pageSectionSubtitle="`${$t(`my-organization.admin-component.billing-recap-section-container.subtitle`)} ${new Date(myOrganizationBillingRecap!.billingDate).toISOString().substring(0, 10)} (${$t(`global.yyyy-mm-dd`)})`"
-    >
-        <BillingRecap :billingRecap="myOrganizationBillingRecap"/>
-    </PageSection>
+    <div v-if="myOrganizationBillingRecap && myOrganizationMembers">
+        <PageSection
+            :pageSectionTitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
+            :pageSectionSubtitle="`${$t(`my-organization.admin-component.billing-recap-section-container.subtitle`)} ${new Date(myOrganizationBillingRecap!.billingDate).toISOString().substring(0, 10)} (${$t(`global.yyyy-mm-dd`)})`"
+        >
+            <BillingRecap 
+                :billingRecap="myOrganizationBillingRecap"
+                :membersCount="myOrganizationMembers.length"
+            />
+        </PageSection>
 
-    <PageSection
-        v-if="myOrganizationMembers"
-        :pageSectionTitle="$t(`my-organization.admin-component.user-table-section-container.title`)"
-        :pageSectionSubtitle="$t(`my-organization.admin-component.user-table-section-container.subtitle`)"
-    >
-        <UserTable 
-            :users="myOrganizationMembers" 
-            @addUser="addOrganizationMember" 
-            @deleteUser="deleteOrganizationMember" 
-        />
-    </PageSection>
+        <PageSection
+            :pageSectionTitle="$t(`my-organization.admin-component.user-table-section-container.title`)"
+            :pageSectionSubtitle="$t(`my-organization.admin-component.user-table-section-container.subtitle`)"
+        >
+            <UserTable 
+                :users="myOrganizationMembers" 
+                @addUser="addOrganizationMember" 
+                @deleteUser="deleteOrganizationMember" 
+            />
+        </PageSection>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -36,7 +39,6 @@ onMounted(async () => {
         .then((data: MyOrganizationAdminDetails) => {
             myOrganizationMembers.value = data.myOrganizationMembers;
             myOrganizationBillingRecap.value = data.myOrganizationBillingRecap;
-            console.log(myOrganizationBillingRecap.value)
         })
         .catch(() => {});
 });
