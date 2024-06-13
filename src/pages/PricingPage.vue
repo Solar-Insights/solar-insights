@@ -84,7 +84,7 @@ import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { priceString } from "@/helpers/util";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import { STARTER_MONTHLY_FIXED_PRICE, PRO_MONTHLY_FIXED_PRICE, ENTERPRISE_MONTHLY_FIXED_PRICE, STARTER_AVAILABLE_ORG_USERS, PRO_AVAILABLE_ORG_USERS, ENTERPRISE_AVAILABLE_ORG_USERS, PRO_ADDITIONAL_ORG_USER_COST, ENTERPRISE_ADDITIONAL_ORG_USER_COST, STARTER_MONTHLY_ANALYSIS_REQUESTS, PRO_MONTHLY_ANALYSIS_REQUESTS, PRICE_PER_REQUEST } from "@/helpers/pricingConstants";
+import { STARTER_MONTHLY_FIXED_PRICE, PRO_MONTHLY_FIXED_PRICE, ENTERPRISE_MONTHLY_FIXED_PRICE, STARTER_AVAILABLE_ORG_USERS, PRO_AVAILABLE_ORG_USERS, ENTERPRISE_AVAILABLE_ORG_USERS, STARTER_MONTHLY_ANALYSIS_REQUESTS, PRO_MONTHLY_ANALYSIS_REQUESTS, PRICE_PER_REQUEST, PRICE_PER_ADDITIONAL_USER } from "@/helpers/pricingConstants";
 
 const t = useI18n().t;
 const tm = useI18n().tm;
@@ -131,7 +131,7 @@ const pricingCards = computed(() => {
                 benefits: [
                     {
                         title: `${PRO_AVAILABLE_ORG_USERS} ${t(`pricing.pricing-cards.pro.benefits.users.title`)}`,
-                        description: `${t(`pricing.pricing-cards.enterprise.benefits.users.description`)} ${priceString(PRO_ADDITIONAL_ORG_USER_COST, userSessionStore.locale)} / ${t(`pricing.pricing-cards.additional-user`)}`
+                        description: `${t(`pricing.pricing-cards.enterprise.benefits.users.description`)} ${priceString(PRICE_PER_ADDITIONAL_USER, userSessionStore.locale)} / ${t(`pricing.pricing-cards.additional-user`)}`
                     },
                     {
                         title: `${PRO_MONTHLY_ANALYSIS_REQUESTS} ${t(`pricing.pricing-cards.pro.benefits.requests.title`)}`,
@@ -158,7 +158,7 @@ const pricingCards = computed(() => {
                 benefits: [
                     {
                         title: `${ENTERPRISE_AVAILABLE_ORG_USERS} ${t(`pricing.pricing-cards.enterprise.benefits.users.title`)}`,
-                        description: `${t(`pricing.pricing-cards.enterprise.benefits.users.description`)} ${priceString(ENTERPRISE_ADDITIONAL_ORG_USER_COST, userSessionStore.locale)} / ${t(`pricing.pricing-cards.additional-user`)}`
+                        description: `${t(`pricing.pricing-cards.enterprise.benefits.users.description`)} ${priceString(PRICE_PER_ADDITIONAL_USER, userSessionStore.locale)} / ${t(`pricing.pricing-cards.additional-user`)}`
                     },
                     {
                         title: t(`pricing.pricing-cards.enterprise.benefits.dedicated-servers.title`)
