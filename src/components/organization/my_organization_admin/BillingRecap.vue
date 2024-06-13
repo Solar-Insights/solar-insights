@@ -27,7 +27,7 @@
                 :value="billingRecap.building_insights_requests"
             />
             <BillableItem
-                :title="`Cost`"
+                :title="`Current cost`"
                 :precision="`x per request`"
                 :value="billingRecap.building_insights_requests * 0.15"
             />
@@ -65,7 +65,7 @@
                 :value="billableMembersCount"
             />
             <BillableItem
-                :title="`Cost`"
+                :title="`Current cost`"
                 :precision="`x per additional member`"
                 :value="billableMembersCount * 5"
             />
