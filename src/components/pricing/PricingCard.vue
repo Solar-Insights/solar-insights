@@ -4,6 +4,7 @@
             class="pricing-card"
             :class="theme === 'dark' ? 'dark-pricing-card' : 'light-pricing-card'"
             elevation="5"
+            border
         >
             <div class="pricing-card-title-section">
                 <div class="pricing-card-name">{{ props.pricingCardDetails.name }}</div>
