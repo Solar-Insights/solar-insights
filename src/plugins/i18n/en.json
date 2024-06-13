@@ -146,7 +146,7 @@
         },
         "admin-component": {
             "billing-recap-section-container": {
-                "title": "Billing summary",
+                "title": "Monthly summary",
                 "subtitle": ""
             },
             "user-table-section-container": {
