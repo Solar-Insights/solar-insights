@@ -60,7 +60,9 @@ function fallbackClipboardExecCommand(textToCopy: string) {
     document.body.removeChild(textArea);
 }
 
-export function priceString(amount: number | string, locale: Locale) {
-    if (locale === "fr") return `${amount}$`;
-    return `$${amount}`;
+export function priceString(amount: number | string, locale: Locale, rounded: boolean = true) {
+    const parsedVal = rounded ? Number(amount).toFixed(2) : Number(amount);
+
+    if (locale === "fr") return `${parsedVal}$`;
+    return `$${parsedVal}`;
 }
