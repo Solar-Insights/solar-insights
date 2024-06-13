@@ -347,3 +347,29 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
     max-height: 40px !important;
     min-height: 40px !important;
 }
+
+.billable-card {}
+
+.billable-card-container {
+    @extend .pa-6;
+}
+
+.billable-card-title {
+    @extend .text-h5; 
+    @extend .mb-6; 
+    @extend .font-weight-black;
+}
+
+.billable-item-container {
+    @extend .text-h6; 
+    @extend .my-0;
+    @extend .py-1;
+}
+
+.billable-item-title {
+    @extend .py-0;
+}
+
+.billable-item-value {
+    @extend .py-0;
+}
