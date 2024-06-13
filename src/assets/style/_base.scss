@@ -348,7 +348,9 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
     min-height: 40px !important;
 }
 
-.billable-card {}
+.billable-card {
+    @extend .h-100;
+}
 
 .billable-card-container {
     @extend .pa-6;

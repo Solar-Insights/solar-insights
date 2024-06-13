@@ -1,5 +1,5 @@
 <template>
-    <v-row>
+    <v-row style="align-items: stretch !important">
         <BillableCard :title="`Solar installation analysis requests`">
             <BillableItem
                 :title="`Limit`"
