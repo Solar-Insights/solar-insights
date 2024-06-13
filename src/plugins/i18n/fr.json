@@ -214,7 +214,10 @@
                             "email": "Email*",
                             "name": "Nom*",
                             "create-new-user": "Créer l'utilisateur",
-                            "cancel": "Annuler"
+                            "cancel": "Annuler",
+                            "paragraph-1": "L'ajout d'un utilisateur peut affecter votre facturation de la période courante. Le nombre d'utilisateurs gratuits figure dans votre Sommaire mensuel.",
+                            "paragraph-2": "Rappelez-vous que le nombre d'utilisateurs facturables provient de la différence entre le plus haut nombre d'utilisateurs au courant du mois et la limite gratuite.",
+                            "paragraph-3": "En ce moment: "
                         },
                         "delete-user": {
                             "title": "Souhaitez-vous vraiment supprimer cet utilisateur?",

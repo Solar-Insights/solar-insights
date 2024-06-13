@@ -214,7 +214,10 @@
                             "email": "Email*",
                             "name": "Name*",
                             "create-new-user": "Create user account",
-                            "cancel": "Cancel"
+                            "cancel": "Cancel",
+                            "paragraph-1": "Adding a user can impact your billing for the current month. The number of free users you have access to appears on your Monthly summary.",
+                            "paragraph-2": "Remember: the number of users billed is obtained by substracting the highest count of users during the month and your free limit.",
+                            "paragraph-3": "Currently: "
                         },
                         "delete-user": {
                             "title": "Do you really want to delete this user?",
