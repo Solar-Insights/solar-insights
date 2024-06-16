@@ -8,7 +8,7 @@
                 </div>
             </v-card-title>
 
-            <v-card-text>
+            <v-card-text class="form-dialog-content">
                 <slot></slot>
             </v-card-text>
 

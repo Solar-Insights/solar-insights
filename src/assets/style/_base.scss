@@ -14,6 +14,9 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
     .pricing-card {
         margin: 3vw 0 3vw 0;
     }
+    .form-dialog-content {
+        padding: 16px 10px 10px !important;
+    }
 }
 
 /*
@@ -22,6 +25,9 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
 @media screen and (min-width: 600px) {
     .pricing-card {
         margin: 1vw;
+    }
+    .form-dialog-content {
+        padding: 16px 24px 10px !important;
     }
 }
 
@@ -363,3 +369,5 @@ $light-surface-darker-1: rgba(221, 221, 221, 1);
 .billable-item-value {
     @extend .py-0;
 }
+
+.form-dialog-content {}
