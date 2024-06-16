@@ -82,7 +82,7 @@
                 "title": "Could not sync organization data"
             },
             "organization-user-creation": {
-                "title": "Could not add user to organization"
+                "title": "Could not add user to organization (error, or user already existing)"
             },
             "organization-user-creation-quota": {
                 "title": "User limit reached. Increase it manually, or upgrade your pricing plan by emailing us."

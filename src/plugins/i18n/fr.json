@@ -82,7 +82,7 @@
                 "title": "Impossible de synchroniser les informations de l'organisation"
             },
             "organization-user-creation": {
-                "title": "Impossible d'ajouter l'utilisateur à l'organisation"
+                "title": "Impossible d'ajouter l'utilisateur à l'organisation (erreur, ou utilisateur déjà existant)"
             },
             "organization-user-deletion": {
                 "title": "Impossible de retirer l'utilisateur de l'organisation"
