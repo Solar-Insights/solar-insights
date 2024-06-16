@@ -9,7 +9,7 @@
                 <v-btn class="mb-2 font-weight-bold" color="theme">
                     {{ $t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.action-name`) }}
 
-                    <NewUserForm @formWasSent="userCreated"/>
+                    <NewUserForm :userCountSummary="userCountSummary" @formWasSent="userCreated"/>
                 </v-btn>
             </v-toolbar>
         </template>
@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { MyOrganizationMember } from "@/helpers/types";
+import { MyOrganizationMember, UserCountSummary } from "@/helpers/types";
 import { computed, PropType, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useAuth0 } from "@auth0/auth0-vue";
@@ -68,6 +68,10 @@ const UserDataHeaders = computed(() => [
 const props = defineProps({
     users: {
         type: Object as PropType<MyOrganizationMember[]>,
+        required: true
+    },
+    userCountSummary: {
+        type: Object as PropType<UserCountSummary | undefined>,
         required: true
     }
 });

@@ -217,7 +217,11 @@
                             "cancel": "Annuler",
                             "paragraph-1": "L'ajout d'un utilisateur peut affecter votre facturation de la période courante. Le nombre d'utilisateurs gratuits figure dans votre Sommaire mensuel.",
                             "paragraph-2": "Rappelez-vous que le nombre d'utilisateurs facturables provient de la différence entre le plus haut nombre d'utilisateurs au courant du mois et la limite gratuite.",
-                            "paragraph-3": "En ce moment: "
+                            "paragraph-3": "En ce moment: ",
+                            "paragraph-4-success": "Vous n'avez pas atteint la limite gratuite. Vous pouvez ajouter un utilisateur sans frais supplémentaire à la fin de la période de facturation courante.",
+                            "paragraph-4-warning": "Vous avec atteint ou dépassé la limite gratuite, mais ajouter un utilisateur n'entraînera pas de frais supplémentaire à la fin de la période de facturation courante.",
+                            "paragraph-4-error": "Vous avez atteint ou dépassé la limite gratuite, et ajouter un utilisateur entraînera des frais supplémentaires à la fin de la période de facturation courante.",
+                            "paragraph-4-no-data": "Impossible d'obtenir de l'information sur vos quotas. Pour plus d'informations, visitez votre Sommaire mensuel."
                         },
                         "delete-user": {
                             "title": "Souhaitez-vous vraiment supprimer cet utilisateur?",

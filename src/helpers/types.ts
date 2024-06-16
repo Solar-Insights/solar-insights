@@ -157,3 +157,8 @@ export type MyOrganizationAdminDetails = {
     myOrganizationMembers: MyOrganizationMember[];
     myOrganizationBillingRecap: MyOrganizationBillingRecap
 };
+
+export type UserCountSummary = {
+    belowFreeLimit: boolean,
+    atHighestCount: boolean
+};

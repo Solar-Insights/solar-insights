@@ -35,7 +35,8 @@
             :pageSectionSubtitle="$t(`my-organization.admin-component.user-table-section-container.subtitle`)"
         >
             <UserTable 
-                :users="myOrganizationMembers" 
+                :users="myOrganizationMembers"
+                :userCountSummary="userCountSummary"
                 @addUser="addOrganizationMember" 
                 @deleteUser="deleteOrganizationMember" 
             />
@@ -44,8 +45,8 @@
 </template>
 
 <script setup lang="ts">
-import { MyOrganizationMember, MyOrganizationAdminDetails, MyOrganizationBillingRecap } from "@/helpers/types";
-import { onMounted, ref } from "vue";
+import { MyOrganizationMember, MyOrganizationAdminDetails, MyOrganizationBillingRecap, UserCountSummary } from "@/helpers/types";
+import { computed, onMounted, ref } from "vue";
 import UserTable from "@/components/organization/my_organization_admin/UserTable.vue";
 import BillingRecap from "@/components/organization/my_organization_admin//BillingRecap.vue";
 import PageSection from "@/components/page_sections/PageSection.vue";
@@ -76,4 +77,15 @@ function deleteOrganizationMember(user: MyOrganizationMember) {
 
     myOrganizationMembers.value!.splice(indexToRemove, 1);
 }
+
+const userCountSummary = computed(() => {
+    if (!myOrganizationBillingRecap.value || !myOrganizationMembers.value) return;
+
+    const userCountSummary: UserCountSummary = {
+        belowFreeLimit: myOrganizationMembers.value.length < myOrganizationBillingRecap.value.max_free_members_count,
+        atHighestCount: myOrganizationMembers.value.length === myOrganizationBillingRecap.value.max_members_count
+    }
+
+    return userCountSummary;
+});
 </script>

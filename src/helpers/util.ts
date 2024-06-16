@@ -1,4 +1,4 @@
-import { Locale } from "@/helpers/types";
+import { Locale, UserCountSummary } from "@/helpers/types";
 
 export function strToLargeNumberDisplay(input: string | number): String {
     let inputStr: string = input.toString().trim();
@@ -65,4 +65,10 @@ export function priceString(amount: number | string, locale: Locale, rounded: bo
 
     if (locale === "fr") return `${parsedVal}$`;
     return `$${parsedVal}`;
+}
+
+export function userCountSummaryToAlertType(summary: UserCountSummary) {
+    if (summary.belowFreeLimit) return "success";
+    else if (summary.atHighestCount) return "error";
+    else return "warning";
 }
