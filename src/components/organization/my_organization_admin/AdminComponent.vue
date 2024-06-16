@@ -1,6 +1,18 @@
 <template>
     <div v-if="myOrganizationBillingRecap && myOrganizationMembers">
         <PageSection
+            :pageSectionTitle="$t(`my-organization.admin-component.user-table-section-container.title`)"
+            :pageSectionSubtitle="$t(`my-organization.admin-component.user-table-section-container.subtitle`)"
+        >
+            <UserTable 
+                :users="myOrganizationMembers"
+                :userCountSummary="userCountSummary"
+                @addUser="addOrganizationMember" 
+                @deleteUser="deleteOrganizationMember" 
+            />
+        </PageSection>
+        
+        <PageSection
             :pageSectionTitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
             :pageSectionSubtitle="`${$t(`my-organization.admin-component.billing-recap-section-container.subtitle`)} ${new Date(myOrganizationBillingRecap!.billingDate).toISOString().substring(0, 10)} (${$t(`global.yyyy-mm-dd`)})`"
         >
@@ -27,18 +39,6 @@
             <BillingRecap 
                 :billingRecap="myOrganizationBillingRecap"
                 :membersCount="myOrganizationMembers.length"
-            />
-        </PageSection>
-
-        <PageSection
-            :pageSectionTitle="$t(`my-organization.admin-component.user-table-section-container.title`)"
-            :pageSectionSubtitle="$t(`my-organization.admin-component.user-table-section-container.subtitle`)"
-        >
-            <UserTable 
-                :users="myOrganizationMembers"
-                :userCountSummary="userCountSummary"
-                @addUser="addOrganizationMember" 
-                @deleteUser="deleteOrganizationMember" 
             />
         </PageSection>
     </div>
