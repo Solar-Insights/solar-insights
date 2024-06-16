@@ -474,26 +474,19 @@
                 "content-1": "Utilisez le champ de texte ci-dessus pour localiser un bâtiment. Vous allez être redirigé vers la carte pour commencer à créer une installation solaire."
             },
             "step-2": {
-                "title": "Obtenez un aperçu d'une installation solaire",
-                "content-1": "Une fois redirigé, observer le panneau Aperçus solaires. Il présente des informations critiques sur l'installation solaire du bâtiment. Par défaut, l'installation solaire est optimisé pour maximiser l'épargne solaire."
+                "title": "Obtenez un aperçu de l'installation solaire",
+                "content-1": "Observez les données visuelles et financières relatives à votre installation solaire. Par défaut, l'installation solaire est optimisé pour maximiser l'épargne solaire."
             },
             "step-3": {
-                "title": "Personnaliser une installation solaire",
-                "content-1": "Deux sections permettent la personnalisation de l'installation et des paramètres de l'analyse financière. Faites des ajustements à cette section pour mieux représenter votre situation personnelle.",
-                "content-2": "La section Panneaux contient des paramètres la puissance la perte annuelle d'efficacité des panneaux. Ils ont été remplis avec des valeurs provenant de standards de l'industrie solaire.",
-                "content-3": "La section Coûts et subventions emploie des données financières issuent du ménage canadien moyen."
+                "title": "Personnaliser l'installation solaire",
+                "content-1": "Modifiez votre installation solaire et la carte à partir des différentes sections de l'interface.",
+                "content-2": "Les sections « Panneaux » et « Coûts et subventions » contiennent des paramètres ajustables manuellement, et permettant de personnaliser l'installation à votre réalité.",
+                "content-3": "La section « Optimisations » permet de trouver la quantité de panneaux optimale répondant à un critère particulier.",
+                "content-4": "La section « Paramètres » permet de modifier l'affichage de l'installation et des données solaires sur la carte."
             },
             "step-4": {
-                "title": "Optimiser une installation solaire",
-                "content-1": "La section Optimisations vise les utilisateurs souhaitant optimiser une installation solaire en fonction d'un critère particulier. Sélectionner le critère que vous préférez, et observez les changements!"
-            },
-            "step-5": {
-                "title": "Ajuster le style de la carte",
-                "content-1": "La section Paramètres permet d'activer / désactiver la visibilité de certains éléments de la carte comme les panneaux. Aussi, vous pouvez utiliser le menu déroulant pour visualiser des patterns solaires mensuels ou quotidiens."
-            },
-            "step-6": {
-                "title": "Partager et sauvegarder des données",
-                "content-1": "Utilisez la barre de tâche pour envoyer des données à un collègue, les sauvegarder sur votre appareil, et bien plus."
+                "title": "Partager et sauvegarder les données de l'installation solaire",
+                "content-1": "Utilisez la barre de tâche pour envoyer des données à un membre de votre organisation, sauvegarder ces données sur votre appareil, et bien plus."
             }
         }
     },
