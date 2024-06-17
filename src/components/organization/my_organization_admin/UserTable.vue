@@ -9,7 +9,7 @@
                 <v-btn class="mb-2 font-weight-bold" color="theme">
                     {{ $t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.action-name`) }}
 
-                    <NewUserForm :userCountSummary="userCountSummary" @formWasSent="userCreated"/>
+                    <NewUserForm :aboveFreeLimit="aboveFreeLimit" @formWasSent="userCreated"/>
                 </v-btn>
             </v-toolbar>
         </template>
@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { MyOrganizationMember, UserCountSummary } from "@/helpers/types";
+import { MyOrganizationMember } from "@/helpers/types";
 import { computed, PropType, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useAuth0 } from "@auth0/auth0-vue";
@@ -70,8 +70,8 @@ const props = defineProps({
         type: Object as PropType<MyOrganizationMember[]>,
         required: true
     },
-    userCountSummary: {
-        type: Object as PropType<UserCountSummary | undefined>,
+    aboveFreeLimit: {
+        type: Boolean,
         required: true
     }
 });

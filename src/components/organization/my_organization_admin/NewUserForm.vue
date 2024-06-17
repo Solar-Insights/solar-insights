@@ -62,15 +62,8 @@
                 class="w-100"
                 :paragraphContent="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.paragraph-3`)"
             >
-                <div 
-                    v-if="objectHasValue(userCountSummary)"
-                    :class="`text-${userQuotaAlert}`"
-                >
+                <div :class="`text-${userQuotaAlert}`">
                     {{ $t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.paragraph-4-${userQuotaAlert}`) }}
-                </div>
-
-                <div v-else>
-                    {{ $t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.paragraph-4-no-data`) }}
                 </div>
             </ParagraphContainer>
         </FormDialogSection>
@@ -78,8 +71,8 @@
 </template>
 
 <script setup lang="ts">
-import { MyOrganizationMember, NewOrganizationUserForm, UserCountSummary } from "@/helpers/types";
-import { computed, PropType, ref } from "vue";
+import { MyOrganizationMember, NewOrganizationUserForm } from "@/helpers/types";
+import { computed, ref } from "vue";
 import useVuelidate from "@vuelidate/core";
 import FormDialog from "@/components/page_sections/FormDialog.vue";
 import FormDialogSection from "@/components/page_sections/FormDialogSection.vue";
@@ -89,22 +82,18 @@ import { newOrganizationUserFormValidators } from "@/helpers/form_validation/cre
 import { EMAIL_MAX_LENGTH, NAME_MAX_LENGTH } from "@/helpers/form_validation/constants";
 import { createValidationMessages } from "@/helpers/form_validation/genericValidators";
 import { createUserForOrganization } from "@/api/user";
-import { objectHasValue } from "@/helpers/componentConditionals";
 import { userCountSummaryToAlertType } from "@/helpers/util";
 
 const props = defineProps({
-    userCountSummary: {
-        type: Object as PropType<UserCountSummary | undefined>,
+    aboveFreeLimit: {
+        type: Boolean,
         required: true
     }
 })
 
 const emits = defineEmits(["formWasSent"]);
 
-const userQuotaAlert = computed(() => {
-    if (!props.userCountSummary) return;
-    return userCountSummaryToAlertType(props.userCountSummary)
-});
+const userQuotaAlert = computed(() => userCountSummaryToAlertType(props.aboveFreeLimit));
 const closeForm = ref<boolean>(false);
 const loadingResponse = ref<boolean>(false);
 

@@ -132,14 +132,11 @@ export type PageTitleActionType = {
     icon: string;
 };
 
-export type MonthlyQuotaField = "max_free_members_count" | "max_building_insights_requests";
+export type MonthlyFreeField = "max_free_members_count" | "max_free_building_insights_requests";
 
-export type MonthlyBillingField = "max_members_count" | "building_insights_requests";
+export type MonthlyQuotaField = "max_members_count" | "max_building_insights_requests";
 
-export type MyOrganizationDetails = {
-    admins: MyOrganizationMember[];
-    name: string;
-};
+export type MonthlyBillingField = "members_count" | "building_insights_requests";
 
 export type MyOrganizationBillingRecap = 
     { 
@@ -148,17 +145,20 @@ export type MyOrganizationBillingRecap =
     {
         [key in MonthlyQuotaField]: number
     } &
+    {
+        [key in MonthlyFreeField]: number
+    } &
     { 
         pricingTier: PricingTier,
         billingDate: string
     };
 
+export type MyOrganizationDetails = {
+    admins: MyOrganizationMember[];
+    name: string;
+};
+
 export type MyOrganizationAdminDetails = {
     myOrganizationMembers: MyOrganizationMember[];
     myOrganizationBillingRecap: MyOrganizationBillingRecap
-};
-
-export type UserCountSummary = {
-    belowFreeLimit: boolean,
-    atHighestCount: boolean
 };

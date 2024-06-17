@@ -1,4 +1,4 @@
-import { Locale, UserCountSummary } from "@/helpers/types";
+import { Locale } from "@/helpers/types";
 
 export function strToLargeNumberDisplay(input: string | number): String {
     let inputStr: string = input.toString().trim();
@@ -67,8 +67,7 @@ export function priceString(amount: number | string, locale: Locale, rounded: bo
     return `$${parsedVal}`;
 }
 
-export function userCountSummaryToAlertType(summary: UserCountSummary) {
-    if (summary.belowFreeLimit) return "success";
-    else if (summary.atHighestCount) return "error";
-    else return "warning";
+export function userCountSummaryToAlertType(aboveFreeLimit: boolean) {
+    if (aboveFreeLimit) return "warning";
+    else return "success";
 }

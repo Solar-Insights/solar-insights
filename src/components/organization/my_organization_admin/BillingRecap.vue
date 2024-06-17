@@ -43,12 +43,12 @@
             <BillableItem
                 :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-count.title`)"
                 :precision="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-count.precision`)"
-                :value="membersCount"
+                :value="billingRecap.members_count"
             />
             <BillableItem
                 :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.free-users.title`)"
                 :precision="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.free-users.precision`)"
-                :value="billingRecap.max_free_members_count"
+                :value="billingRecap.max_members_count"
             />
             <BillableItem
                 :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.highest-count.title`)"
@@ -72,10 +72,6 @@ import BillableItem from '@/components/organization/my_organization_admin/billab
 const props = defineProps({
     billingRecap: {
         type: Object as PropType<MyOrganizationBillingRecap>,
-        required: true
-    },
-    membersCount: {
-        type: Number,
         required: true
     }
 });
