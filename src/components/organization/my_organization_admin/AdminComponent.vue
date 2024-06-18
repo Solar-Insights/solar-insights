@@ -35,10 +35,7 @@
             </div>
             
 
-            <BillingRecap 
-                :billingRecap="myOrganizationBillingRecap"
-                :aboveFreeLimit="myOrganizationBillingRecap.max_members_count > myOrganizationBillingRecap.max_free_members_count"
-            />
+            <BillingRecap :billingRecap="myOrganizationBillingRecap"/>
         </PageSection>
     </div>
 </template>

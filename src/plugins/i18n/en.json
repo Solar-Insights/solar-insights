@@ -173,6 +173,11 @@
                             "title": "Current cost",
                             "precision": "/ request"
                         }
+                    },
+                    "requests-quota": {
+                        "paragraph-success": "You have made less than half of the monthly requests available in your plan.",
+                        "paragraph-warning": "You have made at least half of the monthly requests available in your plan.",
+                        "paragraph-error": "You have made all the monthly requests available in your plan."
                     }
                 },
                 "users-card": {

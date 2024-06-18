@@ -173,6 +173,11 @@
                             "title": "Coût actuel",
                             "precision": "/ requête"
                         }
+                    },
+                    "requests-quota": {
+                        "paragraph-success": "Vous avez effectué moins de la moitié des requêtes mensuelles disponibles dans votre plan.",
+                        "paragraph-warning": "Vous avez effectué au moins la moitié des requêtes mensuelles disponibles dans votre plan.",
+                        "paragraph-error": "Vous avez effectué tous les requêtes mensuelles disponibles dans votre plan."
                     }
                 },
                 "users-card": {

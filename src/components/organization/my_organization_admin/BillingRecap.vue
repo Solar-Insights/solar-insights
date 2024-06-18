@@ -24,6 +24,14 @@
                 :precision="`${priceString(PRICE_PER_REQUEST, locale)} ${$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-cost.precision`)}`"
                 :value="priceString(requestsCost, locale)"
             />
+            <ParagraphContainer
+                class="w-100"
+                :paragraphContent="``"
+            >
+                <div :class="`text-${requestQuota}`">
+                    {{ $t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.requests-quota.paragraph-${requestQuota}`) }}
+                </div>
+            </ParagraphContainer>
         </BillableCard>
 
         <BillableCard :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.title`)">
@@ -50,13 +58,12 @@
                 :precision="`${priceString(PRICE_PER_ADDITIONAL_USER, locale)} ${$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-cost.precision`)}`"
                 :value="priceString(membersCost, locale)"
             />
-
             <ParagraphContainer
                 class="w-100"
                 :paragraphContent="``"
             >
-                <div :class="`text-${userQuotaType}`">
-                    {{ $t(`my-organization.admin-component.billing-recap-section-container.users-card.user-quota.paragraph-${userQuotaType}`) }}
+                <div :class="`text-${userQuota}`">
+                    {{ $t(`my-organization.admin-component.billing-recap-section-container.users-card.user-quota.paragraph-${userQuota}`) }}
                 </div>
             </ParagraphContainer>
         </BillableCard>
@@ -77,10 +84,6 @@ import ParagraphContainer from '@/components/page_sections/ParagraphContainer.vu
 const props = defineProps({
     billingRecap: {
         type: Object as PropType<MyOrganizationBillingRecap>,
-        required: true
-    },
-    aboveFreeLimit: {
-        type: Boolean,
         required: true
     }
 });
@@ -103,8 +106,17 @@ const billableMembersCount = computed(() => {
     return props.billingRecap.max_members_count - props.billingRecap.max_free_members_count;
 })
 
-const userQuotaType = computed(() => {
-    if (props.aboveFreeLimit) return "warning";
+const requestQuota = computed(() => {
+    const belowHalf = props.billingRecap.building_insights_requests < props.billingRecap.max_building_insights_requests / 2;
+    const atOrAboveLimit = props.billingRecap.building_insights_requests >= props.billingRecap.max_building_insights_requests
+    if (belowHalf) return "success";
+    else if (atOrAboveLimit) return "error";
+    else return "warning";
+});
+
+const userQuota = computed(() => {
+    const aboveFreeLimit: boolean = props.billingRecap.max_members_count > props.billingRecap.max_free_members_count;
+    if (aboveFreeLimit) return "warning";
     else return "success";
 })
 </script>
