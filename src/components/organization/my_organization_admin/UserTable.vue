@@ -69,10 +69,6 @@ const props = defineProps({
     users: {
         type: Object as PropType<MyOrganizationMember[]>,
         required: true
-    },
-    aboveFreeLimit: {
-        type: Boolean,
-        required: true
     }
 });
 

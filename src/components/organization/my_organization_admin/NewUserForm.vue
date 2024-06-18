@@ -47,6 +47,16 @@
                     required
                 />
             </FormField>
+
+            <ParagraphContainer
+                class="w-100"
+                :paragraphContent="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.paragraph-1`)"
+            />
+
+            <ParagraphContainer
+                class="w-100"
+                :paragraphContent="$t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.paragraph-2`)"
+            />
         </FormDialogSection>
     </FormDialog>
 </template>
@@ -58,6 +68,7 @@ import useVuelidate from "@vuelidate/core";
 import FormDialog from "@/components/page_sections/FormDialog.vue";
 import FormDialogSection from "@/components/page_sections/FormDialogSection.vue";
 import FormField from "@/components/page_sections/FormField.vue";
+import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
 import { newOrganizationUserFormValidators } from "@/helpers/form_validation/createOrganizationUserFormValidators";
 import { EMAIL_MAX_LENGTH, NAME_MAX_LENGTH } from "@/helpers/form_validation/constants";
 import { createValidationMessages } from "@/helpers/form_validation/genericValidators";

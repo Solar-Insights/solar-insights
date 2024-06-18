@@ -194,6 +194,10 @@
                             "title": "Current cost",
                             "precision": "/ additional user"
                         }
+                    },
+                    "user-quota": {
+                        "paragraph-success": "Your user limit is below or equal to the number of users included in your plan.",
+                        "paragraph-warning": "Your user limit is exceeding the number of users included in your plan."
                     }
                 }
             },
@@ -211,13 +215,8 @@
                             "name": "Name*",
                             "create-new-user": "Create user account",
                             "cancel": "Cancel",
-                            "paragraph-1": "Adding a user can impact your billing for the current month. The number of free users you have access to appears on your Monthly summary.",
-                            "paragraph-2": "Remember: the number of users billed is obtained by substracting the highest count of users during the month and your free limit.",
-                            "paragraph-3": "Currently: ",
-                            "paragraph-4-success": "You have not reached the free limit. Adding a user will not incur a charge at the end of the current billing period.",
-                            "paragraph-4-warning": "You have reached or exceeded the free limit, but adding a user will not incur a charge at the end of ths current billing period.",
-                            "paragraph-4-error": "You have reached or exceeded the free limit, and adding a user will incur a charge at the end of ths current billing period.",
-                            "paragraph-4-no-data": "Could not get information on your quotas. Check out your Monthly summary for more info."
+                            "paragraph-1": "Adding a user will send a password reset email to the new member.",
+                            "paragraph-2": "Remember: you will be billed for users only when your limit of users exceeds the number of users included in your plan."
                         },
                         "delete-user": {
                             "title": "Do you really want to delete this user?",

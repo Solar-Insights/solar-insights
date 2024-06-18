@@ -50,6 +50,15 @@
                 :precision="`${priceString(PRICE_PER_ADDITIONAL_USER, locale)} ${$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-cost.precision`)}`"
                 :value="priceString(membersCost, locale)"
             />
+
+            <ParagraphContainer
+                class="w-100"
+                :paragraphContent="``"
+            >
+                <div :class="`text-${userQuotaType}`">
+                    {{ $t(`my-organization.admin-component.billing-recap-section-container.users-card.user-quota.paragraph-${userQuotaType}`) }}
+                </div>
+            </ParagraphContainer>
         </BillableCard>
     </v-row>
 </template>
@@ -63,10 +72,15 @@ import { priceString, dbNumberToDisplayableNumber } from '@/helpers/util';
 import { PRICE_PER_REQUEST, PRICE_PER_ADDITIONAL_USER } from '@/helpers/pricingConstants';
 import BillableCard from '@/components/organization/my_organization_admin/billable_card/BillableCard.vue';
 import BillableItem from '@/components/organization/my_organization_admin/billable_card/BillableItem.vue';
+import ParagraphContainer from '@/components/page_sections/ParagraphContainer.vue';
 
 const props = defineProps({
     billingRecap: {
         type: Object as PropType<MyOrganizationBillingRecap>,
+        required: true
+    },
+    aboveFreeLimit: {
+        type: Boolean,
         required: true
     }
 });
@@ -89,4 +103,8 @@ const billableMembersCount = computed(() => {
     return props.billingRecap.max_members_count - props.billingRecap.max_free_members_count;
 })
 
+const userQuotaType = computed(() => {
+    if (props.aboveFreeLimit) return "warning";
+    else return "success";
+})
 </script>
