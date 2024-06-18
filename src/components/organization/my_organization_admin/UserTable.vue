@@ -9,7 +9,7 @@
                 <v-btn class="mb-2 font-weight-bold" color="theme">
                     {{ $t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.action-name`) }}
 
-                    <NewUserForm :aboveFreeLimit="aboveFreeLimit" @formWasSent="userCreated"/>
+                    <NewUserForm @formWasSent="userCreated"/>
                 </v-btn>
             </v-toolbar>
         </template>
