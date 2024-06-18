@@ -167,7 +167,7 @@
                         },
                         "billable-count": {
                             "title": "Nombre facturable",
-                            "precision": "Différence entre la limite et la quantité incluse dans votre plan"
+                            "precision": "Différence entre le nombre actuel et la quantité incluse dans votre plan"
                         },
                         "current-cost": {
                             "title": "Coût actuel",

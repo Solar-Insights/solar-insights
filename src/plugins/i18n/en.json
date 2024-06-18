@@ -167,7 +167,7 @@
                         },
                         "billable-count": {
                             "title": "Billable count",
-                            "precision": "Difference between the limit and the quantity included in your plan"
+                            "precision": "Difference between the current count and the quantity included in your plan"
                         },
                         "current-cost": {
                             "title": "Current cost",
