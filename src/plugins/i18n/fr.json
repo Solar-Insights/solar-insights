@@ -88,7 +88,7 @@
                 "title": "Impossible de retirer l'utilisateur de l'organisation"
             },
             "organization-user-creation-quota": {
-                "title": "Limite d'utilisateur(s) atteinte. Augmentez-la manuellement, ou améliorer votre plan de tarification en nous envoyant un courriel."
+                "title": "Limite d'utilisateur(s) atteinte. Augmentez-la ou améliorer votre plan de tarification en nous envoyant un courriel."
             },
             "user": {
                 "title": "Impossible de synchroniser les données du profil"

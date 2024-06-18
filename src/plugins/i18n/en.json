@@ -85,7 +85,7 @@
                 "title": "Could not add user to organization (error, or user already existing)"
             },
             "organization-user-creation-quota": {
-                "title": "User limit reached. Increase it manually, or upgrade your pricing plan by emailing us."
+                "title": "User limit reached. Increase it or upgrade your pricing plan by emailing us."
             },
             "organization-user-deletion": {
                 "title": "Could not remove user from organization"
