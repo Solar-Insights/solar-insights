@@ -157,17 +157,21 @@
                 "solar-requests-card": {
                     "title": "Solar installation analysis requests",
                     "billable-items": {
-                        "limit": {
-                            "title": "Limit",
-                            "precision": "Maximum number of requests made every month"
-                        },
                         "current-count": {
-                            "title": "Current count",
-                            "precision": "Resets monthly"
+                            "title": "Current",
+                            "precision": "Number of requests for the current period"
+                        },
+                        "free-count": {
+                            "title": "Free limit",
+                            "precision": "Maximum number of free monthly requests"
+                        },
+                        "limit-count": {
+                            "title": "Limit",
+                            "precision": "Maximum number of monthly requests"
                         },
                         "billable-count": {
                             "title": "Billable count",
-                            "precision": "Number of requests billed for the current month"
+                            "precision": "Number of requests billed for the current period"
                         },
                         "current-cost": {
                             "title": "Current cost",
@@ -178,21 +182,21 @@
                 "users-card": {
                     "title": "Users",
                     "billable-items": {
-                        "free-users": {
+                        "current-count": {
+                            "title": "Current count",
+                            "precision": "Number of users for the current period"
+                        },
+                        "free-count": {
                             "title": "Free limit",
                             "precision": "Maximum number of free users"
                         },
-                        "current-count": {
-                            "title": "Current count",
-                            "precision": "Resets monthly"
-                        },
-                        "highest-count": {
-                            "title": "Highest count",
-                            "precision": "Highest count of users at any point during the month"
+                        "limit-count": {
+                            "title": "Limit",
+                            "precision": "Maximum number of users"
                         },
                         "billable-count": {
                             "title": "Billable count",
-                            "precision": "Difference between highest and free available count"
+                            "precision": "Difference between the limit and free limit of users"
                         },
                         "current-cost": {
                             "title": "Current cost",

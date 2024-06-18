@@ -157,17 +157,21 @@
                 "solar-requests-card": {
                     "title": "Requêtes d'analyse d'installation solaire",
                     "billable-items": {
-                        "limit": {
+                        "current-count": {
+                            "title": "Actuel",
+                            "precision": "Nombre de requêtes pour la période courante"
+                        },
+                        "free-count": {
+                            "title": "Limite gratuite",
+                            "precision": "Nombre de requêtes mensuelles gratuites"
+                        },
+                        "limit-count": {
                             "title": "Limite",
                             "precision": "Nombre maximal de requêtes mensuelles"
                         },
-                        "current-count": {
-                            "title": "Nombre actuel",
-                            "precision": "Réinitialisé chaque mois"
-                        },
                         "billable-count": {
                             "title": "Nombre facturable",
-                            "precision": "Nombre de requêtes facturées pour le mois courant"
+                            "precision": "Nombre de requêtes facturées pour la période courante"
                         },
                         "current-cost": {
                             "title": "Coût actuel",
@@ -178,21 +182,21 @@
                 "users-card": {
                     "title": "Utilisateurs",
                     "billable-items": {
-                        "free-users": {
+                        "current-count": {
+                            "title": "Nombre actuel",
+                            "precision": "Nombre d'utilisateurs pour la période courante"
+                        },
+                        "free-count": {
                             "title": "Limite gratuite",
                             "precision": "Nombre maximal d'utilisateurs gratuits"
                         },
-                        "current-count": {
-                            "title": "Nombre actuel",
-                            "precision": "Réinitialisé chaque mois"
-                        },
-                        "highest-count": {
-                            "title": "Plus haut nombre",
-                            "precision": "Nombre le plus élevé d'utilisateurs à n'importe quel point du mois"
+                        "limit-count": {
+                            "title": "Limite",
+                            "precision": "Nombre d'utilisateurs maximal"
                         },
                         "billable-count": {
                             "title": "Nombre facturable",
-                            "precision": "Différence entre le plus haut nombre du mois et la limite gratuite"
+                            "precision": "Différence entre la limite et la limite gratuite d'utilisateurs"
                         },
                         "current-cost": {
                             "title": "Coût actuel",

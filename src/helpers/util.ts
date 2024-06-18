@@ -32,6 +32,12 @@ export function strToLargeNumberDisplay(input: string | number): String {
     return inputStrNegative + inputStrTempo + inputStrDecimal;
 }
 
+export function dbNumberToDisplayableNumber(input: number): number | string {
+    const MAX_INT_VALUE = 2147483647;
+    if (input === MAX_INT_VALUE) return "∞";
+    return input;
+}
+
 export function copyToClipboard(textToCopy: string) {
     if (navigator.clipboard) clipBoardApi(textToCopy);
     else fallbackClipboardExecCommand(textToCopy);
