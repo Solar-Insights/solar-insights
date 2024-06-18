@@ -2,19 +2,14 @@
     <v-row class="align-stretch">
         <BillableCard :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.title`)">
             <BillableItem
-                :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-count.title`)"
-                :precision="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-count.precision`)"
-                :value="dbNumberToDisplayableNumber(billingRecap.building_insights_requests)"
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-count-and-limit.title`)"
+                :precision="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-count-and-limit.precision`)"
+                :value="`${dbNumberToDisplayableNumber(billingRecap.building_insights_requests)} (${dbNumberToDisplayableNumber(billingRecap.max_building_insights_requests)})`"
             />
             <BillableItem
-                :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.free-count.title`)"
-                :precision="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.free-count.precision`)"
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.free-limit.title`)"
+                :precision="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.free-limit.precision`)"
                 :value="dbNumberToDisplayableNumber(billingRecap.max_free_building_insights_requests)"
-            />
-            <BillableItem
-                :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.limit-count.title`)"
-                :precision="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.limit-count.precision`)"
-                :value="dbNumberToDisplayableNumber(billingRecap.max_building_insights_requests)"
             />
 
             <v-divider class="my-2"/>
@@ -33,19 +28,14 @@
 
         <BillableCard :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.title`)">
             <BillableItem
-                :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-count.title`)"
-                :precision="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-count.precision`)"
-                :value="dbNumberToDisplayableNumber(billingRecap.members_count)"
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-count-and-limit.title`)"
+                :precision="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-count-and-limit.precision`)"
+                :value="`${dbNumberToDisplayableNumber(billingRecap.members_count)} (${dbNumberToDisplayableNumber(billingRecap.max_members_count)})`"
             />
             <BillableItem
-                :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.free-count.title`)"
-                :precision="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.free-count.precision`)"
-                :value="dbNumberToDisplayableNumber(billingRecap.max_free_members_count)"
-            />
-            <BillableItem
-                :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.limit-count.title`)"
-                :precision="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.limit-count.precision`)"
-                :value="dbNumberToDisplayableNumber(billingRecap.max_members_count)"
+                :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.free-limit.title`)"
+                :precision="$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.free-limit.precision`)"
+                :value="(billingRecap.max_free_members_count)"
             />
 
             <v-divider class="my-2"/>

@@ -157,21 +157,17 @@
                 "solar-requests-card": {
                     "title": "Solar installation analysis requests",
                     "billable-items": {
-                        "current-count": {
-                            "title": "Current",
+                        "current-count-and-limit": {
+                            "title": "Current count (Limit)",
                             "precision": "Number of requests for the current period"
                         },
-                        "free-count": {
-                            "title": "Free limit",
-                            "precision": "Maximum number of free monthly requests"
-                        },
-                        "limit-count": {
-                            "title": "Limit",
-                            "precision": "Maximum number of monthly requests"
+                        "free-limit": {
+                            "title": "Included",
+                            "precision": "Number of requests included in your plan"
                         },
                         "billable-count": {
                             "title": "Billable count",
-                            "precision": "Number of requests billed for the current period"
+                            "precision": "Difference between the limit and the quantity included in your plan"
                         },
                         "current-cost": {
                             "title": "Current cost",
@@ -182,21 +178,17 @@
                 "users-card": {
                     "title": "Users",
                     "billable-items": {
-                        "current-count": {
-                            "title": "Current count",
+                        "current-count-and-limit": {
+                            "title": "Current count (Limit)",
                             "precision": "Number of users for the current period"
                         },
-                        "free-count": {
-                            "title": "Free limit",
-                            "precision": "Maximum number of free users"
-                        },
-                        "limit-count": {
-                            "title": "Limit",
-                            "precision": "Maximum number of users"
+                        "free-limit": {
+                            "title": "Included",
+                            "precision": "Number of users included in your plan"
                         },
                         "billable-count": {
                             "title": "Billable count",
-                            "precision": "Difference between the limit and free limit of users"
+                            "precision": "Difference between the limit and the quantity included in your plan"
                         },
                         "current-cost": {
                             "title": "Current cost",
