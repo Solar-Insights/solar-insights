@@ -30,10 +30,11 @@
                     />
 
                     <ImageContainer
-                        v-for="image in step.images"
-                        :pcImageSrc="image"
-                        :mobileImageSrc="image"
-                        :maxWidth="500"
+                        v-if="step.images.pc && step.images.mobile"
+                        :pcImageSrc="step.images.pc"
+                        :mobileImageSrc="step.images.mobile"
+                        :maxWidthPc="800"
+                        :maxHeightPc="600"
                     />
                 </PageSubtitleContainer>
             </PageSection>
@@ -56,9 +57,10 @@ import PageSection from "@/components/page_sections/PageSection.vue";
 import PageContainer from "@/components/page_sections/PageContainer.vue";
 import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
-import solar_insights from "@/assets/images/search/solar_insights.png";
-import customize_installation from "@/assets/images/search/customize_installation.png";
-
+import solar_insights_pc from "@/assets/images/search/solar_insights_pc.png";
+import customize_installation_pc from "@/assets/images/search/customize_installation_pc.png";
+import solar_insights_mobile from "@/assets/images/search/solar_insights_mobile.png";
+import customize_installation_mobile from "@/assets/images/search/customize_installation_mobile.png";
 import ImageContainer from "@/components/page_sections/ImageContainer.vue";
 
 const { loginUser } = handleUserState();
@@ -76,13 +78,16 @@ const steps = computed(() => {
             icon: "mdi-magnify",
             title: t(`search.timeline.step-1.title`),
             contents: [t(`search.timeline.step-1.content-1`)],
-            images: []
+            images: {}
         },
         {
             icon: "mdi-weather-sunny",
             title: t(`search.timeline.step-2.title`),
             contents: [t(`search.timeline.step-2.content-1`)],
-            images: [solar_insights]
+            images: {
+                pc: solar_insights_pc,
+                mobile: solar_insights_mobile
+            }
         },
         {
             icon: "mdi-pencil",
@@ -93,13 +98,16 @@ const steps = computed(() => {
                 t(`search.timeline.step-3.content-3`),
                 t(`search.timeline.step-3.content-4`)
             ],
-            images: [customize_installation]
+            images: {
+                pc: customize_installation_pc,
+                mobile: customize_installation_mobile
+            }
         },
         {
             icon: "mdi-share",
             title: t(`search.timeline.step-4.title`),
             contents: [t(`search.timeline.step-4.content-1`)],
-            images: []
+            images: {}
         }
     ];
 });

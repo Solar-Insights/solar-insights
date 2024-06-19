@@ -10,7 +10,10 @@
         </PageSection>
 
         <PageSection>
-            <ImageContainer :pcImageSrc="solar_insights_overview" :mobileImageSrc="solar_insights_overview" />
+            <ImageContainer 
+                :pcImageSrc="solar_map_pc" 
+                :mobileImageSrc="solar_map_mobile"
+            />
         </PageSection>
 
         <PageSection>
@@ -47,7 +50,6 @@
 </template>
 
 <script setup lang="ts">
-import solar_insights_overview from "@/assets/images/home/solar_insights_overview.png";
 import router from "@/plugins/router";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
@@ -56,4 +58,6 @@ import PageContainer from "@/components/page_sections/PageContainer.vue";
 import ShortDescriptionItem from "@/components/page_sections/ShortDescriptionItem.vue";
 import ShortDescriptionItemsContainer from "@/components/page_sections/ShortDescriptionItemsContainer.vue";
 import ImageContainer from "@/components/page_sections/ImageContainer.vue";
+import solar_map_pc from "@/assets/images/home/solar_map_pc.png";
+import solar_map_mobile from "@/assets/images/home/solar_map_mobile.png";
 </script>
