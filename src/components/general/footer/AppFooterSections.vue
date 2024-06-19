@@ -22,11 +22,11 @@
                     :key="index"
                     elevation="0"
                 >
-                    <v-expansion-panel-title class="font-weight-regular">
+                    <v-expansion-panel-title class="font-weight-regular" static>
                         {{ $t(`navigation-sections.${sectionName}`) }}
                     </v-expansion-panel-title>
 
-                    <v-expansion-panel-text>
+                    <v-expansion-panel-text class="ml-4">
                         <div v-for="route in section">
                             <FooterRouteLink
                                 :route="route"
