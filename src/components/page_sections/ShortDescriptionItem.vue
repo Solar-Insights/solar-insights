@@ -13,15 +13,21 @@
         </div>
 
         <div v-if="objectHasValue(props.itemAction)" class="short-description-single-item-action">
-            <v-btn
+            <v-card
                 @click="emits('onItemActionClick')"
-                class="rounded-lg font-weight-medium w-100"
+                class="py-5 px-6 rounded-lg mx-auto text-center"
                 elevation="2"
                 color="theme"
-                :append-icon="props.itemAction?.icon"
             >
-                {{ props.itemAction?.text }}
-            </v-btn>
+                <v-row class="pa-0">
+                    <v-col class="pa-0 mx-auto" cols="9">
+                        <div class="font-weight-medium">{{ props.itemAction?.text }}</div>
+                    </v-col>
+                    <v-col v-if="stringHasValue(props.itemAction?.icon)" class="pa-0" cols="3" align-self="center">
+                        <v-icon>{{ props.itemAction?.icon }}</v-icon>
+                    </v-col>
+                </v-row>
+            </v-card>
         </div>
     </v-col>
 </template>

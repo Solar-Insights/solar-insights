@@ -25,7 +25,7 @@
         <div v-if="objectHasValue(props.pageSubtitleAction)" class="page-subtitle-action">
             <v-card
                 @click="emits('onPageSubtitleActionClick')"
-                class="pa-6 rounded-lg mx-auto"
+                class="pa-6 rounded-lg mx-auto text-center"
                 style="width: 250px"
                 elevation="2"
                 color="theme"
