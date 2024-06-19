@@ -38,7 +38,6 @@ $light-line: #dadada;
 }
 
 .universal-font-theme {
-    @extend .font-weight-light;
     @extend .universal-font-size;
     @extend .universal-font-family;
 }
