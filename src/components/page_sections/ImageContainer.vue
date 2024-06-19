@@ -2,18 +2,18 @@
     <v-img
         class="hidden-xs pc-image-container"
         :src="props.pcImageSrc"
-        :max-width="props.maxWidth"
-        :min-width="props.minWidth"
-        :max-height="props.maxHeight"
-        :min-height="props.minHeight"
+        :max-width="props.maxWidthPc"
+        :min-width="props.minWidthPc"
+        :max-height="props.maxHeightPc"
+        :min-height="props.minHeightPc"
     />
     <v-img
         class="hidden-sm-and-up mobile-image-container"
         :src="props.mobileImageSrc"
-        :max-width="props.maxWidth"
-        :min-width="props.minWidth"
-        :max-height="props.maxHeight"
-        :min-height="props.minHeight"
+        :max-width="props.maxWidthMobile"
+        :min-width="props.minWidthMobile"
+        :max-height="props.maxHeightMobile"
+        :min-height="props.minHeightMobile"
     />
 </template>
 
@@ -27,19 +27,37 @@ const props = defineProps({
         type: String,
         required: true
     },
-    maxWidth: {
+    maxWidthPc: {
+        type: Number,
+        required: false,
+        default: 1000
+    },
+    maxHeightPc: {
         type: Number,
         required: false
     },
-    maxHeight: {
+    minWidthPc: {
         type: Number,
         required: false
     },
-    minWidth: {
+    minHeightPc: {
         type: Number,
         required: false
     },
-    minHeight: {
+    maxWidthMobile: {
+        type: Number,
+        required: false
+    },
+    maxHeightMobile: {
+        type: Number,
+        required: false,
+        default: 600
+    },
+    minWidthMobile: {
+        type: Number,
+        required: false
+    },
+    minHeightMobile: {
         type: Number,
         required: false
     }
