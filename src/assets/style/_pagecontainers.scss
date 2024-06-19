@@ -25,6 +25,12 @@
     .paragraph-container {
         width: 100%;
     }
+    .footer-sections-container {
+        margin: 0vw 3vw 0vw 3vw;
+    }
+    .footer-section {
+        margin: 2vw 0vw 2vw 0vw;
+    }
 }
 
 /*
@@ -51,6 +57,12 @@
     }
     .paragraph-container {
         width: 60%;
+    }
+    .footer-sections-container {
+        margin: 0vw 4vw 0vw 4vw;
+    }
+    .footer-section {
+        margin: 2vw 0vw 2vw 0vw;
     }
 }
 
@@ -193,15 +205,12 @@
 }
 
 .footer {
-    @extend .py-8;
+    @extend .py-0;
 }
 
-.footer-sections-container {
-    @extend .mx-12;
-}
+.footer-sections-container {}
 
-.footer-section {
-}
+.footer-section {}
 
 .footer-section-title {
     @extend .pb-2;

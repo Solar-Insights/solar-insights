@@ -2,18 +2,40 @@
     <v-row class="footer-sections-container">
         <v-divider />
 
-        <v-col v-for="(section, sectionName) in sections" class="footer-section my-12" cols="12" xs="12" sm="6" md="4">
+        <v-col v-for="(section, sectionName) in sections" class="footer-section hidden-xs" cols="12" xs="12" sm="6" md="4">
             <div class="footer-section-title">
                 {{ $t(`navigation-sections.${sectionName}`) }}
             </div>
 
             <div v-for="route in section">
-                <div v-if="!route.requiresAuth || (route.requiresAuth && isAuthenticated)" class="footer-section-item">
-                    <router-link :to="{ name: route.name }">
-                        {{ $t(`navigation.${route.name}`) }}
-                    </router-link>
-                </div>
+                <FooterRouteLink
+                    :route="route"
+                    :isAuthenticated="isAuthenticated"
+                />
             </div>
+        </v-col>
+
+        <v-col class="footer-section hidden-sm-and-up">
+            <v-expansion-panels class="hidden-sm-and-up" variant="accordion">
+                <v-expansion-panel 
+                    v-for="(section, sectionName, index) in sections"
+                    :key="index"
+                    elevation="0"
+                >
+                    <v-expansion-panel-title class="font-weight-regular">
+                        {{ $t(`navigation-sections.${sectionName}`) }}
+                    </v-expansion-panel-title>
+
+                    <v-expansion-panel-text>
+                        <div v-for="route in section">
+                            <FooterRouteLink
+                                :route="route"
+                                :isAuthenticated="isAuthenticated"
+                            />
+                        </div>  
+                    </v-expansion-panel-text>
+                </v-expansion-panel>
+            </v-expansion-panels>
         </v-col>
 
         <v-divider />
@@ -32,6 +54,7 @@ import { routes } from "@/helpers/constants";
 import { RouteInfo, RouteSection } from "@/helpers/types";
 import { ref } from "vue";
 import { useAuth0 } from "@auth0/auth0-vue";
+import FooterRouteLink from "@/components/general/footer/FooterRouteLink.vue";
 
 const { isAuthenticated } = useAuth0();
 
