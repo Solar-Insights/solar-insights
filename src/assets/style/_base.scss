@@ -31,7 +31,9 @@
     position: relative;
 }
 
-.toast-content {
+.card-snackbar.toast-content {
+    max-width: 100% !important;
+    min-width: 300px !important;
 }
 
 .dark-toast-content {
