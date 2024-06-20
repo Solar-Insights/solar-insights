@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import { RouteInfo } from '@/helpers/types';
-import { PropType } from 'vue';
+import { RouteInfo } from "@/helpers/types";
+import { PropType } from "vue";
 
 const props = defineProps({
     route: {

@@ -18,15 +18,15 @@
 const props = defineProps({
     title: {
         type: String,
-        required: true,
+        required: true
     },
     precision: {
         type: String,
-        required: false,
+        required: false
     },
     value: {
         type: [String, Number],
-        required: true,
+        required: true
     }
 });
 </script>

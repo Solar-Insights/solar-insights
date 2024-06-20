@@ -100,7 +100,7 @@ export type PricingCardDetails = {
     description: string;
     action: string;
     monthlyFixedPrice: number;
-    benefits: PricingCardBenefits
+    benefits: PricingCardBenefits;
 };
 
 export type PricingCardBenefits = {
@@ -123,8 +123,8 @@ export type NewOrganizationForm = {
 };
 
 export type NewOrganizationUserForm = {
-    email: string,
-    name: string
+    email: string;
+    name: string;
 };
 
 export type PageTitleActionType = {
@@ -138,20 +138,16 @@ export type MonthlyQuotaField = "max_members_count" | "max_building_insights_req
 
 export type MonthlyBillingField = "members_count" | "building_insights_requests";
 
-export type MyOrganizationBillingRecap = 
-    { 
-        [key in MonthlyBillingField]: number 
-    } &
-    {
-        [key in MonthlyQuotaField]: number
-    } &
-    {
-        [key in MonthlyFreeField]: number
-    } &
-    { 
-        pricingTier: PricingTier,
-        billingDate: string
-    };
+export type MyOrganizationBillingRecap = {
+    [key in MonthlyBillingField]: number;
+} & {
+    [key in MonthlyQuotaField]: number;
+} & {
+    [key in MonthlyFreeField]: number;
+} & {
+    pricingTier: PricingTier;
+    billingDate: string;
+};
 
 export type MyOrganizationDetails = {
     admins: MyOrganizationMember[];
@@ -160,5 +156,5 @@ export type MyOrganizationDetails = {
 
 export type MyOrganizationAdminDetails = {
     myOrganizationMembers: MyOrganizationMember[];
-    myOrganizationBillingRecap: MyOrganizationBillingRecap
+    myOrganizationBillingRecap: MyOrganizationBillingRecap;
 };

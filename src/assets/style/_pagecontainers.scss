@@ -93,7 +93,7 @@
 }
 
 .page-section-subtitle {
-    @extend .px-0; 
+    @extend .px-0;
     @extend .text-subtitle-1;
     @extend .text-wrap;
 }
@@ -123,7 +123,7 @@
     @extend .pa-6;
     @extend .mt-7;
     @extend .mx-auto;
-    @extend .rounded-lg; 
+    @extend .rounded-lg;
     @extend .text-center;
     font-size: 1.1rem;
     width: 250px;
@@ -211,9 +211,11 @@
     @extend .py-0;
 }
 
-.footer-sections-container {}
+.footer-sections-container {
+}
 
-.footer-section {}
+.footer-section {
+}
 
 .footer-section-title {
     @extend .pb-2;

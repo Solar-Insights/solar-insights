@@ -1,6 +1,11 @@
 <template>
     <v-col class="short-description-single-item-container" cols="12" xs="12" sm="6" md="3">
-        <v-icon v-if="stringHasValue(props.itemIcon)" class="short-description-item-icon" size="x-large" :color="props.itemIconColor">
+        <v-icon
+            v-if="stringHasValue(props.itemIcon)"
+            class="short-description-item-icon"
+            size="x-large"
+            :color="props.itemIconColor"
+        >
             {{ itemIcon }}
         </v-icon>
 
@@ -13,10 +18,7 @@
         </div>
 
         <div v-if="objectHasValue(props.itemAction)" class="short-description-single-item-action">
-            <PageAction 
-                :action="props.itemAction"
-                @onPageActionClick="emits('onItemActionClick')"
-            />
+            <PageAction :action="props.itemAction" @onPageActionClick="emits('onItemActionClick')" />
         </div>
     </v-col>
 </template>

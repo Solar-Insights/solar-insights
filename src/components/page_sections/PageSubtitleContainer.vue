@@ -23,10 +23,10 @@
         </div>
 
         <div v-if="objectHasValue(props.pageSubtitleAction)" class="page-subtitle-action">
-            <PageAction 
+            <PageAction
                 :action="props.pageSubtitleAction"
                 @onPageActionClick="emits('onPageSubtitleActionClick')"
-                style="width: 250px;"
+                style="width: 250px"
             />
         </div>
     </div>

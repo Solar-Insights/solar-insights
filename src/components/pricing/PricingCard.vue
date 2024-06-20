@@ -47,7 +47,13 @@
                 </span>
                 <span class="detail-text-same-size"> / {{ $t(`pricing.pricing-cards.month`) }} </span>
                 <span>
-                    + <a class="anchor-with-theme" href="javascript:document.getElementById('usage').scrollIntoView(true);"> {{ $t(`pricing.pricing-cards.usage`) }} </a>
+                    +
+                    <a
+                        class="anchor-with-theme"
+                        href="javascript:document.getElementById('usage').scrollIntoView(true);"
+                    >
+                        {{ $t(`pricing.pricing-cards.usage`) }}
+                    </a>
                 </span>
             </div>
 
@@ -56,17 +62,21 @@
             <div class="pricing-card-container">
                 <div>{{ props.pricingCardDetails.benefits.title }}</div>
                 <v-list class="pricing-card-suggestions-container">
-                    <v-list-item 
-                        v-for="benefit in props.pricingCardDetails.benefits.benefits" 
+                    <v-list-item
+                        v-for="benefit in props.pricingCardDetails.benefits.benefits"
                         :class="theme === 'dark' ? 'dark-pricing-card-suggestion' : 'light-pricing-card-suggestion'"
                     >
                         <v-list-item-title class="pricing-card-suggestion-title">
                             {{ benefit.title }}
                         </v-list-item-title>
 
-                        <v-list-item-subtitle 
+                        <v-list-item-subtitle
                             v-if="stringHasValue(benefit.description)"
-                            :class="theme === `dark` ? `dark-pricing-card-suggestion-description` : `light-pricing-card-suggestion-description`"
+                            :class="
+                                theme === `dark`
+                                    ? `dark-pricing-card-suggestion-description`
+                                    : `light-pricing-card-suggestion-description`
+                            "
                         >
                             {{ benefit.description }}
                         </v-list-item-subtitle>

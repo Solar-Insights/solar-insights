@@ -53,7 +53,7 @@ const props = defineProps({
     hideText: {
         type: Boolean,
         default: false,
-        required: false,
+        required: false
     }
 });
 

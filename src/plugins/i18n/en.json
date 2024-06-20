@@ -4,7 +4,7 @@
         "yyyy-mm-dd": "YYYY-MM-DD",
         "starter": "Starter",
         "pro": "Pro",
-        "enterprise":" Enterprise"
+        "enterprise": " Enterprise"
     },
     "navigation-sections": {
         "solar-insights": "Solar Insights",
@@ -238,7 +238,7 @@
                         "creation-date": "Creation date",
                         "actions": "Actions"
                     }
-                } 
+                }
             }
         }
     },

@@ -24,7 +24,7 @@ export function handleUserState() {
             logoutParams: {
                 returnTo: callbackPage
             }
-        })
+        });
     };
 
     return {

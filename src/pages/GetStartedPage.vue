@@ -112,7 +112,9 @@
                         :itemIcon="`mdi-play`"
                         :itemIconColor="`theme`"
                         :itemAction="{
-                            text: $t('get-started.use-solar-insights-subtitle-container.short-items.start-using.action'),
+                            text: $t(
+                                'get-started.use-solar-insights-subtitle-container.short-items.start-using.action'
+                            ),
                             icon: `mdi-weather-sunny`
                         }"
                         @onItemActionClick="router.push({ name: `search` })"

@@ -4,7 +4,7 @@
         "yyyy-mm-dd": "AAAA-MM-JJ",
         "starter": "Starter",
         "pro": "Pro",
-        "enterprise":" Entreprise"
+        "enterprise": " Entreprise"
     },
     "navigation-sections": {
         "solar-insights": "Solar Insights",

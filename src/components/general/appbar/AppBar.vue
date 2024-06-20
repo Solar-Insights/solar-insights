@@ -23,7 +23,7 @@
                     :requiresAuth="route.requiresAuth"
                     :text="route.name"
                     :currentRoute="route.name === currentRoute.name"
-                    @sendAction="$router.push({ name: route.name})"
+                    @sendAction="$router.push({ name: route.name })"
                 />
             </v-toolbar-items>
 
@@ -36,7 +36,9 @@
                     :text="menus[`user`].name"
                     :hideText="true"
                     @sendAction=""
-                > <UserMenu/> </AppBarButton>
+                >
+                    <UserMenu />
+                </AppBarButton>
 
                 <AppBarButton
                     :icon="menus[`settings`].icon"
@@ -44,7 +46,9 @@
                     :text="menus[`settings`].name"
                     :hideText="true"
                     @sendAction=""
-                > <SettingsMenu/> </AppBarButton>
+                >
+                    <SettingsMenu />
+                </AppBarButton>
             </v-toolbar-items>
         </v-app-bar>
 
@@ -56,7 +60,7 @@
                         :requiresAuth="route.requiresAuth"
                         :text="route.name"
                         :currentRoute="route.name === currentRoute.name"
-                        @sendAction="$router.push({ name: route.name})"
+                        @sendAction="$router.push({ name: route.name })"
                     />
                 </v-list-item>
             </v-list>
@@ -70,7 +74,9 @@
                             :text="menus[`user`].name"
                             :hideText="false"
                             @sendAction=""
-                        > <UserMenu/> </AppBarButton>
+                        >
+                            <UserMenu />
+                        </AppBarButton>
                     </v-list-item>
 
                     <v-list-item>
@@ -80,7 +86,9 @@
                             :text="menus[`settings`].name"
                             :hideText="false"
                             @sendAction=""
-                        > <SettingsMenu/> </AppBarButton>
+                        >
+                            <SettingsMenu />
+                        </AppBarButton>
                     </v-list-item>
                 </v-list>
             </template>
@@ -104,5 +112,4 @@ const drawer = ref(false);
 
 const appBarRouteNames = ["get-started", "pricing", "search"];
 const appBarRoutes = ref<RouteInfo[]>(routes.filter((route) => appBarRouteNames.includes(route.name)));
-
 </script>

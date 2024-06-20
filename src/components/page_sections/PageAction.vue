@@ -18,9 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import { ButtonAction } from '@/helpers/types';
-import { PropType } from 'vue';
-import { stringHasValue, objectHasValue } from '@/helpers/componentConditionals';
+import { ButtonAction } from "@/helpers/types";
+import { PropType } from "vue";
+import { stringHasValue, objectHasValue } from "@/helpers/componentConditionals";
 
 const props = defineProps({
     action: {
@@ -29,7 +29,5 @@ const props = defineProps({
     }
 });
 
-const emits = defineEmits([`onPageActionClick`])
-
+const emits = defineEmits([`onPageActionClick`]);
 </script>
-

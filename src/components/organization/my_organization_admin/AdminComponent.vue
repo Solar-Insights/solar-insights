@@ -4,13 +4,13 @@
             :pageSectionTitle="$t(`my-organization.admin-component.user-table-section-container.title`)"
             :pageSectionSubtitle="$t(`my-organization.admin-component.user-table-section-container.subtitle`)"
         >
-            <UserTable 
+            <UserTable
                 :users="myOrganizationMembers"
-                @addUser="addOrganizationMember" 
-                @deleteUser="deleteOrganizationMember" 
+                @addUser="addOrganizationMember"
+                @deleteUser="deleteOrganizationMember"
             />
         </PageSection>
-        
+
         <PageSection
             :pageSectionTitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
             :pageSectionSubtitle="`${$t(`my-organization.admin-component.billing-recap-section-container.subtitle`)} ${new Date(myOrganizationBillingRecap!.billingDate).toISOString().substring(0, 10)} (${$t(`global.yyyy-mm-dd`)})`"
@@ -22,7 +22,7 @@
                         {{ $t(`global.${myOrganizationBillingRecap.pricingTier}`) }}
                     </span>
                 </div>
-                
+
                 <v-btn
                     @click="$router.push({ name: `pricing` })"
                     class="paragraph-action my-1"
@@ -33,9 +33,8 @@
                     {{ $t(`my-organization.admin-component.billing-recap-section-container.upgrade`) }}
                 </v-btn>
             </div>
-            
 
-            <BillingRecap :billingRecap="myOrganizationBillingRecap"/>
+            <BillingRecap :billingRecap="myOrganizationBillingRecap" />
         </PageSection>
     </div>
 </template>

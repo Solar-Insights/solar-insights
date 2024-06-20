@@ -1,10 +1,5 @@
 <template>
-    <v-card
-        @click="emits('onPageTitleActionClick')"
-        class="page-title-action"
-        elevation="2"
-        color="theme"
-    >
+    <v-card @click="emits('onPageTitleActionClick')" class="page-title-action" elevation="2" color="theme">
         <v-row class="pa-0">
             <v-col class="pa-0" cols="9">
                 <div class="font-weight-medium">{{ props.pageTitleAction?.text }}</div>

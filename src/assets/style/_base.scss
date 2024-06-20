@@ -59,7 +59,6 @@
     p {
         @extend .text-white;
     }
-    
 }
 
 .light-toast-text {
@@ -176,15 +175,18 @@
     overflow-y: auto;
 }
 
-.map-data::-webkit-scrollbar, .map-readonly-data::-webkit-scrollbar {
+.map-data::-webkit-scrollbar,
+.map-readonly-data::-webkit-scrollbar {
     width: 6px;
 }
-.map-data::-webkit-scrollbar-thumb, .map-readonly-data::-webkit-scrollbar-thumb {
+.map-data::-webkit-scrollbar-thumb,
+.map-readonly-data::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px master.$scrollbars;
     border-radius: 10px;
     background-color: master.$scrollbars;
 }
-.map-data::-webkit-scrollbar-track, .map-readonly-data::-webkit-scrollbar-track {
+.map-data::-webkit-scrollbar-track,
+.map-readonly-data::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     background-color: #f5f5f5;
@@ -231,13 +233,12 @@
 
 .dark-app-menu-card {
     @extend .app-menu-card;
-    border: 1px solid master.$dark-line
+    border: 1px solid master.$dark-line;
 }
 
 .light-app-menu-card {
     @extend .app-menu-card;
     border: 1px solid master.$light-line;
-
 }
 
 .app-menu-option-icon-container {
@@ -297,7 +298,7 @@
 }
 
 .pricing-card-suggestions-container {
-    @extend .my-3; 
+    @extend .my-3;
     @extend .py-0;
 }
 
@@ -347,13 +348,13 @@
 }
 
 .billable-card-title {
-    @extend .text-h5; 
-    @extend .mb-6; 
+    @extend .text-h5;
+    @extend .mb-6;
     @extend .font-weight-black;
 }
 
 .billable-item-container {
-    @extend .text-h6; 
+    @extend .text-h6;
     @extend .my-0;
     @extend .py-2;
 }
@@ -366,4 +367,5 @@
     @extend .py-0;
 }
 
-.form-dialog-content {}
+.form-dialog-content {
+}

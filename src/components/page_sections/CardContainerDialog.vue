@@ -14,20 +14,16 @@
         <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn 
-                @click="emits(`closeButtonClicked`)" 
-                class="font-weight-medium" 
-                variant="flat"
-            >
+            <v-btn @click="emits(`closeButtonClicked`)" class="font-weight-medium" variant="flat">
                 {{ props.dialogCancelButton }}
             </v-btn>
 
-            <v-btn 
+            <v-btn
                 v-if="stringHasValue($props.dialogConfirmButton)"
-                @click="emits(`confirmButtonClicked`)" 
-                class="font-weight-medium" 
-                variant="flat" 
-                color="theme" 
+                @click="emits(`confirmButtonClicked`)"
+                class="font-weight-medium"
+                variant="flat"
+                color="theme"
                 :loading="dialogLoading"
             >
                 {{ props.dialogConfirmButton }}
@@ -37,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { stringHasValue } from '@/helpers/componentConditionals';
+import { stringHasValue } from "@/helpers/componentConditionals";
 
 const props = defineProps({
     dialogTitle: {

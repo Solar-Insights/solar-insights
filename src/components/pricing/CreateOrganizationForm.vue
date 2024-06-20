@@ -133,7 +133,7 @@ async function sendNewOrganizationRequest() {
         })
         .catch(() => {});
     loadingResponse.value = false;
-    
+
     closeForm.value = true;
 }
 </script>

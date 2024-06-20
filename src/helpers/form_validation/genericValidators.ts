@@ -5,12 +5,12 @@ import { i18n } from "@/plugins/i18n/i18n";
 const VALIDATORS_I18N_PREFIX = "validators";
 
 type ValidationMessagePart = {
-    value: string,
-    isI18n: boolean
+    value: string;
+    isI18n: boolean;
 };
 
 type ValidationMessageParams = {
-    message: ValidationMessagePart[]
+    message: ValidationMessagePart[];
 };
 
 export function createValidationMessages(validationMessageParams: ValidationMessageParams[]) {
@@ -31,9 +31,9 @@ export function createValidationMessages(validationMessageParams: ValidationMess
 
 export type GeneralValidatorType<T> = {
     [key in keyof T]: {
-        [key: string]: ValidationRuleWithParams
-    }
-}
+        [key: string]: ValidationRuleWithParams;
+    };
+};
 
 export function requiredValidator() {
     const validationMessage: ValidationMessageParams = {
@@ -43,12 +43,9 @@ export function requiredValidator() {
                 isI18n: true
             }
         ]
-    }
+    };
 
-    return helpers.withParams(
-        validationMessage,
-        required
-    );
+    return helpers.withParams(validationMessage, required);
 }
 
 export function maxLengthValidator(max: number) {
@@ -65,15 +62,11 @@ export function maxLengthValidator(max: number) {
             {
                 value: `${VALIDATORS_I18N_PREFIX}.characters-long`,
                 isI18n: true
-            },
-           
+            }
         ]
-    }
+    };
 
-    return helpers.withParams(
-        validationMessage,
-        maxLength(max)
-    );
+    return helpers.withParams(validationMessage, maxLength(max));
 }
 
 export function minLengthValidator(min: number) {
@@ -90,15 +83,11 @@ export function minLengthValidator(min: number) {
             {
                 value: `${VALIDATORS_I18N_PREFIX}.characters-long`,
                 isI18n: true
-            },
-           
+            }
         ]
-    }
+    };
 
-    return helpers.withParams(
-        validationMessage,
-        minLength(min)
-    );
+    return helpers.withParams(validationMessage, minLength(min));
 }
 
 export function isEmailValidator() {
@@ -109,12 +98,9 @@ export function isEmailValidator() {
                 isI18n: true
             }
         ]
-    }
+    };
 
-    return helpers.withParams(
-        validationMessage,
-        email
-    );
+    return helpers.withParams(validationMessage, email);
 }
 
 function containsLetter(value: string) {

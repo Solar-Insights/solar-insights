@@ -12,7 +12,7 @@ AxiosInstance.interceptors.request.use(
             .then((accessToken) => {
                 config.headers.Authorization = `Bearer ${accessToken}`;
             })
-            .catch((error) => {})
+            .catch((error) => {});
 
         return config;
     },

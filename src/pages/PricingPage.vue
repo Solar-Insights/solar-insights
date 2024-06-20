@@ -34,10 +34,13 @@
                                 class="mb-2"
                                 prepend-icon="mdi-circle-small"
                             >
-                                <v-list-item-title class="paragraph-content font-weight-thin mb-1" style="white-space: normal !important">
+                                <v-list-item-title
+                                    class="paragraph-content font-weight-thin mb-1"
+                                    style="white-space: normal !important"
+                                >
                                     {{ action.title }}
                                 </v-list-item-title>
-                                
+
                                 <v-list-item-subtitle class="font-weight-bold">
                                     {{ action.price }}
                                 </v-list-item-subtitle>
@@ -84,7 +87,18 @@ import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { priceString } from "@/helpers/util";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import { STARTER_MONTHLY_FIXED_PRICE, PRO_MONTHLY_FIXED_PRICE, ENTERPRISE_MONTHLY_FIXED_PRICE, STARTER_AVAILABLE_ORG_USERS, PRO_AVAILABLE_ORG_USERS, ENTERPRISE_AVAILABLE_ORG_USERS, STARTER_MONTHLY_ANALYSIS_REQUESTS, PRO_MONTHLY_ANALYSIS_REQUESTS, PRICE_PER_REQUEST, PRICE_PER_ADDITIONAL_USER } from "@/helpers/pricingConstants";
+import {
+    STARTER_MONTHLY_FIXED_PRICE,
+    PRO_MONTHLY_FIXED_PRICE,
+    ENTERPRISE_MONTHLY_FIXED_PRICE,
+    STARTER_AVAILABLE_ORG_USERS,
+    PRO_AVAILABLE_ORG_USERS,
+    ENTERPRISE_AVAILABLE_ORG_USERS,
+    STARTER_MONTHLY_ANALYSIS_REQUESTS,
+    PRO_MONTHLY_ANALYSIS_REQUESTS,
+    PRICE_PER_REQUEST,
+    PRICE_PER_ADDITIONAL_USER
+} from "@/helpers/pricingConstants";
 
 const t = useI18n().t;
 const tm = useI18n().tm;
@@ -116,7 +130,7 @@ const pricingCards = computed(() => {
                     },
                     {
                         title: t(`pricing.pricing-cards.starter.benefits.monthly-usage.title`)
-                    },
+                    }
                 ]
             }
         },
@@ -136,14 +150,13 @@ const pricingCards = computed(() => {
                     {
                         title: `${PRO_MONTHLY_ANALYSIS_REQUESTS} ${t(`pricing.pricing-cards.pro.benefits.requests.title`)}`,
                         description: `${t(`pricing.pricing-cards.pro.benefits.requests.description`)} ${priceString(PRICE_PER_REQUEST, userSessionStore.locale)} / ${t(`pricing.pricing-cards.request`)}`
-                        
                     },
                     {
                         title: t(`pricing.pricing-cards.pro.benefits.user-detailed-reports.title`)
                     },
                     {
                         title: t(`pricing.pricing-cards.pro.benefits.private-discord-support.title`)
-                    },
+                    }
                 ]
             }
         },
@@ -165,7 +178,7 @@ const pricingCards = computed(() => {
                     },
                     {
                         title: t(`pricing.pricing-cards.enterprise.benefits.feature-requests.title`)
-                    },
+                    }
                 ]
             }
         }

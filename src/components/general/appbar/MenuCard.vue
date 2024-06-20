@@ -6,13 +6,13 @@
         :variant="theme === 'dark' ? 'tonal' : 'elevated'"
     >
         <v-row>
-            <v-col 
-                v-if="stringHasValue(props.icon)" 
-                class="app-menu-option-icon-container" 
-                cols="auto" 
+            <v-col
+                v-if="stringHasValue(props.icon)"
+                class="app-menu-option-icon-container"
+                cols="auto"
                 align-self="center"
             >
-                <v-icon>{{ props.icon}}</v-icon>
+                <v-icon>{{ props.icon }}</v-icon>
             </v-col>
             <v-col>
                 <div>{{ props.text }}</div>
@@ -51,9 +51,8 @@ const props = defineProps({
     detail: {
         type: String,
         required: false
-    },
+    }
 });
 
 const emits = defineEmits(["sendAction"]);
-
 </script>

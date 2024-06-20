@@ -19,7 +19,13 @@
                     {{ props.formCancelButton }}
                 </v-btn>
 
-                <v-btn @click="emits(`validateForm`)" class="font-weight-medium" variant="flat" color="theme" :loading="formLoadingResponse">
+                <v-btn
+                    @click="emits(`validateForm`)"
+                    class="font-weight-medium"
+                    variant="flat"
+                    color="theme"
+                    :loading="formLoadingResponse"
+                >
                     {{ props.formConfirmButton }}
                 </v-btn>
             </v-card-actions>

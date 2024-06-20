@@ -22,7 +22,7 @@
 
             <v-card v-if="!isAuthenticated" elevation="0">
                 <v-card-title> {{ $t(`general.user-menu.signin-title`) }} </v-card-title>
-                
+
                 <MenuCard
                     :text="$t(`general.user-menu.signin`)"
                     :theme="theme"

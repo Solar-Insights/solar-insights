@@ -1,7 +1,7 @@
 <template>
     <PageContainer v-if="stringHasValue(myOrganization.name)">
         <PageSection>
-            <PageTitleContainer :pageTitle="myOrganization.name"/>
+            <PageTitleContainer :pageTitle="myOrganization.name" />
         </PageSection>
 
         <PageSection
@@ -9,11 +9,7 @@
             :pageSectionSubtitle="$t(`my-organization.help-section-container.subtitle`)"
         >
             <v-list class="d-flex flex-wrap">
-                <v-list-item
-                    v-for="admin in myOrganization.admins"
-                    class="my-2"
-                    :prepend-avatar="admin.avatar"
-                >
+                <v-list-item v-for="admin in myOrganization.admins" class="my-2" :prepend-avatar="admin.avatar">
                     <v-list-item-title> {{ admin.name }}</v-list-item-title>
                     <v-list-item-subtitle>
                         <a :href="`mailto: ${admin.email}`"> {{ admin.email }} </a>

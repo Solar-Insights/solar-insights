@@ -2,30 +2,29 @@
     <v-data-table :items="users" :headers="headers" :sort-by="[{ key: 'created_date', order: 'desc' }]">
         <template v-slot:top>
             <v-toolbar flat>
-                <v-toolbar-title> {{ $t(`my-organization.admin-component.user-table-section-container.user-table.title`) }} </v-toolbar-title>
+                <v-toolbar-title>
+                    {{ $t(`my-organization.admin-component.user-table-section-container.user-table.title`) }}
+                </v-toolbar-title>
 
                 <v-spacer></v-spacer>
 
                 <v-btn class="mb-2 font-weight-bold" color="theme">
-                    {{ $t(`my-organization.admin-component.user-table-section-container.user-table.actions.new-user.action-name`) }}
+                    {{
+                        $t(
+                            `my-organization.admin-component.user-table-section-container.user-table.actions.new-user.action-name`
+                        )
+                    }}
 
-                    <NewUserForm @formWasSent="userCreated"/>
+                    <NewUserForm @formWasSent="userCreated" />
                 </v-btn>
             </v-toolbar>
         </template>
 
         <template v-slot:item.actions="{ item }">
-            <v-btn 
-                :disabled="user?.email === item.email"
-                size="small" 
-                flat 
-            >
+            <v-btn :disabled="user?.email === item.email" size="small" flat>
                 <v-icon>mdi-delete</v-icon>
 
-                <DeleteUserForm
-                    :selectedUserToDelete="item"
-                    @formWasSent="userDeleted"
-                />
+                <DeleteUserForm :selectedUserToDelete="item" @formWasSent="userDeleted" />
             </v-btn>
         </template>
     </v-data-table>
@@ -41,29 +40,36 @@ import DeleteUserForm from "@/components/organization/my_organization_admin/Dele
 
 const { user } = useAuth0();
 const t = useI18n().t;
-const UserDataHeaders = computed(() => [
-    {
-        title: t(`my-organization.admin-component.user-table-section-container.user-table.column-titles.email`),
-        key: "email",
-        sortable: true
-    },
-    {
-        title: t(`my-organization.admin-component.user-table-section-container.user-table.column-titles.name`),
-        key: "name",
-        sortable: true
-    },
-    {
-        title: t(`my-organization.admin-component.user-table-section-container.user-table.column-titles.creation-date`),
-        key: "created_date",
-        sortable: true
-    },
-    {
-        title: t(`my-organization.admin-component.user-table-section-container.user-table.column-titles.actions`),
-        key: "actions",
-        align: "center",
-        sortable: false
-    }
-] as any[]);
+const UserDataHeaders = computed(
+    () =>
+        [
+            {
+                title: t(`my-organization.admin-component.user-table-section-container.user-table.column-titles.email`),
+                key: "email",
+                sortable: true
+            },
+            {
+                title: t(`my-organization.admin-component.user-table-section-container.user-table.column-titles.name`),
+                key: "name",
+                sortable: true
+            },
+            {
+                title: t(
+                    `my-organization.admin-component.user-table-section-container.user-table.column-titles.creation-date`
+                ),
+                key: "created_date",
+                sortable: true
+            },
+            {
+                title: t(
+                    `my-organization.admin-component.user-table-section-container.user-table.column-titles.actions`
+                ),
+                key: "actions",
+                align: "center",
+                sortable: false
+            }
+        ] as any[]
+);
 
 const props = defineProps({
     users: {

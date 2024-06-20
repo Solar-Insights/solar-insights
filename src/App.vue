@@ -2,11 +2,11 @@
     <v-app :theme="theme">
         <AppBar v-if="displaysAppComponents" />
 
-        <v-main style="min-height: 100vh;">
-            <AlertContainer/>
-            <router-view :key="currentRoute.fullPath"/>
+        <v-main style="min-height: 100vh">
+            <AlertContainer />
+            <router-view :key="currentRoute.fullPath" />
         </v-main>
-        
+
         <AppFooter v-if="displaysAppComponents" />
     </v-app>
 </template>
@@ -35,5 +35,4 @@ const displaysAppComponents = computed(() => {
 onMounted(async () => {
     i18n.global.locale.value = locale.value;
 });
-
 </script>

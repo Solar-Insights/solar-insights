@@ -9,13 +9,14 @@
             :detail="themeDetail"
             @sendAction="userSessionStore.changeTheme()"
         />
-        
+
         <MenuCard
             :text="$t(`general.quick-settings.language`)"
             :theme="theme"
             :icon="`mdi-earth`"
             :detail="localeDetail"
-                @sendAction="userSessionStore.changeLocale();
+            @sendAction="
+                userSessionStore.changeLocale();
                 updateVuetifyLocale();
                 locale === 'fr' ? ($i18n.locale = 'fr') : ($i18n.locale = 'en');
             "
@@ -43,9 +44,9 @@ function updateVuetifyLocale() {
 
 const themeDetail = computed(() =>
     theme.value === "dark" ? t(`general.quick-settings.dark`) : t(`general.quick-settings.light`)
-)
+);
 
-const localeDetail = computed(() =>
-    `${locale.value === "fr" ? "Français" : "English"} -> ${locale.value === "fr" ? "English" : "Français"}`
-)
+const localeDetail = computed(
+    () => `${locale.value === "fr" ? "Français" : "English"} -> ${locale.value === "fr" ? "English" : "Français"}`
+);
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div class="paragraph-container">
-        <div 
-            v-if="stringHasValue(props.paragraphContent)" 
+        <div
+            v-if="stringHasValue(props.paragraphContent)"
             class="paragraph-content"
             :class="props.centerParagraphContent ? 'text-center' : ''"
         >
@@ -9,10 +9,10 @@
         </div>
 
         <div v-if="objectHasValue(props.paragraphAction)">
-            <PageAction 
+            <PageAction
                 :action="props.paragraphAction"
                 @onPageActionClick="emits('onParagraphActionClick')"
-                style="max-width: 270px;"
+                style="max-width: 270px"
             />
         </div>
 

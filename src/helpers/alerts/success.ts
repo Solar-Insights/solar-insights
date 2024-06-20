@@ -9,7 +9,7 @@ export class UserLoginSuccess extends VueAlert {
         code: number = 200
     ) {
         super(type, title, code);
-    } 
+    }
 }
 
 export class UserLogoutSuccess extends VueAlert {
@@ -19,7 +19,7 @@ export class UserLogoutSuccess extends VueAlert {
         code: number = 200
     ) {
         super(type, title, code);
-    } 
+    }
 }
 
 export class OrganizationUserCreationSuccess extends VueAlert {

@@ -10,16 +10,16 @@
         </PageSection>
 
         <PageSection>
-            <ImageContainer 
-                :pcImageSrc="solar_map_pc" 
-                :mobileImageSrc="solar_map_mobile"
-            />
+            <ImageContainer :pcImageSrc="solar_map_pc" :mobileImageSrc="solar_map_mobile" />
         </PageSection>
 
         <PageSection>
-            <PageSubtitleContainer 
+            <PageSubtitleContainer
                 :pageSubtitle="$t(`home.usecase-subtitle-container.subtitle`)"
-                :pageSubtitleAction="{ text: $t(`home.usecase-subtitle-container.action`), icon: `mdi-send-variant-outline` }"
+                :pageSubtitleAction="{
+                    text: $t(`home.usecase-subtitle-container.action`),
+                    icon: `mdi-send-variant-outline`
+                }"
                 @onPageSubtitleActionClick="router.push({ name: 'pricing' })"
             >
                 <ShortDescriptionItemsContainer>

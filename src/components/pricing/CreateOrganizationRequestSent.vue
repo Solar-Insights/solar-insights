@@ -1,34 +1,18 @@
 <template>
-    <v-dialog
-        v-model="dialog"
-        persistent
-        max-width="600"
-    >
+    <v-dialog v-model="dialog" persistent max-width="600">
         <CardContainerDialog
             :dialogTitle="$t(`pricing.create-org-confirmation.title`)"
             :dialogIcon="`mdi-account-multiple-plus-outline`"
             :dialogCancelButton="$t(`pricing.create-org-confirmation.cancel-action`)"
             @closeButtonClicked="closeDialog"
         >
-            <ParagraphContainer 
-                class="w-100"
-                :paragraphContent="$t(`pricing.create-org-confirmation.paragraph-1`)"
-            />
+            <ParagraphContainer class="w-100" :paragraphContent="$t(`pricing.create-org-confirmation.paragraph-1`)" />
 
-            <ParagraphContainer 
-                class="w-100"
-                :paragraphContent="$t(`pricing.create-org-confirmation.paragraph-2`)"
-            />
+            <ParagraphContainer class="w-100" :paragraphContent="$t(`pricing.create-org-confirmation.paragraph-2`)" />
 
-            <ParagraphContainer 
-                class="w-100 font-weight-bold"
-                :paragraphContent="requesterEmail"
-            />
+            <ParagraphContainer class="w-100 font-weight-bold" :paragraphContent="requesterEmail" />
 
-            <ParagraphContainer 
-                class="w-100"
-                :paragraphContent="$t(`pricing.create-org-confirmation.paragraph-3`)"
-            />
+            <ParagraphContainer class="w-100" :paragraphContent="$t(`pricing.create-org-confirmation.paragraph-3`)" />
         </CardContainerDialog>
     </v-dialog>
 </template>
@@ -63,6 +47,6 @@ watch(
 
 function closeDialog() {
     emits("dialogWasClosed");
-    dialog.value = false
+    dialog.value = false;
 }
 </script>
