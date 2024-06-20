@@ -18,8 +18,8 @@
         "theme": "Theme",
         "user": "User",
         "settings": "Settings",
-        "get-started": "Get started",
-        "my-organization": "My organization",
+        "get-started": "Get Started",
+        "my-organization": "My Organization",
         "pricing": "Pricing"
     },
     "alerts": {
@@ -108,8 +108,8 @@
     "general": {
         "user-menu": {
             "signin-title": "Use your Solar Insight's account",
-            "signin": "Sign in",
-            "signout": "Sign out"
+            "signin": "Sign In",
+            "signout": "Sign Out"
         },
         "quick-settings": {
             "title": "Settings",
@@ -246,7 +246,7 @@
         "page-title-container": {
             "title": "Drive adoption of solar energy with Solar Insights",
             "description": "Easy to use, highly adaptive, and accurate. Observe the viability of solar installations in one single search.",
-            "action": "How to Get Started"
+            "action": "How to get started"
         },
         "usecase-subtitle-container": {
             "subtitle": "Why Solar Insights?",
@@ -279,7 +279,7 @@
             "subtitle": "1. Create an organization",
             "precision": "Choose a pricing plan aligned with your needs and gain access to every Solar Insights' features",
             "create-an-org-paragraph": {
-                "action": "Visit the Pricing page"
+                "action": "Choose your plan"
             }
         },
         "register-subtitle-container": {
