@@ -129,6 +129,15 @@
     width: 250px;
 }
 
+.page-action {
+    @extend .px-4;
+    @extend .py-5;
+    @extend .rounded-lg;
+    @extend .mx-auto;
+    @extend .text-center;
+    font-size: 0.95rem;
+}
+
 .page-subtitle-container {
     @extend .mx-auto;
     width: 95%;
@@ -182,7 +191,7 @@
 }
 
 .short-description-item-content {
-    @extend .normal-page-content-font;
+    font-size: 0.95rem;
     @extend .mb-5;
 }
 
@@ -196,12 +205,6 @@
 .paragraph-content {
     @extend .normal-page-content-font;
     @extend .mb-3;
-}
-
-.paragraph-action {
-    @extend .rounded-lg; 
-    @extend .font-weight-medium;
-    @extend .mx-auto;
 }
 
 .footer {
