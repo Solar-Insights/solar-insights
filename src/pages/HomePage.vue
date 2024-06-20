@@ -4,8 +4,8 @@
             <PageTitleContainer
                 :pageTitle="$t(`home.page-title-container.title`)"
                 :pageTitlePrecision="$t(`home.page-title-container.description`)"
-                :pageTitleAction="{ text: $t(`home.page-title-container.action`), icon: `mdi-send-variant-outline` }"
-                @onPageTitleActionClick="router.push({ name: 'pricing' })"
+                :pageTitleAction="{ text: $t(`home.page-title-container.action`), icon: `mdi-rocket-launch-outline` }"
+                @onPageTitleActionClick="router.push({ name: 'get-started' })"
             />
         </PageSection>
 
@@ -17,7 +17,11 @@
         </PageSection>
 
         <PageSection>
-            <PageSubtitleContainer :pageSubtitle="$t(`home.usecase-subtitle-container.subtitle`)">
+            <PageSubtitleContainer 
+                :pageSubtitle="$t(`home.usecase-subtitle-container.subtitle`)"
+                :pageSubtitleAction="{ text: $t(`home.usecase-subtitle-container.action`), icon: `mdi-send-variant-outline` }"
+                @onPageSubtitleActionClick="router.push({ name: 'pricing' })"
+            >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
                         :itemTitle="$t(`home.usecase-subtitle-container.visualize.title`)"

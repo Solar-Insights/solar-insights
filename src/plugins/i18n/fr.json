@@ -246,10 +246,11 @@
         "page-title-container": {
             "title": "Propulser l'adoption de l'énergie solaire avec Solar Insights",
             "description": "Intuitif, hautement adaptif et précis. Observer la viabilité d'une installation de panneaux solaires en une simple recherche.",
-            "action": "Choisissez votre plan"
+            "action": "Comment se lancer"
         },
         "usecase-subtitle-container": {
             "subtitle": "Pourquoi Solar Insights?",
+            "action": "Choisissez votre plan",
             "visualize": {
                 "title": "Visualiser des données solaires précises",
                 "description": "Obtenez des estimations sur le positionnement optimal de panneaux solaires d'un bâtiment. Aussi, visualiser des données relatives à l'ensoleillement de la toiture."
@@ -311,7 +312,7 @@
                 "start-using": {
                     "title": "Commencer l'utilisation",
                     "description": "Faites une recherche de bâtiment dès maintenant pour bénéficier de tout ce que Solar Insights peut vous offrir.",
-                    "action": "Page de Potentiel solaire"
+                    "action": "Analysez une installation solaire"
                 }
             }
         },

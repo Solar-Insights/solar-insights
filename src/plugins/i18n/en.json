@@ -246,10 +246,11 @@
         "page-title-container": {
             "title": "Drive adoption of solar energy with Solar Insights",
             "description": "Easy to use, highly adaptive, and accurate. Observe the viability of solar installations in one single search.",
-            "action": "Choose your plan"
+            "action": "How to Get Started"
         },
         "usecase-subtitle-container": {
             "subtitle": "Why Solar Insights?",
+            "action": "Choose your plan",
             "visualize": {
                 "title": "Visualize accurate solar data",
                 "description": "Get estimates on the optimal positioning of solar panels for a building. Also, visualize data regarding a roof's sunlight exposure."
@@ -311,7 +312,7 @@
                 "start-using": {
                     "title": "Get started",
                     "description": "Start a building research now to benefit from everything Solar Insights has to offer.",
-                    "action": "Solar Potential page"
+                    "action": "Analyze a solar installation"
                 }
             }
         },

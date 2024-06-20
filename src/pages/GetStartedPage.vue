@@ -17,6 +17,16 @@
                 :pageSubtitle="$t(`get-started.choose-a-plan-subtitle-container.subtitle`)"
                 :pageSubtitlePrecision="$t(`get-started.choose-a-plan-subtitle-container.precision`)"
             >
+                <ParagraphContainer
+                    class="text-center mx-auto"
+                    :paragraphContent="``"
+                    :paragraphAction="{
+                        text: $t(`get-started.choose-a-plan-subtitle-container.create-an-org-paragraph.action`),
+                        icon: `mdi-currency-usd`
+                    }"
+                    @onParagraphActionClick="router.push({ name: `pricing` })"
+                />
+
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
                         :itemTitle="$t(`pricing.pricing-cards.starter.name`)"
@@ -37,14 +47,6 @@
                         :itemIconColor="`theme`"
                     />
                 </ShortDescriptionItemsContainer>
-                <ParagraphContainer
-                    class="text-center mx-auto"
-                    :paragraphContent="``"
-                    :paragraphAction="{
-                        text: $t(`get-started.choose-a-plan-subtitle-container.create-an-org-paragraph.action`),
-                    }"
-                    @onParagraphActionClick="router.push({ name: `pricing` })"
-                />
             </PageSubtitleContainer>
         </PageSection>
 
@@ -95,7 +97,8 @@
                         :itemIcon="`mdi-account-outline`"
                         :itemIconColor="`theme`"
                         :itemAction="{
-                            text: $t('get-started.use-solar-insights-subtitle-container.short-items.new-org.action')
+                            text: $t('get-started.use-solar-insights-subtitle-container.short-items.new-org.action'),
+                            icon: `mdi-login`
                         }"
                         @onItemActionClick="loginUser"
                     />
@@ -109,7 +112,8 @@
                         :itemIcon="`mdi-play`"
                         :itemIconColor="`theme`"
                         :itemAction="{
-                            text: $t('get-started.use-solar-insights-subtitle-container.short-items.start-using.action')
+                            text: $t('get-started.use-solar-insights-subtitle-container.short-items.start-using.action'),
+                            icon: `mdi-weather-sunny`
                         }"
                         @onItemActionClick="router.push({ name: `search` })"
                     />
