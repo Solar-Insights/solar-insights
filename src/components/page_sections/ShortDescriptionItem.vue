@@ -13,21 +13,10 @@
         </div>
 
         <div v-if="objectHasValue(props.itemAction)" class="short-description-single-item-action">
-            <v-card
-                @click="emits('onItemActionClick')"
-                class="py-5 px-6 rounded-lg mx-auto text-center"
-                elevation="2"
-                color="theme"
-            >
-                <v-row class="pa-0">
-                    <v-col class="pa-0 mx-auto" cols="9">
-                        <div class="font-weight-medium">{{ props.itemAction?.text }}</div>
-                    </v-col>
-                    <v-col v-if="stringHasValue(props.itemAction?.icon)" class="pa-0" cols="3" align-self="center">
-                        <v-icon>{{ props.itemAction?.icon }}</v-icon>
-                    </v-col>
-                </v-row>
-            </v-card>
+            <PageAction 
+                :action="props.itemAction"
+                @onPageActionClick="emits('onItemActionClick')"
+            />
         </div>
     </v-col>
 </template>
@@ -36,6 +25,7 @@
 import { stringHasValue, objectHasValue } from "@/helpers/componentConditionals";
 import { ButtonAction } from "@/helpers/types";
 import { PropType } from "vue";
+import PageAction from "@/components/page_sections/PageAction.vue";
 
 const props = defineProps({
     itemTitle: {

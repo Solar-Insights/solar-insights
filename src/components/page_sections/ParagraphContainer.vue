@@ -9,15 +9,11 @@
         </div>
 
         <div v-if="objectHasValue(props.paragraphAction)">
-            <v-btn
-                @click="emits('onParagraphActionClick')"
-                class="paragraph-action"
-                elevation="2"
-                color="theme"
-                :append-icon="props.paragraphAction?.icon"
-            >
-                {{ props.paragraphAction?.text }}
-            </v-btn>
+            <PageAction 
+                :action="props.paragraphAction"
+                @onPageActionClick="emits('onParagraphActionClick')"
+                style="max-width: 270px;"
+            />
         </div>
 
         <slot></slot>
@@ -28,6 +24,7 @@
 import { ButtonAction } from "@/helpers/types";
 import { stringHasValue, objectHasValue } from "@/helpers/componentConditionals";
 import { PropType } from "vue";
+import PageAction from "@/components/page_sections/PageAction.vue";
 
 const props = defineProps({
     paragraphContent: {
