@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { VueAlert } from "@/helpers/alerts/default";
 import { Theme, Locale } from "@/helpers/types";
 import { toast } from "vuetify-sonner";
-import { i18n } from "@/plugins/i18n/i18n";
+import { i18n } from "@/i18n/i18n";
 import { getAlertDurationTime, matchIconToAlertType } from "@/helpers/alerts/components";
 
 export const useUserSessionStore = defineStore("userSessionStore", {

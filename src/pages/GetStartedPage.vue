@@ -160,7 +160,7 @@ import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vu
 import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 import ShortDescriptionItem from "@/components/page_sections/ShortDescriptionItem.vue";
 import ShortDescriptionItemsContainer from "@/components/page_sections/ShortDescriptionItemsContainer.vue";
-import router from "@/plugins/router";
+import router from "@/router/router";
 import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
 
 import { useAuth0 } from "@auth0/auth0-vue";

@@ -1,7 +1,7 @@
 import { FormError } from "@/helpers/alerts/errors";
 import { CreateOrganizationFormSuccess } from "@/helpers/alerts/success";
 import { NewOrganizationForm } from "@/helpers/types";
-import AxiosInstance from "@/plugins/axios";
+import AxiosInstance from "@/api/axios";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 
 export async function postCreateOrganizationForm(form: NewOrganizationForm) {

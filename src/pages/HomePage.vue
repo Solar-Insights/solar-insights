@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import router from "@/plugins/router";
+import router from "@/router/router";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
 import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";

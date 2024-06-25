@@ -3,7 +3,7 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import router from "@/plugins/router";
+import router from "@/router/router";
 import { UserLoginSuccess, UserLogoutSuccess } from "@/helpers/alerts/success";
 import { RouteLocationNormalizedLoaded } from "vue-router";
 

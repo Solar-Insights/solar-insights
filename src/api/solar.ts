@@ -7,7 +7,7 @@ import {
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, GeoTiff, SolarLayers } from "geo-env-typing/solar";
-import AxiosInstance from "@/plugins/axios";
+import AxiosInstance from "@/api/axios";
 
 export async function getClosestBuildingInsights(coord: LatLng) {
     return await AxiosInstance({

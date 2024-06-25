@@ -1,6 +1,6 @@
 import { ValidationRuleWithParams } from "@vuelidate/core";
 import { helpers, maxLength, minLength, email, required } from "@vuelidate/validators";
-import { i18n } from "@/plugins/i18n/i18n";
+import { i18n } from "@/i18n/i18n";
 
 const VALIDATORS_I18N_PREFIX = "validators";
 

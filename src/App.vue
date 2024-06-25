@@ -19,7 +19,7 @@ import AlertContainer from "@/components/general/AlertContainer.vue";
 import AppBar from "@/components/general/appbar/AppBar.vue";
 import AppFooter from "@/components/general/footer/AppFooter.vue";
 import { computed, onMounted } from "vue";
-import { i18n } from "@/plugins/i18n/i18n";
+import { i18n } from "@/i18n/i18n";
 
 const currentRoute = useRoute();
 const userSessionStore = useUserSessionStore();

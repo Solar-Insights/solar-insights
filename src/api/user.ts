@@ -5,7 +5,7 @@ import {
     OrganizationUserDeletionError
 } from "@/helpers/alerts/errors";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import AxiosInstance from "@/plugins/axios";
+import AxiosInstance from "@/api/axios";
 import {
     MyOrganization,
     MyOrganizationAdminDetails,

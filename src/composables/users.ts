@@ -1,7 +1,6 @@
 import { auth0 } from "@/plugins/auth";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import router from "@/plugins/router";
-import { UserLogoutSuccess } from "@/helpers/alerts/success";
+import router from "@/router/router";
 
 export function handleUserState() {
     const userSessionStore = useUserSessionStore();

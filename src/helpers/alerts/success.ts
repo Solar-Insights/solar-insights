@@ -1,5 +1,5 @@
 import { AlertType } from "@/helpers/types";
-import { i18n } from "@/plugins/i18n/i18n";
+import { i18n } from "@/i18n/i18n";
 import { VueAlert } from "@/helpers/alerts/default";
 
 export class UserLoginSuccess extends VueAlert {
