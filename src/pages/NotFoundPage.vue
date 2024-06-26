@@ -19,4 +19,11 @@ import router from "@/router/router";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
 import PageContainer from "@/components/page_sections/PageContainer.vue";
+import { useHead } from "unhead";
+import { NOT_FOUND } from "@/router/routes";
+
+useHead({
+    title: NOT_FOUND.en.head.title,
+    meta: NOT_FOUND.en.head.meta,
+});
 </script>

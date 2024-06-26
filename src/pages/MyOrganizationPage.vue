@@ -32,6 +32,13 @@ import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vu
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageContainer from "@/components/page_sections/PageContainer.vue";
 import { stringHasValue } from "@/helpers/componentConditionals";
+import { useHead } from "unhead";
+import { MY_ORGANIZATION } from "@/router/routes";
+
+useHead({
+    title: MY_ORGANIZATION.en.head.title,
+    meta: MY_ORGANIZATION.en.head.meta,
+});
 
 const { user } = useAuth0();
 

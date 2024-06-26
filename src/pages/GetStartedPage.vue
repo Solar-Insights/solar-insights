@@ -162,11 +162,16 @@ import ShortDescriptionItem from "@/components/page_sections/ShortDescriptionIte
 import ShortDescriptionItemsContainer from "@/components/page_sections/ShortDescriptionItemsContainer.vue";
 import router from "@/router/router";
 import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
-
 import { useAuth0 } from "@auth0/auth0-vue";
 import { handleUserState } from "@/composables/users";
-import PageTitleAction from "@/components/page_sections/PageTitleAction.vue";
+import { useHead } from "unhead";
+import { GET_STARTED } from "@/router/routes";
+
+useHead({
+    title: GET_STARTED.en.head.title,
+    meta: GET_STARTED.en.head.meta,
+});
 
 const { loginUser } = handleUserState();
-const { isLoading, isAuthenticated, user } = useAuth0();
+const { isAuthenticated } = useAuth0();
 </script>

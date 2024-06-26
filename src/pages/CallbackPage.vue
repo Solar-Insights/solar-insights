@@ -6,6 +6,13 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 import router from "@/router/router";
 import { UserLoginSuccess, UserLogoutSuccess } from "@/helpers/alerts/success";
 import { RouteLocationNormalizedLoaded } from "vue-router";
+import { useHead } from "unhead";
+import { CALLBACK } from "@/router/routes";
+
+useHead({
+    title: CALLBACK.en.head.title,
+    meta: CALLBACK.en.head.meta,
+});
 
 const userSessionStore = useUserSessionStore();
 

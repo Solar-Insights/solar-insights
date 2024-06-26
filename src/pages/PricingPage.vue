@@ -99,9 +99,15 @@ import {
     PRICE_PER_REQUEST,
     PRICE_PER_ADDITIONAL_USER
 } from "@/helpers/pricingConstants";
+import { useHead } from "unhead";
+import { PRICING } from "@/router/routes";
+
+useHead({
+    title: PRICING.en.head.title,
+    meta: PRICING.en.head.meta,
+});
 
 const t = useI18n().t;
-const tm = useI18n().tm;
 const userSessionStore = useUserSessionStore();
 
 const pricingCards = computed(() => {

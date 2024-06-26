@@ -66,6 +66,13 @@ import customize_installation_pc from "@/assets/images/search/customize_installa
 import solar_insights_mobile from "@/assets/images/search/solar_insights_mobile.png";
 import customize_installation_mobile from "@/assets/images/search/customize_installation_mobile.png";
 import ImageContainer from "@/components/page_sections/ImageContainer.vue";
+import { useHead } from "unhead";
+import { SEARCH } from "@/router/routes";
+
+useHead({
+    title: SEARCH.en.head.title,
+    meta: SEARCH.en.head.meta,
+});
 
 const { loginUser } = handleUserState();
 

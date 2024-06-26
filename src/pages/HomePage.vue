@@ -64,4 +64,11 @@ import ShortDescriptionItemsContainer from "@/components/page_sections/ShortDesc
 import ImageContainer from "@/components/page_sections/ImageContainer.vue";
 import solar_map_pc from "@/assets/images/home/solar_map_pc.png";
 import solar_map_mobile from "@/assets/images/home/solar_map_mobile.png";
+import { useHead } from "unhead";
+import { HOME } from "@/router/routes";
+
+useHead({
+    title: HOME.en.head.title,
+    meta: HOME.en.head.meta,
+});
 </script>

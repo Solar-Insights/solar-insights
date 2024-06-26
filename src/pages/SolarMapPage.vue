@@ -22,6 +22,13 @@ import { LatLng, validCoordinates } from "geo-env-typing/geo";
 import { getReverseGeocoding } from "@/api/geo";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { useI18n } from "vue-i18n";
+import { useHead } from "unhead";
+import { SOLAR_MAP } from "@/router/routes";
+
+useHead({
+    title: SOLAR_MAP.en.head.title,
+    meta: SOLAR_MAP.en.head.meta,
+});
 
 const route = useRoute();
 const solarMapStore = useSolarMapStore();
