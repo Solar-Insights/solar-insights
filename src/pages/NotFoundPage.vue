@@ -26,9 +26,4 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 const userSessionStore = useUserSessionStore();
 
 useHead(headSelector(NOT_FOUND, userSessionStore.locale));
-
-useHead({
-    title: NOT_FOUND.en.head.title,
-    meta: NOT_FOUND.en.head.meta,
-});
 </script>

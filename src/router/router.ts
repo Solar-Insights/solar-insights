@@ -53,7 +53,7 @@ const router = createRouter({
         {
             path: NOT_FOUND.en.path,
             name: NOT_FOUND.en.name,
-            component: () => import("@/pages/NotFound.vue"),
+            component: () => import("@/pages/NotFoundPage.vue"),
             beforeEnter: []
         },
         {
