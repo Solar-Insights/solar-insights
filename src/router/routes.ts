@@ -43,11 +43,11 @@ export const HOME: RouteInfo = {
         name: PageName.HOME,
         path: PageRoute.HOME,
         head: {
-            title: "Home",
+            title: "Solar Insights - Drive adoption of solar energy",
             meta: [
                 { 
                     name: "description", 
-                    content: "Welcome to the home page" 
+                    content: "Discover SOLAR INSIGHTS - Easy to use, highly adaptive, and accurate. Observe the viability of solar installations in one single search." 
                 }
             ]
         }
@@ -56,11 +56,11 @@ export const HOME: RouteInfo = {
         name: PageName.HOME,
         path: PageRoute.HOME,
         head: {
-            title: "Accueil",
+            title: "Solar Insights - Propulser l'adoption de l'énergie solaire",
             meta: [
                 { 
                     name: "description", 
-                    content: "Bienvenue sur la page d'accueil" 
+                    content: "Découvrez SOLAR INSIGHTS - Intuitif, hautement adaptif et précis. Observer la viabilité d'une installation de panneaux solaires en une simple recherche." 
                 }
             ]
         }
@@ -72,7 +72,7 @@ export const SEARCH: RouteInfo = {
         name: PageName.SEARCH,
         path: PageRoute.SEARCH,
         head: {
-            title: "Search",
+            title: "Search - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -85,7 +85,7 @@ export const SEARCH: RouteInfo = {
         name: PageName.SEARCH,
         path: PageRoute.SEARCH,
         head: {
-            title: "Recherche",
+            title: "Recherche - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -101,7 +101,7 @@ export const SOLAR_MAP: RouteInfo = {
         name: PageName.SOLAR_MAP,
         path: PageRoute.SOLAR_MAP,
         head: {
-            title: "Solar Map",
+            title: "Solar Map - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -114,7 +114,7 @@ export const SOLAR_MAP: RouteInfo = {
         name: PageName.SOLAR_MAP,
         path: PageRoute.SOLAR_MAP,
         head: {
-            title: "Carte Solaire",
+            title: "Carte solaire - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -130,7 +130,7 @@ export const GET_STARTED: RouteInfo = {
         name: PageName.GET_STARTED,
         path: PageRoute.GET_STARTED,
         head: {
-            title: "Get Started",
+            title: "Get Started - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -143,7 +143,7 @@ export const GET_STARTED: RouteInfo = {
         name: PageName.GET_STARTED,
         path: PageRoute.GET_STARTED,
         head: {
-            title: "Commencer",
+            title: "Lancez-vous - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -159,7 +159,7 @@ export const MY_ORGANIZATION: RouteInfo = {
         name: PageName.MY_ORGANIZATION,
         path: PageRoute.MY_ORGANIZATION,
         head: {
-            title: "My Organization",
+            title: "My Organization - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -172,7 +172,7 @@ export const MY_ORGANIZATION: RouteInfo = {
         name: PageName.MY_ORGANIZATION,
         path: PageRoute.MY_ORGANIZATION,
         head: {
-            title: "Mon Organisation",
+            title: "Mon organisation - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -188,7 +188,7 @@ export const PRICING: RouteInfo = {
         name: PageName.PRICING,
         path: PageRoute.PRICING,
         head: {
-            title: "Pricing",
+            title: "Pricing - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -201,7 +201,7 @@ export const PRICING: RouteInfo = {
         name: PageName.PRICING,
         path: PageRoute.PRICING,
         head: {
-            title: "Tarification",
+            title: "Tarification - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -217,7 +217,7 @@ export const CALLBACK: RouteInfo = {
         name: PageName.CALLBACK,
         path: PageRoute.CALLBACK,
         head: {
-            title: "Callback",
+            title: "Callback - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -230,7 +230,7 @@ export const CALLBACK: RouteInfo = {
         name: PageName.CALLBACK,
         path: PageRoute.CALLBACK,
         head: {
-            title: "Rappel",
+            title: "Rappel - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -246,7 +246,7 @@ export const NOT_FOUND: RouteInfo = {
         name: PageName.NOT_FOUND,
         path: PageRoute.NOT_FOUND,
         head: {
-            title: "Not Found",
+            title: "Page Not Found - Solar Insights",
             meta: [
                 { 
                     name: "description", 
@@ -259,7 +259,7 @@ export const NOT_FOUND: RouteInfo = {
         name: PageName.NOT_FOUND,
         path: PageRoute.NOT_FOUND,
         head: {
-            title: "Introuvable",
+            title: "Page introuvable - Solar Insights",
             meta: [
                 { 
                     name: "description", 
