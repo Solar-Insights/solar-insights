@@ -136,7 +136,7 @@
             "dec": "déc."
         }
     },
-    "catch-all": {
+    "not-found": {
         "oops": "Oups!",
         "404": "404 - Page introuvable",
         "message": "La page que vous recherchiez a peut-être changé de nom, été supprimée, ou est temporairement inaccessible.",

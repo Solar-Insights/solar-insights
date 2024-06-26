@@ -1,13 +1,13 @@
 <template>
     <PageContainer>
         <PageSection>
-            <PageTitleContainer :pageTitle="$t(`catch-all.oops`)" :pageTitlePrecision="$t(`catch-all.404`)">
+            <PageTitleContainer :pageTitle="$t(`not-found.oops`)" :pageTitlePrecision="$t(`not-found.404`)">
                 <v-btn :to="{ name: 'home' }" class="px-4 mx-4 my-3" color="theme" variant="flat" size="large" rounded>
-                    {{ $t(`catch-all.home-button`) }}
+                    {{ $t(`not-found.home-button`) }}
                 </v-btn>
 
                 <v-btn @click="router.back()" class="px-4 mx-4 my-3" color="theme" variant="flat" size="large" rounded>
-                    {{ $t(`catch-all.back-button`) }}
+                    {{ $t(`not-found.back-button`) }}
                 </v-btn>
             </PageTitleContainer>
         </PageSection>

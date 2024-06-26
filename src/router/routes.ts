@@ -76,7 +76,7 @@ export const SEARCH: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "Search for locations" 
+                    content: "Quickly find your next solar panel installation with a single request by address." 
                 }
             ]
         }
@@ -89,7 +89,7 @@ export const SEARCH: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "Rechercher des emplacements" 
+                    content: "Trouvez rapidement votre prochaine installation de panneaux solaires avec une simple requête par adresse." 
                 }
             ]
         }
@@ -105,7 +105,7 @@ export const SOLAR_MAP: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "View the solar map" 
+                    content: "Visualize, customize and optimize solar panel installations with up-to-date solar and financial data." 
                 }
             ]
         }
@@ -118,7 +118,7 @@ export const SOLAR_MAP: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "Voir la carte solaire" 
+                    content: "Visualisez, modifiez et optimisez des installations de panneaux solaires avec des données solaires et financières à jour." 
                 }
             ]
         }
@@ -134,7 +134,7 @@ export const GET_STARTED: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "Get started with our services" 
+                    content: "A quick guide to kickstart your journey on Solar Insights." 
                 }
             ]
         }
@@ -147,7 +147,7 @@ export const GET_STARTED: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "Commencez avec nos services" 
+                    content: "Une introduction en quelques étapes à votre séjour sur Solar Insights." 
                 }
             ]
         }
@@ -163,7 +163,7 @@ export const MY_ORGANIZATION: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "View my organization details" 
+                    content: "Manage your organization and find out more about it." 
                 }
             ]
         }
@@ -176,7 +176,7 @@ export const MY_ORGANIZATION: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "Voir les détails de mon organisation" 
+                    content: "Gérez votre organisation et découvrez-en plus sur celle-ci." 
                 }
             ]
         }
@@ -192,7 +192,7 @@ export const PRICING: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "View pricing details" 
+                    content: "Simple and unsurpricing pricing. Pay only for what you need, and nothing more." 
                 }
             ]
         }
@@ -205,7 +205,7 @@ export const PRICING: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "Voir les détails des prix" 
+                    content: "Une tarification simple et sans surprise. Payez seulement pour ce que vous utilisez, et rien de plus." 
                 }
             ]
         }
@@ -221,7 +221,7 @@ export const CALLBACK: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "Callback page" 
+                    content: "Get redirected to the right place on our site." 
                 }
             ]
         }
@@ -234,7 +234,7 @@ export const CALLBACK: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "Page de rappel" 
+                    content: "Soyez rediriger à la bonne place sur notre site." 
                 }
             ]
         }
@@ -250,7 +250,7 @@ export const NOT_FOUND: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "Page not found" 
+                    content: "The page your are looking fore might have been deleted." 
                 }
             ]
         }
@@ -263,7 +263,7 @@ export const NOT_FOUND: RouteInfo = {
             meta: [
                 { 
                     name: "description", 
-                    content: "Page non trouvée" 
+                    content: "La page que vous recherchiez a peut-être été supprimée." 
                 }
             ]
         }
