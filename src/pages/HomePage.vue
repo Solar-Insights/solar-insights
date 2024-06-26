@@ -65,10 +65,10 @@ import ImageContainer from "@/components/page_sections/ImageContainer.vue";
 import solar_map_pc from "@/assets/images/home/solar_map_pc.png";
 import solar_map_mobile from "@/assets/images/home/solar_map_mobile.png";
 import { useHead } from "unhead";
-import { HOME } from "@/router/routes";
+import { headSelector, HOME } from "@/router/routes";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 
-useHead({
-    title: HOME.en.head.title,
-    meta: HOME.en.head.meta,
-});
+const userSessionStore = useUserSessionStore();
+
+useHead(headSelector(HOME, userSessionStore.locale));
 </script>

@@ -23,15 +23,15 @@ import { getReverseGeocoding } from "@/api/geo";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { useI18n } from "vue-i18n";
 import { useHead } from "unhead";
-import { SOLAR_MAP } from "@/router/routes";
+import { headSelector, SOLAR_MAP } from "@/router/routes";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 
-useHead({
-    title: SOLAR_MAP.en.head.title,
-    meta: SOLAR_MAP.en.head.meta,
-});
+const userSessionStore = useUserSessionStore();
+const solarMapStore = useSolarMapStore();
+
+useHead(headSelector(SOLAR_MAP, userSessionStore.locale));
 
 const route = useRoute();
-const solarMapStore = useSolarMapStore();
 const t = useI18n().t;
 
 const requestAddress = ref<string>("");

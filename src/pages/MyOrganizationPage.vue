@@ -33,12 +33,12 @@ import PageSection from "@/components/page_sections/PageSection.vue";
 import PageContainer from "@/components/page_sections/PageContainer.vue";
 import { stringHasValue } from "@/helpers/componentConditionals";
 import { useHead } from "unhead";
-import { MY_ORGANIZATION } from "@/router/routes";
+import { headSelector, MY_ORGANIZATION } from "@/router/routes";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 
-useHead({
-    title: MY_ORGANIZATION.en.head.title,
-    meta: MY_ORGANIZATION.en.head.meta,
-});
+const userSessionStore = useUserSessionStore();
+
+useHead(headSelector(MY_ORGANIZATION, userSessionStore.locale));
 
 const { user } = useAuth0();
 

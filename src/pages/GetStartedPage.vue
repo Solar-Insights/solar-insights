@@ -165,12 +165,12 @@ import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vu
 import { useAuth0 } from "@auth0/auth0-vue";
 import { handleUserState } from "@/composables/users";
 import { useHead } from "unhead";
-import { GET_STARTED } from "@/router/routes";
+import { GET_STARTED, headSelector } from "@/router/routes";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 
-useHead({
-    title: GET_STARTED.en.head.title,
-    meta: GET_STARTED.en.head.meta,
-});
+const userSessionStore = useUserSessionStore();
+
+useHead(headSelector(GET_STARTED, userSessionStore.locale));
 
 const { loginUser } = handleUserState();
 const { isAuthenticated } = useAuth0();

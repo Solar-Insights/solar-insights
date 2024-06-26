@@ -7,14 +7,11 @@ import router from "@/router/router";
 import { UserLoginSuccess, UserLogoutSuccess } from "@/helpers/alerts/success";
 import { RouteLocationNormalizedLoaded } from "vue-router";
 import { useHead } from "unhead";
-import { CALLBACK } from "@/router/routes";
-
-useHead({
-    title: CALLBACK.en.head.title,
-    meta: CALLBACK.en.head.meta,
-});
+import { CALLBACK, headSelector } from "@/router/routes";
 
 const userSessionStore = useUserSessionStore();
+
+useHead(headSelector(CALLBACK, userSessionStore.locale));
 
 onMounted(() => {
     if (userJustLoggedIn(router.currentRoute.value)) {

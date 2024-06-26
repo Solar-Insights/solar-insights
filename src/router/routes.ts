@@ -269,3 +269,7 @@ export const NOT_FOUND: RouteInfo = {
         }
     }
 }
+
+export function headSelector(route: RouteInfo, locale: Locale) {
+    return route[locale].head;
+}

@@ -67,12 +67,12 @@ import solar_insights_mobile from "@/assets/images/search/solar_insights_mobile.
 import customize_installation_mobile from "@/assets/images/search/customize_installation_mobile.png";
 import ImageContainer from "@/components/page_sections/ImageContainer.vue";
 import { useHead } from "unhead";
-import { SEARCH } from "@/router/routes";
+import { headSelector, SEARCH } from "@/router/routes";
+import { useUserSessionStore } from "@/stores/userSessionStore";
 
-useHead({
-    title: SEARCH.en.head.title,
-    meta: SEARCH.en.head.meta,
-});
+const userSessionStore = useUserSessionStore();
+
+useHead(headSelector(SEARCH, userSessionStore.locale));
 
 const { loginUser } = handleUserState();
 

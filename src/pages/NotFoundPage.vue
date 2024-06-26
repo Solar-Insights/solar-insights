@@ -20,7 +20,12 @@ import PageSection from "@/components/page_sections/PageSection.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
 import PageContainer from "@/components/page_sections/PageContainer.vue";
 import { useHead } from "unhead";
-import { NOT_FOUND } from "@/router/routes";
+import { headSelector, NOT_FOUND } from "@/router/routes";
+import { useUserSessionStore } from "@/stores/userSessionStore";
+
+const userSessionStore = useUserSessionStore();
+
+useHead(headSelector(NOT_FOUND, userSessionStore.locale));
 
 useHead({
     title: NOT_FOUND.en.head.title,
