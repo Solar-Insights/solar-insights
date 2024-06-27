@@ -5,7 +5,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vue-tsc && vite build",
+        "generate-seo": "npx tsx src/plugins/seo/generation.ts",
+        "build": "vue-tsc && vite build && npm run generate-seo",
         "preview": "vite preview",
         "test:unit": "vitest",
         "format": "prettier --trailing-comma none --tab-width 4 --print-width 120 -uw --cache --ignore-path .prettierignore ."

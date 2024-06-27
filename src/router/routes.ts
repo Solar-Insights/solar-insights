@@ -22,7 +22,7 @@ enum PageRoute {
     NOT_FOUND = "/not-found",
 }
 
-type RouteInfo = {
+export type RouteInfo = {
     [key in Locale]: {
         name: PageName,
         path: string,
