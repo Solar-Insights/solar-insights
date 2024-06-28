@@ -44,7 +44,8 @@ export const useUserSessionStore = defineStore("userSessionStore", {
                     buttonProps: {
                         icon: "mdi-close",
                         color: closeIconColor
-                    }
+                    },
+                    onClick: () => {},
                 }
             });
         },
