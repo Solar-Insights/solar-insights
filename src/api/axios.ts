@@ -1,8 +1,9 @@
 import axios from "axios";
 import { auth0 } from "@/plugins/auth";
+import { VITE_SERVER_URL } from "@/env";
 
 const AxiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_SERVER_URL
+    baseURL: VITE_SERVER_URL
 });
 
 AxiosInstance.interceptors.request.use(
