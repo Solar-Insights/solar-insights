@@ -101,7 +101,7 @@ import { ref } from "vue";
 import AppBarButton from "@/components/general/appbar/AppBarButton.vue";
 import UserMenu from "@/components/general/appbar/UserMenu.vue";
 import SettingsMenu from "@/components/general/appbar/SettingsMenu.vue";
-import logo_nobg from "@/assets/images/general/logo_nobg.png";
+import logo_nobg from "@/assets/images/general/logo_nobg.webp";
 import { routes, menus } from "@/helpers/constants";
 import { RouteInfo } from "@/helpers/types";
 import { useRoute } from "vue-router";
