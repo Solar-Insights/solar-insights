@@ -1,4 +1,4 @@
-export const PRICE_PER_REQUEST = 0.15;
+export const PRICE_PER_REQUEST = 0.25;
 export const PRICE_PER_ADDITIONAL_USER = 5;
 
 export const STARTER_MONTHLY_FIXED_PRICE = 25;
