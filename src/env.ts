@@ -1,3 +1,8 @@
+import { EnvMode } from "@/plugins/logger";
+
+// App
+export const VITE_ENV_MODE: EnvMode = import.meta.env.VITE_ENV_MODE as EnvMode // dev or prod mode to handle logging and other;
+
 // Server
 export const VITE_GOOGLE_API_KEY: string = import.meta.env.VITE_GOOGLE_API_KEY as string; // API Key
 export const VITE_SERVER_URL: string = import.meta.env.VITE_SERVER_URL as string; // Server URL
