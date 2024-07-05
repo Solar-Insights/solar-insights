@@ -7,7 +7,7 @@ import { getAlertDurationTime, matchIconToAlertType } from "@/helpers/alerts/com
 
 export const useUserSessionStore = defineStore("userSessionStore", {
     state: () => ({
-        theme: "light" as Theme,
+        theme: "dark" as Theme,
         locale: "en" as Locale,
         callbackPath: "" as string
     }),
