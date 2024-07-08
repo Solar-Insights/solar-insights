@@ -1,7 +1,5 @@
 <template>
-    <v-row class="footer-sections-container">
-        <v-divider />
-
+    <v-row class="footer-sitemap-container">
         <v-col
             v-for="(section, sectionName) in sections"
             class="footer-section hidden-xs"
@@ -33,15 +31,6 @@
                     </v-expansion-panel-text>
                 </v-expansion-panel>
             </v-expansion-panels>
-        </v-col>
-
-        <v-divider />
-
-        <v-col class="footer-section text-center" cols="12">
-            <div>{{ new Date().getFullYear() }} — Solar Insights</div>
-            <div>
-                {{ $t(`global.slogan`) }}
-            </div>
         </v-col>
     </v-row>
 </template>

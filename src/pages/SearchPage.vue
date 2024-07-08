@@ -45,6 +45,8 @@
                     />
                 </PageLateralSubtitleContainer>
             </PageSection>
+
+            <v-divider v-if="index != steps.length - 1"/>
         </div>
     </PageContainer>
 </template>

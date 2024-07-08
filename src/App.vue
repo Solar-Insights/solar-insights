@@ -6,7 +6,7 @@
             <AlertContainer />
             <router-view :key="currentRoute.fullPath" />
         </v-main>
-
+        
         <AppFooter v-if="displaysAppComponents" />
     </v-app>
 </template>
