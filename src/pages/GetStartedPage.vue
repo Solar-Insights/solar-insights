@@ -14,13 +14,13 @@
 
         <PageSection>
             <PageSubtitleContainer
-                :pageSubtitle="$t(`get-started.choose-a-plan-subtitle-container.subtitle`)"
-                :pageSubtitlePrecision="$t(`get-started.choose-a-plan-subtitle-container.precision`)"
-                :pageSubtitleAction="{
+                :subtitle="$t(`get-started.choose-a-plan-subtitle-container.subtitle`)"
+                :precision="$t(`get-started.choose-a-plan-subtitle-container.precision`)"
+                :action="{
                     text: $t(`get-started.choose-a-plan-subtitle-container.create-an-org-paragraph.action`),
                     icon: `mdi-currency-usd`
                 }"
-                @onPageSubtitleActionClick="router.push({ name: 'pricing' })"
+                @onActionClick="router.push({ name: 'pricing' })"
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
@@ -49,8 +49,8 @@
 
         <PageSection>
             <PageSubtitleContainer
-                :pageSubtitle="$t(`get-started.register-subtitle-container.subtitle`)"
-                :pageSubtitlePrecision="$t(`get-started.register-subtitle-container.precision`)"
+                :subtitle="$t(`get-started.register-subtitle-container.subtitle`)"
+                :precision="$t(`get-started.register-subtitle-container.precision`)"
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
@@ -79,8 +79,8 @@
 
         <PageSection>
             <PageSubtitleContainer
-                :pageSubtitle="$t(`get-started.use-solar-insights-subtitle-container.subtitle`)"
-                :pageSubtitlePrecision="$t(`get-started.use-solar-insights-subtitle-container.precision`)"
+                :subtitle="$t(`get-started.use-solar-insights-subtitle-container.subtitle`)"
+                :precision="$t(`get-started.use-solar-insights-subtitle-container.precision`)"
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
@@ -122,8 +122,8 @@
 
         <PageSection>
             <PageSubtitleContainer
-                :pageSubtitle="$t(`get-started.beyond-solar-insights-subtitle-container.subtitle`)"
-                :pageSubtitlePrecision="$t(`get-started.beyond-solar-insights-subtitle-container.precision`)"
+                :subtitle="$t(`get-started.beyond-solar-insights-subtitle-container.subtitle`)"
+                :precision="$t(`get-started.beyond-solar-insights-subtitle-container.precision`)"
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem

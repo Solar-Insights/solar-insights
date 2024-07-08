@@ -1,27 +1,27 @@
 <template>
     <div class="page-subtitle-container">
-        <div v-if="stringHasValue(props.pageSubtitlePrecontent)" class="page-subtitle-precontent">
-            {{ props.pageSubtitlePrecontent }}
+        <div v-if="stringHasValue(props.precontent)" class="page-subtitle-precontent">
+            {{ props.precontent }}
         </div>
 
-        <div v-if="stringHasValue(props.pageSubtitle)" class="page-subtitle">
-            <v-icon v-if="stringHasValue(props.pageSubtitleIcon)" class="mb-3" size="50">
-                {{ props.pageSubtitleIcon }}
+        <div v-if="stringHasValue(props.subtitle)" class="page-subtitle">
+            <v-icon v-if="stringHasValue(props.icon)" class="mb-3" size="50">
+                {{ props.icon }}
             </v-icon>
 
             <div>
-                {{ props.pageSubtitle }}
+                {{ props.subtitle }}
             </div>
         </div>
 
-        <div v-if="stringHasValue(props.pageSubtitlePrecision)" class="page-subtitle-precision">
-            {{ props.pageSubtitlePrecision }}
+        <div v-if="stringHasValue(props.precision)" class="page-subtitle-precision">
+            {{ props.precision }}
         </div>
 
-        <div v-if="objectHasValue(props.pageSubtitleAction)" class="page-subtitle-action">
+        <div v-if="objectHasValue(props.action)" class="page-subtitle-action">
             <PageAction
-                :action="props.pageSubtitleAction"
-                @onPageActionClick="emits('onPageSubtitleActionClick')"
+                :action="props.action"
+                @onPageActionClick="emits('onActionClick')"
                 style="width: 250px"
             />
         </div>
@@ -39,27 +39,27 @@ import { ButtonAction } from "@/helpers/types";
 import PageAction from "@/components/page_sections/PageAction.vue";
 
 const props = defineProps({
-    pageSubtitlePrecontent: {
+    precontent: {
         type: String,
         required: false
     },
-    pageSubtitle: {
+    subtitle: {
         type: String,
         required: true
     },
-    pageSubtitleIcon: {
+    icon: {
         type: String,
         required: false
     },
-    pageSubtitlePrecision: {
+    precision: {
         type: String,
         required: false
     },
-    pageSubtitleAction: {
+    action: {
         type: Object as PropType<ButtonAction>,
         required: false
     }
 });
 
-const emits = defineEmits(["onPageSubtitleActionClick"]);
+const emits = defineEmits(["onActionClick"]);
 </script>

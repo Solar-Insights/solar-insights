@@ -1,9 +1,9 @@
 <template>
     <v-dialog v-model="dialog" persistent max-width="600">
         <CardContainerDialog
-            :dialogTitle="$t(`pricing.create-org-confirmation.title`)"
-            :dialogIcon="`mdi-account-multiple-plus-outline`"
-            :dialogCancelButton="$t(`pricing.create-org-confirmation.cancel-action`)"
+            :title="$t(`pricing.create-org-confirmation.title`)"
+            :icon="`mdi-account-multiple-plus-outline`"
+            :cancelButton="$t(`pricing.create-org-confirmation.cancel-action`)"
             @closeButtonClicked="closeDialog"
         >
             <ParagraphContainer class="w-100" :paragraphContent="$t(`pricing.create-org-confirmation.paragraph-1`)" />

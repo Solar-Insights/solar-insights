@@ -12,8 +12,8 @@
 
         <PageSection id="usage">
             <PageSubtitleContainer
-                :pageSubtitle="$t(`pricing.usage-pricing-subtitle-container.subtitle`)"
-                :pageSubtitlePrecision="$t(`pricing.usage-pricing-subtitle-container.precision`)"
+                :subtitle="$t(`pricing.usage-pricing-subtitle-container.subtitle`)"
+                :precision="$t(`pricing.usage-pricing-subtitle-container.precision`)"
             >
                 <ParagraphContainer
                     class="mx-auto"
@@ -53,8 +53,8 @@
 
         <PageSection>
             <PageSubtitleContainer
-                :pageSubtitle="$t(`pricing.pricing-model-subtitle-container.subtitle`)"
-                :pageSubtitlePrecision="$t(`pricing.pricing-model-subtitle-container.precision`)"
+                :subtitle="$t(`pricing.pricing-model-subtitle-container.subtitle`)"
+                :precision="$t(`pricing.pricing-model-subtitle-container.precision`)"
             >
                 <ParagraphContainer
                     class="mx-auto"

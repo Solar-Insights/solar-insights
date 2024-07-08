@@ -15,7 +15,7 @@
 
         <PageSection>
             <PageSubtitleContainer
-                :pageSubtitle="$t(`home.usecase-subtitle-container.subtitle`)"
+                :subtitle="$t(`home.usecase-subtitle-container.subtitle`)"
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem

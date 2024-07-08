@@ -2,8 +2,8 @@
     <v-card class="rounded-lg">
         <v-card-title class="mt-3">
             <div class="d-flex">
-                <v-icon>{{ props.dialogIcon }}</v-icon>
-                <div class="ml-4">{{ props.dialogTitle }}</div>
+                <v-icon>{{ props.icon }}</v-icon>
+                <div class="ml-4">{{ props.title }}</div>
             </div>
         </v-card-title>
 
@@ -15,18 +15,18 @@
             <v-spacer></v-spacer>
 
             <v-btn @click="emits(`closeButtonClicked`)" class="font-weight-medium" variant="flat">
-                {{ props.dialogCancelButton }}
+                {{ props.cancelButton }}
             </v-btn>
 
             <v-btn
-                v-if="stringHasValue($props.dialogConfirmButton)"
+                v-if="stringHasValue($props.confirmButton)"
                 @click="emits(`confirmButtonClicked`)"
                 class="font-weight-medium"
                 variant="flat"
                 color="theme"
-                :loading="dialogLoading"
+                :loading="loading"
             >
-                {{ props.dialogConfirmButton }}
+                {{ props.confirmButton }}
             </v-btn>
         </v-card-actions>
     </v-card>
@@ -36,23 +36,23 @@
 import { stringHasValue } from "@/helpers/componentConditionals";
 
 const props = defineProps({
-    dialogTitle: {
+    title: {
         type: String,
         required: true
     },
-    dialogIcon: {
+    icon: {
         type: String,
         required: true
     },
-    dialogCancelButton: {
+    cancelButton: {
         type: String,
         required: true
     },
-    dialogConfirmButton: {
+    confirmButton: {
         type: String,
         required: false
     },
-    dialogLoading: {
+    loading: {
         type: Boolean,
         required: false,
         default: false

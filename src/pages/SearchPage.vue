@@ -26,7 +26,7 @@
 
         <div v-for="(step, index) in steps">
             <PageSection>
-                <PageSubtitleContainer :pageSubtitle="`${index + 1}. ${step.title}`" :pageSubtitleIcon="step.icon">
+                <PageSubtitleContainer :subtitle="`${index + 1}. ${step.title}`" :icon="step.icon">
                     <ParagraphContainer
                         v-for="paragraph in step.contents"
                         :paragraphContent="paragraph"
