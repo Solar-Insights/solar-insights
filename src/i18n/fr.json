@@ -406,22 +406,6 @@
                 }
             }
         },
-        "usage-pricing-subtitle-container": {
-            "subtitle": "Tarification à l'utilisation",
-            "precision": "Plus d'informations sur les coûts variables mensuels",
-            "confusion-paragraph": {
-                "content": "Les coûts variables peuvent être troublant. Laissez-nous vous aider avec cela. Tout ce qui est relatif aux coûts variables figure ci-dessous."
-            },
-            "what-is-included-paragraph": {
-                "content": "Voici une description détaillée de toutes les actions qui seront facturées à l'utilisation et comptabilisées à la fin du mois",
-                "depends-on-the-plan": "Prix / utilisateur supplémentaire dépend du plan choisi",
-                "per-request": "/ requête",
-                "charges": {
-                    "building-insights-request": "Effectuer des requêtes d'analyse d'installation solaire; accéder à la page d'analyse d'installation solaire (la carte)",
-                    "additional-users": "Créer un utilisateur additionnel après avoir atteint les limites du plan, si celui-ci le permet"
-                }
-            }
-        },
         "pricing-model-subtitle-container": {
             "subtitle": "Notre modèle de tarification hybride",
             "precision": "Le raisonnement derrière un mélange de tarification fixe et variable",

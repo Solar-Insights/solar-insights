@@ -406,22 +406,6 @@
                 }
             }
         },
-        "usage-pricing-subtitle-container": {
-            "subtitle": "Usage pricing",
-            "precision": "More info about your monthly variable costs",
-            "confusion-paragraph": {
-                "content": "Variable costs can be confusing. Let us help with that. Belows stands everything you need to know about them."
-            },
-            "what-is-included-paragraph": {
-                "content": "Here is a detailed breakdown of every action that incurs a charge on a monthly bill",
-                "depends-on-the-plan": "Price / additional user depends on the chosen plan",
-                "per-request": "/ request",
-                "charges": {
-                    "building-insights-request": "Making solar installation analysis requests; accessing the solar installation analysis page (the map)",
-                    "additional-users": "Create an additional user after reaching the plan's limit, if the plan allows it"
-                }
-            }
-        },
         "pricing-model-subtitle-container": {
             "subtitle": "Our hybrid pricing model",
             "precision": "The explanation behind a mix of fixed and variable pricing",

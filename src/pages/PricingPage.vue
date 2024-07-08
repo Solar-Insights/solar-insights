@@ -11,66 +11,28 @@
         </PageSection>
 
         <PageSection id="usage">
-            <PageSubtitleContainer
-                :subtitle="$t(`pricing.usage-pricing-subtitle-container.subtitle`)"
-                :precision="$t(`pricing.usage-pricing-subtitle-container.precision`)"
-            >
-                <ParagraphContainer
-                    class="mx-auto"
-                    :paragraphContent="$t(`pricing.usage-pricing-subtitle-container.confusion-paragraph.content`)"
-                />
-
-                <ParagraphContainer
-                    class="mx-auto font-weight-bold"
-                    :paragraphContent="
-                        $t(`pricing.usage-pricing-subtitle-container.what-is-included-paragraph.content`)
-                    "
-                    :centerParagraphContent="true"
-                >
-                    <div>
-                        <v-list>
-                            <v-list-item
-                                v-for="action in incurringActions"
-                                class="mb-2"
-                                prepend-icon="mdi-circle-small"
-                            >
-                                <v-list-item-title
-                                    class="paragraph-content font-weight-thin mb-1"
-                                    style="white-space: normal !important"
-                                >
-                                    {{ action.title }}
-                                </v-list-item-title>
-
-                                <v-list-item-subtitle class="font-weight-bold">
-                                    {{ action.price }}
-                                </v-list-item-subtitle>
-                            </v-list-item>
-                        </v-list>
-                    </div>
-                </ParagraphContainer>
-            </PageSubtitleContainer>
-        </PageSection>
-
-        <PageSection>
-            <PageSubtitleContainer
+            <PageLateralSubtitleContainer
                 :subtitle="$t(`pricing.pricing-model-subtitle-container.subtitle`)"
                 :precision="$t(`pricing.pricing-model-subtitle-container.precision`)"
             >
                 <ParagraphContainer
                     class="mx-auto"
                     :paragraphContent="$t(`pricing.pricing-model-subtitle-container.introduction-paragraph.content`)"
+                    :fullWidth="true"
                 />
 
                 <ParagraphContainer
                     class="mx-auto"
                     :paragraphContent="$t(`pricing.pricing-model-subtitle-container.fixed-costs-paragraph.content`)"
+                    :fullWidth="true"
                 />
 
                 <ParagraphContainer
                     class="mx-auto"
                     :paragraphContent="$t(`pricing.pricing-model-subtitle-container.variable-costs-paragraph.content`)"
+                    :fullWidth="true"
                 />
-            </PageSubtitleContainer>
+            </PageLateralSubtitleContainer>
         </PageSection>
     </PageContainer>
 </template>
@@ -80,6 +42,7 @@ import PageContainer from "@/components/page_sections/PageContainer.vue";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
 import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
+import PageLateralSubtitleContainer from "@/components/page_sections/PageLateralSubtitleContainer.vue";
 import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
 import PricingCard from "@/components/pricing/PricingCard.vue";
 import { PricingCardDetails } from "@/helpers/types";
