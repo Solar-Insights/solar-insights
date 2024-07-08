@@ -16,17 +16,12 @@
             <PageSubtitleContainer
                 :pageSubtitle="$t(`get-started.choose-a-plan-subtitle-container.subtitle`)"
                 :pageSubtitlePrecision="$t(`get-started.choose-a-plan-subtitle-container.precision`)"
+                :pageSubtitleAction="{
+                    text: $t(`get-started.choose-a-plan-subtitle-container.create-an-org-paragraph.action`),
+                    icon: `mdi-currency-usd`
+                }"
+                @onPageSubtitleActionClick="router.push({ name: 'pricing' })"
             >
-                <ParagraphContainer
-                    class="text-center mx-auto"
-                    :paragraphContent="``"
-                    :paragraphAction="{
-                        text: $t(`get-started.choose-a-plan-subtitle-container.create-an-org-paragraph.action`),
-                        icon: `mdi-currency-usd`
-                    }"
-                    @onParagraphActionClick="router.push({ name: `pricing` })"
-                />
-
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
                         :itemTitle="$t(`pricing.pricing-cards.starter.name`)"

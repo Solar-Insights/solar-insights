@@ -5,7 +5,7 @@
         </div>
 
         <div v-if="stringHasValue(props.pageSubtitle)" class="page-subtitle">
-            <v-icon v-if="stringHasValue(props.pageSubtitleIcon)" class="mb-3" size="small">
+            <v-icon v-if="stringHasValue(props.pageSubtitleIcon)" class="mb-3" size="50">
                 {{ props.pageSubtitleIcon }}
             </v-icon>
 
@@ -18,16 +18,16 @@
             {{ props.pageSubtitlePrecision }}
         </div>
 
-        <div class="page-subtitle-content">
-            <slot></slot>
-        </div>
-
         <div v-if="objectHasValue(props.pageSubtitleAction)" class="page-subtitle-action">
             <PageAction
                 :action="props.pageSubtitleAction"
                 @onPageActionClick="emits('onPageSubtitleActionClick')"
                 style="width: 250px"
             />
+        </div>
+
+        <div class="page-subtitle-content">
+            <slot></slot>
         </div>
     </div>
 </template>

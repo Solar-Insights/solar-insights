@@ -166,6 +166,7 @@
 }
 
 .page-subtitle-action {
+    @extend .mt-3;
 }
 
 .short-description-items-container {
@@ -174,7 +175,8 @@
 .short-description-single-item-container {
     @extend .mx-auto;
     @extend .my-6;
-    @extend .px-5;
+    @extend .px-7;
+    max-width: 550px !important;
 }
 
 .short-description-item-icon {
@@ -194,6 +196,7 @@
 }
 
 .short-description-single-item-action {
+    max-width: 65% !important;
 }
 
 .paragraph-container {

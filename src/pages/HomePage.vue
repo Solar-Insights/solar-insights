@@ -16,11 +16,6 @@
         <PageSection>
             <PageSubtitleContainer
                 :pageSubtitle="$t(`home.usecase-subtitle-container.subtitle`)"
-                :pageSubtitleAction="{
-                    text: $t(`home.usecase-subtitle-container.action`),
-                    icon: `mdi-send-variant-outline`
-                }"
-                @onPageSubtitleActionClick="router.push({ name: 'pricing' })"
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
@@ -48,6 +43,16 @@
                         :itemIconColor="`theme`"
                     />
                 </ShortDescriptionItemsContainer>
+
+                <ParagraphContainer
+                    class="text-center mx-auto"
+                    :paragraphContent="``"
+                    :paragraphAction="{
+                        text: $t(`home.usecase-subtitle-container.action`),
+                        icon: `mdi-send-variant-outline`
+                    }"
+                    @onParagraphActionClick="router.push({ name: 'pricing' })"
+                />
             </PageSubtitleContainer>
         </PageSection>
     </PageContainer>
@@ -67,6 +72,7 @@ import solar_map_mobile from "@/assets/images/home/solar_map_mobile.webp";
 import { useHead } from "unhead";
 import { headSelector, HOME } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
+import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
 
 const userSessionStore = useUserSessionStore();
 
