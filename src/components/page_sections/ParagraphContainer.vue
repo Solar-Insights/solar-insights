@@ -1,5 +1,5 @@
 <template>
-    <div class="paragraph-container">
+    <div class="paragraph-container" :class="fullWidth ? `w-100` : ``">
         <div
             v-if="stringHasValue(props.paragraphContent)"
             class="paragraph-content"
@@ -38,6 +38,11 @@ const props = defineProps({
     centerParagraphContent: {
         type: Boolean,
         required: false
+    },
+    fullWidth: {
+        type: Boolean, 
+        required: false,
+        default: false
     }
 });
 
