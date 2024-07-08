@@ -41,7 +41,6 @@
 import PageContainer from "@/components/page_sections/PageContainer.vue";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
-import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 import PageLateralSubtitleContainer from "@/components/page_sections/PageLateralSubtitleContainer.vue";
 import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
 import PricingCard from "@/components/pricing/PricingCard.vue";

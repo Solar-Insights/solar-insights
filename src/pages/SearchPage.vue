@@ -26,11 +26,14 @@
 
         <div v-for="(step, index) in steps">
             <PageSection>
-                <PageSubtitleContainer :subtitle="`${index + 1}. ${step.title}`" :icon="step.icon">
+                <PageLateralSubtitleContainer 
+                    :subtitle="`${step.title}`" 
+                    :icon="step.icon"
+                >
                     <ParagraphContainer
                         v-for="paragraph in step.contents"
                         :paragraphContent="paragraph"
-                        class="text-center mx-auto text-justify"
+                        :fullWidth="true"
                     />
 
                     <ImageContainer
@@ -40,10 +43,8 @@
                         :maxWidthPc="800"
                         :maxHeightPc="600"
                     />
-                </PageSubtitleContainer>
+                </PageLateralSubtitleContainer>
             </PageSection>
-
-            <v-divider v-if="index + 1 !== steps.length" />
         </div>
     </PageContainer>
 </template>
@@ -59,8 +60,8 @@ import { handleUserState } from "@/composables/users";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageContainer from "@/components/page_sections/PageContainer.vue";
-import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
+import PageLateralSubtitleContainer from "@/components/page_sections/PageLateralSubtitleContainer.vue";
 import solar_insights_pc from "@/assets/images/search/solar_insights_pc.webp";
 import customize_installation_pc from "@/assets/images/search/customize_installation_pc.webp";
 import solar_insights_mobile from "@/assets/images/search/solar_insights_mobile.webp";

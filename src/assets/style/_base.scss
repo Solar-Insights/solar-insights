@@ -87,7 +87,8 @@
 .autocomplete-search-computer {
     @extend .autocomplete-search;
     @extend .my-3;
-    @extend .mx-4;
+    @extend .mx-auto;
+    max-width: 600px;
 }
 
 .map-details {

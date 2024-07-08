@@ -6,11 +6,11 @@
             </div>
 
             <div v-if="stringHasValue(props.subtitle)" class="page-subtitle">
-                <v-icon v-if="stringHasValue(props.icon)" class="mb-3" size="50">
-                    {{ props.icon }}
-                </v-icon>
-
                 <div style="text-align: left !important">
+                    <v-icon v-if="stringHasValue(props.icon)" class="mb-2 mr-2" size="sm">
+                        {{ props.icon }}
+                    </v-icon>
+
                     {{ props.subtitle }}
                 </div>
             </div>
