@@ -19,11 +19,11 @@
                 {{ props.precision }}
             </div>
 
-            <div v-if="objectHasValue(props.action)" class="page-subtitle-action">
+            <div v-if="objectHasValue(props.action)" class="page-subtitle-action" style="text-align: left !important;">
                 <PageAction
+                    class="ml-0"
                     :action="props.action"
                     @onPageActionClick="emits('onActionClick')"
-                    style="width: 250px"
                 />
             </div>
         </v-col>

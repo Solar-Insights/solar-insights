@@ -13,7 +13,7 @@
         </PageSection>
 
         <PageSection>
-            <PageSubtitleContainer
+            <PageLateralSubtitleContainer
                 :subtitle="$t(`get-started.choose-a-plan-subtitle-container.subtitle`)"
                 :precision="$t(`get-started.choose-a-plan-subtitle-container.precision`)"
                 :action="{
@@ -24,67 +24,67 @@
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
+                        cols="12" xs="12" sm="12" md="12"
                         :itemTitle="$t(`pricing.pricing-cards.starter.name`)"
                         :itemContent="$t(`pricing.pricing-cards.starter.description`)"
                         :itemIcon="`mdi-account-outline`"
                         :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
+                        cols="12" xs="12" sm="12" md="12"
                         :itemTitle="$t(`pricing.pricing-cards.pro.name`)"
                         :itemContent="$t(`pricing.pricing-cards.pro.description`)"
                         :itemIcon="`mdi-account-multiple-outline`"
                         :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
+                        cols="12" xs="12" sm="12" md="12"
                         :itemTitle="$t(`pricing.pricing-cards.enterprise.name`)"
                         :itemContent="$t(`pricing.pricing-cards.enterprise.description`)"
                         :itemIcon="`mdi-account-group-outline`"
                         :itemIconColor="`theme`"
                     />
                 </ShortDescriptionItemsContainer>
-            </PageSubtitleContainer>
+            </PageLateralSubtitleContainer>
         </PageSection>
 
         <v-divider />
 
         <PageSection>
-            <PageSubtitleContainer
+            <PageLateralSubtitleContainer
                 :subtitle="$t(`get-started.register-subtitle-container.subtitle`)"
                 :precision="$t(`get-started.register-subtitle-container.precision`)"
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
+                        cols="12" xs="12" sm="12" md="12"
                         :itemTitle="$t(`get-started.register-subtitle-container.short-items.manage.title`)"
                         :itemContent="$t(`get-started.register-subtitle-container.short-items.manage.description`)"
-                        :itemIcon="`mdi-account-group-outline`"
+                        :itemIcon="`mdi-lock-check-outline`"
                         :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
+                        cols="12" xs="12" sm="12" md="12"
                         :itemTitle="$t(`get-started.register-subtitle-container.short-items.share.title`)"
                         :itemContent="$t(`get-started.register-subtitle-container.short-items.share.description`)"
                         :itemIcon="`mdi-share-outline`"
                         :itemIconColor="`theme`"
                     />
-                    <ShortDescriptionItem
-                        :itemTitle="$t(`get-started.register-subtitle-container.short-items.help.title`)"
-                        :itemContent="$t(`get-started.register-subtitle-container.short-items.help.description`)"
-                        :itemIcon="`mdi-account-question-outline`"
-                        :itemIconColor="`theme`"
-                    />
                 </ShortDescriptionItemsContainer>
-            </PageSubtitleContainer>
+            </PageLateralSubtitleContainer>
         </PageSection>
 
         <v-divider />
 
         <PageSection>
-            <PageSubtitleContainer
+            <PageLateralSubtitleContainer
                 :subtitle="$t(`get-started.use-solar-insights-subtitle-container.subtitle`)"
                 :precision="$t(`get-started.use-solar-insights-subtitle-container.precision`)"
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
                         v-if="!isAuthenticated"
+                        cols="12" xs="12" sm="12" md="12"
                         :itemTitle="$t(`get-started.use-solar-insights-subtitle-container.short-items.new-org.title`)"
                         :itemContent="
                             $t(`get-started.use-solar-insights-subtitle-container.short-items.new-org.description`)
@@ -98,6 +98,7 @@
                         @onItemActionClick="loginUser"
                     />
                     <ShortDescriptionItem
+                        cols="12" xs="12" sm="12" md="12"
                         :itemTitle="
                             $t(`get-started.use-solar-insights-subtitle-container.short-items.start-using.title`)
                         "
@@ -115,18 +116,19 @@
                         @onItemActionClick="router.push({ name: `search` })"
                     />
                 </ShortDescriptionItemsContainer>
-            </PageSubtitleContainer>
+            </PageLateralSubtitleContainer>
         </PageSection>
 
         <v-divider />
 
         <PageSection>
-            <PageSubtitleContainer
+            <PageLateralSubtitleContainer
                 :subtitle="$t(`get-started.beyond-solar-insights-subtitle-container.subtitle`)"
                 :precision="$t(`get-started.beyond-solar-insights-subtitle-container.precision`)"
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
+                        cols="12" xs="12" sm="12" md="12"
                         :itemTitle="$t(`get-started.beyond-solar-insights-subtitle-container.short-items.data.title`)"
                         :itemContent="
                             $t(`get-started.beyond-solar-insights-subtitle-container.short-items.data.description`)
@@ -135,6 +137,7 @@
                         :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
+                        cols="12" xs="12" sm="12" md="12"
                         :itemTitle="$t(`get-started.beyond-solar-insights-subtitle-container.short-items.graphs.title`)"
                         :itemContent="
                             $t(`get-started.beyond-solar-insights-subtitle-container.short-items.graphs.description`)
@@ -143,7 +146,7 @@
                         :itemIconColor="`theme`"
                     />
                 </ShortDescriptionItemsContainer>
-            </PageSubtitleContainer>
+            </PageLateralSubtitleContainer>
         </PageSection>
     </PageContainer>
 </template>
@@ -152,11 +155,10 @@
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageContainer from "@/components/page_sections/PageContainer.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
-import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 import ShortDescriptionItem from "@/components/page_sections/ShortDescriptionItem.vue";
 import ShortDescriptionItemsContainer from "@/components/page_sections/ShortDescriptionItemsContainer.vue";
 import router from "@/router/router";
-import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
+import PageLateralSubtitleContainer from "@/components/page_sections/PageLateralSubtitleContainer.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { handleUserState } from "@/composables/users";
 import { useHead } from "unhead";

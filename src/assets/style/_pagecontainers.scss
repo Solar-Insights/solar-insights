@@ -197,7 +197,7 @@
 }
 
 .short-description-single-item-action {
-    max-width: 65% !important;
+    @extend .w-100;
 }
 
 .paragraph-container {

@@ -293,10 +293,6 @@
                 "share": {
                     "title": "Partager des aperçus avec des collègues",
                     "description": "Envoyez vos Solar Insights favoris à un collègue par l'entremise d'un simple lien."
-                },
-                "help": {
-                    "title": "Collaborer avec d'autres utilisateurs",
-                    "description": "Trouvez les administrateurs et membres de votre organisation en un instant et débuter votre travail d'équipe."
                 }
             }
         },

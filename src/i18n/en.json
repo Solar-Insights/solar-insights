@@ -293,10 +293,6 @@
                 "share": {
                     "title": "Share insights with colleagues",
                     "description": "Send your Solar Insights' discoveries to colleagues with a simple link."
-                },
-                "help": {
-                    "title": "Collaborate with users",
-                    "description": "Find your organization's admin(s) and members in a matter of seconds and start collaborating."
                 }
             }
         },
