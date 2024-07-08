@@ -43,14 +43,14 @@
         padding-top: 6vw !important;
     }
     .page-section-container {
-        padding: 4vw 0vw 4vw 0vw !important;
+        padding: 4vw 6vw 4vw 6vw !important;
     }
     .page-title-container {
         width: 70%;
     }
     .page-title {
         font-size: 3rem;
-        line-height: 3.125rem;
+        line-height: 3.250rem;
     }
     .page-subtitle-container {
         width: 80%;
@@ -73,7 +73,7 @@
 
 .normal-page-content-font {
     line-height: 1.5rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .page-container {
@@ -112,11 +112,10 @@
 }
 
 .page-title-precision {
+    @extend .normal-page-content-font;
     @extend .mt-5;
     @extend .mx-auto;
-    @extend .font-weight-regular;
     width: 80%;
-    font-size: 1.1rem;
 }
 
 .page-title-action {
@@ -150,16 +149,15 @@
     @extend .text-h4;
     @extend .my-3;
     @extend .text-center;
-    @extend .font-weight-regular;
+    @extend .font-weight-medium;
 }
 
 .page-subtitle-precision {
+    @extend .normal-page-content-font;
     @extend .mt-3;
     @extend .mx-auto;
-    @extend .font-weight-regular;
     @extend .text-center;
     width: 80%;
-    font-size: 1.1rem;
 }
 
 .page-subtitle-content {
