@@ -1,5 +1,7 @@
 <template>
     <div v-if="myOrganizationBillingRecap && myOrganizationMembers">
+        <v-divider/>
+
         <PageSection
             :pageSectionTitle="$t(`my-organization.admin-component.user-table-section-container.title`)"
             :pageSectionSubtitle="$t(`my-organization.admin-component.user-table-section-container.subtitle`)"
@@ -10,6 +12,8 @@
                 @deleteUser="deleteOrganizationMember"
             />
         </PageSection>
+
+        <v-divider/>
 
         <PageSection
             :pageSectionTitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
