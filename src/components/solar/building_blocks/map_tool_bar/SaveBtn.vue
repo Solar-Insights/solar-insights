@@ -70,7 +70,6 @@
 </template>
 
 <script setup lang="ts">
-import _ from "lodash";
 import { ref, computed } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
