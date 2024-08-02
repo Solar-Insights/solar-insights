@@ -159,7 +159,7 @@ const requestsCost = computed(() => {
 });
 
 const billableMembersCount = computed(() => {
-    if (props.billingRecap.max_free_members_count >= props.billingRecap.members_count) {
+    if (props.billingRecap.max_free_members_count >= props.billingRecap.max_members_count) {
         return 0;
     }
 
