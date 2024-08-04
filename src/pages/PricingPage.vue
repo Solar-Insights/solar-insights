@@ -93,9 +93,6 @@ const pricingCards = computed(() => {
                     },
                     {
                         title: t(`pricing.pricing-cards.starter.benefits.email-support.title`)
-                    },
-                    {
-                        title: t(`pricing.pricing-cards.starter.benefits.monthly-usage.title`)
                     }
                 ]
             }
