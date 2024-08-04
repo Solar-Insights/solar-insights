@@ -430,6 +430,7 @@
             "additional-info-section": {
                 "title": "Informations additionnelles",
                 "fields": {
+                    "existing-plan": "Modification du plan d'une organisation existante?",
                     "situation": "Décrivez votre situation"
                 }
             }

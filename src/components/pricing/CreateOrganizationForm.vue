@@ -60,6 +60,19 @@
 
         <FormDialogSection :sectionTitle="$t(`pricing.pricing-form.additional-info-section.title`)">
             <FormField>
+                <v-switch
+                    v-model="data.modifiyingExistingPlan"
+                    class="ml-2"
+                    :error-messages="createValidationMessages(v$.modifiyingExistingPlan.$errors.map((e: any) => e.$params))"
+                    @blur="v$.modifiyingExistingPlan.$touch"
+                    @input="v$.modifiyingExistingPlan.$touch"
+                    :label="$t(`pricing.pricing-form.additional-info-section.fields.existing-plan`)"
+                    density="compact"
+                    color="theme"
+                />
+            </FormField>
+
+            <FormField>
                 <v-textarea
                     v-model="data.additionalNotes"
                     :error-messages="createValidationMessages(v$.additionalNotes.$errors.map((e: any) => e.$params))"
@@ -111,6 +124,7 @@ const data = ref<NewOrganizationForm>({
     name: "",
     contactEmail: "",
     pricingTier: props.pricingTier,
+    modifiyingExistingPlan: false,
     additionalNotes: ""
 });
 

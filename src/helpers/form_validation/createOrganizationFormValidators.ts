@@ -20,6 +20,9 @@ export const newOrganizationFormValidators: GeneralValidatorType<NewOrganization
     pricingTier: {
         required: requiredValidator()
     },
+    modifiyingExistingPlan: {
+        required: requiredValidator()
+    },
     additionalNotes: {
         maxLength: maxLengthValidator(ADDITIONAL_NOTES_MAX_LENGTH)
     }
