@@ -153,7 +153,7 @@
                 "title": "Monthly summary",
                 "subtitle": "For the billing period ending on",
                 "pricing-plan": "Current plan: ",
-                "upgrade": "Upgrade",
+                "upgrade": "Change your plan, or monthly limits",
                 "solar-requests-card": {
                     "title": "Solar installation analysis requests",
                     "billable-items": {
