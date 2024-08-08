@@ -53,7 +53,6 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import router from "@/router/router";
 import { LatLng } from "geo-env-typing/geo";
 import AutocompleteField from "@/components/general/AutocompleteField.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
@@ -72,7 +71,9 @@ import ImageContainer from "@/components/page_sections/ImageContainer.vue";
 import { useHead } from "unhead";
 import { headSelector, SEARCH } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const userSessionStore = useUserSessionStore();
 
 useHead(headSelector(SEARCH, userSessionStore.locale));

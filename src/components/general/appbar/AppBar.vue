@@ -23,7 +23,7 @@
                     :requiresAuth="route.requiresAuth"
                     :text="route.name"
                     :currentRoute="route.name === currentRoute.name"
-                    @sendAction="$router.push({ name: route.name })"
+                    @sendAction="router.push({ name: route.name })"
                 />
             </v-toolbar-items>
 
@@ -60,7 +60,7 @@
                         :requiresAuth="route.requiresAuth"
                         :text="route.name"
                         :currentRoute="route.name === currentRoute.name"
-                        @sendAction="$router.push({ name: route.name })"
+                        @sendAction="router.push({ name: route.name })"
                     />
                 </v-list-item>
             </v-list>
@@ -104,9 +104,10 @@ import SettingsMenu from "@/components/general/appbar/SettingsMenu.vue";
 import logo_nobg from "@/assets/images/general/logo_nobg.webp";
 import { routes, menus } from "@/helpers/constants";
 import { RouteInfo } from "@/helpers/types";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const currentRoute = useRoute();
+const router = useRouter();
 
 const drawer = ref(false);
 

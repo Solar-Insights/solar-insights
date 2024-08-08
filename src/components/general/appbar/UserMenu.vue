@@ -9,7 +9,7 @@
                     :text="$t(`navigation.my-organization`)"
                     :theme="theme"
                     :icon="`mdi-account-group-outline`"
-                    @sendAction="$router.push({ name: 'my-organization' })"
+                    @sendAction="router.push({ name: 'my-organization' })"
                 />
 
                 <MenuCard
@@ -41,7 +41,9 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { storeToRefs } from "pinia";
 import { handleUserState } from "@/composables/users";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const { loginUser, logoutUser } = handleUserState();
 const { isLoading, isAuthenticated, user } = useAuth0();
 const userSessionStore = useUserSessionStore();

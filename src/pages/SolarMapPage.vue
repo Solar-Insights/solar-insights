@@ -13,11 +13,10 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import SolarMapPcDisplay from "@/components/solar/SolarMapPcDisplay.vue";
 import SolarMapMobileDisplay from "@/components/solar/SolarMapMobileDisplay.vue";
 import { validRouteCoordinates } from "@/helpers/solar/map/components_util";
-import router from "@/router/router";
 import { LatLng, validCoordinates } from "geo-env-typing/geo";
 import { getReverseGeocoding } from "@/api/geo";
 import { useSolarMapStore } from "@/stores/solarMapStore";
@@ -26,6 +25,7 @@ import { useHead } from "unhead";
 import { headSelector, SOLAR_MAP } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 
+const router = useRouter();
 const userSessionStore = useUserSessionStore();
 const solarMapStore = useSolarMapStore();
 

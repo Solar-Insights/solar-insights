@@ -63,7 +63,6 @@
 </template>
 
 <script setup lang="ts">
-import router from "@/router/router";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
 import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
@@ -77,7 +76,9 @@ import { useHead } from "unhead";
 import { headSelector, HOME } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const userSessionStore = useUserSessionStore();
 
 useHead(headSelector(HOME, userSessionStore.locale));

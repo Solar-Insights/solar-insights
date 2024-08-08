@@ -3,12 +3,13 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import router from "@/router/router";
 import { UserLoginSuccess, UserLogoutSuccess } from "@/helpers/alerts/success";
 import { RouteLocationNormalizedLoaded } from "vue-router";
 import { useHead } from "unhead";
 import { CALLBACK, headSelector } from "@/router/routes";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const userSessionStore = useUserSessionStore();
 
 useHead(headSelector(CALLBACK, userSessionStore.locale));

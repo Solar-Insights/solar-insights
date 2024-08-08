@@ -157,14 +157,15 @@ import PageContainer from "@/components/page_sections/PageContainer.vue";
 import PageTitleContainer from "@/components/page_sections/PageTitleContainer.vue";
 import ShortDescriptionItem from "@/components/page_sections/ShortDescriptionItem.vue";
 import ShortDescriptionItemsContainer from "@/components/page_sections/ShortDescriptionItemsContainer.vue";
-import router from "@/router/router";
 import PageLateralSubtitleContainer from "@/components/page_sections/PageLateralSubtitleContainer.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { handleUserState } from "@/composables/users";
 import { useHead } from "unhead";
 import { GET_STARTED, headSelector } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const userSessionStore = useUserSessionStore();
 
 useHead(headSelector(GET_STARTED, userSessionStore.locale));

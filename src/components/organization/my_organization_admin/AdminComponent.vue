@@ -28,7 +28,7 @@
                 </div>
 
                 <v-btn
-                    @click="$router.push({ name: `pricing` })"
+                    @click="router.push({ name: `pricing` })"
                     class="paragraph-action my-1"
                     elevation="2"
                     color="theme"
@@ -45,11 +45,14 @@
 
 <script setup lang="ts">
 import { MyOrganizationMember, MyOrganizationAdminDetails, MyOrganizationBillingRecap } from "@/helpers/types";
-import { computed, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import UserTable from "@/components/organization/my_organization_admin/UserTable.vue";
 import BillingRecap from "@/components/organization/my_organization_admin//BillingRecap.vue";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import { getMyOrganizationAdminData } from "@/api/user";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const myOrganizationMembers = ref<MyOrganizationMember[]>();
 const myOrganizationBillingRecap = ref<MyOrganizationBillingRecap>();
