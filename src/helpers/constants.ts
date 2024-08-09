@@ -105,3 +105,7 @@ export const menus = {
         icon: "mdi-cog-outline"
     }
 };
+
+export const SOLAR_INSIGHTS_INFINITY = 2147483647;
+
+export const SOLAR_INSIGHTS_NEGATIVE_INFINITY = -2147483647;
