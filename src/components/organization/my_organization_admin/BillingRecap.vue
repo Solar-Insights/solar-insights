@@ -1,6 +1,7 @@
 <template>
     <v-row class="align-stretch">
         <BillableCard
+            v-if="validInformations.requests"
             :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.title`)"
         >
             <BillableItem
@@ -43,7 +44,7 @@
                         `my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.billable-count.precision`
                     )
                 "
-                :value="dbNumberToDisplayableNumber(billingRecap.building_insights_requests)"
+                :value="dbNumberToDisplayableNumber(aboveFreeLimits.requests)"
             />
             <BillableItem
                 :title="
@@ -51,8 +52,8 @@
                         `my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-cost.title`
                     )
                 "
-                :precision="`${priceString(PRICE_PER_REQUEST, locale)} ${$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-cost.precision`)}`"
-                :value="priceString(requestsCost, locale)"
+                :precision="`${priceString(billingRecap.building_insights_requests_unit_price_in_cents, locale, true)} ${$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-cost.precision`)}`"
+                :value="priceString(totalCosts.requests, locale, true)"
             />
             <ParagraphContainer class="w-100" :paragraphContent="``">
                 <div :class="`text-${requestQuota}`">
@@ -65,7 +66,10 @@
             </ParagraphContainer>
         </BillableCard>
 
-        <BillableCard :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.title`)">
+        <BillableCard 
+            v-if="validInformations.members"
+            :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.title`)"
+        >
             <BillableItem
                 :title="
                     $t(
@@ -106,7 +110,7 @@
                         `my-organization.admin-component.billing-recap-section-container.users-card.billable-items.billable-count.precision`
                     )
                 "
-                :value="dbNumberToDisplayableNumber(billableMembersCount)"
+                :value="dbNumberToDisplayableNumber(aboveFreeLimits.members)"
             />
             <BillableItem
                 :title="
@@ -114,8 +118,8 @@
                         `my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-cost.title`
                     )
                 "
-                :precision="`${priceString(PRICE_PER_ADDITIONAL_USER, locale)} ${$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-cost.precision`)}`"
-                :value="priceString(membersCost, locale)"
+                :precision="`${priceString(billingRecap.members_unit_price_in_cents, locale, true)} ${$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-cost.precision`)}`"
+                :value="priceString(totalCosts.members, locale, true)"
             />
             <ParagraphContainer class="w-100" :paragraphContent="``">
                 <div :class="`text-${userQuota}`">
@@ -136,10 +140,10 @@ import { computed, PropType } from "vue";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
 import { priceString, dbNumberToDisplayableNumber } from "@/helpers/util";
-import { PRICE_PER_REQUEST, PRICE_PER_ADDITIONAL_USER } from "@/helpers/pricingConstants";
 import BillableCard from "@/components/organization/my_organization_admin/billable_card/BillableCard.vue";
 import BillableItem from "@/components/organization/my_organization_admin/billable_card/BillableItem.vue";
 import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
+import { numbersHaveValues } from "@/helpers/componentConditionals";
 
 const props = defineProps({
     billingRecap: {
@@ -150,27 +154,48 @@ const props = defineProps({
 
 const { locale } = storeToRefs(useUserSessionStore());
 
-const membersCost = computed(() => {
-    return PRICE_PER_ADDITIONAL_USER * billableMembersCount.value;
-});
-
-const requestsCost = computed(() => {
-    return PRICE_PER_REQUEST * props.billingRecap.building_insights_requests;
-});
-
-const billableMembersCount = computed(() => {
-    if (props.billingRecap.max_free_members_count >= props.billingRecap.max_members_count) {
-        return 0;
+const validInformations = computed(() => {
+    return {
+        members:numbersHaveValues([
+            props.billingRecap.building_insights_requests,
+            props.billingRecap.building_insights_requests_unit_price_in_cents,
+            props.billingRecap.max_building_insights_requests,
+            props.billingRecap.max_free_building_insights_requests
+        ]),
+        requests: numbersHaveValues([
+            props.billingRecap.members_count,
+            props.billingRecap.members_unit_price_in_cents,
+            props.billingRecap.max_members_count,
+            props.billingRecap.max_free_members_count
+        ]),
+        plan: numbersHaveValues([
+            props.billingRecap.plan_count,
+            props.billingRecap.plan_unit_price_in_cents
+        ]),
     }
+})
 
-    return props.billingRecap.max_members_count - props.billingRecap.max_free_members_count;
-});
+const aboveFreeLimits = computed(() => {
+    return {
+        members: props.billingRecap.max_members_count - props.billingRecap.max_free_members_count,
+        requests: props.billingRecap.building_insights_requests - props.billingRecap.max_free_building_insights_requests
+    }
+})
+
+const totalCosts = computed(() => {
+    return {
+        members: props.billingRecap.members_unit_price_in_cents * aboveFreeLimits.value.members,
+        requests: props.billingRecap.building_insights_requests_unit_price_in_cents * aboveFreeLimits.value.requests,
+        plan: props.billingRecap.plan_unit_price_in_cents * props.billingRecap.plan_count
+    };
+})
 
 const requestQuota = computed(() => {
     const belowHalf =
         props.billingRecap.building_insights_requests < props.billingRecap.max_building_insights_requests / 2;
     const atOrAboveLimit =
         props.billingRecap.building_insights_requests >= props.billingRecap.max_building_insights_requests;
+        
     if (belowHalf) return "success";
     else if (atOrAboveLimit) return "error";
     else return "warning";

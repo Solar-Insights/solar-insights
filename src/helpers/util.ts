@@ -1,4 +1,5 @@
 import { Locale } from "@/helpers/types";
+import { SOLAR_INSIGHTS_INFINITY } from "./constants";
 
 export function strToLargeNumberDisplay(input: string | number): String {
     let inputStr: string = input.toString().trim();
@@ -33,8 +34,7 @@ export function strToLargeNumberDisplay(input: string | number): String {
 }
 
 export function dbNumberToDisplayableNumber(input: number): number | string {
-    const MAX_INT_VALUE = 2147483647;
-    if (input === MAX_INT_VALUE) return "∞";
+    if (input === SOLAR_INSIGHTS_INFINITY) return "∞";
     return input;
 }
 
@@ -66,8 +66,9 @@ function fallbackClipboardExecCommand(textToCopy: string) {
     document.body.removeChild(textArea);
 }
 
-export function priceString(amount: number | string, locale: Locale, rounded: boolean = true) {
-    const parsedVal = rounded ? Number(amount).toFixed(2) : Number(amount);
+export function priceString(amount: number | string, locale: Locale, inCents: boolean = false, rounded: boolean = true) {
+    const dollarVal = inCents ? Number(amount) / 100 : Number(amount);
+    const parsedVal = rounded ? dollarVal.toFixed(2) : dollarVal;
 
     if (locale === "fr") return `${parsedVal}$`;
     return `$${parsedVal}`;

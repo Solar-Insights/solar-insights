@@ -17,7 +17,7 @@
 
         <PageSection
             :pageSectionTitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
-            :pageSectionSubtitle="`${$t(`my-organization.admin-component.billing-recap-section-container.subtitle`)} ${new Date(myOrganizationBillingRecap!.billingDate).toISOString().substring(0, 10)} (${$t(`global.yyyy-mm-dd`)})`"
+            :pageSectionSubtitle="`${$t(`my-organization.admin-component.billing-recap-section-container.subtitle`)} ${new Date(myOrganizationBillingRecap!.periodStart).toISOString().substring(0, 10)} (${$t(`global.yyyy-mm-dd`)})`"
         >
             <div class="my-10">
                 <div class="text-h6 my-1">
