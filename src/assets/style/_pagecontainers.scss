@@ -138,8 +138,7 @@
 }
 
 .page-subtitle-container {
-    @extend .mx-auto;
-    width: 95%;
+    width: 100%;
 }
 
 .page-subtitle-precontent {
@@ -148,7 +147,6 @@
 .page-subtitle {
     @extend .text-h4;
     @extend .my-3;
-    @extend .text-center;
     @extend .font-weight-medium;
 }
 

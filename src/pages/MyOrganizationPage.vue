@@ -4,18 +4,25 @@
             <PageTitleContainer :pageTitle="myOrganization.name" />
         </PageSection>
 
-        <PageSection
-            :pageSectionTitle="$t(`my-organization.help-section-container.title`)"
-            :pageSectionSubtitle="$t(`my-organization.help-section-container.subtitle`)"
-        >
-            <v-list class="d-flex flex-wrap">
-                <v-list-item v-for="admin in myOrganization.admins" class="my-2" :prepend-avatar="admin.avatar">
-                    <v-list-item-title> {{ admin.name }}</v-list-item-title>
-                    <v-list-item-subtitle>
-                        <a :href="`mailto: ${admin.email}`"> {{ admin.email }} </a>
-                    </v-list-item-subtitle>
-                </v-list-item>
-            </v-list>
+        <PageSection>
+            <PageSubtitleContainer
+                :subtitle="`Allo`"
+                :center="false"
+            >
+                <PageSectionDescriptor
+                    :pageSectionDescriptorTitle="$t(`my-organization.help-section-container.title`)"
+                    :pageSectionDescriptorSubtitle="$t(`my-organization.help-section-container.subtitle`)"
+                />
+
+                <v-list class="d-flex flex-wrap">
+                    <v-list-item v-for="admin in myOrganization.admins" class="my-2" :prepend-avatar="admin.avatar">
+                        <v-list-item-title> {{ admin.name }}</v-list-item-title>
+                        <v-list-item-subtitle>
+                            <a :href="`mailto: ${admin.email}`"> {{ admin.email }} </a>
+                        </v-list-item-subtitle>
+                    </v-list-item>
+                </v-list>
+            </PageSubtitleContainer>
         </PageSection>
 
         <AdminComponent v-if="isAdmin" />
@@ -35,6 +42,8 @@ import { stringHasValue } from "@/helpers/componentConditionals";
 import { useHead } from "unhead";
 import { headSelector, MY_ORGANIZATION } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
+import PageSectionDescriptor from "@/components/page_sections/PageSectionDescriptor.vue";
+import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 
 const userSessionStore = useUserSessionStore();
 

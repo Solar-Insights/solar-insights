@@ -4,7 +4,7 @@
             {{ props.precontent }}
         </div>
 
-        <div v-if="stringHasValue(props.subtitle)" class="page-subtitle">
+        <div v-if="stringHasValue(props.subtitle)" class="page-subtitle" :class="center ? `text-center` : ``">
             <v-icon v-if="stringHasValue(props.icon)" class="mb-3" size="50">
                 {{ props.icon }}
             </v-icon>
@@ -57,6 +57,11 @@ const props = defineProps({
     },
     action: {
         type: Object as PropType<ButtonAction>,
+        required: false
+    },
+    center: {
+        type: Boolean,
+        default: true,
         required: false
     }
 });

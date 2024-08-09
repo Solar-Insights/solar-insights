@@ -2,43 +2,56 @@
     <div v-if="myOrganizationBillingRecap && myOrganizationMembers">
         <v-divider/>
 
-        <PageSection
-            :pageSectionTitle="$t(`my-organization.admin-component.user-table-section-container.title`)"
-            :pageSectionSubtitle="$t(`my-organization.admin-component.user-table-section-container.subtitle`)"
-        >
-            <UserTable
-                :users="myOrganizationMembers"
-                @addUser="addOrganizationMember"
-                @deleteUser="deleteOrganizationMember"
-            />
+        <PageSection>
+            <PageSubtitleContainer
+                :subtitle="`Allo`"
+                :center="false"
+            >
+                <PageSectionDescriptor
+                    :pageSectionDescriptorTitle="$t(`my-organization.admin-component.user-table-section-container.title`)"
+                    :pageSectionDescriptorSubtitle="$t(`my-organization.admin-component.user-table-section-container.subtitle`)"
+                />
+                <UserTable
+                    :users="myOrganizationMembers"
+                    @addUser="addOrganizationMember"
+                    @deleteUser="deleteOrganizationMember"
+                />
+            </PageSubtitleContainer>
         </PageSection>
 
         <v-divider/>
 
-        <PageSection
-            :pageSectionTitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
-            :pageSectionSubtitle="`${$t(`my-organization.admin-component.billing-recap-section-container.subtitle`)} ${new Date(myOrganizationBillingRecap!.periodStart).toISOString().substring(0, 10)} (${$t(`global.yyyy-mm-dd`)})`"
-        >
-            <div class="my-10">
-                <div class="text-h6 my-1">
-                    {{ $t(`my-organization.admin-component.billing-recap-section-container.pricing-plan`) }}
-                    <span class="font-weight-black">
-                        {{ $t(`global.${myOrganizationBillingRecap.pricingTier}`) }}
-                    </span>
+        <PageSection>
+            <PageSubtitleContainer
+                :subtitle="`Allo`"
+                :center="false"
+            >
+                <PageSectionDescriptor
+                    :pageSectionDescriptorTitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
+                    :pageSectionDescriptorSubtitle="`${$t(`my-organization.admin-component.billing-recap-section-container.subtitle`)} ${new Date(myOrganizationBillingRecap!.periodStart).toISOString().substring(0, 10)} (${$t(`global.yyyy-mm-dd`)})`"
+                />
+
+                <div class="my-10">
+                    <div class="text-h6 my-1">
+                        {{ $t(`my-organization.admin-component.billing-recap-section-container.pricing-plan`) }}
+                        <span class="font-weight-black">
+                            {{ $t(`global.${myOrganizationBillingRecap.pricingTier}`) }}
+                        </span>
+                    </div>
+
+                    <v-btn
+                        @click="router.push({ name: `pricing` })"
+                        class="paragraph-action my-1"
+                        elevation="2"
+                        color="theme"
+                        append-icon="mdi-arrow-up-bold-outline"
+                    >
+                        {{ $t(`my-organization.admin-component.billing-recap-section-container.upgrade`) }}
+                    </v-btn>
                 </div>
 
-                <v-btn
-                    @click="router.push({ name: `pricing` })"
-                    class="paragraph-action my-1"
-                    elevation="2"
-                    color="theme"
-                    append-icon="mdi-arrow-up-bold-outline"
-                >
-                    {{ $t(`my-organization.admin-component.billing-recap-section-container.upgrade`) }}
-                </v-btn>
-            </div>
-
-            <BillingRecap :billingRecap="myOrganizationBillingRecap" />
+                <BillingRecap :billingRecap="myOrganizationBillingRecap" />
+            </PageSubtitleContainer>
         </PageSection>
     </div>
 </template>
@@ -51,6 +64,8 @@ import BillingRecap from "@/components/organization/my_organization_admin//Billi
 import PageSection from "@/components/page_sections/PageSection.vue";
 import { getMyOrganizationAdminData } from "@/api/user";
 import { useRouter } from "vue-router";
+import PageSectionDescriptor from "@/components/page_sections/PageSectionDescriptor.vue";
+import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 
 const router = useRouter();
 

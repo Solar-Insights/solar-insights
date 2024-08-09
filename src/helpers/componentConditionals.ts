@@ -29,7 +29,7 @@ export function objectHasValue(obj: object | undefined) {
 }
 
 export function numberHasValue(nb: number | null | undefined) {
-    return instanceIsDefinedAndNotNull(nb) && numberIsNotNaN(nb) && numberHasValidValue();
+    return instanceIsDefinedAndNotNull(nb) && numberIsNotNaN(nb as number) && numberHasValidValue(nb as number);
 }
 
 export function numbersHaveValues(nbList: number[]) {
