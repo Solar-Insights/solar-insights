@@ -151,6 +151,7 @@
         "admin-component": {
             "billing-recap-section-container": {
                 "title": "Monthly billing summary",
+                "subtitle-date-format": "all dates are in format",
                 "subtitle-to": "to",
                 "current-plan-details": {
                     "title": "More on the ongoing billing cycle",
@@ -189,7 +190,7 @@
                     "title": "Solar installation analysis requests",
                     "billable-items": {
                         "current-count-and-limit": {
-                            "title": "Current count (Limit)",
+                            "title": "Current count [Limit]",
                             "precision": "Number of requests for the current period"
                         },
                         "free-limit": {

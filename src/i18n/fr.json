@@ -151,6 +151,7 @@
         "admin-component": {
             "billing-recap-section-container": {
                 "title": "Sommaire mensuel de facturation",
+                "subtitle-date-format": "toutes les dates sont en format",
                 "subtitle-to": "au",
                 "current-plan-details": {
                     "title": "Plus sur le cycle de facturation courant",
@@ -189,7 +190,7 @@
                     "title": "Requêtes d'analyse d'installation solaire",
                     "billable-items": {
                         "current-count-and-limit": {
-                            "title": "Nombre actuel (Limite)",
+                            "title": "Nombre actuel [Limite]",
                             "precision": "Nombre de requêtes pour la période courante"
                         },
                         "free-limit": {

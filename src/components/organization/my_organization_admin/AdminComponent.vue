@@ -20,7 +20,7 @@
         <PageSection>
             <PageSubtitleContainer
                 :subtitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
-                :precision="`${new Date(myOrganizationBillingRecap.periodStart).toISOString().substring(0, 10)} ${$t(`my-organization.admin-component.billing-recap-section-container.subtitle-to`)} ${new Date(myOrganizationBillingRecap.periodEnd).toISOString().substring(0, 10)} (${$t(`global.yyyy-mm-dd`)})`"
+                :precision="`${new Date(myOrganizationBillingRecap.periodStart).toISOString().substring(0, 10)} ${$t(`my-organization.admin-component.billing-recap-section-container.subtitle-to`)} ${new Date(myOrganizationBillingRecap.periodEnd).toISOString().substring(0, 10)} (${$t(`my-organization.admin-component.billing-recap-section-container.subtitle-date-format`)} ${$t(`global.yyyy-mm-dd`)})`"
                 :center="false"
             >
                 <div class="my-6">
