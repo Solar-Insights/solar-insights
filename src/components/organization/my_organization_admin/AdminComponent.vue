@@ -4,13 +4,11 @@
 
         <PageSection>
             <PageSubtitleContainer
-                :subtitle="`Allo`"
+                :precontent="$t(`my-organization.admin-component.admin-component-precision`)"
+                :subtitle="$t(`my-organization.admin-component.user-table-section-container.title`)"
+                :precision="$t(`my-organization.admin-component.user-table-section-container.subtitle`)"
                 :center="false"
             >
-                <PageSectionDescriptor
-                    :pageSectionDescriptorTitle="$t(`my-organization.admin-component.user-table-section-container.title`)"
-                    :pageSectionDescriptorSubtitle="$t(`my-organization.admin-component.user-table-section-container.subtitle`)"
-                />
                 <UserTable
                     :users="myOrganizationMembers"
                     @addUser="addOrganizationMember"
@@ -19,18 +17,12 @@
             </PageSubtitleContainer>
         </PageSection>
 
-        <v-divider/>
-
         <PageSection>
             <PageSubtitleContainer
-                :subtitle="`Allo`"
+                :subtitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
+                :precision="`${$t(`my-organization.admin-component.billing-recap-section-container.subtitle`)} ${new Date(myOrganizationBillingRecap!.periodStart).toISOString().substring(0, 10)} (${$t(`global.yyyy-mm-dd`)})`"
                 :center="false"
             >
-                <PageSectionDescriptor
-                    :pageSectionDescriptorTitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
-                    :pageSectionDescriptorSubtitle="`${$t(`my-organization.admin-component.billing-recap-section-container.subtitle`)} ${new Date(myOrganizationBillingRecap!.periodStart).toISOString().substring(0, 10)} (${$t(`global.yyyy-mm-dd`)})`"
-                />
-
                 <div class="my-10">
                     <div class="text-h6 my-1">
                         {{ $t(`my-organization.admin-component.billing-recap-section-container.pricing-plan`) }}

@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div v-if="stringHasValue(props.precision)" class="page-subtitle-precision">
+        <div v-if="stringHasValue(props.precision)" class="page-subtitle-precision" :class="center ? `text-center` : ``">
             {{ props.precision }}
         </div>
 

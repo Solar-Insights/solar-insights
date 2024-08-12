@@ -146,7 +146,7 @@
     "my-organization": {
         "help-section-container": {
             "title": "Any question or problem regarding your account?",
-            "subtitle": "Contact one of your organization's administrator."
+            "subtitle": "Contact your organization's administrator."
         },
         "admin-component": {
             "billing-recap-section-container": {
@@ -206,6 +206,7 @@
                     }
                 }
             },
+            "admin-component-precision": "The sections below are only visible to the organization's administrator.",
             "user-table-section-container": {
                 "title": "Your team",
                 "subtitle": "",

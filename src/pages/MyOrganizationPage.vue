@@ -6,14 +6,10 @@
 
         <PageSection>
             <PageSubtitleContainer
-                :subtitle="`Allo`"
+                :subtitle="$t(`my-organization.help-section-container.title`)"
+                :precision="$t(`my-organization.help-section-container.subtitle`)"
                 :center="false"
             >
-                <PageSectionDescriptor
-                    :pageSectionDescriptorTitle="$t(`my-organization.help-section-container.title`)"
-                    :pageSectionDescriptorSubtitle="$t(`my-organization.help-section-container.subtitle`)"
-                />
-
                 <v-list class="d-flex flex-wrap">
                     <v-list-item v-for="admin in myOrganization.admins" class="my-2" :prepend-avatar="admin.avatar">
                         <v-list-item-title> {{ admin.name }}</v-list-item-title>
