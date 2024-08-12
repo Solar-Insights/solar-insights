@@ -150,10 +150,41 @@
         },
         "admin-component": {
             "billing-recap-section-container": {
-                "title": "Sommaire mensuel",
-                "subtitle": "Pour la période finissant le",
-                "pricing-plan": "Plan actuel: ",
-                "upgrade": "Modifier votre plan, ou vos limites",
+                "title": "Sommaire mensuel de facturation",
+                "subtitle-to": "au",
+                "current-plan-details": {
+                    "title": "Plus sur le cycle de facturation courant",
+                    "upgrade": "Modifier votre plan, ou vos limites",
+                    "summary-card": {
+                        "title": "Sommaire",
+                        "items": {
+                            "pricing-tier": {
+                                "title": "Plan de tarification",
+                                "precision": "Chaque plan offre une variété d'avantages"
+                            },
+                            "starting-date": {
+                                "title": "Date de début",
+                                "precision": ""
+                            },
+                            "ending-date": {
+                                "title": "Date de fin",
+                                "precision": ""
+                            },
+                            "payment-due-date": {
+                                "title": "Date maximale de paiement",
+                                "precision": "Vous allez recevoir la facture par courriel le jour suivant la fin du cycle"
+                            },
+                            "max-free-members": {
+                                "title": "Nombre d'utilisateurs inclus",
+                                "precision": "Nombre d'utilisateurs inclus dans votre plan"
+                            },
+                            "max-free-requests": {
+                                "title": "Nombre de requêtes incluses",
+                                "precision": "Nombre de requêtes pour la période courante"
+                            }
+                        }
+                    }
+                },
                 "solar-requests-card": {
                     "title": "Requêtes d'analyse d'installation solaire",
                     "billable-items": {

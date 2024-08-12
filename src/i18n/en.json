@@ -150,10 +150,41 @@
         },
         "admin-component": {
             "billing-recap-section-container": {
-                "title": "Monthly summary",
-                "subtitle": "For the billing period ending on",
-                "pricing-plan": "Current plan: ",
-                "upgrade": "Change your plan, or monthly limits",
+                "title": "Monthly billing summary",
+                "subtitle-to": "to",
+                "current-plan-details": {
+                    "title": "More on the ongoing billing cycle",
+                    "upgrade": "Change your plan, or monthly limits",
+                    "summary-card": {
+                        "title": "Summary",
+                        "items": {
+                            "pricing-tier": {
+                                "title": "Pricing plan",
+                                "precision": "Each plan offers a variety of benefits"
+                            },
+                            "starting-date": {
+                                "title": "Starting date",
+                                "precision": ""
+                            },
+                            "ending-date": {
+                                "title": "Ending date",
+                                "precision": ""
+                            },
+                            "payment-due-date": {
+                                "title": "Payment due date",
+                                "precision": "You will receive an invoice by email one day after the end of the cycle"
+                            },
+                            "max-free-members": {
+                                "title": "Free number of users",
+                                "precision": "Number of users included in your plan"
+                            },
+                            "max-free-requests": {
+                                "title": "Free number of requests",
+                                "precision": "Number of requests included in your plan"
+                            }
+                        }
+                    }
+                },
                 "solar-requests-card": {
                     "title": "Solar installation analysis requests",
                     "billable-items": {
