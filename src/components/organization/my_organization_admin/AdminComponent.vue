@@ -56,7 +56,6 @@ import BillingRecap from "@/components/organization/my_organization_admin//Billi
 import PageSection from "@/components/page_sections/PageSection.vue";
 import { getMyOrganizationAdminData } from "@/api/user";
 import { useRouter } from "vue-router";
-import PageSectionDescriptor from "@/components/page_sections/PageSectionDescriptor.vue";
 import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 
 const router = useRouter();
