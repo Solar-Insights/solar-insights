@@ -38,7 +38,6 @@ import { stringHasValue } from "@/helpers/componentConditionals";
 import { useHead } from "unhead";
 import { headSelector, MY_ORGANIZATION } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
-import PageSectionDescriptor from "@/components/page_sections/PageSectionDescriptor.vue";
 import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
 
 const userSessionStore = useUserSessionStore();
