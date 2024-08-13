@@ -484,7 +484,7 @@
             "additional-info-section": {
                 "title": "Additional infos",
                 "fields": {
-                    "existing-plan": "Modifiying a plan for an existing organization?",
+                    "existing-plan": "Request for an existing organization?",
                     "situation": "Describe your situation"
                 }
             }
