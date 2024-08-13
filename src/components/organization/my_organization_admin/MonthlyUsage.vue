@@ -139,7 +139,7 @@ import { MyOrganizationBillingRecap } from "@/helpers/types";
 import { computed, PropType } from "vue";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { storeToRefs } from "pinia";
-import { priceString, dbNumberToDisplayableNumber } from "@/helpers/util";
+import { priceString, dbNumberToDisplayableNumber, getNumbersAboveFreeLimits, getTotalCosts } from "@/helpers/util";
 import BillableCard from "@/components/organization/my_organization_admin/billable_card/BillableCard.vue";
 import BillableItem from "@/components/organization/my_organization_admin/billable_card/BillableItem.vue";
 import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
@@ -156,7 +156,7 @@ const { locale } = storeToRefs(useUserSessionStore());
 
 const validInformations = computed(() => {
     return {
-        members:numbersHaveValues([
+        members: numbersHaveValues([
             props.billingRecap.building_insights_requests,
             props.billingRecap.building_insights_requests_unit_price_in_cents,
             props.billingRecap.max_building_insights_requests,
@@ -175,20 +175,9 @@ const validInformations = computed(() => {
     }
 })
 
-const aboveFreeLimits = computed(() => {
-    return {
-        members: props.billingRecap.max_members_count - props.billingRecap.max_free_members_count,
-        requests: props.billingRecap.building_insights_requests - props.billingRecap.max_free_building_insights_requests
-    }
-})
+const aboveFreeLimits = computed(() => getNumbersAboveFreeLimits(props.billingRecap))
 
-const totalCosts = computed(() => {
-    return {
-        members: props.billingRecap.members_unit_price_in_cents * aboveFreeLimits.value.members,
-        requests: props.billingRecap.building_insights_requests_unit_price_in_cents * aboveFreeLimits.value.requests,
-        plan: props.billingRecap.plan_unit_price_in_cents * props.billingRecap.plan_count
-    };
-})
+const totalCosts = computed(() => getTotalCosts(props.billingRecap, aboveFreeLimits.value));
 
 const requestQuota = computed(() => {
     const belowHalf =

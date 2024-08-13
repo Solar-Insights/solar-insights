@@ -1,4 +1,4 @@
-import { Locale } from "@/helpers/types";
+import { Locale, MyOrganizationBillingRecap } from "@/helpers/types";
 import { SOLAR_INSIGHTS_INFINITY } from "./constants";
 
 export function strToLargeNumberDisplay(input: string | number): String {
@@ -77,4 +77,24 @@ export function priceString(amount: number | string, locale: Locale, inCents: bo
 export function userCountSummaryToAlertType(aboveFreeLimit: boolean) {
     if (aboveFreeLimit) return "warning";
     else return "success";
+}
+
+type AboveFreeLimits = {
+    members: number,
+    requests: number
+};
+
+export function getNumbersAboveFreeLimits(billingRecap: MyOrganizationBillingRecap): AboveFreeLimits {
+    return {
+        members: billingRecap.max_members_count - billingRecap.max_free_members_count,
+        requests: billingRecap.building_insights_requests - billingRecap.max_free_building_insights_requests
+    }
+}
+
+export function getTotalCosts(billingRecap: MyOrganizationBillingRecap, aboveFreeLimits: AboveFreeLimits) {
+    return {
+        members: billingRecap.members_unit_price_in_cents * aboveFreeLimits.members,
+        requests: billingRecap.building_insights_requests_unit_price_in_cents * aboveFreeLimits.requests,
+        plan: billingRecap.plan_unit_price_in_cents * billingRecap.plan_count
+    };
 }
