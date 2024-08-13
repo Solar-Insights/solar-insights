@@ -154,7 +154,7 @@
                 "subtitle-date-format": "all dates are in format",
                 "subtitle-to": "to",
                 "current-plan-details": {
-                    "title": "More on the ongoing billing cycle",
+                    "title": "Billing cycle",
                     "upgrade": "Change your plan, or monthly limits",
                     "summary-card": {
                         "title": "Summary",
@@ -186,55 +186,58 @@
                         }
                     }
                 },
-                "solar-requests-card": {
-                    "title": "Solar installation analysis requests",
-                    "billable-items": {
-                        "current-count-and-limit": {
-                            "title": "Current count [Limit]",
-                            "precision": "Number of requests for the current period"
+                "hybrid-pricing-details": {
+                    "title": "Monthly usage",
+                    "solar-requests-card": {
+                        "title": "Solar installation analysis requests",
+                        "billable-items": {
+                            "current-count-and-limit": {
+                                "title": "Current count [Limit]",
+                                "precision": "Number of requests for the current period"
+                            },
+                            "free-limit": {
+                                "title": "Included",
+                                "precision": "Number of requests included in your plan"
+                            },
+                            "billable-count": {
+                                "title": "Billable count",
+                                "precision": "Difference between the current count and the quantity included in your plan"
+                            },
+                            "current-cost": {
+                                "title": "Current cost",
+                                "precision": "/ request"
+                            }
                         },
-                        "free-limit": {
-                            "title": "Included",
-                            "precision": "Number of requests included in your plan"
-                        },
-                        "billable-count": {
-                            "title": "Billable count",
-                            "precision": "Difference between the current count and the quantity included in your plan"
-                        },
-                        "current-cost": {
-                            "title": "Current cost",
-                            "precision": "/ request"
+                        "requests-quota": {
+                            "paragraph-success": "You have made less than half of the monthly requests available in your plan.",
+                            "paragraph-warning": "You have made at least half of the monthly requests available in your plan.",
+                            "paragraph-error": "You have made all the monthly requests available in your plan."
                         }
                     },
-                    "requests-quota": {
-                        "paragraph-success": "You have made less than half of the monthly requests available in your plan.",
-                        "paragraph-warning": "You have made at least half of the monthly requests available in your plan.",
-                        "paragraph-error": "You have made all the monthly requests available in your plan."
-                    }
-                },
-                "users-card": {
-                    "title": "Users",
-                    "billable-items": {
-                        "current-count-and-limit": {
-                            "title": "Current count (Limit)",
-                            "precision": "Number of users for the current period"
+                    "users-card": {
+                        "title": "Users",
+                        "billable-items": {
+                            "current-count-and-limit": {
+                                "title": "Current count (Limit)",
+                                "precision": "Number of users for the current period"
+                            },
+                            "free-limit": {
+                                "title": "Included",
+                                "precision": "Number of users included in your plan"
+                            },
+                            "billable-count": {
+                                "title": "Billable count",
+                                "precision": "Difference between the limit and the quantity included in your plan"
+                            },
+                            "current-cost": {
+                                "title": "Current cost",
+                                "precision": "/ additional user"
+                            }
                         },
-                        "free-limit": {
-                            "title": "Included",
-                            "precision": "Number of users included in your plan"
-                        },
-                        "billable-count": {
-                            "title": "Billable count",
-                            "precision": "Difference between the limit and the quantity included in your plan"
-                        },
-                        "current-cost": {
-                            "title": "Current cost",
-                            "precision": "/ additional user"
+                        "user-quota": {
+                            "paragraph-success": "Your user limit is below or equal to the number of users included in your plan.",
+                            "paragraph-warning": "Your user limit is exceeding the number of users included in your plan."
                         }
-                    },
-                    "user-quota": {
-                        "paragraph-success": "Your user limit is below or equal to the number of users included in your plan.",
-                        "paragraph-warning": "Your user limit is exceeding the number of users included in your plan."
                     }
                 }
             },

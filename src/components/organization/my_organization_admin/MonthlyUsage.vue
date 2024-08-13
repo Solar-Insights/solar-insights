@@ -1,18 +1,24 @@
 <template>
     <v-row class="align-stretch">
+        <v-col class="mt-6 mb-3 py-0" cols="12">
+            <div class="text-h5 my-1">
+                {{ $t(`my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.title`) }}
+            </div>
+        </v-col>
+
         <BillableCard
             v-if="validInformations.requests"
-            :title="$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.title`)"
+            :title="$t(`my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.title`)"
         >
             <BillableItem
                 :title="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-count-and-limit.title`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.billable-items.current-count-and-limit.title`
                     )
                 "
                 :precision="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-count-and-limit.precision`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.billable-items.current-count-and-limit.precision`
                     )
                 "
                 :value="`${dbNumberToDisplayableNumber(billingRecap.building_insights_requests)} [${dbNumberToDisplayableNumber(billingRecap.max_building_insights_requests)}]`"
@@ -20,12 +26,12 @@
             <BillableItem
                 :title="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.free-limit.title`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.billable-items.free-limit.title`
                     )
                 "
                 :precision="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.free-limit.precision`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.billable-items.free-limit.precision`
                     )
                 "
                 :value="`(${dbNumberToDisplayableNumber(billingRecap.max_free_building_insights_requests)})`"
@@ -36,12 +42,12 @@
             <BillableItem
                 :title="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.billable-count.title`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.billable-items.billable-count.title`
                     )
                 "
                 :precision="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.billable-count.precision`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.billable-items.billable-count.precision`
                     )
                 "
                 :value="dbNumberToDisplayableNumber(aboveFreeLimits.requests)"
@@ -49,17 +55,17 @@
             <BillableItem
                 :title="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-cost.title`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.billable-items.current-cost.title`
                     )
                 "
-                :precision="`${priceString(billingRecap.building_insights_requests_unit_price_in_cents, locale, true)} ${$t(`my-organization.admin-component.billing-recap-section-container.solar-requests-card.billable-items.current-cost.precision`)}`"
+                :precision="`${priceString(billingRecap.building_insights_requests_unit_price_in_cents, locale, true)} ${$t(`my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.billable-items.current-cost.precision`)}`"
                 :value="priceString(totalCosts.requests, locale, true)"
             />
             <ParagraphContainer class="w-100" :paragraphContent="``">
                 <div :class="`text-${requestQuota}`">
                     {{
                         $t(
-                            `my-organization.admin-component.billing-recap-section-container.solar-requests-card.requests-quota.paragraph-${requestQuota}`
+                            `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.requests-quota.paragraph-${requestQuota}`
                         )
                     }}
                 </div>
@@ -68,17 +74,17 @@
 
         <BillableCard 
             v-if="validInformations.members"
-            :title="$t(`my-organization.admin-component.billing-recap-section-container.users-card.title`)"
+            :title="$t(`my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.users-card.title`)"
         >
             <BillableItem
                 :title="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-count-and-limit.title`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.users-card.billable-items.current-count-and-limit.title`
                     )
                 "
                 :precision="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-count-and-limit.precision`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.users-card.billable-items.current-count-and-limit.precision`
                     )
                 "
                 :value="`${dbNumberToDisplayableNumber(billingRecap.members_count)} [${dbNumberToDisplayableNumber(billingRecap.max_members_count)}]`"
@@ -86,12 +92,12 @@
             <BillableItem
                 :title="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.users-card.billable-items.free-limit.title`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.users-card.billable-items.free-limit.title`
                     )
                 "
                 :precision="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.users-card.billable-items.free-limit.precision`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.users-card.billable-items.free-limit.precision`
                     )
                 "
                 :value="`(${billingRecap.max_free_members_count})`"
@@ -102,12 +108,12 @@
             <BillableItem
                 :title="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.users-card.billable-items.billable-count.title`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.users-card.billable-items.billable-count.title`
                     )
                 "
                 :precision="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.users-card.billable-items.billable-count.precision`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.users-card.billable-items.billable-count.precision`
                     )
                 "
                 :value="dbNumberToDisplayableNumber(aboveFreeLimits.members)"
@@ -115,17 +121,17 @@
             <BillableItem
                 :title="
                     $t(
-                        `my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-cost.title`
+                        `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.users-card.billable-items.current-cost.title`
                     )
                 "
-                :precision="`${priceString(billingRecap.members_unit_price_in_cents, locale, true)} ${$t(`my-organization.admin-component.billing-recap-section-container.users-card.billable-items.current-cost.precision`)}`"
+                :precision="`${priceString(billingRecap.members_unit_price_in_cents, locale, true)} ${$t(`my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.users-card.billable-items.current-cost.precision`)}`"
                 :value="priceString(totalCosts.members, locale, true)"
             />
             <ParagraphContainer class="w-100" :paragraphContent="``">
                 <div :class="`text-${userQuota}`">
                     {{
                         $t(
-                            `my-organization.admin-component.billing-recap-section-container.users-card.user-quota.paragraph-${userQuota}`
+                            `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.users-card.user-quota.paragraph-${userQuota}`
                         )
                     }}
                 </div>

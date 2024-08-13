@@ -154,7 +154,7 @@
                 "subtitle-date-format": "toutes les dates sont en format",
                 "subtitle-to": "au",
                 "current-plan-details": {
-                    "title": "Plus sur le cycle de facturation courant",
+                    "title": "Cycle de facturation",
                     "upgrade": "Modifier votre plan, ou vos limites",
                     "summary-card": {
                         "title": "Sommaire",
@@ -186,55 +186,58 @@
                         }
                     }
                 },
-                "solar-requests-card": {
-                    "title": "Requêtes d'analyse d'installation solaire",
-                    "billable-items": {
-                        "current-count-and-limit": {
-                            "title": "Nombre actuel [Limite]",
-                            "precision": "Nombre de requêtes pour la période courante"
+                "hybrid-pricing-details": {
+                    "title": "Utilisation mensuelle",
+                    "solar-requests-card": {
+                        "title": "Requêtes d'analyse d'installation solaire",
+                        "billable-items": {
+                            "current-count-and-limit": {
+                                "title": "Nombre actuel [Limite]",
+                                "precision": "Nombre de requêtes pour la période courante"
+                            },
+                            "free-limit": {
+                                "title": "Inclus",
+                                "precision": "Nombre de requêtes incluses dans votre plan"
+                            },
+                            "billable-count": {
+                                "title": "Nombre facturable",
+                                "precision": "Différence entre le nombre actuel et la quantité incluse dans votre plan"
+                            },
+                            "current-cost": {
+                                "title": "Coût actuel",
+                                "precision": "/ requête"
+                            }
                         },
-                        "free-limit": {
-                            "title": "Inclus",
-                            "precision": "Nombre de requêtes incluses dans votre plan"
-                        },
-                        "billable-count": {
-                            "title": "Nombre facturable",
-                            "precision": "Différence entre le nombre actuel et la quantité incluse dans votre plan"
-                        },
-                        "current-cost": {
-                            "title": "Coût actuel",
-                            "precision": "/ requête"
+                        "requests-quota": {
+                            "paragraph-success": "Vous avez effectué moins de la moitié des requêtes mensuelles disponibles dans votre plan.",
+                            "paragraph-warning": "Vous avez effectué au moins la moitié des requêtes mensuelles disponibles dans votre plan.",
+                            "paragraph-error": "Vous avez effectué tous les requêtes mensuelles disponibles dans votre plan."
                         }
                     },
-                    "requests-quota": {
-                        "paragraph-success": "Vous avez effectué moins de la moitié des requêtes mensuelles disponibles dans votre plan.",
-                        "paragraph-warning": "Vous avez effectué au moins la moitié des requêtes mensuelles disponibles dans votre plan.",
-                        "paragraph-error": "Vous avez effectué tous les requêtes mensuelles disponibles dans votre plan."
-                    }
-                },
-                "users-card": {
-                    "title": "Utilisateurs",
-                    "billable-items": {
-                        "current-count-and-limit": {
-                            "title": "Nombre actuel (Limite)",
-                            "precision": "Nombre d'utilisateurs pour la période courante"
+                    "users-card": {
+                        "title": "Utilisateurs",
+                        "billable-items": {
+                            "current-count-and-limit": {
+                                "title": "Nombre actuel (Limite)",
+                                "precision": "Nombre d'utilisateurs pour la période courante"
+                            },
+                            "free-limit": {
+                                "title": "Inclus",
+                                "precision": "Nombre d'utilisateurs inclus dans votre plan"
+                            },
+                            "billable-count": {
+                                "title": "Nombre facturable",
+                                "precision": "Différence entre la limite et la quantité incluse dans votre plan"
+                            },
+                            "current-cost": {
+                                "title": "Coût actuel",
+                                "precision": "/ utilisateur additionnel"
+                            }
                         },
-                        "free-limit": {
-                            "title": "Inclus",
-                            "precision": "Nombre d'utilisateurs inclus dans votre plan"
-                        },
-                        "billable-count": {
-                            "title": "Nombre facturable",
-                            "precision": "Différence entre la limite et la quantité incluse dans votre plan"
-                        },
-                        "current-cost": {
-                            "title": "Coût actuel",
-                            "precision": "/ utilisateur additionnel"
+                        "user-quota": {
+                            "paragraph-success": "Votre limite d'utilisateurs est inférieure ou égale à la quantité d'utilisateurs inclus dans votre plan.",
+                            "paragraph-warning": "Votre limite d'utilisateurs est supérieure à la quantité d'utilisateurs inclus dans votre plan."
                         }
-                    },
-                    "user-quota": {
-                        "paragraph-success": "Votre limite d'utilisateurs est inférieure ou égale à la quantité d'utilisateurs inclus dans votre plan.",
-                        "paragraph-warning": "Votre limite d'utilisateurs est supérieure à la quantité d'utilisateurs inclus dans votre plan."
                     }
                 }
             },
