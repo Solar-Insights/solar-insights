@@ -154,10 +154,9 @@
                 "subtitle-date-format": "all dates are in format",
                 "subtitle-to": "to",
                 "current-plan-details": {
-                    "title": "Billing cycle",
-                    "upgrade": "Change your plan, or monthly limits",
                     "summary-card": {
-                        "title": "Summary",
+                        "title": "Billing cycle",
+                        "action": "Change your plan, or monthly limits",
                         "items": {
                             "pricing-tier": {
                                 "title": "Pricing plan",
@@ -187,7 +186,6 @@
                     }
                 },
                 "hybrid-pricing-details": {
-                    "title": "Monthly usage",
                     "solar-requests-card": {
                         "title": "Solar installation analysis requests",
                         "billable-items": {

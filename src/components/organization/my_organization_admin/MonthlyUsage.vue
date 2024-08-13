@@ -1,11 +1,5 @@
 <template>
-    <v-row class="align-stretch">
-        <v-col class="mt-6 mb-3 py-0" cols="12">
-            <div class="text-h5 my-1">
-                {{ $t(`my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.title`) }}
-            </div>
-        </v-col>
-
+    <v-row class="align-stretch my-6 py-5">
         <BillableCard
             v-if="validInformations.requests"
             :title="$t(`my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.title`)"

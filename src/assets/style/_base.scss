@@ -349,10 +349,17 @@
     @extend .pa-6;
 }
 
+.billable-card-title-container {
+    @extend .mb-6;
+}
+
 .billable-card-title {
     @extend .text-h5;
-    @extend .mb-6;
     @extend .font-weight-black;
+}
+
+.billable-card-title-action {
+    @extend .my-1;
 }
 
 .billable-item-container {

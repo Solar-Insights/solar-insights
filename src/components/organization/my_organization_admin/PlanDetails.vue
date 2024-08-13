@@ -1,25 +1,12 @@
 <template>
-    <v-row class="my-6" no-gutters>
-        <v-col cols="12">
-            <div class="text-h5 my-1">
-                {{ $t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.title`) }}
-            </div>
-        </v-col>
-
-        <v-col cols="12" class="mb-3">
-            <v-btn
-                @click="router.push({ name: `pricing` })"
-                class="paragraph-action my-1"
-                elevation="2"
-                color="theme"
-                append-icon="mdi-arrow-up-bold-outline"
-            >
-                {{ $t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.upgrade`) }}
-            </v-btn>
-        </v-col>
-
+    <v-row class="my-6 pb-5" no-gutters>
         <BillableCard
             :title="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.title`)"
+            :action="{
+                text: $t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.action`),
+                icon: `mdi-arrow-up-bold-outline`
+            }"
+            @onActionClick="router.push({ name: `pricing` })"
             fullWidth
         >
             <BillableItem
