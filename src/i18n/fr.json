@@ -185,6 +185,29 @@
                         }
                     }
                 },
+                "total-costs": {
+                    "total-cost-card": {
+                        "title": "Coûts totaux",
+                        "billable-items": {
+                            "plan-cost": {
+                                "title": "Plan",
+                                "precision": "Coût mensuel de votre plan de tarification"
+                            },
+                            "requests-cost": {
+                                "title": "Requêtes d'analyse d'installation solaire",
+                                "precision": "Voir les détails ci-dessous"
+                            },
+                            "users-cost": {
+                                "title": "Utilisateurs",
+                                "precision": "Voir les détails ci-dessous"
+                            },
+                            "total-cost": {
+                                "title": "Total",
+                                "precision": ""  
+                            }
+                        }
+                    }
+                },
                 "hybrid-pricing-details": {
                     "solar-requests-card": {
                         "title": "Requêtes d'analyse d'installation solaire",

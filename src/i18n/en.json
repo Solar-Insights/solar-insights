@@ -185,6 +185,29 @@
                         }
                     }
                 },
+                "total-costs": {
+                    "total-cost-card": {
+                        "title": "Total costs",
+                        "billable-items": {
+                            "plan-cost": {
+                                "title": "Plan",
+                                "precision": "Monthly cost for your current pricing plan"
+                            },
+                            "requests-cost": {
+                                "title": "Solar installation analysis requests",
+                                "precision": "See the breakdown below"
+                            },
+                            "users-cost": {
+                                "title": "Users",
+                                "precision": "See the breakdown below"
+                            },
+                            "total-cost": {
+                                "title": "Total",
+                                "precision": ""  
+                            }
+                        }
+                    }
+                },
                 "hybrid-pricing-details": {
                     "solar-requests-card": {
                         "title": "Solar installation analysis requests",

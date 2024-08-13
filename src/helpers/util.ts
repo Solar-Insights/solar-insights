@@ -92,9 +92,14 @@ export function getNumbersAboveFreeLimits(billingRecap: MyOrganizationBillingRec
 }
 
 export function getTotalCosts(billingRecap: MyOrganizationBillingRecap, aboveFreeLimits: AboveFreeLimits) {
+    const membersCost = billingRecap.members_unit_price_in_cents * aboveFreeLimits.members
+    const requestsCost = billingRecap.building_insights_requests_unit_price_in_cents * aboveFreeLimits.requests
+    const planCost = billingRecap.plan_unit_price_in_cents * billingRecap.plan_count;
+    
     return {
-        members: billingRecap.members_unit_price_in_cents * aboveFreeLimits.members,
-        requests: billingRecap.building_insights_requests_unit_price_in_cents * aboveFreeLimits.requests,
-        plan: billingRecap.plan_unit_price_in_cents * billingRecap.plan_count
+        members: membersCost,
+        requests: requestsCost,
+        plan: planCost,
+        total: membersCost + requestsCost + planCost
     };
 }

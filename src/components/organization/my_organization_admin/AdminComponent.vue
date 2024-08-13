@@ -17,6 +17,8 @@
             </PageSubtitleContainer>
         </PageSection>
 
+        <v-divider/>
+
         <PageSection>
             <PageSubtitleContainer
                 :subtitle="$t(`my-organization.admin-component.billing-recap-section-container.title`)"
@@ -24,6 +26,8 @@
                 :center="false"
             >
                 <PlanDetails :billingRecap="myOrganizationBillingRecap" />
+
+                <TotalCost :billingRecap="myOrganizationBillingRecap" /> 
 
                 <MonthlyUsage :billingRecap="myOrganizationBillingRecap" />
             </PageSubtitleContainer>
@@ -37,13 +41,10 @@ import { onMounted, ref } from "vue";
 import UserTable from "@/components/organization/my_organization_admin/UserTable.vue";
 import PlanDetails from "@/components/organization/my_organization_admin/PlanDetails.vue";
 import MonthlyUsage from "@/components/organization/my_organization_admin/MonthlyUsage.vue";
+import TotalCost from "@/components/organization/my_organization_admin/TotalCost.vue";
 import PageSection from "@/components/page_sections/PageSection.vue";
 import { getMyOrganizationAdminData } from "@/api/user";
-import { useRouter } from "vue-router";
 import PageSubtitleContainer from "@/components/page_sections/PageSubtitleContainer.vue";
-
-
-const router = useRouter();
 
 const myOrganizationMembers = ref<MyOrganizationMember[]>();
 const myOrganizationBillingRecap = ref<MyOrganizationBillingRecap>();
