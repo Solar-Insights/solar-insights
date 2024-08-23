@@ -63,7 +63,9 @@
                 <v-switch
                     v-model="data.modifiyingExistingPlan"
                     class="ml-2"
-                    :error-messages="createValidationMessages(v$.modifiyingExistingPlan.$errors.map((e: any) => e.$params))"
+                    :error-messages="
+                        createValidationMessages(v$.modifiyingExistingPlan.$errors.map((e: any) => e.$params))
+                    "
                     @blur="v$.modifiyingExistingPlan.$touch"
                     @input="v$.modifiyingExistingPlan.$touch"
                     :label="$t(`pricing.pricing-form.additional-info-section.fields.existing-plan`)"

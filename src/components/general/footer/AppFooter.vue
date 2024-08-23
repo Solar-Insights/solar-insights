@@ -1,10 +1,10 @@
 <template>
     <div class="footer">
-        <v-divider/>
-        <AppFooterSitemap/>
-        <v-divider/>
-        
-        <AppFooterCommercial/>
+        <v-divider />
+        <AppFooterSitemap />
+        <v-divider />
+
+        <AppFooterCommercial />
     </div>
 </template>
 

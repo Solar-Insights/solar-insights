@@ -1,12 +1,12 @@
-import * as fs from 'fs'
+import * as fs from "fs";
 import { HOME, SEARCH, SOLAR_MAP, GET_STARTED, MY_ORGANIZATION, PRICING } from "@/router/routes";
-import { RouteInfo } from '@/router/routes';
+import { RouteInfo } from "@/router/routes";
 
 function addStartingStringsToSiteMap() {
     let start = ``;
 
     start += `<?xml version="1.0" encoding="UTF-8"?>\n`;
-    start += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`
+    start += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
     return start;
 }
@@ -21,7 +21,7 @@ function addRouteStringsToSiteMap() {
     const relevantRoutes: RouteInfo[] = [HOME, SEARCH, PRICING, SOLAR_MAP, GET_STARTED, MY_ORGANIZATION];
     relevantRoutes.forEach((route: RouteInfo) => {
         routes += addSingleRouteStringToSiteMap(route);
-    })
+    });
 
     return routes;
 }
@@ -53,8 +53,8 @@ async function createRobotsTxt() {
     robots += `User-agent: *\n`;
     robots += `Disallow:\n`;
     robots += `\n`;
-    robots += `Sitemap: https://solarinsights.ca/sitemap.xml`
-    
+    robots += `Sitemap: https://solarinsights.ca/sitemap.xml`;
+
     await fs.promises.writeFile("dist/robots.txt", robots);
 }
 

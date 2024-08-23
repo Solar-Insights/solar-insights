@@ -14,16 +14,16 @@
             </div>
         </div>
 
-        <div v-if="stringHasValue(props.precision)" class="page-subtitle-precision" :class="center ? `text-center` : ``">
+        <div
+            v-if="stringHasValue(props.precision)"
+            class="page-subtitle-precision"
+            :class="center ? `text-center` : ``"
+        >
             {{ props.precision }}
         </div>
 
         <div v-if="objectHasValue(props.action)" class="page-subtitle-action">
-            <PageAction
-                :action="props.action"
-                @onPageActionClick="emits('onActionClick')"
-                style="width: 250px"
-            />
+            <PageAction :action="props.action" @onPageActionClick="emits('onActionClick')" style="width: 250px" />
         </div>
 
         <div class="page-subtitle-content">

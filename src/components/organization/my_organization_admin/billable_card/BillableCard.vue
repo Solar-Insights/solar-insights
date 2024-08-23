@@ -26,8 +26,8 @@
 </template>
 
 <script setup lang="ts">
-import { ButtonAction } from '@/helpers/types';
-import { PropType } from 'vue';
+import { ButtonAction } from "@/helpers/types";
+import { PropType } from "vue";
 import { objectHasValue, stringHasValue } from "@/helpers/componentConditionals";
 
 const props = defineProps({
@@ -43,7 +43,7 @@ const props = defineProps({
     action: {
         type: Object as PropType<ButtonAction>,
         required: false
-    },
+    }
 });
 
 const emits = defineEmits(["onActionClick"]);

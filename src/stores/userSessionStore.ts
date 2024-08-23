@@ -45,7 +45,7 @@ export const useUserSessionStore = defineStore("userSessionStore", {
                         icon: "mdi-close",
                         color: closeIconColor
                     },
-                    onClick: () => {},
+                    onClick: () => {}
                 }
             });
         },

@@ -1,6 +1,6 @@
 <template>
     <div v-if="myOrganizationBillingRecap && myOrganizationMembers">
-        <v-divider/>
+        <v-divider />
 
         <PageSection>
             <PageSubtitleContainer
@@ -17,7 +17,7 @@
             </PageSubtitleContainer>
         </PageSection>
 
-        <v-divider/>
+        <v-divider />
 
         <PageSection>
             <PageSubtitleContainer
@@ -27,7 +27,7 @@
             >
                 <PlanDetails :billingRecap="myOrganizationBillingRecap" />
 
-                <TotalCost :billingRecap="myOrganizationBillingRecap" /> 
+                <TotalCost :billingRecap="myOrganizationBillingRecap" />
 
                 <MonthlyUsage :billingRecap="myOrganizationBillingRecap" />
             </PageSubtitleContainer>

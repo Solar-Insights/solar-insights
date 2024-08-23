@@ -26,10 +26,7 @@
 
         <div v-for="(step, index) in steps">
             <PageSection>
-                <PageLateralSubtitleContainer 
-                    :subtitle="`${step.title}`" 
-                    :icon="step.icon"
-                >
+                <PageLateralSubtitleContainer :subtitle="`${step.title}`" :icon="step.icon">
                     <ParagraphContainer
                         v-for="paragraph in step.contents"
                         :paragraphContent="paragraph"
@@ -46,7 +43,7 @@
                 </PageLateralSubtitleContainer>
             </PageSection>
 
-            <v-divider v-if="index != steps.length - 1"/>
+            <v-divider v-if="index != steps.length - 1" />
         </div>
     </PageContainer>
 </template>

@@ -40,7 +40,7 @@ const props = defineProps({
         required: false
     },
     fullWidth: {
-        type: Boolean, 
+        type: Boolean,
         required: false,
         default: false
     }

@@ -203,7 +203,7 @@
                             },
                             "total-cost": {
                                 "title": "Total",
-                                "precision": ""  
+                                "precision": ""
                             }
                         }
                     }

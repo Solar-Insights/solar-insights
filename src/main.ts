@@ -7,7 +7,7 @@ import piniaPluginPersistedState from "pinia-plugin-persistedstate";
 import vuetifyThemesAndComponents from "@/vuetify";
 import "@/assets/_main.scss";
 import { auth0 } from "@/plugins/auth";
-import { createHead } from 'unhead'
+import { createHead } from "unhead";
 
 createHead();
 

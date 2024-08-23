@@ -2,7 +2,11 @@
     <v-row class="align-stretch my-6 py-5">
         <BillableCard
             v-if="validInformations.requests"
-            :title="$t(`my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.title`)"
+            :title="
+                $t(
+                    `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.solar-requests-card.title`
+                )
+            "
         >
             <BillableItem
                 :title="
@@ -66,9 +70,13 @@
             </ParagraphContainer>
         </BillableCard>
 
-        <BillableCard 
+        <BillableCard
             v-if="validInformations.members"
-            :title="$t(`my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.users-card.title`)"
+            :title="
+                $t(
+                    `my-organization.admin-component.billing-recap-section-container.hybrid-pricing-details.users-card.title`
+                )
+            "
         >
             <BillableItem
                 :title="
@@ -168,14 +176,11 @@ const validInformations = computed(() => {
             props.billingRecap.max_members_count,
             props.billingRecap.max_free_members_count
         ]),
-        plan: numbersHaveValues([
-            props.billingRecap.plan_count,
-            props.billingRecap.plan_unit_price_in_cents
-        ]),
-    }
-})
+        plan: numbersHaveValues([props.billingRecap.plan_count, props.billingRecap.plan_unit_price_in_cents])
+    };
+});
 
-const aboveFreeLimits = computed(() => getNumbersAboveFreeLimits(props.billingRecap))
+const aboveFreeLimits = computed(() => getNumbersAboveFreeLimits(props.billingRecap));
 
 const totalCosts = computed(() => getTotalCosts(props.billingRecap, aboveFreeLimits.value));
 
@@ -184,7 +189,7 @@ const requestQuota = computed(() => {
         props.billingRecap.building_insights_requests < props.billingRecap.max_building_insights_requests / 2;
     const atOrAboveLimit =
         props.billingRecap.building_insights_requests >= props.billingRecap.max_building_insights_requests;
-        
+
     if (belowHalf) return "success";
     else if (atOrAboveLimit) return "error";
     else return "warning";

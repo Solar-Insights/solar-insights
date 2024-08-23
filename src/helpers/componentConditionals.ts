@@ -33,9 +33,9 @@ export function numberHasValue(nb: number | null | undefined) {
 }
 
 export function numbersHaveValues(nbList: number[]) {
-    for(let nb of nbList) {
+    for (let nb of nbList) {
         if (!numberHasValue(nb)) return false;
     }
-    
+
     return true;
 }

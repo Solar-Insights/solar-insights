@@ -1,9 +1,9 @@
 <template>
-    <v-col 
-        class="short-description-single-item-container" 
-        :cols="$props.cols" 
-        :xs="$props.xs" 
-        :sm="$props.sm" 
+    <v-col
+        class="short-description-single-item-container"
+        :cols="$props.cols"
+        :xs="$props.xs"
+        :sm="$props.sm"
         :md="$props.md"
     >
         <v-icon
@@ -24,10 +24,7 @@
         </div>
 
         <div v-if="objectHasValue(props.itemAction)" class="short-description-single-item-action">
-            <PageAction
-                :action="props.itemAction" 
-                @onPageActionClick="emits('onItemActionClick')" 
-            />
+            <PageAction :action="props.itemAction" @onPageActionClick="emits('onItemActionClick')" />
         </div>
     </v-col>
 </template>
@@ -41,19 +38,19 @@ import PageAction from "@/components/page_sections/PageAction.vue";
 const props = defineProps({
     cols: {
         type: [Number, String],
-        required: true,
+        required: true
     },
     xs: {
         type: [Number, String],
-        required: true,
+        required: true
     },
     sm: {
         type: [Number, String],
-        required: true,
+        required: true
     },
     md: {
         type: [Number, String],
-        required: true,
+        required: true
     },
     itemTitle: {
         type: String,

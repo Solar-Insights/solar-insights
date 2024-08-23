@@ -1,49 +1,103 @@
 <template>
     <v-row class="my-6 pb-5" no-gutters>
         <BillableCard
-            :title="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.title`)"
+            :title="
+                $t(
+                    `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.title`
+                )
+            "
             :action="{
-                text: $t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.action`),
+                text: $t(
+                    `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.action`
+                ),
                 icon: `mdi-arrow-up-bold-outline`
             }"
             @onActionClick="router.push({ name: `pricing` })"
             fullWidth
         >
             <BillableItem
-                :title="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.pricing-tier.title`)"
-                :precision="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.pricing-tier.precision`)"
+                :title="
+                    $t(
+                        `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.pricing-tier.title`
+                    )
+                "
+                :precision="
+                    $t(
+                        `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.pricing-tier.precision`
+                    )
+                "
                 :value="$t(`global.${billingRecap.pricingTier}`)"
             />
 
             <BillableItem
-                :title="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.max-free-members.title`)"
-                :precision="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.max-free-members.precision`)"
+                :title="
+                    $t(
+                        `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.max-free-members.title`
+                    )
+                "
+                :precision="
+                    $t(
+                        `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.max-free-members.precision`
+                    )
+                "
                 :value="billingRecap.max_free_members_count"
             />
-            
+
             <BillableItem
-                :title="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.max-free-requests.title`)"
-                :precision="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.max-free-requests.precision`)"
+                :title="
+                    $t(
+                        `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.max-free-requests.title`
+                    )
+                "
+                :precision="
+                    $t(
+                        `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.max-free-requests.precision`
+                    )
+                "
                 :value="billingRecap.max_free_building_insights_requests"
             />
 
-            <v-divider class="my-2"/>
+            <v-divider class="my-2" />
 
             <BillableItem
-                :title="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.starting-date.title`)"
-                :precision="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.starting-date.precision`)"
+                :title="
+                    $t(
+                        `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.starting-date.title`
+                    )
+                "
+                :precision="
+                    $t(
+                        `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.starting-date.precision`
+                    )
+                "
                 :value="billingRecap.periodStart"
             />
 
             <BillableItem
-                :title="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.ending-date.title`)"
-                :precision="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.ending-date.precision`)"
+                :title="
+                    $t(
+                        `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.ending-date.title`
+                    )
+                "
+                :precision="
+                    $t(
+                        `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.ending-date.precision`
+                    )
+                "
                 :value="billingRecap.periodEnd"
             />
-            
+
             <BillableItem
-                :title="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.payment-due-date.title`)"
-                :precision="$t(`my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.payment-due-date.precision`)"
+                :title="
+                    $t(
+                        `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.payment-due-date.title`
+                    )
+                "
+                :precision="
+                    $t(
+                        `my-organization.admin-component.billing-recap-section-container.current-plan-details.summary-card.items.payment-due-date.precision`
+                    )
+                "
                 :value="billingRecap.dueDate"
             />
         </BillableCard>

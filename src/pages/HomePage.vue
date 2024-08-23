@@ -14,33 +14,43 @@
         </PageSection>
 
         <PageSection>
-            <PageSubtitleContainer
-                :subtitle="$t(`home.usecase-subtitle-container.subtitle`)"
-            >
+            <PageSubtitleContainer :subtitle="$t(`home.usecase-subtitle-container.subtitle`)">
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
-                        cols="12" xs="12" sm="6" md="6"
+                        cols="12"
+                        xs="12"
+                        sm="6"
+                        md="6"
                         :itemTitle="$t(`home.usecase-subtitle-container.visualize.title`)"
                         :itemContent="$t(`home.usecase-subtitle-container.visualize.description`)"
                         :itemIcon="`mdi-telescope`"
                         :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
-                        cols="12" xs="12" sm="6" md="6"
+                        cols="12"
+                        xs="12"
+                        sm="6"
+                        md="6"
                         :itemTitle="$t(`home.usecase-subtitle-container.viability.title`)"
                         :itemContent="$t(`home.usecase-subtitle-container.viability.description`)"
                         :itemIcon="`mdi-cash`"
                         :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
-                        cols="12" xs="12" sm="6" md="6"
+                        cols="12"
+                        xs="12"
+                        sm="6"
+                        md="6"
                         :itemTitle="$t(`home.usecase-subtitle-container.customize.title`)"
                         :itemContent="$t(`home.usecase-subtitle-container.customize.description`)"
                         :itemIcon="`mdi-hammer`"
                         :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
-                        cols="12" xs="12" sm="6" md="6"
+                        cols="12"
+                        xs="12"
+                        sm="6"
+                        md="6"
                         :itemTitle="$t(`home.usecase-subtitle-container.collaborate.title`)"
                         :itemContent="$t(`home.usecase-subtitle-container.collaborate.description`)"
                         :itemIcon="`mdi-account-group-outline`"

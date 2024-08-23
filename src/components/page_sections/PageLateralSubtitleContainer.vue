@@ -15,20 +15,20 @@
                 </div>
             </div>
 
-            <div v-if="stringHasValue(props.precision)" class="page-subtitle-precision ml-0" style="text-align: left !important">
+            <div
+                v-if="stringHasValue(props.precision)"
+                class="page-subtitle-precision ml-0"
+                style="text-align: left !important"
+            >
                 {{ props.precision }}
             </div>
 
-            <div v-if="objectHasValue(props.action)" class="page-subtitle-action" style="text-align: left !important;">
-                <PageAction
-                    class="ml-0"
-                    :action="props.action"
-                    @onPageActionClick="emits('onActionClick')"
-                />
+            <div v-if="objectHasValue(props.action)" class="page-subtitle-action" style="text-align: left !important">
+                <PageAction class="ml-0" :action="props.action" @onPageActionClick="emits('onActionClick')" />
             </div>
         </v-col>
 
-        <v-col class="py-0" cols="12" xs="12" sm="12" md="1"/>
+        <v-col class="py-0" cols="12" xs="12" sm="12" md="1" />
 
         <v-col class="py-0" cols="12" xs="12" sm="12" md="6">
             <div class="page-subtitle-content pb-0">

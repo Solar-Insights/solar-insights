@@ -24,21 +24,30 @@
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
-                        cols="12" xs="12" sm="12" md="12"
+                        cols="12"
+                        xs="12"
+                        sm="12"
+                        md="12"
                         :itemTitle="$t(`pricing.pricing-cards.starter.name`)"
                         :itemContent="$t(`pricing.pricing-cards.starter.description`)"
                         :itemIcon="`mdi-account-outline`"
                         :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
-                        cols="12" xs="12" sm="12" md="12"
+                        cols="12"
+                        xs="12"
+                        sm="12"
+                        md="12"
                         :itemTitle="$t(`pricing.pricing-cards.pro.name`)"
                         :itemContent="$t(`pricing.pricing-cards.pro.description`)"
                         :itemIcon="`mdi-account-multiple-outline`"
                         :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
-                        cols="12" xs="12" sm="12" md="12"
+                        cols="12"
+                        xs="12"
+                        sm="12"
+                        md="12"
                         :itemTitle="$t(`pricing.pricing-cards.enterprise.name`)"
                         :itemContent="$t(`pricing.pricing-cards.enterprise.description`)"
                         :itemIcon="`mdi-account-group-outline`"
@@ -57,14 +66,20 @@
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
-                        cols="12" xs="12" sm="12" md="12"
+                        cols="12"
+                        xs="12"
+                        sm="12"
+                        md="12"
                         :itemTitle="$t(`get-started.register-subtitle-container.short-items.manage.title`)"
                         :itemContent="$t(`get-started.register-subtitle-container.short-items.manage.description`)"
                         :itemIcon="`mdi-lock-check-outline`"
                         :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
-                        cols="12" xs="12" sm="12" md="12"
+                        cols="12"
+                        xs="12"
+                        sm="12"
+                        md="12"
                         :itemTitle="$t(`get-started.register-subtitle-container.short-items.share.title`)"
                         :itemContent="$t(`get-started.register-subtitle-container.short-items.share.description`)"
                         :itemIcon="`mdi-share-outline`"
@@ -84,7 +99,10 @@
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
                         v-if="!isAuthenticated"
-                        cols="12" xs="12" sm="12" md="12"
+                        cols="12"
+                        xs="12"
+                        sm="12"
+                        md="12"
                         :itemTitle="$t(`get-started.use-solar-insights-subtitle-container.short-items.new-org.title`)"
                         :itemContent="
                             $t(`get-started.use-solar-insights-subtitle-container.short-items.new-org.description`)
@@ -98,7 +116,10 @@
                         @onItemActionClick="loginUser"
                     />
                     <ShortDescriptionItem
-                        cols="12" xs="12" sm="12" md="12"
+                        cols="12"
+                        xs="12"
+                        sm="12"
+                        md="12"
                         :itemTitle="
                             $t(`get-started.use-solar-insights-subtitle-container.short-items.start-using.title`)
                         "
@@ -128,7 +149,10 @@
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
-                        cols="12" xs="12" sm="12" md="12"
+                        cols="12"
+                        xs="12"
+                        sm="12"
+                        md="12"
                         :itemTitle="$t(`get-started.beyond-solar-insights-subtitle-container.short-items.data.title`)"
                         :itemContent="
                             $t(`get-started.beyond-solar-insights-subtitle-container.short-items.data.description`)
@@ -137,7 +161,10 @@
                         :itemIconColor="`theme`"
                     />
                     <ShortDescriptionItem
-                        cols="12" xs="12" sm="12" md="12"
+                        cols="12"
+                        xs="12"
+                        sm="12"
+                        md="12"
                         :itemTitle="$t(`get-started.beyond-solar-insights-subtitle-container.short-items.graphs.title`)"
                         :itemContent="
                             $t(`get-started.beyond-solar-insights-subtitle-container.short-items.graphs.description`)

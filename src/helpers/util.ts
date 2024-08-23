@@ -66,7 +66,12 @@ function fallbackClipboardExecCommand(textToCopy: string) {
     document.body.removeChild(textArea);
 }
 
-export function priceString(amount: number | string, locale: Locale, inCents: boolean = false, rounded: boolean = true) {
+export function priceString(
+    amount: number | string,
+    locale: Locale,
+    inCents: boolean = false,
+    rounded: boolean = true
+) {
     const dollarVal = inCents ? Number(amount) / 100 : Number(amount);
     const parsedVal = rounded ? dollarVal.toFixed(2) : dollarVal;
 
@@ -80,22 +85,22 @@ export function userCountSummaryToAlertType(aboveFreeLimit: boolean) {
 }
 
 type AboveFreeLimits = {
-    members: number,
-    requests: number
+    members: number;
+    requests: number;
 };
 
 export function getNumbersAboveFreeLimits(billingRecap: MyOrganizationBillingRecap): AboveFreeLimits {
     return {
         members: billingRecap.max_members_count - billingRecap.max_free_members_count,
         requests: billingRecap.building_insights_requests - billingRecap.max_free_building_insights_requests
-    }
+    };
 }
 
 export function getTotalCosts(billingRecap: MyOrganizationBillingRecap, aboveFreeLimits: AboveFreeLimits) {
-    const membersCost = billingRecap.members_unit_price_in_cents * aboveFreeLimits.members
-    const requestsCost = billingRecap.building_insights_requests_unit_price_in_cents * aboveFreeLimits.requests
+    const membersCost = billingRecap.members_unit_price_in_cents * aboveFreeLimits.members;
+    const requestsCost = billingRecap.building_insights_requests_unit_price_in_cents * aboveFreeLimits.requests;
     const planCost = billingRecap.plan_unit_price_in_cents * billingRecap.plan_count;
-    
+
     return {
         members: membersCost,
         requests: requestsCost,
