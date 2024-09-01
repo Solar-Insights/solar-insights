@@ -8,7 +8,8 @@
     },
     "navigation-sections": {
         "solar-insights": "Solar Insights",
-        "services": "Services"
+        "services": "Services",
+        "support": "Support"
     },
     "navigation": {
         "home": "Accueil",
@@ -20,7 +21,8 @@
         "settings": "Paramètres",
         "get-started": "Lancez-vous",
         "my-organization": "Mon organisation",
-        "pricing": "Tarification"
+        "pricing": "Tarification",
+        "contact": "Nous contacter"
     },
     "alerts": {
         "default": {

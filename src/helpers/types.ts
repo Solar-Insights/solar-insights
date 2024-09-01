@@ -92,7 +92,7 @@ export type ButtonAction = {
     icon?: string;
 };
 
-export type RouteSection = "solar-insights" | "services";
+export type RouteSection = "solar-insights" | "services" | "support";
 
 export type PricingCardDetails = {
     pricingTier: PricingTier;

@@ -92,6 +92,13 @@ export const routes: RouteInfo[] = [
         icon: "mdi-weather-sunny",
         requiresAuth: false,
         displaysAppBarAndFooter: true
+    },
+    {
+        section: "support",
+        name: "contact",
+        icon: "",
+        requiresAuth: false,
+        displaysAppBarAndFooter: true
     }
 ];
 
