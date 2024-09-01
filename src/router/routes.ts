@@ -7,6 +7,7 @@ enum PageName {
     GET_STARTED = "get-started",
     MY_ORGANIZATION = "my-organization",
     PRICING = "pricing",
+    CONTACT = "contact",
     CALLBACK = "callback",
     NOT_FOUND = "not-found"
 }
@@ -18,6 +19,7 @@ enum PageRoute {
     GET_STARTED = "/get-started",
     MY_ORGANIZATION = "/my-organization",
     PRICING = "/pricing",
+    CONTACT = "/contact",
     CALLBACK = "/callback",
     NOT_FOUND = "/not-found"
 }
@@ -212,6 +214,36 @@ export const PRICING: RouteInfo = {
                     name: "description",
                     content:
                         "Une tarification simple et sans surprise. Payez seulement pour ce que vous utilisez, et rien de plus."
+                }
+            ]
+        }
+    }
+};
+
+export const CONTACT: RouteInfo = {
+    en: {
+        name: PageName.CONTACT,
+        path: PageRoute.CONTACT,
+        head: {
+            title: "Contact - Solar Insights",
+            meta: [
+                {
+                    name: "description",
+                    content: "Get in touch with Solar Insight's team as soon as possible to discuss any matter that concerns the app."
+                }
+            ]
+        }
+    },
+    fr: {
+        name: PageName.PRICING,
+        path: PageRoute.PRICING,
+        head: {
+            title: "Contact - Solar Insights",
+            meta: [
+                {
+                    name: "description",
+                    content:
+                        "Entrez en contact avec l'équipe de Solar Insights dès que possible pour adresser tout enjeu concernant l'application."
                 }
             ]
         }

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { authGuard } from "@auth0/auth0-vue";
-import { HOME, SEARCH, SOLAR_MAP, GET_STARTED, MY_ORGANIZATION, PRICING, CALLBACK, NOT_FOUND } from "@/router/routes";
+import { HOME, SEARCH, SOLAR_MAP, GET_STARTED, MY_ORGANIZATION, PRICING, CONTACT, CALLBACK, NOT_FOUND } from "@/router/routes";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,6 +42,12 @@ const router = createRouter({
             path: PRICING.en.path,
             name: PRICING.en.name,
             component: () => import("@/pages/PricingPage.vue"),
+            beforeEnter: []
+        },
+        {
+            path: CONTACT.en.path,
+            name: CONTACT.en.name,
+            component: () => import("@/pages/ContactgPage.vue"),
             beforeEnter: []
         },
         {
