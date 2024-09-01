@@ -56,7 +56,9 @@ export const hourCodes = [
     "23:00"
 ];
 
-// All available routes for the sitemap in footer. Helps for appbar too
+export const SOLAR_INSIGHTS_CONTACT_EMAIL = "support@solarinsights.ca";
+
+// All available routes and actions for the sitemap in footer. Helps for appbar too
 export const routes: RouteInfo[] = [
     {
         section: "solar-insights",
@@ -98,7 +100,10 @@ export const routes: RouteInfo[] = [
         name: "contact",
         icon: "",
         requiresAuth: false,
-        displaysAppBarAndFooter: true
+        displaysAppBarAndFooter: true,
+        action: () => {
+            location.href = `mailto:${SOLAR_INSIGHTS_CONTACT_EMAIL}`
+        }
     }
 ];
 

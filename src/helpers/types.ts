@@ -73,6 +73,7 @@ export type RouteInfo = {
     icon: string;
     requiresAuth: boolean;
     displaysAppBarAndFooter: boolean;
+    action?: () => void;
 };
 
 export type MyOrganization = {
