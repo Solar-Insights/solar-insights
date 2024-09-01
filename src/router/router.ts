@@ -47,7 +47,7 @@ const router = createRouter({
         {
             path: CONTACT.en.path,
             name: CONTACT.en.name,
-            component: () => import("@/pages/ContactgPage.vue"),
+            component: () => import("@/pages/ContactPage.vue"),
             beforeEnter: []
         },
         {

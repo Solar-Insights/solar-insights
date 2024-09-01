@@ -225,7 +225,7 @@ export const CONTACT: RouteInfo = {
         name: PageName.CONTACT,
         path: PageRoute.CONTACT,
         head: {
-            title: "Contact - Solar Insights",
+            title: "Contact us - Solar Insights",
             meta: [
                 {
                     name: "description",
@@ -235,10 +235,10 @@ export const CONTACT: RouteInfo = {
         }
     },
     fr: {
-        name: PageName.PRICING,
-        path: PageRoute.PRICING,
+        name: PageName.CONTACT,
+        path: PageRoute.CONTACT,
         head: {
-            title: "Contact - Solar Insights",
+            title: "Contactez nous - Solar Insights",
             meta: [
                 {
                     name: "description",
