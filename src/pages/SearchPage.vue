@@ -37,8 +37,11 @@
                         v-if="step.images.pc && step.images.mobile"
                         :pcImageSrc="step.images.pc"
                         :mobileImageSrc="step.images.mobile"
-                        :maxWidthPc="800"
-                        :maxHeightPc="600"
+                        :maxWidthPc="500"
+                        :minWidthPc="500"
+                        :maxHeightPc="500"
+                        :minHeightPc="400"
+                        :minHeightMobile="500"
                     />
                 </PageLateralSubtitleContainer>
             </PageSection>

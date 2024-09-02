@@ -51,7 +51,7 @@ const props = defineProps({
     maxHeightMobile: {
         type: Number,
         required: false,
-        default: 600
+        default: 500
     },
     minWidthMobile: {
         type: Number,
