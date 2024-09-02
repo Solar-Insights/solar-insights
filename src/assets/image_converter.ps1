@@ -18,3 +18,6 @@ foreach ($pngFile in $pngFiles) {
 }
 
 Write-Host "Conversion completed!"
+
+# Resize image - https://imagemagick.org/script/command-line-processing.php
+# magick solar_map_pc.webp -resize 1000x600 solar_map_pc.webp
