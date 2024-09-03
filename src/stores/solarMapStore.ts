@@ -19,6 +19,7 @@ import { monthlyEnergyBillApproximation } from "@/helpers/solar/math_and_data/so
 
 export const useSolarMapStore = defineStore("solarMapStore", {
     state: () => ({
+        buildingQueried: false as Boolean,
         buildingInsights: {} as BuildingInsights,
         mapSettings: makeDefaultMapSettings() as MapSettings,
         userSolarData: makeDefaultUserSolarDataObject() as UserSolarData,
@@ -37,20 +38,22 @@ export const useSolarMapStore = defineStore("solarMapStore", {
     }),
 
     actions: {
-        async syncWithNewRequest(coord: LatLng, formattedAddress: string) {
-            this.setNewCenterCoord(coord);
+        async syncWithNewRequest(coord: LatLng) {
+            this.centerCoord = coord;
 
             await getClosestBuildingInsights(coord)
                 .then(async (data: BuildingInsights) => {
                     this.buildingInsights = data;
-                    await this.showDataLayer(true);
-                    this.syncTemplateVariablesAndMapFollowingNewRequest();
                 })
                 .catch(() => {});
         },
 
-        setNewCenterCoord(coord: LatLng) {
-            this.centerCoord = coord;
+        async syncMapOnLoad() {
+            await this.showDataLayer(true);
+            this.syncTemplateVariablesAndMapFollowingNewRequest();
+        },
+
+        setNewMapCenter(coord: LatLng) {
             this.map.setCenter(coord);
         },
 
