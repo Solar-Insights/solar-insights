@@ -1,11 +1,11 @@
 <template>
     <PageContainer>
-        <div>
+        <!-- <div>
             <LoadingSpinner 
                 :size="50"
                 :color="`#fcb600`"
             />
-        </div>
+        </div> -->
         <PageSection>
             <PageTitleContainer
                 :pageTitle="$t(`search.title`)"
