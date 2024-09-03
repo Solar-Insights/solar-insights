@@ -129,7 +129,7 @@ const chartOptions = computed(() => makeChartOptions(theme.value));
 const timeSeries = ref<TimeSerie[]>(makeTimeSeriesFromUserSolarData(userSolarData.value));
 const breakEvenYear = ref<number>(getBreakEvenYear(userSolarData.value));
 
-const DELAY_TIME_MS = 1500;
+const DELAY_TIME_MS = 750;
 let updateTimeout: NodeJS.Timeout | undefined;
 
 watch(
