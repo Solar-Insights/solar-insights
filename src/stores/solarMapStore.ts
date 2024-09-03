@@ -49,6 +49,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         async syncMapOnLoad() {
+            this.setNewMapCenter(this.centerCoord);
             await this.showDataLayer(true);
             this.syncTemplateVariablesAndMapFollowingNewRequest();
         },
