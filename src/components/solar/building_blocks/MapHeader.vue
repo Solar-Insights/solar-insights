@@ -27,16 +27,13 @@
         </v-card-title>
 
         <v-card-subtitle class="text-center font-weight-regular title-break">
-            {{ requestAddress }}
+            {{ solarMapStore.address }}
         </v-card-subtitle>
     </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-    requestAddress: {
-        type: String,
-        required: true
-    }
-});
+import { useSolarMapStore } from "@/stores/solarMapStore";
+
+const solarMapStore = useSolarMapStore();
 </script>
