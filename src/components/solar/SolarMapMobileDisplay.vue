@@ -1,21 +1,21 @@
 <template>
-    <v-sheet v-if="requestCoordinates !== undefined">
+    <v-sheet>
         <MapToolBar />
 
         <div class="d-flex">
             <v-col class="pa-0">
                 <v-card class="rounded-0 map-details-mobile" :width="displayingData ? '100vw' : '0'">
-                    <MapHeader :requestAddress="requestAddress" />
+                    <MapHeader />
 
                     <DataPanel />
                 </v-card>
             </v-col>
 
-            <map-layers />
+            <MapLayers />
 
-            <time-param v-if="!displayingData" />
+            <TimeParam v-if="!displayingData" />
 
-            <div v-if="Object.keys(buildingInsights).length">
+            <div>
                 <BuildingReadonlyPanel v-if="solarReadonlyPanel === 'BUILDING_READONLY'" />
                 <InsightsReadonlyPanel v-if="solarReadonlyPanel === 'INSIGHTS_READONLY'" />
             </div>
@@ -47,8 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { LatLng } from "geo-env-typing/geo";
-import { onMounted, PropType, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import BuildingReadonlyPanel from "@/components/solar/building_blocks/BuildingReadonlyPanel.vue";
@@ -66,18 +65,7 @@ onMounted(() => {
 
 const solarMapStore = useSolarMapStore();
 
-const { buildingInsights, solarReadonlyPanel } = storeToRefs(solarMapStore);
-
-const props = defineProps({
-    requestCoordinates: {
-        type: Object as PropType<LatLng>,
-        required: true
-    },
-    requestAddress: {
-        type: String,
-        required: true
-    }
-});
+const { solarReadonlyPanel } = storeToRefs(solarMapStore);
 
 const displayingData = ref(false);
 </script>
