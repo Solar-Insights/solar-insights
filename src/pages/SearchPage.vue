@@ -1,5 +1,11 @@
 <template>
     <PageContainer>
+        <div>
+            <LoadingSpinner 
+                :size="50"
+                :color="`#fcb600`"
+            />
+        </div>
         <PageSection>
             <PageTitleContainer
                 :pageTitle="$t(`search.title`)"
@@ -53,7 +59,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { LatLng } from "geo-env-typing/geo";
+import { LatLng, validCoordinates } from "geo-env-typing/geo";
 import AutocompleteField from "@/components/general/AutocompleteField.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { useI18n } from "vue-i18n";
@@ -69,12 +75,17 @@ import solar_insights_mobile from "@/assets/images/search/solar_insights_mobile.
 import customize_installation_mobile from "@/assets/images/search/customize_installation_mobile.webp";
 import ImageContainer from "@/components/page_sections/ImageContainer.vue";
 import { useHead } from "unhead";
-import { headSelector, SEARCH } from "@/router/routes";
+import { headSelector, SEARCH, SOLAR_MAP } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useRouter } from "vue-router";
+import LoadingSpinner from "@/components/general/LoadingSpinner.vue";   
+import { getReverseGeocoding } from "@/api/geo";
+import { useSolarMapStore } from "@/stores/solarMapStore"
 
 const router = useRouter();
 const userSessionStore = useUserSessionStore();
+const solarMapStore = useSolarMapStore();
+const t = useI18n().t;
 
 useHead(headSelector(SEARCH, userSessionStore.locale));
 
@@ -82,11 +93,30 @@ const { loginUser } = handleUserState();
 
 const { isLoading, isAuthenticated } = useAuth0();
 
-function sendToMap(coords: LatLng, address: string) {
-    router.push({ name: "solar-map", query: coords });
+async function sendToMap(coords: LatLng, address: string) {
+    if (!validCoordinates(coords)) {
+        router.push({ name: SEARCH.en.name });
+    }
+
+    solarMapStore.address = await getReverseGeocoding(coords)
+        .then(async (address: string) => {
+            return address;
+        })
+        .catch((error) => {
+            return t(`solar.data-panel.header.reverse-geocoding-error`);
+        });
+
+    await solarMapStore.syncWithNewRequest(coords)
+        .then(() => {
+            solarMapStore.buildingQueried = true;
+            router.push({ name: SOLAR_MAP.en.name, query: coords });
+        })
+        .catch((error) => {
+            // do something
+            console.log(error)
+        })
 }
 
-const t = useI18n().t;
 const steps = computed(() => {
     return [
         {
