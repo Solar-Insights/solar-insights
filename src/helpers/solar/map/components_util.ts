@@ -2,7 +2,6 @@ import { LatLng } from "geo-env-typing/geo";
 import { MapElements } from "@/helpers/types";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { MapInitializationError } from "@/helpers/alerts/errors";
-import { LocationQuery } from "vue-router";
 
 const SOLAR_MIN_ZOOM = 18;
 const SOLAR_ZOOM = 20;
@@ -111,18 +110,4 @@ function handleEnterKeyOnSearchBar(autocompleteSearch: HTMLInputElement) {
             cancelable: true
         })
     );
-}
-
-export function validRouteCoordinates(queryParams: LocationQuery) {
-    return existingRouteCoordinates(queryParams) && nonZeroCoordinates(queryParams);
-}
-
-export function existingRouteCoordinates(queryParams: LocationQuery) {
-    return queryParams.lat !== undefined && queryParams.lng !== undefined;
-}
-
-export function nonZeroCoordinates(queryParams: LocationQuery) {
-    const lat = Number(queryParams.lat);
-    const lng = Number(queryParams.lng);
-    return lat !== 0 && lng !== 0;
 }
