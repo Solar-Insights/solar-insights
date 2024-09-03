@@ -51,7 +51,7 @@ onMounted(async () => {
         await getReverseGeocoding(props.coord)
             .then((address: string) => {
                 autocompleteValue.value = address;
-                emits("syncWithNewRequest", props.coord, autocompleteValue.value);
+                emits("syncWithNewRequest", props.coord);
             })
             .catch((error) => {});
     }
@@ -81,7 +81,7 @@ async function setPlaceChangedOnAutocompleteListener() {
         await getGeocoding(newPlace.formatted_address)
             .then(async (newCoord: LatLng) => {
                 autocompleteValue.value = newPlace.formatted_address!;
-                emits("syncWithNewRequest", newCoord, newPlace.formatted_address);
+                emits("syncWithNewRequest", newCoord);
             })
             .catch((error) => {
                 autocompleteValue.value = "";
