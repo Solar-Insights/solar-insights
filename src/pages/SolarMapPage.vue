@@ -1,7 +1,7 @@
 <template>
     <div v-if="verificationsFinished">
-        <SolarMapPcDisplay v-if="$vuetify.display.mdAndUp"/>
-        <SolarMapMobileDisplay v-if="$vuetify.display.smAndDown"/>
+        <SolarMapPcDisplay v-if="$vuetify.display.mdAndUp" />
+        <SolarMapMobileDisplay v-if="$vuetify.display.smAndDown" />
     </div>
 </template>
 
@@ -28,7 +28,7 @@ onMounted(async () => {
         lat: Number(route.query.lat),
         lng: Number(route.query.lng)
     };
-    
+
     if (!validCoordinates(coords) || !validateBuildingQueried(coords)) {
         return router.push({ name: "search" });
     }
@@ -42,7 +42,8 @@ function validateBuildingQueried(currentCoords: LatLng) {
         return false;
     }
 
-    const sameCoords = previouslyQueriedCoords.lat === currentCoords.lat && previouslyQueriedCoords.lng === currentCoords.lng;
+    const sameCoords =
+        previouslyQueriedCoords.lat === currentCoords.lat && previouslyQueriedCoords.lng === currentCoords.lng;
     if (!sameCoords) {
         return false;
     }

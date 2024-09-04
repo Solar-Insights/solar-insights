@@ -64,12 +64,12 @@ const router = createRouter({
     ]
 });
 
-router.beforeEach(async (to, from, next) => { 
+router.beforeEach(async (to, from, next) => {
     if (to.name !== SOLAR_MAP.en.name) {
         useUserSessionStore().resetBuildingQueried();
     }
 
     return next();
-})
+});
 
 export default router;

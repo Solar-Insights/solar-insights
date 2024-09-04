@@ -17,7 +17,7 @@ export const useUserSessionStore = defineStore("userSessionStore", {
                 lat: NaN,
                 lng: NaN
             }
-        } as BuildingQueried,
+        } as BuildingQueried
     }),
 
     actions: {
@@ -33,7 +33,7 @@ export const useUserSessionStore = defineStore("userSessionStore", {
                 lng: NaN
             };
         },
-        
+
         setAlert(alert: VueAlert) {
             const toastCardClass = this.theme === "dark" ? "dark-toast-content" : "light-toast-content";
             const toastTextClass = this.theme === "dark" ? "dark-toast-text" : "light-toast-text";

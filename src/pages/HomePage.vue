@@ -10,10 +10,10 @@
         </PageSection>
 
         <PageSection>
-            <ImageContainer 
-                :pcImageSrc="solar_map_pc" 
-                :mobileImageSrc="solar_map_mobile" 
-                :minHeightPc="450" 
+            <ImageContainer
+                :pcImageSrc="solar_map_pc"
+                :mobileImageSrc="solar_map_mobile"
+                :minHeightPc="450"
                 :minHeightMobile="400"
             />
         </PageSection>

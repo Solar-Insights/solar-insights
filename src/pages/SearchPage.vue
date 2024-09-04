@@ -78,9 +78,9 @@ import { useHead } from "unhead";
 import { headSelector, SEARCH, SOLAR_MAP } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useRouter } from "vue-router";
-import LoadingSpinner from "@/components/general/LoadingSpinner.vue";   
+import LoadingSpinner from "@/components/general/LoadingSpinner.vue";
 import { getReverseGeocoding } from "@/api/geo";
-import { useSolarMapStore } from "@/stores/solarMapStore"
+import { useSolarMapStore } from "@/stores/solarMapStore";
 
 const router = useRouter();
 const userSessionStore = useUserSessionStore();
@@ -106,15 +106,16 @@ async function sendToMap(coords: LatLng, address: string) {
             return t(`solar.data-panel.header.reverse-geocoding-error`);
         });
 
-    await solarMapStore.syncWithNewRequest(coords)
+    await solarMapStore
+        .syncWithNewRequest(coords)
         .then(() => {
             userSessionStore.setBuildingQueried(coords);
             router.push({ name: SOLAR_MAP.en.name, query: coords });
         })
         .catch((error) => {
             // do something
-            console.log(error)
-        })
+            console.log(error);
+        });
 }
 
 const steps = computed(() => {

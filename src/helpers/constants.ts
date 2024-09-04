@@ -102,7 +102,7 @@ export const routes: RouteInfo[] = [
         requiresAuth: false,
         displaysAppBarAndFooter: true,
         action: () => {
-            location.href = `mailto:${SOLAR_INSIGHTS_CONTACT_EMAIL}`
+            location.href = `mailto:${SOLAR_INSIGHTS_CONTACT_EMAIL}`;
         }
     }
 ];
