@@ -108,7 +108,7 @@ async function sendToMap(coords: LatLng, address: string) {
 
     await solarMapStore.syncWithNewRequest(coords)
         .then(() => {
-            solarMapStore.buildingQueried = true;
+            userSessionStore.setBuildingQueried(coords);
             router.push({ name: SOLAR_MAP.en.name, query: coords });
         })
         .catch((error) => {

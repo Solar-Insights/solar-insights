@@ -19,7 +19,6 @@ import { monthlyEnergyBillApproximation } from "@/helpers/solar/math_and_data/so
 
 export const useSolarMapStore = defineStore("solarMapStore", {
     state: () => ({
-        buildingQueried: false as Boolean,
         buildingInsights: {} as BuildingInsights,
         mapSettings: makeDefaultMapSettings() as MapSettings,
         userSolarData: makeDefaultUserSolarDataObject() as UserSolarData,
@@ -212,5 +211,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         setReadonlyPanelToDisplay(buttonClicked: SolarReadonlyPanel | undefined) {
             this.solarReadonlyPanel = buttonClicked;
         }
-    }
+    },
+
+    persist: true
 });

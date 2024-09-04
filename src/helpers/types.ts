@@ -1,3 +1,5 @@
+import { LatLng } from "geo-env-typing/geo";
+
 export type TimeParameters = {
     tick: number;
     month: number;
@@ -91,6 +93,11 @@ export type MyOrganizationMember = {
 export type ButtonAction = {
     text: string;
     icon?: string;
+};
+
+export type BuildingQueried = {
+    validRequest: boolean;
+    coords: LatLng;
 };
 
 export type RouteSection = "solar-insights" | "services" | "support";
