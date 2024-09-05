@@ -156,6 +156,8 @@ async function initiateNewRequest(address: string) {
         .then(() => {
             solarMapStore.address = address;
             userSessionStore.setBuildingQueried(coords);
+
+            if (router.currentRoute.value.name !== SEARCH.en.name) return;
             router.push({ name: SOLAR_MAP.en.name, query: coords });
         })
         .catch((error) => {
