@@ -613,6 +613,10 @@
                     "display-panels": "Afficher les panneaux",
                     "display-heatmap": "Afficher la heatmap",
                     "heatmap-animation": "Animation de la heatmap"
+                },
+                "settings-advanced-settings": {
+                    "name": "Paramètres avancés",
+                    "reset-map-parameters": "Réinitialiser les paramètres"
                 }
             }
         },

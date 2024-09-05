@@ -32,6 +32,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         timeParams: makeDefaultTimeParams() as TimeParameters,
         panelConfig: undefined as SolarPanelConfig | undefined,
         solarPanels: [] as google.maps.Polygon[],
+        configIdIndex: 0,
         overlays: [] as google.maps.GroundOverlay[],
         layer: undefined as Layer | undefined,
         
@@ -40,6 +41,10 @@ export const useSolarMapStore = defineStore("solarMapStore", {
     }),
 
     actions: {
+        resetDefaultMapSettings() {
+            this.mapSettings = makeDefaultMapSettings();
+        },
+
         resetRequestData() {
             this.centerCoord = { lat: NaN, lng: NaN };
             this.address = "";
@@ -49,6 +54,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             this.timeParams = makeDefaultTimeParams();
             this.panelConfig = undefined;
             this.solarPanels = [];
+            this.configIdIndex = 0
             this.overlays = [];
             this.layer = undefined;
         },
@@ -103,9 +109,9 @@ export const useSolarMapStore = defineStore("solarMapStore", {
 
         setConfigId(newConfigId: number | undefined) {
             if (newConfigId === undefined) {
-                this.mapSettings.configIdIndex = this.buildingInsights.solarPotential.solarPanelConfigs.length - 1;
+                this.configIdIndex = this.buildingInsights.solarPotential.solarPanelConfigs.length - 1;
             } else {
-                this.mapSettings.configIdIndex = newConfigId;
+                this.configIdIndex = newConfigId;
             }
 
             this.panelCountChange();
@@ -127,7 +133,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         async setNewPanelConfig() {
-            this.panelConfig = this.buildingInsights.solarPotential.solarPanelConfigs[this.mapSettings.configIdIndex];
+            this.panelConfig = this.buildingInsights.solarPotential.solarPanelConfigs[this.configIdIndex];
             this.userSolarData.yearlyEnergyDcKwh = this.panelConfig.yearlyEnergyDcKwh;
             this.userSolarData.panelCount = this.panelConfig.panelsCount;
         },
@@ -146,7 +152,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
 
         async panelCountChange() {
             this.userSolarData.panelCount =
-                this.buildingInsights.solarPotential.solarPanelConfigs[this.mapSettings.configIdIndex].panelsCount;
+                this.buildingInsights.solarPotential.solarPanelConfigs[this.configIdIndex].panelsCount;
 
             await this.syncMapWithNewRequest();
         },

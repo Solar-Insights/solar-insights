@@ -17,7 +17,7 @@
                         {{
                             buildingInsights.solarPotential === undefined
                                 ? 0
-                                : buildingInsights.solarPotential.solarPanelConfigs[mapSettings.configIdIndex]
+                                : buildingInsights.solarPotential.solarPanelConfigs[configIdIndex]
                                       .panelsCount
                         }}
                         / {{ userSolarData.maxPanelCount }}
@@ -25,7 +25,7 @@
                     </span>
                 </div>
                 <v-slider
-                    v-model="mapSettings.configIdIndex"
+                    v-model="configIdIndex"
                     @end="solarMapStore.panelCountChange"
                     :min="0"
                     :max="
@@ -107,7 +107,7 @@ import { useSolarMapStore } from "@/stores/solarMapStore";
 
 const solarMapStore = useSolarMapStore();
 
-const { buildingInsights, mapSettings, userSolarData } = storeToRefs(solarMapStore);
+const { buildingInsights, userSolarData, configIdIndex } = storeToRefs(solarMapStore);
 
 const advancedSettingsPanels = ref([] as string[]);
 </script>

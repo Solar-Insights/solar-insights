@@ -209,14 +209,13 @@
 }
 
 .clickable-map-card-title {
-    @extend .pt-0;
     @extend .px-0;
 }
 
 .clickable-map-card-paragraph {
     @extend .pa-0;
     @extend .pr-2;
-    @extend .pb-1;
+    @extend .pb-3;
     font-size: 0.75rem;
 }
 

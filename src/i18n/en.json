@@ -613,6 +613,10 @@
                     "display-panels": "Display panels",
                     "display-heatmap": "Display heatmap",
                     "heatmap-animation": "Heatmap animation"
+                },
+                "settings-advanced-settings": {
+                    "name": "Advanced Settings",
+                    "reset-map-parameters": "Reset parameters"
                 }
             }
         },

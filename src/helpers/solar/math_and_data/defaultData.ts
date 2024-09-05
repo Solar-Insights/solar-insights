@@ -49,7 +49,6 @@ export namespace DefaultSolarMapSettings {
     export const SHOW_PANELS = true;
     export const SHOW_HEATMAP = true;
     export const HEATMAP_ANIMATION = true;
-    export const CONFIG_ID_INDEX = 0;
 }
 
 export function makeDefaultMapSettings() {
@@ -58,8 +57,7 @@ export function makeDefaultMapSettings() {
         layerIdChoices: DefaultSolarMapSettings.LAYER_ID_CHOICES,
         showPanels: DefaultSolarMapSettings.SHOW_PANELS,
         showHeatmap: DefaultSolarMapSettings.SHOW_HEATMAP,
-        heatmapAnimation: DefaultSolarMapSettings.HEATMAP_ANIMATION,
-        configIdIndex: DefaultSolarMapSettings.CONFIG_ID_INDEX
+        heatmapAnimation: DefaultSolarMapSettings.HEATMAP_ANIMATION
     } as MapSettings;
 }
 
