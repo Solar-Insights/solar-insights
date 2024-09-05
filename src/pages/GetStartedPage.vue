@@ -8,7 +8,7 @@
                     text: $t(`get-started.page-title-container.action`),
                     icon: `mdi-weather-sunny`
                 }"
-                @onPageTitleActionClick="router.push({ name: 'search' })"
+                @onPageTitleActionClick="router.push({ name: SEARCH.en.name })"
             />
         </PageSection>
 
@@ -20,7 +20,7 @@
                     text: $t(`get-started.choose-a-plan-subtitle-container.create-an-org-paragraph.action`),
                     icon: `mdi-currency-usd`
                 }"
-                @onActionClick="router.push({ name: 'pricing' })"
+                @onActionClick="router.push({ name: PRICING.en.name })"
             >
                 <ShortDescriptionItemsContainer>
                     <ShortDescriptionItem
@@ -134,7 +134,7 @@
                             ),
                             icon: `mdi-weather-sunny`
                         }"
-                        @onItemActionClick="router.push({ name: `search` })"
+                        @onItemActionClick="router.push({ name: SEARCH.en.name })"
                     />
                 </ShortDescriptionItemsContainer>
             </PageLateralSubtitleContainer>
@@ -188,7 +188,7 @@ import PageLateralSubtitleContainer from "@/components/page_sections/PageLateral
 import { useAuth0 } from "@auth0/auth0-vue";
 import { handleUserState } from "@/composables/users";
 import { useHead } from "unhead";
-import { GET_STARTED, headSelector } from "@/router/routes";
+import { GET_STARTED, SEARCH, PRICING, headSelector } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useRouter } from "vue-router";
 

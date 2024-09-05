@@ -6,7 +6,7 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 import { UserLoginSuccess, UserLogoutSuccess } from "@/helpers/alerts/success";
 import { RouteLocationNormalizedLoaded } from "vue-router";
 import { useHead } from "unhead";
-import { CALLBACK, headSelector } from "@/router/routes";
+import { CALLBACK, HOME, headSelector } from "@/router/routes";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -22,7 +22,7 @@ onMounted(() => {
     }
 
     const callbackPath = userSessionStore.getAndClearCallbackPath();
-    if (callbackPath === "") router.push({ name: "home" });
+    if (callbackPath === "") router.push({ name: HOME.en.name });
     else router.push(callbackPath);
 });
 

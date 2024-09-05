@@ -5,7 +5,7 @@
                 :pageTitle="$t(`home.page-title-container.title`)"
                 :pageTitlePrecision="$t(`home.page-title-container.description`)"
                 :pageTitleAction="{ text: $t(`home.page-title-container.action`), icon: `mdi-rocket-launch-outline` }"
-                @onPageTitleActionClick="router.push({ name: 'get-started' })"
+                @onPageTitleActionClick="router.push({ name: GET_STARTED.en.name })"
             />
         </PageSection>
 
@@ -70,7 +70,7 @@
                         text: $t(`home.usecase-subtitle-container.action`),
                         icon: `mdi-send-variant-outline`
                     }"
-                    @onParagraphActionClick="router.push({ name: 'pricing' })"
+                    @onParagraphActionClick="router.push({ name: PRICING.en.name })"
                 />
             </PageSubtitleContainer>
         </PageSection>
@@ -88,7 +88,7 @@ import ImageContainer from "@/components/page_sections/ImageContainer.vue";
 import solar_map_pc from "@/assets/images/home/solar_map_pc.webp";
 import solar_map_mobile from "@/assets/images/home/solar_map_mobile.webp";
 import { useHead } from "unhead";
-import { headSelector, HOME } from "@/router/routes";
+import { headSelector, HOME, GET_STARTED, PRICING } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import ParagraphContainer from "@/components/page_sections/ParagraphContainer.vue";
 import { useRouter } from "vue-router";

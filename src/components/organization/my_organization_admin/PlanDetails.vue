@@ -12,7 +12,7 @@
                 ),
                 icon: `mdi-arrow-up-bold-outline`
             }"
-            @onActionClick="router.push({ name: `pricing` })"
+            @onActionClick="router.push({ name: PRICING.en.name })"
             fullWidth
         >
             <BillableItem
@@ -107,7 +107,7 @@
 <script setup lang="ts">
 import { MyOrganizationBillingRecap } from "@/helpers/types";
 import { PropType } from "vue";
-
+import { PRICING } from "@/router/routes";
 import { useRouter } from "vue-router";
 import BillableCard from "@/components/organization/my_organization_admin/billable_card/BillableCard.vue";
 import BillableItem from "@/components/organization/my_organization_admin/billable_card/BillableItem.vue";
