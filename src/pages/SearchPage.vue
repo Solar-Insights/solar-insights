@@ -1,11 +1,20 @@
 <template>
-    <PageContainer v-if="showLoadingScreen">
-        <div>
-            <LoadingSpinner 
-                :size="50"
-                :color="`#fcb600`"
+    <PageContainer v-if="showLoadingScreen" class="d-flex align-center justify-center">
+        <PageSection class="w-100">
+            <LoadingSpinner
+                class="mx-auto"
+                :size="100"
+                :color="SOLAR_INSIGHTS_THEME_COLOR"
             />
-        </div>
+
+            <ParagraphContainer
+                class="mt-4"
+                :paragraphContent="$t(`search.loading`)"
+                :centerParagraphContent="true"
+                :fullWidth="true"
+            />
+
+        </PageSection>
     </PageContainer>
 
     <PageContainer v-else>
@@ -83,6 +92,7 @@ import { useRouter } from "vue-router";
 import LoadingSpinner from "@/components/general/LoadingSpinner.vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { getGeocoding } from "@/api/geo";
+import { SOLAR_INSIGHTS_THEME_COLOR } from "@/helpers/constants";
 
 const router = useRouter();
 const userSessionStore = useUserSessionStore();

@@ -121,3 +121,5 @@ export const menus = {
 export const SOLAR_INSIGHTS_INFINITY = 2147483647;
 
 export const SOLAR_INSIGHTS_NEGATIVE_INFINITY = -2147483647;
+
+export const SOLAR_INSIGHTS_THEME_COLOR = "rgba(62, 158, 135, 1)";
