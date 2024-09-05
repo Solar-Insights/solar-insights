@@ -21,23 +21,28 @@ export type MapElements = {
 
 export type AlertType = "warning" | "error" | "success";
 
-export type UserSolarData = {
+export type FinancialParameters = {
+    installationLifespan: number;
+    installationCostPerWatt: number;
+    averageMonthlyEnergyBill: number;
+    energyCostPerKwh: number;
+    solarIncentives: number;
+    yearlyEnergyCostIncrease: number;
+    yearlyDiscountRate: number;
+};
+
+export type PanelParameters = {
     panelCount: number;
     minPanelCount: number;
     maxPanelCount: number;
     panelCapacityWatts: number;
     defaultPanelCapacityWatts: number;
-    installationLifespan: number;
-    installationCostPerWatt: number;
     yearlyEnergyDcKwh: number;
     dcToAcDerate: number;
-    averageMonthlyEnergyBill: number;
-    energyCostPerKwh: number;
-    solarIncentives: number;
     yearlyPanelEfficiencyDecline: number;
-    yearlyEnergyCostIncrease: number;
-    yearlyDiscountRate: number;
-};
+}
+
+export type UserSolarData = FinancialParameters & PanelParameters;
 
 export type SolarReadonlyPanel = "BUILDING_READONLY" | "INSIGHTS_READONLY";
 

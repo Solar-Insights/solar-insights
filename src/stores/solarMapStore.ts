@@ -2,11 +2,13 @@ import { defineStore } from "pinia";
 import { toRaw } from "vue";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
-import { SolarReadonlyPanel, TimeParameters, UserSolarData } from "@/helpers/types";
+import { FinancialParameters, PanelParameters, SolarReadonlyPanel, TimeParameters, UserSolarData } from "@/helpers/types";
 import {
     makeDefaultUserSolarDataObject,
     makeDefaultMapSettings,
-    makeDefaultTimeParams
+    makeDefaultTimeParams,
+    makeDefaultFinancialParameters,
+    makeDefaultPanelParameters
 } from "@/helpers/solar/math_and_data/defaultData";
 import { getClosestBuildingInsights } from "@/api/solar";
 import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/map/panels";
@@ -22,6 +24,8 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         // User preferences
         mapSettings: makeDefaultMapSettings() as MapSettings,
         solarReadonlyPanel: "INSIGHTS_READONLY" as SolarReadonlyPanel | undefined,
+        financialParameters: makeDefaultFinancialParameters() as FinancialParameters,
+        panelParameters: makeDefaultPanelParameters() as PanelParameters,
 
         // Single request data
         centerCoord: { lat: NaN, lng: NaN } as LatLng,
@@ -43,6 +47,14 @@ export const useSolarMapStore = defineStore("solarMapStore", {
     actions: {
         resetDefaultMapSettings() {
             this.mapSettings = makeDefaultMapSettings();
+        },
+
+        resetDefaultFinancialSettings() {
+            // todo
+        },
+
+        resetDefaultPanelsSettings() {
+            // todo
         },
 
         resetRequestData() {

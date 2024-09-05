@@ -1,5 +1,5 @@
 import { LayerId, MapSettings, SolarDataType } from "geo-env-typing/solar";
-import { TimeParameters, UserSolarData } from "@/helpers/types";
+import { TimeParameters, UserSolarData, FinancialParameters, PanelParameters } from "@/helpers/types";
 
 export namespace DefaultUserSolarData {
     export const PANEL_COUNT = 0;
@@ -19,24 +19,38 @@ export namespace DefaultUserSolarData {
     export const INSTALLATION_LIFESPAN = 25;
 }
 
-export function makeDefaultUserSolarDataObject() {
+export function makeDefaultFinancialParameters(): FinancialParameters {
+    // todo
+    return {
+        installationCostPerWatt: DefaultUserSolarData.INSTALLATION_COST_PER_WATT,
+        averageMonthlyEnergyBill: DefaultUserSolarData.AVERAGE_MONTHLY_ENERGY_BILL,
+        energyCostPerKwh: DefaultUserSolarData.ENERGY_COST_PER_KWH,
+        solarIncentives: DefaultUserSolarData.SOLAR_INCENTIVES,
+        yearlyEnergyCostIncrease: DefaultUserSolarData.YEARLY_ENERGY_COST_INCREASE,
+        yearlyDiscountRate: DefaultUserSolarData.YEARLY_DISCOUNT_RATE,
+        installationLifespan: DefaultUserSolarData.INSTALLATION_LIFESPAN
+    };
+}
+
+export function makeDefaultPanelParameters(): PanelParameters {
+    // todo
     return {
         panelCount: DefaultUserSolarData.PANEL_COUNT,
         minPanelCount: DefaultUserSolarData.MIN_PANEL_COUNT,
         maxPanelCount: DefaultUserSolarData.MAX_PANEL_COUNT,
         panelCapacityWatts: DefaultUserSolarData.PANEL_CAPACITY_WATTS,
         defaultPanelCapacityWatts: DefaultUserSolarData.DEFAULT_PANEL_CAPACITY_WATTS,
-        installationCostPerWatt: DefaultUserSolarData.INSTALLATION_COST_PER_WATT,
         yearlyEnergyDcKwh: DefaultUserSolarData.YEARLY_ENERGY_DC_KWH,
         dcToAcDerate: DefaultUserSolarData.DC_TO_AC_DERATE,
-        averageMonthlyEnergyBill: DefaultUserSolarData.AVERAGE_MONTHLY_ENERGY_BILL,
-        energyCostPerKwh: DefaultUserSolarData.ENERGY_COST_PER_KWH,
-        solarIncentives: DefaultUserSolarData.SOLAR_INCENTIVES,
         yearlyPanelEfficiencyDecline: DefaultUserSolarData.YEARLY_PANEL_EFFICIENCY_DECLINE,
-        yearlyEnergyCostIncrease: DefaultUserSolarData.YEARLY_ENERGY_COST_INCREASE,
-        yearlyDiscountRate: DefaultUserSolarData.YEARLY_DISCOUNT_RATE,
-        installationLifespan: DefaultUserSolarData.INSTALLATION_LIFESPAN
-    } as UserSolarData;
+    };
+}
+
+export function makeDefaultUserSolarDataObject(): UserSolarData {
+    return {
+        ...makeDefaultFinancialParameters(),
+        ...makeDefaultPanelParameters()
+    };
 }
 
 export namespace DefaultSolarMapSettings {
