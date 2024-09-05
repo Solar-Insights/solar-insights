@@ -559,7 +559,7 @@
             "header": {
                 "reverse-geocoding-error": "Could not get the address.",
                 "toolbar": {
-                    "share-tooltip": "Map URL copied to clipboard!"
+                    "share-tooltip": "Address copied to clipboard!"
                 }
             },
             "readonly-panels": {

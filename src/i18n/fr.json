@@ -559,7 +559,7 @@
             "header": {
                 "reverse-geocoding-error": "Impossible d'obtenir l'adresse souhaitée",
                 "toolbar": {
-                    "share-tooltip": "URL de la carte copié au presse-papiers!"
+                    "share-tooltip": "Adresse copiée au presse-papiers!"
                 }
             },
             "readonly-panels": {

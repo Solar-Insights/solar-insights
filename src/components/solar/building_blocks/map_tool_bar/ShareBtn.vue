@@ -8,9 +8,11 @@
 <script setup lang="ts">
 import Tooltip from "@/components/general/Tooltip.vue";
 import { copyToClipboard } from "@/helpers/util";
+import { useSolarMapStore } from "@/stores/solarMapStore";
+
+const solarMapStore = useSolarMapStore();
 
 function copyRouteToClipboard() {
-    const fullCurrentRoute = window.location.href;
-    copyToClipboard(fullCurrentRoute);
+    copyToClipboard(solarMapStore.address);
 }
 </script>
