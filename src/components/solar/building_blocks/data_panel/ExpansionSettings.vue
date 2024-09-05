@@ -80,7 +80,7 @@
                             :title="$t(`solar.data-panel.data-panels.settings-advanced-settings.reset-map-parameters`)"
                             :icon="`mdi-home`"
                             :isButton="true"
-                            @onActionClick=""
+                            @onActionClick="resetParameters"
                         />
                     </v-expansion-panel-text>
                 </v-expansion-panel>
@@ -100,6 +100,13 @@ const solarMapStore = useSolarMapStore();
 const { mapSettings } = storeToRefs(solarMapStore);
 
 const advancedSettingsPanels = ref([] as string[]);
+
+async function resetParameters() {
+    solarMapStore.resetDefaultMapSettings();
+    await syncMapWithPanels();
+    await showDataLayerOnLayerIdChange();
+    await changeLayersOnShowHeatmapChange();
+}
 
 async function syncMapWithPanels() {
     await solarMapStore.syncMapWithNewRequest();
