@@ -57,17 +57,49 @@
                     :label="$t(`solar.data-panel.data-panels.settings.heatmap-animation`)"
                 />
             </div>
+
+            <div class="w-100 text-center mb-2">
+                <v-chip
+                    @click="
+                        advancedSettingsPanels.length == 0
+                            ? (advancedSettingsPanels = ['advanced-settings-panels'])
+                            : (advancedSettingsPanels = [])
+                    "
+                    color="theme"
+                    variant="text"
+                    :append-icon="advancedSettingsPanels.length == 0 ? 'mdi-menu-down' : 'mdi-menu-up'"
+                >
+                    {{ $t(`solar.data-panel.data-panels.settings-advanced-settings.name`) }}
+                </v-chip>
+            </div>
+
+            <v-expansion-panels v-model="advancedSettingsPanels">
+                <v-expansion-panel value="advanced-settings-panels" class="mb-2" elevation="0">
+                    <v-expansion-panel-text class="px-0" id="expansion-panel-second-layer">
+                        <ClickableCard
+                            :title="$t(`solar.data-panel.data-panels.settings-advanced-settings.reset-map-parameters`)"
+                            :icon="`mdi-home`"
+                            :isButton="true"
+                            @onActionClick=""
+                        />
+                    </v-expansion-panel-text>
+                </v-expansion-panel>
+            </v-expansion-panels>
         </v-expansion-panel-text>
     </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue"
 import { storeToRefs } from "pinia";
 import { useSolarMapStore } from "@/stores/solarMapStore";
+import ClickableCard from "@/components/solar/building_blocks/data_panel/ClickableCard.vue";
 
 const solarMapStore = useSolarMapStore();
 
 const { mapSettings } = storeToRefs(solarMapStore);
+
+const advancedSettingsPanels = ref([] as string[]);
 
 async function syncMapWithPanels() {
     await solarMapStore.syncMapWithNewRequest();
