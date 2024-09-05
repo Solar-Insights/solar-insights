@@ -14,48 +14,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, PropType } from "vue";
+import { ref, onMounted } from "vue";
 import { useUserSessionStore } from "@/stores/userSessionStore";
+import { useI18n } from "vue-i18n";
 import { initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/solar/map/components_util";
 import { LatLng } from "geo-env-typing/geo";
-import { getGeocoding, getReverseGeocoding } from "@/api/geo";
+import { getGeocoding } from "@/api/geo";
 import { AutocompleteInputError } from "@/helpers/alerts/errors";
 
 const userSessionStore = useUserSessionStore();
+
+const t = useI18n().t;
 
 const autocompleteValue = ref<string | null>("");
 let autocomplete: google.maps.places.Autocomplete;
 let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events (arrow keydown + enter), prevent first one from sending request
 
-const props = defineProps({
-    coord: {
-        type: Object as PropType<LatLng>,
-        default: {
-            lat: 0,
-            lng: 0
-        }
-    },
-    reverseGeocodeOnLoad: {
-        type: Boolean,
-        required: true,
-        default: false
-    }
-});
-
 const emits = defineEmits(["syncWithNewRequest"]);
 
 onMounted(async () => {
     autocomplete = await initAutocomplete();
-
-    if (props.reverseGeocodeOnLoad) {
-        await getReverseGeocoding(props.coord)
-            .then((address: string) => {
-                autocompleteValue.value = address;
-                emits("syncWithNewRequest", props.coord);
-            })
-            .catch((error) => {});
-    }
-
     await initListeners();
 });
 
@@ -80,8 +58,8 @@ async function setPlaceChangedOnAutocompleteListener() {
         autocompleteAlreadyChanged = false;
         await getGeocoding(newPlace.formatted_address)
             .then(async (newCoord: LatLng) => {
-                autocompleteValue.value = newPlace.formatted_address!;
-                emits("syncWithNewRequest", newCoord);
+                const resultingAddress = newPlace.formatted_address === undefined ? t(`solar.data-panel.header.reverse-geocoding-error`) : newPlace.formatted_address;
+                emits("syncWithNewRequest", newCoord, resultingAddress);
             })
             .catch((error) => {
                 autocompleteValue.value = "";

@@ -23,8 +23,7 @@
                 <v-skeleton-loader class="search-loader mt-7" :loading="isLoading" type="chip">
                     <AutocompleteField
                         v-if="isAuthenticated"
-                        :reverseGeocodeOnLoad="false"
-                        @sync-with-new-request="sendToMap"
+                        @syncWithNewRequest="sendToMap"
                     />
                 </v-skeleton-loader>
             </PageTitleContainer>
@@ -58,8 +57,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { LatLng, validCoordinates } from "geo-env-typing/geo";
+import { computed, ref } from "vue";
+import { LatLng } from "geo-env-typing/geo";
 import AutocompleteField from "@/components/general/AutocompleteField.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { useI18n } from "vue-i18n";
@@ -79,7 +78,6 @@ import { headSelector, SEARCH, SOLAR_MAP } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useRouter } from "vue-router";
 import LoadingSpinner from "@/components/general/LoadingSpinner.vue";
-import { getReverseGeocoding } from "@/api/geo";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 
 const router = useRouter();
@@ -93,18 +91,10 @@ const { loginUser } = handleUserState();
 
 const { isLoading, isAuthenticated } = useAuth0();
 
-async function sendToMap(coords: LatLng, address: string) {
-    if (!validCoordinates(coords)) {
-        router.push({ name: SEARCH.en.name });
-    }
+const showLoadingScreen = ref<Boolean>(false);
 
-    solarMapStore.address = await getReverseGeocoding(coords)
-        .then(async (address: string) => {
-            return address;
-        })
-        .catch((error) => {
-            return t(`solar.data-panel.header.reverse-geocoding-error`);
-        });
+async function sendToMap(coords: LatLng, address: string) {
+    solarMapStore.address = address;
 
     await solarMapStore
         .syncWithNewRequest(coords)
