@@ -37,14 +37,15 @@ export const useSolarMapStore = defineStore("solarMapStore", {
     }),
 
     actions: {
-        async syncWithNewRequest(coord: LatLng) {
-            this.centerCoord = coord;
+        async syncWithNewRequest(coords: LatLng) {
+            this.centerCoord = coords;
 
-            await getClosestBuildingInsights(coord)
+            await getClosestBuildingInsights(coords)
                 .then(async (data: BuildingInsights) => {
                     this.buildingInsights = data;
                 })
-                .catch(() => {});
+
+            return coords;
         },
 
         async syncMapOnLoad() {

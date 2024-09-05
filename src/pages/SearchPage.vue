@@ -149,20 +149,16 @@ const showLoadingScreen = ref<Boolean>(false);
 async function initiateNewRequest(address: string) {
     showLoadingScreen.value = true;
 
-    const coords: LatLng = await getGeocoding(address);
-
-    await solarMapStore
-        .syncWithNewRequest(coords)
-        .then(() => {
+    await getGeocoding(address)
+        .then(async (coords) => await solarMapStore.syncWithNewRequest(coords))
+        .then((coords) => {
             solarMapStore.address = address;
             userSessionStore.setBuildingQueried(coords);
 
             if (router.currentRoute.value.name !== SEARCH.en.name) return;
             router.push({ name: SOLAR_MAP.en.name, query: coords });
         })
-        .catch((error) => {
-            // do something
-            console.log(error);
+        .catch(() => {
             showLoadingScreen.value = false;
         });
 }
