@@ -11,26 +11,19 @@
             </div>
 
             <div>
-                <v-card @click="solarMapStore.setOptimizedSavingsConfig" class="optimization-card" variant="outlined">
-                    <v-card-item class="pt-0 px-0" prepend-icon="mdi-currency-usd">
-                        {{ $t(`solar.data-panel.data-panels.optimizations.choices.total-savings.name`) }}
-                    </v-card-item>
-                    <v-card-item class="pa-0 pr-2 detail-text-no-color-change" prepend-icon="null">
-                        {{ $t(`solar.data-panel.data-panels.optimizations.choices.total-savings.description`) }}
-                    </v-card-item>
-                </v-card>
-                <v-card
-                    @click="solarMapStore.setOptimizedEnergyCoveredConfig"
-                    class="optimization-card"
-                    variant="outlined"
-                >
-                    <v-card-item class="pt-0 px-0" prepend-icon="mdi-home-battery">
-                        {{ $t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.name`) }}
-                    </v-card-item>
-                    <v-card-item class="pa-0 pr-2 detail-text-no-color-change" prepend-icon="null">
-                        {{ $t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.description`) }}
-                    </v-card-item>
-                </v-card>
+                <ClickableCard
+                    :title="$t(`solar.data-panel.data-panels.optimizations.choices.total-savings.name`)"
+                    :icon="`mdi-currency-usd`"
+                    :paragraph="$t(`solar.data-panel.data-panels.optimizations.choices.total-savings.description`)"
+                    @onActionClick="solarMapStore.setOptimizedSavingsConfig"
+                />
+
+                <ClickableCard
+                    :title="$t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.name`)"
+                    :icon="`mdi-home-battery`"
+                    :paragraph="$t(`solar.data-panel.data-panels.optimizations.choices.energy-covered.description`)"
+                    @onActionClick="solarMapStore.setOptimizedEnergyCoveredConfig"
+                />
             </div>
         </v-expansion-panel-text>
     </div>
@@ -38,6 +31,7 @@
 
 <script setup lang="ts">
 import { useSolarMapStore } from "@/stores/solarMapStore";
+import ClickableCard from "@/components/solar/building_blocks/data_panel/ClickableCard.vue";
 
 const solarMapStore = useSolarMapStore();
 </script>

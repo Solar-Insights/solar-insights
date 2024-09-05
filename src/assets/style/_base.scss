@@ -200,12 +200,24 @@
     width: calc(50% - 10px);
 }
 
-.optimization-card {
+.clickable-map-card {
     @extend .w-100;
     @extend .pa-1;
     @extend .my-3;
     @extend .universal-font-theme;
     @extend .rounded-lg;
+}
+
+.clickable-map-card-title {
+    @extend .pt-0;
+    @extend .px-0;
+}
+
+.clickable-map-card-paragraph {
+    @extend .pa-0;
+    @extend .pr-2;
+    @extend .pb-1;
+    font-size: 0.75rem;
 }
 
 .hovering-elevation-card {
