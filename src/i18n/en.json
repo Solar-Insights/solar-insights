@@ -577,7 +577,8 @@
                 "panels-advanced-settings": {
                     "name": "Advanced Settings",
                     "dc-to-ac": "DC to AC conversion",
-                    "efficiency-decline": "Panel efficiency decline per year"
+                    "efficiency-decline": "Panel efficiency decline per year",
+                    "reset-panels-parameters": "Reset Panels parameters"
                 },
                 "costs": {
                     "name": "Costs and Incentives",
@@ -590,7 +591,8 @@
                 "costs-advanced-settings": {
                     "name": "Advanced Settings",
                     "energy-cost-increase": "Energy cost increase per year",
-                    "discount-rate": "Discount rate per year"
+                    "discount-rate": "Discount rate per year",
+                    "reset-financial-parameters": "Reset Financial parameters"
                 },
                 "optimizations": {
                     "name": "Optimizations",
@@ -616,7 +618,7 @@
                 },
                 "settings-advanced-settings": {
                     "name": "Advanced Settings",
-                    "reset-map-parameters": "Reset parameters"
+                    "reset-map-parameters": "Reset Map parameters"
                 }
             }
         },

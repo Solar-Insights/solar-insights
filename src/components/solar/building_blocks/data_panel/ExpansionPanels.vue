@@ -93,6 +93,13 @@
                         >
                             <template v-slot:append-inner> % </template>
                         </v-text-field>
+
+                        <ClickableCard
+                            :title="$t(`solar.data-panel.data-panels.panels-advanced-settings.reset-panels-parameters`)"
+                            :icon="`mdi-home`"
+                            :isButton="true"
+                            @onActionClick=""
+                        />
                     </v-expansion-panel-text>
                 </v-expansion-panel>
             </v-expansion-panels>
@@ -104,6 +111,7 @@
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSolarMapStore } from "@/stores/solarMapStore";
+import ClickableCard from "@/components/solar/building_blocks/data_panel/ClickableCard.vue";
 
 const solarMapStore = useSolarMapStore();
 

@@ -577,7 +577,8 @@
                 "panels-advanced-settings": {
                     "name": "Paramètres avancés",
                     "dc-to-ac": "Conversion DC à AC",
-                    "efficiency-decline": "Diminution annuelle de l'efficacité des panneaux"
+                    "efficiency-decline": "Diminution annuelle de l'efficacité des panneaux",
+                    "reset-panels-parameters": "Réinitialiser les paramètres des panneaux"
                 },
                 "costs": {
                     "name": "Coûts et subventions",
@@ -590,7 +591,8 @@
                 "costs-advanced-settings": {
                     "name": "Paramètres avancés",
                     "energy-cost-increase": "Augmentation annuel du coût de l'énergie",
-                    "discount-rate": "Taux d'escompte annuel"
+                    "discount-rate": "Taux d'escompte annuel",
+                    "reset-financial-parameters": "Réinitialiser les paramètres financiers"
                 },
                 "optimizations": {
                     "name": "Optimisations",
@@ -616,7 +618,7 @@
                 },
                 "settings-advanced-settings": {
                     "name": "Paramètres avancés",
-                    "reset-map-parameters": "Réinitialiser les paramètres"
+                    "reset-map-parameters": "Réinitialiser les paramètres de la carte"
                 }
             }
         },
