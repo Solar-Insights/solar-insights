@@ -1,11 +1,14 @@
 <template>
-    <PageContainer>
-        <!-- <div>
+    <PageContainer v-if="showLoadingScreen">
+        <div>
             <LoadingSpinner 
                 :size="50"
                 :color="`#fcb600`"
             />
-        </div> -->
+        </div>
+    </PageContainer>
+
+    <PageContainer v-else>
         <PageSection>
             <PageTitleContainer
                 :pageTitle="$t(`search.title`)"
@@ -23,7 +26,7 @@
                 <v-skeleton-loader class="search-loader mt-7" :loading="isLoading" type="chip">
                     <AutocompleteField
                         v-if="isAuthenticated"
-                        @syncWithNewRequest="sendToMap"
+                        @syncWithNewRequest="initiateNewRequest"
                     />
                 </v-skeleton-loader>
             </PageTitleContainer>
@@ -79,34 +82,17 @@ import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useRouter } from "vue-router";
 import LoadingSpinner from "@/components/general/LoadingSpinner.vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
+import { getGeocoding } from "@/api/geo";
 
 const router = useRouter();
 const userSessionStore = useUserSessionStore();
 const solarMapStore = useSolarMapStore();
+
+const { loginUser } = handleUserState();
+const { isLoading, isAuthenticated } = useAuth0();
 const t = useI18n().t;
 
 useHead(headSelector(SEARCH, userSessionStore.locale));
-
-const { loginUser } = handleUserState();
-
-const { isLoading, isAuthenticated } = useAuth0();
-
-const showLoadingScreen = ref<Boolean>(false);
-
-async function sendToMap(coords: LatLng, address: string) {
-    solarMapStore.address = address;
-
-    await solarMapStore
-        .syncWithNewRequest(coords)
-        .then(() => {
-            userSessionStore.setBuildingQueried(coords);
-            router.push({ name: SOLAR_MAP.en.name, query: coords });
-        })
-        .catch((error) => {
-            // do something
-            console.log(error);
-        });
-}
 
 const steps = computed(() => {
     return [
@@ -147,4 +133,26 @@ const steps = computed(() => {
         }
     ];
 });
+
+const showLoadingScreen = ref<Boolean>(false);
+
+async function initiateNewRequest(address: string) {
+    showLoadingScreen.value = true;
+
+    const coords: LatLng = await getGeocoding(address);
+
+    await solarMapStore
+        .syncWithNewRequest(coords)
+        .then(() => {
+            solarMapStore.address = address;
+            userSessionStore.setBuildingQueried(coords);
+            router.push({ name: SOLAR_MAP.en.name, query: coords });
+        })
+        .catch((error) => {
+            // do something
+            console.log(error);
+            showLoadingScreen.value = false;
+        });
+}
+
 </script>

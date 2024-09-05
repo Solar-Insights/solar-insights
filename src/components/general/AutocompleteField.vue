@@ -18,8 +18,6 @@ import { ref, onMounted } from "vue";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useI18n } from "vue-i18n";
 import { initAutocomplete, prepareHandlerEnterKeyOnSearchBar } from "@/helpers/solar/map/components_util";
-import { LatLng } from "geo-env-typing/geo";
-import { getGeocoding } from "@/api/geo";
 import { AutocompleteInputError } from "@/helpers/alerts/errors";
 
 const userSessionStore = useUserSessionStore();
@@ -56,14 +54,9 @@ async function setPlaceChangedOnAutocompleteListener() {
         }
 
         autocompleteAlreadyChanged = false;
-        await getGeocoding(newPlace.formatted_address)
-            .then(async (newCoord: LatLng) => {
-                const resultingAddress = newPlace.formatted_address === undefined ? t(`solar.data-panel.header.reverse-geocoding-error`) : newPlace.formatted_address;
-                emits("syncWithNewRequest", newCoord, resultingAddress);
-            })
-            .catch((error) => {
-                autocompleteValue.value = "";
-            });
+
+        const resultingAddress = newPlace.formatted_address === undefined ? t(`solar.data-panel.header.reverse-geocoding-error`) : newPlace.formatted_address;
+        emits("syncWithNewRequest", resultingAddress);
     });
 }
 </script>
