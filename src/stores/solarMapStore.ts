@@ -19,24 +19,40 @@ import { monthlyEnergyBillApproximation } from "@/helpers/solar/math_and_data/so
 
 export const useSolarMapStore = defineStore("solarMapStore", {
     state: () => ({
-        buildingInsights: {} as BuildingInsights,
+        // User preferences
         mapSettings: makeDefaultMapSettings() as MapSettings,
-        userSolarData: makeDefaultUserSolarDataObject() as UserSolarData,
-        timeParams: makeDefaultTimeParams() as TimeParameters,
-        layer: undefined as Layer | undefined,
-        overlays: [] as google.maps.GroundOverlay[],
-        showRoofOnly: false,
+        solarReadonlyPanel: "INSIGHTS_READONLY" as SolarReadonlyPanel | undefined,
 
+        // Single request data
+        centerCoord: { lat: NaN, lng: NaN } as LatLng,
+        address: "",
+        buildingInsights: {} as BuildingInsights,
+        userSolarData: makeDefaultUserSolarDataObject() as UserSolarData,
         map: {} as google.maps.Map,
+        timeParams: makeDefaultTimeParams() as TimeParameters,
         panelConfig: undefined as SolarPanelConfig | undefined,
         solarPanels: [] as google.maps.Polygon[],
-        geometryLibrary: google.maps.importLibrary("geometry") as Promise<google.maps.GeometryLibrary>,
-        centerCoord: { lat: 46.81221406773517, lng: -71.20572802264097 } as LatLng,
-        address: "",
-        solarReadonlyPanel: "INSIGHTS_READONLY" as SolarReadonlyPanel | undefined
+        overlays: [] as google.maps.GroundOverlay[],
+        layer: undefined as Layer | undefined,
+        
+        // Utils
+        geometryLibrary: google.maps.importLibrary("geometry") as Promise<google.maps.GeometryLibrary>
     }),
 
     actions: {
+        resetRequestData() {
+            this.centerCoord = { lat: NaN, lng: NaN };
+            this.address = "";
+            this.buildingInsights = {} as BuildingInsights;
+            this.userSolarData = makeDefaultUserSolarDataObject() as UserSolarData;
+            this.map = {} as google.maps.Map;
+            this.timeParams = makeDefaultTimeParams();
+            this.panelConfig = undefined;
+            this.solarPanels = [];
+            this.overlays = [];
+            this.layer = undefined;
+        },
+
         async syncWithNewRequest(coords: LatLng) {
             this.centerCoord = coords;
 
@@ -151,7 +167,6 @@ export const useSolarMapStore = defineStore("solarMapStore", {
 
         resetDataLayer() {
             this.layer = undefined;
-            this.showRoofOnly = ["annualFlux", "monthlyFlux", "hourlyShade"].includes(this.mapSettings.layerId);
             this.map.setMapTypeId("satellite");
         },
 
@@ -166,10 +181,11 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             }
 
             const bounds = this.layer.bounds;
+            const showRoofOnly = true;
 
             this.overlays.map((overlay) => overlay.setMap(null));
             this.overlays = this.layer
-                .render(this.showRoofOnly, this.timeParams.month, this.timeParams.day)
+                .render(showRoofOnly, this.timeParams.month, this.timeParams.day)
                 .map((canvas) => new google.maps.GroundOverlay(canvas.toDataURL(), bounds));
         },
 

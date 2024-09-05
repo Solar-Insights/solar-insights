@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import { authGuard } from "@auth0/auth0-vue";
 import { HOME, SEARCH, SOLAR_MAP, GET_STARTED, MY_ORGANIZATION, PRICING, CALLBACK, NOT_FOUND } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
+import { useSolarMapStore } from "@/stores/solarMapStore";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -67,6 +68,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     if (to.name !== SOLAR_MAP.en.name) {
         useUserSessionStore().resetBuildingQueried();
+        useSolarMapStore().resetRequestData();
     }
 
     return next();
