@@ -583,6 +583,8 @@
                 "costs": {
                     "name": "Costs and Incentives",
                     "description": "Costs and incentives are used to evaluate the financial benefits of solar panels for a specific building",
+                    "installation-lifespan": "Installation's lifespan",
+                    "installation-lifespan-unit": "years",
                     "monthly-energy-cost": "Average monthly energy cost",
                     "energy-cost": "Energy cost per kWh",
                     "installation-cost": "Installation cost per Watt",

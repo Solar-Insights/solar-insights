@@ -106,7 +106,7 @@ import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore";
 const solarMapStore = useSolarMapStore();
 const solarMapVisualsStore = useSolarMapVisualsStore();
 
-const { mapSettings } = storeToRefs(solarMapStore);
+const { mapSettings, financialParameters } = storeToRefs(solarMapStore);
 
 const advancedSettingsPanels = ref([] as string[]);
 

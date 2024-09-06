@@ -583,6 +583,8 @@
                 "costs": {
                     "name": "Coûts et subventions",
                     "description": "Section permettant d'évaluer la viabilité économique des panneaux solaires pour un bâtiment particulier",
+                    "installation-lifespan": "Durée de vie de l'installation",
+                    "installation-lifespan-unit": "années",
                     "monthly-energy-cost": "Coût mensuel en énergie",
                     "energy-cost": "Coût de l'énergie par kWh",
                     "installation-cost": "Coût de l'installation par Watt",

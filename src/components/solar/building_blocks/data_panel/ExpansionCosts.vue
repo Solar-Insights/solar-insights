@@ -12,6 +12,17 @@
 
             <div>
                 <v-text-field
+                    v-model="financialParameters.installationLifespan"
+                    :label="$t(`solar.data-panel.data-panels.costs.installation-lifespan`)"
+                    density="compact"
+                    variant="outlined"
+                    type="number"
+                    prepend-inner-icon="mdi-clock-time-eight-outline"
+                    rounded
+                >
+                    <template v-slot:append-inner> {{ $t(`solar.data-panel.data-panels.costs.installation-lifespan-unit`) }} </template>
+                </v-text-field>
+                <v-text-field
                     v-model="financialParameters.averageMonthlyEnergyBill"
                     :label="$t(`solar.data-panel.data-panels.costs.monthly-energy-cost`)"
                     density="compact"
