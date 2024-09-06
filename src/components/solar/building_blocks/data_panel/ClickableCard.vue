@@ -1,6 +1,10 @@
 <template>
     <v-card @click="emits(`onActionClick`)" class="clickable-map-card" variant="outlined">
-        <v-card-item class="clickable-map-card-title" :class="isButton ? `py-1 text-center` : ``" :prepend-icon="props.icon">
+        <v-card-item
+            class="clickable-map-card-title"
+            :class="isButton ? `py-1 text-center` : ``"
+            :prepend-icon="props.icon"
+        >
             {{ props.title }}
         </v-card-item>
 

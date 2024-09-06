@@ -71,7 +71,11 @@ export function installationSizeCalc(userSolarData: UserSolarData, panelParamete
 /*
     Units: $
 */
-export function installationCostCalc(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
+export function installationCostCalc(
+    userSolarData: UserSolarData,
+    financialParameters: FinancialParameters,
+    panelParameters: PanelParameters
+) {
     return financialParameters.installationCostPerWatt * installationSizeCalc(userSolarData, panelParameters) * 1000;
 }
 
@@ -79,7 +83,11 @@ export function installationCostCalc(userSolarData: UserSolarData, financialPara
     Units: []kWh
     Division by 100 because dcToAcDerate in percent
 */
-export function yearlyEnergyAcProductionKwh(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
+export function yearlyEnergyAcProductionKwh(
+    userSolarData: UserSolarData,
+    financialParameters: FinancialParameters,
+    panelParameters: PanelParameters
+) {
     const energyProduction: number[] = [];
     for (let i = 0; i < financialParameters.installationLifespan; i++) {
         energyProduction.push(
@@ -103,14 +111,26 @@ export function yearlyEnergyConsumptionKwh(financialParameters: FinancialParamet
 /*
     Units: %
 */
-export function energyCoveredCalc(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
-    return (yearlyEnergyAcProductionKwh(userSolarData, financialParameters, panelParameters)[0] / yearlyEnergyConsumptionKwh(financialParameters)) * 100;
+export function energyCoveredCalc(
+    userSolarData: UserSolarData,
+    financialParameters: FinancialParameters,
+    panelParameters: PanelParameters
+) {
+    return (
+        (yearlyEnergyAcProductionKwh(userSolarData, financialParameters, panelParameters)[0] /
+            yearlyEnergyConsumptionKwh(financialParameters)) *
+        100
+    );
 }
 
 /*
     Units: $
 */
-export function yearlyUtilityBillEstimates(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
+export function yearlyUtilityBillEstimates(
+    userSolarData: UserSolarData,
+    financialParameters: FinancialParameters,
+    panelParameters: PanelParameters
+) {
     const utilityBillEstimates: number[] = [];
     const energyProduction: number[] = yearlyEnergyAcProductionKwh(userSolarData, financialParameters, panelParameters);
     for (let i = 0; i < financialParameters.installationLifespan; i++) {
@@ -131,8 +151,16 @@ export function yearlyUtilityBillEstimates(userSolarData: UserSolarData, financi
 /*
     Units: $
 */
-export function costWithSolarInstallation(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
-    const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData, financialParameters, panelParameters);
+export function costWithSolarInstallation(
+    userSolarData: UserSolarData,
+    financialParameters: FinancialParameters,
+    panelParameters: PanelParameters
+) {
+    const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(
+        userSolarData,
+        financialParameters,
+        panelParameters
+    );
     return (
         installationCostCalc(userSolarData, financialParameters, panelParameters) +
         utilityBillEstimates.reduce((x, y) => x + y, 0) -

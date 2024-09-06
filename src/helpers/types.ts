@@ -36,7 +36,7 @@ export type PanelParameters = {
     defaultPanelCapacityWatts: number;
     dcToAcDerate: number;
     yearlyPanelEfficiencyDecline: number;
-}
+};
 
 export type UserSolarData = {
     yearlyEnergyDcKwh: number;

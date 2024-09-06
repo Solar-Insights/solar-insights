@@ -1,11 +1,7 @@
 <template>
     <PageContainer v-if="showLoadingScreen" class="d-flex align-center justify-center">
         <PageSection class="w-100">
-            <LoadingSpinner
-                class="mx-auto"
-                :size="100"
-                :color="SOLAR_INSIGHTS_THEME_COLOR"
-            />
+            <LoadingSpinner class="mx-auto" :size="100" :color="SOLAR_INSIGHTS_THEME_COLOR" />
 
             <ParagraphContainer
                 class="mt-4"
@@ -13,7 +9,6 @@
                 :centerParagraphContent="true"
                 :fullWidth="true"
             />
-
         </PageSection>
     </PageContainer>
 
@@ -33,10 +28,7 @@
                 @onPageTitleActionClick="loginUser"
             >
                 <v-skeleton-loader class="search-loader mt-7" :loading="isLoading" type="chip">
-                    <AutocompleteField
-                        v-if="isAuthenticated"
-                        @makeNewSolarInstallationRequest="initiateNewRequest"
-                    />
+                    <AutocompleteField v-if="isAuthenticated" @makeNewSolarInstallationRequest="initiateNewRequest" />
                 </v-skeleton-loader>
             </PageTitleContainer>
         </PageSection>
@@ -161,5 +153,4 @@ async function initiateNewRequest(address: string) {
             showLoadingScreen.value = false;
         });
 }
-
 </script>

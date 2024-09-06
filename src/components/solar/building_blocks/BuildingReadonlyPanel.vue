@@ -55,7 +55,9 @@
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-account-hard-hat-outline</v-icon>
                 <div class="me-auto">{{ $t("solar.building-readonly.installation-size") }}</div>
-                <div>{{ strToLargeNumberDisplay(installationSizeCalc(userSolarData, panelParameters).toFixed(1)) }} kW</div>
+                <div>
+                    {{ strToLargeNumberDisplay(installationSizeCalc(userSolarData, panelParameters).toFixed(1)) }} kW
+                </div>
             </div>
         </div>
     </v-card>

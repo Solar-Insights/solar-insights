@@ -29,16 +29,26 @@ export function costWithoutSolarInstallation(financialParameters: FinancialParam
     return costWithoutSolar.reduce((x, y) => x + y, 0);
 }
 
-export function getBreakEvenYear(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
+export function getBreakEvenYear(
+    userSolarData: UserSolarData,
+    financialParameters: FinancialParameters,
+    panelParameters: PanelParameters
+) {
     let breakEvenYear: number = 0;
 
     let costWithSolar = 0;
-    const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData, financialParameters, panelParameters);
+    const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(
+        userSolarData,
+        financialParameters,
+        panelParameters
+    );
     const cumulativeCostWithSolar: number[] = [];
     for (let i = 0; i < financialParameters.installationLifespan; i++) {
         costWithSolar +=
             i == 0
-                ? utilityBillEstimates[i] + installationCostCalc(userSolarData, financialParameters, panelParameters) - financialParameters.solarIncentives
+                ? utilityBillEstimates[i] +
+                  installationCostCalc(userSolarData, financialParameters, panelParameters) -
+                  financialParameters.solarIncentives
                 : utilityBillEstimates[i];
         cumulativeCostWithSolar.push(costWithSolar);
     }
@@ -81,15 +91,25 @@ export function makeCumulativeCostWithoutSolar(userSolarData: UserSolarData, fin
     return cumulativeCostWithoutSolar;
 }
 
-export function makeCumulativeCostWithSolar(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
-    const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData, financialParameters, panelParameters);
+export function makeCumulativeCostWithSolar(
+    userSolarData: UserSolarData,
+    financialParameters: FinancialParameters,
+    panelParameters: PanelParameters
+) {
+    const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(
+        userSolarData,
+        financialParameters,
+        panelParameters
+    );
     const cumulativeCostWithSolar: number[] = [];
     let cumulation = 0;
 
     for (let i = 0; i < financialParameters.installationLifespan; i++) {
         cumulation +=
             i == 0
-                ? utilityBillEstimates[i] + installationCostCalc(userSolarData, financialParameters, panelParameters) - financialParameters.solarIncentives
+                ? utilityBillEstimates[i] +
+                  installationCostCalc(userSolarData, financialParameters, panelParameters) -
+                  financialParameters.solarIncentives
                 : utilityBillEstimates[i];
         cumulativeCostWithSolar.push(Math.round(cumulation));
     }

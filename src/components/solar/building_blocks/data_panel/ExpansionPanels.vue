@@ -17,8 +17,7 @@
                         {{
                             buildingInsights.solarPotential === undefined
                                 ? 0
-                                : buildingInsights.solarPotential.solarPanelConfigs[configIdIndex]
-                                      .panelsCount
+                                : buildingInsights.solarPotential.solarPanelConfigs[configIdIndex].panelsCount
                         }}
                         / {{ userSolarData.maxPanelCount }}
                         {{ $t(`solar.data-panel.data-panels.panels.panels`) }}

@@ -13,7 +13,7 @@ export function makeDefaultUserSolarDataObject(): UserSolarData {
         maxPanelCount: DefaultUserSolarData.MAX_PANEL_COUNT,
         minPanelCount: DefaultUserSolarData.MIN_PANEL_COUNT,
         panelCount: DefaultUserSolarData.PANEL_COUNT,
-        yearlyEnergyDcKwh: DefaultUserSolarData.YEARLY_ENERGY_DC_KWH,
+        yearlyEnergyDcKwh: DefaultUserSolarData.YEARLY_ENERGY_DC_KWH
     };
 }
 
@@ -25,7 +25,7 @@ export namespace DefaultFinancialParameters {
     export const YEARLY_ENERGY_COST_INCREASE = 2.5;
     export const YEARLY_DISCOUNT_RATE = 4;
     export const INSTALLATION_LIFESPAN = 25;
-};
+}
 
 export function makeDefaultFinancialParameters(): FinancialParameters {
     return {
@@ -44,14 +44,14 @@ export namespace DefaultPanelParameters {
     export const DEFAULT_PANEL_CAPACITY_WATTS = 400;
     export const YEARLY_PANEL_EFFICIENCY_DECLINE = 0.75;
     export const DC_TO_AC_DERATE = 85;
-};
+}
 
 export function makeDefaultPanelParameters(): PanelParameters {
     return {
         panelCapacityWatts: DefaultPanelParameters.PANEL_CAPACITY_WATTS,
         defaultPanelCapacityWatts: DefaultPanelParameters.DEFAULT_PANEL_CAPACITY_WATTS,
         dcToAcDerate: DefaultPanelParameters.DC_TO_AC_DERATE,
-        yearlyPanelEfficiencyDecline: DefaultPanelParameters.YEARLY_PANEL_EFFICIENCY_DECLINE,
+        yearlyPanelEfficiencyDecline: DefaultPanelParameters.YEARLY_PANEL_EFFICIENCY_DECLINE
     };
 }
 

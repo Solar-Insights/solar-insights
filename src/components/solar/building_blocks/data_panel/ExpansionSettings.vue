@@ -90,7 +90,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import ClickableCard from "@/components/solar/building_blocks/data_panel/ClickableCard.vue";

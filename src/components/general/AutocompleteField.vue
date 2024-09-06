@@ -55,7 +55,10 @@ async function setPlaceChangedOnAutocompleteListener() {
 
         autocompleteAlreadyChanged = false;
 
-        const resultingAddress = newPlace.formatted_address === undefined ? t(`solar.data-panel.header.reverse-geocoding-error`) : newPlace.formatted_address;
+        const resultingAddress =
+            newPlace.formatted_address === undefined
+                ? t(`solar.data-panel.header.reverse-geocoding-error`)
+                : newPlace.formatted_address;
         emits("makeNewSolarInstallationRequest", resultingAddress);
     });
 }

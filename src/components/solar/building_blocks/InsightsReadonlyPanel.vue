@@ -15,7 +15,9 @@
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-calendar-clock-outline</v-icon>
                 <div class="me-auto">{{ $t("solar.insights-readonly.yearly-energy") }}</div>
-                <div>{{ strToLargeNumberDisplay(yearlyEnergyCalc(userSolarData, panelParameters).toFixed(0)) }} kWh</div>
+                <div>
+                    {{ strToLargeNumberDisplay(yearlyEnergyCalc(userSolarData, panelParameters).toFixed(0)) }} kWh
+                </div>
             </div>
         </div>
 
@@ -23,13 +25,22 @@
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-account-cash-outline</v-icon>
                 <div class="me-auto">{{ $t("solar.insights-readonly.installation-cost") }}</div>
-                <div>{{ strToLargeNumberDisplay(installationCostCalc(userSolarData, financialParameters, panelParameters).toFixed(0)) }} $</div>
+                <div>
+                    {{
+                        strToLargeNumberDisplay(
+                            installationCostCalc(userSolarData, financialParameters, panelParameters).toFixed(0)
+                        )
+                    }}
+                    $
+                </div>
             </div>
         </div>
 
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">{{ batteryCharging(energyCoveredCalc(userSolarData, financialParameters, panelParameters)) }}</v-icon>
+                <v-icon class="mr-3" color="theme">{{
+                    batteryCharging(energyCoveredCalc(userSolarData, financialParameters, panelParameters))
+                }}</v-icon>
                 <div class="me-auto">{{ $t("solar.insights-readonly.energy-covered") }}</div>
                 <div>{{ energyCoveredCalc(userSolarData, financialParameters, panelParameters).toFixed(0) }} %</div>
             </div>
@@ -57,7 +68,14 @@
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-solar-panel</v-icon>
                 <div class="me-auto">{{ $t("solar.insights-readonly.cost-with") }}</div>
-                <div>{{ strToLargeNumberDisplay(costWithSolarInstallation(userSolarData, financialParameters, panelParameters).toFixed(0)) }} $</div>
+                <div>
+                    {{
+                        strToLargeNumberDisplay(
+                            costWithSolarInstallation(userSolarData, financialParameters, panelParameters).toFixed(0)
+                        )
+                    }}
+                    $
+                </div>
             </div>
         </div>
 
@@ -69,7 +87,8 @@
                     {{
                         strToLargeNumberDisplay(
                             (
-                                costWithoutSolarInstallation(financialParameters) - costWithSolarInstallation(userSolarData, financialParameters, panelParameters)
+                                costWithoutSolarInstallation(financialParameters) -
+                                costWithSolarInstallation(userSolarData, financialParameters, panelParameters)
                             ).toFixed(0)
                         )
                     }}
@@ -126,8 +145,12 @@ const { userSolarData, financialParameters, panelParameters } = storeToRefs(sola
 const { theme } = storeToRefs(userSessionStore);
 
 const chartOptions = computed(() => makeChartOptions(theme.value));
-const timeSeries = ref<TimeSerie[]>(makeTimeSeriesFromUserSolarData(userSolarData.value, financialParameters.value, panelParameters.value));
-const breakEvenYear = ref<number>(getBreakEvenYear(userSolarData.value, financialParameters.value, panelParameters.value));
+const timeSeries = ref<TimeSerie[]>(
+    makeTimeSeriesFromUserSolarData(userSolarData.value, financialParameters.value, panelParameters.value)
+);
+const breakEvenYear = ref<number>(
+    getBreakEvenYear(userSolarData.value, financialParameters.value, panelParameters.value)
+);
 
 const DELAY_TIME_MS = 750;
 let updateTimeout: NodeJS.Timeout | undefined;
@@ -138,8 +161,16 @@ watch(
         clearTimeout(updateTimeout);
 
         updateTimeout = setTimeout(() => {
-            timeSeries.value = makeTimeSeriesFromUserSolarData(userSolarData.value, financialParameters.value, panelParameters.value);
-            breakEvenYear.value = getBreakEvenYear(userSolarData.value, financialParameters.value, panelParameters.value);
+            timeSeries.value = makeTimeSeriesFromUserSolarData(
+                userSolarData.value,
+                financialParameters.value,
+                panelParameters.value
+            );
+            breakEvenYear.value = getBreakEvenYear(
+                userSolarData.value,
+                financialParameters.value,
+                panelParameters.value
+            );
         }, DELAY_TIME_MS);
     },
     { deep: true }

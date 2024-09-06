@@ -78,7 +78,8 @@ import { downloadInstallationData } from "@/helpers/solar/math_and_data/download
 
 const solarMapStore = useSolarMapStore();
 
-const { buildingInsights, userSolarData, financialParameters, panelParameters, panelConfig, address } = storeToRefs(solarMapStore);
+const { buildingInsights, userSolarData, financialParameters, panelParameters, panelConfig, address } =
+    storeToRefs(solarMapStore);
 
 const requiredInfoUnavailable = computed(() => {
     return (

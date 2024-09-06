@@ -13,12 +13,20 @@ export function downloadInstallationData(
     exportOptions: InstallationExportOptions,
     buildingInsights: BuildingInsights,
     userSolarData: UserSolarData,
-    financialParameters: FinancialParameters, 
+    financialParameters: FinancialParameters,
     panelParameters: PanelParameters,
     panelConfig: SolarPanelConfig,
     address: string
 ) {
-    const data = createExportedInstallationData(exportOptions, buildingInsights, userSolarData, financialParameters, panelParameters, panelConfig, address);
+    const data = createExportedInstallationData(
+        exportOptions,
+        buildingInsights,
+        userSolarData,
+        financialParameters,
+        panelParameters,
+        panelConfig,
+        address
+    );
 
     const suggestedName = `Solar installation - ${address}`;
     saveFileToLocal(data, suggestedName, exportOptions.exportType);
@@ -28,7 +36,7 @@ function createExportedInstallationData(
     exportOptions: InstallationExportOptions,
     buildingInsights: BuildingInsights,
     userSolarData: UserSolarData,
-    financialParameters: FinancialParameters, 
+    financialParameters: FinancialParameters,
     panelParameters: PanelParameters,
     panelConfig: SolarPanelConfig,
     address: string
@@ -37,7 +45,8 @@ function createExportedInstallationData(
 
     addMetadataToObject(data, address, buildingInsights);
 
-    if (exportOptions.solarInsightsAndParameters) addSolarInsightsAndParametersToObject(data, userSolarData, financialParameters, panelParameters);
+    if (exportOptions.solarInsightsAndParameters)
+        addSolarInsightsAndParametersToObject(data, userSolarData, financialParameters, panelParameters);
 
     if (exportOptions.panelConfiguration) addPanelConfigurationToObject(data, buildingInsights, panelConfig);
 
@@ -60,7 +69,12 @@ function addMetadataToObject(data: any, address: string, buildingInsights: Build
     };
 }
 
-function addSolarInsightsAndParametersToObject(data: any, userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
+function addSolarInsightsAndParametersToObject(
+    data: any,
+    userSolarData: UserSolarData,
+    financialParameters: FinancialParameters,
+    panelParameters: PanelParameters
+) {
     data.parameters = userSolarData;
     data.solarInsights = {};
 
@@ -73,7 +87,8 @@ function addSolarInsightsAndParametersToObject(data: any, userSolarData: UserSol
     const costWithoutSolar = costWithoutSolarInstallation(financialParameters);
     const costWithSolar = costWithSolarInstallation(userSolarData, financialParameters, panelParameters);
     const totalSavedCost = costWithoutSolar - costWithSolar;
-    const breakevenYear = getBreakEvenYear(userSolarData, financialParameters, panelParameters) + new Date().getFullYear();
+    const breakevenYear =
+        getBreakEvenYear(userSolarData, financialParameters, panelParameters) + new Date().getFullYear();
 
     data.solarInsights.costAnalysis = {
         installationLifespan: financialParameters.installationLifespan,

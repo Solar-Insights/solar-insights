@@ -10,7 +10,11 @@ import {
     makeCumulativeCostWithoutSolar
 } from "@/helpers/solar/math_and_data/yearlyAndCumulativeCosts";
 
-export function getOptimizedEnergyCoveredConfigId(buildingInsights: BuildingInsights, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
+export function getOptimizedEnergyCoveredConfigId(
+    buildingInsights: BuildingInsights,
+    financialParameters: FinancialParameters,
+    panelParameters: PanelParameters
+) {
     let configId: number | undefined;
 
     for (let i = 0; i < buildingInsights.solarPotential.solarPanelConfigs.length; i++) {
@@ -28,7 +32,12 @@ export function getOptimizedEnergyCoveredConfigId(buildingInsights: BuildingInsi
     return configId;
 }
 
-export function getOptimizedSavingsConfigId(buildingInsights: BuildingInsights, userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
+export function getOptimizedSavingsConfigId(
+    buildingInsights: BuildingInsights,
+    userSolarData: UserSolarData,
+    financialParameters: FinancialParameters,
+    panelParameters: PanelParameters
+) {
     let configId: number | undefined;
     let maxSavings: number = 0;
 
@@ -39,10 +48,13 @@ export function getOptimizedSavingsConfigId(buildingInsights: BuildingInsights, 
             i
         );
         const finalCumulativeCostWithSolar: number = makeCumulativeCostWithSolar(
-            userSolarDataForSpecificConfigId, financialParameters, panelParameters
+            userSolarDataForSpecificConfigId,
+            financialParameters,
+            panelParameters
         ).pop()!;
         const finalCumulativeCostWithoutSolar: number = makeCumulativeCostWithoutSolar(
-            userSolarDataForSpecificConfigId, financialParameters
+            userSolarDataForSpecificConfigId,
+            financialParameters
         ).pop()!;
         const solarSavings = finalCumulativeCostWithoutSolar - finalCumulativeCostWithSolar;
 

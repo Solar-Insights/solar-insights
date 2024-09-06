@@ -76,7 +76,11 @@ function textColorBasedOnTheme(theme: Theme) {
     }
 }
 
-export function makeTimeSeriesFromUserSolarData(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
+export function makeTimeSeriesFromUserSolarData(
+    userSolarData: UserSolarData,
+    financialParameters: FinancialParameters,
+    panelParameters: PanelParameters
+) {
     const yearsList: Date[] = makeYearsList(financialParameters);
     const cumulativeCostWithSolarTimeSerie: TimeSerieData = makeCumulativeCostWithSolarTimeSerie(
         userSolarData,
@@ -117,9 +121,18 @@ function makeYearsList(financialParameters: FinancialParameters) {
     return yearsList;
 }
 
-function makeCumulativeCostWithSolarTimeSerie(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters, yearsList: Date[]) {
+function makeCumulativeCostWithSolarTimeSerie(
+    userSolarData: UserSolarData,
+    financialParameters: FinancialParameters,
+    panelParameters: PanelParameters,
+    yearsList: Date[]
+) {
     const timeSerie: TimeSerieData = [];
-    const cumulativeCostWithSolar: number[] = makeCumulativeCostWithSolar(userSolarData, financialParameters, panelParameters);
+    const cumulativeCostWithSolar: number[] = makeCumulativeCostWithSolar(
+        userSolarData,
+        financialParameters,
+        panelParameters
+    );
 
     for (let i = 0; i < financialParameters.installationLifespan; i++) {
         timeSerie.push([yearsList[i], cumulativeCostWithSolar[i]]);
@@ -128,7 +141,11 @@ function makeCumulativeCostWithSolarTimeSerie(userSolarData: UserSolarData, fina
     return timeSerie;
 }
 
-function makeCumulativeCostWithoutSolarTimeSerie(userSolarData: UserSolarData, financialParameters: FinancialParameters, yearsList: Date[]) {
+function makeCumulativeCostWithoutSolarTimeSerie(
+    userSolarData: UserSolarData,
+    financialParameters: FinancialParameters,
+    yearsList: Date[]
+) {
     const timeSerie: TimeSerieData = [];
     const cumulativeCostWithoutSolar: number[] = makeCumulativeCostWithoutSolar(userSolarData, financialParameters);
 

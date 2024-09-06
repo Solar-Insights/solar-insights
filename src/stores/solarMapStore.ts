@@ -2,7 +2,13 @@ import { defineStore } from "pinia";
 import { toRaw } from "vue";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
-import { FinancialParameters, PanelParameters, SolarReadonlyPanel, TimeParameters, UserSolarData } from "@/helpers/types";
+import {
+    FinancialParameters,
+    PanelParameters,
+    SolarReadonlyPanel,
+    TimeParameters,
+    UserSolarData
+} from "@/helpers/types";
 import {
     makeDefaultUserSolarDataObject,
     makeDefaultMapSettings,
@@ -40,7 +46,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         configIdIndex: 0,
         overlays: [] as google.maps.GroundOverlay[],
         layer: undefined as Layer | undefined,
-        
+
         // Utils
         geometryLibrary: google.maps.importLibrary("geometry") as Promise<google.maps.GeometryLibrary>
     }),
@@ -50,7 +56,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             !objectHasValue(this.mapSettings) ? this.setDefaultMapSettings() : false;
             !objectHasValue(this.financialParameters) ? this.setDefaultFinancialParameters() : false;
             !objectHasValue(this.panelParameters) ? this.setDefaultPanelParameters() : false;
-            
+
             this.setDynamicUserSolarData();
             this.setDefaultTimeParams();
         },
@@ -65,7 +71,9 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         setDynamicFinancialParameters() {
-            this.financialParameters.averageMonthlyEnergyBill = monthlyEnergyBillApproximation(this.buildingInsights.solarPotential.wholeRoofStats.areaMeters2)
+            this.financialParameters.averageMonthlyEnergyBill = monthlyEnergyBillApproximation(
+                this.buildingInsights.solarPotential.wholeRoofStats.areaMeters2
+            );
         },
 
         setDefaultPanelParameters() {
@@ -98,11 +106,11 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             this.timeParams = {} as TimeParameters;
             this.panelConfig = undefined;
             this.solarPanels = [];
-            this.configIdIndex = 0
+            this.configIdIndex = 0;
             this.overlays = [];
             this.layer = undefined;
         },
-        
+
         setDefaultTimeParams() {
             this.timeParams = makeDefaultTimeParams();
         },
@@ -110,10 +118,9 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         async makeNewSolarInstallationRequest(coords: LatLng) {
             this.centerCoord = coords;
 
-            await getClosestBuildingInsights(coords)
-                .then(async (data: BuildingInsights) => {
-                    this.buildingInsights = data;
-                })
+            await getClosestBuildingInsights(coords).then(async (data: BuildingInsights) => {
+                this.buildingInsights = data;
+            });
 
             return coords;
         },
@@ -188,14 +195,19 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         setOptimizedEnergyCoveredConfig() {
             const configId: number | undefined = getOptimizedEnergyCoveredConfigId(
                 this.buildingInsights,
-                this.financialParameters, 
+                this.financialParameters,
                 this.panelParameters
             );
             this.setConfigId(configId);
         },
 
         setOptimizedSavingsConfig() {
-            const configId: number | undefined = getOptimizedSavingsConfigId(this.buildingInsights, this.userSolarData, this.financialParameters, this.panelParameters);
+            const configId: number | undefined = getOptimizedSavingsConfigId(
+                this.buildingInsights,
+                this.userSolarData,
+                this.financialParameters,
+                this.panelParameters
+            );
             this.setConfigId(configId);
         },
 
@@ -247,9 +259,9 @@ export const useSolarMapStore = defineStore("solarMapStore", {
 
         async showHeatmapChanged() {
             if (this.mapSettings.showHeatmap) {
-                await this.showHeatmapLayer()
+                await this.showHeatmapLayer();
             } else {
-                this.displayHeatmapLayer()
+                this.displayHeatmapLayer();
             }
         },
 

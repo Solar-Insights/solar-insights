@@ -100,7 +100,9 @@
                         </v-text-field>
 
                         <ClickableCard
-                            :title="$t(`solar.data-panel.data-panels.costs-advanced-settings.reset-financial-parameters`)"
+                            :title="
+                                $t(`solar.data-panel.data-panels.costs-advanced-settings.reset-financial-parameters`)
+                            "
                             :icon="`mdi-home`"
                             :isButton="true"
                             @onActionClick="solarMapStore.setDefaultFinancialParameters"
