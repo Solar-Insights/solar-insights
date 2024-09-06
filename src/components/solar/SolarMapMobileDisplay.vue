@@ -24,8 +24,8 @@
         <MobileBottomNav
             :showingData="displayingData"
             @showData="
+                displayingData = true;
                 solarMapStore.setReadonlyPanelToDisplay(undefined);
-                displayingData = !displayingData;
             "
             :showingMap="solarReadonlyPanel === undefined && displayingData === false"
             @showMap="
