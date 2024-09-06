@@ -103,7 +103,7 @@
                             :title="
                                 $t(`solar.data-panel.data-panels.costs-advanced-settings.reset-financial-parameters`)
                             "
-                            :icon="`mdi-home`"
+                            :icon="`mdi-restore`"
                             :isButton="true"
                             @onActionClick="solarMapStore.setDefaultFinancialParameters"
                         />

@@ -95,7 +95,7 @@
 
                         <ClickableCard
                             :title="$t(`solar.data-panel.data-panels.panels-advanced-settings.reset-panels-parameters`)"
-                            :icon="`mdi-home`"
+                            :icon="`mdi-restore`"
                             :isButton="true"
                             @onActionClick="solarMapStore.setDefaultPanelParameters"
                         />

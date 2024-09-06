@@ -85,7 +85,7 @@
                     <v-expansion-panel-text class="px-0" id="expansion-panel-second-layer">
                         <ClickableCard
                             :title="$t(`solar.data-panel.data-panels.settings-advanced-settings.reset-map-parameters`)"
-                            :icon="`mdi-home`"
+                            :icon="`mdi-restore`"
                             :isButton="true"
                             @onActionClick="resetParameters"
                         />

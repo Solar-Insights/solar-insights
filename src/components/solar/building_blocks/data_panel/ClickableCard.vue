@@ -2,7 +2,7 @@
     <v-card @click="emits(`onActionClick`)" class="clickable-map-card" variant="outlined">
         <v-card-item
             class="clickable-map-card-title"
-            :class="isButton ? `py-1 text-center` : ``"
+            :class="isButton ? `py-1 ml-2 text-center` : ``"
             :prepend-icon="props.icon"
         >
             {{ props.title }}
