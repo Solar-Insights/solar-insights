@@ -57,7 +57,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             !objectHasValue(this.financialParameters) ? this.setDefaultFinancialParameters() : false;
             !objectHasValue(this.panelParameters) ? this.setDefaultPanelParameters() : false;
 
-            this.setDynamicUserSolarData();
+            this.setDefaultUserSolarData();
             this.setDefaultTimeParams();
         },
 
@@ -86,6 +86,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         setDefaultUserSolarData() {
+            this.userSolarData = makeDefaultUserSolarDataObject();
             this.setDynamicUserSolarData();
         },
 
