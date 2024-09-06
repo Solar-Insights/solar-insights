@@ -2,7 +2,7 @@
     <div :class="$vuetify.display.smAndDown ? 'map-data-mobile' : 'map-data-computer'">
         <ReadonlyPanelSelector />
 
-        <v-expansion-panels variant="accordion" v-model="expansionPanels">
+        <v-expansion-panels variant="accordion" multiple v-model="expansionPanels">
             <v-expansion-panel elevation="0" value="panels">
                 <ExpansionPanels />
             </v-expansion-panel>
