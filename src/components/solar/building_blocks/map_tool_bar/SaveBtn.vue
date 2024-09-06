@@ -75,14 +75,13 @@ import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
 import { InstallationExportOptions, getDefaultInstallationExportOptions } from "@/helpers/types";
 import { downloadInstallationData } from "@/helpers/solar/math_and_data/downloads";
-import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore"
+import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore";
 
 const solarMapStore = useSolarMapStore();
 const solarMapVisualsStore = useSolarMapVisualsStore();
 
-const { panelConfig } = storeToRefs(solarMapVisualsStore); 
-const { buildingInsights, userSolarData, financialParameters, panelParameters, address } =
-    storeToRefs(solarMapStore);
+const { panelConfig } = storeToRefs(solarMapVisualsStore);
+const { buildingInsights, userSolarData, financialParameters, panelParameters, address } = storeToRefs(solarMapStore);
 
 const requiredInfoUnavailable = computed(() => {
     return (

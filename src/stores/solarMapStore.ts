@@ -1,12 +1,7 @@
 import { defineStore } from "pinia";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
-import {
-    FinancialParameters,
-    PanelParameters,
-    SolarReadonlyPanel,
-    UserSolarData
-} from "@/helpers/types";
+import { FinancialParameters, PanelParameters, SolarReadonlyPanel, UserSolarData } from "@/helpers/types";
 import {
     makeDefaultUserSolarDataObject,
     makeDefaultMapSettings,
@@ -35,7 +30,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         address: "",
         buildingInsights: {} as BuildingInsights,
         userSolarData: {} as UserSolarData,
-        configIdIndex: 0,
+        configIdIndex: 0
     }),
 
     actions: {
@@ -91,7 +86,6 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             this.userSolarData = {} as UserSolarData;
             this.configIdIndex = 0;
         },
-
 
         async makeNewSolarInstallationRequest(coords: LatLng) {
             this.centerCoord = coords;
@@ -157,7 +151,8 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         },
 
         setNewPanelConfig() {
-            const panelConfig: SolarPanelConfig = this.buildingInsights.solarPotential.solarPanelConfigs[this.configIdIndex];
+            const panelConfig: SolarPanelConfig =
+                this.buildingInsights.solarPotential.solarPanelConfigs[this.configIdIndex];
             this.userSolarData.yearlyEnergyDcKwh = panelConfig.yearlyEnergyDcKwh;
             this.userSolarData.panelCount = panelConfig.panelsCount;
         },

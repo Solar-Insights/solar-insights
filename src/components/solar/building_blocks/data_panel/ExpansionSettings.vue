@@ -13,7 +13,9 @@
             <div>
                 <v-select
                     v-model="mapSettings.layerId"
-                    @update:modelValue="solarMapVisualsStore.showHeatmapLayer(solarMapStore.mapSettings, solarMapStore.buildingInsights)"
+                    @update:modelValue="
+                        solarMapVisualsStore.showHeatmapLayer(solarMapStore.mapSettings, solarMapStore.buildingInsights)
+                    "
                     item-title="displayedName"
                     item-value="name"
                     :items="mapSettings.layerIdChoices"
@@ -37,7 +39,12 @@
 
                 <v-switch
                     v-model="mapSettings.showHeatmap"
-                    @change="solarMapVisualsStore.showHeatmapChanged(solarMapStore.buildingInsights, solarMapStore.mapSettings)"
+                    @change="
+                        solarMapVisualsStore.showHeatmapChanged(
+                            solarMapStore.buildingInsights,
+                            solarMapStore.mapSettings
+                        )
+                    "
                     inset
                     color="theme"
                     density="compact"
@@ -94,7 +101,7 @@ import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import ClickableCard from "@/components/solar/building_blocks/data_panel/ClickableCard.vue";
-import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore"
+import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore";
 
 const solarMapStore = useSolarMapStore();
 const solarMapVisualsStore = useSolarMapVisualsStore();

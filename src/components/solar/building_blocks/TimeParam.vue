@@ -52,12 +52,12 @@ import { onMounted, onUnmounted, ref } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
 import { monthCodes, hourCodes } from "@/helpers/constants";
-import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore"
+import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore";
 
 const solarMapStore = useSolarMapStore();
 const solarMapVisualsStore = useSolarMapVisualsStore();
 
-const { timeParams, layer } = storeToRefs(solarMapVisualsStore); 
+const { timeParams, layer } = storeToRefs(solarMapVisualsStore);
 const { mapSettings } = storeToRefs(solarMapStore);
 
 const currentlySliding = ref(false);

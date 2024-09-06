@@ -1,11 +1,7 @@
 import { getLayerFromBuildingInsights } from "@/helpers/solar/map/layers";
 import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/map/panels";
-import {
-    makeDefaultTimeParams,
-} from "@/helpers/solar/math_and_data/defaultData";
-import {
-    TimeParameters,
-} from "@/helpers/types";
+import { makeDefaultTimeParams } from "@/helpers/solar/math_and_data/defaultData";
+import { TimeParameters } from "@/helpers/types";
 import { LatLng } from "geo-env-typing/geo";
 import { BuildingInsights, Layer, MapSettings, SolarPanelConfig } from "geo-env-typing/solar";
 import { defineStore } from "pinia";
@@ -49,12 +45,11 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
             await this.showHeatmapLayer(mapSettings, buildingInsights);
         },
 
-
         async showHeatmapLayer(mapSettings: MapSettings, buildingInsights: BuildingInsights) {
             if (mapSettings.layerId == null || buildingInsights == null) {
                 return;
             }
-            
+
             this.layer = await getLayerFromBuildingInsights(buildingInsights, mapSettings);
             this.displayHeatmapLayer(mapSettings);
         },
@@ -124,9 +119,7 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
 
             this.solarPanels.map((panel, i) =>
                 panel.setMap(
-                    mapSettings.showPanels && this.panelConfig && i < this.panelConfig.panelsCount
-                        ? this.map
-                        : null
+                    mapSettings.showPanels && this.panelConfig && i < this.panelConfig.panelsCount ? this.map : null
                 )
             );
         },
@@ -137,6 +130,6 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
             } else {
                 this.displayHeatmapLayer(mapSettings);
             }
-        },
+        }
     }
 });
