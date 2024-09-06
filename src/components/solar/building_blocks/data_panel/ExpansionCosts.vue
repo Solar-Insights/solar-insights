@@ -12,7 +12,7 @@
 
             <div>
                 <v-text-field
-                    v-model="userSolarData.averageMonthlyEnergyBill"
+                    v-model="financialParameters.averageMonthlyEnergyBill"
                     :label="$t(`solar.data-panel.data-panels.costs.monthly-energy-cost`)"
                     density="compact"
                     variant="outlined"
@@ -23,7 +23,7 @@
                     <template v-slot:append-inner> $ </template>
                 </v-text-field>
                 <v-text-field
-                    v-model="userSolarData.energyCostPerKwh"
+                    v-model="financialParameters.energyCostPerKwh"
                     :label="$t(`solar.data-panel.data-panels.costs.energy-cost`)"
                     density="compact"
                     variant="outlined"
@@ -34,7 +34,7 @@
                     <template v-slot:append-inner> $ </template>
                 </v-text-field>
                 <v-text-field
-                    v-model="userSolarData.installationCostPerWatt"
+                    v-model="financialParameters.installationCostPerWatt"
                     :label="$t(`solar.data-panel.data-panels.costs.installation-cost`)"
                     density="compact"
                     variant="outlined"
@@ -45,7 +45,7 @@
                     <template v-slot:append-inner> $ </template>
                 </v-text-field>
                 <v-text-field
-                    v-model="userSolarData.solarIncentives"
+                    v-model="financialParameters.solarIncentives"
                     :label="$t(`solar.data-panel.data-panels.costs.solar-incentives`)"
                     density="compact"
                     variant="outlined"
@@ -76,7 +76,7 @@
                 <v-expansion-panel value="advanced-settings-solar-potential" class="mb-2" elevation="0">
                     <v-expansion-panel-text class="px-0" id="expansion-panel-second-layer">
                         <v-text-field
-                            v-model="userSolarData.yearlyEnergyCostIncrease"
+                            v-model="financialParameters.yearlyEnergyCostIncrease"
                             :label="$t(`solar.data-panel.data-panels.costs-advanced-settings.energy-cost-increase`)"
                             density="compact"
                             variant="outlined"
@@ -88,7 +88,7 @@
                         </v-text-field>
 
                         <v-text-field
-                            v-model="userSolarData.yearlyDiscountRate"
+                            v-model="financialParameters.yearlyDiscountRate"
                             :label="$t(`solar.data-panel.data-panels.costs-advanced-settings.discount-rate`)"
                             density="compact"
                             variant="outlined"
@@ -103,7 +103,7 @@
                             :title="$t(`solar.data-panel.data-panels.costs-advanced-settings.reset-financial-parameters`)"
                             :icon="`mdi-home`"
                             :isButton="true"
-                            @onActionClick=""
+                            @onActionClick="solarMapStore.setDefaultFinancialParameters"
                         />
                     </v-expansion-panel-text>
                 </v-expansion-panel>
@@ -120,7 +120,7 @@ import ClickableCard from "@/components/solar/building_blocks/data_panel/Clickab
 
 const solarMapStore = useSolarMapStore();
 
-const { userSolarData } = storeToRefs(solarMapStore);
+const { financialParameters } = storeToRefs(solarMapStore);
 
 const advancedSettingsSolarPotential = ref([] as string[]);
 </script>

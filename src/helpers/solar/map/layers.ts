@@ -1,6 +1,6 @@
 import { getSolarLayers } from "@/api/solar";
 import { LatLng } from "geo-env-typing/geo";
-import { BuildingInsights, MapSettings, SolarLayers } from "geo-env-typing/solar";
+import { BuildingInsights, layerIds, MapSettings, SolarLayers } from "geo-env-typing/solar";
 import { getSingleLayer } from "@/helpers/solar/map/geotiffs";
 
 export async function getLayerFromBuildingInsights(buildingInsights: BuildingInsights, mapSettings: MapSettings) {

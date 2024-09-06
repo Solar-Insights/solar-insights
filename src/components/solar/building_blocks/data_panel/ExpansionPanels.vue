@@ -40,7 +40,7 @@
 
             <div>
                 <v-text-field
-                    v-model="userSolarData.panelCapacityWatts"
+                    v-model="panelParameters.panelCapacityWatts"
                     :label="$t(`solar.data-panel.data-panels.panels.power-rating`)"
                     density="compact"
                     variant="outlined"
@@ -71,7 +71,7 @@
                 <v-expansion-panel value="advanced-settings-panels" class="mb-2" elevation="0">
                     <v-expansion-panel-text class="px-0" id="expansion-panel-second-layer">
                         <v-text-field
-                            v-model="userSolarData.dcToAcDerate"
+                            v-model="panelParameters.dcToAcDerate"
                             :label="$t(`solar.data-panel.data-panels.panels-advanced-settings.dc-to-ac`)"
                             density="compact"
                             variant="outlined"
@@ -83,7 +83,7 @@
                         </v-text-field>
 
                         <v-text-field
-                            v-model="userSolarData.yearlyPanelEfficiencyDecline"
+                            v-model="panelParameters.yearlyPanelEfficiencyDecline"
                             :label="$t(`solar.data-panel.data-panels.panels-advanced-settings.efficiency-decline`)"
                             density="compact"
                             variant="outlined"
@@ -98,7 +98,7 @@
                             :title="$t(`solar.data-panel.data-panels.panels-advanced-settings.reset-panels-parameters`)"
                             :icon="`mdi-home`"
                             :isButton="true"
-                            @onActionClick=""
+                            @onActionClick="solarMapStore.setDefaultPanelParameters"
                         />
                     </v-expansion-panel-text>
                 </v-expansion-panel>
@@ -115,7 +115,7 @@ import ClickableCard from "@/components/solar/building_blocks/data_panel/Clickab
 
 const solarMapStore = useSolarMapStore();
 
-const { buildingInsights, userSolarData, configIdIndex } = storeToRefs(solarMapStore);
+const { buildingInsights, userSolarData, panelParameters, configIdIndex } = storeToRefs(solarMapStore);
 
 const advancedSettingsPanels = ref([] as string[]);
 </script>

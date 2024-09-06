@@ -28,7 +28,7 @@ const autocompleteValue = ref<string | null>("");
 let autocomplete: google.maps.places.Autocomplete;
 let autocompleteAlreadyChanged: boolean = false; // Because enter key triggers 2 events (arrow keydown + enter), prevent first one from sending request
 
-const emits = defineEmits(["syncWithNewRequest"]);
+const emits = defineEmits(["makeNewSolarInstallationRequest"]);
 
 onMounted(async () => {
     autocomplete = await initAutocomplete();
@@ -56,7 +56,7 @@ async function setPlaceChangedOnAutocompleteListener() {
         autocompleteAlreadyChanged = false;
 
         const resultingAddress = newPlace.formatted_address === undefined ? t(`solar.data-panel.header.reverse-geocoding-error`) : newPlace.formatted_address;
-        emits("syncWithNewRequest", resultingAddress);
+        emits("makeNewSolarInstallationRequest", resultingAddress);
     });
 }
 </script>

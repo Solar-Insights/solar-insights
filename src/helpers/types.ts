@@ -32,17 +32,18 @@ export type FinancialParameters = {
 };
 
 export type PanelParameters = {
-    panelCount: number;
-    minPanelCount: number;
-    maxPanelCount: number;
     panelCapacityWatts: number;
     defaultPanelCapacityWatts: number;
-    yearlyEnergyDcKwh: number;
     dcToAcDerate: number;
     yearlyPanelEfficiencyDecline: number;
 }
 
-export type UserSolarData = FinancialParameters & PanelParameters;
+export type UserSolarData = {
+    yearlyEnergyDcKwh: number;
+    panelCount: number;
+    minPanelCount: number;
+    maxPanelCount: number;
+};
 
 export type SolarReadonlyPanel = "BUILDING_READONLY" | "INSIGHTS_READONLY";
 

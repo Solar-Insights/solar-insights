@@ -13,7 +13,7 @@
             <div>
                 <v-select
                     v-model="mapSettings.layerId"
-                    @update:modelValue="showDataLayerOnLayerIdChange"
+                    @update:modelValue="solarMapStore.showHeatmapLayer"
                     item-title="displayedName"
                     item-value="name"
                     :items="mapSettings.layerIdChoices"
@@ -27,7 +27,7 @@
 
                 <v-switch
                     v-model="mapSettings.showPanels"
-                    @change="syncMapWithPanels"
+                    @change="solarMapStore.panelCountChange"
                     inset
                     color="theme"
                     density="compact"
@@ -37,7 +37,7 @@
 
                 <v-switch
                     v-model="mapSettings.showHeatmap"
-                    @change="changeLayersOnShowHeatmapChange"
+                    @change="solarMapStore.showHeatmapChanged"
                     inset
                     color="theme"
                     density="compact"
@@ -102,21 +102,8 @@ const { mapSettings } = storeToRefs(solarMapStore);
 const advancedSettingsPanels = ref([] as string[]);
 
 async function resetParameters() {
-    solarMapStore.resetDefaultMapSettings();
-    await syncMapWithPanels();
-    await showDataLayerOnLayerIdChange();
-    await changeLayersOnShowHeatmapChange();
-}
-
-async function syncMapWithPanels() {
-    await solarMapStore.syncMapWithNewRequest();
-}
-
-async function showDataLayerOnLayerIdChange() {
-    await solarMapStore.showDataLayer(true);
-}
-
-async function changeLayersOnShowHeatmapChange() {
-    mapSettings.value.showHeatmap ? await solarMapStore.showDataLayer(true) : solarMapStore.resetHeatmapLayer();
+    solarMapStore.setDefaultMapSettings();
+    await solarMapStore.panelCountChange();
+    await solarMapStore.showHeatmapLayer();
 }
 </script>

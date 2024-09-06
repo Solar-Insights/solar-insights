@@ -14,11 +14,13 @@ import { LatLng, validCoordinates } from "geo-env-typing/geo";
 import { useHead } from "unhead";
 import { headSelector, SOLAR_MAP } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
+import { useSolarMapStore } from "@/stores/solarMapStore";
 import { SEARCH } from "@/router/routes";
 
 const router = useRouter();
 const route = useRoute();
 const userSessionStore = useUserSessionStore();
+const solarMapStore = useSolarMapStore();
 
 useHead(headSelector(SOLAR_MAP, userSessionStore.locale));
 
@@ -33,6 +35,8 @@ onMounted(async () => {
     if (!validCoordinates(coords) || !validateBuildingQueried(coords)) {
         return router.push({ name: SEARCH.en.name });
     }
+
+    solarMapStore.setDefaultParametersAndSettings();
 
     verificationsFinished.value = true;
 });

@@ -15,7 +15,7 @@
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-calendar-clock-outline</v-icon>
                 <div class="me-auto">{{ $t("solar.insights-readonly.yearly-energy") }}</div>
-                <div>{{ strToLargeNumberDisplay(yearlyEnergyCalc(userSolarData).toFixed(0)) }} kWh</div>
+                <div>{{ strToLargeNumberDisplay(yearlyEnergyCalc(userSolarData, panelParameters).toFixed(0)) }} kWh</div>
             </div>
         </div>
 
@@ -23,15 +23,15 @@
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-account-cash-outline</v-icon>
                 <div class="me-auto">{{ $t("solar.insights-readonly.installation-cost") }}</div>
-                <div>{{ strToLargeNumberDisplay(installationCostCalc(userSolarData).toFixed(0)) }} $</div>
+                <div>{{ strToLargeNumberDisplay(installationCostCalc(userSolarData, financialParameters, panelParameters).toFixed(0)) }} $</div>
             </div>
         </div>
 
         <div class="mb-5">
             <div class="d-flex">
-                <v-icon class="mr-3" color="theme">{{ batteryCharging(energyCoveredCalc(userSolarData)) }}</v-icon>
+                <v-icon class="mr-3" color="theme">{{ batteryCharging(energyCoveredCalc(userSolarData, financialParameters, panelParameters)) }}</v-icon>
                 <div class="me-auto">{{ $t("solar.insights-readonly.energy-covered") }}</div>
-                <div>{{ energyCoveredCalc(userSolarData).toFixed(0) }} %</div>
+                <div>{{ energyCoveredCalc(userSolarData, financialParameters, panelParameters).toFixed(0) }} %</div>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
             <div>&nbsp</div>
             <div class="d-flex">
                 <div class="me-auto font-weight-medium">
-                    {{ $t("solar.insights-readonly.cost-analysis-for") }} {{ userSolarData.installationLifespan }}
+                    {{ $t("solar.insights-readonly.cost-analysis-for") }} {{ financialParameters.installationLifespan }}
                     {{ $t("solar.insights-readonly.years") }}
                 </div>
             </div>
@@ -49,7 +49,7 @@
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-transmission-tower</v-icon>
                 <div class="me-auto">{{ $t("solar.insights-readonly.cost-without") }}</div>
-                <div>{{ strToLargeNumberDisplay(costWithoutSolarInstallation(userSolarData).toFixed(0)) }} $</div>
+                <div>{{ strToLargeNumberDisplay(costWithoutSolarInstallation(financialParameters).toFixed(0)) }} $</div>
             </div>
         </div>
 
@@ -57,7 +57,7 @@
             <div class="d-flex">
                 <v-icon class="mr-3" color="theme">mdi-solar-panel</v-icon>
                 <div class="me-auto">{{ $t("solar.insights-readonly.cost-with") }}</div>
-                <div>{{ strToLargeNumberDisplay(costWithSolarInstallation(userSolarData).toFixed(0)) }} $</div>
+                <div>{{ strToLargeNumberDisplay(costWithSolarInstallation(userSolarData, financialParameters, panelParameters).toFixed(0)) }} $</div>
             </div>
         </div>
 
@@ -69,7 +69,7 @@
                     {{
                         strToLargeNumberDisplay(
                             (
-                                costWithoutSolarInstallation(userSolarData) - costWithSolarInstallation(userSolarData)
+                                costWithoutSolarInstallation(financialParameters) - costWithSolarInstallation(userSolarData, financialParameters, panelParameters)
                             ).toFixed(0)
                         )
                     }}
@@ -122,24 +122,24 @@ import { TimeSerie } from "@/helpers/types";
 const solarMapStore = useSolarMapStore();
 const userSessionStore = useUserSessionStore();
 
-const { userSolarData } = storeToRefs(solarMapStore);
+const { userSolarData, financialParameters, panelParameters } = storeToRefs(solarMapStore);
 const { theme } = storeToRefs(userSessionStore);
 
 const chartOptions = computed(() => makeChartOptions(theme.value));
-const timeSeries = ref<TimeSerie[]>(makeTimeSeriesFromUserSolarData(userSolarData.value));
-const breakEvenYear = ref<number>(getBreakEvenYear(userSolarData.value));
+const timeSeries = ref<TimeSerie[]>(makeTimeSeriesFromUserSolarData(userSolarData.value, financialParameters.value, panelParameters.value));
+const breakEvenYear = ref<number>(getBreakEvenYear(userSolarData.value, financialParameters.value, panelParameters.value));
 
 const DELAY_TIME_MS = 750;
 let updateTimeout: NodeJS.Timeout | undefined;
 
 watch(
-    () => userSolarData,
+    () => [userSolarData, financialParameters, panelParameters],
     () => {
         clearTimeout(updateTimeout);
 
         updateTimeout = setTimeout(() => {
-            timeSeries.value = makeTimeSeriesFromUserSolarData(userSolarData.value);
-            breakEvenYear.value = getBreakEvenYear(userSolarData.value);
+            timeSeries.value = makeTimeSeriesFromUserSolarData(userSolarData.value, financialParameters.value, panelParameters.value);
+            breakEvenYear.value = getBreakEvenYear(userSolarData.value, financialParameters.value, panelParameters.value);
         }, DELAY_TIME_MS);
     },
     { deep: true }

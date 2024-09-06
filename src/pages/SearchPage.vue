@@ -35,7 +35,7 @@
                 <v-skeleton-loader class="search-loader mt-7" :loading="isLoading" type="chip">
                     <AutocompleteField
                         v-if="isAuthenticated"
-                        @syncWithNewRequest="initiateNewRequest"
+                        @makeNewSolarInstallationRequest="initiateNewRequest"
                     />
                 </v-skeleton-loader>
             </PageTitleContainer>
@@ -70,7 +70,6 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { LatLng } from "geo-env-typing/geo";
 import AutocompleteField from "@/components/general/AutocompleteField.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { useI18n } from "vue-i18n";
@@ -150,7 +149,7 @@ async function initiateNewRequest(address: string) {
     showLoadingScreen.value = true;
 
     await getGeocoding(address)
-        .then(async (coords) => await solarMapStore.syncWithNewRequest(coords))
+        .then(async (coords) => await solarMapStore.makeNewSolarInstallationRequest(coords))
         .then((coords) => {
             solarMapStore.address = address;
             userSessionStore.setBuildingQueried(coords);

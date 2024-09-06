@@ -1,5 +1,5 @@
-import { UserSolarData } from "@/helpers/types";
-import { DefaultUserSolarData } from "@/helpers/solar/math_and_data/defaultData";
+import { FinancialParameters, PanelParameters, UserSolarData } from "@/helpers/types";
+import { DefaultFinancialParameters, DefaultUserSolarData } from "@/helpers/solar/math_and_data/defaultData";
 
 export namespace SolarMathVariables {
     export const CANADA_2015_TOTAL_RESIDENTIAL_AREA_METERS2 = 2026000000; // https://www.climate-chance.org/wp-content/uploads/2019/03/en_fp13-canada-residentiel_def-1.pdf
@@ -22,71 +22,71 @@ export function clamp(x: number, min: number, max: number) {
 /*
     Units: None
 */
-export function panelCapacityRatioCalc(userSolarData: UserSolarData) {
-    return userSolarData.panelCapacityWatts / userSolarData.defaultPanelCapacityWatts;
+export function panelCapacityRatioCalc(panelParameters: PanelParameters) {
+    return panelParameters.panelCapacityWatts / panelParameters.defaultPanelCapacityWatts;
 }
 
 /*
     Units: None
 */
-export function yearlyDiscountRate(userSolarData: UserSolarData) {
-    return 1 + userSolarData.yearlyDiscountRate / 100;
+export function yearlyDiscountRate(financialParameters: FinancialParameters) {
+    return 1 + financialParameters.yearlyDiscountRate / 100;
 }
 
 /*
     Units: None
 */
-export function yearlyPanelEfficiencyDecline(userSolarData: UserSolarData) {
-    return 1 - userSolarData.yearlyPanelEfficiencyDecline / 100;
+export function yearlyPanelEfficiencyDecline(panelParameters: PanelParameters) {
+    return 1 - panelParameters.yearlyPanelEfficiencyDecline / 100;
 }
 
 /*
     Units: None
 */
-export function yearlyEnergyCostIncrease(userSolarData: UserSolarData) {
-    return 1 + userSolarData.yearlyEnergyCostIncrease / 100;
+export function yearlyEnergyCostIncrease(financialParameters: FinancialParameters) {
+    return 1 + financialParameters.yearlyEnergyCostIncrease / 100;
 }
 
 /*
     Units: None
 */
-export function dcToAcDerate(userSolarData: UserSolarData) {
-    return userSolarData.dcToAcDerate / 100;
+export function dcToAcDerate(panelParameters: PanelParameters) {
+    return panelParameters.dcToAcDerate / 100;
 }
 
 /*
     Units: kWh
 */
-export function yearlyEnergyCalc(userSolarData: UserSolarData) {
-    return userSolarData.yearlyEnergyDcKwh * panelCapacityRatioCalc(userSolarData);
+export function yearlyEnergyCalc(userSolarData: UserSolarData, panelParameters: PanelParameters) {
+    return userSolarData.yearlyEnergyDcKwh * panelCapacityRatioCalc(panelParameters);
 }
 
 /*
     Units: kW
 */
-export function installationSizeCalc(userSolarData: UserSolarData) {
-    return (userSolarData.panelCount * userSolarData.panelCapacityWatts) / 1000;
+export function installationSizeCalc(userSolarData: UserSolarData, panelParameters: PanelParameters) {
+    return (userSolarData.panelCount * panelParameters.panelCapacityWatts) / 1000;
 }
 
 /*
     Units: $
 */
-export function installationCostCalc(userSolarData: UserSolarData) {
-    return userSolarData.installationCostPerWatt * installationSizeCalc(userSolarData) * 1000;
+export function installationCostCalc(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
+    return financialParameters.installationCostPerWatt * installationSizeCalc(userSolarData, panelParameters) * 1000;
 }
 
 /*
     Units: []kWh
     Division by 100 because dcToAcDerate in percent
 */
-export function yearlyEnergyAcProductionKwh(userSolarData: UserSolarData) {
+export function yearlyEnergyAcProductionKwh(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
     const energyProduction: number[] = [];
-    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+    for (let i = 0; i < financialParameters.installationLifespan; i++) {
         energyProduction.push(
             userSolarData.yearlyEnergyDcKwh *
-                panelCapacityRatioCalc(userSolarData) *
-                dcToAcDerate(userSolarData) *
-                yearlyPanelEfficiencyDecline(userSolarData) ** i
+                panelCapacityRatioCalc(panelParameters) *
+                dcToAcDerate(panelParameters) *
+                yearlyPanelEfficiencyDecline(panelParameters) ** i
         );
     }
 
@@ -96,30 +96,30 @@ export function yearlyEnergyAcProductionKwh(userSolarData: UserSolarData) {
 /*
     Units: kWh
 */
-export function yearlyEnergyConsumptionKwh(userSolarData: UserSolarData) {
-    return (userSolarData.averageMonthlyEnergyBill / userSolarData.energyCostPerKwh) * 12;
+export function yearlyEnergyConsumptionKwh(financialParameters: FinancialParameters) {
+    return (financialParameters.averageMonthlyEnergyBill / financialParameters.energyCostPerKwh) * 12;
 }
 
 /*
     Units: %
 */
-export function energyCoveredCalc(userSolarData: UserSolarData) {
-    return (yearlyEnergyAcProductionKwh(userSolarData)[0] / yearlyEnergyConsumptionKwh(userSolarData)) * 100;
+export function energyCoveredCalc(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
+    return (yearlyEnergyAcProductionKwh(userSolarData, financialParameters, panelParameters)[0] / yearlyEnergyConsumptionKwh(financialParameters)) * 100;
 }
 
 /*
     Units: $
 */
-export function yearlyUtilityBillEstimates(userSolarData: UserSolarData) {
+export function yearlyUtilityBillEstimates(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
     const utilityBillEstimates: number[] = [];
-    const energyProduction: number[] = yearlyEnergyAcProductionKwh(userSolarData);
-    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+    const energyProduction: number[] = yearlyEnergyAcProductionKwh(userSolarData, financialParameters, panelParameters);
+    for (let i = 0; i < financialParameters.installationLifespan; i++) {
         utilityBillEstimates.push(
             Math.max(
-                ((yearlyEnergyConsumptionKwh(userSolarData) - energyProduction[i]) *
-                    userSolarData.energyCostPerKwh *
-                    yearlyEnergyCostIncrease(userSolarData) ** i) /
-                    yearlyDiscountRate(userSolarData) ** i,
+                ((yearlyEnergyConsumptionKwh(financialParameters) - energyProduction[i]) *
+                    financialParameters.energyCostPerKwh *
+                    yearlyEnergyCostIncrease(financialParameters) ** i) /
+                    yearlyDiscountRate(financialParameters) ** i,
                 0
             )
         );
@@ -131,12 +131,12 @@ export function yearlyUtilityBillEstimates(userSolarData: UserSolarData) {
 /*
     Units: $
 */
-export function costWithSolarInstallation(userSolarData: UserSolarData) {
-    const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData);
+export function costWithSolarInstallation(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
+    const utilityBillEstimates: number[] = yearlyUtilityBillEstimates(userSolarData, financialParameters, panelParameters);
     return (
-        installationCostCalc(userSolarData) +
+        installationCostCalc(userSolarData, financialParameters, panelParameters) +
         utilityBillEstimates.reduce((x, y) => x + y, 0) -
-        userSolarData.solarIncentives
+        financialParameters.solarIncentives
     );
 }
 
@@ -148,6 +148,6 @@ export function monthlyEnergyBillApproximation(areaMeters2: number) {
         SolarMathVariables.CANADA_2015_TOTAL_RESIDENTIAL_KWH_CONSUMPTION /
         SolarMathVariables.CANADA_2015_TOTAL_RESIDENTIAL_AREA_METERS2;
     const residentialKwhEstimate = areaMeters2 * canadianResidentialKwhToMeter2Ratio;
-    const yearlyEnergyCostEstimate = residentialKwhEstimate * DefaultUserSolarData.ENERGY_COST_PER_KWH;
+    const yearlyEnergyCostEstimate = residentialKwhEstimate * DefaultFinancialParameters.ENERGY_COST_PER_KWH;
     return Math.round(yearlyEnergyCostEstimate / 12);
 }

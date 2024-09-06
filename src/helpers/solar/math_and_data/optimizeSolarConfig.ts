@@ -1,5 +1,5 @@
 import { BuildingInsights } from "geo-env-typing/solar";
-import { UserSolarData } from "@/helpers/types";
+import { FinancialParameters, PanelParameters, UserSolarData } from "@/helpers/types";
 import {
     panelCapacityRatioCalc,
     dcToAcDerate,
@@ -10,15 +10,15 @@ import {
     makeCumulativeCostWithoutSolar
 } from "@/helpers/solar/math_and_data/yearlyAndCumulativeCosts";
 
-export function getOptimizedEnergyCoveredConfigId(buildingInsights: BuildingInsights, userSolarData: UserSolarData) {
+export function getOptimizedEnergyCoveredConfigId(buildingInsights: BuildingInsights, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
     let configId: number | undefined;
 
     for (let i = 0; i < buildingInsights.solarPotential.solarPanelConfigs.length; i++) {
         if (
             buildingInsights.solarPotential.solarPanelConfigs[i].yearlyEnergyDcKwh *
-                panelCapacityRatioCalc(userSolarData) *
-                dcToAcDerate(userSolarData) >=
-            yearlyEnergyConsumptionKwh(userSolarData)
+                panelCapacityRatioCalc(panelParameters) *
+                dcToAcDerate(panelParameters) >=
+            yearlyEnergyConsumptionKwh(financialParameters)
         ) {
             configId = i;
             break;
@@ -28,7 +28,7 @@ export function getOptimizedEnergyCoveredConfigId(buildingInsights: BuildingInsi
     return configId;
 }
 
-export function getOptimizedSavingsConfigId(buildingInsights: BuildingInsights, userSolarData: UserSolarData) {
+export function getOptimizedSavingsConfigId(buildingInsights: BuildingInsights, userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
     let configId: number | undefined;
     let maxSavings: number = 0;
 
@@ -39,10 +39,10 @@ export function getOptimizedSavingsConfigId(buildingInsights: BuildingInsights, 
             i
         );
         const finalCumulativeCostWithSolar: number = makeCumulativeCostWithSolar(
-            userSolarDataForSpecificConfigId
+            userSolarDataForSpecificConfigId, financialParameters, panelParameters
         ).pop()!;
         const finalCumulativeCostWithoutSolar: number = makeCumulativeCostWithoutSolar(
-            userSolarDataForSpecificConfigId
+            userSolarDataForSpecificConfigId, financialParameters
         ).pop()!;
         const solarSavings = finalCumulativeCostWithoutSolar - finalCumulativeCostWithSolar;
 

@@ -2,54 +2,56 @@ import { LayerId, MapSettings, SolarDataType } from "geo-env-typing/solar";
 import { TimeParameters, UserSolarData, FinancialParameters, PanelParameters } from "@/helpers/types";
 
 export namespace DefaultUserSolarData {
+    export const YEARLY_ENERGY_DC_KWH = 0;
     export const PANEL_COUNT = 0;
     export const MIN_PANEL_COUNT = 0;
     export const MAX_PANEL_COUNT = 1;
-    export const PANEL_CAPACITY_WATTS = 300;
-    export const DEFAULT_PANEL_CAPACITY_WATTS = 400;
-    export const INSTALLATION_COST_PER_WATT = 3.0;
-    export const YEARLY_ENERGY_DC_KWH = 0;
-    export const DC_TO_AC_DERATE = 85;
-    export const AVERAGE_MONTHLY_ENERGY_BILL = 200;
-    export const ENERGY_COST_PER_KWH = 0.155;
-    export const SOLAR_INCENTIVES = 5000;
-    export const YEARLY_PANEL_EFFICIENCY_DECLINE = 0.75;
-    export const YEARLY_ENERGY_COST_INCREASE = 2.5;
-    export const YEARLY_DISCOUNT_RATE = 4;
-    export const INSTALLATION_LIFESPAN = 25;
-}
-
-export function makeDefaultFinancialParameters(): FinancialParameters {
-    // todo
-    return {
-        installationCostPerWatt: DefaultUserSolarData.INSTALLATION_COST_PER_WATT,
-        averageMonthlyEnergyBill: DefaultUserSolarData.AVERAGE_MONTHLY_ENERGY_BILL,
-        energyCostPerKwh: DefaultUserSolarData.ENERGY_COST_PER_KWH,
-        solarIncentives: DefaultUserSolarData.SOLAR_INCENTIVES,
-        yearlyEnergyCostIncrease: DefaultUserSolarData.YEARLY_ENERGY_COST_INCREASE,
-        yearlyDiscountRate: DefaultUserSolarData.YEARLY_DISCOUNT_RATE,
-        installationLifespan: DefaultUserSolarData.INSTALLATION_LIFESPAN
-    };
-}
-
-export function makeDefaultPanelParameters(): PanelParameters {
-    // todo
-    return {
-        panelCount: DefaultUserSolarData.PANEL_COUNT,
-        minPanelCount: DefaultUserSolarData.MIN_PANEL_COUNT,
-        maxPanelCount: DefaultUserSolarData.MAX_PANEL_COUNT,
-        panelCapacityWatts: DefaultUserSolarData.PANEL_CAPACITY_WATTS,
-        defaultPanelCapacityWatts: DefaultUserSolarData.DEFAULT_PANEL_CAPACITY_WATTS,
-        yearlyEnergyDcKwh: DefaultUserSolarData.YEARLY_ENERGY_DC_KWH,
-        dcToAcDerate: DefaultUserSolarData.DC_TO_AC_DERATE,
-        yearlyPanelEfficiencyDecline: DefaultUserSolarData.YEARLY_PANEL_EFFICIENCY_DECLINE,
-    };
 }
 
 export function makeDefaultUserSolarDataObject(): UserSolarData {
     return {
-        ...makeDefaultFinancialParameters(),
-        ...makeDefaultPanelParameters()
+        maxPanelCount: DefaultUserSolarData.MAX_PANEL_COUNT,
+        minPanelCount: DefaultUserSolarData.MIN_PANEL_COUNT,
+        panelCount: DefaultUserSolarData.PANEL_COUNT,
+        yearlyEnergyDcKwh: DefaultUserSolarData.YEARLY_ENERGY_DC_KWH,
+    };
+}
+
+export namespace DefaultFinancialParameters {
+    export const INSTALLATION_COST_PER_WATT = 3.0;
+    export const AVERAGE_MONTHLY_ENERGY_BILL = 200;
+    export const ENERGY_COST_PER_KWH = 0.155;
+    export const SOLAR_INCENTIVES = 5000;
+    export const YEARLY_ENERGY_COST_INCREASE = 2.5;
+    export const YEARLY_DISCOUNT_RATE = 4;
+    export const INSTALLATION_LIFESPAN = 25;
+};
+
+export function makeDefaultFinancialParameters(): FinancialParameters {
+    return {
+        installationCostPerWatt: DefaultFinancialParameters.INSTALLATION_COST_PER_WATT,
+        averageMonthlyEnergyBill: DefaultFinancialParameters.AVERAGE_MONTHLY_ENERGY_BILL,
+        energyCostPerKwh: DefaultFinancialParameters.ENERGY_COST_PER_KWH,
+        solarIncentives: DefaultFinancialParameters.SOLAR_INCENTIVES,
+        yearlyEnergyCostIncrease: DefaultFinancialParameters.YEARLY_ENERGY_COST_INCREASE,
+        yearlyDiscountRate: DefaultFinancialParameters.YEARLY_DISCOUNT_RATE,
+        installationLifespan: DefaultFinancialParameters.INSTALLATION_LIFESPAN
+    };
+}
+
+export namespace DefaultPanelParameters {
+    export const PANEL_CAPACITY_WATTS = 300;
+    export const DEFAULT_PANEL_CAPACITY_WATTS = 400;
+    export const YEARLY_PANEL_EFFICIENCY_DECLINE = 0.75;
+    export const DC_TO_AC_DERATE = 85;
+};
+
+export function makeDefaultPanelParameters(): PanelParameters {
+    return {
+        panelCapacityWatts: DefaultPanelParameters.PANEL_CAPACITY_WATTS,
+        defaultPanelCapacityWatts: DefaultPanelParameters.DEFAULT_PANEL_CAPACITY_WATTS,
+        dcToAcDerate: DefaultPanelParameters.DC_TO_AC_DERATE,
+        yearlyPanelEfficiencyDecline: DefaultPanelParameters.YEARLY_PANEL_EFFICIENCY_DECLINE,
     };
 }
 

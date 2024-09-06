@@ -1,4 +1,4 @@
-import { Theme, TimeSerie, TimeSerieData, UserSolarData } from "@/helpers/types";
+import { FinancialParameters, PanelParameters, Theme, TimeSerie, TimeSerieData, UserSolarData } from "@/helpers/types";
 import {
     makeCumulativeCostWithoutSolar,
     makeCumulativeCostWithSolar
@@ -76,14 +76,17 @@ function textColorBasedOnTheme(theme: Theme) {
     }
 }
 
-export function makeTimeSeriesFromUserSolarData(userSolarData: UserSolarData) {
-    const yearsList: Date[] = makeYearsList(userSolarData);
+export function makeTimeSeriesFromUserSolarData(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters) {
+    const yearsList: Date[] = makeYearsList(financialParameters);
     const cumulativeCostWithSolarTimeSerie: TimeSerieData = makeCumulativeCostWithSolarTimeSerie(
         userSolarData,
+        financialParameters,
+        panelParameters,
         yearsList
     );
     const cumulativeCostWithoutSolarTimeSerie: TimeSerieData = makeCumulativeCostWithoutSolarTimeSerie(
         userSolarData,
+        financialParameters,
         yearsList
     );
 
@@ -100,9 +103,9 @@ export function makeTimeSeriesFromUserSolarData(userSolarData: UserSolarData) {
     ] as TimeSerie[];
 }
 
-function makeYearsList(userSolarData: UserSolarData) {
+function makeYearsList(financialParameters: FinancialParameters) {
     const firstYear = new Date().getFullYear() + 1;
-    const endOfLifespanYear = firstYear + userSolarData.installationLifespan;
+    const endOfLifespanYear = firstYear + financialParameters.installationLifespan;
     const yearsList = [];
 
     for (let i = firstYear; i < endOfLifespanYear; i++) {
@@ -114,22 +117,22 @@ function makeYearsList(userSolarData: UserSolarData) {
     return yearsList;
 }
 
-function makeCumulativeCostWithSolarTimeSerie(userSolarData: UserSolarData, yearsList: Date[]) {
+function makeCumulativeCostWithSolarTimeSerie(userSolarData: UserSolarData, financialParameters: FinancialParameters, panelParameters: PanelParameters, yearsList: Date[]) {
     const timeSerie: TimeSerieData = [];
-    const cumulativeCostWithSolar: number[] = makeCumulativeCostWithSolar(userSolarData);
+    const cumulativeCostWithSolar: number[] = makeCumulativeCostWithSolar(userSolarData, financialParameters, panelParameters);
 
-    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+    for (let i = 0; i < financialParameters.installationLifespan; i++) {
         timeSerie.push([yearsList[i], cumulativeCostWithSolar[i]]);
     }
 
     return timeSerie;
 }
 
-function makeCumulativeCostWithoutSolarTimeSerie(userSolarData: UserSolarData, yearsList: Date[]) {
+function makeCumulativeCostWithoutSolarTimeSerie(userSolarData: UserSolarData, financialParameters: FinancialParameters, yearsList: Date[]) {
     const timeSerie: TimeSerieData = [];
-    const cumulativeCostWithoutSolar: number[] = makeCumulativeCostWithoutSolar(userSolarData);
+    const cumulativeCostWithoutSolar: number[] = makeCumulativeCostWithoutSolar(userSolarData, financialParameters);
 
-    for (let i = 0; i < userSolarData.installationLifespan; i++) {
+    for (let i = 0; i < financialParameters.installationLifespan; i++) {
         timeSerie.push([yearsList[i], cumulativeCostWithoutSolar[i]]);
     }
 

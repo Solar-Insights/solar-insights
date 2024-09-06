@@ -68,7 +68,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     if (to.name !== SOLAR_MAP.en.name) {
         useUserSessionStore().resetBuildingQueried();
-        useSolarMapStore().resetRequestData();
+        useSolarMapStore().removeRequestData();
     }
 
     return next();
