@@ -1,0 +1,156 @@
+import { defineStore } from "pinia";
+import { toRaw } from "vue";
+import { LatLng } from "geo-env-typing/geo";
+import { BuildingInsights, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
+import {
+    TimeParameters,
+} from "@/helpers/types";
+import {
+    makeDefaultTimeParams,
+} from "@/helpers/solar/math_and_data/defaultData";
+import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/map/panels";
+import { getLayerFromBuildingInsights } from "@/helpers/solar/map/layers";
+
+export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
+    state: () => ({
+        centerCoord: { lat: NaN, lng: NaN } as LatLng,
+        map: {} as google.maps.Map,
+        panelConfig: undefined as SolarPanelConfig | undefined,
+        solarPanels: [] as google.maps.Polygon[],
+        overlays: [] as google.maps.GroundOverlay[],
+        layer: undefined as Layer | undefined,
+        timeParams: {} as TimeParameters,
+        geometryLibrary: google.maps.importLibrary("geometry") as Promise<google.maps.GeometryLibrary>
+    }),
+
+    actions: {
+        setDefaultParametersAndSettings() {
+            this.setDefaultTimeParams();
+        },
+
+        setDefaultTimeParams() {
+            this.timeParams = makeDefaultTimeParams();
+        },
+
+        removeRequestData() {
+            this.centerCoord = { lat: NaN, lng: NaN };
+            this.map = {} as google.maps.Map;
+            this.panelConfig = undefined;
+            this.solarPanels = [];
+            this.overlays = [];
+            this.layer = undefined;
+            this.timeParams = {} as TimeParameters;
+        },
+
+        setMapCenter(coords: LatLng) {
+            this.map.setCenter(coords);
+        },
+
+        async syncMapOnLoad(mapSettings: MapSettings, buildingInsights: BuildingInsights, centerCoords: LatLng) {
+            this.setMapCenter(centerCoords);
+            await this.showHeatmapLayer(mapSettings, buildingInsights);
+        },
+
+
+        async showHeatmapLayer(mapSettings: MapSettings, buildingInsights: BuildingInsights) {
+            console.log("show heatmap");
+            if (mapSettings.layerId == null || buildingInsights == null) {
+                return;
+            }
+            
+            this.layer = await getLayerFromBuildingInsights(buildingInsights, mapSettings);
+            this.displayHeatmapLayer(mapSettings);
+        },
+
+        displayHeatmapLayer(mapSettings: MapSettings) {
+            console.log("display heatmap");
+            this.renderOverlay();
+            this.displayCorrectLayer(mapSettings);
+        },
+
+        renderOverlay() {
+            console.log("render overlay");
+            if (!this.layer) {
+                return;
+            }
+
+            const bounds = this.layer.bounds;
+            const showRoofOnly = true;
+
+            this.overlays.map((overlay) => overlay.setMap(null));
+            this.overlays = this.layer
+                .render(showRoofOnly, this.timeParams.month, this.timeParams.day)
+                .map((canvas) => new google.maps.GroundOverlay(canvas.toDataURL(), bounds));
+        },
+
+        displayCorrectLayer(mapSettings: MapSettings) {
+            console.log("display correct layer");
+            if (!this.layer || !mapSettings.showHeatmap) {
+                return;
+            }
+
+            
+
+            if (this.layer.id === "monthlyFlux") {
+                this.displayMonthlyFlux(mapSettings);
+            } else if (this.layer.id === "hourlyShade") {
+                this.displayHourlyShade(mapSettings);
+            } else {
+                this.overlays[0].setMap(this.map);
+            }
+        },
+
+        displayMonthlyFlux(mapSettings: MapSettings) {
+            if (mapSettings.showHeatmap) {
+                this.overlays.map((overlay, i) => overlay.setMap(i == this.timeParams.month ? this.map : null));
+            }
+        },
+
+        displayHourlyShade(mapSettings: MapSettings) {
+            if (mapSettings.showHeatmap) {
+                this.overlays.map((overlay, i) => overlay.setMap(i == this.timeParams.hour ? this.map : null));
+            }
+        },
+
+        async panelCountChange(buildingInsights: BuildingInsights, configIdIndex: number, mapSettings: MapSettings) {
+            console.log("panel count change");
+            this.removeSolarPanelsFromMap();
+            this.setNewPanelConfig(buildingInsights, configIdIndex);
+            await this.addSolarPanelsToMap(buildingInsights, mapSettings);
+        },
+
+        removeSolarPanelsFromMap() {
+            console.log("remove panels from map");
+            this.solarPanels.map((panel) => toRaw(panel).setMap(null));
+            this.solarPanels = [];
+        },
+
+        setNewPanelConfig(buildingInsights: BuildingInsights, configIdIndex: number) {
+            this.panelConfig = buildingInsights.solarPotential.solarPanelConfigs[configIdIndex];
+        },
+
+        async addSolarPanelsToMap(buildingInsights: BuildingInsights, mapSettings: MapSettings) {
+            console.log("add solar panels to map");
+            this.solarPanels = await createSolarPanelsFromBuildingInsights(buildingInsights);
+
+            this.solarPanels.map((panel, i) =>
+                panel.setMap(
+                    mapSettings.showPanels && this.panelConfig && i < this.panelConfig.panelsCount
+                        ? this.map
+                        : null
+                )
+            );
+        },
+
+        async showHeatmapChanged(buildingInsights: BuildingInsights, mapSettings: MapSettings) {
+            console.log("Heatmap changed");
+            if (mapSettings.showHeatmap) {
+                await this.showHeatmapLayer(mapSettings, buildingInsights);
+            } else {
+                this.displayHeatmapLayer(mapSettings);
+            }
+        },
+    },
+
+    persist: true
+});

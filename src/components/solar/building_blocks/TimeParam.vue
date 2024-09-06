@@ -52,10 +52,13 @@ import { onMounted, onUnmounted, ref } from "vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { storeToRefs } from "pinia";
 import { monthCodes, hourCodes } from "@/helpers/constants";
+import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore"
 
 const solarMapStore = useSolarMapStore();
+const solarMapVisualsStore = useSolarMapVisualsStore();
 
-const { mapSettings, timeParams, layer } = storeToRefs(solarMapStore);
+const { timeParams, layer } = storeToRefs(solarMapVisualsStore); 
+const { mapSettings } = storeToRefs(solarMapStore);
 
 const currentlySliding = ref(false);
 let intervalId: NodeJS.Timeout;
@@ -95,9 +98,9 @@ function handleIntervalChange() {
 
 function handleTickUpdate() {
     if (layer.value?.id === "monthlyFlux" && mapSettings.value.showHeatmap) {
-        solarMapStore.displayMonthlyFlux();
+        solarMapVisualsStore.displayMonthlyFlux(solarMapStore.mapSettings);
     } else if (mapSettings.value.layerId === "hourlyShade" && mapSettings.value.showHeatmap) {
-        solarMapStore.displayHourlyShade();
+        solarMapVisualsStore.displayHourlyShade(solarMapStore.mapSettings);
     }
 }
 </script>

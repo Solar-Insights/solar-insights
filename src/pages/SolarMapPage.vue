@@ -16,11 +16,13 @@ import { headSelector, SOLAR_MAP } from "@/router/routes";
 import { useUserSessionStore } from "@/stores/userSessionStore";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { SEARCH } from "@/router/routes";
+import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore"
 
 const router = useRouter();
 const route = useRoute();
 const userSessionStore = useUserSessionStore();
 const solarMapStore = useSolarMapStore();
+const solarMapVisualsStore = useSolarMapVisualsStore();
 
 useHead(headSelector(SOLAR_MAP, userSessionStore.locale));
 
@@ -37,6 +39,7 @@ onMounted(async () => {
     }
 
     solarMapStore.setDefaultParametersAndSettings();
+    solarMapVisualsStore.setDefaultParametersAndSettings();
 
     verificationsFinished.value = true;
 });
