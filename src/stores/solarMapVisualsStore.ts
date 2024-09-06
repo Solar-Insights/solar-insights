@@ -53,7 +53,6 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
 
 
         async showHeatmapLayer(mapSettings: MapSettings, buildingInsights: BuildingInsights) {
-            console.log("show heatmap");
             if (mapSettings.layerId == null || buildingInsights == null) {
                 return;
             }
@@ -63,13 +62,11 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
         },
 
         displayHeatmapLayer(mapSettings: MapSettings) {
-            console.log("display heatmap");
             this.renderOverlay();
             this.displayCorrectLayer(mapSettings);
         },
 
         renderOverlay() {
-            console.log("render overlay");
             if (!this.layer) {
                 return;
             }
@@ -84,7 +81,6 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
         },
 
         displayCorrectLayer(mapSettings: MapSettings) {
-            console.log("display correct layer");
             if (!this.layer || !mapSettings.showHeatmap) {
                 return;
             }
@@ -113,14 +109,13 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
         },
 
         async panelCountChange(buildingInsights: BuildingInsights, configIdIndex: number, mapSettings: MapSettings) {
-            console.log("panel count change");
+            ("panel count change");
             this.removeSolarPanelsFromMap();
             this.setNewPanelConfig(buildingInsights, configIdIndex);
             await this.addSolarPanelsToMap(buildingInsights, mapSettings);
         },
 
         removeSolarPanelsFromMap() {
-            console.log("remove panels from map");
             this.solarPanels.map((panel) => toRaw(panel).setMap(null));
             this.solarPanels = [];
         },
@@ -130,7 +125,6 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
         },
 
         async addSolarPanelsToMap(buildingInsights: BuildingInsights, mapSettings: MapSettings) {
-            console.log("add solar panels to map");
             this.solarPanels = await createSolarPanelsFromBuildingInsights(buildingInsights);
 
             this.solarPanels.map((panel, i) =>
@@ -143,7 +137,6 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
         },
 
         async showHeatmapChanged(buildingInsights: BuildingInsights, mapSettings: MapSettings) {
-            console.log("Heatmap changed");
             if (mapSettings.showHeatmap) {
                 await this.showHeatmapLayer(mapSettings, buildingInsights);
             } else {
