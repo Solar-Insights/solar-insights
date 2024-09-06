@@ -1,19 +1,18 @@
-import { defineStore } from "pinia";
-import { toRaw } from "vue";
-import { LatLng } from "geo-env-typing/geo";
-import { BuildingInsights, Layer, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
-import {
-    TimeParameters,
-} from "@/helpers/types";
+import { getLayerFromBuildingInsights } from "@/helpers/solar/map/layers";
+import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/map/panels";
 import {
     makeDefaultTimeParams,
 } from "@/helpers/solar/math_and_data/defaultData";
-import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/map/panels";
-import { getLayerFromBuildingInsights } from "@/helpers/solar/map/layers";
+import {
+    TimeParameters,
+} from "@/helpers/types";
+import { LatLng } from "geo-env-typing/geo";
+import { BuildingInsights, Layer, MapSettings, SolarPanelConfig } from "geo-env-typing/solar";
+import { defineStore } from "pinia";
+import { toRaw } from "vue";
 
 export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
     state: () => ({
-        centerCoord: { lat: NaN, lng: NaN } as LatLng,
         map: {} as google.maps.Map,
         panelConfig: undefined as SolarPanelConfig | undefined,
         solarPanels: [] as google.maps.Polygon[],
@@ -33,7 +32,6 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
         },
 
         removeRequestData() {
-            this.centerCoord = { lat: NaN, lng: NaN };
             this.map = {} as google.maps.Map;
             this.panelConfig = undefined;
             this.solarPanels = [];
@@ -85,8 +83,6 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
                 return;
             }
 
-            
-
             if (this.layer.id === "monthlyFlux") {
                 this.displayMonthlyFlux(mapSettings);
             } else if (this.layer.id === "hourlyShade") {
@@ -109,7 +105,6 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
         },
 
         async panelCountChange(buildingInsights: BuildingInsights, configIdIndex: number, mapSettings: MapSettings) {
-            ("panel count change");
             this.removeSolarPanelsFromMap();
             this.setNewPanelConfig(buildingInsights, configIdIndex);
             await this.addSolarPanelsToMap(buildingInsights, mapSettings);
@@ -143,7 +138,5 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
                 this.displayHeatmapLayer(mapSettings);
             }
         },
-    },
-
-    persist: true
+    }
 });

@@ -18,7 +18,8 @@ const { map } = storeToRefs(solarMapVisualsStore);
 onMounted(async () => {
     const mapComponents = await initMapComponents(centerCoord.value);
     map.value = mapComponents.map;
-    await solarMapStore.syncMapOnLoad();
+    
     await solarMapVisualsStore.syncMapOnLoad(solarMapStore.mapSettings, solarMapStore.buildingInsights, solarMapStore.centerCoord);
+    await solarMapStore.syncMapOnLoad();
 });
 </script>

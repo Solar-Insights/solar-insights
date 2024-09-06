@@ -105,7 +105,7 @@ const advancedSettingsPanels = ref([] as string[]);
 
 async function resetParameters() {
     solarMapStore.setDefaultMapSettings();
-    await solarMapStore.panelCountChange();
     await solarMapVisualsStore.showHeatmapLayer(solarMapStore.mapSettings, solarMapStore.buildingInsights);
+    await solarMapStore.panelCountChange();
 }
 </script>
