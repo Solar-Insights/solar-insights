@@ -57,7 +57,7 @@ import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore";
 const solarMapStore = useSolarMapStore();
 const solarMapVisualsStore = useSolarMapVisualsStore();
 
-const { timeParams, layer } = storeToRefs(solarMapVisualsStore);
+const { timeParams, currentLayer } = storeToRefs(solarMapVisualsStore);
 const { mapSettings } = storeToRefs(solarMapStore);
 
 const currentlySliding = ref(false);
@@ -80,14 +80,14 @@ function handleIntervalChange() {
     }
 
     if (
-        layer.value?.id === "monthlyFlux" &&
+        currentLayer.value?.id === "monthlyFlux" &&
         mapSettings.value.heatmapAnimation &&
         mapSettings.value.showHeatmap &&
         !currentlySliding.value
     ) {
         timeParams.value.month = (timeParams.value.month + 1) % 12;
     } else if (
-        layer.value?.id === "hourlyShade" &&
+        currentLayer.value?.id === "hourlyShade" &&
         mapSettings.value.heatmapAnimation &&
         mapSettings.value.showHeatmap &&
         !currentlySliding.value
@@ -97,7 +97,7 @@ function handleIntervalChange() {
 }
 
 function handleTickUpdate() {
-    if (layer.value?.id === "monthlyFlux" && mapSettings.value.showHeatmap) {
+    if (currentLayer.value?.id === "monthlyFlux" && mapSettings.value.showHeatmap) {
         solarMapVisualsStore.displayMonthlyFlux(solarMapStore.mapSettings);
     } else if (mapSettings.value.layerId === "hourlyShade" && mapSettings.value.showHeatmap) {
         solarMapVisualsStore.displayHourlyShade(solarMapStore.mapSettings);

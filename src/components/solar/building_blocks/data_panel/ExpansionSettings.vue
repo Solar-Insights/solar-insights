@@ -40,9 +40,9 @@
                 <v-switch
                     v-model="mapSettings.showHeatmap"
                     @change="
-                        solarMapVisualsStore.showHeatmapChanged(
-                            solarMapStore.buildingInsights,
-                            solarMapStore.mapSettings
+                        solarMapVisualsStore.showHeatmapLayer(
+                            solarMapStore.mapSettings,
+                            solarMapStore.buildingInsights
                         )
                     "
                     inset

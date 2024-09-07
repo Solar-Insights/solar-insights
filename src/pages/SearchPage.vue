@@ -84,9 +84,12 @@ import LoadingSpinner from "@/components/general/LoadingSpinner.vue";
 import { useSolarMapStore } from "@/stores/solarMapStore";
 import { getGeocoding } from "@/api/geo";
 import { SOLAR_INSIGHTS_THEME_COLOR } from "@/helpers/constants";
+import { LatLng } from "geo-env-typing/geo";
+import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore";
 
 const router = useRouter();
 const userSessionStore = useUserSessionStore();
+const solarMapVisualsStore = useSolarMapVisualsStore();
 const solarMapStore = useSolarMapStore();
 
 const { loginUser } = handleUserState();
@@ -139,14 +142,18 @@ const showLoadingScreen = ref<Boolean>(false);
 
 async function initiateNewRequest(address: string) {
     showLoadingScreen.value = true;
+    let coords: LatLng;
 
     await getGeocoding(address)
-        .then(async (coords) => await solarMapStore.makeNewSolarInstallationRequest(coords))
-        .then((coords) => {
-            solarMapStore.address = address;
-            userSessionStore.setBuildingQueried(coords);
-
+        .then(async (geocodedCoords: LatLng) => {
+            coords = geocodedCoords;
+            return await solarMapStore.makeNewSolarInstallationRequest(coords, address);
+        })
+        .then(async () => await solarMapVisualsStore.makeLayersRequest(solarMapStore.buildingInsights))
+        .then(() => {
             if (router.currentRoute.value.name !== SEARCH.en.name) return;
+            
+            userSessionStore.setBuildingQueried(coords);
             router.push({ name: SOLAR_MAP.en.name, query: coords });
         })
         .catch(() => {

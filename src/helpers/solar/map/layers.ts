@@ -1,9 +1,8 @@
 import { getSolarLayers } from "@/api/solar";
 import { LatLng } from "geo-env-typing/geo";
-import { BuildingInsights, layerIds, MapSettings, SolarLayers } from "geo-env-typing/solar";
-import { getSingleLayer } from "@/helpers/solar/map/geotiffs";
+import { BuildingInsights } from "geo-env-typing/solar";
 
-export async function getLayerFromBuildingInsights(buildingInsights: BuildingInsights, mapSettings: MapSettings) {
+export async function getLayersFromBuildingInsights(buildingInsights: BuildingInsights) {
     const geometryLibrary: google.maps.GeometryLibrary = (await google.maps.importLibrary(
         "geometry"
     )) as google.maps.GeometryLibrary;
@@ -21,7 +20,5 @@ export async function getLayerFromBuildingInsights(buildingInsights: BuildingIns
     );
     const radius = Math.ceil(diameter / 2);
 
-    const solarLayers: SolarLayers | null = await getSolarLayers(center, radius);
-
-    return await getSingleLayer(mapSettings.layerId, solarLayers as SolarLayers);
+    return await getSolarLayers(center, radius);
 }

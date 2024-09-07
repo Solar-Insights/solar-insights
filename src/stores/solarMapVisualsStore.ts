@@ -43,8 +43,8 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
             this.map.setCenter(coords);
         },
 
-        async makeLayersRequest(mapSettings: MapSettings, buildingInsights: BuildingInsights) {
-            this.layers = await getLayersFromBuildingInsights(buildingInsights, mapSettings);
+        async makeLayersRequest(buildingInsights: BuildingInsights) {
+            this.layers = await getLayersFromBuildingInsights(buildingInsights);
         },
 
         async syncMapOnLoad(mapSettings: MapSettings, buildingInsights: BuildingInsights, centerCoords: LatLng) {
