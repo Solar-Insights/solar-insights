@@ -87,14 +87,13 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             this.configIdIndex = 0;
         },
 
-        async makeNewSolarInstallationRequest(coords: LatLng) {
+        async makeNewSolarInstallationRequest(coords: LatLng, address: string) {
             this.centerCoord = coords;
+            this.address = address;
 
             await getClosestBuildingInsights(coords).then(async (data: BuildingInsights) => {
                 this.buildingInsights = data;
             });
-
-            return coords;
         },
 
         async syncMapOnLoad() {
