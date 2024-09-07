@@ -149,7 +149,7 @@ async function initiateNewRequest(address: string) {
             coords = geocodedCoords;
             return await solarMapStore.makeNewSolarInstallationRequest(coords, address);
         })
-        .then(async () => await solarMapVisualsStore.makeLayersRequest(solarMapStore.buildingInsights))
+        .then(async () => await solarMapStore.makeLayersRequest())
         .then(() => {
             if (router.currentRoute.value.name !== SEARCH.en.name) return;
             

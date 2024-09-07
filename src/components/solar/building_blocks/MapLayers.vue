@@ -22,8 +22,9 @@ onMounted(async () => {
     await solarMapVisualsStore.syncMapOnLoad(
         solarMapStore.mapSettings,
         solarMapStore.buildingInsights,
-        solarMapStore.centerCoord
+        solarMapStore.centerCoord,
+        solarMapStore.layers
     );
-    await solarMapStore.syncMapOnLoad();
+    await solarMapStore.syncDataOnLoad();
 });
 </script>

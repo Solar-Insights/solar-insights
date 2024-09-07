@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { LatLng } from "geo-env-typing/geo";
-import { BuildingInsights, SolarPanelConfig, MapSettings } from "geo-env-typing/solar";
+import { BuildingInsights, SolarPanelConfig, MapSettings, SolarLayers } from "geo-env-typing/solar";
 import { FinancialParameters, PanelParameters, SolarReadonlyPanel, UserSolarData } from "@/helpers/types";
 import {
     makeDefaultUserSolarDataObject,
@@ -16,6 +16,7 @@ import {
 import { monthlyEnergyBillApproximation } from "@/helpers/solar/math_and_data/solarDataMath";
 import { objectHasValue } from "@/helpers/componentConditionals";
 import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore";
+import { getLayersFromBuildingInsights } from "@/helpers/solar/map/layers";
 
 export const useSolarMapStore = defineStore("solarMapStore", {
     state: () => ({
@@ -29,6 +30,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
         centerCoord: { lat: NaN, lng: NaN } as LatLng,
         address: "",
         buildingInsights: {} as BuildingInsights,
+        layers: {} as SolarLayers,
         userSolarData: {} as UserSolarData,
         configIdIndex: 0
     }),
@@ -85,6 +87,7 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             this.buildingInsights = {} as BuildingInsights;
             this.userSolarData = {} as UserSolarData;
             this.configIdIndex = 0;
+            this.layers = {} as SolarLayers;
         },
 
         async makeNewSolarInstallationRequest(coords: LatLng, address: string) {
@@ -96,7 +99,11 @@ export const useSolarMapStore = defineStore("solarMapStore", {
             });
         },
 
-        async syncMapOnLoad() {
+        async makeLayersRequest() {
+            this.layers = await getLayersFromBuildingInsights(this.buildingInsights);
+        },
+
+        async syncDataOnLoad() {
             this.syncDynamicParameters();
         },
 

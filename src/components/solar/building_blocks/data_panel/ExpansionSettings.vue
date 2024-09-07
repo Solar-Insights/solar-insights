@@ -14,7 +14,7 @@
                 <v-select
                     v-model="mapSettings.layerId"
                     @update:modelValue="
-                        solarMapVisualsStore.showHeatmapLayer(solarMapStore.mapSettings, solarMapStore.buildingInsights)
+                        solarMapVisualsStore.showHeatmapLayer(solarMapStore.mapSettings, solarMapStore.buildingInsights, solarMapStore.layers)
                     "
                     item-title="displayedName"
                     item-value="name"
@@ -42,7 +42,8 @@
                     @change="
                         solarMapVisualsStore.showHeatmapLayer(
                             solarMapStore.mapSettings,
-                            solarMapStore.buildingInsights
+                            solarMapStore.buildingInsights,
+                            solarMapStore.layers
                         )
                     "
                     inset
@@ -106,13 +107,13 @@ import { useSolarMapVisualsStore } from "@/stores/solarMapVisualsStore";
 const solarMapStore = useSolarMapStore();
 const solarMapVisualsStore = useSolarMapVisualsStore();
 
-const { mapSettings, financialParameters } = storeToRefs(solarMapStore);
+const { mapSettings } = storeToRefs(solarMapStore);
 
 const advancedSettingsPanels = ref([] as string[]);
 
 async function resetParameters() {
     solarMapStore.setDefaultMapSettings();
-    await solarMapVisualsStore.showHeatmapLayer(solarMapStore.mapSettings, solarMapStore.buildingInsights);
+    await solarMapVisualsStore.showHeatmapLayer(solarMapStore.mapSettings, solarMapStore.buildingInsights, solarMapStore.layers);
     await solarMapStore.panelCountChange();
 }
 </script>

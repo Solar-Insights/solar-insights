@@ -1,5 +1,4 @@
 import { getSingleLayer } from "@/helpers/solar/map/geotiffs";
-import { getLayersFromBuildingInsights } from "@/helpers/solar/map/layers";
 import { createSolarPanelsFromBuildingInsights } from "@/helpers/solar/map/panels";
 import { makeDefaultTimeParams } from "@/helpers/solar/math_and_data/defaultData";
 import { TimeParameters } from "@/helpers/types";
@@ -14,7 +13,6 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
         panelConfig: undefined as SolarPanelConfig | undefined,
         solarPanels: [] as google.maps.Polygon[],
         overlays: [] as google.maps.GroundOverlay[],
-        layers: undefined as SolarLayers | undefined,
         currentLayer: undefined as Layer | undefined,
         timeParams: {} as TimeParameters,
         geometryLibrary: google.maps.importLibrary("geometry") as Promise<google.maps.GeometryLibrary>
@@ -34,7 +32,6 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
             this.panelConfig = undefined;
             this.solarPanels = [];
             this.overlays = [];
-            this.layers = undefined;
             this.currentLayer = undefined;
             this.timeParams = {} as TimeParameters;
         },
@@ -43,27 +40,23 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
             this.map.setCenter(coords);
         },
 
-        async makeLayersRequest(buildingInsights: BuildingInsights) {
-            this.layers = await getLayersFromBuildingInsights(buildingInsights);
-        },
-
-        async syncMapOnLoad(mapSettings: MapSettings, buildingInsights: BuildingInsights, centerCoords: LatLng) {
+        async syncMapOnLoad(mapSettings: MapSettings, buildingInsights: BuildingInsights, centerCoords: LatLng, layers: SolarLayers) {
             this.setMapCenter(centerCoords);
-            await this.showHeatmapLayer(mapSettings, buildingInsights);
+            await this.showHeatmapLayer(mapSettings, buildingInsights, layers);
         },
 
-        async showHeatmapLayer(mapSettings: MapSettings, buildingInsights: BuildingInsights) {
+        async showHeatmapLayer(mapSettings: MapSettings, buildingInsights: BuildingInsights, layers: SolarLayers) {
             if (mapSettings.layerId == null || buildingInsights == null) {
                 return;
             }
             
-            await this.getPreferredLayer(mapSettings);
+            await this.getPreferredLayer(mapSettings, layers);
             this.renderOverlay();
             this.displayCorrectLayer(mapSettings);
         },
 
-        async getPreferredLayer(mapSettings: MapSettings) {
-            this.currentLayer = await getSingleLayer(mapSettings.layerId, this.layers as SolarLayers);
+        async getPreferredLayer(mapSettings: MapSettings, layers: SolarLayers) {
+            this.currentLayer = await getSingleLayer(mapSettings.layerId, layers as SolarLayers);
         },
 
         renderOverlay() {
@@ -130,9 +123,5 @@ export const useSolarMapVisualsStore = defineStore("solarMapVisualsStore", {
                 )
             );
         }
-    },
-
-    persist: {
-        pick: ["layers"]
-    } as any as boolean // trick to avoid TS breaking everything related to the store. Methods become unavailable if not boolean
+    }
 });
