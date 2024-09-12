@@ -110,6 +110,7 @@
     "general": {
         "user-menu": {
             "signin-title": "Utilisez votre compte Solar Insights",
+            "register": "S'inscrire - Contactez-nous",
             "signin": "Se connecter",
             "signout": "Se déconnecter"
         },

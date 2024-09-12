@@ -24,6 +24,13 @@
                 <v-card-title> {{ $t(`general.user-menu.signin-title`) }} </v-card-title>
 
                 <MenuCard
+                    :text="$t(`general.user-menu.register`)"
+                    :theme="theme"
+                    :icon="`mdi-account-plus`"
+                    @sendAction="router.push({ name: PRICING.en.name })"
+                />
+
+                <MenuCard
                     :text="$t(`general.user-menu.signin`)"
                     :theme="theme"
                     :icon="`mdi-login`"
@@ -42,7 +49,7 @@ import { useAuth0 } from "@auth0/auth0-vue";
 import { storeToRefs } from "pinia";
 import { handleUserState } from "@/composables/users";
 import { useRouter } from "vue-router";
-import { MY_ORGANIZATION } from "@/router/routes";
+import { MY_ORGANIZATION, PRICING } from "@/router/routes";
 
 const router = useRouter();
 const { loginUser, logoutUser } = handleUserState();

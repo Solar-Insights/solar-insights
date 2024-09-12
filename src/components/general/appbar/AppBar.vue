@@ -2,7 +2,7 @@
     <div>
         <v-app-bar density="comfortable" elevation="0">
             <v-btn
-                class="px-2 h-100 ml-2"
+                class="px-2 h-100 ml-2 no-background-hover"
                 :to="{ name: 'home' }"
                 style="font-size: 1.1rem"
                 :active="false"
