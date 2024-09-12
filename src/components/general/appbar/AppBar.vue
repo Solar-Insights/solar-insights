@@ -2,15 +2,15 @@
     <div>
         <v-app-bar density="comfortable" elevation="0">
             <v-btn
-                class="px-2 h-100 ml-0 no-background-hover"
+                class="px-2 h-100 ml-2"
                 :to="{ name: 'home' }"
                 style="font-size: 1.1rem"
                 :active="false"
                 :ripple="false"
                 variant="plain"
             >
-                <v-avatar class="mr-2" :image="logo_nobg" density="compact" />
-                <span class="hidden-md-and-down"> SOLAR INSIGHTS </span>
+                <v-avatar class="mr-2 hidden-md-and-up" icon="mdi-home" density="compact" />
+                <span class="hidden-sm-and-down"> SOLAR INSIGHTS </span>
             </v-btn>
 
             <v-spacer />
