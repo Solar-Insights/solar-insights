@@ -1,11 +1,12 @@
 # Execute from repo source with:
-# .\src\assets\image_converter.ps1
+# .\scripts\image_converter.ps1
 
-# Define input directory
-$inputDirectory = ".\src\assets\images\"
+# Define input directories
+$src = ".\src\assets\images\"
+$public = ".\public\images\"
 
 # Get all PNG files in the input directory
-$imageFiles = Get-ChildItem -Path $inputDirectory -Include "*.jpg", "*.png" -Recurse
+$imageFiles = Get-ChildItem -Path $src, $public -Include "*.jpg", "*.png" -Recurse
 
 # Iterate over each PNG file and convert it to WEBP
 foreach ($oldImage in $imageFiles) {
