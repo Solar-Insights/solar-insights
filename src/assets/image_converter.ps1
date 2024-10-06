@@ -1,20 +1,22 @@
+# Execute from repo source with:
+# .\src\assets\image_converter.ps1
+
 # Define input directory
-$inputDirectory = ".\*.png"
+$inputDirectory = ".\src\assets\images\"
 
 # Get all PNG files in the input directory
-$pngFiles = Get-ChildItem -Path $inputDirectory -Recurse
+$imageFiles = Get-ChildItem -Path $inputDirectory -Include "*.jpg", "*.png" -Recurse
 
 # Iterate over each PNG file and convert it to WEBP
-foreach ($pngFile in $pngFiles) {
-    $fileName = [System.IO.Path]::GetFileNameWithoutExtension($pngFile)
-    $fullFilePath = [System.IO.Path]::GetFullPath($pngFile)
+foreach ($oldImage in $imageFiles) {
+    $imageName = [System.IO.Path]::GetFileNameWithoutExtension($oldImage)
+    $pathToParentDir = Split-Path -Parent $oldImage
 
-    $newParentPath = Split-Path -Parent $fullFilePath
-    $webpFile = Join-Path -Path $newParentPath -ChildPath "$fileName.webp"
+    $newImage = Join-Path -Path $pathToParentDir -ChildPath "$imageName.webp"
 
-    magick "$($pngFile.FullName)" "$webpFile"
+    magick $oldImage $newImage
 
-    Remove-Item $pngFile
+    Remove-Item $oldImage
 }
 
 Write-Host "Conversion completed!"
